@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+THESIS: A design system as a pixel travel-poster series about quiet everyday
+places; it refuses the component-grid dashboard catalog.
+OWN-WORLD: One vertical winter-sky gradient falling into snow-white paper;
+heavy white Helvetica display floating in sky; cobalt captions and giant
+katakana as graphic; all illustration rect-only pixel art on an integer grid;
+orange is the sign's warm accent only: band, stripes, cone, price marks.
+STORY: A visitor lands on the Hokkaido-style poster, understands the system is
+posters plus the pixel rule, pages through spreads 28-32, and leaves able to
+build with the kit.
+FIRST VIEWPORT: Full-width sky, giant white KONBINI, the pixel Seimart scene
+standing on the snow line; captions, katakana, footnote, folio 28 below.
+FORM: Client-pinned direction (reference travel poster); catalog paced as
+paginated poster spreads; no seed roll.
+-->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KONBINI - Pixel Travel-Poster Design System</title>
+  <meta name="description" content="KONBINI: a pixel-art travel-poster design system. Winter sky, snow paper, cobalt type, one lovingly detailed pixel scene." />
+  <link rel="stylesheet" href="css/konbini-core.css" />
+</head>
+<body>
+
+  <!-- pixel icon symbols (16x16 grid, rects only) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="px-pole" viewBox="0 0 16 16">
+        <rect x="7" y="0" width="2" height="1" fill="var(--white)"/>
+        <rect x="3" y="1" width="2" height="1" fill="var(--navy)"/>
+        <rect x="7" y="1" width="2" height="1" fill="var(--cobalt)"/>
+        <rect x="11" y="1" width="2" height="1" fill="var(--navy)"/>
+        <rect x="1" y="2" width="14" height="2" fill="var(--cobalt)"/>
+        <rect x="7" y="4" width="2" height="2" fill="var(--cobalt)"/>
+        <rect x="4" y="6" width="8" height="2" fill="var(--cobalt)"/>
+        <rect x="7" y="8" width="2" height="7" fill="var(--cobalt)"/>
+        <rect x="6" y="15" width="4" height="1" fill="var(--navy)"/>
+      </symbol>
+      <symbol id="px-vending" viewBox="0 0 16 16">
+        <rect x="3" y="1" width="10" height="2" fill="var(--cobalt)"/>
+        <rect x="3" y="3" width="2" height="4" fill="var(--cobalt)"/>
+        <rect x="5" y="3" width="6" height="1" fill="var(--sky-pale)"/>
+        <rect x="11" y="3" width="2" height="4" fill="var(--cobalt)"/>
+        <rect x="5" y="4" width="1" height="2" fill="var(--sky-pale)"/>
+        <rect x="6" y="4" width="1" height="2" fill="var(--white)"/>
+        <rect x="7" y="4" width="1" height="2" fill="var(--sky-pale)"/>
+        <rect x="8" y="4" width="1" height="2" fill="var(--sign)"/>
+        <rect x="9" y="4" width="1" height="2" fill="var(--sky-pale)"/>
+        <rect x="10" y="4" width="1" height="2" fill="var(--white)"/>
+        <rect x="5" y="6" width="6" height="1" fill="var(--sky-pale)"/>
+        <rect x="3" y="7" width="10" height="2" fill="var(--cobalt)"/>
+        <rect x="3" y="9" width="2" height="2" fill="var(--cobalt)"/>
+        <rect x="5" y="9" width="4" height="2" fill="var(--navy)"/>
+        <rect x="9" y="9" width="4" height="2" fill="var(--cobalt)"/>
+        <rect x="3" y="11" width="10" height="4" fill="var(--cobalt)"/>
+        <rect x="3" y="15" width="10" height="1" fill="var(--navy)"/>
+      </symbol>
+      <symbol id="px-cone" viewBox="0 0 16 16">
+        <rect x="7" y="2" width="2" height="2" fill="var(--sign)"/>
+        <rect x="6" y="4" width="4" height="2" fill="var(--sign)"/>
+        <rect x="5" y="6" width="6" height="2" fill="var(--white)"/>
+        <rect x="5" y="8" width="6" height="2" fill="var(--sign)"/>
+        <rect x="4" y="10" width="8" height="2" fill="var(--sign)"/>
+        <rect x="3" y="12" width="10" height="2" fill="var(--sign)"/>
+        <rect x="2" y="14" width="12" height="1" fill="var(--navy)"/>
+      </symbol>
+      <symbol id="px-ac" viewBox="0 0 16 16">
+        <rect x="2" y="3" width="12" height="1" fill="var(--sky-pale)"/>
+        <rect x="2" y="4" width="12" height="2" fill="var(--cobalt)"/>
+        <rect x="2" y="6" width="2" height="4" fill="var(--cobalt)"/>
+        <rect x="4" y="6" width="1" height="4" fill="var(--white)"/>
+        <rect x="5" y="6" width="1" height="4" fill="var(--cobalt)"/>
+        <rect x="6" y="6" width="1" height="4" fill="var(--white)"/>
+        <rect x="7" y="6" width="1" height="4" fill="var(--cobalt)"/>
+        <rect x="8" y="6" width="1" height="4" fill="var(--white)"/>
+        <rect x="9" y="6" width="1" height="4" fill="var(--cobalt)"/>
+        <rect x="10" y="6" width="1" height="4" fill="var(--white)"/>
+        <rect x="11" y="6" width="3" height="4" fill="var(--cobalt)"/>
+        <rect x="2" y="10" width="12" height="2" fill="var(--cobalt)"/>
+        <rect x="2" y="12" width="12" height="1" fill="var(--navy)"/>
+        <rect x="3" y="13" width="2" height="2" fill="var(--navy)"/>
+        <rect x="11" y="13" width="2" height="2" fill="var(--navy)"/>
+      </symbol>
+      <symbol id="px-truck" viewBox="0 0 16 16">
+        <rect x="2" y="4" width="4" height="1" fill="var(--cobalt)"/>
+        <rect x="1" y="5" width="1" height="2" fill="var(--cobalt)"/>
+        <rect x="2" y="5" width="3" height="2" fill="var(--sky-pale)"/>
+        <rect x="5" y="5" width="1" height="1" fill="var(--cobalt)"/>
+        <rect x="5" y="6" width="10" height="1" fill="var(--cobalt)"/>
+        <rect x="1" y="7" width="14" height="1" fill="var(--cobalt)"/>
+        <rect x="1" y="8" width="6" height="1" fill="var(--cobalt)"/>
+        <rect x="7" y="8" width="7" height="1" fill="var(--sky-pale)"/>
+        <rect x="14" y="8" width="1" height="1" fill="var(--cobalt)"/>
+        <rect x="1" y="9" width="14" height="1" fill="var(--cobalt)"/>
+        <rect x="1" y="10" width="14" height="1" fill="var(--navy)"/>
+        <rect x="3" y="11" width="3" height="1" fill="var(--navy)"/>
+        <rect x="10" y="11" width="3" height="1" fill="var(--navy)"/>
+        <rect x="3" y="12" width="1" height="1" fill="var(--navy)"/>
+        <rect x="4" y="12" width="1" height="1" fill="var(--white)"/>
+        <rect x="5" y="12" width="1" height="1" fill="var(--navy)"/>
+        <rect x="10" y="12" width="1" height="1" fill="var(--navy)"/>
+        <rect x="11" y="12" width="1" height="1" fill="var(--white)"/>
+        <rect x="12" y="12" width="1" height="1" fill="var(--navy)"/>
+      </symbol>
+      <symbol id="px-snowflake" viewBox="0 0 16 16">
+        <rect x="7" y="1" width="2" height="2" fill="var(--cobalt)"/>
+        <rect x="3" y="3" width="1" height="1" fill="var(--cobalt)"/>
+        <rect x="6" y="3" width="4" height="1" fill="var(--cobalt)"/>
+        <rect x="12" y="3" width="1" height="1" fill="var(--cobalt)"/>
+        <rect x="4" y="4" width="1" height="1" fill="var(--cobalt)"/>
+        <rect x="7" y="4" width="2" height="3" fill="var(--cobalt)"/>
+        <rect x="11" y="4" width="1" height="1" fill="var(--cobalt)"/>
+        <rect x="5" y="5" width="1" height="1" fill="var(--cobalt)"/>
+        <rect x="10" y="5" width="1" height="1" fill="var(--cobalt)"/>
+        <rect x="3" y="6" width="1" height="1" fill="var(--cobalt)"/>
+        <rect x="12" y="6" width="1" height="1" fill="var(--cobalt)"/>
+        <rect x="1" y="7" width="14" height="2" fill="var(--cobalt)"/>
+        <rect x="3" y="9" width="1" height="1" fill="var(--cobalt)"/>
+        <rect x="7" y="9" width="2" height="3" fill="var(--cobalt)"/>
+        <rect x="12" y="9" width="1" height="1" fill="var(--cobalt)"/>
+        <rect x="5" y="10" width="1" height="1" fill="var(--cobalt)"/>
+        <rect x="10" y="10" width="1" height="1" fill="var(--cobalt)"/>
+        <rect x="4" y="11" width="1" height="1" fill="var(--cobalt)"/>
+        <rect x="11" y="11" width="1" height="1" fill="var(--cobalt)"/>
+        <rect x="3" y="12" width="1" height="1" fill="var(--cobalt)"/>
+        <rect x="6" y="12" width="4" height="1" fill="var(--cobalt)"/>
+        <rect x="12" y="12" width="1" height="1" fill="var(--cobalt)"/>
+        <rect x="7" y="13" width="2" height="2" fill="var(--cobalt)"/>
+      </symbol>
+      <symbol id="px-onigiri" viewBox="0 0 16 16">
+        <rect x="7" y="2" width="2" height="1" fill="var(--navy)"/>
+        <rect x="6" y="3" width="1" height="1" fill="var(--navy)"/>
+        <rect x="7" y="3" width="2" height="1" fill="var(--white)"/>
+        <rect x="9" y="3" width="1" height="1" fill="var(--navy)"/>
+        <rect x="5" y="4" width="1" height="2" fill="var(--navy)"/>
+        <rect x="6" y="4" width="4" height="2" fill="var(--white)"/>
+        <rect x="10" y="4" width="1" height="2" fill="var(--navy)"/>
+        <rect x="4" y="6" width="1" height="2" fill="var(--navy)"/>
+        <rect x="5" y="6" width="6" height="2" fill="var(--white)"/>
+        <rect x="11" y="6" width="1" height="2" fill="var(--navy)"/>
+        <rect x="3" y="8" width="1" height="2" fill="var(--navy)"/>
+        <rect x="4" y="8" width="8" height="1" fill="var(--white)"/>
+        <rect x="12" y="8" width="1" height="2" fill="var(--navy)"/>
+        <rect x="4" y="9" width="2" height="1" fill="var(--white)"/>
+        <rect x="6" y="9" width="4" height="3" fill="var(--navy)"/>
+        <rect x="10" y="9" width="2" height="1" fill="var(--white)"/>
+        <rect x="2" y="10" width="1" height="2" fill="var(--navy)"/>
+        <rect x="3" y="10" width="3" height="2" fill="var(--white)"/>
+        <rect x="10" y="10" width="3" height="2" fill="var(--white)"/>
+        <rect x="13" y="10" width="1" height="2" fill="var(--navy)"/>
+        <rect x="2" y="12" width="12" height="1" fill="var(--navy)"/>
+      </symbol>
+      <symbol id="px-hotcan" viewBox="0 0 16 16">
+        <rect x="6" y="0" width="1" height="1" fill="var(--ice)"/>
+        <rect x="9" y="1" width="1" height="1" fill="var(--ice)"/>
+        <rect x="7" y="2" width="1" height="1" fill="var(--ice)"/>
+        <rect x="5" y="3" width="6" height="1" fill="var(--navy)"/>
+        <rect x="5" y="4" width="6" height="3" fill="var(--cobalt)"/>
+        <rect x="5" y="7" width="6" height="1" fill="var(--white)"/>
+        <rect x="5" y="8" width="6" height="1" fill="var(--sign)"/>
+        <rect x="5" y="9" width="6" height="1" fill="var(--white)"/>
+        <rect x="5" y="10" width="6" height="3" fill="var(--cobalt)"/>
+        <rect x="5" y="13" width="6" height="1" fill="var(--navy)"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- ============ the poster (hero) ============ -->
+  <header>
+    <div class="poster-sky k-sky">
+      <h1 class="k-display poster-title">KONBINI</h1>
+      <p class="poster-sub">design system</p>
+      <div class="poster-scene">
+        <svg viewBox="0 0 176 104" role="img"
+          aria-label="Pixel art scene: the Seimart convenience store on a snowy street. A snow-capped flat roof with two AC units, an orange sign band reading Seimart, a dark glass storefront with posters and a sliding door, a vending machine by the entrance, a white kei truck parked in the foreground, a traffic cone, power poles with sagging lines and small birds, distant pale buildings, and one cloud drifting in a winter sky.">
+        <g class="k-cloud">
+          <rect x="18" y="10" width="7" height="1" fill="var(--white)"/>
+          <rect x="15" y="11" width="13" height="1" fill="var(--white)"/>
+          <rect x="13" y="12" width="17" height="1" fill="var(--white)"/>
+          <rect x="12" y="13" width="20" height="1" fill="var(--white)"/>
+          <rect x="14" y="14" width="12" height="1" fill="var(--white)"/>
+        </g>
+        <rect x="23" y="32" width="4" height="1" fill="var(--white)"/>
+        <rect x="24" y="33" width="2" height="3" fill="var(--navy)"/>
+        <rect x="16" y="36" width="18" height="1" fill="var(--white)"/>
+        <rect x="16" y="37" width="18" height="1" fill="var(--navy)"/>
+        <rect x="16" y="38" width="19" height="1" fill="var(--navy)"/>
+        <rect x="14" y="39" width="2" height="1" fill="var(--navy)"/>
+        <rect x="24" y="39" width="2" height="4" fill="var(--navy)"/>
+        <rect x="35" y="39" width="3" height="1" fill="var(--navy)"/>
+        <rect x="0" y="40" width="2" height="1" fill="var(--navy)"/>
+        <rect x="11" y="40" width="3" height="1" fill="var(--navy)"/>
+        <rect x="38" y="40" width="3" height="1" fill="var(--navy)"/>
+        <rect x="2" y="41" width="9" height="1" fill="var(--navy)"/>
+        <rect x="41" y="41" width="3" height="1" fill="var(--navy)"/>
+        <rect x="44" y="42" width="3" height="1" fill="var(--navy)"/>
+        <rect x="18" y="43" width="14" height="1" fill="var(--white)"/>
+        <rect x="47" y="43" width="4" height="1" fill="var(--navy)"/>
+        <rect x="18" y="44" width="14" height="1" fill="var(--navy)"/>
+        <rect x="51" y="44" width="3" height="1" fill="var(--navy)"/>
+        <rect x="17" y="45" width="16" height="1" fill="var(--navy)"/>
+        <rect x="54" y="45" width="4" height="1" fill="var(--navy)"/>
+        <rect x="0" y="46" width="2" height="1" fill="var(--navy)"/>
+        <rect x="15" y="46" width="2" height="1" fill="var(--navy)"/>
+        <rect x="24" y="46" width="2" height="45" fill="var(--navy)"/>
+        <rect x="33" y="46" width="3" height="1" fill="var(--navy)"/>
+        <rect x="58" y="46" width="4" height="1" fill="var(--navy)"/>
+        <rect x="2" y="47" width="5" height="1" fill="var(--navy)"/>
+        <rect x="10" y="47" width="5" height="1" fill="var(--navy)"/>
+        <rect x="36" y="47" width="4" height="1" fill="var(--navy)"/>
+        <rect x="62" y="47" width="4" height="1" fill="var(--navy)"/>
+        <rect x="7" y="48" width="3" height="1" fill="var(--navy)"/>
+        <rect x="40" y="48" width="3" height="1" fill="var(--navy)"/>
+        <rect x="66" y="48" width="5" height="1" fill="var(--navy)"/>
+        <rect x="43" y="49" width="4" height="1" fill="var(--navy)"/>
+        <rect x="71" y="49" width="5" height="1" fill="var(--navy)"/>
+        <rect x="47" y="50" width="4" height="1" fill="var(--navy)"/>
+        <rect x="64" y="50" width="11" height="1" fill="var(--white)"/>
+        <rect x="76" y="50" width="5" height="1" fill="var(--navy)"/>
+        <rect x="100" y="50" width="11" height="1" fill="var(--white)"/>
+        <rect x="152" y="50" width="4" height="1" fill="var(--white)"/>
+        <rect x="51" y="51" width="4" height="1" fill="var(--navy)"/>
+        <rect x="64" y="51" width="11" height="1" fill="var(--ice)"/>
+        <rect x="81" y="51" width="7" height="1" fill="var(--navy)"/>
+        <rect x="100" y="51" width="11" height="1" fill="var(--ice)"/>
+        <rect x="153" y="51" width="2" height="2" fill="var(--navy)"/>
+        <rect x="55" y="52" width="4" height="1" fill="var(--navy)"/>
+        <rect x="64" y="52" width="2" height="3" fill="var(--ice)"/>
+        <rect x="66" y="52" width="1" height="3" fill="var(--navy)"/>
+        <rect x="67" y="52" width="1" height="3" fill="var(--ice)"/>
+        <rect x="68" y="52" width="1" height="3" fill="var(--navy)"/>
+        <rect x="69" y="52" width="1" height="3" fill="var(--ice)"/>
+        <rect x="70" y="52" width="1" height="3" fill="var(--navy)"/>
+        <rect x="71" y="52" width="1" height="3" fill="var(--ice)"/>
+        <rect x="72" y="52" width="1" height="3" fill="var(--navy)"/>
+        <rect x="73" y="52" width="2" height="3" fill="var(--ice)"/>
+        <rect x="88" y="52" width="7" height="1" fill="var(--navy)"/>
+        <rect x="100" y="52" width="2" height="3" fill="var(--ice)"/>
+        <rect x="102" y="52" width="1" height="3" fill="var(--navy)"/>
+        <rect x="103" y="52" width="1" height="3" fill="var(--ice)"/>
+        <rect x="104" y="52" width="1" height="3" fill="var(--navy)"/>
+        <rect x="105" y="52" width="1" height="3" fill="var(--ice)"/>
+        <rect x="106" y="52" width="1" height="3" fill="var(--navy)"/>
+        <rect x="107" y="52" width="1" height="3" fill="var(--ice)"/>
+        <rect x="108" y="52" width="1" height="3" fill="var(--navy)"/>
+        <rect x="109" y="52" width="2" height="3" fill="var(--ice)"/>
+        <rect x="59" y="53" width="5" height="1" fill="var(--navy)"/>
+        <rect x="95" y="53" width="5" height="1" fill="var(--navy)"/>
+        <rect x="148" y="53" width="12" height="1" fill="var(--white)"/>
+        <rect x="111" y="54" width="9" height="1" fill="var(--navy)"/>
+        <rect x="139" y="54" width="21" height="1" fill="var(--navy)"/>
+        <rect x="64" y="55" width="11" height="1" fill="var(--ice)"/>
+        <rect x="100" y="55" width="11" height="1" fill="var(--ice)"/>
+        <rect x="120" y="55" width="19" height="1" fill="var(--navy)"/>
+        <rect x="148" y="55" width="14" height="1" fill="var(--navy)"/>
+        <rect x="64" y="56" width="16" height="1" fill="var(--navy)"/>
+        <rect x="100" y="56" width="11" height="1" fill="var(--navy)"/>
+        <rect x="153" y="56" width="2" height="2" fill="var(--navy)"/>
+        <rect x="162" y="56" width="2" height="1" fill="var(--navy)"/>
+        <rect x="58" y="57" width="8" height="1" fill="var(--white)"/>
+        <rect x="69" y="57" width="12" height="1" fill="var(--white)"/>
+        <rect x="81" y="57" width="3" height="1" fill="var(--navy)"/>
+        <rect x="84" y="57" width="9" height="1" fill="var(--white)"/>
+        <rect x="96" y="57" width="14" height="1" fill="var(--white)"/>
+        <rect x="113" y="57" width="7" height="1" fill="var(--white)"/>
+        <rect x="164" y="57" width="3" height="1" fill="var(--navy)"/>
+        <rect x="174" y="57" width="2" height="1" fill="var(--navy)"/>
+        <rect x="56" y="58" width="66" height="2" fill="var(--white)"/>
+        <rect x="150" y="58" width="8" height="1" fill="var(--white)"/>
+        <rect x="167" y="58" width="7" height="1" fill="var(--navy)"/>
+        <rect x="144" y="59" width="14" height="1" fill="var(--navy)"/>
+        <rect x="57" y="60" width="87" height="1" fill="var(--navy)"/>
+        <rect x="150" y="60" width="10" height="1" fill="var(--navy)"/>
+        <rect x="57" y="61" width="64" height="1" fill="var(--white)"/>
+        <rect x="153" y="61" width="2" height="33" fill="var(--navy)"/>
+        <rect x="160" y="61" width="3" height="1" fill="var(--navy)"/>
+        <rect x="57" y="62" width="64" height="1" fill="var(--sign)"/>
+        <rect x="163" y="62" width="3" height="1" fill="var(--navy)"/>
+        <rect x="173" y="62" width="3" height="1" fill="var(--navy)"/>
+        <rect x="57" y="63" width="17" height="3" fill="var(--sign)"/>
+        <rect x="74" y="63" width="3" height="1" fill="var(--white)"/>
+        <rect x="77" y="63" width="1" height="1" fill="var(--sign)"/>
+        <rect x="78" y="63" width="3" height="1" fill="var(--white)"/>
+        <rect x="81" y="63" width="1" height="1" fill="var(--sign)"/>
+        <rect x="82" y="63" width="3" height="1" fill="var(--white)"/>
+        <rect x="85" y="63" width="1" height="1" fill="var(--sign)"/>
+        <rect x="86" y="63" width="1" height="1" fill="var(--white)"/>
+        <rect x="87" y="63" width="3" height="1" fill="var(--sign)"/>
+        <rect x="90" y="63" width="1" height="1" fill="var(--white)"/>
+        <rect x="91" y="63" width="1" height="5" fill="var(--sign)"/>
+        <rect x="92" y="63" width="3" height="1" fill="var(--white)"/>
+        <rect x="95" y="63" width="1" height="5" fill="var(--sign)"/>
+        <rect x="96" y="63" width="2" height="1" fill="var(--white)"/>
+        <rect x="98" y="63" width="2" height="1" fill="var(--sign)"/>
+        <rect x="100" y="63" width="3" height="1" fill="var(--white)"/>
+        <rect x="103" y="63" width="18" height="1" fill="var(--sign)"/>
+        <rect x="166" y="63" width="7" height="1" fill="var(--navy)"/>
+        <rect x="74" y="64" width="1" height="1" fill="var(--white)"/>
+        <rect x="75" y="64" width="3" height="1" fill="var(--sign)"/>
+        <rect x="78" y="64" width="1" height="1" fill="var(--white)"/>
+        <rect x="79" y="64" width="4" height="1" fill="var(--sign)"/>
+        <rect x="83" y="64" width="1" height="3" fill="var(--white)"/>
+        <rect x="84" y="64" width="2" height="3" fill="var(--sign)"/>
+        <rect x="86" y="64" width="2" height="1" fill="var(--white)"/>
+        <rect x="88" y="64" width="1" height="1" fill="var(--sign)"/>
+        <rect x="89" y="64" width="2" height="1" fill="var(--white)"/>
+        <rect x="92" y="64" width="1" height="1" fill="var(--white)"/>
+        <rect x="93" y="64" width="1" height="1" fill="var(--sign)"/>
+        <rect x="94" y="64" width="1" height="1" fill="var(--white)"/>
+        <rect x="96" y="64" width="1" height="1" fill="var(--white)"/>
+        <rect x="97" y="64" width="1" height="1" fill="var(--sign)"/>
+        <rect x="98" y="64" width="1" height="1" fill="var(--white)"/>
+        <rect x="99" y="64" width="2" height="1" fill="var(--sign)"/>
+        <rect x="101" y="64" width="1" height="4" fill="var(--white)"/>
+        <rect x="102" y="64" width="19" height="4" fill="var(--sign)"/>
+        <rect x="74" y="65" width="3" height="1" fill="var(--white)"/>
+        <rect x="77" y="65" width="1" height="3" fill="var(--sign)"/>
+        <rect x="78" y="65" width="3" height="1" fill="var(--white)"/>
+        <rect x="81" y="65" width="2" height="1" fill="var(--sign)"/>
+        <rect x="86" y="65" width="1" height="3" fill="var(--white)"/>
+        <rect x="87" y="65" width="1" height="1" fill="var(--sign)"/>
+        <rect x="88" y="65" width="1" height="1" fill="var(--white)"/>
+        <rect x="89" y="65" width="1" height="1" fill="var(--sign)"/>
+        <rect x="90" y="65" width="1" height="3" fill="var(--white)"/>
+        <rect x="92" y="65" width="3" height="1" fill="var(--white)"/>
+        <rect x="96" y="65" width="2" height="1" fill="var(--white)"/>
+        <rect x="98" y="65" width="3" height="1" fill="var(--sign)"/>
+        <rect x="57" y="66" width="19" height="1" fill="var(--sign)"/>
+        <rect x="76" y="66" width="1" height="1" fill="var(--white)"/>
+        <rect x="78" y="66" width="1" height="1" fill="var(--white)"/>
+        <rect x="79" y="66" width="4" height="1" fill="var(--sign)"/>
+        <rect x="87" y="66" width="3" height="2" fill="var(--sign)"/>
+        <rect x="92" y="66" width="1" height="2" fill="var(--white)"/>
+        <rect x="93" y="66" width="1" height="2" fill="var(--sign)"/>
+        <rect x="94" y="66" width="1" height="2" fill="var(--white)"/>
+        <rect x="96" y="66" width="1" height="2" fill="var(--white)"/>
+        <rect x="97" y="66" width="1" height="2" fill="var(--sign)"/>
+        <rect x="98" y="66" width="1" height="2" fill="var(--white)"/>
+        <rect x="99" y="66" width="2" height="2" fill="var(--sign)"/>
+        <rect x="57" y="67" width="17" height="1" fill="var(--sign)"/>
+        <rect x="74" y="67" width="3" height="1" fill="var(--white)"/>
+        <rect x="78" y="67" width="3" height="1" fill="var(--white)"/>
+        <rect x="81" y="67" width="1" height="1" fill="var(--sign)"/>
+        <rect x="82" y="67" width="3" height="1" fill="var(--white)"/>
+        <rect x="85" y="67" width="1" height="1" fill="var(--sign)"/>
+        <rect x="57" y="68" width="64" height="1" fill="var(--sign)"/>
+        <rect x="57" y="69" width="64" height="1" fill="var(--white)"/>
+        <rect x="57" y="70" width="64" height="1" fill="var(--navy)"/>
+        <rect x="57" y="71" width="1" height="18" fill="var(--navy)"/>
+        <rect x="58" y="71" width="3" height="18" fill="var(--snow)"/>
+        <rect x="61" y="71" width="56" height="1" fill="var(--navy)"/>
+        <rect x="117" y="71" width="3" height="7" fill="var(--snow)"/>
+        <rect x="120" y="71" width="1" height="21" fill="var(--navy)"/>
+        <rect x="15" y="72" width="9" height="1" fill="var(--white)"/>
+        <rect x="26" y="72" width="4" height="1" fill="var(--white)"/>
+        <rect x="61" y="72" width="2" height="2" fill="var(--navy)"/>
+        <rect x="63" y="72" width="2" height="2" fill="var(--sky-deep)"/>
+        <rect x="65" y="72" width="6" height="2" fill="var(--navy)"/>
+        <rect x="71" y="72" width="2" height="2" fill="var(--sky-deep)"/>
+        <rect x="73" y="72" width="21" height="2" fill="var(--navy)"/>
+        <rect x="94" y="72" width="2" height="15" fill="var(--snow)"/>
+        <rect x="96" y="72" width="5" height="2" fill="var(--sky-deep)"/>
+        <rect x="101" y="72" width="1" height="19" fill="var(--navy)"/>
+        <rect x="102" y="72" width="5" height="8" fill="var(--sky-deep)"/>
+        <rect x="107" y="72" width="2" height="15" fill="var(--snow)"/>
+        <rect x="109" y="72" width="8" height="6" fill="var(--navy)"/>
+        <rect x="15" y="73" width="9" height="2" fill="var(--ice)"/>
+        <rect x="26" y="73" width="4" height="2" fill="var(--ice)"/>
+        <rect x="61" y="74" width="4" height="11" fill="var(--navy)"/>
+        <rect x="65" y="74" width="2" height="1" fill="var(--sky-deep)"/>
+        <rect x="67" y="74" width="6" height="1" fill="var(--navy)"/>
+        <rect x="73" y="74" width="2" height="1" fill="var(--sky-deep)"/>
+        <rect x="75" y="74" width="19" height="1" fill="var(--navy)"/>
+        <rect x="96" y="74" width="1" height="2" fill="var(--sky-deep)"/>
+        <rect x="97" y="74" width="3" height="2" fill="var(--sign)"/>
+        <rect x="100" y="74" width="1" height="2" fill="var(--sky-deep)"/>
+        <rect x="15" y="75" width="2" height="2" fill="var(--ice)"/>
+        <rect x="17" y="75" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="19" y="75" width="2" height="2" fill="var(--ice)"/>
+        <rect x="21" y="75" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="23" y="75" width="1" height="2" fill="var(--ice)"/>
+        <rect x="26" y="75" width="1" height="2" fill="var(--sky-pale)"/>
+        <rect x="27" y="75" width="3" height="2" fill="var(--ice)"/>
+        <rect x="65" y="75" width="6" height="2" fill="var(--white)"/>
+        <rect x="71" y="75" width="1" height="5" fill="var(--navy)"/>
+        <rect x="72" y="75" width="6" height="2" fill="var(--white)"/>
+        <rect x="78" y="75" width="16" height="3" fill="var(--navy)"/>
+        <rect x="96" y="76" width="5" height="4" fill="var(--sky-deep)"/>
+        <rect x="121" y="76" width="15" height="1" fill="var(--white)"/>
+        <rect x="15" y="77" width="9" height="3" fill="var(--ice)"/>
+        <rect x="26" y="77" width="4" height="3" fill="var(--ice)"/>
+        <rect x="65" y="77" width="1" height="1" fill="var(--white)"/>
+        <rect x="66" y="77" width="4" height="1" fill="var(--cobalt)"/>
+        <rect x="70" y="77" width="1" height="1" fill="var(--white)"/>
+        <rect x="72" y="77" width="1" height="4" fill="var(--white)"/>
+        <rect x="73" y="77" width="4" height="4" fill="var(--cobalt)"/>
+        <rect x="77" y="77" width="1" height="4" fill="var(--white)"/>
+        <rect x="121" y="77" width="15" height="2" fill="var(--ice)"/>
+        <rect x="0" y="78" width="14" height="1" fill="var(--white)"/>
+        <rect x="65" y="78" width="6" height="1" fill="var(--white)"/>
+        <rect x="78" y="78" width="1" height="2" fill="var(--sky-deep)"/>
+        <rect x="79" y="78" width="1" height="2" fill="var(--navy)"/>
+        <rect x="80" y="78" width="2" height="2" fill="var(--white)"/>
+        <rect x="82" y="78" width="1" height="2" fill="var(--navy)"/>
+        <rect x="83" y="78" width="2" height="2" fill="var(--cobalt)"/>
+        <rect x="85" y="78" width="1" height="2" fill="var(--navy)"/>
+        <rect x="86" y="78" width="2" height="2" fill="var(--sign)"/>
+        <rect x="88" y="78" width="1" height="2" fill="var(--navy)"/>
+        <rect x="89" y="78" width="2" height="2" fill="var(--white)"/>
+        <rect x="91" y="78" width="3" height="2" fill="var(--navy)"/>
+        <rect x="109" y="78" width="10" height="1" fill="var(--white)"/>
+        <rect x="119" y="78" width="1" height="14" fill="var(--snow)"/>
+        <rect x="155" y="78" width="21" height="1" fill="var(--white)"/>
+        <rect x="0" y="79" width="14" height="2" fill="var(--ice)"/>
+        <rect x="65" y="79" width="1" height="1" fill="var(--white)"/>
+        <rect x="66" y="79" width="3" height="1" fill="var(--cobalt)"/>
+        <rect x="69" y="79" width="2" height="1" fill="var(--white)"/>
+        <rect x="109" y="79" width="1" height="7" fill="var(--navy)"/>
+        <rect x="110" y="79" width="8" height="1" fill="var(--cobalt)"/>
+        <rect x="118" y="79" width="1" height="7" fill="var(--navy)"/>
+        <rect x="121" y="79" width="1" height="2" fill="var(--ice)"/>
+        <rect x="122" y="79" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="124" y="79" width="2" height="2" fill="var(--ice)"/>
+        <rect x="126" y="79" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="128" y="79" width="2" height="2" fill="var(--ice)"/>
+        <rect x="130" y="79" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="132" y="79" width="4" height="2" fill="var(--ice)"/>
+        <rect x="155" y="79" width="21" height="2" fill="var(--ice)"/>
+        <rect x="15" y="80" width="2" height="2" fill="var(--ice)"/>
+        <rect x="17" y="80" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="19" y="80" width="2" height="2" fill="var(--ice)"/>
+        <rect x="21" y="80" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="23" y="80" width="1" height="2" fill="var(--ice)"/>
+        <rect x="26" y="80" width="1" height="2" fill="var(--sky-pale)"/>
+        <rect x="27" y="80" width="3" height="2" fill="var(--ice)"/>
+        <rect x="44" y="80" width="10" height="1" fill="var(--white)"/>
+        <rect x="65" y="80" width="6" height="1" fill="var(--white)"/>
+        <rect x="71" y="80" width="1" height="2" fill="var(--sky-deep)"/>
+        <rect x="78" y="80" width="1" height="2" fill="var(--navy)"/>
+        <rect x="79" y="80" width="1" height="1" fill="var(--sky-deep)"/>
+        <rect x="80" y="80" width="13" height="1" fill="var(--ice)"/>
+        <rect x="93" y="80" width="1" height="1" fill="var(--navy)"/>
+        <rect x="96" y="80" width="1" height="1" fill="var(--sky-deep)"/>
+        <rect x="97" y="80" width="4" height="1" fill="var(--white)"/>
+        <rect x="102" y="80" width="4" height="1" fill="var(--white)"/>
+        <rect x="106" y="80" width="1" height="1" fill="var(--sky-deep)"/>
+        <rect x="110" y="80" width="8" height="1" fill="var(--sky-pale)"/>
+        <rect x="0" y="81" width="2" height="2" fill="var(--ice)"/>
+        <rect x="2" y="81" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="4" y="81" width="2" height="2" fill="var(--ice)"/>
+        <rect x="6" y="81" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="8" y="81" width="2" height="2" fill="var(--ice)"/>
+        <rect x="10" y="81" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="12" y="81" width="2" height="2" fill="var(--ice)"/>
+        <rect x="44" y="81" width="10" height="2" fill="var(--ice)"/>
+        <rect x="65" y="81" width="1" height="1" fill="var(--white)"/>
+        <rect x="66" y="81" width="4" height="1" fill="var(--cobalt)"/>
+        <rect x="70" y="81" width="1" height="1" fill="var(--white)"/>
+        <rect x="72" y="81" width="6" height="1" fill="var(--white)"/>
+        <rect x="79" y="81" width="2" height="1" fill="var(--sky-deep)"/>
+        <rect x="81" y="81" width="13" height="1" fill="var(--navy)"/>
+        <rect x="96" y="81" width="5" height="6" fill="var(--sky-deep)"/>
+        <rect x="102" y="81" width="5" height="6" fill="var(--sky-deep)"/>
+        <rect x="110" y="81" width="1" height="2" fill="var(--sky-pale)"/>
+        <rect x="111" y="81" width="1" height="2" fill="var(--white)"/>
+        <rect x="112" y="81" width="1" height="2" fill="var(--sky-pale)"/>
+        <rect x="113" y="81" width="1" height="2" fill="var(--sign)"/>
+        <rect x="114" y="81" width="1" height="2" fill="var(--sky-pale)"/>
+        <rect x="115" y="81" width="1" height="2" fill="var(--cobalt)"/>
+        <rect x="116" y="81" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="121" y="81" width="15" height="3" fill="var(--ice)"/>
+        <rect x="155" y="81" width="1" height="2" fill="var(--ice)"/>
+        <rect x="156" y="81" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="158" y="81" width="2" height="2" fill="var(--ice)"/>
+        <rect x="160" y="81" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="162" y="81" width="2" height="2" fill="var(--ice)"/>
+        <rect x="164" y="81" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="166" y="81" width="2" height="2" fill="var(--ice)"/>
+        <rect x="168" y="81" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="170" y="81" width="2" height="2" fill="var(--ice)"/>
+        <rect x="172" y="81" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="174" y="81" width="2" height="2" fill="var(--ice)"/>
+        <rect x="15" y="82" width="9" height="3" fill="var(--ice)"/>
+        <rect x="26" y="82" width="4" height="3" fill="var(--ice)"/>
+        <rect x="65" y="82" width="6" height="1" fill="var(--white)"/>
+        <rect x="71" y="82" width="1" height="3" fill="var(--navy)"/>
+        <rect x="72" y="82" width="1" height="1" fill="var(--white)"/>
+        <rect x="73" y="82" width="4" height="1" fill="var(--cobalt)"/>
+        <rect x="77" y="82" width="1" height="1" fill="var(--white)"/>
+        <rect x="78" y="82" width="3" height="1" fill="var(--navy)"/>
+        <rect x="81" y="82" width="2" height="1" fill="var(--sky-deep)"/>
+        <rect x="83" y="82" width="11" height="1" fill="var(--navy)"/>
+        <rect x="137" y="82" width="14" height="1" fill="var(--white)"/>
+        <rect x="0" y="83" width="14" height="3" fill="var(--ice)"/>
+        <rect x="44" y="83" width="2" height="2" fill="var(--ice)"/>
+        <rect x="46" y="83" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="48" y="83" width="2" height="2" fill="var(--ice)"/>
+        <rect x="50" y="83" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="52" y="83" width="2" height="2" fill="var(--ice)"/>
+        <rect x="65" y="83" width="3" height="1" fill="var(--white)"/>
+        <rect x="68" y="83" width="2" height="1" fill="var(--sign)"/>
+        <rect x="70" y="83" width="1" height="1" fill="var(--white)"/>
+        <rect x="72" y="83" width="6" height="2" fill="var(--white)"/>
+        <rect x="78" y="83" width="2" height="2" fill="var(--navy)"/>
+        <rect x="80" y="83" width="2" height="2" fill="var(--cobalt)"/>
+        <rect x="82" y="83" width="1" height="1" fill="var(--sky-deep)"/>
+        <rect x="83" y="83" width="2" height="2" fill="var(--sign)"/>
+        <rect x="85" y="83" width="1" height="2" fill="var(--navy)"/>
+        <rect x="86" y="83" width="2" height="2" fill="var(--white)"/>
+        <rect x="88" y="83" width="1" height="2" fill="var(--navy)"/>
+        <rect x="89" y="83" width="2" height="2" fill="var(--white)"/>
+        <rect x="91" y="83" width="3" height="2" fill="var(--navy)"/>
+        <rect x="110" y="83" width="8" height="1" fill="var(--sky-pale)"/>
+        <rect x="137" y="83" width="14" height="2" fill="var(--ice)"/>
+        <rect x="155" y="83" width="21" height="3" fill="var(--ice)"/>
+        <rect x="31" y="84" width="12" height="1" fill="var(--white)"/>
+        <rect x="65" y="84" width="6" height="1" fill="var(--white)"/>
+        <rect x="82" y="84" width="1" height="1" fill="var(--navy)"/>
+        <rect x="110" y="84" width="1" height="2" fill="var(--sky-pale)"/>
+        <rect x="111" y="84" width="1" height="2" fill="var(--sign)"/>
+        <rect x="112" y="84" width="1" height="2" fill="var(--sky-pale)"/>
+        <rect x="113" y="84" width="1" height="2" fill="var(--cobalt)"/>
+        <rect x="114" y="84" width="1" height="2" fill="var(--sky-pale)"/>
+        <rect x="115" y="84" width="1" height="2" fill="var(--white)"/>
+        <rect x="116" y="84" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="121" y="84" width="1" height="2" fill="var(--ice)"/>
+        <rect x="122" y="84" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="124" y="84" width="2" height="2" fill="var(--ice)"/>
+        <rect x="126" y="84" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="128" y="84" width="2" height="2" fill="var(--ice)"/>
+        <rect x="130" y="84" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="132" y="84" width="4" height="2" fill="var(--ice)"/>
+        <rect x="15" y="85" width="2" height="2" fill="var(--ice)"/>
+        <rect x="17" y="85" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="19" y="85" width="2" height="2" fill="var(--ice)"/>
+        <rect x="21" y="85" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="23" y="85" width="1" height="2" fill="var(--ice)"/>
+        <rect x="26" y="85" width="1" height="2" fill="var(--sky-pale)"/>
+        <rect x="27" y="85" width="3" height="2" fill="var(--ice)"/>
+        <rect x="31" y="85" width="7" height="1" fill="var(--ice)"/>
+        <rect x="38" y="85" width="9" height="1" fill="var(--white)"/>
+        <rect x="47" y="85" width="7" height="1" fill="var(--ice)"/>
+        <rect x="61" y="85" width="14" height="1" fill="var(--navy)"/>
+        <rect x="75" y="85" width="2" height="1" fill="var(--sky-deep)"/>
+        <rect x="77" y="85" width="3" height="1" fill="var(--navy)"/>
+        <rect x="80" y="85" width="13" height="1" fill="var(--ice)"/>
+        <rect x="93" y="85" width="1" height="1" fill="var(--navy)"/>
+        <rect x="137" y="85" width="2" height="2" fill="var(--ice)"/>
+        <rect x="139" y="85" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="141" y="85" width="2" height="2" fill="var(--ice)"/>
+        <rect x="143" y="85" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="145" y="85" width="2" height="2" fill="var(--ice)"/>
+        <rect x="147" y="85" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="149" y="85" width="2" height="2" fill="var(--ice)"/>
+        <rect x="0" y="86" width="2" height="2" fill="var(--ice)"/>
+        <rect x="2" y="86" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="4" y="86" width="2" height="2" fill="var(--ice)"/>
+        <rect x="6" y="86" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="8" y="86" width="2" height="2" fill="var(--ice)"/>
+        <rect x="10" y="86" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="12" y="86" width="2" height="2" fill="var(--ice)"/>
+        <rect x="31" y="86" width="6" height="1" fill="var(--ice)"/>
+        <rect x="37" y="86" width="11" height="1" fill="var(--white)"/>
+        <rect x="48" y="86" width="6" height="2" fill="var(--ice)"/>
+        <rect x="61" y="86" width="16" height="2" fill="var(--navy)"/>
+        <rect x="77" y="86" width="2" height="2" fill="var(--sky-deep)"/>
+        <rect x="79" y="86" width="15" height="2" fill="var(--navy)"/>
+        <rect x="109" y="86" width="10" height="1" fill="var(--navy)"/>
+        <rect x="121" y="86" width="15" height="3" fill="var(--ice)"/>
+        <rect x="155" y="86" width="1" height="2" fill="var(--ice)"/>
+        <rect x="156" y="86" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="158" y="86" width="2" height="2" fill="var(--ice)"/>
+        <rect x="160" y="86" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="162" y="86" width="2" height="2" fill="var(--ice)"/>
+        <rect x="164" y="86" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="166" y="86" width="2" height="2" fill="var(--ice)"/>
+        <rect x="168" y="86" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="170" y="86" width="2" height="2" fill="var(--ice)"/>
+        <rect x="172" y="86" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="174" y="86" width="2" height="2" fill="var(--ice)"/>
+        <rect x="15" y="87" width="9" height="3" fill="var(--ice)"/>
+        <rect x="26" y="87" width="4" height="3" fill="var(--ice)"/>
+        <rect x="31" y="87" width="2" height="2" fill="var(--ice)"/>
+        <rect x="33" y="87" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="35" y="87" width="2" height="1" fill="var(--ice)"/>
+        <rect x="37" y="87" width="1" height="4" fill="var(--white)"/>
+        <rect x="38" y="87" width="8" height="1" fill="var(--navy)"/>
+        <rect x="46" y="87" width="2" height="3" fill="var(--white)"/>
+        <rect x="94" y="87" width="7" height="4" fill="var(--snow)"/>
+        <rect x="102" y="87" width="7" height="4" fill="var(--snow)"/>
+        <rect x="109" y="87" width="1" height="3" fill="var(--navy)"/>
+        <rect x="110" y="87" width="5" height="2" fill="var(--cobalt)"/>
+        <rect x="115" y="87" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="117" y="87" width="1" height="2" fill="var(--cobalt)"/>
+        <rect x="118" y="87" width="1" height="6" fill="var(--navy)"/>
+        <rect x="137" y="87" width="14" height="3" fill="var(--ice)"/>
+        <rect x="0" y="88" width="14" height="6" fill="var(--ice)"/>
+        <rect x="35" y="88" width="1" height="1" fill="var(--ice)"/>
+        <rect x="36" y="88" width="1" height="2" fill="var(--navy)"/>
+        <rect x="38" y="88" width="1" height="2" fill="var(--navy)"/>
+        <rect x="39" y="88" width="6" height="2" fill="var(--sky-deep)"/>
+        <rect x="45" y="88" width="1" height="2" fill="var(--navy)"/>
+        <rect x="48" y="88" width="2" height="1" fill="var(--ice)"/>
+        <rect x="50" y="88" width="2" height="1" fill="var(--sky-pale)"/>
+        <rect x="52" y="88" width="2" height="1" fill="var(--ice)"/>
+        <rect x="61" y="88" width="33" height="1" fill="var(--navy)"/>
+        <rect x="155" y="88" width="21" height="6" fill="var(--ice)"/>
+        <rect x="31" y="89" width="5" height="1" fill="var(--ice)"/>
+        <rect x="48" y="89" width="1" height="1" fill="var(--ice)"/>
+        <rect x="49" y="89" width="18" height="1" fill="var(--white)"/>
+        <rect x="67" y="89" width="27" height="2" fill="var(--navy)"/>
+        <rect x="110" y="89" width="8" height="1" fill="var(--cobalt)"/>
+        <rect x="121" y="89" width="1" height="2" fill="var(--ice)"/>
+        <rect x="122" y="89" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="124" y="89" width="2" height="2" fill="var(--ice)"/>
+        <rect x="126" y="89" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="128" y="89" width="2" height="2" fill="var(--ice)"/>
+        <rect x="130" y="89" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="132" y="89" width="4" height="4" fill="var(--ice)"/>
+        <rect x="15" y="90" width="2" height="2" fill="var(--ice)"/>
+        <rect x="17" y="90" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="19" y="90" width="2" height="2" fill="var(--ice)"/>
+        <rect x="21" y="90" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="23" y="90" width="1" height="1" fill="var(--ice)"/>
+        <rect x="26" y="90" width="1" height="1" fill="var(--sky-pale)"/>
+        <rect x="27" y="90" width="3" height="2" fill="var(--ice)"/>
+        <rect x="31" y="90" width="6" height="4" fill="var(--ice)"/>
+        <rect x="38" y="90" width="8" height="1" fill="var(--navy)"/>
+        <rect x="46" y="90" width="21" height="1" fill="var(--white)"/>
+        <rect x="109" y="90" width="5" height="1" fill="var(--navy)"/>
+        <rect x="114" y="90" width="4" height="2" fill="var(--cobalt)"/>
+        <rect x="137" y="90" width="2" height="2" fill="var(--ice)"/>
+        <rect x="139" y="90" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="141" y="90" width="2" height="2" fill="var(--ice)"/>
+        <rect x="143" y="90" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="145" y="90" width="2" height="2" fill="var(--ice)"/>
+        <rect x="147" y="90" width="2" height="2" fill="var(--sky-pale)"/>
+        <rect x="149" y="90" width="2" height="2" fill="var(--ice)"/>
+        <rect x="23" y="91" width="4" height="1" fill="var(--navy)"/>
+        <rect x="37" y="91" width="1" height="1" fill="var(--sign)"/>
+        <rect x="38" y="91" width="12" height="1" fill="var(--white)"/>
+        <rect x="50" y="91" width="16" height="2" fill="var(--ice)"/>
+        <rect x="66" y="91" width="1" height="2" fill="var(--white)"/>
+        <rect x="67" y="91" width="47" height="1" fill="var(--navy)"/>
+        <rect x="121" y="91" width="9" height="1" fill="var(--ice)"/>
+        <rect x="130" y="91" width="2" height="2" fill="var(--sign)"/>
+        <rect x="15" y="92" width="8" height="2" fill="var(--ice)"/>
+        <rect x="23" y="92" width="5" height="2" fill="var(--white)"/>
+        <rect x="28" y="92" width="2" height="2" fill="var(--ice)"/>
+        <rect x="37" y="92" width="13" height="1" fill="var(--white)"/>
+        <rect x="67" y="92" width="42" height="1" fill="var(--snow)"/>
+        <rect x="109" y="92" width="1" height="1" fill="var(--navy)"/>
+        <rect x="110" y="92" width="8" height="1" fill="var(--cobalt)"/>
+        <rect x="119" y="92" width="4" height="2" fill="var(--white)"/>
+        <rect x="123" y="92" width="7" height="1" fill="var(--ice)"/>
+        <rect x="137" y="92" width="14" height="1" fill="var(--ice)"/>
+        <rect x="37" y="93" width="30" height="1" fill="var(--white)"/>
+        <rect x="67" y="93" width="32" height="1" fill="var(--navy)"/>
+        <rect x="99" y="93" width="6" height="1" fill="var(--white)"/>
+        <rect x="105" y="93" width="14" height="1" fill="var(--navy)"/>
+        <rect x="123" y="93" width="6" height="1" fill="var(--ice)"/>
+        <rect x="129" y="93" width="4" height="1" fill="var(--white)"/>
+        <rect x="133" y="93" width="3" height="1" fill="var(--ice)"/>
+        <rect x="137" y="93" width="3" height="1" fill="var(--ice)"/>
+        <rect x="140" y="93" width="6" height="1" fill="var(--white)"/>
+        <rect x="146" y="93" width="5" height="1" fill="var(--ice)"/>
+        <rect x="0" y="94" width="22" height="1" fill="var(--snow)"/>
+        <rect x="22" y="94" width="7" height="1" fill="var(--ice)"/>
+        <rect x="29" y="94" width="8" height="1" fill="var(--snow)"/>
+        <rect x="37" y="94" width="1" height="1" fill="var(--sky-pale)"/>
+        <rect x="38" y="94" width="29" height="1" fill="var(--white)"/>
+        <rect x="67" y="94" width="54" height="1" fill="var(--ice)"/>
+        <rect x="121" y="94" width="8" height="1" fill="var(--snow)"/>
+        <rect x="129" y="94" width="4" height="1" fill="var(--sign)"/>
+        <rect x="133" y="94" width="19" height="1" fill="var(--snow)"/>
+        <rect x="152" y="94" width="6" height="1" fill="var(--ice)"/>
+        <rect x="158" y="94" width="18" height="1" fill="var(--snow)"/>
+        <rect x="0" y="95" width="37" height="1" fill="var(--snow)"/>
+        <rect x="37" y="95" width="3" height="1" fill="var(--ice)"/>
+        <rect x="40" y="95" width="5" height="1" fill="var(--navy)"/>
+        <rect x="45" y="95" width="13" height="1" fill="var(--ice)"/>
+        <rect x="58" y="95" width="5" height="1" fill="var(--navy)"/>
+        <rect x="63" y="95" width="4" height="1" fill="var(--ice)"/>
+        <rect x="67" y="95" width="61" height="1" fill="var(--snow)"/>
+        <rect x="128" y="95" width="6" height="1" fill="var(--sign)"/>
+        <rect x="134" y="95" width="42" height="1" fill="var(--snow)"/>
+        <rect x="0" y="96" width="12" height="1" fill="var(--ice)"/>
+        <rect x="12" y="96" width="4" height="1" fill="var(--snow)"/>
+        <rect x="16" y="96" width="10" height="1" fill="var(--ice)"/>
+        <rect x="26" y="96" width="11" height="1" fill="var(--snow)"/>
+        <rect x="37" y="96" width="5" height="1" fill="var(--navy)"/>
+        <rect x="42" y="96" width="1" height="1" fill="var(--ice)"/>
+        <rect x="43" y="96" width="17" height="1" fill="var(--navy)"/>
+        <rect x="60" y="96" width="1" height="1" fill="var(--ice)"/>
+        <rect x="61" y="96" width="6" height="1" fill="var(--navy)"/>
+        <rect x="67" y="96" width="36" height="1" fill="var(--snow)"/>
+        <rect x="103" y="96" width="1" height="1" fill="var(--ice)"/>
+        <rect x="104" y="96" width="23" height="1" fill="var(--snow)"/>
+        <rect x="127" y="96" width="8" height="1" fill="var(--sign)"/>
+        <rect x="135" y="96" width="41" height="2" fill="var(--snow)"/>
+        <rect x="0" y="97" width="40" height="1" fill="var(--snow)"/>
+        <rect x="40" y="97" width="5" height="1" fill="var(--navy)"/>
+        <rect x="45" y="97" width="13" height="1" fill="var(--snow)"/>
+        <rect x="58" y="97" width="5" height="1" fill="var(--navy)"/>
+        <rect x="63" y="97" width="34" height="1" fill="var(--snow)"/>
+        <rect x="97" y="97" width="1" height="1" fill="var(--ice)"/>
+        <rect x="98" y="97" width="12" height="1" fill="var(--snow)"/>
+        <rect x="110" y="97" width="1" height="1" fill="var(--ice)"/>
+        <rect x="111" y="97" width="5" height="1" fill="var(--snow)"/>
+        <rect x="116" y="97" width="1" height="1" fill="var(--ice)"/>
+        <rect x="117" y="97" width="10" height="1" fill="var(--snow)"/>
+        <rect x="127" y="97" width="8" height="1" fill="var(--ice)"/>
+        <rect x="0" y="98" width="41" height="1" fill="var(--snow)"/>
+        <rect x="41" y="98" width="3" height="1" fill="var(--navy)"/>
+        <rect x="44" y="98" width="15" height="1" fill="var(--snow)"/>
+        <rect x="59" y="98" width="3" height="1" fill="var(--navy)"/>
+        <rect x="62" y="98" width="38" height="1" fill="var(--snow)"/>
+        <rect x="100" y="98" width="1" height="1" fill="var(--ice)"/>
+        <rect x="101" y="98" width="5" height="1" fill="var(--snow)"/>
+        <rect x="106" y="98" width="1" height="1" fill="var(--ice)"/>
+        <rect x="107" y="98" width="69" height="1" fill="var(--snow)"/>
+        <rect x="0" y="99" width="8" height="1" fill="var(--ice)"/>
+        <rect x="8" y="99" width="4" height="1" fill="var(--snow)"/>
+        <rect x="12" y="99" width="12" height="1" fill="var(--ice)"/>
+        <rect x="24" y="99" width="4" height="1" fill="var(--snow)"/>
+        <rect x="28" y="99" width="39" height="1" fill="var(--ice)"/>
+        <rect x="67" y="99" width="46" height="1" fill="var(--snow)"/>
+        <rect x="113" y="99" width="1" height="1" fill="var(--ice)"/>
+        <rect x="114" y="99" width="16" height="1" fill="var(--snow)"/>
+        <rect x="130" y="99" width="1" height="1" fill="var(--white)"/>
+        <rect x="131" y="99" width="45" height="1" fill="var(--snow)"/>
+        <rect x="0" y="100" width="176" height="1" fill="var(--snow)"/>
+        <rect x="0" y="101" width="30" height="1" fill="var(--snow)"/>
+        <rect x="30" y="101" width="1" height="1" fill="var(--white)"/>
+        <rect x="31" y="101" width="115" height="1" fill="var(--snow)"/>
+        <rect x="146" y="101" width="1" height="1" fill="var(--white)"/>
+        <rect x="147" y="101" width="29" height="1" fill="var(--snow)"/>
+        <rect x="0" y="102" width="12" height="1" fill="var(--snow)"/>
+        <rect x="12" y="102" width="1" height="1" fill="var(--white)"/>
+        <rect x="13" y="102" width="77" height="1" fill="var(--snow)"/>
+        <rect x="90" y="102" width="1" height="1" fill="var(--white)"/>
+        <rect x="91" y="102" width="69" height="1" fill="var(--snow)"/>
+        <rect x="160" y="102" width="1" height="1" fill="var(--white)"/>
+        <rect x="161" y="102" width="15" height="1" fill="var(--snow)"/>
+        <rect x="0" y="103" width="176" height="1" fill="var(--snow)"/>
+        <g class="k-bird k-bird-1">
+          <rect x="72" y="47" width="2" height="2" fill="var(--navy)"/>
+          <rect x="74" y="46" width="1" height="1" fill="var(--navy)"/>
+        </g>
+        <g class="k-bird k-bird-2">
+          <rect x="96" y="51" width="2" height="2" fill="var(--navy)"/>
+          <rect x="98" y="50" width="1" height="1" fill="var(--navy)"/>
+        </g>
+        <g class="k-bird k-bird-3">
+          <rect x="122" y="53" width="2" height="2" fill="var(--navy)"/>
+          <rect x="124" y="52" width="1" height="1" fill="var(--navy)"/>
+        </g>
+        </svg>
+      </div>
+    </div>
+    <div class="poster-snow">
+      <p class="k-captions" aria-label="poster captions">
+        <span class="k-caption">never too</span>
+        <span class="k-caption">far away</span>
+        <span class="k-caption">always there</span>
+      </p>
+      <p class="k-kana poster-kana" lang="ja" aria-label="konbini, in katakana">コンビニ</p>
+      <div class="poster-foot">
+        <p class="k-footnote">the omnipresent konbini will always be there for you.</p>
+        <p class="k-pageno" aria-label="page 28">28</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="k-band" role="presentation"></div>
+
+  <nav class="spread" style="padding-top:2rem;padding-bottom:2rem" aria-label="catalog sections">
+    <p class="k-captions">
+      <a class="k-link" href="#foundations">foundations</a>
+      <a class="k-link" href="#pixel-rule">the pixel rule</a>
+      <a class="k-link" href="#motifs">motifs</a>
+      <a class="k-link" href="#components">components</a>
+      <a class="k-link" href="#application">in application</a>
+    </p>
+  </nav>
+
+  <div class="k-band k-band--thin" role="presentation"></div>
+
+  <main>
+
+    <!-- ============ foundations ============ -->
+    <section class="spread" id="foundations">
+      <div class="spread-head">
+        <h2>foundations</h2>
+        <span class="kana" lang="ja" aria-hidden="true">カラー と タイプ</span>
+      </div>
+
+      <h3>palette</h3>
+      <p>
+        Nine flat colors and nothing else. Three skies that only ever appear
+        inside the one gradient, two papers, cobalt for every word on snow,
+        navy for outlines and dark details, one warm orange that belongs to
+        the sign, and ice for everything far away.
+      </p>
+      <div class="row" style="margin-top:1.5rem">
+        <div class="swatch-cell">
+          <div class="k-swatch" style="background:#5fb2dd"></div>
+          <span class="name">--sky-deep</span><span class="hex">#5fb2dd</span>
+        </div>
+        <div class="swatch-cell">
+          <div class="k-swatch" style="background:#8ecbe9"></div>
+          <span class="name">--sky</span><span class="hex">#8ecbe9</span>
+        </div>
+        <div class="swatch-cell">
+          <div class="k-swatch" style="background:#c9e6f4"></div>
+          <span class="name">--sky-pale</span><span class="hex">#c9e6f4</span>
+        </div>
+        <div class="swatch-cell">
+          <div class="k-swatch" style="background:#f4f8fa"></div>
+          <span class="name">--snow</span><span class="hex">#f4f8fa</span>
+        </div>
+        <div class="swatch-cell">
+          <div class="k-swatch" style="background:#ffffff"></div>
+          <span class="name">--white</span><span class="hex">#ffffff</span>
+        </div>
+        <div class="swatch-cell">
+          <div class="k-swatch" style="background:#2563eb"></div>
+          <span class="name">--cobalt</span><span class="hex">#2563eb</span>
+        </div>
+        <div class="swatch-cell">
+          <div class="k-swatch" style="background:#2b3a55"></div>
+          <span class="name">--navy</span><span class="hex">#2b3a55</span>
+        </div>
+        <div class="swatch-cell">
+          <div class="k-swatch" style="background:#f08c1e"></div>
+          <span class="name">--sign</span><span class="hex">#f08c1e</span>
+        </div>
+        <div class="swatch-cell">
+          <div class="k-swatch" style="background:#a8cede"></div>
+          <span class="name">--ice</span><span class="hex">#a8cede</span>
+        </div>
+      </div>
+
+      <h3>the one gradient</h3>
+      <p>
+        Exactly one gradient exists in the whole system: the vertical sky,
+        deep at the top and pale at the horizon. It is always vertical and
+        always a sky. Bands, plates, buttons, and shadows are flat fills.
+      </p>
+      <div class="k-sky" style="height:120px;max-width:520px;margin-top:1rem" role="img" aria-label="the sky gradient: sky-deep at the top, sky in the middle, sky-pale at the bottom"></div>
+
+      <h3>display voice</h3>
+      <p>
+        A heavy neutral grotesque, 700 to 800, tight tracking, set white and
+        giant when it floats in sky. On sky it is a poster voice only: at
+        least 32px and bold, never body copy.
+      </p>
+      <div class="specimen-sky k-sky" style="max-width:520px">
+        <span class="k-display">HOKKAIDO</span>
+      </div>
+
+      <h3>text voices</h3>
+      <div class="row">
+        <div class="cell">
+          <span class="lbl">caption - lowercase, 700, cobalt</span>
+          <span class="k-caption">lights on the snow</span>
+        </div>
+        <div class="cell">
+          <span class="lbl">body - 400, cobalt, max 62ch</span>
+          <p class="k-body" style="max-width:36ch">
+            The store at the end of the street keeps its lights on all
+            night, and the snow outside stays blue until morning.
+          </p>
+        </div>
+        <div class="cell">
+          <span class="lbl">footnote - 24ch, ragged right, folio in the corner</span>
+          <p class="k-footnote">the heater above the door hums a little louder when it snows.</p>
+        </div>
+      </div>
+
+      <h3>cjk display voice</h3>
+      <p>
+        Giant katakana set in cobalt as pure graphic shape. It is texture and
+        scenery, not navigation: a word made of pixels-in-spirit.
+      </p>
+      <p class="k-kana" lang="ja" style="font-size:clamp(3rem,10vw,6rem)" aria-label="yuki, snow, in katakana">ユキ</p>
+
+      <div class="spread-folio"><span class="k-pageno" aria-label="page 29">29</span></div>
+    </section>
+
+    <div class="k-band" role="presentation"></div>
+
+    <!-- ============ the pixel rule ============ -->
+    <section class="spread" id="pixel-rule">
+      <div class="spread-head">
+        <h2>the pixel rule</h2>
+        <span class="kana" lang="ja" aria-hidden="true">ピクセル</span>
+      </div>
+      <p>
+        All illustration is pixel art on a fixed integer grid: inline SVG made
+        only of axis-aligned rects at integer coordinates, rendered with
+        crisp edges. No curves, no strokes, no anti-aliasing. Scenes are
+        drawn on a 176x104 grid, icons on 16x16.
+      </p>
+      <p>
+        Scaling happens in whole steps. A pixel is 1x, 2x, 3x, or 4x, and
+        never 1.5x: CSS width is always an integer multiple of the grid, so
+        the pixels stay square and crisp at every size.
+      </p>
+      <div class="scale-demo" style="margin-top:2rem">
+        <div class="cell">
+          <svg width="16" height="16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-snowflake" /></svg>
+          <span class="lbl">1x - 16px</span>
+        </div>
+        <div class="cell">
+          <svg width="32" height="32" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-snowflake" /></svg>
+          <span class="lbl">2x - 32px</span>
+        </div>
+        <div class="cell">
+          <svg width="48" height="48" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-snowflake" /></svg>
+          <span class="lbl">3x - 48px</span>
+        </div>
+        <div class="cell">
+          <svg width="64" height="64" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-snowflake" /></svg>
+          <span class="lbl">4x - 64px</span>
+        </div>
+      </div>
+
+      <div class="spread-folio"><span class="k-pageno" aria-label="page 30">30</span></div>
+    </section>
+
+    <div class="k-band" role="presentation"></div>
+
+    <!-- ============ motifs ============ -->
+    <section class="spread" id="motifs">
+      <div class="spread-head">
+        <h2>motifs</h2>
+        <span class="kana" lang="ja" aria-hidden="true">モチーフ</span>
+      </div>
+
+      <h3>pixel icons - 16 grid</h3>
+      <div class="icon-grid">
+        <div class="cell">
+          <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-pole" /></svg>
+          <span class="lbl">power pole</span>
+        </div>
+        <div class="cell">
+          <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-vending" /></svg>
+          <span class="lbl">vending machine</span>
+        </div>
+        <div class="cell">
+          <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-cone" /></svg>
+          <span class="lbl">traffic cone</span>
+        </div>
+        <div class="cell">
+          <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-ac" /></svg>
+          <span class="lbl">ac unit</span>
+        </div>
+        <div class="cell">
+          <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-truck" /></svg>
+          <span class="lbl">kei truck</span>
+        </div>
+        <div class="cell">
+          <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-snowflake" /></svg>
+          <span class="lbl">snowflake</span>
+        </div>
+        <div class="cell">
+          <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-onigiri" /></svg>
+          <span class="lbl">onigiri</span>
+        </div>
+        <div class="cell">
+          <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-hotcan" /></svg>
+          <span class="lbl">hot drink can</span>
+        </div>
+      </div>
+
+      <h3>caption row</h3>
+      <p>Three short lowercase phrases spread across the full width.</p>
+      <p class="k-captions" style="max-width:640px">
+        <span class="k-caption">open all night</span>
+        <span class="k-caption">lights on the snow</span>
+        <span class="k-caption">warm hands</span>
+      </p>
+
+      <h3>katakana block</h3>
+      <p>
+        A kana column or row in cobalt, used as graphic texture beside a
+        scene or a paragraph.
+      </p>
+      <div class="row" style="align-items:center">
+        <span class="kana-column" lang="ja" aria-label="fuyu no machi, winter town, in kana">フユノマチ</span>
+        <span class="k-kana" lang="ja" style="font-size:clamp(2.5rem,8vw,5rem)" aria-label="yoru, night, in katakana">ヨル</span>
+      </div>
+
+      <h3>sign band</h3>
+      <p>
+        The konbini fascia: white, orange, white, held by navy hairlines.
+        It divides sections the way the sign divides roof from storefront.
+        Orange never carries text.
+      </p>
+      <div class="k-band" role="presentation" style="max-width:520px"></div>
+
+      <h3>sky field</h3>
+      <p>The gradient block that display type floats in.</p>
+      <div class="specimen-sky k-sky" style="max-width:520px">
+        <span class="k-display" style="font-size:2.5rem">FUYU</span>
+        <span class="k-caption" style="color:var(--navy)">the long season</span>
+      </div>
+
+      <div class="spread-folio"><span class="k-pageno" aria-label="page 31">31</span></div>
+    </section>
+
+    <div class="k-band" role="presentation"></div>
+
+    <!-- ============ components ============ -->
+    <section class="spread" id="components">
+      <div class="spread-head">
+        <h2>components</h2>
+        <span class="kana" lang="ja" aria-hidden="true">パーツ</span>
+      </div>
+
+      <h3>text links</h3>
+      <div class="row">
+        <div class="cell">
+          <span class="lbl">default</span>
+          <a class="k-link" href="#components">the shop at the end of the street</a>
+        </div>
+        <div class="cell">
+          <span class="lbl">hover - navy, 2px underline</span>
+          <a class="k-link is-hover" href="#components">the shop at the end of the street</a>
+        </div>
+        <div class="cell">
+          <span class="lbl">focus - tab to see the 2px cobalt ring</span>
+          <a class="k-link" href="#components">the shop at the end of the street</a>
+        </div>
+      </div>
+
+      <h3>buttons - poster plates</h3>
+      <p>
+        A snow plate with a 2px navy pixel-step border and a flat ice pixel
+        shadow. Hover lifts the plate one step; active sits it flat on the
+        snow. States snap: posters do not ease.
+      </p>
+      <div class="row row--tight">
+        <div class="cell"><span class="lbl">default</span><button class="k-btn" type="button">stock up</button></div>
+        <div class="cell"><span class="lbl">hover</span><button class="k-btn is-hover" type="button">stock up</button></div>
+        <div class="cell"><span class="lbl">active</span><button class="k-btn is-active" type="button">stock up</button></div>
+        <div class="cell"><span class="lbl">disabled</span><button class="k-btn" type="button" disabled>sold out</button></div>
+      </div>
+      <div class="row row--tight" style="margin-top:1.5rem">
+        <div class="cell"><span class="lbl">primary</span><button class="k-btn k-btn--primary" type="button">pay here</button></div>
+        <div class="cell"><span class="lbl">primary hover</span><button class="k-btn k-btn--primary is-hover" type="button">pay here</button></div>
+        <div class="cell"><span class="lbl">primary active</span><button class="k-btn k-btn--primary is-active" type="button">pay here</button></div>
+      </div>
+
+      <h3>chips - tiny sign stripes</h3>
+      <div class="row row--tight">
+        <span class="k-chip is-selected">onigiri</span>
+        <span class="k-chip">hot drinks</span>
+        <span class="k-chip">seasonal</span>
+        <span class="k-chip is-disabled">sold out</span>
+      </div>
+
+      <h3>pagination - folios</h3>
+      <nav class="k-pagination" aria-label="example pagination">
+        <span class="is-disabled" aria-disabled="true">&lt;- prev</span>
+        <span><span class="current">28</span> / 32</span>
+        <a href="#components">next -&gt;</a>
+      </nav>
+
+      <h3>input - snow fields</h3>
+      <div class="row">
+        <div class="cell k-field">
+          <label for="in-name">traveler name</label>
+          <input class="k-input" id="in-name" type="text" placeholder="who is out tonight" />
+        </div>
+        <div class="cell k-field">
+          <label for="in-town">town</label>
+          <input class="k-input" id="in-town" type="text" value="Teine, Sapporo" />
+        </div>
+        <div class="cell k-field">
+          <label for="in-closed">disabled</label>
+          <input class="k-input" id="in-closed" type="text" value="closed for winter" disabled />
+        </div>
+      </div>
+    </section>
+
+    <div class="k-band" role="presentation"></div>
+
+    <!-- in application shares page 32 with components: the kit, then the kit at work -->
+    <section class="spread" id="application">
+      <div class="spread-head">
+        <h2>in application</h2>
+        <span class="kana" lang="ja" aria-hidden="true">おみせ</span>
+      </div>
+      <p>
+        A page from a traveler's log, built entirely from the kit: sky field,
+        sign band, pixel icons, price chips, plates, and folios.
+      </p>
+
+      <article class="app-poster" style="margin-top:2rem" aria-label="example page: Seimart travel log">
+        <div class="app-sky k-sky">
+          <span class="k-display">SEIMART</span>
+          <span class="kana" lang="ja" aria-label="seimart, in katakana">セイマート</span>
+        </div>
+        <div class="k-band k-band--thin" role="presentation"></div>
+        <div class="app-body">
+          <p class="k-caption">travel log - day 3</p>
+          <p class="k-body">
+            Snow since morning. The town went quiet by four and dark by five,
+            and the only light left on the street was the Seimart at the end
+            of it, humming to itself. Bought too much again.
+          </p>
+          <ul class="stock-list">
+            <li>
+              <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-onigiri" /></svg>
+              <span class="item">onigiri, tuna mayo<br /><span class="note">two, because it is cold</span></span>
+              <span class="price">&yen;120</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-hotcan" /></svg>
+              <span class="item">hot can coffee<br /><span class="note">from the warm shelf</span></span>
+              <span class="price">&yen;130</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-snowflake" /></svg>
+              <span class="item">bag of ice<br /><span class="note">in january, somehow</span></span>
+              <span class="price">&yen;200</span>
+            </li>
+          </ul>
+          <div class="app-actions">
+            <button class="k-btn k-btn--primary" type="button">stock up</button>
+            <nav class="k-pagination" aria-label="travel log pages">
+              <a href="#application">&lt;- day 2</a>
+              <span><span class="current">3</span> / 7</span>
+            </nav>
+          </div>
+        </div>
+      </article>
+
+      <div class="spread-folio"><span class="k-pageno" aria-label="page 32">32</span></div>
+    </section>
+
+  </main>
+
+  <div class="k-band" role="presentation"></div>
+
+  <footer class="k-footer">
+    <p class="note">
+      All places, products, and prices on this page are synthetic: poster
+      fiction for a design exploration. Seimart is not a real store, but one
+      like it is never too far away.
+    </p>
+    <p class="k-pageno" aria-label="page 32 of 32">32 / 32</p>
+    <a class="k-link" href="/index.html">&lt;- all systems</a>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+/*
+Token sheet for a new design system. Everything visual starts here: a system's
+identity is its tokens, so these never live in shared/.
+*/
+
+:root {
+  --ink: #f7f4e8;
+  --ground: #23282c;
+  --accent: #7fb2d9;
+}
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font: 15px/1.6 ui-sans-serif, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.wrap {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 64px 28px;
+}

@@ -1,0 +1,567 @@
+/* STRATOS core - tokens, primitives, marks, components. Flat FUI: no glow,
+   no blur, no radius, no gradient fades (hazard stripes are hard-stop strips). */
+
+:root {
+  --void: #0b0b0b;
+  --panel: #151515;
+  --signal: #f4f2ee;
+  --dim: #9b9b9b;
+  --alert: #ff6a00;
+  --hairline: rgba(244, 242, 238, 0.22);
+
+  --font-display: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--void);
+}
+
+body {
+  background: var(--void);
+  color: var(--signal);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--alert);
+  color: #0b0b0b;
+}
+
+:focus-visible {
+  outline: 2px solid var(--alert);
+  outline-offset: 2px;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--signal);
+}
+
+/* ---------- type voices ---------- */
+
+.v-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.v-display-xl { font-size: clamp(56px, 9vw, 96px); }
+.v-display-lg { font-size: clamp(30px, 5vw, 44px); }
+.v-display-md { font-size: 24px; font-weight: 700; }
+
+.v-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.v-data {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.v-micro {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  color: var(--dim);
+  text-transform: uppercase;
+}
+
+.ink-dim { color: var(--dim); }
+.ink-alert { color: var(--alert); } /* 14px+ bold only on dark grounds */
+
+/* ---------- marks: chips ---------- */
+
+.s-chip {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
+  padding: 4px 7px;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+
+.s-chip--white {
+  background: var(--signal);
+  border-color: var(--signal);
+  color: #0b0b0b;
+}
+
+.s-chip--alert {
+  background: var(--alert);
+  border-color: var(--alert);
+  color: #0b0b0b;
+}
+
+.s-chip--outline {
+  border-color: var(--signal);
+  color: var(--signal);
+}
+
+.s-chip--ghost {
+  border-color: var(--hairline);
+  color: var(--dim);
+}
+
+/* status chips: orange = live, white = ready, outline+dim = inactive */
+.s-status { display: inline-flex; align-items: center; gap: 6px; }
+.s-status .dot { width: 6px; height: 6px; background: currentColor; }
+.s-status.is-active .dot { animation: s-blink 1.4s steps(1, end) infinite; }
+
+/* ---------- marks: hazard stripe ---------- */
+
+.s-hazard {
+  height: 10px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--alert) 0,
+    var(--alert) 8px,
+    var(--void) 8px,
+    var(--void) 16px
+  );
+}
+
+.s-hazard--thin { height: 6px; }
+
+/* ---------- marks: rules with end-cap ticks ---------- */
+
+.s-rule {
+  position: relative;
+  height: 1px;
+  background: var(--hairline);
+}
+
+.s-rule::before,
+.s-rule::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  width: 1px;
+  height: 7px;
+  background: var(--signal);
+}
+
+.s-rule::before { left: 0; }
+.s-rule::after { right: 0; }
+
+/* ---------- marks: corner-bracketed frame ---------- */
+/* needs an inner <i class="s-frame-x" aria-hidden="true"></i> for the bottom pair */
+
+.s-frame {
+  position: relative;
+}
+
+.s-frame::before,
+.s-frame::after,
+.s-frame .s-frame-x::before,
+.s-frame .s-frame-x::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 0 solid var(--signal);
+  pointer-events: none;
+}
+
+.s-frame::before { top: 0; left: 0; border-top-width: 1px; border-left-width: 1px; }
+.s-frame::after { top: 0; right: 0; border-top-width: 1px; border-right-width: 1px; }
+.s-frame .s-frame-x::before { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; }
+.s-frame .s-frame-x::after { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
+
+/* ---------- marks: small geometry ---------- */
+
+.s-square {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: var(--alert);
+  flex: none;
+}
+
+.s-square--signal { background: var(--signal); }
+.s-square--outline { background: none; border: 1px solid var(--hairline); }
+.s-square--lg { width: 14px; height: 14px; }
+
+.s-cross {
+  position: relative;
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  flex: none;
+  color: var(--dim);
+}
+
+.s-cross::before,
+.s-cross::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+}
+
+.s-cross::before { left: 4px; top: 0; width: 1px; height: 9px; }
+.s-cross::after { left: 0; top: 4px; width: 9px; height: 1px; }
+
+.s-tri {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  flex: none;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 7px solid var(--signal);
+}
+
+.s-tri--alert { border-top-color: var(--alert); }
+.s-tri--right {
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 7px solid var(--signal);
+  border-right: 0;
+}
+.s-tri--right.s-tri--alert { border-left-color: var(--alert); border-top-color: transparent; }
+
+/* ---------- marks: segmented bar ---------- */
+
+.s-seg {
+  display: flex;
+  gap: 3px;
+}
+
+.s-seg i {
+  width: 9px;
+  height: 14px;
+  border: 1px solid var(--hairline);
+  flex: none;
+}
+
+.s-seg i.on {
+  background: var(--signal);
+  border-color: var(--signal);
+}
+
+.s-seg--alert i.on {
+  background: var(--alert);
+  border-color: var(--alert);
+}
+
+.s-seg--tall i { height: 22px; }
+
+/* ---------- marks: big numeric readout ---------- */
+
+.s-num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+  font-variant-numeric: tabular-nums;
+}
+
+.s-num--alert { color: var(--alert); }
+
+/* ---------- marks: schematic placeholder ---------- */
+
+.s-schem {
+  position: relative;
+  border: 1px solid var(--hairline);
+}
+
+.s-schem svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.s-schem svg line {
+  stroke: var(--hairline);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.s-schem .pip {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 8px;
+  height: 8px;
+  background: var(--alert);
+}
+
+/* ---------- marks: feed rows ---------- */
+
+.s-feed {
+  list-style: none;
+}
+
+.s-feed li {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  padding: 4px 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.s-feed li:hover,
+.s-feed li.is-hot {
+  background: var(--panel);
+}
+
+.s-feed .mk {
+  align-self: center;
+}
+
+.s-feed .lbl {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.s-feed .lead {
+  flex: 1;
+  min-width: 12px;
+  border-bottom: 1px dotted var(--hairline);
+  transform: translateY(-3px);
+}
+
+.s-feed .val {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.s-feed .val.ink-alert {
+  font-weight: 700;
+  font-size: 14px; /* orange on black floor: 14px bold */
+  line-height: 1;
+  align-self: center;
+}
+
+/* ---------- components: buttons ---------- */
+
+.s-btn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
+  background: none;
+  border: none;
+  color: var(--signal);
+  padding: 6px 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}
+
+.s-btn--bracket {
+  border: 1px solid transparent; /* reserved so the hover flip is layout-stable */
+  padding: 6px 8px;
+}
+
+.s-btn--bracket::before { content: "["; }
+.s-btn--bracket::after { content: "]"; }
+
+.s-btn--bracket:hover:not(:disabled) {
+  background: var(--panel);
+  border-color: var(--signal);
+}
+
+.s-btn--solid {
+  background: var(--signal);
+  color: #0b0b0b;
+  padding: 8px 14px;
+}
+
+.s-btn--solid:hover:not(:disabled) {
+  background: var(--alert);
+}
+
+.s-btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.s-btn:disabled {
+  color: var(--dim);
+  background: none;
+  border: 1px dashed var(--hairline);
+  cursor: not-allowed;
+  padding: 7px 13px;
+}
+
+.s-btn--bracket:disabled {
+  padding: 6px 8px;
+}
+
+/* ---------- components: toggle pair (UPLOAD / DOWNLOAD ticks) ---------- */
+
+.s-toggle {
+  display: inline-flex;
+  gap: 18px;
+  border: none;
+}
+
+.s-toggle label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dim);
+  cursor: pointer;
+  position: relative;
+}
+
+.s-toggle input {
+  /* visually hidden, still focusable */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.s-toggle .tick {
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--hairline);
+  flex: none;
+}
+
+.s-toggle input:checked ~ .tick {
+  background: var(--alert);
+  border-color: var(--alert);
+}
+
+.s-toggle input:checked ~ .txt {
+  color: var(--signal);
+}
+
+.s-toggle input:focus-visible ~ .tick {
+  outline: 2px solid var(--alert);
+  outline-offset: 2px;
+}
+
+/* ---------- components: input ---------- */
+
+.s-field {
+  display: block;
+}
+
+.s-field .flabel {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--dim);
+}
+
+.s-input {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--hairline);
+  color: var(--signal);
+  padding: 5px 2px;
+  width: 100%;
+  caret-color: var(--alert);
+  text-transform: uppercase;
+}
+
+.s-input::placeholder {
+  color: var(--dim);
+  opacity: 1;
+}
+
+.s-input:focus {
+  border-bottom-color: var(--signal);
+  outline: none;
+}
+
+.s-input:focus-visible {
+  outline: 2px solid var(--alert);
+  outline-offset: 2px;
+}
+
+.s-input:disabled {
+  color: var(--dim);
+  border-bottom-style: dashed;
+  cursor: not-allowed;
+}
+
+/* static specimen caret: blinking block */
+.s-caret {
+  display: inline-block;
+  width: 7px;
+  height: 12px;
+  background: var(--alert);
+  vertical-align: -2px;
+  animation: s-blink 1.4s steps(1, end) infinite;
+}
+
+/* ---------- motion ---------- */
+
+@keyframes s-blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* flat scan column sweeping a .s-scan-host once per ~8s */
+.s-scan-host {
+  position: relative;
+  overflow: hidden;
+}
+
+.s-scan {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -18%;
+  width: 90px;
+  background: rgba(244, 242, 238, 0.05);
+  border-right: 1px solid rgba(255, 106, 0, 0.35);
+  pointer-events: none;
+  animation: s-scan 8s linear infinite;
+}
+
+@keyframes s-scan {
+  0% { left: -18%; }
+  32% { left: 104%; }
+  100% { left: 104%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .s-scan { display: none; }
+  .s-status.is-active .dot,
+  .s-caret { animation: none; }
+  * { transition: none !important; }
+}

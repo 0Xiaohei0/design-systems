@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+THESIS: Every UI element is a printed label: stickers, stamps, barcodes and spec
+sheets on a concrete sheet inside a black press frame.
+OWN-WORLD: Four paper stocks (black, kraft, steel, bone) and their inks are the
+whole palette; Anton display set vertically, mono serial data, justified fine
+print; depth only as the hard offset sticker lift.
+STORY: A designer scans the sheet: the four reference strips, then stocks, type
+voices, motifs, components with every state, and one assembled product spec
+sheet, and leaves knowing exactly which label to peel.
+FIRST VIEWPORT: The four vertical strip labels, OBJEKT SYSTEM MODUL KINETIC,
+side by side at scale 1:1.
+FORM: Single catalog sheet (mode: Read); fixed frame chrome with registration
+marks; plain CSS tokens in objekt-core.css; synthetic industrial data.
+-->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OBJEKT - Industrial Label System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/objekt-core.css" />
+  <style>
+    /* catalog layout only; the system itself lives in objekt-core.css */
+    .masthead-row {
+      display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+    .hero-grid {
+      display: grid; grid-template-columns: repeat(4, minmax(0, 220px));
+      gap: clamp(12px, 2.4vw, 26px); justify-content: center; align-items: stretch;
+    }
+    .hero-under {
+      max-width: 1010px; margin: 26px auto 0;
+      display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap;
+    }
+    .hero-under .t-fine { flex: 1 1 320px; max-width: 62ch; }
+    .anchor-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .anchor-row a { text-decoration: none; }
+    .anchor-row a:hover { background: var(--stock-black); color: var(--ink-on-dark); border-color: var(--stock-black); }
+
+    .g-plates { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
+    .g-plates-wide { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+
+    .swatch-plate { display: flex; flex-direction: column; min-height: 200px; }
+    .swatch-plate .t-display { font-size: clamp(30px, 4vw, 44px); }
+    .swatch-plate .rule { margin: 10px 0; }
+    .swatch-rows { margin-top: auto; }
+    .swatch-rows .r { display: flex; justify-content: space-between; gap: 8px; padding: 3px 0; }
+
+    .voice-display { font-size: clamp(42px, 6vw, 74px); }
+    .voice-note { margin-top: 12px; }
+
+    .states-row { display: flex; flex-wrap: wrap; gap: 14px 18px; align-items: center; }
+    .states-row + .plate-cap { margin-top: 18px; }
+    .stack-14 > * + * { margin-top: 14px; }
+    .stack-22 > * + * { margin-top: 22px; }
+
+    .draw-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 20px; }
+    .draw-gallery figure { display: flex; flex-direction: column; gap: 8px; }
+    .draw-gallery .tdraw { flex: 1; display: flex; align-items: flex-end; justify-content: center; }
+    /* uniform figure height so stroke weight reads consistently across drawings */
+    .draw-gallery .tdraw svg { width: auto; height: 170px; max-width: 100%; }
+    .draw-gallery figcaption {
+      font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--ink-sec);
+    }
+    .rule-demo > * + * { margin-top: 22px; }
+
+    .app-grid { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+    .app-head { display: flex; align-items: baseline; gap: 14px; padding: 10px 14px 8px; margin-bottom: 16px; }
+    .app-head .t-display { font-size: clamp(26px, 3.4vw, 38px); }
+    .app-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; }
+    .app-actions .field { flex: 0 1 120px; }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .sheet-foot { margin-top: clamp(48px, 7vw, 84px); text-align: center; }
+    .sheet-foot .barcode { max-width: 260px; margin: 26px auto 0; }
+    .sheet-foot .t-display { font-size: clamp(30px, 5vw, 52px); margin-top: 18px; }
+    .sheet-foot .t-data { margin-top: 10px; }
+    .sheet-foot .btn { margin-top: 22px; }
+
+    @media (max-width: 1000px) {
+      .hero-grid { grid-template-columns: repeat(2, minmax(0, 220px)); }
+    }
+    @media (max-width: 720px) {
+      .hero-grid { grid-template-columns: minmax(0, 220px); }
+      .app-grid { grid-template-columns: minmax(0, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="reg-cross" viewBox="0 0 14 14">
+        <g fill="none" stroke="currentColor" stroke-width="1.25">
+          <path d="M7 1 V13 M1 7 H13" />
+        </g>
+      </symbol>
+
+      <!-- barcodes: irregular bars, currentColor -->
+      <symbol id="bc-a" viewBox="0 0 120 30" preserveAspectRatio="none">
+        <g fill="currentColor">
+          <rect x="0" width="3" height="30"/><rect x="5" width="1" height="30"/><rect x="8" width="2" height="30"/>
+          <rect x="12" width="4" height="30"/><rect x="18" width="1" height="30"/><rect x="21" width="1" height="30"/>
+          <rect x="24" width="3" height="30"/><rect x="29" width="2" height="30"/><rect x="33" width="1" height="30"/>
+          <rect x="36" width="5" height="30"/><rect x="43" width="1" height="30"/><rect x="46" width="2" height="30"/>
+          <rect x="50" width="3" height="30"/><rect x="55" width="1" height="30"/><rect x="58" width="1" height="30"/>
+          <rect x="61" width="4" height="30"/><rect x="67" width="2" height="30"/><rect x="71" width="1" height="30"/>
+          <rect x="74" width="3" height="30"/><rect x="79" width="1" height="30"/><rect x="82" width="2" height="30"/>
+          <rect x="86" width="4" height="30"/><rect x="92" width="1" height="30"/><rect x="95" width="2" height="30"/>
+          <rect x="99" width="1" height="30"/><rect x="102" width="3" height="30"/><rect x="107" width="1" height="30"/>
+          <rect x="110" width="2" height="30"/><rect x="114" width="1" height="30"/><rect x="117" width="3" height="30"/>
+        </g>
+      </symbol>
+      <symbol id="bc-b" viewBox="0 0 120 30" preserveAspectRatio="none">
+        <g fill="currentColor">
+          <rect x="0" width="2" height="30"/><rect x="4" width="4" height="30"/><rect x="10" width="1" height="30"/>
+          <rect x="13" width="1" height="30"/><rect x="16" width="3" height="30"/><rect x="21" width="1" height="30"/>
+          <rect x="24" width="5" height="30"/><rect x="31" width="1" height="30"/><rect x="34" width="2" height="30"/>
+          <rect x="38" width="1" height="30"/><rect x="41" width="3" height="30"/><rect x="46" width="1" height="30"/>
+          <rect x="49" width="2" height="30"/><rect x="53" width="4" height="30"/><rect x="59" width="1" height="30"/>
+          <rect x="62" width="1" height="30"/><rect x="65" width="3" height="30"/><rect x="70" width="2" height="30"/>
+          <rect x="74" width="1" height="30"/><rect x="77" width="4" height="30"/><rect x="83" width="1" height="30"/>
+          <rect x="86" width="2" height="30"/><rect x="90" width="1" height="30"/><rect x="93" width="3" height="30"/>
+          <rect x="98" width="1" height="30"/><rect x="101" width="2" height="30"/><rect x="105" width="4" height="30"/>
+          <rect x="111" width="1" height="30"/><rect x="114" width="2" height="30"/><rect x="118" width="2" height="30"/>
+        </g>
+      </symbol>
+
+      <!-- technical drawings: patent-style line art -->
+      <symbol id="td-reels" viewBox="0 0 120 90">
+        <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square">
+          <circle cx="32" cy="36" r="24"/><circle cx="88" cy="36" r="24"/>
+          <circle cx="32" cy="36" r="12" stroke-dasharray="3 3"/><circle cx="88" cy="36" r="12" stroke-dasharray="3 3"/>
+          <circle cx="32" cy="36" r="5"/><circle cx="88" cy="36" r="5"/>
+          <path d="M32 24 V31 M32 41 V48 M20 36 H27 M37 36 H44"/>
+          <path d="M88 24 V31 M88 41 V48 M76 36 H83 M93 36 H100"/>
+          <path d="M32 60 L45 73 M51 76 L69 76 M75 73 L88 60"/>
+          <circle cx="48" cy="76" r="3"/><circle cx="72" cy="76" r="3"/>
+          <path d="M8 86 H112"/>
+        </g>
+      </symbol>
+      <symbol id="td-box" viewBox="0 0 120 100">
+        <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="miter">
+          <path d="M20 20 L60 6 L100 20 L60 34 Z"/>
+          <path d="M20 20 V44 M100 20 V44 M60 34 V58" stroke-dasharray="3 3"/>
+          <path d="M20 44 L60 30 L100 44 L60 58 Z"/>
+          <path d="M20 44 V76 M100 44 V76 M60 58 V90"/>
+          <path d="M20 76 L60 90 L100 76"/>
+          <circle cx="40" cy="66" r="2.5"/><circle cx="80" cy="66" r="2.5"/>
+        </g>
+      </symbol>
+      <symbol id="td-rotor" viewBox="0 0 100 110">
+        <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="miter">
+          <path d="M50 0 V110" stroke-dasharray="4 3"/>
+          <path d="M50 4 L55 7 L55 13 L50 16 L45 13 L45 7 Z"/>
+          <circle cx="50" cy="10" r="2"/>
+          <circle cx="50" cy="62" r="42" stroke-dasharray="4 3"/>
+          <circle cx="50" cy="62" r="9"/><circle cx="50" cy="62" r="3"/>
+          <path d="M50 53 C43 40 43 28 50 22 C57 28 57 40 50 53 Z"/>
+          <g transform="rotate(120 50 62)"><path d="M50 53 C43 40 43 28 50 22 C57 28 57 40 50 53 Z"/></g>
+          <g transform="rotate(240 50 62)"><path d="M50 53 C43 40 43 28 50 22 C57 28 57 40 50 53 Z"/></g>
+        </g>
+      </symbol>
+      <symbol id="td-spring" viewBox="0 0 60 110">
+        <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square">
+          <circle cx="30" cy="8" r="5"/>
+          <path d="M30 13 V26"/>
+          <path d="M30 26 L42 29 L18 35 L42 41 L18 47 L42 53 L18 59 L42 65 L18 71 L42 77 L18 83 L30 86"/>
+          <path d="M30 86 V97"/>
+          <circle cx="30" cy="102" r="5"/>
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- frame chrome: registration marks + rotated edge captions -->
+  <svg class="frame-cross tl" aria-hidden="true"><use href="#reg-cross"/></svg>
+  <svg class="frame-cross tr" aria-hidden="true"><use href="#reg-cross"/></svg>
+  <svg class="frame-cross bl" aria-hidden="true"><use href="#reg-cross"/></svg>
+  <svg class="frame-cross br" aria-hidden="true"><use href="#reg-cross"/></svg>
+  <span class="frame-cap top" aria-hidden="true">PROJECT: DESIGN_PLAYGROUND / SHEET: OBJEKT</span>
+  <span class="frame-cap bottom" aria-hidden="true">K.S.A.R. BRUTALIST STICKERS - PRINTED WERK 3</span>
+  <span class="frame-cap left" aria-hidden="true">DEV STAGE: APPROVED - REV.04</span>
+  <span class="frame-cap right" aria-hidden="true">SERIES K - LABELS 88-301 TO 88-304</span>
+
+  <div class="sheet">
+    <main class="sheet-inner" id="main">
+      <h1 class="visually-hidden">OBJEKT industrial label system - catalog sheet</h1>
+
+      <!-- ============ HERO: the reference strip set ============ -->
+      <header>
+        <div class="masthead-row t-data">
+          <span>OBJEKT INDUSTRIAL LABEL SYSTEM / SERIES K</span>
+          <span class="t-data-sec">SCALE 1:1 / SHEET 01/007</span>
+        </div>
+
+        <div class="hero-grid">
+          <article class="strip stock-black">
+            <div class="strip-word-area"><span class="strip-word">OBJEKT</span></div>
+            <div class="rule" role="presentation"></div>
+            <div class="strip-rev"><span>REV.04</span><span>VOL.1</span></div>
+            <div class="strip-mid">
+              <div class="strip-data">SERIAL: 88-301 &middot; CAPACITY: 4000 &middot; 0100 1100 0010</div>
+              <div class="strip-draw tdraw"><svg viewBox="0 0 120 90" aria-hidden="true"><use href="#td-reels"/></svg></div>
+            </div>
+            <div class="barcode">
+              <svg preserveAspectRatio="none" aria-hidden="true"><use href="#bc-a"/></svg>
+              <div class="digits">5 8 8 9 1 8 - 0 6 8 0 7</div>
+            </div>
+            <div class="strip-foot">
+              <span class="stamp-index">01/007</span>
+              <span class="made">WERK 3 / DE</span>
+            </div>
+          </article>
+
+          <article class="strip stock-kraft">
+            <div class="strip-word-area"><span class="strip-word">SYSTEM</span></div>
+            <div class="rule" role="presentation"></div>
+            <div class="strip-rev"><span>REV.02</span><span>VOL.1</span></div>
+            <div class="strip-mid">
+              <div class="strip-data">SERIAL: 88-302 &middot; CAPACITY: 2600 &middot; 0101 0011 0001</div>
+              <div class="strip-draw tdraw"><svg viewBox="0 0 120 100" aria-hidden="true"><use href="#td-box"/></svg></div>
+            </div>
+            <div class="barcode">
+              <svg preserveAspectRatio="none" aria-hidden="true"><use href="#bc-b"/></svg>
+              <div class="digits">5 8 8 9 1 8 - 0 6 8 0 8</div>
+            </div>
+            <div class="strip-foot">
+              <span class="stamp-index">02/007</span>
+              <span class="made">WERK 3 / DE</span>
+            </div>
+          </article>
+
+          <article class="strip stock-steel">
+            <div class="strip-word-area"><span class="strip-word">MODUL</span></div>
+            <div class="rule" role="presentation"></div>
+            <div class="strip-rev"><span>REV.07</span><span>VOL.2</span></div>
+            <div class="strip-mid">
+              <div class="strip-data">SERIAL: 88-303 &middot; CAPACITY: 1200 &middot; 0100 1101 0100</div>
+              <div class="strip-draw tdraw"><svg viewBox="0 0 100 110" aria-hidden="true"><use href="#td-rotor"/></svg></div>
+            </div>
+            <div class="barcode">
+              <svg preserveAspectRatio="none" aria-hidden="true"><use href="#bc-a"/></svg>
+              <div class="digits">5 8 8 9 1 8 - 0 6 8 0 9</div>
+            </div>
+            <div class="strip-foot">
+              <span class="stamp-index">03/007</span>
+              <span class="made">WERK 3 / DE</span>
+            </div>
+          </article>
+
+          <article class="strip stock-bone">
+            <div class="strip-word-area"><span class="strip-word">KINETIC</span></div>
+            <div class="rule" role="presentation"></div>
+            <div class="strip-rev"><span>REV.01</span><span>VOL.2</span></div>
+            <div class="strip-mid">
+              <div class="strip-data">SERIAL: 88-304 &middot; CAPACITY: 800 &middot; 0100 1011 0110</div>
+              <div class="strip-draw tdraw"><svg viewBox="0 0 60 110" aria-hidden="true"><use href="#td-spring"/></svg></div>
+            </div>
+            <div class="barcode">
+              <svg preserveAspectRatio="none" aria-hidden="true"><use href="#bc-b"/></svg>
+              <div class="digits">5 8 8 9 1 8 - 0 6 8 1 0</div>
+            </div>
+            <div class="strip-foot">
+              <span class="stamp-index">04/007</span>
+              <span class="made">WERK 3 / DE</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="hero-under">
+          <p class="t-fine">
+            OBJEKT is a design system in which every interface element is a printed
+            label. Buttons are stamps, values are serials, panels are paper stock,
+            and depth exists only as the hard shadow of a sticker lifting off the
+            sheet. Four stocks and their inks are the entire palette; no accent
+            hue, no gradient, no radius, no blur. This sheet is the catalog:
+            stocks, type voices, motifs, components with every state, and one
+            assembled spec sheet, printed at scale 1:1 for designers picking parts.
+          </p>
+          <nav class="anchor-row" aria-label="Sheet contents">
+            <a class="badge stock-bone" href="#sec-stocks">01 STOCKS</a>
+            <a class="badge stock-bone" href="#sec-type">02 TYPE</a>
+            <a class="badge stock-bone" href="#sec-motifs">03 MOTIFS</a>
+            <a class="badge stock-bone" href="#sec-components">04 COMPONENTS</a>
+            <a class="badge stock-bone" href="#sec-application">05 APPLICATION</a>
+          </nav>
+        </div>
+      </header>
+
+      <!-- ============ 01 STOCKS AND INKS ============ -->
+      <section class="sec" id="sec-stocks">
+        <div class="sec-head">
+          <h2>Stocks and inks</h2>
+          <span class="idx">SEC.01 / 05</span>
+        </div>
+        <div class="g-plates">
+          <div class="plate swatch-plate stock-black">
+            <span class="t-display">Black</span>
+            <div class="rule" role="presentation"></div>
+            <div class="swatch-rows t-data">
+              <div class="r"><span>STOCK</span><span>#161616</span></div>
+              <div class="r"><span>INK</span><span>#EAE7DF</span></div>
+              <div class="r t-data-sec"><span>INK 2ND</span><span>#B9B5AA</span></div>
+              <div class="r t-data-sec"><span>USE</span><span>HEADERS, STAMPS</span></div>
+            </div>
+          </div>
+          <div class="plate swatch-plate stock-kraft">
+            <span class="t-display">Kraft</span>
+            <div class="rule" role="presentation"></div>
+            <div class="swatch-rows t-data">
+              <div class="r"><span>STOCK</span><span>#C7AC83</span></div>
+              <div class="r"><span>INK</span><span>#1A1A1A</span></div>
+              <div class="r t-data-sec"><span>INK 2ND</span><span>#34312B</span></div>
+              <div class="r t-data-sec"><span>USE</span><span>WARM UTILITY</span></div>
+            </div>
+          </div>
+          <div class="plate swatch-plate stock-steel">
+            <span class="t-display">Steel</span>
+            <div class="rule" role="presentation"></div>
+            <div class="swatch-rows t-data">
+              <div class="r"><span>STOCK</span><span>#A4A8AB</span></div>
+              <div class="r"><span>INK</span><span>#1A1A1A</span></div>
+              <div class="r t-data-sec"><span>INK 2ND</span><span>#34312B</span></div>
+              <div class="r t-data-sec"><span>USE</span><span>COOL UTILITY</span></div>
+            </div>
+          </div>
+          <div class="plate swatch-plate stock-bone">
+            <span class="t-display">Bone</span>
+            <div class="rule" role="presentation"></div>
+            <div class="swatch-rows t-data">
+              <div class="r"><span>STOCK</span><span>#EDEAE2</span></div>
+              <div class="r"><span>INK</span><span>#1A1A1A</span></div>
+              <div class="r t-data-sec"><span>INK 2ND</span><span>#34312B</span></div>
+              <div class="r t-data-sec"><span>USE</span><span>FORMS, TABLES</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-under" style="margin-top: 20px; max-width: none;">
+          <p class="t-fine" style="max-width: 62ch;">
+            The sheet itself is GROUND #D7D5D0 and the press frame is FRAME
+            #0E0E0E, the deepest black on the page and the color of every hard
+            shadow. Secondary text is always a darker or lighter step of the
+            stock's own ink, never a mid gray: #34312B on the light stocks,
+            #B9B5AA on black. All body ink holds at least 4.5:1 on its stock.
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ 02 TYPE VOICES ============ -->
+      <section class="sec" id="sec-type">
+        <div class="sec-head">
+          <h2>Type voices</h2>
+          <span class="idx">SEC.02 / 05</span>
+        </div>
+        <div class="g-plates-wide">
+          <div class="plate stock-bone">
+            <p class="plate-cap">VOICE 01 / DISPLAY - ANTON, UPPERCASE, TRACKING -0.01EM</p>
+            <p class="t-display voice-display">Arkiv 4000&nbsp;KG</p>
+            <p class="t-data voice-note t-data-sec">
+              ULTRA-HEAVY CONDENSED GROTESQUE. HEADLINES, STRIP WORDS, STAMP
+              BUTTONS. OFTEN SET VERTICALLY TO RUN UP A STRIP.
+            </p>
+          </div>
+          <div class="plate stock-bone">
+            <p class="plate-cap">VOICE 02 / DATA - UI-MONOSPACE, TRACKING 0.12EM</p>
+            <p class="t-data">
+              SERIAL: 88-301<br />
+              CAPACITY: 4000 M<br />
+              BATCH: 2206-K / PLANT: WERK 3<br />
+              0100 1100 0010 0110
+            </p>
+            <p class="t-data voice-note t-data-sec">
+              SERIALS, CAPACITIES, BINARY STRINGS. EVERY NUMBER ON THE SHEET
+              SPEAKS IN THIS VOICE.
+            </p>
+          </div>
+          <div class="plate stock-bone">
+            <p class="plate-cap">VOICE 03 / FINE PRINT - CONDENSED SANS, JUSTIFIED</p>
+            <p class="t-fine">
+              HANDLING: Store flat between 10 and 25 degrees C at 35 to 45
+              percent relative humidity. Labels are pressure-set and must not be
+              repositioned after 24 hours. Adhesive class B2 per works standard
+              KSAR-88. Damaged strips are void and must be returned to plant
+              WERK 3 for reprint. Serial continuity is the operator's
+              responsibility; report gaps to the registry before the next
+              production run is released.
+            </p>
+            <p class="t-data voice-note t-data-sec">
+              LEGAL BANDS, HANDLING NOTES, MICRO COPY.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 03 MOTIFS ============ -->
+      <section class="sec" id="sec-motifs">
+        <div class="sec-head">
+          <h2>Motifs</h2>
+          <span class="idx">SEC.03 / 05</span>
+        </div>
+        <div class="g-plates">
+          <div class="plate stock-bone stack-14">
+            <p class="plate-cap">BARCODE / TWO CUTS</p>
+            <div class="barcode">
+              <svg preserveAspectRatio="none" aria-hidden="true"><use href="#bc-a"/></svg>
+              <div class="digits">5 8 8 9 1 8 - 0 6 8 0 7</div>
+            </div>
+            <div class="barcode">
+              <svg preserveAspectRatio="none" aria-hidden="true"><use href="#bc-b"/></svg>
+              <div class="digits">2 2 0 6 - K / 8 8 3 0 1</div>
+            </div>
+          </div>
+          <div class="plate stock-bone stack-14">
+            <p class="plate-cap">INDEX STAMP / SERIAL PLATE</p>
+            <p><span class="stamp-index">01/007</span> <span class="stamp-index lg">04/007</span></p>
+            <div class="serial-plate">
+              <div class="rows">
+                <div class="row">SERIAL: 88-301</div>
+                <div class="row">BATCH: 2206-K</div>
+                <div class="row">PLANT: WERK 3 / DE</div>
+              </div>
+              <div class="row-rot">QC PASSED 2026-07</div>
+            </div>
+          </div>
+          <div class="plate stock-bone stack-14">
+            <p class="plate-cap">REGISTRATION / RULES</p>
+            <p><svg class="regmark" aria-hidden="true"><use href="#reg-cross"/></svg></p>
+            <div class="rule-demo">
+              <div class="rule" role="presentation"></div>
+              <div class="rule-thin" role="presentation"></div>
+            </div>
+            <p class="t-data t-data-sec">
+              CROSSES AND CROP TICKS SIT AT FRAME CORNERS. THICK RULES ARE 3PX
+              WITH "I" END TICKS; THIN RULES ARE 1PX ROW SEPARATORS.
+            </p>
+          </div>
+        </div>
+        <div class="plate stock-bone" style="margin-top: 20px;">
+          <p class="plate-cap">TECHNICAL DRAWINGS / PATENT LINE ART, 1.4PX CURRENTCOLOR STROKES</p>
+          <div class="draw-gallery">
+            <figure>
+              <div class="tdraw"><svg viewBox="0 0 120 90" aria-hidden="true"><use href="#td-reels"/></svg></div>
+              <figcaption>FIG.1 - TAPE TRANSPORT</figcaption>
+            </figure>
+            <figure>
+              <div class="tdraw"><svg viewBox="0 0 120 100" aria-hidden="true"><use href="#td-box"/></svg></div>
+              <figcaption>FIG.2 - ENCLOSURE, EXPLODED</figcaption>
+            </figure>
+            <figure>
+              <div class="tdraw"><svg viewBox="0 0 100 110" aria-hidden="true"><use href="#td-rotor"/></svg></div>
+              <figcaption>FIG.3 - ROTOR AND NUT</figcaption>
+            </figure>
+            <figure>
+              <div class="tdraw"><svg viewBox="0 0 60 110" aria-hidden="true"><use href="#td-spring"/></svg></div>
+              <figcaption>FIG.4 - DAMPER SPRING</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 04 COMPONENTS ============ -->
+      <section class="sec" id="sec-components">
+        <div class="sec-head">
+          <h2>Components</h2>
+          <span class="idx">SEC.04 / 05</span>
+        </div>
+        <div class="g-plates-wide">
+          <div class="plate stock-bone">
+            <p class="plate-cap">STAMP BUTTONS / DEFAULT, LIFTED (HOVER), PRESSED, FOCUS, DISABLED</p>
+            <div class="states-row">
+              <button type="button" class="btn">Add to manifest</button>
+              <button type="button" class="btn is-lifted">Add to manifest</button>
+              <button type="button" class="btn is-pressed">Add to manifest</button>
+              <button type="button" class="btn is-focused">Add to manifest</button>
+              <button type="button" class="btn" disabled>Add to manifest</button>
+            </div>
+            <p class="plate-cap">BONE AND KRAFT VARIANTS</p>
+            <div class="states-row">
+              <button type="button" class="btn btn-bone">Request quote</button>
+              <button type="button" class="btn btn-bone" disabled>Request quote</button>
+              <button type="button" class="btn btn-kraft">Print label</button>
+              <button type="button" class="btn btn-kraft" disabled>Print label</button>
+            </div>
+            <p class="t-data t-data-sec" style="margin-top: 16px;">
+              THE STICKER LIFT IS THE SYSTEM'S ONLY AUTHORED MOTION: HOVER RAISES
+              THE LABEL 2PX WITH A HARD 4PX SHADOW, ACTIVE PRESSES IT FLAT.
+            </p>
+          </div>
+
+          <div class="plate stock-bone stack-22">
+            <p class="plate-cap">TEXT FIELD / DEFAULT, FILLED, ERROR, DISABLED</p>
+            <div class="field">
+              <label class="field-label" for="f-batch">Batch code</label>
+              <input id="f-batch" type="text" placeholder="2206-K" autocomplete="off" />
+            </div>
+            <div class="field">
+              <label class="field-label" for="f-serial">Serial</label>
+              <input id="f-serial" type="text" value="88-301" autocomplete="off" />
+            </div>
+            <div class="field is-error">
+              <label class="field-label" for="f-capacity">Capacity (M)</label>
+              <input id="f-capacity" type="text" value="4800" aria-invalid="true" aria-describedby="f-capacity-err" autocomplete="off" />
+              <span class="field-error" id="f-capacity-err">REJECTED: RANGE 0 - 4000</span>
+            </div>
+            <div class="field is-disabled">
+              <label class="field-label" for="f-plant">Plant</label>
+              <input id="f-plant" type="text" value="WERK 3" disabled />
+            </div>
+          </div>
+
+          <div class="plate stock-bone stack-14">
+            <p class="plate-cap">BADGES / STOCK CHIPS</p>
+            <div class="states-row">
+              <span class="badge stock-black">SERIES K</span>
+              <span class="badge stock-kraft">REV.04</span>
+              <span class="badge stock-steel">12.7 MM</span>
+              <span class="badge stock-bone">QC PASSED</span>
+              <span class="badge stock-bone is-disabled">RETIRED</span>
+              <span class="badge stock-black is-disabled">VOID</span>
+            </div>
+            <p class="plate-cap" style="margin-top: 10px;">CHECKBOX / STAMP BOX WITH X</p>
+            <div class="stack-14">
+              <label class="check">
+                <input type="checkbox" checked />
+                <span class="box" aria-hidden="true"></span>
+                <span class="check-label">Archival sleeve (+2 KG)</span>
+              </label>
+              <label class="check">
+                <input type="checkbox" />
+                <span class="box" aria-hidden="true"></span>
+                <span class="check-label">Humidity seal</span>
+              </label>
+              <label class="check is-disabled">
+                <input type="checkbox" disabled />
+                <span class="box" aria-hidden="true"></span>
+                <span class="check-label">Cold store crate - out of stock</span>
+              </label>
+              <label class="check is-disabled">
+                <input type="checkbox" checked disabled />
+                <span class="box" aria-hidden="true"></span>
+                <span class="check-label">Works certificate (included)</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="plate stock-bone">
+            <p class="plate-cap">SPEC TABLE / THICK TOP RULE, THIN ROW RULES</p>
+            <table class="spec-table">
+              <caption>K-301 ARCHIVE TAPE UNIT</caption>
+              <tbody>
+                <tr><th scope="row">Media</th><td>12.7 MM MAGNETIC</td></tr>
+                <tr><th scope="row">Capacity</th><td>4000 M</td></tr>
+                <tr><th scope="row">Spool</th><td>ALU, 267 MM</td></tr>
+                <tr><th scope="row">Weight</th><td>6.4 KG</td></tr>
+                <tr><th scope="row">Stock</th><td>BLACK #161616</td></tr>
+                <tr><th scope="row">Serial</th><td>88-301</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 05 IN APPLICATION ============ -->
+      <section class="sec" id="sec-application">
+        <div class="sec-head">
+          <h2>In application</h2>
+          <span class="idx">SEC.05 / 05</span>
+        </div>
+        <div class="app-grid">
+          <form class="plate stock-bone" aria-label="Order form for K-301 archive tape unit" onsubmit="return false;">
+            <div class="app-head stock-black">
+              <span class="t-display">K-301</span>
+              <span class="t-data" style="color: var(--ink-on-dark-2);">ARCHIVE TAPE UNIT</span>
+            </div>
+            <p class="t-fine" style="max-width: 60ch; margin-bottom: 16px;">
+              Long-term magnetic archive spool for series K transports. 4000
+              meters of 12.7 mm media on an aluminium spool, rated for 30 years
+              of flat cold storage. Shipped shrink-labeled on black stock with
+              works certificate and QC stamp.
+            </p>
+            <table class="spec-table" style="margin-bottom: 18px;">
+              <caption>SPECIFICATION</caption>
+              <tbody>
+                <tr><th scope="row">Media</th><td>12.7 MM MAGNETIC</td></tr>
+                <tr><th scope="row">Capacity</th><td>4000 M</td></tr>
+                <tr><th scope="row">Spool</th><td>ALU, 267 MM</td></tr>
+                <tr><th scope="row">Weight</th><td>6.4 KG</td></tr>
+                <tr><th scope="row">Batch</th><td>2206-K</td></tr>
+              </tbody>
+            </table>
+            <p class="plate-cap">OPTIONS</p>
+            <div class="stack-14" style="margin-bottom: 20px;">
+              <label class="check">
+                <input type="checkbox" checked />
+                <span class="box" aria-hidden="true"></span>
+                <span class="check-label">Archival sleeve (+2 KG)</span>
+              </label>
+              <label class="check">
+                <input type="checkbox" />
+                <span class="box" aria-hidden="true"></span>
+                <span class="check-label">Humidity seal</span>
+              </label>
+              <label class="check is-disabled">
+                <input type="checkbox" disabled />
+                <span class="box" aria-hidden="true"></span>
+                <span class="check-label">Cold store crate - out of stock</span>
+              </label>
+            </div>
+            <div class="app-actions">
+              <div class="field">
+                <label class="field-label" for="f-qty">Quantity</label>
+                <input id="f-qty" type="text" inputmode="numeric" value="2" autocomplete="off" />
+              </div>
+              <button type="submit" class="btn">Add to manifest</button>
+              <button type="button" class="btn btn-bone">Request quote</button>
+            </div>
+          </form>
+
+          <aside class="stack-22" aria-label="K-301 label data">
+            <div class="plate stock-bone stack-14">
+              <div class="serial-plate">
+                <div class="rows">
+                  <div class="row">SERIAL: 88-301</div>
+                  <div class="row">BATCH: 2206-K</div>
+                  <div class="row">PLANT: WERK 3 / DE</div>
+                </div>
+                <div class="row-rot">QC PASSED 2026-07</div>
+              </div>
+              <div class="badge-row">
+                <span class="badge stock-black">SERIES K</span>
+                <span class="badge stock-kraft">REV.04</span>
+                <span class="badge stock-steel">12.7 MM</span>
+              </div>
+              <div class="barcode">
+                <svg preserveAspectRatio="none" aria-hidden="true"><use href="#bc-a"/></svg>
+                <div class="digits">5 8 8 9 1 8 - 0 6 8 0 7</div>
+              </div>
+            </div>
+            <div class="plate stock-kraft">
+              <p class="plate-cap">FIG.1 - TAPE TRANSPORT</p>
+              <div class="tdraw"><svg viewBox="0 0 120 90" aria-hidden="true"><use href="#td-reels"/></svg></div>
+              <p class="t-data t-data-sec" style="margin-top: 10px;">MOUNT SPOOL HUB-FIRST. TENSION 2.4 N NOMINAL.</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- ============ FOOTER ============ -->
+      <footer class="sheet-foot">
+        <div class="rule" role="presentation" style="max-width: 420px; margin: 0 auto;"></div>
+        <div class="barcode">
+          <svg preserveAspectRatio="none" aria-hidden="true"><use href="#bc-b"/></svg>
+          <div class="digits">0 7 / 0 0 7 - E N D</div>
+        </div>
+        <p class="t-display">End of sheet</p>
+        <p class="t-data t-data-sec">
+          ALL SERIALS, VOLUMES AND CAPACITIES ON THIS SHEET ARE SYNTHETIC
+          SPECIMEN DATA.
+        </p>
+        <a class="btn" href="/index.html">Return to portal</a>
+      </footer>
+    </main>
+  </div>
+
+</body>
+</html>

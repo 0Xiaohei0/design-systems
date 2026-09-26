@@ -1,0 +1,122 @@
+/*
+Mochi's entrance card on the root portal. Scoped to .sys-mochi; loaded by the
+portal only. Mirrors the Mochi tokens by value: one warm greige material, depth
+by light (raised/pressed soft shadows), no borders, rounded everything, flip
+clock, page dots. The portal's dark ground gets a soft halo so the material
+still reads as lit.
+*/
+
+.sys-mochi {
+  background: #ece9e2;
+  color: #5d574e;
+  border-radius: 22px;
+  font-family: ui-rounded, "SF Pro Rounded", "Hiragino Maru Gothic ProN",
+    "Yuanti SC", "PingFang SC", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 22px 22px 18px;
+}
+
+.sys-mochi .clockrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.sys-mochi .tile {
+  background: #f7f5f0;
+  border-radius: 10px;
+  padding: 6px 10px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  box-shadow: inset -3px -3px 8px rgba(255, 255, 255, 0.8),
+    inset 4px 4px 10px rgba(166, 158, 144, 0.35);
+}
+
+.sys-mochi .colon {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sys-mochi .colon i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #d698a0;
+  animation: mochi-blink 1s steps(1) infinite;
+}
+
+@keyframes mochi-blink { 50% { opacity: 0.25; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .sys-mochi .colon i { animation: none; }
+}
+
+.sys-mochi h3 {
+  margin: 0 0 2px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.sys-mochi .status {
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  opacity: 0.8;
+  margin-bottom: 10px;
+}
+
+.sys-mochi p {
+  margin: 0 0 12px;
+  flex: 1;
+  font-size: 0.76rem;
+  line-height: 1.65;
+}
+
+.sys-mochi .dots {
+  display: flex;
+  gap: 7px;
+  margin-bottom: 14px;
+}
+
+.sys-mochi .dots i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #d6d2c8;
+}
+
+.sys-mochi .dots i.on { background: #d698a0; }
+
+.sys-mochi .enter {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 100px;
+  background: #ece9e2;
+  color: #5d574e;
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-decoration: none;
+  box-shadow: -5px -5px 12px rgba(255, 255, 255, 0.85),
+    6px 6px 14px rgba(166, 158, 144, 0.42);
+  transition: box-shadow 0.12s ease-out;
+}
+
+.sys-mochi .enter:hover {
+  box-shadow: -6px -6px 14px rgba(255, 255, 255, 0.9),
+    8px 8px 18px rgba(166, 158, 144, 0.5);
+}
+
+.sys-mochi .enter:active {
+  box-shadow: inset -4px -4px 10px rgba(255, 255, 255, 0.8),
+    inset 5px 5px 12px rgba(166, 158, 144, 0.4);
+}
+
+.sys-mochi .enter:focus-visible {
+  outline: 2px solid #3e5c68;
+  outline-offset: 3px;
+}

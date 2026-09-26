@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+THESIS: A design catalog that behaves like tea-ceremony stationery: nine tenths
+paper, tiny ink objects resting on one hairline horizon. It refuses the dense
+token-grid spec page.
+OWN-WORLD: BENRAN (DESIGN.md): paper #fcfcfa, solid ink silhouettes, hairline
+rules with shelf ticks, vertical Songti CJK plus 10px tracked Latin, one
+vermilion seal, celadon ripples, tan roundel.
+STORY: A teammate scrolls a quiet shelf: foundations, motifs, components, then
+three posters and four bookmarks; they leave knowing restraint IS the system.
+FIRST VIEWPORT: thumbnail strip top-left, tiny vertical masthead top-right, five
+silhouettes on one long horizon with a slow celadon ripple and drifting steam,
+then vast emptiness holding only the tan roundel.
+FORM: Brief-pinned homage to a Sun Zhang tea-brand sheet; no seed roll; mode Read.
+-->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BENRAN 本然 - Design Language Catalog</title>
+  <link rel="stylesheet" href="css/benran-core.css" />
+</head>
+<body>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <!-- object silhouettes: solid ink, evenodd paper cutouts as highlights -->
+      <symbol id="o-bowl" viewBox="0 0 96 54">
+        <path fill="currentColor" fill-rule="evenodd" d="M48 6 C68 6 88 7.5 88 11 C88 26 74 40 59 43.5 C59.8 46.5 61.2 48.5 63 50 L33 50 C34.8 48.5 36.2 46.5 37 43.5 C22 40 8 26 8 11 C8 7.5 28 6 48 6 Z M20 13 C19 20 22 27 27 32 C23.5 26.5 21.5 20 22.5 13.5 Z" />
+      </symbol>
+      <symbol id="o-stone" viewBox="0 0 72 70">
+        <path fill="currentColor" fill-rule="evenodd" d="M36 3 C55 3 69 16 69 35 C69 53 54 67 36 67 C17 67 3 53 3 35 C3 16 17 3 36 3 Z M28 18 C33.5 18 38 22.5 38 28 C38 33.5 33.5 38 28 38 C22.5 38 18 33.5 18 28 C18 22.5 22.5 18 28 18 Z M52 50 C49 55 44 58.5 38 60 C44.8 60 51 56 54 50.6 Z" />
+      </symbol>
+      <symbol id="o-sprout" viewBox="0 0 84 76">
+        <path fill="currentColor" d="M41 26 C34 23 29 15 30 5 C38 8 42.5 16 42 26 Z" />
+        <path fill="currentColor" d="M44 28 C44 20 48 14 55 12 C55 20 51 26 45 28.5 Z" />
+        <path fill="currentColor" d="M40.8 42 C40.8 35 41 29.5 41.6 25 L43.6 25 C43 29.5 42.8 35 42.8 42 Z" />
+        <path fill="currentColor" fill-rule="evenodd" d="M25 43 C25 41.6 32 40.8 42 40.8 C52 40.8 59 41.6 59 43 C59 51.5 51.5 58 42 58 C32.5 58 25 51.5 25 43 Z M29 44 C33 45.4 51 45.4 55 44 C51 46.6 33 46.6 29 44 Z" />
+        <path fill="currentColor" d="M10 62 C10 60.6 24 59.6 42 59.6 C60 59.6 74 60.6 74 62 C74 66.4 60 70 42 70 C24 70 10 66.4 10 62 Z" />
+      </symbol>
+      <symbol id="o-teapot" viewBox="0 0 100 72">
+        <path fill="currentColor" d="M32 26 C32 9 68 9 68 26 L63.5 26 C63.5 14 36.5 14 36.5 26 Z" />
+        <circle fill="currentColor" cx="50" cy="26.5" r="3" />
+        <path fill="currentColor" d="M37 34 C37 30 63 30 63 34 L37 34 Z" />
+        <path fill="currentColor" d="M79 47 C85 45 90 40 92 33 L96 35.5 C94 44 88.5 50 81.5 52.5 Z" />
+        <path fill="currentColor" fill-rule="evenodd" d="M50 36 C69 36 83 43 83 53 C83 62.5 69 69 50 69 C31 69 17 62.5 17 53 C17 43 31 36 50 36 Z M27 46 C25 50.5 25.5 56 28.5 60 C24.5 57 22.5 51 24.5 46.5 Z" />
+      </symbol>
+      <symbol id="o-gourd" viewBox="0 0 64 84">
+        <path fill="currentColor" d="M32 4 C33.6 4 34.6 5 34.6 6.6 C34.6 8 33.8 9.2 33.6 10.6 L30.4 10.6 C30.2 9.2 29.4 8 29.4 6.6 C29.4 5 30.4 4 32 4 Z" />
+        <path fill="currentColor" fill-rule="evenodd" d="M32 12 C40 12 46 18 46 26 C46 31.5 43 35.8 38.6 38.4 C48 42.4 55 51 55 61 C55 73.5 45 80 32 80 C19 80 9 73.5 9 61 C9 51 16 42.4 25.4 38.4 C21 35.8 18 31.5 18 26 C18 18 24 12 32 12 Z M17 56 C14.5 61.5 15 69 19 74 C16 69.5 15.5 61.5 18.5 55.8 Z" />
+      </symbol>
+      <symbol id="o-leaf" viewBox="0 0 56 56">
+        <path fill="currentColor" fill-rule="evenodd" d="M6 50 C6 26 24 8 50 6 C48 32 30 50 6 50 Z M10 46 C22 38 36 24 45 11 C38 26 25 40 11 47 Z" />
+      </symbol>
+
+      <!-- roundel: thin circle holding a three-stroke 本 mark -->
+      <symbol id="b-roundel" viewBox="0 0 44 44">
+        <g fill="none" stroke="currentColor" stroke-linecap="round">
+          <circle cx="22" cy="22" r="20.5" stroke-width="1" />
+          <path stroke-width="1.2" d="M22 11.5 V32.5" />
+          <path stroke-width="1.2" d="M13.5 17.5 H30.5" />
+          <path stroke-width="1.2" d="M22 20 L14.5 29 M22 20 L29.5 29" />
+          <path stroke-width="1" d="M18.5 29.5 H25.5" />
+        </g>
+      </symbol>
+
+      <!-- seal stamp: vermilion ground, white negative 本 -->
+      <symbol id="b-seal-sq" viewBox="0 0 22 22">
+        <rect fill="currentColor" x="1" y="1" width="20" height="20" rx="4" />
+        <g fill="none" stroke="#fcfcfa" stroke-width="1.3" stroke-linecap="round">
+          <path d="M11 5 V17" />
+          <path d="M6.5 8.5 H15.5" />
+          <path d="M11 10 L7.5 14 M11 10 L14.5 14" />
+          <path d="M8.5 15.5 H13.5" />
+        </g>
+      </symbol>
+      <symbol id="b-seal-rd" viewBox="0 0 22 22">
+        <circle fill="currentColor" cx="11" cy="11" r="10" />
+        <g fill="none" stroke="#fcfcfa" stroke-width="1.3" stroke-linecap="round">
+          <path d="M11 5 V17" />
+          <path d="M6.5 8.5 H15.5" />
+          <path d="M11 10 L7.5 14 M11 10 L14.5 14" />
+          <path d="M8.5 15.5 H13.5" />
+        </g>
+      </symbol>
+
+      <!-- static ripple: three flat concentric ellipses -->
+      <symbol id="b-ripple3" viewBox="0 0 220 44">
+        <g fill="none" stroke="currentColor" stroke-width="1">
+          <ellipse cx="110" cy="22" rx="34" ry="4" opacity="0.8" />
+          <ellipse cx="110" cy="22" rx="66" ry="8" opacity="0.5" />
+          <ellipse cx="110" cy="22" rx="100" ry="12" opacity="0.3" />
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
+  <div class="b-page">
+
+    <!-- ================= HERO ================= -->
+    <header class="b-hero">
+      <div class="b-hero-top">
+        <div class="b-thumbstrip" aria-hidden="true">
+          <span><svg class="b-obj" width="40" height="22.5" viewBox="0 0 96 54"><use href="#o-bowl" /></svg></span>
+          <span><svg class="b-obj" width="26" height="25.3" viewBox="0 0 72 70"><use href="#o-stone" /></svg></span>
+          <span><svg class="b-obj" width="38" height="27.4" viewBox="0 0 100 72"><use href="#o-teapot" /></svg></span>
+          <span><svg class="b-obj" width="21" height="27.6" viewBox="0 0 64 84"><use href="#o-gourd" /></svg></span>
+        </div>
+        <div class="b-masthead">
+          <div class="m-latin">
+            <span class="v-latin">Benran</span>
+            <span class="v-latin is-echo">Oriental zen</span>
+            <span class="v-num">2026 / 8.3</span>
+          </div>
+          <h1 class="v-cjk m-cjk" lang="zh">本然</h1>
+        </div>
+      </div>
+
+      <!-- five objects resting on one long horizon -->
+      <div class="b-shelf" role="img" aria-label="Five ink tea-object silhouettes resting on a hairline shelf: tea bowl, donut stone, sprouting cup, iron teapot, gourd">
+        <div class="b-shelf-row">
+          <span class="shelf-slot">
+            <svg class="b-obj" width="78" height="43.9" viewBox="0 0 96 54" aria-hidden="true"><use href="#o-bowl" /></svg>
+            <svg class="b-ripple b-shelf-ripple" width="190" height="38" viewBox="0 0 220 44" style="margin-top:-13px" aria-hidden="true">
+              <g fill="none" stroke="var(--celadon)" stroke-width="1">
+                <ellipse cx="110" cy="22" rx="30" ry="3.5" opacity="0.75" />
+                <ellipse cx="110" cy="22" rx="62" ry="7.5" opacity="0.4" />
+                <ellipse class="r-live" cx="110" cy="22" rx="102" ry="12" stroke="var(--celadon)" />
+              </g>
+            </svg>
+          </span>
+          <span class="shelf-slot">
+            <svg class="b-obj" width="54" height="52.5" viewBox="0 0 72 70" aria-hidden="true"><use href="#o-stone" /></svg>
+          </span>
+          <span class="shelf-slot">
+            <svg class="b-obj" width="60" height="54.3" viewBox="0 0 84 76" aria-hidden="true"><use href="#o-sprout" /></svg>
+          </span>
+          <span class="shelf-slot">
+            <span class="b-trail is-live shelf-steam" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+            <svg class="b-obj" width="82" height="59" viewBox="0 0 100 72" aria-hidden="true"><use href="#o-teapot" /></svg>
+          </span>
+          <span class="shelf-slot">
+            <svg class="b-obj" width="46" height="60.4" viewBox="0 0 64 84" aria-hidden="true"><use href="#o-gourd" /></svg>
+          </span>
+        </div>
+        <div class="b-horizon"></div>
+      </div>
+
+      <!-- vast space; the roundel alone -->
+      <div class="b-hero-void">
+        <svg class="b-roundel" width="40" height="40" viewBox="0 0 44 44" role="img" aria-label="Benran roundel mark"><use href="#b-roundel" /></svg>
+      </div>
+    </header>
+
+    <main>
+
+      <!-- ================= FOUNDATIONS ================= -->
+      <section class="b-section" aria-labelledby="h-foundations">
+        <h2 class="b-sect-head" id="h-foundations">
+          <span class="v-cjk sh-cjk" lang="zh">素材</span>
+          <span class="v-latin sh-latin">Foundations</span>
+        </h2>
+        <div class="b-horizon b-sect-rule"></div>
+
+        <div class="b-sect-body">
+          <p class="v-body">
+            <span lang="zh">本然</span> - benran, "what is so of itself" - is the stationery
+            identity of a small tea atelier. Every surface begins as empty paper; the work
+            is deciding what little may enter. Objects are solid ink and rest on a hairline
+            shelf, words stand upright as they do on a scroll, and color is spent the way
+            seal paste is: one stamp at a time.
+          </p>
+        </div>
+
+        <div class="b-sect-body">
+          <div class="b-palette">
+            <div class="b-swatch">
+              <span class="sw-dot is-outlined" style="background:var(--paper)"></span>
+              <span class="sw-name">Paper</span><span class="sw-hex">#FCFCFA</span>
+            </div>
+            <div class="b-swatch">
+              <span class="sw-dot" style="background:var(--ink)"></span>
+              <span class="sw-name">Ink</span><span class="sw-hex">#2A2A28</span>
+            </div>
+            <div class="b-swatch">
+              <span class="sw-dot" style="background:var(--faint)"></span>
+              <span class="sw-name">Faint</span><span class="sw-hex">#8A8880</span>
+            </div>
+            <div class="b-swatch">
+              <span class="sw-dot" style="background:var(--hairline)"></span>
+              <span class="sw-name">Hairline</span><span class="sw-hex">#D5D3CD</span>
+            </div>
+            <div class="b-swatch">
+              <span class="sw-dot" style="background:var(--celadon)"></span>
+              <span class="sw-name">Celadon</span><span class="sw-hex">#9FC4BD</span>
+            </div>
+            <div class="b-swatch">
+              <span class="sw-dot" style="background:var(--seal)"></span>
+              <span class="sw-name">Seal</span><span class="sw-hex">#C25E4A</span>
+            </div>
+            <div class="b-swatch">
+              <span class="sw-dot" style="background:var(--tan)"></span>
+              <span class="sw-name">Tan</span><span class="sw-hex">#C9A87C</span>
+            </div>
+          </div>
+          <p class="v-body" style="margin-top:44px">
+            Ink carries everything essential. Faint is reserved for large or duplicated
+            captions; celadon, tan, and the hairline never carry text.
+          </p>
+        </div>
+
+        <div class="b-sect-body">
+          <div class="b-voices">
+            <div class="b-voice">
+              <span class="vo-caption">CJK display - vertical-rl - Songti</span>
+              <span class="v-cjk vo-cjk-lg" lang="zh">東方禪意</span>
+            </div>
+            <div class="b-voice">
+              <span class="vo-caption">Latin - 10px - 0.35em track</span>
+              <span class="v-latin">Benran</span>
+              <span class="v-latin">Oriental zen</span>
+              <span class="v-latin">Sun Zhang</span>
+            </div>
+            <div class="b-voice">
+              <span class="vo-caption">Body - 13px / 2</span>
+              <p class="v-body" style="max-width:22em">
+                The kettle is heard before it is seen. Guests are seated when the
+                water first speaks.
+              </p>
+            </div>
+            <div class="b-voice">
+              <span class="vo-caption">Numbers and dates</span>
+              <span class="v-num">2026 / 8.3</span>
+              <span class="v-num">NO. 04 - 19:00</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= MOTIFS ================= -->
+      <section class="b-section" aria-labelledby="h-motifs">
+        <h2 class="b-sect-head" id="h-motifs">
+          <span class="v-cjk sh-cjk" lang="zh">紋樣</span>
+          <span class="v-latin sh-latin">Motifs</span>
+        </h2>
+        <div class="b-horizon b-sect-rule"></div>
+
+        <div class="b-sect-body">
+          <div class="b-motifs">
+            <div class="b-motif b-motif-wide">
+              <div class="mo-stage" style="width:100%"><div class="b-horizon" style="width:100%"></div></div>
+              <span class="mo-caption">Horizon rule - objects sit on it</span>
+            </div>
+
+            <div class="b-motif">
+              <div class="mo-stage"><svg class="b-obj" width="72" height="40.5" viewBox="0 0 96 54" role="img" aria-label="Tea bowl silhouette"><use href="#o-bowl" /></svg></div>
+              <span class="mo-caption">Tea bowl</span>
+            </div>
+            <div class="b-motif">
+              <div class="mo-stage"><svg class="b-obj" width="50" height="48.6" viewBox="0 0 72 70" role="img" aria-label="Donut stone silhouette"><use href="#o-stone" /></svg></div>
+              <span class="mo-caption">Donut stone</span>
+            </div>
+            <div class="b-motif">
+              <div class="mo-stage"><svg class="b-obj" width="56" height="50.7" viewBox="0 0 84 76" role="img" aria-label="Sprouting cup on a saucer"><use href="#o-sprout" /></svg></div>
+              <span class="mo-caption">Sprout cup</span>
+            </div>
+            <div class="b-motif">
+              <div class="mo-stage"><svg class="b-obj" width="76" height="54.7" viewBox="0 0 100 72" role="img" aria-label="Iron teapot silhouette"><use href="#o-teapot" /></svg></div>
+              <span class="mo-caption">Iron pot</span>
+            </div>
+            <div class="b-motif">
+              <div class="mo-stage"><svg class="b-obj" width="42" height="55.1" viewBox="0 0 64 84" role="img" aria-label="Gourd silhouette"><use href="#o-gourd" /></svg></div>
+              <span class="mo-caption">Gourd</span>
+            </div>
+            <div class="b-motif">
+              <div class="mo-stage"><svg class="b-obj" width="40" height="40" viewBox="0 0 56 56" role="img" aria-label="Tea leaf silhouette"><use href="#o-leaf" /></svg></div>
+              <span class="mo-caption">Leaf</span>
+            </div>
+
+            <div class="b-motif">
+              <div class="mo-stage" style="gap:22px;align-items:center">
+                <svg class="b-roundel" width="40" height="40" viewBox="0 0 44 44" role="img" aria-label="Roundel, tan"><use href="#b-roundel" /></svg>
+                <svg class="b-roundel is-ink" width="30" height="30" viewBox="0 0 44 44" role="img" aria-label="Roundel, ink"><use href="#b-roundel" /></svg>
+              </div>
+              <span class="mo-caption">Roundel - tan / ink</span>
+            </div>
+            <div class="b-motif">
+              <div class="mo-stage" style="gap:18px;align-items:center;color:var(--seal)">
+                <svg width="20" height="20" viewBox="0 0 22 22" role="img" aria-label="Seal stamp, square"><use href="#b-seal-sq" /></svg>
+                <svg width="18" height="18" viewBox="0 0 22 22" role="img" aria-label="Seal stamp, round"><use href="#b-seal-rd" /></svg>
+              </div>
+              <span class="mo-caption">Seal - one per surface</span>
+            </div>
+            <div class="b-motif">
+              <div class="mo-stage" style="align-items:center">
+                <span class="b-trail" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+              </div>
+              <span class="mo-caption">Dotted trail - steam</span>
+            </div>
+            <div class="b-motif">
+              <div class="mo-stage" style="flex-direction:column;gap:14px;align-items:center;justify-content:center">
+                <svg width="170" height="34" viewBox="0 0 220 44" style="color:var(--celadon)" aria-hidden="true"><use href="#b-ripple3" /></svg>
+                <svg width="170" height="34" viewBox="0 0 220 44" style="color:var(--tan)" aria-hidden="true"><use href="#b-ripple3" /></svg>
+              </div>
+              <span class="mo-caption">Ripple - celadon / tan</span>
+            </div>
+            <div class="b-motif">
+              <div class="mo-stage" style="align-items:center">
+                <span class="b-lockup">
+                  <span class="v-cjk" style="font-size:15px" lang="zh">本然</span>
+                  <span class="b-x" aria-hidden="true">x</span>
+                  <span class="v-cjk" style="font-size:15px" lang="zh">東方禪意</span>
+                </span>
+              </div>
+              <span class="mo-caption">The x mark - collaboration</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= COMPONENTS ================= -->
+      <section class="b-section" aria-labelledby="h-components">
+        <h2 class="b-sect-head" id="h-components">
+          <span class="v-cjk sh-cjk" lang="zh">器件</span>
+          <span class="v-latin sh-latin">Components</span>
+        </h2>
+        <div class="b-horizon b-sect-rule"></div>
+
+        <div class="b-sect-body">
+          <div class="b-comp-grid">
+
+            <div class="b-comp">
+              <span class="co-caption">Text link - hover summons the seal dot</span>
+              <div class="co-row" style="flex-direction:column;gap:14px">
+                <a class="b-link" href="#h-application">Season program</a>
+                <a class="b-link" href="#h-foundations">Reserve a seat</a>
+                <span class="b-link is-disabled" aria-disabled="true">Winter - closed</span>
+              </div>
+            </div>
+
+            <div class="b-comp">
+              <span class="co-caption">Stamp button - hover inks it</span>
+              <div class="co-row">
+                <button class="b-stamp-btn" type="button" lang="zh">預約</button>
+                <button class="b-stamp-btn" type="button" lang="zh">入席</button>
+                <button class="b-stamp-btn" type="button" lang="zh" disabled>已滿</button>
+              </div>
+              <span class="co-note">Reserve - be seated - full (disabled). Focus is a 1px ink outline, 3px offset.</span>
+            </div>
+
+            <div class="b-comp">
+              <span class="co-caption">Chip - two glyphs, upright</span>
+              <div class="co-row">
+                <button class="b-chip" type="button" lang="zh">濃茶</button>
+                <button class="b-chip is-selected" type="button" aria-pressed="true" lang="zh">薄茶</button>
+                <button class="b-chip" type="button" lang="zh">焙茶</button>
+                <button class="b-chip" type="button" lang="zh" disabled>售罄</button>
+              </div>
+              <span class="co-note">Thick tea - thin tea (selected) - roasted tea - sold out.</span>
+            </div>
+
+            <div class="b-comp">
+              <span class="co-caption">List - dotted-trail entries</span>
+              <ol class="b-list">
+                <li><span lang="zh">迎客</span><span class="li-latin">Greeting</span><span class="li-num">19:00</span></li>
+                <li><span lang="zh">點炭</span><span class="li-latin">Charcoal</span><span class="li-num">19:15</span></li>
+                <li><span lang="zh">濃茶</span><span class="li-latin">Thick tea</span><span class="li-num">19:40</span></li>
+                <li><span lang="zh">薄茶</span><span class="li-latin">Thin tea</span><span class="li-num">20:10</span></li>
+                <li class="is-disabled"><span lang="zh">夜話</span><span class="li-latin">Night talk</span><span class="li-num">Full</span></li>
+              </ol>
+            </div>
+
+            <div class="b-comp">
+              <span class="co-caption">Input - bare underline</span>
+              <div class="co-row" style="flex-direction:column;gap:26px">
+                <label class="b-field">
+                  <span class="f-label"><span lang="zh">姓名</span> Name</span>
+                  <input class="b-input" type="text" placeholder="Your name" />
+                </label>
+                <label class="b-field">
+                  <span class="f-label"><span lang="zh">同行</span> Guests</span>
+                  <input class="b-input" type="text" value="沈青竹 +1" />
+                </label>
+                <label class="b-field">
+                  <span class="f-label"><span lang="zh">席位</span> Seat</span>
+                  <input class="b-input" type="text" value="窗邊 - window" disabled />
+                </label>
+              </div>
+            </div>
+
+            <div class="b-comp">
+              <span class="co-caption">Pagination - tiny circles</span>
+              <nav class="co-row" style="align-items:center" aria-label="Program pages">
+                <span class="b-pgn">
+                  <button type="button" aria-label="Page 1"></button>
+                  <button type="button" aria-label="Page 2" aria-current="page"></button>
+                  <button type="button" aria-label="Page 3"></button>
+                  <button type="button" aria-label="Page 4"></button>
+                  <button type="button" aria-label="Page 5" disabled></button>
+                </span>
+                <span class="v-num"><span lang="zh">頁</span> 2 / 5</span>
+              </nav>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= IN APPLICATION ================= -->
+      <section class="b-section" aria-labelledby="h-application">
+        <h2 class="b-sect-head" id="h-application">
+          <span class="v-cjk sh-cjk" lang="zh">應用</span>
+          <span class="v-latin sh-latin">In application</span>
+        </h2>
+        <div class="b-horizon b-sect-rule"></div>
+
+        <div class="b-sect-body">
+          <div class="b-posters">
+
+            <!-- poster 1: ripple-bowl diagram -->
+            <article class="b-poster" aria-label="Poster: Benran, tea bowl over ripples">
+              <svg class="b-roundel b-pin" style="top:18px;left:18px" width="30" height="30" viewBox="0 0 44 44" aria-hidden="true"><use href="#b-roundel" /></svg>
+              <span class="v-cjk b-pin" style="top:20px;right:22px;font-size:22px" lang="zh">本然</span>
+              <span class="b-trail b-pin" style="bottom:calc(44% + 52px);left:50%;transform:translateX(-50%)" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+              <svg class="b-obj b-pin" style="bottom:44%;left:50%;transform:translateX(-50%)" width="62" height="34.9" viewBox="0 0 96 54" aria-hidden="true"><use href="#o-bowl" /></svg>
+              <span class="b-horizon b-pin" style="top:56%;left:19%;width:62%"></span>
+              <svg class="b-pin" style="top:calc(56% - 15px);left:50%;transform:translateX(-50%);color:var(--celadon)" width="160" height="32" viewBox="0 0 220 44" aria-hidden="true"><use href="#b-ripple3" /></svg>
+              <span class="b-pin" style="bottom:18px;left:0;right:0;text-align:center">
+                <span class="v-latin" style="font-size:9.5px">Benran tea atelier</span><br />
+                <span class="v-num">2026 / 8.3</span>
+              </span>
+            </article>
+
+            <!-- poster 2: the collaboration -->
+            <article class="b-poster" aria-label="Poster: Benran x Oriental Zen, leaf and stone">
+              <span class="b-lockup b-pin" style="top:13%;left:0;right:0" lang="zh">
+                <span class="v-cjk" style="font-size:20px">本然</span>
+                <span class="b-x" aria-hidden="true">x</span>
+                <span class="v-cjk" style="font-size:20px">東方禪意</span>
+              </span>
+              <svg class="b-obj b-pin" style="top:50%;left:26%;transform:rotate(-24deg)" width="24" height="24" viewBox="0 0 56 56" aria-hidden="true"><use href="#o-leaf" /></svg>
+              <svg class="b-obj b-pin" style="bottom:24%;left:56%;transform:translateX(-50%)" width="38" height="36.9" viewBox="0 0 72 70" aria-hidden="true"><use href="#o-stone" /></svg>
+              <span class="b-horizon b-pin" style="top:76%;left:22%;width:56%"></span>
+              <svg class="b-pin" style="top:calc(76% - 13px);left:56%;transform:translateX(-50%);color:var(--tan)" width="140" height="28" viewBox="0 0 220 44" aria-hidden="true"><use href="#b-ripple3" /></svg>
+              <span class="b-pin" style="bottom:18px;left:0;right:0;text-align:center">
+                <span class="v-latin" style="font-size:9.5px">Oriental zen - autumn program</span>
+              </span>
+            </article>
+
+            <!-- poster 3: the seal -->
+            <article class="b-poster" aria-label="Poster: vertical Benran wordmark with seal stamp and gourd">
+              <span class="v-cjk b-pin" style="top:14%;right:22%;font-size:34px" lang="zh">本然</span>
+              <svg class="b-pin" style="top:calc(14% + 128px);right:calc(22% + 7px);color:var(--seal)" width="20" height="20" viewBox="0 0 22 22" role="img" aria-label="Vermilion seal stamp"><use href="#b-seal-sq" /></svg>
+              <svg class="b-obj b-pin" style="bottom:18%;left:30%;transform:translateX(-50%)" width="34" height="44.6" viewBox="0 0 64 84" aria-hidden="true"><use href="#o-gourd" /></svg>
+              <span class="b-horizon b-pin" style="top:82%;left:12%;width:44%"></span>
+              <span class="b-pin" style="bottom:18px;left:0;right:0;text-align:center">
+                <span class="v-latin" style="font-size:9.5px">Benran - est. 2026</span>
+              </span>
+            </article>
+
+          </div>
+
+          <div class="b-bookmarks">
+
+            <article class="b-bookmark" aria-label="Bookmark: Kodo, the way of incense">
+              <div class="b-bm-flow">
+                <span class="v-cjk bm-title" lang="zh">香道</span>
+                <span class="b-trail" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+                <span class="bm-shelf">
+                  <svg class="b-obj" width="44" height="24.8" viewBox="0 0 96 54" aria-hidden="true"><use href="#o-bowl" /></svg>
+                  <span class="b-horizon"></span>
+                </span>
+                <span class="bm-latin">Kodo<br />incense</span>
+              </div>
+            </article>
+
+            <article class="b-bookmark" aria-label="Bookmark: Shodo, the way of writing">
+              <div class="b-bm-flow">
+                <span class="v-cjk bm-title" lang="zh">書道</span>
+                <span class="b-trail" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+                <span class="bm-shelf">
+                  <svg class="b-obj" width="30" height="29.2" viewBox="0 0 72 70" aria-hidden="true"><use href="#o-stone" /></svg>
+                  <span class="b-horizon"></span>
+                </span>
+                <span class="bm-latin">Shodo<br />writing</span>
+              </div>
+            </article>
+
+            <article class="b-bookmark" aria-label="Bookmark: Chado, the way of tea, with seal stamp">
+              <div class="b-bm-flow">
+                <span class="v-cjk bm-title" lang="zh">茶道</span>
+                <svg style="color:var(--seal)" width="14" height="14" viewBox="0 0 22 22" aria-hidden="true"><use href="#b-seal-rd" /></svg>
+                <span class="b-trail" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+                <span class="bm-shelf">
+                  <svg class="b-obj" width="46" height="33.1" viewBox="0 0 100 72" aria-hidden="true"><use href="#o-teapot" /></svg>
+                  <span class="b-horizon"></span>
+                </span>
+                <span class="bm-latin">Chado<br />tea</span>
+              </div>
+            </article>
+
+            <article class="b-bookmark" aria-label="Bookmark: Kado, the way of flowers">
+              <div class="b-bm-flow">
+                <span class="v-cjk bm-title" lang="zh">花道</span>
+                <span class="b-trail" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+                <span class="bm-shelf">
+                  <svg class="b-obj" width="36" height="32.6" viewBox="0 0 84 76" aria-hidden="true"><use href="#o-sprout" /></svg>
+                  <span class="b-horizon"></span>
+                </span>
+                <span class="bm-latin">Kado<br />flowers</span>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="b-footer">
+      <svg class="b-roundel" width="34" height="34" viewBox="0 0 44 44" aria-hidden="true"><use href="#b-roundel" /></svg>
+      <p class="ft-note">
+        Benran - oriental zen - an homage to a Sun Zhang tea-brand sheet<br />
+        all names, dates and programs on this page are synthetic
+      </p>
+      <a class="b-stamp-btn" href="/index.html" lang="zh" aria-label="All systems - back to the portal">所有系統</a>
+    </footer>
+
+  </div>
+
+</body>
+</html>

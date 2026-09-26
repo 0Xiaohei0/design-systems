@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SDPG-HUD - Design System</title>
+<link rel="stylesheet" href="css/hud-core.css">
+</head>
+<body>
+
+<!-- ============ SVG SPRITE ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-dice" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="3.5" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="8" cy="8" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><circle cx="16" cy="16" r="1.6" fill="currentColor"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="9.5" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="15" r="1.4" fill="currentColor"/></symbol>
+  <symbol id="i-unlock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="9.5" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8 10.5V8a4 4 0 0 1 7.7-1.4" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="15" r="1.4" fill="currentColor"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="10" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M5.5 15.5H4.5a1 1 0 0 1-1-1V5.5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v1" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+  <symbol id="i-cross" viewBox="0 0 24 24"><path d="M12 4v6M12 14v6M4 12h6M14 12h6" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3 22 20H2Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 9v5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="17" r="1.1" fill="currentColor"/></symbol>
+  <symbol id="i-no" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M6 6 18 18" stroke="currentColor" stroke-width="1.7"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4" stroke="currentColor" stroke-width="1.4"/></symbol>
+  <symbol id="i-chevL" viewBox="0 0 24 24"><path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-chevR" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5 10 17 19 7" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 9 7" shape-rendering="crispEdges"><path fill="currentColor" d="M1 0h2v1H1zM6 0h2v1H6zM0 1h4v1H0zM5 1h4v1H5zM0 2h9v1H0zM1 3h7v1H1zM2 4h5v1H2zM3 5h3v1H3zM4 6h1v1H4z"/></symbol>
+</svg>
+
+<div class="viewport-frame" aria-hidden="true"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i></div>
+
+<!-- ============ STATUS BAR ============ -->
+<div class="statusbar">
+  <div class="wrap">
+    <span class="seg"><b>SDPG-HUD</b> // REV 02</span>
+    <span class="seg hide-sm" style="display:flex;align-items:center;gap:8px"><span class="dot blink"></span> SYSTEM ONLINE</span>
+    <span class="spacer"></span>
+    <span class="seg hide-md">CH-01 · MONOCHROME</span>
+    <a class="tbtn" href="/index.html">All Systems</a>
+    <button class="tbtn" data-toggle-theme type="button">◐ Invert</button>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="scanlines"></div>
+  <div class="poster-meta tl"><b>TEMP 0.90</b><br>SEED 19009304</div>
+  <div class="poster-meta tc"><svg width="20" height="20"><use href="#i-target"/></svg></div>
+  <div class="poster-meta tr"><b>REV 02</b><br>MONOCHROME</div>
+
+  <img class="mascot" src="mascot.png" alt="SDPromptGen mascot">
+  <div class="stage">
+    <h1 class="bigword solid">Design</h1>
+    <div class="bigword outline" aria-hidden="true">Design</div>
+    <span class="sub l" lang="ja">デザイン</span>
+    <span class="sub r">dɪ·ˈzaɪn</span>
+    <i class="tickmark t1" aria-hidden="true"></i>
+    <i class="tickmark t2" aria-hidden="true"></i>
+  </div>
+
+  <div class="band">
+    <div class="band-left">
+      <span class="coin"><span class="dot blink"></span> Insert Coin</span>
+      <p>A monochrome heads-up-display interface kit for SDPromptGen.</p>
+      <p class="dim">Targeting brackets, arcade readouts, pixel status - grayscale only, emphasis by filled block, never by color.</p>
+    </div>
+    <div class="band-right">
+      <span class="pre">The system is</span>
+      <span class="name">SDPG-HUD</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- ===== 01 FOUNDATIONS ===== -->
+  <section class="block"><div class="wrap">
+    <div class="sec-head">
+      <span class="id">§01</span>
+      <h2>Foundations</h2>
+      <span class="rule"></span>
+      <span class="status"><span class="dot"></span> Stable</span>
+    </div>
+
+    <p class="prose">Everything is grayscale. There is no accent hue - emphasis comes from a solid black fill or an inverted block, never from color. Status is encoded in <em>form</em>: a filled shape is active, an outline is idle, a dashed edge is disabled or in-flux.</p>
+
+    <div style="height:26px"></div>
+
+    <div class="panel" style="margin-bottom:30px">
+      <span class="panel-label">Grayscale ramp</span>
+      <div class="ramp">
+        <div class="sw" style="background:#15181c;color:#e6e8ea"><span class="nm">ink-900</span><span>#15181C</span></div>
+        <div class="sw" style="background:#3a3e44;color:#e6e8ea"><span class="nm">ink-700</span><span>#3A3E44</span></div>
+        <div class="sw" style="background:#6b7076;color:#e6e8ea"><span class="nm">500</span><span>#6B7076</span></div>
+        <div class="sw" style="background:#8b9096;color:#15181c"><span class="nm">400</span><span>#8B9096</span></div>
+        <div class="sw" style="background:#b3b7bd;color:#15181c"><span class="nm">300</span><span>#B3B7BD</span></div>
+        <div class="sw" style="background:#d1d4d8;color:#15181c"><span class="nm">200</span><span>#D1D4D8</span></div>
+        <div class="sw" style="background:#e6e8ea;color:#15181c"><span class="nm">ground</span><span>#E6E8EA</span></div>
+        <div class="sw" style="background:#f1f2f4;color:#15181c"><span class="nm">panel</span><span>#F1F2F4</span></div>
+        <div class="sw" style="background:#fafbfb;color:#15181c;border-left:1px solid #d1d4d8"><span class="nm">white</span><span>#FAFBFB</span></div>
+      </div>
+    </div>
+
+    <div class="cols c2">
+      <div class="panel p2">
+        <span class="panel-label">Typography</span>
+        <div class="specimen" style="gap:20px">
+          <div class="specimen">
+            <span class="tag">Display · wide · uppercase</span>
+            <div class="sp-display">Reroll</div>
+          </div>
+          <div class="specimen">
+            <span class="tag">Mono heading · tracked</span>
+            <div class="sp-h">Prompt Assembly</div>
+          </div>
+          <div class="specimen">
+            <span class="tag">Body · humanist sans</span>
+            <div class="sp-body">Combine scenario, appearance, and clothing snippets into a single prompt, then reroll the slots you have not locked.</div>
+          </div>
+          <div class="specimen">
+            <span class="tag">Caption / data · mono</span>
+            <div class="sp-cap">CH-04 · TEMP 0.90 · SEED 19009304</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel p2">
+        <span class="panel-label">Iconography</span>
+        <div class="motifs">
+          <div class="motif"><svg><use href="#i-target"/></svg><span>Target</span></div>
+          <div class="motif"><svg><use href="#i-cross"/></svg><span>Register</span></div>
+          <div class="motif"><svg><use href="#i-warn"/></svg><span>Warn</span></div>
+          <div class="motif"><svg><use href="#i-no"/></svg><span>Block</span></div>
+          <div class="motif"><svg><use href="#i-dice"/></svg><span>Reroll</span></div>
+          <div class="motif"><svg><use href="#i-lock"/></svg><span>Lock</span></div>
+          <div class="motif"><svg><use href="#i-unlock"/></svg><span>Unlock</span></div>
+          <div class="motif"><svg><use href="#i-copy"/></svg><span>Copy</span></div>
+          <div class="motif"><svg><use href="#i-check"/></svg><span>Done</span></div>
+          <div class="motif"><svg><use href="#i-heart"/></svg><span>Life</span></div>
+          <div class="motif"><svg><use href="#i-chevL"/></svg><span>Prev</span></div>
+          <div class="motif"><svg><use href="#i-chevR"/></svg><span>Next</span></div>
+        </div>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- ===== 02 CONTROLS ===== -->
+  <section class="block"><div class="wrap">
+    <div class="sec-head">
+      <span class="id">§02</span>
+      <h2>Controls</h2>
+      <span class="rule"></span>
+      <span class="status"><span class="dot"></span> Interactive</span>
+    </div>
+
+    <div class="cols c2">
+      <div class="panel">
+        <span class="panel-label">Buttons</span>
+        <svg class="panel-corner" width="16" height="16"><use href="#i-cross"/></svg>
+        <div class="btn-row" style="margin-bottom:14px">
+          <button class="btn solid" type="button"><svg><use href="#i-dice"/></svg> Reroll Unlocked</button>
+          <button class="btn" type="button"><svg><use href="#i-copy"/></svg> Copy Merged</button>
+        </div>
+        <div class="btn-row" style="margin-bottom:14px">
+          <button class="btn pill" type="button"><span class="dot"></span> Insert Coin</button>
+          <button class="btn ghost" type="button">Cancel</button>
+          <button class="btn" type="button" disabled>Empty</button>
+        </div>
+        <div class="btn-row">
+          <button class="iconbtn" type="button" title="Copy"><svg><use href="#i-copy"/></svg></button>
+          <button class="iconbtn" type="button" title="Reroll"><svg><use href="#i-dice"/></svg></button>
+          <button class="iconbtn on" type="button" title="Locked"><svg><use href="#i-lock"/></svg></button>
+          <button class="iconbtn" type="button" title="Unlocked"><svg><use href="#i-unlock"/></svg></button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <span class="panel-label">Inputs</span>
+        <label class="field-label" for="d-in">New preset</label>
+        <input id="d-in" class="input" type="text" value="rain jacket, rubber boots, umbrella" style="margin-bottom:16px">
+        <label class="field-label" for="d-ta">Prompt template</label>
+        <textarea id="d-ta" class="textarea" rows="3">You generate tag-style snippets for the {category} category. {categoryRules}</textarea>
+        <div style="height:16px"></div>
+        <label class="field-label">Temperature · 0.90</label>
+        <input type="range" min="0" max="2" step="0.05" value="0.9">
+      </div>
+    </div>
+
+    <div style="height:22px"></div>
+
+    <div class="cols c3">
+      <div class="panel p2">
+        <span class="panel-label">Toggles</span>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <span class="toggle on"><span class="track"></span><span>Lock general</span></span>
+          <span class="toggle"><span class="track"></span><span>AI coherence</span></span>
+          <span class="toggle on"><span class="track"></span><span>Structured out</span></span>
+        </div>
+      </div>
+      <div class="panel p2">
+        <span class="panel-label">Badges</span>
+        <div class="badges">
+          <span class="badge solid">AI</span>
+          <span class="badge">Manual</span>
+          <span class="badge">Scenario</span>
+          <span class="badge">Clothing</span>
+          <span class="badge dash">Unsaved</span>
+          <span class="badge warn"><svg><use href="#i-warn"/></svg> Empty lib</span>
+        </div>
+      </div>
+      <div class="panel p2">
+        <span class="panel-label">Readouts</span>
+        <div class="readout">
+          <div class="metric"><b>47</b><span>Presets</span></div>
+          <div>
+            <div class="mono-note" style="margin-bottom:6px">Variation budget</div>
+            <div class="bar"><i style="width:64%"></i></div>
+          </div>
+          <div class="score"><span class="k">HI SCORE</span><span class="v">19 009 304</span></div>
+          <div class="hearts"><svg><use href="#i-heart"/></svg><svg><use href="#i-heart"/></svg><svg class="empty"><use href="#i-heart"/></svg></div>
+        </div>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- ===== 03 CONSOLE ===== -->
+  <section class="block"><div class="wrap">
+    <div class="sec-head">
+      <span class="id">§03</span>
+      <h2>Operator Console</h2>
+      <span class="rule"></span>
+      <span class="status">Decorative</span>
+    </div>
+    <p class="prose">The full-HUD register - reserved for heroes, empty states, and section furniture. Gauges, gain sliders, D-pad, and pixel lives set the arcade tone without cluttering the working surfaces.</p>
+    <div style="height:26px"></div>
+
+    <div class="panel brk" style="padding:34px">
+      <div class="console">
+        <div class="col">
+          <div class="gauge">
+            <svg viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="52" fill="none" stroke="var(--line)" stroke-width="1"/>
+              <circle cx="60" cy="60" r="44" fill="none" stroke="var(--gray-300)" stroke-width="7" stroke-dasharray="207 277" transform="rotate(135 60 60)"/>
+              <circle cx="60" cy="60" r="44" fill="none" stroke="var(--ink)" stroke-width="7" stroke-dasharray="186 277" transform="rotate(135 60 60)"/>
+            </svg>
+            <div class="lbl"><b>0.90</b><span>Temp</span></div>
+          </div>
+          <span class="cap">Sampler</span>
+        </div>
+
+        <div class="col">
+          <div style="display:flex;gap:12px">
+            <div class="gain"><i style="background:var(--ink)"></i><i style="background:var(--gray-500)"></i><i style="background:var(--gray-400)"></i><i style="background:var(--gray-300)"></i><i style="background:var(--gray-200)"></i></div>
+            <div class="gain"><i style="background:var(--gray-400)"></i><i style="background:var(--ink)"></i><i style="background:var(--gray-400)"></i><i style="background:var(--gray-300)"></i><i style="background:var(--gray-200)"></i></div>
+          </div>
+          <span class="cap">Gain</span>
+        </div>
+
+        <div class="col">
+          <svg class="dpad" viewBox="0 0 96 96"><path d="M36 6h24v30h30v24H60v30H36V60H6V36h30z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="48" cy="48" r="11" fill="none" stroke="currentColor" stroke-width="2"/><path d="M48 15l-6 9h12zM48 81l-6-9h12zM15 48l9-6v12zM81 48l-9-6v12z" fill="currentColor"/></svg>
+          <span class="cap">Navigate</span>
+        </div>
+
+        <div class="col">
+          <svg class="abtn" viewBox="0 0 84 84"><circle cx="42" cy="16" r="12" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="68" cy="42" r="12" fill="currentColor"/><circle cx="16" cy="42" r="12" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="42" cy="68" r="12" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          <span class="cap">Action</span>
+        </div>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- ===== 04 APPLICATION ===== -->
+  <section class="block"><div class="wrap">
+    <div class="sec-head">
+      <span class="id">§04</span>
+      <h2>In Application</h2>
+      <span class="rule"></span>
+      <span class="status"><span class="dot"></span> Prompt Assembly</span>
+    </div>
+    <p class="prose">The system applied to SDPromptGen's generator - full-HUD frame around the module, restrained and legible inside the dense slot list. Each category is a slot you copy, reroll, or lock.</p>
+    <div style="height:26px"></div>
+
+    <div class="panel brk" style="padding:26px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px">
+        <span class="mono-note">MODULE // PROMPT ASSEMBLY</span>
+        <span class="mono-note">SEED <b style="color:var(--ink)">19009304</b></span>
+      </div>
+
+      <div class="gen">
+        <div class="slot locked">
+          <div class="meta"><span class="n">SLOT 01 · LOCKED</span><span class="cat">General</span></div>
+          <div class="tags">masterpiece, best quality, highres, absurdres</div>
+          <div class="ctrl">
+            <button class="iconbtn" type="button" title="Copy"><svg><use href="#i-copy"/></svg></button>
+            <button class="iconbtn" type="button" title="Reroll"><svg><use href="#i-dice"/></svg></button>
+            <button class="iconbtn on" type="button" title="Locked"><svg><use href="#i-lock"/></svg></button>
+          </div>
+        </div>
+        <div class="slot">
+          <div class="meta"><span class="n">SLOT 02</span><span class="cat">Scenario</span></div>
+          <div class="tags">1girl, solo, standing, park, day</div>
+          <div class="ctrl">
+            <button class="iconbtn" type="button" title="Copy"><svg><use href="#i-copy"/></svg></button>
+            <button class="iconbtn" type="button" title="Reroll"><svg><use href="#i-dice"/></svg></button>
+            <button class="iconbtn" type="button" title="Unlocked"><svg><use href="#i-unlock"/></svg></button>
+          </div>
+        </div>
+        <div class="slot">
+          <div class="meta"><span class="n">SLOT 03</span><span class="cat">Appearance</span></div>
+          <div class="tags">long brown hair, brown eyes, cheerful</div>
+          <div class="ctrl">
+            <button class="iconbtn" type="button" title="Copy"><svg><use href="#i-copy"/></svg></button>
+            <button class="iconbtn" type="button" title="Reroll"><svg><use href="#i-dice"/></svg></button>
+            <button class="iconbtn" type="button" title="Unlocked"><svg><use href="#i-unlock"/></svg></button>
+          </div>
+        </div>
+        <div class="slot">
+          <div class="meta"><span class="n">SLOT 04</span><span class="cat">Clothing</span></div>
+          <div class="tags">t-shirt, jeans, sneakers</div>
+          <div class="ctrl">
+            <button class="iconbtn" type="button" title="Copy"><svg><use href="#i-copy"/></svg></button>
+            <button class="iconbtn" type="button" title="Reroll"><svg><use href="#i-dice"/></svg></button>
+            <button class="iconbtn" type="button" title="Unlocked"><svg><use href="#i-unlock"/></svg></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="out">
+        <div class="block">
+          <div class="h"><span>Sections</span><svg width="13" height="13" style="color:var(--gray-400)"><use href="#i-copy"/></svg></div>
+          <pre>general: masterpiece, best quality, highres, absurdres
+
+scenario: 1girl, solo, standing, park, day
+
+appearance: long brown hair, brown eyes, cheerful
+
+clothing: t-shirt, jeans, sneakers</pre>
+        </div>
+        <div class="block">
+          <div class="h"><span>Merged</span><svg width="13" height="13" style="color:var(--gray-400)"><use href="#i-copy"/></svg></div>
+          <pre>masterpiece, best quality, highres, absurdres,
+
+1girl, solo, standing, park, day,
+
+long brown hair, brown eyes, cheerful,
+
+t-shirt, jeans, sneakers</pre>
+        </div>
+      </div>
+
+      <div class="gen-actions">
+        <button class="btn solid" type="button"><svg><use href="#i-chevL"/></svg> Reroll Unlocked <svg><use href="#i-chevR"/></svg></button>
+      </div>
+    </div>
+  </div></section>
+</main>
+
+<footer><div class="wrap">
+  <div class="foot">
+    <span>SDPG-HUD · Design System · REV 02</span>
+    <span class="end"><svg width="14" height="14"><use href="#i-target"/></svg> END OF LINE</span>
+    <span>Monochrome · No chroma · 2 grounds</span>
+  </div>
+</div></footer>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    if (location.hash === "#light" || location.hash === "#dark") {
+      root.setAttribute("data-theme", location.hash.slice(1));
+    }
+    document.querySelectorAll("[data-toggle-theme]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var cur = root.getAttribute("data-theme");
+        if (!cur) cur = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        root.setAttribute("data-theme", cur === "dark" ? "light" : "dark");
+      });
+    });
+    // demo toggles + lock buttons flip their own state (showcase only)
+    document.querySelectorAll(".toggle").forEach(function (t) {
+      t.setAttribute("role", "switch");
+      t.tabIndex = 0;
+      function flip() { t.classList.toggle("on"); }
+      t.addEventListener("click", flip);
+      t.addEventListener("keydown", function (e) { if (e.key === " " || e.key === "Enter") { e.preventDefault(); flip(); } });
+    });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+/*
+Chaguan's entrance card on the root portal. Scoped to .sys-cha; loaded by the
+portal only. Mirrors the Chaguan tokens by value: caramel mount, cream hero
+poster with a sun disc and ink teapot, brush CJK display, service tiles, one
+vermilion seal, coffee-brown door button.
+*/
+
+.sys-cha {
+  background: #b08d63;
+  color: #2a2620;
+  font-family: -apple-system, "PingFang SC", "Noto Sans SC", "Segoe UI", sans-serif;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+
+/* the cream hero poster */
+.sys-cha .poster {
+  position: relative;
+  background: #f0e8d3;
+  border-radius: 10px;
+  padding: 14px 14px 12px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.sys-cha .poster .sun {
+  position: absolute;
+  right: 18px;
+  top: 12px;
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  background: rgba(201, 163, 95, 0.45);
+}
+
+.sys-cha .poster .pot {
+  position: absolute;
+  right: 22px;
+  top: 26px;
+  width: 66px;
+  height: 52px;
+  color: #2a2620;
+}
+
+.sys-cha h3 {
+  margin: 0;
+  font-family: "Ma Shan Zheng", "Kaiti SC", "STKaiti", cursive;
+  font-weight: 400;
+  font-size: 2.1rem;
+  line-height: 1.15;
+  writing-mode: vertical-rl;
+  letter-spacing: 0.12em;
+  min-height: 84px;
+}
+
+.sys-cha .latin {
+  display: block;
+  margin-top: 8px;
+  font-family: Georgia, serif;
+  font-size: 0.56rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #4a3421;
+}
+
+.sys-cha .poster .seal {
+  position: absolute;
+  left: 46px;
+  top: 16px;
+  width: 15px;
+  height: 15px;
+  border-radius: 2px;
+  background: #b5442c;
+}
+
+.sys-cha .poster .seal::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 1px solid rgba(251, 248, 240, 0.9);
+}
+
+/* service tiles */
+.sys-cha .tiles {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.sys-cha .tile {
+  flex: 1;
+  background: #e8ddc4;
+  border-radius: 12px;
+  padding: 8px 4px 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: #4a3421;
+}
+
+.sys-cha .tile svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sys-cha .tile span {
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+}
+
+.sys-cha p {
+  margin: 0 0 12px;
+  flex: 1;
+  font-size: 0.76rem;
+  line-height: 1.6;
+  color: #2a2620;
+}
+
+.sys-cha .status {
+  font-size: 0.58rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-family: Georgia, serif;
+  color: #4a3421;
+  margin-bottom: 8px;
+}
+
+.sys-cha .enter {
+  align-self: stretch;
+  text-align: center;
+  background: #4a3421;
+  color: #f0e8d3;
+  border-radius: 999px;
+  padding: 10px 16px;
+  text-decoration: none;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  transition: transform 0.1s ease, background 0.1s ease;
+}
+
+.sys-cha .enter:hover { background: #5b422b; }
+
+.sys-cha .enter:active { transform: translateY(1px); }
+
+.sys-cha .enter:focus-visible {
+  outline: 2px solid #4a3421;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sys-cha .enter { transition: none; }
+}

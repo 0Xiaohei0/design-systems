@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+THESIS: The phone as a plush desk toy - one warm greige material, every widget a
+soft extruded pillow, depth from light and never from lines.
+OWN-WORLD: Warm neumorphism crossed with Chinese cute-widget home screens: muted
+pastel plates, a flip clock, pill gauges, a ">u<" face, bilingual labels, gold
+only as tiny accents. No borders, no black, no hard edges.
+STORY: A designer scrolls: the lovingly themed home screen first, then paint
+chips, the raised/pressed material rule, each motif isolated, every component
+state, and a music player assembled from the kit.
+FIRST VIEWPORT: Wordmark and two-sentence idea beside the full phone panel -
+flip clock 08:08, Netease card, analog clock at 10:08, two pill gauges,
+birthday ring, kawaii face, chat bubbles, dock, page dots.
+FORM: Read-mode catalog; direction pinned by the client 2026-08-03; the focus
+ring is the only outline; contrast verified.
+-->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MOCHI 麻薯 - Soft Widget System</title>
+  <link rel="stylesheet" href="css/mochi-core.css" />
+</head>
+<body>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <!-- kawaii ">u<" blush face -->
+      <symbol id="g-face" viewBox="0 0 150 56">
+        <path d="M40 16 L52 26 L40 36" fill="none" stroke="#5d574e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M110 16 L98 26 L110 36" fill="none" stroke="#5d574e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M68 24 C69.5 31.5 80.5 31.5 82 24" fill="none" stroke="#5d574e" stroke-width="5" stroke-linecap="round" />
+        <ellipse class="blush" cx="27" cy="37" rx="9" ry="5" fill="#d698a0" opacity="0.85" />
+        <ellipse class="blush" cx="123" cy="37" rx="9" ry="5" fill="#d698a0" opacity="0.85" />
+      </symbol>
+
+      <!-- app glyphs: 2-3 muted colors, rounded strokes -->
+      <symbol id="g-note" viewBox="0 0 48 48">
+        <circle cx="17" cy="33" r="6" fill="currentColor" />
+        <path d="M23 33 V13 l11 3.5" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="g-phone" viewBox="0 0 24 24">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke="#fbfaf7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="g-chat" viewBox="0 0 48 48">
+        <rect x="6" y="9" width="27" height="18" rx="9" fill="#fbfaf7" />
+        <path d="M12 26 v6 l7 -6 z" fill="#fbfaf7" />
+        <rect x="24" y="24" width="19" height="13" rx="6.5" fill="#3e5c68" />
+        <path d="M38 36 v5 l-5.5 -5 z" fill="#3e5c68" />
+      </symbol>
+      <symbol id="g-camera" viewBox="0 0 48 48">
+        <path d="M18.5 14 l2.6-3.6 h5.8 l2.6 3.6" fill="none" stroke="#3e5c68" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+        <rect x="7" y="14" width="34" height="23" rx="7" fill="#3e5c68" />
+        <circle cx="24" cy="25.5" r="8" fill="#fbfaf7" />
+        <circle cx="24" cy="25.5" r="4.2" fill="#8fb5a4" />
+        <circle cx="36" cy="19.5" r="1.9" fill="#d4a94e" />
+      </symbol>
+      <symbol id="g-flower" viewBox="0 0 48 48">
+        <circle cx="24" cy="14.5" r="6.6" fill="#fbfaf7" />
+        <circle cx="33.1" cy="21.1" r="6.6" fill="#fbfaf7" />
+        <circle cx="29.6" cy="31.8" r="6.6" fill="#fbfaf7" />
+        <circle cx="18.4" cy="31.8" r="6.6" fill="#fbfaf7" />
+        <circle cx="14.9" cy="21.1" r="6.6" fill="#fbfaf7" />
+        <circle cx="24" cy="23.5" r="5" fill="#d4a94e" />
+      </symbol>
+      <symbol id="g-penguin" viewBox="0 0 48 48">
+        <ellipse cx="24" cy="26" rx="13.5" ry="15.5" fill="#3e5c68" />
+        <ellipse cx="24" cy="30.5" rx="8.6" ry="9.6" fill="#fbfaf7" />
+        <circle cx="19.5" cy="18.5" r="1.9" fill="#fbfaf7" />
+        <circle cx="28.5" cy="18.5" r="1.9" fill="#fbfaf7" />
+        <path d="M21.4 22 h5.2 l-2.6 3.4 z" fill="#d4a94e" />
+        <ellipse cx="14.8" cy="22.6" rx="2.5" ry="1.6" fill="#d698a0" />
+        <ellipse cx="33.2" cy="22.6" rx="2.5" ry="1.6" fill="#d698a0" />
+        <ellipse cx="17.5" cy="41" rx="3.6" ry="2" fill="#d4a94e" />
+        <ellipse cx="30.5" cy="41" rx="3.6" ry="2" fill="#d4a94e" />
+      </symbol>
+      <symbol id="g-chev" viewBox="0 0 24 24">
+        <path d="M9.5 6.5 L15 12 L9.5 17.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="g-prev" viewBox="0 0 24 24">
+        <path d="M17 6.5 v11 L9.5 12 Z M7 6.8 V17.2" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="g-play" viewBox="0 0 24 24">
+        <path d="M8.5 6 L18 12 L8.5 18 Z" fill="currentColor" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="g-next" viewBox="0 0 24 24">
+        <path d="M7 6.5 v11 L14.5 12 Z M17 6.8 V17.2" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+    </defs>
+  </svg>
+
+  <div class="page">
+
+    <!-- ============ HERO ============ -->
+    <header class="hero">
+      <div class="hero-copy">
+        <h1>MOCHI <span class="zh" lang="zh-CN">麻薯</span></h1>
+        <p class="tag">
+          The phone as a plush desk toy. Every widget is a soft pillow pressed
+          from one warm greige material - depth comes from light, never from
+          lines, and every label speaks Chinese first with English nearby.
+        </p>
+        <nav class="nav-chips" aria-label="Sections">
+          <a class="btn btn-sm" href="#foundations">基础 Foundations</a>
+          <a class="btn btn-sm" href="#material">材质 Material</a>
+          <a class="btn btn-sm" href="#motifs">母题 Motifs</a>
+          <a class="btn btn-sm" href="#components">组件 Components</a>
+          <a class="btn btn-sm" href="#application">应用 In application</a>
+        </nav>
+      </div>
+
+      <div class="phone">
+        <div class="phone-grid">
+
+          <!-- flip clock -->
+          <div class="widget c4">
+            <div class="flip">
+              <time class="tile" datetime="08:08">08</time>
+              <span class="colon" aria-hidden="true"><i></i><i></i></span>
+              <span class="tile">08</span>
+            </div>
+            <div class="flip-date">
+              <span lang="zh-CN">07月25日 星期四</span>
+              <span class="pill">Wednesday</span>
+            </div>
+          </div>
+
+          <!-- music card -->
+          <div class="music-card c4">
+            <span class="roundel"><svg aria-hidden="true"><use href="#g-note" /></svg></span>
+            <div>
+              <div class="t" lang="zh-CN">网易云音乐</div>
+              <div class="s">Netease Cloud</div>
+            </div>
+          </div>
+
+          <!-- analog clock -->
+          <div class="widget c2" style="display:grid; place-items:center;">
+            <div class="aclock" role="img" aria-label="模拟时钟 Analog clock, 10:08">
+              <i class="dot q" style="transform:rotate(0deg) translateY(-49px)"></i>
+              <i class="dot" style="transform:rotate(30deg) translateY(-49px)"></i>
+              <i class="dot" style="transform:rotate(60deg) translateY(-49px)"></i>
+              <i class="dot q" style="transform:rotate(90deg) translateY(-49px)"></i>
+              <i class="dot" style="transform:rotate(120deg) translateY(-49px)"></i>
+              <i class="dot" style="transform:rotate(150deg) translateY(-49px)"></i>
+              <i class="dot q" style="transform:rotate(180deg) translateY(-49px)"></i>
+              <i class="dot" style="transform:rotate(210deg) translateY(-49px)"></i>
+              <i class="dot" style="transform:rotate(240deg) translateY(-49px)"></i>
+              <i class="dot q" style="transform:rotate(270deg) translateY(-49px)"></i>
+              <i class="dot" style="transform:rotate(300deg) translateY(-49px)"></i>
+              <i class="dot" style="transform:rotate(330deg) translateY(-49px)"></i>
+              <i class="hand h" style="transform:rotate(304deg)"></i>
+              <i class="hand m" style="transform:rotate(48deg)"></i>
+              <i class="cap-dot"></i>
+            </div>
+          </div>
+
+          <!-- pill gauges -->
+          <div class="pgauge" role="img" aria-label="电量剩余 Battery remaining 100%" style="--v:100%; --liquid:var(--sage-deep);">
+            <div class="fill"></div>
+            <div class="txt"><span class="num">100%</span><span class="lbl" lang="zh-CN">电量剩余</span></div>
+          </div>
+          <div class="pgauge" role="img" aria-label="今年剩余 Year remaining 41%" style="--v:41%; --liquid:var(--blue-deep);">
+            <div class="fill"></div>
+            <div class="txt"><span class="num">41%</span><span class="lbl" lang="zh-CN">今年剩余</span></div>
+          </div>
+
+          <!-- birthday countdown ring -->
+          <div class="widget c2" style="display:grid; place-items:center;">
+            <div class="ring-gauge" role="img" aria-label="生日倒计时 Birthday countdown, 124 天">
+              <svg viewBox="0 0 128 128" aria-hidden="true">
+                <circle class="track" cx="64" cy="64" r="56" fill="none" stroke-width="12" />
+                <circle class="arc" cx="64" cy="64" r="56" fill="none" stroke-width="12" stroke-dasharray="232 352" />
+              </svg>
+              <div class="center">
+                <span class="lbl" lang="zh-CN">生日倒计时</span>
+                <span class="num" lang="zh-CN">0124 天</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- chat mini widget -->
+          <div class="widget c2">
+            <p class="cap" style="font-size:12px; margin-bottom:10px;">消息 Chats</p>
+            <div class="chat-bubbles">
+              <span class="bub" lang="zh-CN">今天喝奶茶吗？</span>
+              <span class="bub me" lang="zh-CN">好呀 &gt;u&lt;</span>
+            </div>
+          </div>
+
+          <!-- kawaii face plate -->
+          <div class="face-plate c4">
+            <svg width="150" height="56" viewBox="0 0 150 56" role="img" aria-label="害羞的笑脸 Blushing happy face">
+              <path d="M40 16 L52 26 L40 36" fill="none" stroke="#5d574e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M110 16 L98 26 L110 36" fill="none" stroke="#5d574e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M68 24 C69.5 31.5 80.5 31.5 82 24" fill="none" stroke="#5d574e" stroke-width="5" stroke-linecap="round" />
+              <ellipse class="blush" cx="27" cy="37" rx="9" ry="5" fill="#d698a0" opacity="0.85" />
+              <ellipse class="blush" cx="123" cy="37" rx="9" ry="5" fill="#d698a0" opacity="0.85" />
+            </svg>
+          </div>
+
+          <!-- page dots -->
+          <div class="page-dots c4" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+
+          <!-- dock -->
+          <div class="dock">
+            <button class="app sage" type="button" aria-label="电话 Phone"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#g-phone" /></svg></button>
+            <button class="app blue" type="button" aria-label="聊天 Chat"><svg aria-hidden="true"><use href="#g-chat" /></svg></button>
+            <button class="app peach" type="button" aria-label="相机 Camera"><svg aria-hidden="true"><use href="#g-camera" /></svg></button>
+            <button class="app rose" type="button" aria-label="相册 Gallery"><svg aria-hidden="true"><use href="#g-flower" /></svg></button>
+          </div>
+
+        </div>
+      </div>
+    </header>
+
+    <main style="display:grid; gap:40px;">
+
+      <!-- ============ FOUNDATIONS ============ -->
+      <section class="widget" id="foundations" aria-labelledby="foundations-h">
+        <h2 id="foundations-h" lang="zh-CN">基础<span class="en" lang="en">Foundations</span></h2>
+        <p class="lede">One warm material, four pastels, one deep teal. Nothing is pure black or pure gray.</p>
+
+        <h3>材质中性 Material neutrals</h3>
+        <div class="spec-grid">
+          <div class="paint-chip"><div class="swatch" style="background:var(--ground)"></div><span class="cap">ground 地色</span><span class="hex">#ece9e2</span></div>
+          <div class="paint-chip"><div class="swatch" style="background:var(--plate)"></div><span class="cap">plate 内板</span><span class="hex">#f7f5f0</span></div>
+          <div class="paint-chip"><div class="swatch" style="background:var(--ink)"></div><span class="cap">ink 墨</span><span class="hex">#5d574e</span></div>
+          <div class="paint-chip"><div class="swatch" style="background:var(--ink-soft)"></div><span class="cap">ink-soft 淡墨</span><span class="hex">#6b665c</span></div>
+          <div class="paint-chip"><div class="swatch" style="background:var(--white)"></div><span class="cap">white 奶白</span><span class="hex">#fbfaf7</span></div>
+        </div>
+
+        <h3>粉彩 Pastels - fills and decoration only</h3>
+        <div class="spec-grid">
+          <div class="paint-chip"><div class="swatch" style="background:var(--blue)"></div><span class="cap">blue 雾蓝</span><span class="hex">#93a9cb</span></div>
+          <div class="paint-chip"><div class="swatch" style="background:var(--rose)"></div><span class="cap">rose 藕粉</span><span class="hex">#d698a0</span></div>
+          <div class="paint-chip"><div class="swatch" style="background:var(--sage)"></div><span class="cap">sage 抹茶</span><span class="hex">#8fb5a4</span></div>
+          <div class="paint-chip"><div class="swatch" style="background:var(--peach)"></div><span class="cap">peach 奶杏</span><span class="hex">#e5c39c</span></div>
+        </div>
+
+        <h3>加深粉彩 Deepened - the only pastels that carry white text (large-bold)</h3>
+        <div class="spec-grid">
+          <div class="paint-chip"><div class="swatch" style="background:var(--blue-deep)"></div><span class="cap">blue-deep</span><span class="hex">#6d87b1</span></div>
+          <div class="paint-chip"><div class="swatch" style="background:var(--rose-deep)"></div><span class="cap">rose-deep</span><span class="hex">#bd747f</span></div>
+          <div class="paint-chip"><div class="swatch" style="background:var(--sage-deep)"></div><span class="cap">sage-deep</span><span class="hex">#679181</span></div>
+        </div>
+
+        <h3>浅粉彩 Light tints - the pastels that carry small ink text</h3>
+        <div class="spec-grid">
+          <div class="paint-chip"><div class="swatch" style="background:var(--blue-lt)"></div><span class="cap">blue-lt</span><span class="hex">#c9d4e6</span></div>
+          <div class="paint-chip"><div class="swatch" style="background:var(--rose-lt)"></div><span class="cap">rose-lt</span><span class="hex">#eccfd3</span></div>
+          <div class="paint-chip"><div class="swatch" style="background:var(--sage-lt)"></div><span class="cap">sage-lt</span><span class="hex">#cfdfd7</span></div>
+          <div class="paint-chip"><div class="swatch" style="background:var(--peach-lt)"></div><span class="cap">peach-lt</span><span class="hex">#f2dfc8</span></div>
+        </div>
+
+        <h3>深与金 Deep and gold - used sparingly</h3>
+        <div class="spec-grid">
+          <div class="paint-chip"><div class="swatch" style="background:var(--deep)"></div><span class="cap">deep 墨青</span><span class="hex">#3e5c68</span></div>
+          <div class="paint-chip"><div class="swatch" style="background:var(--gold)"></div><span class="cap">gold 麦金</span><span class="hex">#d4a94e</span></div>
+        </div>
+
+        <h3>字号 Type scale - one rounded voice</h3>
+        <div class="type-row"><span class="spec-note">62 / 700 - widget digits</span><span style="font-size:62px; font-weight:700; font-variant-numeric:tabular-nums; line-height:1;">08:08</span></div>
+        <div class="type-row"><span class="spec-note">26 / 700 - section title</span><span style="font-size:26px; font-weight:700;" lang="zh-CN">生日倒计时 Countdown</span></div>
+        <div class="type-row"><span class="spec-note">17 / 400 - lead body</span><span style="font-size:17px;">Soft things ask to be touched. 软软的东西让人想摸一下。</span></div>
+        <div class="type-row"><span class="spec-note">15 / 400 - body</span><span style="font-size:15px;">Every label speaks Chinese first, with English nearby.</span></div>
+        <div class="type-row"><span class="spec-note">13 / 600 - label (ink-soft)</span><span class="cap" style="font-weight:600;" lang="zh-CN">电量剩余 Battery</span></div>
+        <div class="type-row"><span class="spec-note">12 / 600 - caption floor</span><span class="cap" style="font-size:12px; font-weight:600;" lang="zh-CN">星期四 Wednesday</span></div>
+      </section>
+
+      <!-- ============ MATERIAL ============ -->
+      <section class="widget" id="material" aria-labelledby="material-h">
+        <h2 id="material-h" lang="zh-CN">材质<span class="en" lang="en">The material</span></h2>
+        <p class="lede">One soft body, two states. Raised at rest, pressed when active - 120ms ease-out on box-shadow.</p>
+
+        <div class="spec-grid" style="grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));">
+          <div class="spec">
+            <div class="stage" style="box-shadow:none; padding:34px 20px;">
+              <div class="m-raised" style="width:120px; height:120px;"></div>
+            </div>
+            <span class="cap"><strong>raised 凸起</strong> - rest<br /><code class="soft">-6px -6px 14px #fff.85, 7px 7px 16px #a69e90.42</code></span>
+          </div>
+          <div class="spec">
+            <div class="stage" style="box-shadow:none; padding:34px 20px;">
+              <div class="m-pressed" style="width:120px; height:120px;"></div>
+            </div>
+            <span class="cap"><strong>pressed 按下</strong> - active<br /><code class="soft">inset -4px -4px 10px #fff.8, inset 5px 5px 12px #a69e90.4</code></span>
+          </div>
+          <div class="spec">
+            <div class="stage" style="box-shadow:none; padding:34px 20px;">
+              <div class="plate" style="width:120px; height:120px; background:var(--rose-lt);"></div>
+            </div>
+            <span class="cap"><strong>plate 色板</strong> - flat pastel fill inside a widget, soft small shadow</span>
+          </div>
+        </div>
+
+        <h3>可以 / 不可以 Do / Don't</h3>
+        <div class="spec-grid" style="grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));">
+          <div class="spec">
+            <div class="stage">
+              <div class="widget" style="width:100%; text-align:center;">
+                <p style="font-weight:600;" lang="zh-CN">用光做深度</p>
+                <p class="cap">Depth from light. Same color as the page.</p>
+              </div>
+            </div>
+            <span class="cap"><span class="tag-do">DO 可以</span></span>
+          </div>
+          <div class="spec">
+            <div class="stage">
+              <div class="anti-card" style="width:100%; text-align:center;">
+                <p style="font-weight:600;">Outlined card</p>
+                <p style="font-size:13px;">Border, hard shadow, cool gray - everything MOCHI is not.</p>
+              </div>
+            </div>
+            <span class="cap"><span class="tag-dont">DON'T 不可以</span> borders, hard edges, pure gray</span>
+          </div>
+        </div>
+
+        <ul class="cap" style="margin-top:22px; padding-left:20px; display:grid; gap:6px; max-width:62ch;">
+          <li>No outlines anywhere - the 2px <code class="soft">--deep</code> focus ring is the single exception.</li>
+          <li>Light always comes from the top-left; never flip a shadow.</li>
+          <li>One dark plate color only: <code class="soft">--deep</code>, reserved for the clock face and rare dark plates.</li>
+          <li>White text only on <code class="soft">--deep</code> or on deepened pastels at large-bold sizes; small text on pastel uses ink on the light tints.</li>
+        </ul>
+      </section>
+
+      <!-- ============ MOTIFS ============ -->
+      <section class="widget" id="motifs" aria-labelledby="motifs-h">
+        <h2 id="motifs-h" lang="zh-CN">母题<span class="en" lang="en">Motifs</span></h2>
+        <p class="lede">The recurring pieces of the home screen, each isolated on a pressed tray.</p>
+
+        <div class="spec-grid" style="grid-template-columns:repeat(auto-fill, minmax(210px, 1fr));">
+          <div class="spec">
+            <div class="stage"><div class="widget" style="width:82%; height:88px;"></div></div>
+            <span class="cap"><strong>widget 小组件</strong> - the only container</span>
+          </div>
+          <div class="spec">
+            <div class="stage">
+              <div class="flip" style="width:100%;">
+                <span class="tile" style="font-size:40px; padding:8px 0;">10</span>
+                <span class="colon" aria-hidden="true"><i></i><i></i></span>
+                <span class="tile" style="font-size:40px; padding:8px 0;">08</span>
+              </div>
+            </div>
+            <span class="cap"><strong>flip-clock 翻页钟</strong> - plate tiles, blinking colon</span>
+          </div>
+          <div class="spec">
+            <div class="stage" style="padding:16px;">
+              <div class="pgauge" role="img" aria-label="电量剩余 Battery remaining 72%" style="--v:72%; --liquid:var(--rose-deep); width:74px; min-height:168px;">
+                <div class="fill"></div>
+                <div class="txt"><span class="num">72%</span><span class="lbl" lang="zh-CN">电量剩余</span></div>
+              </div>
+            </div>
+            <span class="cap"><strong>pill gauge 药丸量表</strong> - pressed track, liquid fill</span>
+          </div>
+          <div class="spec">
+            <div class="stage" style="padding:24px;">
+              <div class="aclock" role="img" aria-label="模拟时钟 Analog clock, 10:08">
+                <i class="dot q" style="transform:rotate(0deg) translateY(-49px)"></i>
+                <i class="dot" style="transform:rotate(30deg) translateY(-49px)"></i>
+                <i class="dot" style="transform:rotate(60deg) translateY(-49px)"></i>
+                <i class="dot q" style="transform:rotate(90deg) translateY(-49px)"></i>
+                <i class="dot" style="transform:rotate(120deg) translateY(-49px)"></i>
+                <i class="dot" style="transform:rotate(150deg) translateY(-49px)"></i>
+                <i class="dot q" style="transform:rotate(180deg) translateY(-49px)"></i>
+                <i class="dot" style="transform:rotate(210deg) translateY(-49px)"></i>
+                <i class="dot" style="transform:rotate(240deg) translateY(-49px)"></i>
+                <i class="dot q" style="transform:rotate(270deg) translateY(-49px)"></i>
+                <i class="dot" style="transform:rotate(300deg) translateY(-49px)"></i>
+                <i class="dot" style="transform:rotate(330deg) translateY(-49px)"></i>
+                <i class="hand h" style="transform:rotate(304deg)"></i>
+                <i class="hand m" style="transform:rotate(48deg)"></i>
+                <i class="cap-dot"></i>
+              </div>
+            </div>
+            <span class="cap"><strong>analog clock 表盘</strong> - the deep-teal plate, gold dots</span>
+          </div>
+          <div class="spec">
+            <div class="stage" style="padding:24px;">
+              <div class="ring-gauge" role="img" aria-label="生日倒计时 Birthday countdown, 124 天">
+                <svg viewBox="0 0 128 128" aria-hidden="true">
+                  <circle class="track" cx="64" cy="64" r="56" fill="none" stroke-width="12" />
+                  <circle class="arc" cx="64" cy="64" r="56" fill="none" stroke-width="12" stroke-dasharray="232 352" />
+                </svg>
+                <div class="center">
+                  <span class="lbl" lang="zh-CN">生日倒计时</span>
+                  <span class="num" lang="zh-CN">0124 天</span>
+                </div>
+              </div>
+            </div>
+            <span class="cap"><strong>ring gauge 圆环</strong> - blue arc, rounded caps</span>
+          </div>
+          <div class="spec">
+            <div class="stage" style="padding:16px;">
+              <div class="face-plate" style="width:100%;">
+                <svg width="150" height="56" viewBox="0 0 150 56" role="img" aria-label="害羞的笑脸 Blushing happy face">
+                  <path d="M40 16 L52 26 L40 36" fill="none" stroke="#5d574e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M110 16 L98 26 L110 36" fill="none" stroke="#5d574e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M68 24 C69.5 31.5 80.5 31.5 82 24" fill="none" stroke="#5d574e" stroke-width="5" stroke-linecap="round" />
+                  <ellipse class="blush" cx="27" cy="37" rx="9" ry="5" fill="#d698a0" opacity="0.85" />
+                  <ellipse class="blush" cx="123" cy="37" rx="9" ry="5" fill="#d698a0" opacity="0.85" />
+                </svg>
+              </div>
+            </div>
+            <span class="cap"><strong>kawaii face 脸蛋</strong> - blush fades in on hover</span>
+          </div>
+          <div class="spec">
+            <div class="stage" style="gap:12px; grid-auto-flow:column;">
+              <button class="app plate-bg" type="button" aria-label="企鹅 Penguin"><svg aria-hidden="true"><use href="#g-penguin" /></svg></button>
+              <button class="app rose" type="button" aria-label="小花 Flower"><svg aria-hidden="true"><use href="#g-flower" /></svg></button>
+              <button class="app peach" type="button" aria-label="相机 Camera"><svg aria-hidden="true"><use href="#g-camera" /></svg></button>
+            </div>
+            <span class="cap"><strong>app squircle 图标</strong> - raised, pastel fill, cute glyph</span>
+          </div>
+          <div class="spec">
+            <div class="stage" style="gap:12px; grid-auto-flow:column;">
+              <button class="app sage" type="button" aria-label="电话 Phone"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#g-phone" /></svg></button>
+              <button class="app blue" type="button" aria-label="聊天 Chat"><svg aria-hidden="true"><use href="#g-chat" /></svg></button>
+            </div>
+            <span class="cap">glyphs stay 2-3 muted colors, strokes rounded</span>
+          </div>
+          <div class="spec">
+            <div class="stage" style="padding:16px;">
+              <div class="music-card" style="width:100%;">
+                <span class="roundel"><svg aria-hidden="true"><use href="#g-note" /></svg></span>
+                <div>
+                  <div class="t" lang="zh-CN">网易云音乐</div>
+                  <div class="s">Netease Cloud</div>
+                </div>
+              </div>
+            </div>
+            <span class="cap"><strong>music card 音乐卡</strong> - white bold on rose-deep</span>
+          </div>
+          <div class="spec">
+            <div class="stage"><div class="page-dots" aria-hidden="true"><i class="on"></i><i></i><i></i></div></div>
+            <span class="cap"><strong>page dots 页点</strong> - one rose, rest greige</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ COMPONENTS ============ -->
+      <section class="widget" id="components" aria-labelledby="components-h">
+        <h2 id="components-h" lang="zh-CN">组件<span class="en" lang="en">Components</span></h2>
+        <p class="lede">Every interactive element is raised at rest and pressed when active. Try them - they are live.</p>
+
+        <h3>按钮 Buttons</h3>
+        <div class="spec-grid" style="grid-template-columns:repeat(auto-fill, minmax(160px, 1fr));">
+          <div class="spec"><div class="stage"><button class="btn" type="button" lang="zh-CN">保存 Save</button></div><span class="cap">rest - raised</span></div>
+          <div class="spec"><div class="stage"><button class="btn is-pressed" type="button" lang="zh-CN">保存 Save</button></div><span class="cap">pressed - inset</span></div>
+          <div class="spec"><div class="stage"><button class="btn" type="button" disabled lang="zh-CN">保存 Save</button></div><span class="cap">disabled - flat, 45% ink</span></div>
+          <div class="spec"><div class="stage"><button class="btn btn-deep" type="button" lang="zh-CN">确认 Confirm</button></div><span class="cap">primary - deep plate</span></div>
+        </div>
+
+        <h3>开关 Toggle &amp; 滑块 Slider</h3>
+        <div class="spec-grid" style="grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));">
+          <div class="spec">
+            <div class="stage" style="gap:16px; grid-auto-flow:column;">
+              <button class="toggle" type="button" role="switch" aria-checked="false" aria-label="夜间模式 Night mode"><span class="knob"></span></button>
+              <button class="toggle" type="button" role="switch" aria-checked="true" aria-label="免打扰 Do not disturb"><span class="knob"></span></button>
+            </div>
+            <span class="cap">off / on - sage fill when on</span>
+          </div>
+          <div class="spec">
+            <div class="stage" style="padding:20px 24px;">
+              <input class="slider" type="range" min="0" max="100" value="60" aria-label="亮度 Brightness" style="--fill:60%;" />
+            </div>
+            <span class="cap">slider - pressed track, raised thumb</span>
+          </div>
+          <div class="spec">
+            <div class="stage" style="padding:20px 24px;">
+              <input class="slider" type="range" min="0" max="100" value="30" aria-label="音量 Volume" style="--fill:30%; --fill-color:var(--rose);" />
+            </div>
+            <span class="cap">rose variant</span>
+          </div>
+        </div>
+
+        <h3>列表 List rows</h3>
+        <div class="tray" style="max-width:420px;">
+          <div class="list">
+            <button class="lrow" type="button"><span lang="zh-CN">铃声 Ringtone<span class="sub" style="display:block;" lang="zh-CN">叮咚 Ding-dong</span></span><svg class="chev" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><use href="#g-chev" /></svg></button>
+            <button class="lrow is-active" type="button" aria-current="true"><span lang="zh-CN">壁纸 Wallpaper<span class="sub" style="display:block;" lang="zh-CN">奶油云朵 Cream clouds</span></span><svg class="chev" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><use href="#g-chev" /></svg></button>
+            <button class="lrow" type="button"><span lang="zh-CN">通知 Notifications<span class="sub" style="display:block;" lang="zh-CN">仅重要 Important only</span></span><svg class="chev" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><use href="#g-chev" /></svg></button>
+          </div>
+        </div>
+        <p class="cap" style="margin-top:8px;">divider-free rows; the active row is a light pastel plate</p>
+
+        <h3>标签 Chips &amp; 提示 Tooltip &amp; 输入 Input</h3>
+        <div class="spec-grid" style="grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));">
+          <div class="spec">
+            <div class="stage" style="display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:center;">
+              <button class="chip is-on" type="button" lang="zh-CN">全部 All</button>
+              <button class="chip" type="button" lang="zh-CN">粉彩 Pastel</button>
+              <button class="chip" type="button" lang="zh-CN">抹茶 Matcha</button>
+            </div>
+            <span class="cap">chips - selected is pressed + sage tint</span>
+          </div>
+          <div class="spec">
+            <div class="stage" style="padding-top:52px;">
+              <span class="tipwrap">
+                <button class="btn btn-sm" type="button" lang="zh-CN">长按 Hold</button>
+                <span class="tooltip" role="tooltip" lang="zh-CN">小提示 A little tip</span>
+              </span>
+            </div>
+            <span class="cap">tooltip - tiny raised plate (hover / focus)</span>
+          </div>
+          <div class="spec">
+            <div class="stage" style="padding:20px;">
+              <input class="field" type="text" placeholder="输入昵称 Nickname" aria-label="昵称 Nickname" />
+            </div>
+            <span class="cap">input - pressed field, soft placeholder</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ IN APPLICATION ============ -->
+      <section class="widget" id="application" aria-labelledby="application-h">
+        <h2 id="application-h" lang="zh-CN">应用<span class="en" lang="en">In application</span></h2>
+        <p class="lede">A music player screen assembled entirely from the kit above - no new parts.</p>
+
+        <div class="player widget">
+          <p class="cap" style="text-align:center; font-weight:600;" lang="zh-CN">正在播放 Now playing</p>
+          <div class="album"><svg aria-hidden="true"><use href="#g-flower" /></svg></div>
+          <div class="meta">
+            <p class="t" lang="zh-CN">夏日汽水 Summer Soda</p>
+            <p class="a" lang="zh-CN">麻薯乐队 Mochi Band</p>
+          </div>
+          <div>
+            <input class="slider" type="range" min="0" max="225" value="84" aria-label="播放进度 Playback position" style="--fill:38%;" />
+            <div class="times"><span>1:24</span><span>3:45</span></div>
+          </div>
+          <div class="transport">
+            <button class="btn btn-round" type="button" aria-label="上一首 Previous"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><use href="#g-prev" /></svg></button>
+            <button class="btn btn-round big" type="button" aria-label="播放 Play"><svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><use href="#g-play" /></svg></button>
+            <button class="btn btn-round" type="button" aria-label="下一首 Next"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><use href="#g-next" /></svg></button>
+          </div>
+          <div class="vol">
+            <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><use href="#g-note" /></svg>
+            <input class="slider" type="range" min="0" max="100" value="55" aria-label="音量 Volume" style="--fill:55%; --fill-color:var(--sage);" />
+          </div>
+          <div>
+            <p class="cap" style="font-weight:600; margin-bottom:8px;" lang="zh-CN">播放列表 Up next</p>
+            <div class="list">
+              <button class="lrow" type="button"><span lang="zh-CN">云朵蹦床 Cloud Trampoline</span><span class="sub">2:58</span></button>
+              <button class="lrow" type="button"><span lang="zh-CN">汽水星球 Soda Planet</span><span class="sub">3:12</span></button>
+              <button class="lrow" type="button"><span lang="zh-CN">晚安企鹅 Goodnight Penguin</span><span class="sub">4:05</span></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="widget footer-widget">
+      <svg width="110" height="41" viewBox="0 0 150 56" aria-hidden="true"><use href="#g-face" /></svg>
+      <p lang="zh-CN">本页所有数据均为演示用合成数据。All content on this page is synthetic demo data.<br />MOCHI - exploration, direction pinned 2026-08-03. Spec lives in DESIGN.md.</p>
+      <a class="btn" href="/index.html" lang="zh-CN">所有系统 All Systems</a>
+    </footer>
+
+  </div>
+
+  <script>
+    // live demos: toggles, chips, slider fill tracking
+    document.querySelectorAll(".toggle").forEach(function (t) {
+      t.addEventListener("click", function () {
+        t.setAttribute("aria-checked", t.getAttribute("aria-checked") === "true" ? "false" : "true");
+      });
+    });
+    document.querySelectorAll(".chip").forEach(function (c) {
+      c.addEventListener("click", function () { c.classList.toggle("is-on"); });
+    });
+    document.querySelectorAll(".slider").forEach(function (s) {
+      s.addEventListener("input", function () {
+        var pct = ((s.value - s.min) / (s.max - s.min)) * 100;
+        s.style.setProperty("--fill", pct + "%");
+      });
+    });
+  </script>
+</body>
+</html>

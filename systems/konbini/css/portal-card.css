@@ -1,0 +1,113 @@
+/*
+Konbini's entrance card on the root portal. Scoped to .sys-kon; loaded by the
+portal only. Mirrors the Konbini tokens by value: the one vertical sky gradient,
+white poster display type, a crisp pixel storefront on the snow line, cobalt
+captions on snow. Pixels stay hard-edged; nothing else decorates.
+*/
+
+.sys-kon {
+  background: linear-gradient(
+    #5fb2dd 0%,
+    #8ecbe9 34%,
+    #c9e6f4 55%,
+    #f4f8fa 55%,
+    #f4f8fa 100%
+  );
+  color: #2563eb;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 16px;
+}
+
+.sys-kon h3 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 2.1rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.sys-kon .status {
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+/* pixel storefront sits on the gradient's snow line */
+.sys-kon .scene {
+  align-self: center;
+  width: 192px;
+  height: 80px;
+  margin-top: auto;
+  image-rendering: pixelated;
+}
+
+/* sits in the right margin beside the pixel scene, ending at the snow line */
+.sys-kon .kana {
+  position: absolute;
+  right: 14px;
+  top: 20%;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #2563eb;
+  writing-mode: vertical-rl;
+  letter-spacing: 0.28em;
+}
+
+.sys-kon .captions {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.66rem;
+  font-weight: 700;
+  margin: 10px 0 8px;
+}
+
+.sys-kon p {
+  margin: 0 0 12px;
+  font-size: 0.76rem;
+  line-height: 1.55;
+  color: #2b3a55;
+}
+
+.sys-kon .foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sys-kon .enter {
+  display: inline-block;
+  background: #2563eb;
+  color: #ffffff;
+  padding: 8px 14px;
+  text-decoration: none;
+  font-size: 0.72rem;
+  font-weight: 700;
+  box-shadow: 3px 3px 0 #2b3a55;
+  transition: box-shadow 0.1s steps(1), transform 0.1s steps(1);
+}
+
+.sys-kon .enter:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 #2b3a55;
+}
+
+.sys-kon .enter:active {
+  transform: translate(3px, 3px);
+  box-shadow: none;
+}
+
+.sys-kon .enter:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.sys-kon .page {
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: #2563eb;
+}

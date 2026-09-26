@@ -1,0 +1,152 @@
+/*
+Benran's entrance card on the root portal. Scoped to .sys-ben; loaded by the
+portal only. Mirrors the Benran tokens by value: paper emptiness, a tea bowl
+resting on a hairline horizon, vertical CJK type, one celadon ripple, one
+vermilion seal. Content stays tiny; the whitespace is the design.
+*/
+
+.sys-ben {
+  background: #fcfcfa;
+  color: #2a2a28;
+  font-family: system-ui, "Segoe UI", "PingFang SC", "Hiragino Sans GB", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 26px 22px 20px;
+}
+
+.sys-ben .latin {
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: #2a2a28;
+  margin-bottom: 4px;
+  padding-left: 0.38em; /* optical centering vs tracking */
+}
+
+.sys-ben h3 {
+  margin: 0;
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  font-family: "Songti SC", "Noto Serif CJK SC", "SimSun", serif;
+  font-weight: 400;
+  font-size: 1.3rem;
+  letter-spacing: 0.35em;
+  writing-mode: vertical-rl;
+  color: #2a2a28;
+}
+
+/* tiny brand roundel */
+.sys-ben .roundel {
+  width: 34px;
+  height: 34px;
+  color: #c9a87c;
+  margin: 6px 0 2px;
+}
+
+/* the shelf: bowl resting on a hairline with end ticks, ripple beneath */
+.sys-ben .shelf {
+  position: relative;
+  align-self: stretch;
+  flex: 1;
+  min-height: 96px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.sys-ben .shelf .bowl {
+  width: 58px;
+  height: 34px;
+  color: #2a2a28;
+  margin-bottom: 1px;
+}
+
+.sys-ben .shelf .line {
+  position: absolute;
+  bottom: 0;
+  left: 8%;
+  right: 8%;
+  height: 1px;
+  background: #d5d3cd;
+}
+
+.sys-ben .shelf .line::before,
+.sys-ben .shelf .line::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  width: 1px;
+  height: 8px;
+  background: #d5d3cd;
+  transform: rotate(24deg);
+}
+
+.sys-ben .shelf .line::before { left: 0; }
+.sys-ben .shelf .line::after { right: 0; transform: rotate(-24deg); }
+
+.sys-ben .shelf .ripple {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  width: 110px;
+  height: 22px;
+  transform: translateX(-50%);
+  color: #9fc4bd;
+}
+
+.sys-ben p {
+  margin: 14px 0 0;
+  font-size: 0.72rem;
+  line-height: 1.9;
+  text-align: center;
+  max-width: 30ch;
+  color: #2a2a28;
+}
+
+.sys-ben .status {
+  margin-top: 8px;
+  font-size: 0.58rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #8a8880;
+}
+
+/* enter: tracked caption; the seal appears on hover */
+.sys-ben .enter {
+  position: relative;
+  margin-top: 14px;
+  color: #2a2a28;
+  text-decoration: none;
+  font-size: 0.64rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  padding: 6px 2px;
+  border-bottom: 1px solid #d5d3cd;
+}
+
+.sys-ben .enter .seal {
+  position: absolute;
+  right: -18px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  background: #c25e4a;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.sys-ben .enter:hover { border-bottom-color: #2a2a28; }
+.sys-ben .enter:hover .seal { opacity: 1; }
+
+.sys-ben .enter:focus-visible {
+  outline: 1px solid #2a2a28;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sys-ben .enter .seal { transition: none; }
+}

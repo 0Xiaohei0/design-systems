@@ -1,0 +1,93 @@
+/*
+Portal chrome. Deliberately neutral: this page indexes design systems, so its own
+voice must not wear any one system's clothes. Plain system-UI type, dark neutral
+ground, no tokens from systems/.
+
+The entrance cards are the exception by design: each card is a material specimen
+of its system, and its styles live with that system in
+systems/<name>/css/portal-card.css (linked from the root index.html). This file
+only provides the neutral shell around them: page chrome, the grid, and the
+card's footprint.
+*/
+
+:root {
+  --bg: #16181a;
+  --surface: #1e2124;
+  --line: #32373b;
+  --text: #e6e8ea;
+  --muted: #969ea6;
+  --accent: #7fb2d9;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font: 15px/1.6 ui-sans-serif, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 72px 28px 96px;
+}
+
+header { margin-bottom: 14px; }
+
+h1 {
+  margin: 0 0 6px;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.sub {
+  margin: 0;
+  color: var(--muted);
+  max-width: 62ch;
+}
+
+h2 {
+  margin: 52px 0 16px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Fixed-width cards rather than 1fr: a lone system should not stretch to the full
+   column width, and the row should look the same as systems are added. */
+.systems {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 340px));
+  gap: 20px;
+}
+
+/* Neutral footprint only. Everything visual - ground, ink, type, border, motion -
+   comes from the system's own portal-card.css, so each door is a true specimen
+   of the world behind it. */
+.system {
+  position: relative;
+  overflow: hidden;
+  min-height: 340px;
+}
+
+.note {
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.note code {
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: #262b2f;
+  font-size: 12px;
+}

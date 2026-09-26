@@ -1,0 +1,161 @@
+/*
+Enjoy's entrance card on the root portal. Scoped to .sys-joy; loaded by the
+portal only. Mirrors the Enjoy tokens by value: cream desk with aqua waves, one
+chunky outlined window with traffic dots, mono voice, pill meter, hard little
+offset shadows.
+*/
+
+.sys-joy {
+  background: #f2ecdc;
+  color: #22201c;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  display: flex;
+  padding: 22px 20px;
+}
+
+/* wallpaper waves */
+.sys-joy .wave {
+  position: absolute;
+  background: #bcdfe1;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.sys-joy .wave.w1 {
+  width: 130%;
+  height: 60%;
+  left: -40%;
+  top: -22%;
+  transform: rotate(-9deg);
+}
+
+.sys-joy .wave.w2 {
+  width: 120%;
+  height: 50%;
+  right: -45%;
+  bottom: -18%;
+  transform: rotate(-7deg);
+}
+
+.sys-joy .win {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #faf6ea;
+  border: 2px solid #22201c;
+  border-radius: 10px;
+  box-shadow: 3px 3px 0 #22201c;
+  overflow: hidden;
+}
+
+.sys-joy .titlebar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 10px;
+  border-bottom: 2px solid #22201c;
+}
+
+.sys-joy .titlebar .d {
+  width: 9px;
+  height: 9px;
+  border: 2px solid #22201c;
+  border-radius: 50%;
+  flex: none;
+}
+
+.sys-joy .titlebar span {
+  flex: 1;
+  text-align: center;
+  font-size: 0.66rem;
+  padding-right: 34px; /* optical center vs the three dots */
+}
+
+.sys-joy .body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 14px 16px 16px;
+}
+
+.sys-joy h3 {
+  margin: 0 0 2px;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.sys-joy .status {
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+  color: #22201c;
+  opacity: 0.72;
+  margin-bottom: 10px;
+}
+
+.sys-joy p {
+  margin: 0 0 12px;
+  flex: 1;
+  font-size: 0.72rem;
+  line-height: 1.65;
+}
+
+.sys-joy .meter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  margin-bottom: 14px;
+  font-size: 0.66rem;
+}
+
+.sys-joy .meter .track {
+  flex: 1;
+  display: block;
+  height: 12px;
+  border: 2px solid #22201c;
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.sys-joy .meter .fill {
+  display: block;
+  height: 100%;
+  width: 68%;
+  background: #bcdfe1;
+}
+
+.sys-joy .enter {
+  display: inline-block;
+  padding: 7px 14px;
+  border: 2px solid #22201c;
+  border-radius: 9px;
+  background: #faf6ea;
+  color: #22201c;
+  text-decoration: none;
+  font-size: 0.72rem;
+  box-shadow: 2px 2px 0 #22201c;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.sys-joy .enter:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 #22201c;
+}
+
+.sys-joy .enter:active {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+
+.sys-joy .enter:focus-visible {
+  outline: 2px solid #22201c;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sys-joy .enter { transition: none; }
+}

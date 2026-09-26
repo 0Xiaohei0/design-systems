@@ -1,0 +1,722 @@
+/* KONBINI core: tokens, primitives, components. See DESIGN.md. */
+
+:root {
+  --sky-deep: #5fb2dd;
+  --sky: #8ecbe9;
+  --sky-pale: #c9e6f4;
+  --snow: #f4f8fa;
+  --white: #ffffff;
+  --cobalt: #2563eb;
+  --navy: #2b3a55;
+  --sign: #f08c1e;
+  --ice: #a8cede;
+
+  --font-display: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-cjk: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+
+  /* integer pixel scale for the hero scene (176x104 grid) */
+  --scene-px: 3px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--snow);
+  color: var(--cobalt);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+:focus-visible {
+  outline: 2px solid var(--cobalt);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--cobalt);
+  color: var(--white);
+}
+
+/* ---------- primitives ---------- */
+
+/* the one permitted gradient: vertical, sky */
+.k-sky {
+  background: linear-gradient(180deg, var(--sky-deep) 0%, var(--sky) 55%, var(--sky-pale) 100%);
+}
+
+.k-display {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  color: var(--white);
+}
+
+.k-kana {
+  font-family: var(--font-cjk);
+  font-weight: 700;
+  color: var(--cobalt);
+  line-height: 1;
+}
+
+.k-caption {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--cobalt);
+  text-transform: lowercase;
+}
+
+.k-captions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+}
+
+.k-body {
+  color: var(--cobalt);
+  max-width: 62ch;
+}
+
+.k-footnote {
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--cobalt);
+  max-width: 24ch; /* ragged right by nature */
+}
+
+.k-pageno {
+  font-weight: 800;
+  font-size: 1.375rem;
+  letter-spacing: -0.02em;
+  color: var(--cobalt);
+}
+
+/* sign band: white/orange/white fascia with navy hairlines */
+.k-band {
+  height: 24px;
+  background: var(--sign);
+  border-top: 6px solid var(--white);
+  border-bottom: 6px solid var(--white);
+  box-shadow: 0 -2px 0 var(--navy), 0 2px 0 var(--navy);
+  margin: 2px 0; /* room for the hairline shadows */
+}
+
+.k-band--thin {
+  height: 14px;
+  border-top: 4px solid var(--white);
+  border-bottom: 4px solid var(--white);
+}
+
+/* pixel art scaling: width must stay an integer multiple of the grid */
+.k-px {
+  shape-rendering: crispEdges;
+  display: block;
+}
+
+/* ---------- components ---------- */
+
+.k-link {
+  color: var(--cobalt);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.k-link:hover,
+.k-link.is-hover {
+  color: var(--navy);
+  text-decoration-thickness: 2px;
+}
+
+/* buttons: poster plates with a navy pixel-step border (notched corners)
+   and a flat ice pixel shadow; states snap, nothing eases */
+.k-btn {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  padding: 10px 22px;
+  background: var(--white);
+  color: var(--cobalt);
+  box-shadow:
+    0 -2px 0 var(--navy),
+    0 2px 0 var(--navy),
+    -2px 0 0 var(--navy),
+    2px 0 0 var(--navy),
+    4px 4px 0 var(--ice);
+  margin: 2px 6px 6px 2px; /* reserve space for border + shadow */
+}
+
+.k-btn:hover,
+.k-btn.is-hover {
+  transform: translate(-2px, -2px);
+  box-shadow:
+    0 -2px 0 var(--navy),
+    0 2px 0 var(--navy),
+    -2px 0 0 var(--navy),
+    2px 0 0 var(--navy),
+    6px 6px 0 var(--ice);
+}
+
+.k-btn:active,
+.k-btn.is-active {
+  transform: translate(4px, 4px);
+  box-shadow:
+    0 -2px 0 var(--navy),
+    0 2px 0 var(--navy),
+    -2px 0 0 var(--navy),
+    2px 0 0 var(--navy);
+}
+
+.k-btn--primary {
+  background: var(--cobalt);
+  color: var(--white);
+}
+
+.k-btn:disabled,
+.k-btn.is-disabled {
+  background: var(--snow);
+  color: var(--ice);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow:
+    0 -2px 0 var(--ice),
+    0 2px 0 var(--ice),
+    -2px 0 0 var(--ice),
+    2px 0 0 var(--ice);
+}
+
+/* chips: miniature sign-band stripes */
+.k-chip {
+  display: inline-block;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: lowercase;
+  color: var(--cobalt);
+  background: var(--white);
+  border-top: 3px solid var(--sign);
+  border-bottom: 3px solid var(--sign);
+  padding: 3px 12px;
+}
+
+.k-chip.is-selected {
+  background: var(--cobalt);
+  color: var(--white);
+}
+
+.k-chip.is-disabled {
+  color: var(--ice);
+  border-color: var(--ice);
+}
+
+/* pagination: poster folios */
+.k-pagination {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 1rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.k-pagination .current {
+  color: var(--cobalt);
+  font-weight: 800;
+}
+
+.k-pagination a {
+  color: var(--cobalt);
+  text-decoration: none;
+}
+
+.k-pagination a:hover {
+  color: var(--navy);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.k-pagination .is-disabled {
+  color: var(--ice);
+}
+
+/* input: snow field, navy bottom rule, cobalt caret */
+.k-field {
+  display: block;
+}
+
+.k-field > label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: lowercase;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+
+.k-input {
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  width: 100%;
+  max-width: 260px;
+  background: var(--white);
+  color: var(--navy);
+  caret-color: var(--cobalt);
+  border: none;
+  border-bottom: 2px solid var(--navy);
+  padding: 8px 10px;
+}
+
+.k-input::placeholder {
+  color: var(--cobalt);
+  opacity: 1;
+}
+
+.k-input:focus {
+  border-bottom-color: var(--cobalt);
+}
+
+.k-input:disabled {
+  background: var(--ice);
+  border-bottom-color: var(--ice);
+  color: var(--navy);
+  cursor: not-allowed;
+}
+
+/* swatches: pixel plates with the navy step border */
+.k-swatch {
+  width: 76px;
+  height: 76px;
+  box-shadow:
+    0 -2px 0 var(--navy),
+    0 2px 0 var(--navy),
+    -2px 0 0 var(--navy),
+    2px 0 0 var(--navy);
+  margin: 2px;
+}
+
+/* ---------- hero poster ---------- */
+
+.poster-sky {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(3.5rem, 9vh, 6.5rem) 1rem 0;
+}
+
+.poster-title {
+  font-size: clamp(3.25rem, 12vw, 8rem);
+  text-align: center;
+}
+
+.poster-sub {
+  margin-top: 1rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: lowercase;
+  color: var(--navy);
+  text-align: center;
+}
+
+.poster-scene {
+  position: relative;
+  z-index: 1;
+  margin-top: clamp(1.5rem, 5vh, 3.5rem);
+  /* the scene's own snow strip (10 grid rows) overlaps into the snow half
+     so the horizon lines up exactly at the scene's ground line */
+  margin-bottom: calc(-10 * var(--scene-px));
+}
+
+.poster-scene svg {
+  display: block;
+  width: calc(176 * var(--scene-px));
+  height: calc(104 * var(--scene-px));
+  shape-rendering: crispEdges;
+}
+
+.poster-snow {
+  background: var(--snow);
+  padding: clamp(2.5rem, 6vh, 4.5rem) clamp(1.25rem, 5vw, 4rem) 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: clamp(2rem, 5vh, 3.5rem);
+  max-width: 1180px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.poster-kana {
+  font-size: clamp(3.5rem, 16vw, 10rem);
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+.poster-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 2rem;
+}
+
+/* ---------- motion: the only two moments ---------- */
+
+@keyframes k-hop-a {
+  0% { transform: none; }
+  46% { transform: translate(3px, 0); }
+  58% { transform: translate(3px, -2px); }
+  64% { transform: translate(3px, 0); }
+  100% { transform: none; }
+}
+
+@keyframes k-hop-b {
+  0% { transform: none; }
+  31% { transform: translate(-4px, -1px); }
+  55% { transform: none; }
+  100% { transform: none; }
+}
+
+@keyframes k-away {
+  0% { opacity: 1; transform: none; }
+  72% { opacity: 1; transform: translate(2px, 0); }
+  80% { opacity: 0; transform: translate(2px, 0); }
+  94% { opacity: 1; transform: none; }
+  100% { opacity: 1; transform: none; }
+}
+
+.k-bird-1 { animation: k-hop-a 9s steps(1, end) infinite; }
+.k-bird-2 { animation: k-hop-b 13s steps(1, end) infinite 2s; }
+.k-bird-3 { animation: k-away 17s steps(1, end) infinite 5s; }
+
+@keyframes k-drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(28px); }
+}
+
+.k-cloud { animation: k-drift 160s steps(28) infinite alternate; }
+
+@media (prefers-reduced-motion: reduce) {
+  .k-bird-1, .k-bird-2, .k-bird-3, .k-cloud { animation: none; }
+}
+
+/* ---------- catalog spreads ---------- */
+
+.spread {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(3rem, 8vh, 5.5rem) clamp(1.25rem, 5vw, 4rem);
+}
+
+.spread-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.spread-head h2 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: lowercase;
+  color: var(--cobalt);
+}
+
+.spread-head .kana {
+  font-family: var(--font-cjk);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--navy);
+}
+
+.spread h3 {
+  font-size: 1.0625rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  text-transform: lowercase;
+  color: var(--navy);
+  margin: 2.75rem 0 1rem;
+}
+
+.spread h3:first-of-type {
+  margin-top: 0;
+}
+
+.spread p {
+  color: var(--cobalt);
+  max-width: 62ch;
+  margin-bottom: 0.75rem;
+}
+
+.spread p.k-footnote {
+  max-width: 24ch; /* the footnote voice keeps its narrow measure inside spreads */
+}
+
+.spread-folio {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 3rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.row--tight {
+  gap: 1rem;
+  align-items: center;
+}
+
+.cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+.cell > .lbl {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: lowercase;
+  color: var(--navy);
+}
+
+.swatch-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  width: 84px;
+}
+
+.swatch-cell .name {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--cobalt);
+  line-height: 1.3;
+}
+
+.swatch-cell .hex {
+  font-size: 0.75rem;
+  color: var(--navy);
+}
+
+/* specimen plates */
+.specimen-sky {
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.specimen-sky .k-display {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+}
+
+.icon-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem 2.5rem;
+}
+
+.icon-grid .cell {
+  align-items: center;
+}
+
+.icon-grid svg {
+  width: 48px;
+  height: 48px;
+  shape-rendering: crispEdges;
+}
+
+.scale-demo {
+  display: flex;
+  align-items: flex-end;
+  gap: 2.5rem;
+}
+
+.scale-demo svg {
+  shape-rendering: crispEdges;
+  display: block;
+}
+
+/* vertical kana column */
+.kana-column {
+  writing-mode: vertical-rl;
+  font-family: var(--font-cjk);
+  font-weight: 700;
+  color: var(--cobalt);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  letter-spacing: 0.1em;
+  line-height: 1;
+}
+
+/* ---------- "in application": the Seimart page ---------- */
+
+.app-poster {
+  background: var(--white);
+  box-shadow:
+    0 -2px 0 var(--navy),
+    0 2px 0 var(--navy),
+    -2px 0 0 var(--navy),
+    2px 0 0 var(--navy),
+    8px 8px 0 var(--ice);
+  margin: 2px 10px 10px 2px;
+  max-width: 720px;
+}
+
+.app-sky {
+  padding: 2.25rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.app-sky .k-display {
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+.app-sky .kana {
+  font-family: var(--font-cjk);
+  font-weight: 700;
+  color: var(--navy); /* small type on sky is navy, never white */
+  font-size: 0.9375rem;
+  letter-spacing: 0.5em;
+}
+
+.app-body {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.stock-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.stock-list li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.875rem 0;
+  border-bottom: 2px solid var(--snow);
+}
+
+.stock-list li:last-child {
+  border-bottom: none;
+}
+
+.stock-list svg {
+  width: 32px;
+  height: 32px;
+  flex: none;
+  shape-rendering: crispEdges;
+}
+
+.stock-list .item {
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.stock-list .note {
+  font-size: 0.8125rem;
+  color: var(--cobalt);
+}
+
+.stock-list .price {
+  margin-left: auto;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--cobalt);
+  background: var(--snow);
+  border-top: 3px solid var(--sign);
+  padding: 2px 10px;
+}
+
+.app-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* ---------- footer ---------- */
+
+.k-footer {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 2.5rem clamp(1.25rem, 5vw, 4rem) 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.k-footer .note {
+  font-size: 0.8125rem;
+  color: var(--navy);
+  max-width: 44ch;
+}
+
+/* ---------- responsive: integer scene steps, stacking captions ---------- */
+
+@media (min-width: 1500px) {
+  :root { --scene-px: 4px; }
+}
+
+@media (max-width: 700px) {
+  :root { --scene-px: 2px; }
+}
+
+@media (max-width: 640px) {
+  .k-captions {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.375rem;
+    text-align: center;
+  }
+
+  .poster-foot {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .spread-head {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .scale-demo {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 380px) {
+  :root { --scene-px: 2px; }
+
+  .poster-sky {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}

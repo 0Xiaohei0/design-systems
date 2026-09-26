@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+Gallery portal. Indexes every design system under systems/ - one door per system.
+THESIS: a specimen drawer. The chrome is neutral on purpose, but each entrance
+card is a genuine material sample of the system behind it, styled by that
+system's own systems/<name>/css/portal-card.css.
+STORY: a visitor scans nine unmistakably different doors and opens one; all
+iteration then stays inside that system.
+FIRST VIEWPORT: title, one line of purpose, the specimen cards.
+FORM: index page for pinned worlds; no seed roll.
+-->
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design Systems</title>
+  <!-- webfonts the specimen cards actually use (Objekt: Anton; Sprout: Silkscreen; Chaguan: Ma Shan Zheng; CJK labels: Noto Sans SC) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Anton&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Silkscreen:wght@400;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="/shared/portal/portal.css" />
+  <!-- each system dresses its own door -->
+  <link rel="stylesheet" href="/systems/sdpg-hud/css/portal-card.css" />
+  <link rel="stylesheet" href="/systems/objekt/css/portal-card.css" />
+  <link rel="stylesheet" href="/systems/stratos/css/portal-card.css" />
+  <link rel="stylesheet" href="/systems/enjoy/css/portal-card.css" />
+  <link rel="stylesheet" href="/systems/mochi/css/portal-card.css" />
+  <link rel="stylesheet" href="/systems/konbini/css/portal-card.css" />
+  <link rel="stylesheet" href="/systems/benran/css/portal-card.css" />
+  <link rel="stylesheet" href="/systems/sprout/css/portal-card.css" />
+  <link rel="stylesheet" href="/systems/chaguan/css/portal-card.css" />
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Design Systems</h1>
+      <p class="sub">
+        An open collection of UI design systems, each one a complete world: its
+        own tokens, components and spec. Every door is dressed in its own
+        system's clothes - the card is the first specimen. Take one, fork it,
+        or steal a single idea.
+      </p>
+    </header>
+
+    <h2>Systems</h2>
+    <div class="systems">
+      <article class="system sys-hud">
+        <i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>
+        <div class="bar">
+          <b>SDPG-HUD</b>&nbsp;// REV 02
+          <span class="sp"></span>
+          <span class="dot blink"></span> ONLINE
+        </div>
+        <h3>SDPG-HUD</h3>
+        <span class="status">Ported &middot; SDPromptGen</span>
+        <p>
+          Monochrome arcade targeting-HUD. Two grounds - blueprint and CRT - and
+          no chroma: emphasis by filled block, status encoded in form, not color.
+        </p>
+        <a class="enter" href="/systems/sdpg-hud/index.html"><span class="dot"></span> Insert Coin</a>
+      </article>
+
+      <article class="system sys-obj">
+        <div class="strip">
+          <h3>Objekt</h3>
+          <svg class="barcode" viewBox="0 0 60 30" preserveAspectRatio="none" aria-hidden="true">
+            <g fill="currentColor">
+              <rect x="0" y="0" width="3" height="24" />
+              <rect x="5" y="0" width="1.5" height="24" />
+              <rect x="9" y="0" width="4" height="24" />
+              <rect x="15" y="0" width="1.5" height="24" />
+              <rect x="18.5" y="0" width="2" height="24" />
+              <rect x="23" y="0" width="5" height="24" />
+              <rect x="30" y="0" width="1.5" height="24" />
+              <rect x="34" y="0" width="3" height="24" />
+              <rect x="39" y="0" width="1.5" height="24" />
+              <rect x="43" y="0" width="4.5" height="24" />
+              <rect x="50" y="0" width="2" height="24" />
+              <rect x="54" y="0" width="1.5" height="24" />
+              <rect x="57" y="0" width="3" height="24" />
+            </g>
+            <text x="30" y="29.5" text-anchor="middle" fill="currentColor" font-size="5"
+              font-family="ui-monospace, Menlo, monospace" letter-spacing="2">588918</text>
+          </svg>
+        </div>
+        <div class="side">
+          <span class="tag">Exploration &middot; Vol. 01</span>
+          <p class="serial">
+            SERIAL: 88-301<br />
+            STOCKS: 4<br />
+            0100 1100 0010
+          </p>
+          <p class="blurb">
+            Brutalist industrial labels: paper stocks, stamped type, barcodes,
+            serial plates, and spec sheets. Print rules - no glow, no radius, no
+            chroma.
+          </p>
+          <a class="enter" href="/systems/objekt/index.html">Open 01/007</a>
+        </div>
+        <span class="stamp">SYS 03/010</span>
+      </article>
+
+      <article class="system sys-str">
+        <div class="top">
+          <span class="chip">FUI_OVERLAY</span>
+          <span class="num">89</span>
+        </div>
+        <h3>Stratos<i class="sq"></i></h3>
+        <span class="status">Exploration &middot; Signal kit</span>
+        <div class="hazard" aria-hidden="true"></div>
+        <p>
+          Mission-console overlays on black glass: underscore_labels, segmented
+          bars, hazard stripes, big numerals. White signal, one hot orange.
+        </p>
+        <div class="feed">
+          <span class="dot" aria-hidden="true"></span>STATUS<i class="lead"></i><span class="val">ACTIVE</span>
+        </div>
+        <a class="enter" href="/systems/stratos/index.html">&gt; OPEN_STRATOS</a>
+      </article>
+
+      <article class="system sys-joy">
+        <i class="wave w1" aria-hidden="true"></i><i class="wave w2" aria-hidden="true"></i>
+        <div class="win">
+          <div class="titlebar">
+            <i class="d"></i><i class="d"></i><i class="d"></i>
+            <span>/home/fun - enjoy</span>
+          </div>
+          <div class="body">
+            <h3>Enjoy</h3>
+            <span class="status">exploration &middot; cozy desktop</span>
+            <p>
+              Chunky outlined windows on a sunny desk: a global menu bar, pill
+              meters, hand-drawn desktop icons, and one bright blue player. Mono
+              everywhere, hard little shadows.
+            </p>
+            <div class="meter" aria-hidden="true">
+              <span>vol</span>
+              <i class="track"><i class="fill"></i></i>
+            </div>
+            <a class="enter" href="/systems/enjoy/index.html">@open-enjoy</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="system sys-mochi">
+        <div class="clockrow" aria-hidden="true">
+          <span class="tile">08</span>
+          <span class="colon"><i></i><i></i></span>
+          <span class="tile">08</span>
+        </div>
+        <h3>Mochi</h3>
+        <span class="status">Exploration &middot; 软乎乎 widgets</span>
+        <p>
+          Soft neumorphic widget kit: one warm material, raised or pressed by
+          light alone. Pastel plates, flip clocks, pill gauges, kawaii faces -
+          no borders anywhere.
+        </p>
+        <div class="dots" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+        <a class="enter" href="/systems/mochi/index.html">打开 Open</a>
+      </article>
+
+      <article class="system sys-kon">
+        <h3>Konbini</h3>
+        <span class="status">Pixel travel posters</span>
+        <span class="kana" aria-hidden="true">コンビニ</span>
+        <svg class="scene" viewBox="0 0 96 40" shape-rendering="crispEdges" aria-hidden="true">
+          <!-- distant buildings -->
+          <rect x="0" y="14" width="12" height="19" fill="#a8cede" />
+          <rect x="2" y="17" width="3" height="3" fill="#8ecbe9" />
+          <rect x="7" y="17" width="3" height="3" fill="#8ecbe9" />
+          <rect x="82" y="10" width="14" height="23" fill="#a8cede" />
+          <rect x="84" y="13" width="4" height="4" fill="#8ecbe9" />
+          <rect x="90" y="13" width="4" height="4" fill="#8ecbe9" />
+          <rect x="84" y="20" width="4" height="4" fill="#8ecbe9" />
+          <rect x="90" y="20" width="4" height="4" fill="#8ecbe9" />
+          <!-- power pole and lines -->
+          <rect x="76" y="2" width="2" height="31" fill="#2b3a55" />
+          <rect x="70" y="4" width="14" height="1" fill="#2b3a55" />
+          <rect x="0" y="6" width="76" height="1" fill="#2b3a55" opacity="0.35" />
+          <!-- store: snow roof, AC unit, sign band, glass, door -->
+          <rect x="18" y="15" width="46" height="3" fill="#ffffff" />
+          <rect x="26" y="11" width="6" height="4" fill="#ffffff" />
+          <rect x="27" y="12" width="4" height="2" fill="#a8cede" />
+          <rect x="18" y="18" width="46" height="4" fill="#f08c1e" />
+          <rect x="34" y="18" width="14" height="4" fill="#ffffff" />
+          <rect x="18" y="22" width="46" height="9" fill="#2b3a55" />
+          <rect x="20" y="23" width="10" height="7" fill="#3d5273" />
+          <rect x="38" y="23" width="8" height="8" fill="#4a6285" />
+          <rect x="52" y="23" width="10" height="7" fill="#3d5273" />
+          <rect x="18" y="31" width="46" height="2" fill="#eef4f8" />
+          <!-- vending machine + cone -->
+          <rect x="12" y="24" width="5" height="9" fill="#eef4f8" />
+          <rect x="13" y="25" width="3" height="4" fill="#a8cede" />
+          <rect x="67" y="29" width="2" height="4" fill="#f08c1e" />
+          <!-- snow ground -->
+          <rect x="0" y="33" width="96" height="7" fill="#f4f8fa" />
+        </svg>
+        <div class="captions" aria-hidden="true">
+          <span>never too</span><span>far away</span><span>always there</span>
+        </div>
+        <p>
+          Pixel-art travel posters: giant white type in a winter sky, rect-only
+          scenes on an integer grid, cobalt captions on snow.
+        </p>
+        <div class="foot">
+          <a class="enter" href="/systems/konbini/index.html">open konbini</a>
+          <span class="page">28</span>
+        </div>
+      </article>
+
+      <article class="system sys-ben">
+        <h3 lang="zh">本然</h3>
+        <span class="latin">Benran</span>
+        <svg class="roundel" viewBox="0 0 34 34" aria-hidden="true">
+          <circle cx="17" cy="17" r="15.5" fill="none" stroke="currentColor" stroke-width="1" />
+          <path d="M17 9 V25 M11 13.5 H23 M12.5 21.5 L17 16.5 L21.5 21.5" fill="none" stroke="currentColor"
+            stroke-width="1.2" stroke-linecap="round" />
+        </svg>
+        <div class="shelf" aria-hidden="true">
+          <svg class="bowl" viewBox="0 0 58 34">
+            <path d="M3 7 C10 10.5 48 10.5 55 7 C54 19 44 28 29 28 C14 28 4 19 3 7 Z" fill="currentColor" />
+            <rect x="23" y="28" width="12" height="3" fill="currentColor" />
+            <path d="M8 9.5 C16 12 42 12 50 9.5" fill="none" stroke="#fcfcfa" stroke-width="1" />
+          </svg>
+          <i class="line"></i>
+          <svg class="ripple" viewBox="0 0 110 22">
+            <ellipse cx="55" cy="11" rx="52" ry="9" fill="none" stroke="currentColor" stroke-width="1" opacity="0.9" />
+            <ellipse cx="55" cy="11" rx="36" ry="6" fill="none" stroke="#c9a87c" stroke-width="1" opacity="0.8" />
+            <ellipse cx="55" cy="11" rx="20" ry="3.4" fill="none" stroke="currentColor" stroke-width="1"
+              opacity="0.6" />
+          </svg>
+        </div>
+        <p>
+          Zen tea-ceremony identity: ink silhouettes resting on hairline
+          horizons, vertical type, one vermilion seal. Emptiness is the
+          material.
+        </p>
+        <span class="status">Exploration</span>
+        <a class="enter" href="/systems/benran/index.html">Open Benran<i class="seal"></i></a>
+      </article>
+
+      <article class="system sys-spr">
+        <div class="sign">
+          <h3>Sprout</h3>
+        </div>
+        <span class="status">Exploration &middot; UI kit</span>
+        <p>
+          Cozy farm-game pixel kit: biscuit buttons, wooden signs, seed dots and
+          matcha boards. Pixel-step corners, one-pixel bevels, steps() motion
+          only.
+        </p>
+        <div class="row" aria-hidden="true">
+          <span class="toggle"><span class="knob"></span></span>
+          <span class="segs"><i></i><i></i><i></i><i></i><i class="empty"></i><i class="empty"></i></span>
+        </div>
+        <a class="enter" href="/systems/sprout/index.html">Open Sprout</a>
+      </article>
+
+      <article class="system sys-cha">
+        <div class="poster">
+          <span class="sun" aria-hidden="true"></span>
+          <svg class="pot" viewBox="0 0 66 52" aria-hidden="true">
+            <path d="M14 20 C10 20 5 24 4 30 C3 34 5 36 7 35 C9 30 11 26 15 24 Z" fill="currentColor" />
+            <path d="M15 22 C15 15 21 11 32 11 C43 11 50 15 50 22 C50 32 46 42 32 42 C18 42 15 32 15 22 Z"
+              fill="currentColor" />
+            <path d="M24 11 C24 7 28 5 32 5 C36 5 40 7 40 11 Z" fill="currentColor" />
+            <rect x="30" y="2" width="4" height="4" rx="2" fill="currentColor" />
+            <path d="M50 24 C56 24 60 27 60 31 C60 35 56 38 51 38" fill="none" stroke="currentColor" stroke-width="3.4"
+              stroke-linecap="round" />
+            <path d="M18 46 C26 49 38 49 46 46" fill="none" stroke="currentColor" stroke-width="2.4"
+              stroke-linecap="round" />
+          </svg>
+          <h3 lang="zh">茶馆</h3>
+          <span class="seal" aria-hidden="true"></span>
+          <span class="latin">Welcome to Chaguan</span>
+        </div>
+        <div class="tiles" aria-hidden="true">
+          <span class="tile">
+            <svg viewBox="0 0 24 24">
+              <path d="M5 10h11v3a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5Z" />
+              <path d="M16 11h2a2.5 2.5 0 0 1 0 5h-2.4" />
+              <path d="M8 6c0-1.4 1-1.6 1-3M12 6c0-1.4 1-1.6 1-3" />
+            </svg>
+            <span lang="zh">堂食</span>
+          </span>
+          <span class="tile">
+            <svg viewBox="0 0 24 24">
+              <circle cx="6.5" cy="17" r="2.5" />
+              <circle cx="17.5" cy="17" r="2.5" />
+              <path d="M9 17h6M4 13h6l2-6h4M14 10h3l2.5 4.5" />
+            </svg>
+            <span lang="zh">外卖</span>
+          </span>
+          <span class="tile">
+            <svg viewBox="0 0 24 24">
+              <path d="M6 8h12l-1.5 12h-9Z" />
+              <path d="M9 8V6a3 3 0 0 1 6 0v2" />
+            </svg>
+            <span lang="zh">自取</span>
+          </span>
+        </div>
+        <p>
+          Neo-Chinese teahouse mini-app: brush-ink art over gold sun discs,
+          cream posters, service tiles, coffee-brown chrome. Operate UI in
+          literati clothes.
+        </p>
+        <span class="status">Exploration</span>
+        <a class="enter" href="/systems/chaguan/index.html"><span lang="zh">进店</span> Enter</a>
+      </article>
+
+    </div>
+
+    <p class="note">
+      New system: copy <code>systems/_template</code>, rename it, add a card above
+      pointing at its front door, and give it a
+      <code>systems/&lt;name&gt;/css/portal-card.css</code> so its door wears its
+      own clothes. The Vite config discovers <code>.html</code> entries
+      automatically.
+    </p>
+  </div>
+</body>
+
+</html>

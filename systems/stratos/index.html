@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+THESIS: A mission console projecting instrument overlays onto black glass; every
+element is a self-contained readout fit for compositing over footage.
+OWN-WORLD: STRATOS (DESIGN.md): flat marks only - one ink (#f4f2ee) plus one hot
+orange (#ff6a00) carrying ~30% of the surface; heavy grotesque lockups (SAT.3,
+DB.40), underscore mono labels, hazard stripes, segmented bars, corner brackets.
+STORY: A teammate scrolls foundations, marks, components, then a full telemetry
+console, and copies readout blocks straight into an overlay comp.
+FIRST VIEWPORT: A dense corner-bracketed cluster: STRATOS lockup with orange
+square, tag chips, a big orange 89, segmented bars, hazard stripe, live feed
+rows, blinking ACTIVE chip, one slow scan sweep.
+FORM: Catalog (mode: Read). Direction client-pinned from a reference sheet; all
+demo data synthetic.
+-->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STRATOS - Signal Overlay Kit</title>
+  <link rel="stylesheet" href="css/stratos-core.css" />
+  <style>
+    /* catalog page scaffolding; the kit itself lives in stratos-core.css */
+    .page { max-width: 1240px; margin: 0 auto; padding: 28px 24px 64px; }
+
+    /* ---- hero cluster ---- */
+    .hero { padding: 24px; margin-bottom: 64px; }
+    .hero-top {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 14px 24px; flex-wrap: wrap; margin-bottom: 16px;
+    }
+    .hero-id { display: flex; align-items: center; gap: 14px; }
+    .hero-sys { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .hero-main {
+      display: grid; grid-template-columns: 4fr 5fr 4fr;
+      gap: 24px 28px; padding: 24px 0;
+    }
+    .hero-col { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+    .num-hero { font-size: clamp(64px, 9vw, 116px); }
+    .num-wide { font-size: clamp(40px, 8vw, 68px); }
+    .chip-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .schem-hero { flex: 1; min-height: 150px; }
+    .hero-bottom {
+      display: flex; align-items: flex-end; gap: 14px 22px; flex-wrap: wrap;
+      border-top: 1px solid var(--hairline); padding-top: 16px;
+    }
+    .markers { display: flex; align-items: center; gap: 10px; }
+    .grow { flex: 1; }
+
+    /* ---- sections ---- */
+    .sec { margin-bottom: 64px; }
+    .sechead { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+    .sechead h2 {
+      font-family: var(--font-mono); font-size: 12px; font-weight: 400;
+      letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap;
+    }
+    .sechead .s-rule { flex: 1; }
+
+    .spec-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 18px;
+    }
+    .cell {
+      border: 1px solid var(--hairline); padding: 16px;
+      display: flex; flex-direction: column; gap: 14px; min-width: 0;
+    }
+    .cell .cap {
+      margin-top: auto; padding-top: 10px; color: var(--dim);
+      border-top: 1px dotted var(--hairline);
+    }
+    .cell .demo { display: flex; flex-direction: column; gap: 10px; }
+    .cell .demo-row { display: flex; flex-direction: row; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+    /* palette */
+    .swatches {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 14px; margin-bottom: 26px;
+    }
+    .sw .block { height: 64px; border: 1px solid var(--hairline); margin-bottom: 7px; }
+    .sw p { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+
+    /* type specimens */
+    .type-rows { display: flex; flex-direction: column; gap: 22px; margin-bottom: 26px; }
+    .type-row { display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap; }
+    .type-row .who { width: 170px; flex: none; color: var(--dim); }
+    .type-row .what { min-width: 0; overflow-wrap: anywhere; }
+
+    .gram { list-style: none; max-width: 640px; }
+    .gram li { display: flex; align-items: baseline; gap: 8px; padding: 5px 0; }
+    .gram .pat { color: var(--dim); white-space: nowrap; }
+    .gram .lead { flex: 1; min-width: 12px; border-bottom: 1px dotted var(--hairline); transform: translateY(-3px); }
+    .gram .ex { text-align: right; }
+
+    /* console composition */
+    .console { background: var(--panel); padding: 22px; }
+    .console .s-feed li:hover, .console .s-feed li.is-hot { background: rgba(244, 242, 238, 0.07); }
+    .console-head { display: flex; align-items: center; gap: 12px 18px; flex-wrap: wrap; margin-bottom: 14px; }
+    .console-head .lockup { display: flex; align-items: baseline; gap: 12px; }
+    .console-body { display: grid; grid-template-columns: 1fr 1.15fr 1fr; gap: 26px; padding: 20px 0 16px; }
+    .console-col { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+    .console-col .blk { display: flex; flex-direction: column; gap: 8px; }
+    .schem-console { height: 130px; }
+    .console-foot { border-top: 1px solid var(--hairline); padding-top: 12px; display: flex; flex-direction: column; gap: 10px; }
+    .ctrl-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+    /* footer */
+    .endcap { margin-top: 80px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+    .endcap .s-hazard, .endcap .s-rule { align-self: stretch; }
+
+    /* ---- responsive ---- */
+    @media (max-width: 720px) {
+      .hero-main { grid-template-columns: 1fr 1fr; }
+      .hero-col--schem { grid-column: 1 / -1; order: 3; }
+      .console-body { grid-template-columns: 1fr; }
+      .type-row .who { width: 100%; }
+    }
+    @media (max-width: 480px) {
+      .page { padding: 18px 14px 48px; }
+      .hero { padding: 16px; }
+      .hero-main { grid-template-columns: 1fr; }
+      .console { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- ============ HERO: first-viewport thesis cluster ============ -->
+    <header class="hero s-frame s-scan-host">
+      <i class="s-frame-x" aria-hidden="true"></i>
+      <span class="s-scan" aria-hidden="true"></span>
+
+      <div class="hero-top">
+        <div class="hero-id">
+          <span class="s-square s-square--lg" aria-hidden="true"></span>
+          <h1 class="v-display v-display-lg">STRATOS</h1>
+          <span class="s-chip s-chip--ghost">SIGNAL_OVERLAY_KIT</span>
+        </div>
+        <div class="hero-sys v-data">
+          <span class="ink-dim">SYS.CHK // ORB.PASS 2049</span>
+          <span class="s-chip s-chip--alert s-status is-active"><span class="dot" aria-hidden="true"></span>ACTIVE</span>
+        </div>
+      </div>
+
+      <div class="s-hazard" aria-hidden="true"></div>
+
+      <div class="hero-main">
+        <div class="hero-col">
+          <span class="v-label ink-dim">SIGNAL_STRENGTH</span>
+          <p class="s-num s-num--alert num-hero">89</p>
+          <p class="v-data">DB.40 / GAIN_04</p>
+          <div class="s-seg" role="img" aria-label="Signal level 8 of 12">
+            <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i>
+          </div>
+          <p class="v-micro">CARRIER LOCKED / DRIFT +0.003HZ / FRAME_SYNC 8N1 / BUFFER 62PCT / NEXT_PASS 00:41:22 / AUTH RB - 10040</p>
+        </div>
+
+        <div class="hero-col hero-col--schem">
+          <div class="s-schem schem-hero">
+            <svg aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 100 100">
+              <line x1="0" y1="0" x2="100" y2="100" />
+              <line x1="100" y1="0" x2="0" y2="100" />
+            </svg>
+            <span class="pip" aria-hidden="true"></span>
+          </div>
+          <p class="v-label ink-dim">SUB_SCHEMATIC / SEC 1..4</p>
+          <div class="chip-row">
+            <span class="s-chip s-chip--white">&gt; SOURCE_TRACKING</span>
+            <span class="s-chip s-chip--outline">+ VXZ_SCANNING</span>
+            <span class="s-chip s-chip--alert">MOUNT_PROCESS</span>
+          </div>
+        </div>
+
+        <div class="hero-col">
+          <span class="v-label ink-dim">LIVE_FEED</span>
+          <div class="s-rule" aria-hidden="true"></div>
+          <ul class="s-feed">
+            <li><span class="mk s-tri s-tri--right s-tri--alert" aria-hidden="true"></span><span class="lbl">UPLINK</span><span class="lead" aria-hidden="true"></span><span class="val ink-alert">137.62MHZ</span></li>
+            <li><span class="mk s-square s-square--signal" aria-hidden="true"></span><span class="lbl">AZIMUTH</span><span class="lead" aria-hidden="true"></span><span class="val">214.7</span></li>
+            <li><span class="mk s-cross" aria-hidden="true"></span><span class="lbl">ELEVATION</span><span class="lead" aria-hidden="true"></span><span class="val">43.9</span></li>
+            <li><span class="mk s-square" aria-hidden="true"></span><span class="lbl">DOWNLINK</span><span class="lead" aria-hidden="true"></span><span class="val">8.4MB/S</span></li>
+            <li><span class="mk s-cross" aria-hidden="true"></span><span class="lbl">LATENCY</span><span class="lead" aria-hidden="true"></span><span class="val">122MS</span></li>
+          </ul>
+          <div class="s-seg s-seg--alert" role="img" aria-label="Alert buffer 5 of 12">
+            <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+          <p class="v-data"><span class="ink-dim">SAT.3</span> &nbsp;UI-12&nbsp; <span class="ink-dim">RB - 10040</span></p>
+        </div>
+      </div>
+
+      <div class="hero-bottom">
+        <div class="markers" aria-hidden="true">
+          <span class="s-cross"></span>
+          <span class="s-square"></span>
+          <span class="s-tri"></span>
+          <span class="s-square s-square--outline"></span>
+          <span class="s-cross"></span>
+        </div>
+        <span class="s-chip s-chip--ghost">PROTOCOL_DIAGNOSIS</span>
+        <span class="grow"></span>
+        <p class="v-micro">PACKET_ID SEQUENCE / VERIFIED 2049.203</p>
+        <p class="s-num num-wide">77449</p>
+      </div>
+    </header>
+
+    <main>
+
+      <!-- ============ SEC.1 FOUNDATIONS ============ -->
+      <section class="sec" aria-labelledby="h-foundations">
+        <div class="sechead">
+          <span class="s-chip s-chip--alert">SEC.1</span>
+          <h2 id="h-foundations">FOUNDATIONS</h2>
+          <div class="s-rule" aria-hidden="true"></div>
+        </div>
+
+        <h3 class="v-label ink-dim" style="margin-bottom: 12px;">PALETTE</h3>
+        <div class="swatches">
+          <div class="sw">
+            <div class="block" style="background: #0b0b0b;"></div>
+            <p class="v-data"><span>--void</span><span class="ink-dim">#0B0B0B</span></p>
+          </div>
+          <div class="sw">
+            <div class="block" style="background: #151515;"></div>
+            <p class="v-data"><span>--panel</span><span class="ink-dim">#151515</span></p>
+          </div>
+          <div class="sw">
+            <div class="block" style="background: #f4f2ee;"></div>
+            <p class="v-data"><span>--signal</span><span class="ink-dim">#F4F2EE</span></p>
+          </div>
+          <div class="sw">
+            <div class="block" style="background: #9b9b9b;"></div>
+            <p class="v-data"><span>--dim</span><span class="ink-dim">#9B9B9B</span></p>
+          </div>
+          <div class="sw">
+            <div class="block" style="background: #ff6a00;"></div>
+            <p class="v-data"><span>--alert</span><span class="ink-dim">#FF6A00</span></p>
+          </div>
+          <div class="sw">
+            <div class="block" style="background: rgba(244,242,238,0.22);"></div>
+            <p class="v-data"><span>--hairline</span><span class="ink-dim">22PCT</span></p>
+          </div>
+        </div>
+
+        <h3 class="v-label ink-dim" style="margin-bottom: 14px;">TYPE_VOICES</h3>
+        <div class="type-rows">
+          <div class="type-row">
+            <span class="who v-label">DISPLAY / 800</span>
+            <span class="what v-display v-display-xl">SAT.3</span>
+          </div>
+          <div class="type-row">
+            <span class="who v-label">DISPLAY / 800</span>
+            <span class="what v-display v-display-lg">DB.40 <span class="ink-alert">UI-12</span></span>
+          </div>
+          <div class="type-row">
+            <span class="who v-label">DISPLAY / 700</span>
+            <span class="what v-display v-display-md">RB - 10040</span>
+          </div>
+          <div class="type-row">
+            <span class="who v-label">LABEL / MONO 10</span>
+            <span class="what v-label">SOURCE_TRACKING / MOUNT_PROCESS / LIVE_FEED</span>
+          </div>
+          <div class="type-row">
+            <span class="who v-label">DATA / MONO 11</span>
+            <span class="what v-data">137.62MHZ&nbsp; 409KM&nbsp; 51.6DEG&nbsp; 7.66KM/S</span>
+          </div>
+          <div class="type-row">
+            <span class="who v-label">MICRO / MONO 9</span>
+            <span class="what v-micro" style="max-width: 420px;">TELEMETRY BLOCK RELAYED VIA GROUND STATION KIR.4 / CHECKSUM VALID / PACKETS 4402 OF 4402 / RETRY 0 / SIGNAL PATH COLD START COMPLETE</span>
+          </div>
+        </div>
+
+        <h3 class="v-label ink-dim" style="margin-bottom: 8px;">NAMING_GRAMMAR</h3>
+        <ul class="gram v-data">
+          <li><span class="pat">UPPERCASE_UNDERSCORE</span><span class="lead" aria-hidden="true"></span><span class="ex">SOURCE_TRACKING, END_OF_TRANSMISSION</span></li>
+          <li><span class="pat">WORD.DIGIT</span><span class="lead" aria-hidden="true"></span><span class="ex">SAT.3, DB.40, ACTIVE.B</span></li>
+          <li><span class="pat">ABBREV-NUMBER</span><span class="lead" aria-hidden="true"></span><span class="ex">UI-12, RB - 10040</span></li>
+          <li><span class="pat">PREFIX &gt;</span><span class="lead" aria-hidden="true"></span><span class="ex">&gt; SOURCE_TRACKING (live pointer)</span></li>
+          <li><span class="pat">PREFIX +</span><span class="lead" aria-hidden="true"></span><span class="ex">+ VXZ_SCANNING (aux item)</span></li>
+        </ul>
+      </section>
+
+      <!-- ============ SEC.2 MARKS ============ -->
+      <section class="sec" aria-labelledby="h-marks">
+        <div class="sechead">
+          <span class="s-chip s-chip--alert">SEC.2</span>
+          <h2 id="h-marks">MARKS</h2>
+          <div class="s-rule" aria-hidden="true"></div>
+        </div>
+
+        <div class="spec-grid">
+          <div class="cell">
+            <div class="demo">
+              <div class="demo-row">
+                <span class="s-chip s-chip--white">&gt; SOURCE_TRACKING</span>
+                <span class="s-chip s-chip--alert">MOUNT_PROCESS</span>
+              </div>
+              <div class="demo-row">
+                <span class="s-chip s-chip--outline">+ VXZ_SCANNING</span>
+                <span class="s-chip s-chip--ghost">STANDBY_LINK</span>
+              </div>
+            </div>
+            <p class="cap v-label">TAG_CHIP / WHITE, ALERT, OUTLINE, GHOST</p>
+          </div>
+
+          <div class="cell">
+            <div class="demo">
+              <div class="s-hazard" aria-hidden="true"></div>
+              <div class="s-hazard s-hazard--thin" aria-hidden="true"></div>
+            </div>
+            <p class="cap v-label">HAZARD_STRIPE / 10PX, 6PX</p>
+          </div>
+
+          <div class="cell">
+            <div class="demo">
+              <div class="s-seg" role="img" aria-label="Level 7 of 10">
+                <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i>
+              </div>
+              <div class="s-seg s-seg--alert" role="img" aria-label="Alert level 4 of 10">
+                <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              </div>
+              <div class="s-seg s-seg--tall" role="img" aria-label="Level 3 of 6">
+                <i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i>
+              </div>
+            </div>
+            <p class="cap v-label">SEGMENTED_BAR / SIGNAL, ALERT, TALL</p>
+          </div>
+
+          <div class="cell">
+            <div class="demo demo-row" style="align-items: baseline;">
+              <span class="s-num s-num--alert" style="font-size: 64px;">89</span>
+              <span class="s-num" style="font-size: 44px;">402</span>
+            </div>
+            <p class="cap v-label">BIG_READOUT / ALERT, SIGNAL</p>
+          </div>
+
+          <div class="cell">
+            <div class="demo">
+              <div class="s-frame" style="height: 74px;">
+                <i class="s-frame-x" aria-hidden="true"></i>
+              </div>
+              <div class="s-rule" aria-hidden="true"></div>
+            </div>
+            <p class="cap v-label">CORNER_BRACKETS / RULE_END_TICKS</p>
+          </div>
+
+          <div class="cell">
+            <div class="demo demo-row" aria-hidden="true">
+              <span class="s-cross"></span>
+              <span class="s-square"></span>
+              <span class="s-square s-square--signal"></span>
+              <span class="s-square s-square--outline"></span>
+              <span class="s-tri"></span>
+              <span class="s-tri s-tri--alert"></span>
+              <span class="s-tri s-tri--right"></span>
+              <span class="s-tri s-tri--right s-tri--alert"></span>
+            </div>
+            <p class="cap v-label">MARKERS / CROSS, SQUARE, TRIANGLE</p>
+          </div>
+
+          <div class="cell">
+            <div class="demo">
+              <div class="s-schem" style="height: 110px;">
+                <svg aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 100 100">
+                  <line x1="0" y1="0" x2="100" y2="100" />
+                  <line x1="100" y1="0" x2="0" y2="100" />
+                </svg>
+                <span class="pip" aria-hidden="true"></span>
+              </div>
+              <p class="v-label ink-dim">SUB_SCHEMATIC / SEC 1..4</p>
+            </div>
+            <p class="cap v-label">SCHEMATIC_PLACEHOLDER</p>
+          </div>
+
+          <div class="cell">
+            <ul class="s-feed">
+              <li><span class="mk s-tri s-tri--right s-tri--alert" aria-hidden="true"></span><span class="lbl">FREQ</span><span class="lead" aria-hidden="true"></span><span class="val">137.62MHZ</span></li>
+              <li><span class="mk s-square s-square--signal" aria-hidden="true"></span><span class="lbl">RANGE</span><span class="lead" aria-hidden="true"></span><span class="val">409KM</span></li>
+              <li><span class="mk s-cross" aria-hidden="true"></span><span class="lbl">DOPPLER</span><span class="lead" aria-hidden="true"></span><span class="val">-2.1KHZ</span></li>
+            </ul>
+            <p class="cap v-label">FEED_ROW / MARKER, LABEL, LEADER, VALUE</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SEC.3 COMPONENTS ============ -->
+      <section class="sec" aria-labelledby="h-components">
+        <div class="sechead">
+          <span class="s-chip s-chip--alert">SEC.3</span>
+          <h2 id="h-components">COMPONENTS</h2>
+          <div class="s-rule" aria-hidden="true"></div>
+        </div>
+
+        <div class="spec-grid">
+          <div class="cell">
+            <div class="demo demo-row">
+              <span class="s-chip s-chip--alert s-status is-active"><span class="dot" aria-hidden="true"></span>ACTIVE</span>
+              <span class="s-chip s-chip--white s-status"><span class="dot" aria-hidden="true"></span>READY</span>
+              <span class="s-chip s-chip--ghost s-status"><span class="dot" aria-hidden="true"></span>INACTIVE</span>
+            </div>
+            <p class="cap v-label">STATUS_CHIP / ACTIVE BLINKS 1.4S STEPS</p>
+          </div>
+
+          <div class="cell">
+            <div class="demo demo-row">
+              <button type="button" class="s-btn s-btn--bracket">ENGAGE</button>
+              <button type="button" class="s-btn s-btn--bracket" disabled>OFFLINE</button>
+            </div>
+            <div class="demo demo-row">
+              <button type="button" class="s-btn s-btn--solid">TRANSMIT</button>
+              <button type="button" class="s-btn s-btn--solid" disabled>LOCKED</button>
+            </div>
+            <p class="cap v-label">BUTTON / HOVER FLIPS, ACTIVE SHIFTS 1PX</p>
+          </div>
+
+          <div class="cell">
+            <fieldset class="s-toggle">
+              <legend class="v-label ink-dim" style="margin-bottom: 8px;">CHANNEL_MODE</legend>
+              <label>
+                <input type="checkbox" checked />
+                <span class="tick" aria-hidden="true"></span>
+                <span class="txt">UPLOAD</span>
+              </label>
+              <label>
+                <input type="checkbox" />
+                <span class="tick" aria-hidden="true"></span>
+                <span class="txt">DOWNLOAD</span>
+              </label>
+            </fieldset>
+            <p class="cap v-label">TOGGLE / PAIRED TICKS, CHECKED = ALERT</p>
+          </div>
+
+          <div class="cell">
+            <ul class="s-feed">
+              <li><span class="mk s-square s-square--signal" aria-hidden="true"></span><span class="lbl">NODE_ALPHA</span><span class="lead" aria-hidden="true"></span><span class="val">SYNCED</span></li>
+              <li class="is-hot"><span class="mk s-tri s-tri--right s-tri--alert" aria-hidden="true"></span><span class="lbl">NODE_BRAVO</span><span class="lead" aria-hidden="true"></span><span class="val">HOLD</span></li>
+              <li><span class="mk s-cross" aria-hidden="true"></span><span class="lbl">NODE_CHARLIE</span><span class="lead" aria-hidden="true"></span><span class="val">QUEUED</span></li>
+            </ul>
+            <p class="cap v-label">LIST_ROW / HOVER = PANEL FILL</p>
+          </div>
+
+          <div class="cell">
+            <label class="s-field">
+              <span class="flabel v-label">CHANNEL_ID</span>
+              <input class="s-input" type="text" value="FREQ_137.62" spellcheck="false" />
+            </label>
+            <p class="v-data" aria-hidden="true">TARGET_LOCK&gt;&nbsp;SAT.3<span class="s-caret"></span></p>
+            <p class="cap v-label">INPUT / UNDERLINE, BLOCK CARET IN ALERT</p>
+          </div>
+
+          <div class="cell">
+            <label class="s-field">
+              <span class="flabel v-label">RELAY_KEY</span>
+              <input class="s-input" type="text" value="RB - 10040" disabled />
+            </label>
+            <p class="cap v-label">DISABLED / DIM INK, DASHED UNDERLINE</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SEC.4 CONSOLE ============ -->
+      <section class="sec" aria-labelledby="h-console">
+        <div class="sechead">
+          <span class="s-chip s-chip--alert">SEC.4</span>
+          <h2 id="h-console">CONSOLE</h2>
+          <div class="s-rule" aria-hidden="true"></div>
+        </div>
+
+        <div class="console s-frame">
+          <i class="s-frame-x" aria-hidden="true"></i>
+
+          <div class="console-head">
+            <div class="lockup">
+              <span class="v-display v-display-md">SAT.3</span>
+              <span class="v-label ink-dim">ORBITAL_TELEMETRY</span>
+            </div>
+            <span class="grow"></span>
+            <span class="s-chip s-chip--alert s-status is-active"><span class="dot" aria-hidden="true"></span>ACTIVE.B</span>
+            <span class="s-chip s-chip--white">&gt; LIVE_FEED</span>
+          </div>
+
+          <div class="s-hazard s-hazard--thin" aria-hidden="true"></div>
+
+          <div class="console-body">
+            <div class="console-col">
+              <span class="v-label ink-dim">ORBIT_TRACE</span>
+              <ul class="s-feed">
+                <li><span class="mk s-square s-square--signal" aria-hidden="true"></span><span class="lbl">PERIGEE</span><span class="lead" aria-hidden="true"></span><span class="val">409KM</span></li>
+                <li><span class="mk s-square s-square--signal" aria-hidden="true"></span><span class="lbl">APOGEE</span><span class="lead" aria-hidden="true"></span><span class="val">421KM</span></li>
+                <li><span class="mk s-cross" aria-hidden="true"></span><span class="lbl">INCLINATION</span><span class="lead" aria-hidden="true"></span><span class="val">51.6DEG</span></li>
+                <li><span class="mk s-cross" aria-hidden="true"></span><span class="lbl">VELOCITY</span><span class="lead" aria-hidden="true"></span><span class="val">7.66KM/S</span></li>
+                <li><span class="mk s-tri s-tri--right s-tri--alert" aria-hidden="true"></span><span class="lbl">PERIOD</span><span class="lead" aria-hidden="true"></span><span class="val">92.9MIN</span></li>
+              </ul>
+              <p class="v-micro">TLE EPOCH 2049.203.7741 / SOURCE GROUND KIR.4 / PROPAGATOR SGP.4 / RESIDUAL 0.002</p>
+            </div>
+
+            <div class="console-col">
+              <div class="s-schem schem-console">
+                <svg aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 100 100">
+                  <line x1="0" y1="0" x2="100" y2="100" />
+                  <line x1="100" y1="0" x2="0" y2="100" />
+                </svg>
+                <span class="pip" aria-hidden="true"></span>
+              </div>
+              <p class="v-label ink-dim">ARRAY_SCHEMATIC / SEC 1..4</p>
+              <div class="blk">
+                <span class="v-label ink-dim">POWER_BUS</span>
+                <div class="s-seg" role="img" aria-label="Power 9 of 12">
+                  <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i>
+                </div>
+              </div>
+              <div class="blk">
+                <span class="v-label ink-dim">THERMAL_MARGIN</span>
+                <div class="s-seg s-seg--alert" role="img" aria-label="Thermal margin 4 of 12">
+                  <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="console-col">
+              <div class="blk">
+                <span class="v-label ink-dim">PASS_WINDOW / MIN</span>
+                <p class="s-num s-num--alert" style="font-size: 56px;">12</p>
+              </div>
+              <fieldset class="s-toggle">
+                <legend class="v-label ink-dim" style="margin-bottom: 8px;">CHANNEL_MODE</legend>
+                <label>
+                  <input type="checkbox" checked />
+                  <span class="tick" aria-hidden="true"></span>
+                  <span class="txt">UPLOAD</span>
+                </label>
+                <label>
+                  <input type="checkbox" />
+                  <span class="tick" aria-hidden="true"></span>
+                  <span class="txt">DOWNLOAD</span>
+                </label>
+              </fieldset>
+              <label class="s-field">
+                <span class="flabel v-label">COMMAND_LINE</span>
+                <input class="s-input" type="text" placeholder="ENTER_SEQUENCE" spellcheck="false" />
+              </label>
+              <div class="ctrl-row">
+                <button type="button" class="s-btn s-btn--bracket">ENGAGE</button>
+                <button type="button" class="s-btn s-btn--solid">TRANSMIT</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="console-foot">
+            <p class="v-micro">LOG 22:14:07 UPLINK ACK / 22:14:09 MODE SHIFT B / 22:14:12 ARRAY SEC.2 NOMINAL / 22:14:15 QUEUE 3 CMD</p>
+            <div class="s-hazard s-hazard--thin" aria-hidden="true"></div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="endcap">
+      <div class="s-hazard" aria-hidden="true"></div>
+      <p class="v-display v-display-lg">END_OF_TRANSMISSION</p>
+      <a class="s-btn s-btn--bracket" href="/index.html">RETURN_TO_PORTAL</a>
+      <p class="v-micro">ALL_TELEMETRY_SYNTHETIC / NO_LIVE_DOWNLINK / STRATOS KIT V0.1 / 2049.203</p>
+      <div class="s-rule" aria-hidden="true"></div>
+    </footer>
+
+  </div>
+</body>
+</html>

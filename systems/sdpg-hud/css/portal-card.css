@@ -1,0 +1,121 @@
+/*
+SDPG-HUD's entrance card on the root portal. Scoped to .sys-hud; loaded by the
+portal only. Mirrors the SDPG-HUD tokens by value (blueprint ground, grid,
+targeting corners, mono voice, invert-on-hover) without importing hud-core.css.
+*/
+
+.sys-hud {
+  background: #e6e8ea;
+  background-image:
+    linear-gradient(rgba(21, 24, 28, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(21, 24, 28, 0.06) 1px, transparent 1px);
+  background-size: 26px 26px;
+  color: #15181c;
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 22px 22px;
+}
+
+/* targeting-frame corners */
+.sys-hud .c {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #15181c;
+  opacity: 0.85;
+}
+
+.sys-hud .c.tl { top: 8px; left: 8px; border-right: 0; border-bottom: 0; }
+.sys-hud .c.tr { top: 8px; right: 8px; border-left: 0; border-bottom: 0; }
+.sys-hud .c.bl { bottom: 8px; left: 8px; border-right: 0; border-top: 0; }
+.sys-hud .c.br { bottom: 8px; right: 8px; border-left: 0; border-top: 0; }
+
+.sys-hud .bar {
+  position: absolute;
+  top: 12px;
+  left: 30px;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #6b7076;
+  white-space: nowrap;
+}
+
+.sys-hud .bar b { color: #15181c; font-weight: 700; }
+.sys-hud .bar .sp { flex: 1; }
+
+.sys-hud .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  display: inline-block;
+  flex: none;
+}
+
+.sys-hud .blink { animation: hud-blink 1.4s steps(1) infinite; }
+
+@keyframes hud-blink { 50% { opacity: 0.15; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .sys-hud .blink { animation: none; }
+}
+
+.sys-hud h3 {
+  margin: 0 0 4px;
+  font-family: "Arial Black", "Helvetica Neue Bold", Impact, sans-serif;
+  font-weight: 900;
+  font-size: 1.85rem;
+  line-height: 1;
+  text-transform: uppercase;
+  transform: scaleX(1.05);
+  transform-origin: left;
+}
+
+.sys-hud .status {
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #6b7076;
+  margin-bottom: 12px;
+}
+
+.sys-hud p {
+  margin: 0 0 18px;
+  font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: #3a3e44;
+  flex: 1;
+}
+
+.sys-hud .enter {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 16px;
+  border: 1.5px solid #15181c;
+  border-radius: 100px;
+  color: #15181c;
+  text-decoration: none;
+  font-size: 0.66rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transition: background 0.12s, color 0.12s;
+}
+
+.sys-hud .enter:hover {
+  background: #15181c;
+  color: #fafbfb;
+}
+
+.sys-hud .enter:focus-visible {
+  outline: 2px solid #15181c;
+  outline-offset: 2px;
+}

@@ -1,0 +1,351 @@
+/* OBJEKT core - tokens, primitives, components. Print, not screen:
+   no gradients, no radius, no blur, no transparency effects. */
+
+:root {
+  --stock-black: #161616;
+  --stock-kraft: #c7ac83;
+  --stock-steel: #a4a8ab;
+  --stock-bone: #edeae2;
+  --ground: #d7d5d0;
+  --frame: #0e0e0e;
+
+  --ink: #1a1a1a;
+  --ink-2: #34312b;
+  --ink-40: #989791;          /* solid 40% ink mixed on bone, disabled only */
+  --ink-on-dark: #eae7df;
+  --ink-on-dark-2: #b9b5aa;
+  --ink-on-dark-40: #6b6a66;  /* solid 40% ink mixed on black, disabled only */
+
+  --font-display: "Anton", "Arial Narrow", Impact, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --font-fine: "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+
+  --rule-w: 3px;
+  --lift: 4px 4px 0 var(--frame);
+  --frame-w: 28px;
+
+  /* per-stock secondary ink, overridden by stock classes */
+  --ink-sec: var(--ink-2);
+  --ink-dis: var(--ink-40);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { background: var(--frame); }
+
+body {
+  background: var(--frame);
+  padding: var(--frame-w);
+  color: var(--ink);
+  font-family: var(--font-fine);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+::selection { background: var(--stock-black); color: var(--ink-on-dark); }
+
+:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+
+img, svg { display: block; max-width: 100%; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+}
+
+/* ---------- stocks: color is material ---------- */
+
+.stock-black { background: var(--stock-black); color: var(--ink-on-dark); --ink-sec: var(--ink-on-dark-2); --ink-dis: var(--ink-on-dark-40); }
+.stock-kraft { background: var(--stock-kraft); color: var(--ink); --ink-sec: var(--ink-2); --ink-dis: #7e7059; }
+.stock-steel { background: var(--stock-steel); color: var(--ink); --ink-sec: var(--ink-2); --ink-dis: #6d7072; }
+.stock-bone  { background: var(--stock-bone);  color: var(--ink); --ink-sec: var(--ink-2); --ink-dis: var(--ink-40); }
+
+/* ---------- frame chrome: registration marks + edge captions ---------- */
+
+.frame-cross { position: fixed; z-index: 40; color: var(--ink-on-dark-2); width: 12px; height: 12px; }
+.frame-cross.tl { top: 8px; left: 8px; }
+.frame-cross.tr { top: 8px; right: 8px; }
+.frame-cross.bl { bottom: 8px; left: 8px; }
+.frame-cross.br { bottom: 8px; right: 8px; }
+
+.frame-cap {
+  position: fixed; z-index: 40;
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink-on-dark-2); white-space: nowrap;
+}
+.frame-cap.top { top: 0; left: 48px; height: var(--frame-w); line-height: var(--frame-w); }
+.frame-cap.bottom { bottom: 0; right: 48px; height: var(--frame-w); line-height: var(--frame-w); }
+.frame-cap.left,
+.frame-cap.right {
+  writing-mode: vertical-rl; width: var(--frame-w);
+  text-align: left; line-height: var(--frame-w);
+}
+.frame-cap.left { left: 0; top: 48px; transform: rotate(180deg); }
+.frame-cap.right { right: 0; bottom: 48px; }
+
+/* the concrete sheet inside the frame */
+.sheet {
+  background: var(--ground);
+  min-height: calc(100vh - 2 * var(--frame-w));
+  padding: clamp(20px, 4vw, 56px) clamp(16px, 4vw, 56px) clamp(28px, 4vw, 64px);
+}
+.sheet-inner { max-width: 1120px; margin: 0 auto; }
+
+/* ---------- type voices ---------- */
+
+.t-display {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+  line-height: 0.96;
+}
+.t-data {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.7;
+}
+.t-data-sec { color: var(--ink-sec); }
+.t-fine {
+  font-family: var(--font-fine);
+  font-size: 10.5px;
+  line-height: 1.5;
+  text-align: justify;
+}
+
+.v-text { writing-mode: vertical-rl; transform: rotate(180deg); }
+
+/* ---------- primitives ---------- */
+
+/* thick rule with "I" end ticks */
+.rule { position: relative; height: var(--rule-w); background: currentColor; }
+.rule::before, .rule::after {
+  content: ""; position: absolute; top: -4px;
+  width: 2px; height: calc(var(--rule-w) + 8px); background: currentColor;
+}
+.rule::before { left: 0; }
+.rule::after { right: 0; }
+.rule-thin { height: 1px; background: currentColor; }
+
+/* barcode: svg bars + digits beneath */
+.barcode { color: inherit; }
+.barcode svg { width: 100%; height: 30px; }
+.barcode .digits {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.28em;
+  text-transform: uppercase; margin-top: 4px; white-space: nowrap;
+}
+
+/* index stamp: bordered box, 01/007 style */
+.stamp-index {
+  display: inline-block; border: 1.5px solid currentColor;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em;
+  padding: 4px 8px 3px; text-transform: uppercase;
+}
+.stamp-index.lg { font-size: 13px; padding: 6px 12px 5px; }
+
+/* serial plate: stacked mono rows, optional rotated rows */
+.serial-plate { border: 1.5px solid currentColor; padding: 8px 10px; display: flex; gap: 10px; }
+.serial-plate .rows { flex: 1; }
+.serial-plate .row {
+  font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.12em;
+  text-transform: uppercase; padding: 3px 0; border-bottom: 1px solid currentColor;
+}
+.serial-plate .row:last-child { border-bottom: 0; }
+.serial-plate .row-rot {
+  writing-mode: vertical-rl; transform: rotate(180deg);
+  font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.12em;
+  text-transform: uppercase; border-left: 1px solid currentColor; padding-left: 8px;
+}
+
+/* technical line drawings: stroke attrs live on the symbols themselves */
+.tdraw svg { width: 100%; height: auto; }
+
+/* registration cross specimen (in-flow, not the fixed frame ones) */
+.regmark { width: 14px; height: 14px; color: inherit; }
+
+/* ---------- strip label: the card primitive ---------- */
+
+.strip {
+  display: flex; flex-direction: column;
+  width: 100%; max-width: 220px;
+  padding: 14px 14px 16px;
+  box-shadow: 6px 6px 0 #bcbab4; /* resting sticker lift off the sheet */
+}
+.strip-word-area { flex: 1; display: flex; justify-content: center; min-height: 300px; padding: 6px 0 14px; }
+.strip-word {
+  writing-mode: vertical-rl; transform: rotate(180deg);
+  font-family: var(--font-display); font-weight: 400;
+  text-transform: uppercase; letter-spacing: -0.01em; line-height: 1;
+  font-size: clamp(56px, 7.2vw, 92px);
+}
+.strip .rule { margin: 0 0 10px; }
+.strip-rev {
+  display: flex; justify-content: space-between;
+  font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.12em;
+  text-transform: uppercase; margin-bottom: 12px;
+}
+.strip-mid { display: flex; gap: 10px; margin-bottom: 12px; min-height: 120px; }
+.strip-data {
+  writing-mode: vertical-rl; transform: rotate(180deg);
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em;
+  text-transform: uppercase; line-height: 1.8; color: var(--ink-sec);
+}
+.strip-draw { flex: 1; display: flex; align-items: center; }
+.strip .barcode { margin-bottom: 12px; }
+.strip-foot { display: flex; justify-content: space-between; align-items: center; }
+.strip-foot .made {
+  font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--ink-sec);
+}
+
+/* ---------- section header: a black label strip, not a heading ---------- */
+
+.sec { margin-top: clamp(40px, 6vw, 72px); }
+.sec-head {
+  background: var(--stock-black); color: var(--ink-on-dark);
+  --ink-sec: var(--ink-on-dark-2);
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 16px; padding: 10px 16px 8px; margin-bottom: 24px;
+}
+.sec-head h2 {
+  font-family: var(--font-display); font-weight: 400; text-transform: uppercase;
+  letter-spacing: -0.01em; font-size: clamp(20px, 3vw, 30px); line-height: 1;
+}
+.sec-head .idx {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink-on-dark-2); white-space: nowrap;
+}
+
+/* plates: rectangular specimen surfaces inside sections */
+.plate { padding: 16px; box-shadow: 4px 4px 0 #bcbab4; }
+.plate-cap {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink-sec); margin-bottom: 10px;
+}
+
+/* ---------- components ---------- */
+
+/* stamp button: the one authored motion is the sticker lift */
+.btn {
+  display: inline-block; border: 0; cursor: pointer;
+  background: var(--stock-black); color: var(--ink-on-dark);
+  font-family: var(--font-display); font-weight: 400;
+  font-size: 14px; letter-spacing: 0.01em; text-transform: uppercase;
+  padding: 10px 18px 9px; text-decoration: none; text-align: center;
+  transition: transform 120ms cubic-bezier(0.2, 0.9, 0.2, 1),
+              box-shadow 120ms cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+.btn:hover, .btn.is-lifted { transform: translate(-2px, -2px); box-shadow: var(--lift); }
+.btn:active, .btn.is-pressed { transform: translate(0, 0); box-shadow: none; }
+.btn:disabled, .btn.is-disabled {
+  cursor: not-allowed; color: var(--ink-on-dark-40);
+  outline: 1.5px dashed var(--ink-on-dark-40); outline-offset: -4px;
+  transform: none; box-shadow: none;
+}
+/* the black stamp sits on light surfaces, so focus draws in frame black */
+.btn:focus-visible { outline: 2px solid var(--frame); outline-offset: 2px; }
+.btn-bone { background: var(--stock-bone); color: var(--ink); border: 2px solid var(--ink); padding: 8px 16px 7px; }
+.btn-bone:disabled, .btn-bone.is-disabled { color: var(--ink-40); border-color: var(--ink-40); border-style: dashed; outline: 0; }
+.btn-kraft { background: var(--stock-kraft); color: var(--ink); border: 2px solid var(--ink); padding: 8px 16px 7px; }
+.btn-kraft:disabled, .btn-kraft.is-disabled { color: #7e7059; border-color: #7e7059; border-style: dashed; outline: 0; }
+/* frozen focus specimen for the catalog only */
+.btn.is-focused { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+/* text field: ruled underline on bone stock */
+.field { display: block; }
+.field .field-label {
+  display: block; font-family: var(--font-mono); font-size: 9.5px;
+  letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px;
+}
+.field input, .field select {
+  width: 100%; border: 0; border-bottom: 2px solid var(--ink);
+  background: var(--stock-bone); color: var(--ink);
+  font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em;
+  text-transform: uppercase; padding: 4px 2px 5px;
+}
+.field input::placeholder { color: var(--ink-2); opacity: 1; }
+.field input:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.field.is-error input { border-bottom-width: 3px; }
+.field .field-error {
+  display: inline-block; margin-top: 8px;
+  background: var(--stock-black); color: var(--ink-on-dark);
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em;
+  text-transform: uppercase; padding: 4px 8px 3px;
+}
+.field input:disabled {
+  color: var(--ink-40); border-bottom-style: dashed; border-bottom-color: var(--ink-40);
+}
+.field.is-disabled .field-label { color: var(--ink-40); }
+
+/* badges: small stock chips */
+.badge {
+  display: inline-block; font-family: var(--font-mono); font-size: 9px;
+  letter-spacing: 0.14em; text-transform: uppercase; padding: 4px 8px 3px;
+}
+.badge.stock-kraft, .badge.stock-steel, .badge.stock-bone { border: 1px solid var(--ink); }
+.badge.is-disabled { color: var(--ink-dis); border-style: dashed; }
+.badge.stock-black.is-disabled { color: var(--ink-on-dark-40); border: 1px dashed var(--ink-on-dark-40); }
+
+/* spec table: thick top rule, thin row rules, mono values */
+.spec-table { width: 100%; border-collapse: collapse; border-top: var(--rule-w) solid var(--ink); }
+.spec-table caption {
+  text-align: left; font-family: var(--font-mono); font-size: 9px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-sec);
+  padding: 0 0 8px;
+}
+.spec-table th, .spec-table td { border-bottom: 1px solid var(--ink); padding: 7px 4px 6px; vertical-align: top; }
+.spec-table th {
+  text-align: left; font-family: var(--font-fine); font-weight: 700;
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
+}
+.spec-table td {
+  text-align: right; font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+
+/* checkbox: a stamp box struck with an X */
+.check { display: flex; align-items: center; gap: 10px; cursor: pointer; position: relative; }
+.check input { position: absolute; width: 18px; height: 18px; opacity: 0.0001; cursor: pointer; }
+.check .box { width: 18px; height: 18px; border: 2px solid var(--ink); position: relative; flex: none; }
+.check .box::before, .check .box::after {
+  content: ""; position: absolute; left: 50%; top: 50%;
+  width: 2px; height: 13px; background: var(--ink);
+  transform: translate(-50%, -50%) rotate(45deg) scale(0);
+}
+.check .box::after { transform: translate(-50%, -50%) rotate(-45deg) scale(0); }
+.check input:checked + .box::before { transform: translate(-50%, -50%) rotate(45deg) scale(1); }
+.check input:checked + .box::after { transform: translate(-50%, -50%) rotate(-45deg) scale(1); }
+.check input:focus-visible + .box { outline: 2px solid var(--ink); outline-offset: 2px; }
+.check .check-label {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.check.is-disabled { cursor: not-allowed; }
+/* 1.5px keeps the dash fine enough to read as an edge, not corner marks */
+.check.is-disabled .box { border: 1.5px dashed var(--ink-dis); }
+.check.is-disabled .box::before, .check.is-disabled .box::after { background: var(--ink-dis); }
+.check.is-disabled .check-label { color: var(--ink-dis); }
+.check.is-disabled input { cursor: not-allowed; }
+
+/* ---------- motion restraint ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .btn { transition: none; }
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 900px) {
+  :root { --frame-w: 20px; }
+}
+@media (max-width: 720px) {
+  :root { --frame-w: 14px; }
+  .frame-cap { display: none; }
+  .frame-cross { width: 9px; height: 9px; }
+  .frame-cross.tl, .frame-cross.tr { top: 3px; }
+  .frame-cross.bl, .frame-cross.br { bottom: 3px; }
+  .frame-cross.tl, .frame-cross.bl { left: 3px; }
+  .frame-cross.tr, .frame-cross.br { right: 3px; }
+}

@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+THESIS: A UI kit presented as the asset sheet itself - every control a hand-baked
+game prop (biscuit, plank, sprout) laid out on a matcha board; refuses the
+neutral swatch-grid catalog page.
+OWN-WORLD: 3px pixel unit; matcha ground, biscuit/cream/crust bakery ramp, cocoa
+ink, leaf signs; clip-path step corners (border-radius banned), 1-unit crust
+outlines, 1-unit bevels; Silkscreen display over system-sans body; steps() only.
+STORY: A game dev scans the sheet, presses the biscuits, flips the toggles, reads
+the construction anatomy, and leaves able to rebuild any piece from tokens.
+FIRST VIEWPORT: The recreated reference sheet - credit line, button-state row
+with snow arrows, settings panel (sound on / music muted), segment rows, slider
+assemblies, D-pad, scattered seeds, big wooden SPROUT / UI KIT sign at center.
+FORM: Client-pinned homage to Sprout Lands by Cup Nooble; no seed roll; mode
+Read, asset-sheet catalog.
+-->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Sprout - a cozy farm-game pixel UI kit built from CSS step corners and SVG rect-art. Homage to Sprout Lands by Cup Nooble." />
+  <title>Sprout - Cozy Farm Pixel UI Kit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/sprout-core.css" />
+  <style>
+    /* catalog-page layout only; the system lives in css/sprout-core.css */
+    html { overflow-x: clip; }
+
+    .ic-s { fill: var(--snow); }
+
+    .hero {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: calc(8 * var(--px)) 20px calc(14 * var(--px));
+    }
+    .hero-credit {
+      text-align: center;
+      font-family: var(--font-pixel);
+      font-size: 10px;
+      text-transform: uppercase;
+      color: var(--cocoa-deep);
+      margin-bottom: calc(10 * var(--px));
+    }
+    .hero-sheet {
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      gap: calc(12 * var(--px)) calc(16 * var(--px));
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .sheet-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: calc(4 * var(--px));
+    }
+    .sheet-cap {
+      font-family: var(--font-pixel);
+      font-size: 10px;
+      text-transform: uppercase;
+      color: var(--cocoa-deep);
+      text-align: center;
+    }
+    .state-row {
+      display: flex;
+      align-items: center;
+      gap: calc(2 * var(--px));
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .state-arrow { color: var(--snow); }
+    .hero-panel { width: 340px; max-width: 100%; }
+    .hero-sign-row {
+      display: flex;
+      justify-content: center;
+      margin-top: calc(16 * var(--px));
+    }
+    .hero-seed { position: absolute; color: var(--cocoa-deep); }
+    .hero-seed--leaf { color: var(--leaf-deep); }
+
+    .intro {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: calc(10 * var(--px)) 20px 0;
+      text-align: center;
+    }
+
+    .sec {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: calc(22 * var(--px)) 20px 0;
+    }
+    .sec-head {
+      display: flex;
+      justify-content: center;
+      padding-top: calc(10 * var(--px)); /* room for tendrils */
+      margin-bottom: calc(8 * var(--px));
+    }
+    .note {
+      max-width: 640px;
+      margin: 0 auto calc(8 * var(--px));
+      text-align: center;
+    }
+
+    .tray { margin-top: calc(8 * var(--px)); }
+    .tray-cap {
+      font-family: var(--font-pixel);
+      font-size: 10px;
+      text-transform: uppercase;
+      color: var(--cocoa-deep);
+      margin: 0 0 calc(4 * var(--px));
+    }
+    .tray-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: calc(8 * var(--px)) calc(10 * var(--px));
+      align-items: flex-end;
+    }
+    .spec {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: calc(3 * var(--px));
+    }
+    .spec-label {
+      font-family: var(--font-pixel);
+      font-size: 10px;
+      text-transform: uppercase;
+      color: var(--cocoa-deep);
+      text-align: center;
+    }
+    .spec--tip { padding-top: calc(16 * var(--px)); }
+
+    .packet-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: calc(6 * var(--px));
+      justify-content: center;
+    }
+
+    .tline {
+      display: flex;
+      align-items: baseline;
+      gap: calc(6 * var(--px));
+      flex-wrap: wrap;
+      padding: calc(2 * var(--px)) 0;
+    }
+    .tline .spec-label { min-width: 150px; text-align: left; }
+    .tline .px40 { font-size: 40px; font-weight: 700; }
+    .tline .px30 { font-size: 30px; font-weight: 700; }
+    .tline .px20 { font-size: 20px; font-weight: 700; }
+    .tline .px15 { font-size: 15px; }
+    .tline .px10 { font-size: 10px; }
+    .tline .spr-pixel-text { color: var(--cocoa-deep); }
+    .tbody-sample { max-width: 60ch; color: var(--cocoa-deep); }
+
+    .anatomy {
+      display: flex;
+      flex-wrap: wrap;
+      gap: calc(10 * var(--px)) calc(16 * var(--px));
+      justify-content: center;
+      align-items: flex-end;
+    }
+    .x2 { --px: 6px; }
+    .x4 { --px: 12px; }
+    .legend { list-style: none; margin: 0; padding: 0; display: grid; gap: calc(2 * var(--px)); }
+    .legend li { display: flex; align-items: center; gap: calc(3 * var(--px)); color: var(--cocoa-deep); }
+    .legend i {
+      width: calc(4 * var(--px));
+      height: calc(4 * var(--px));
+      flex: none;
+      box-shadow: inset 0 0 0 1px var(--cocoa-dark);
+    }
+    .corner-block {
+      background: var(--crust);
+      clip-path: var(--clip-px);
+      padding: var(--px);
+      width: calc(18 * var(--px));
+      height: calc(18 * var(--px));
+    }
+    .corner-block b {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: var(--biscuit);
+      clip-path: var(--clip-px);
+      box-shadow:
+        inset 0 var(--px) 0 0 var(--cream),
+        inset 0 calc(-1 * var(--px)) 0 0 var(--biscuit-shade);
+    }
+
+    .shop { max-width: 620px; margin: 0 auto; }
+    .shop-sign {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+      margin-bottom: calc(-5 * var(--px));
+      padding-top: calc(10 * var(--px));
+    }
+    .shop-row {
+      display: flex;
+      align-items: center;
+      gap: calc(4 * var(--px));
+      padding: calc(3 * var(--px)) 0;
+      border-bottom: var(--px) solid var(--biscuit);
+      cursor: pointer;
+    }
+    .shop-row .spr-i { color: var(--cocoa); flex: none; }
+    .shop-item-name {
+      font-family: var(--font-pixel);
+      font-size: 10px;
+      text-transform: uppercase;
+      color: var(--cocoa);
+    }
+    .shop-item-note { font-size: 13px; color: var(--cocoa-soft); }
+    .shop-stock { margin-left: auto; }
+    .shop-price {
+      display: flex;
+      align-items: center;
+      gap: var(--px);
+      font-family: var(--font-pixel);
+      font-size: 15px;
+      color: var(--cocoa);
+      min-width: calc(16 * var(--px));
+      justify-content: flex-end;
+    }
+    .shop-price .spr-i--2 { color: var(--cocoa); }
+    .shop-qty {
+      display: flex;
+      align-items: center;
+      gap: calc(4 * var(--px));
+      flex-wrap: wrap;
+      padding: calc(4 * var(--px)) 0 calc(2 * var(--px));
+    }
+    .shop-actions {
+      display: flex;
+      gap: calc(4 * var(--px));
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      margin-top: calc(4 * var(--px));
+    }
+
+    .foot {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: calc(24 * var(--px)) 20px calc(30 * var(--px));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: calc(6 * var(--px));
+      text-align: center;
+    }
+    .x4 .spr-tip-face { font-size: 40px; }
+
+    @media (max-width: 720px) {
+      .hero-sheet { flex-direction: column; align-items: center; }
+      .spr-sign--big .spr-sign-face { font-size: 30px; }
+      .spr-sign--big .spr-sign-face small { font-size: 15px; }
+      .tline .spec-label { min-width: 100%; }
+      .spr-input { width: 100%; }
+      .shop-stock { display: none; } /* keep rows honest at phone width */
+      .spr-plate { padding: calc(4 * var(--px)); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- pixel sprite sheet: axis-aligned integer rects only -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-speaker" viewBox="0 0 16 16">
+        <rect x="2" y="6" width="3" height="4"/>
+        <rect x="5" y="5" width="1" height="6"/>
+        <rect x="6" y="4" width="1" height="8"/>
+        <rect x="7" y="3" width="1" height="10"/>
+        <rect x="10" y="5" width="1" height="1"/>
+        <rect x="11" y="6" width="1" height="4"/>
+        <rect x="10" y="10" width="1" height="1"/>
+        <rect x="12" y="3" width="1" height="1"/>
+        <rect x="13" y="4" width="1" height="8"/>
+        <rect x="12" y="12" width="1" height="1"/>
+      </symbol>
+      <symbol id="i-speaker-mute" viewBox="0 0 16 16">
+        <rect x="2" y="6" width="3" height="4"/>
+        <rect x="5" y="5" width="1" height="6"/>
+        <rect x="6" y="4" width="1" height="8"/>
+        <rect x="7" y="3" width="1" height="10"/>
+        <rect x="10" y="5" width="1" height="2"/><rect x="11" y="6" width="1" height="2"/>
+        <rect x="12" y="7" width="1" height="2"/><rect x="13" y="8" width="1" height="2"/>
+        <rect x="13" y="5" width="1" height="2"/><rect x="12" y="6" width="1" height="2"/>
+        <rect x="11" y="7" width="1" height="2"/><rect x="10" y="8" width="1" height="2"/>
+      </symbol>
+      <symbol id="i-note" viewBox="0 0 16 16">
+        <rect x="5" y="10" width="4" height="3"/>
+        <rect x="8" y="3" width="1" height="7"/>
+        <rect x="9" y="3" width="2" height="1"/>
+        <rect x="11" y="4" width="1" height="3"/>
+        <rect x="10" y="6" width="1" height="1"/>
+      </symbol>
+      <symbol id="i-note-mute" viewBox="0 0 16 16">
+        <rect x="5" y="10" width="4" height="3"/>
+        <rect x="8" y="3" width="1" height="7"/>
+        <rect x="9" y="3" width="2" height="1"/>
+        <rect x="11" y="4" width="1" height="3"/>
+        <rect x="10" y="6" width="1" height="1"/>
+        <rect x="2" y="2" width="1" height="2"/><rect x="3" y="3" width="1" height="2"/>
+        <rect x="4" y="4" width="1" height="2"/><rect x="5" y="5" width="1" height="2"/>
+        <rect x="6" y="6" width="1" height="2"/><rect x="7" y="7" width="1" height="2"/>
+        <rect x="8" y="8" width="1" height="2"/><rect x="9" y="9" width="1" height="2"/>
+        <rect x="10" y="10" width="1" height="2"/><rect x="11" y="11" width="1" height="2"/>
+        <rect x="12" y="12" width="1" height="2"/><rect x="13" y="13" width="1" height="1"/>
+      </symbol>
+      <symbol id="i-check" viewBox="0 0 16 16">
+        <rect x="2" y="8" width="2" height="2"/><rect x="4" y="10" width="2" height="2"/>
+        <rect x="6" y="8" width="2" height="2"/><rect x="8" y="6" width="2" height="2"/>
+        <rect x="10" y="4" width="2" height="2"/><rect x="12" y="2" width="2" height="2"/>
+      </symbol>
+      <symbol id="i-x" viewBox="0 0 16 16">
+        <rect x="2" y="2" width="2" height="2"/><rect x="4" y="4" width="2" height="2"/>
+        <rect x="6" y="6" width="2" height="2"/><rect x="8" y="8" width="2" height="2"/>
+        <rect x="10" y="10" width="2" height="2"/><rect x="12" y="12" width="2" height="2"/>
+        <rect x="12" y="2" width="2" height="2"/><rect x="10" y="4" width="2" height="2"/>
+        <rect x="8" y="6" width="2" height="2"/><rect x="6" y="8" width="2" height="2"/>
+        <rect x="4" y="10" width="2" height="2"/><rect x="2" y="12" width="2" height="2"/>
+      </symbol>
+      <symbol id="i-tri" viewBox="0 0 16 16">
+        <rect x="4" y="2" width="2" height="12"/>
+        <rect x="6" y="4" width="2" height="8"/>
+        <rect x="8" y="6" width="2" height="4"/>
+        <rect x="10" y="7" width="1" height="2"/>
+      </symbol>
+      <symbol id="i-seed" viewBox="0 0 16 16">
+        <rect x="6" y="3" width="4" height="1"/>
+        <rect x="5" y="4" width="6" height="1"/>
+        <rect x="4" y="5" width="8" height="5"/>
+        <rect x="5" y="10" width="6" height="1"/>
+        <rect x="6" y="11" width="4" height="1"/>
+        <rect x="7" y="12" width="2" height="1"/>
+      </symbol>
+      <symbol id="i-sprout" viewBox="0 0 16 16">
+        <rect x="7" y="8" width="2" height="5"/>
+        <rect x="3" y="3" width="3" height="1"/>
+        <rect x="2" y="4" width="5" height="2"/>
+        <rect x="3" y="6" width="4" height="1"/>
+        <rect x="5" y="7" width="2" height="1"/>
+        <rect x="10" y="3" width="3" height="1"/>
+        <rect x="9" y="4" width="5" height="2"/>
+        <rect x="9" y="6" width="4" height="1"/>
+        <rect x="9" y="7" width="2" height="1"/>
+      </symbol>
+      <symbol id="i-coin" viewBox="0 0 16 16">
+        <rect x="5" y="2" width="6" height="1"/>
+        <rect x="3" y="3" width="10" height="1"/>
+        <rect x="2" y="4" width="12" height="8"/>
+        <rect x="3" y="12" width="10" height="1"/>
+        <rect x="5" y="13" width="6" height="1"/>
+        <rect class="ic-s" x="7" y="5" width="2" height="6"/>
+      </symbol>
+      <symbol id="i-cursor-plus" viewBox="0 0 16 16">
+        <rect x="6" y="1" width="4" height="14"/>
+        <rect x="1" y="6" width="14" height="4"/>
+        <rect class="ic-s" x="7" y="2" width="2" height="12"/>
+        <rect class="ic-s" x="2" y="7" width="12" height="2"/>
+      </symbol>
+      <symbol id="i-cursor-point" viewBox="0 0 16 16">
+        <rect x="4" y="1" width="1" height="11"/>
+        <rect x="5" y="2" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/>
+        <rect x="7" y="4" width="1" height="1"/><rect x="8" y="5" width="1" height="1"/>
+        <rect x="9" y="6" width="1" height="1"/><rect x="10" y="7" width="1" height="1"/>
+        <rect x="11" y="8" width="1" height="1"/>
+        <rect x="7" y="9" width="5" height="1"/>
+        <rect x="6" y="10" width="1" height="1"/><rect x="6" y="11" width="1" height="1"/>
+        <rect x="4" y="12" width="3" height="1"/>
+        <rect class="ic-s" x="5" y="3" width="1" height="1"/>
+        <rect class="ic-s" x="5" y="4" width="2" height="1"/>
+        <rect class="ic-s" x="5" y="5" width="3" height="1"/>
+        <rect class="ic-s" x="5" y="6" width="4" height="1"/>
+        <rect class="ic-s" x="5" y="7" width="5" height="1"/>
+        <rect class="ic-s" x="5" y="8" width="6" height="1"/>
+        <rect class="ic-s" x="5" y="9" width="2" height="1"/>
+        <rect class="ic-s" x="5" y="10" width="1" height="1"/>
+        <rect class="ic-s" x="5" y="11" width="1" height="1"/>
+      </symbol>
+      <symbol id="i8-check" viewBox="0 0 8 8">
+        <rect x="0" y="4" width="1" height="2"/><rect x="1" y="5" width="1" height="2"/>
+        <rect x="2" y="6" width="1" height="2"/><rect x="3" y="5" width="1" height="2"/>
+        <rect x="4" y="4" width="1" height="2"/><rect x="5" y="3" width="1" height="2"/>
+        <rect x="6" y="2" width="1" height="2"/><rect x="7" y="1" width="1" height="2"/>
+      </symbol>
+      <symbol id="i8-x" viewBox="0 0 8 8">
+        <rect x="1" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/>
+        <rect x="3" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/>
+        <rect x="5" y="5" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/>
+        <rect x="6" y="1" width="1" height="1"/><rect x="5" y="2" width="1" height="1"/>
+        <rect x="4" y="3" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/>
+        <rect x="2" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/>
+      </symbol>
+      <symbol id="i8-plus" viewBox="0 0 8 8">
+        <rect x="3" y="1" width="2" height="6"/>
+        <rect x="1" y="3" width="6" height="2"/>
+      </symbol>
+      <symbol id="i8-minus" viewBox="0 0 8 8">
+        <rect x="1" y="3" width="6" height="2"/>
+      </symbol>
+      <symbol id="i8-tri" viewBox="0 0 8 8">
+        <rect x="2" y="1" width="2" height="6"/>
+        <rect x="4" y="2" width="2" height="4"/>
+        <rect x="6" y="3" width="1" height="2"/>
+      </symbol>
+      <symbol id="i-seed8" viewBox="0 0 8 8">
+        <rect x="3" y="0" width="2" height="1"/>
+        <rect x="2" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/>
+        <rect x="1" y="2" width="1" height="3"/><rect x="6" y="2" width="1" height="3"/>
+        <rect x="2" y="5" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/>
+        <rect x="3" y="6" width="2" height="1"/>
+        <rect style="fill:var(--seed-meat, currentColor)" x="3" y="1" width="2" height="1"/>
+        <rect style="fill:var(--seed-meat, currentColor)" x="2" y="2" width="4" height="3"/>
+        <rect style="fill:var(--seed-meat, currentColor)" x="3" y="5" width="2" height="1"/>
+      </symbol>
+      <symbol id="s-tendril" viewBox="0 0 12 12">
+        <rect x="5" y="7" width="1" height="5"/>
+        <rect x="4" y="4" width="1" height="3"/>
+        <rect x="5" y="3" width="3" height="1"/>
+        <rect x="7" y="4" width="1" height="2"/>
+        <rect x="6" y="5" width="1" height="1"/>
+        <rect x="6" y="9" width="1" height="1"/><rect x="7" y="8" width="1" height="1"/>
+        <rect x="4" y="9" width="1" height="1"/><rect x="3" y="8" width="1" height="1"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- ================= HERO: the asset sheet ================= -->
+  <header class="hero">
+    <p class="hero-credit">Sprout &middot; cozy farm UI kit &middot; homage to Sprout Lands by Cup Nooble</p>
+
+    <svg class="spr-i hero-seed" style="top:10%; left:3%;" aria-hidden="true"><use href="#i-seed"/></svg>
+    <svg class="spr-i hero-seed hero-seed--leaf" style="top:52%; left:6%;" aria-hidden="true"><use href="#i-sprout"/></svg>
+    <svg class="spr-i--2 spr-i hero-seed" style="top:78%; left:12%;" aria-hidden="true"><use href="#i-seed"/></svg>
+    <svg class="spr-i hero-seed hero-seed--leaf" style="top:14%; right:4%;" aria-hidden="true"><use href="#i-sprout"/></svg>
+    <svg class="spr-i--2 spr-i hero-seed" style="top:48%; right:8%;" aria-hidden="true"><use href="#i-seed"/></svg>
+    <svg class="spr-i hero-seed" style="top:82%; right:5%;" aria-hidden="true"><use href="#i-seed"/></svg>
+
+    <div class="hero-sheet">
+
+      <div class="sheet-group">
+        <div class="state-row">
+          <span class="spr-btn"><span class="spr-btn-body"><span class="spr-btn-face"><span>PLANT</span></span></span></span>
+          <svg class="spr-i spr-i--2 state-arrow" aria-hidden="true"><use href="#i-tri"/></svg>
+          <span class="spr-btn is-hover"><span class="spr-btn-body"><span class="spr-btn-face"><span>PLANT</span></span></span></span>
+          <svg class="spr-i spr-i--2 state-arrow" aria-hidden="true"><use href="#i-tri"/></svg>
+          <span class="spr-btn is-pressed"><span class="spr-btn-body"><span class="spr-btn-face"><span>PLANT</span></span></span></span>
+        </div>
+        <div class="state-row">
+          <span class="spr-btn is-disabled"><span class="spr-btn-body"><span class="spr-btn-face"><span>SLEEP</span></span></span></span>
+          <button class="spr-btn spr-btn--icon" type="button" aria-label="Confirm">
+            <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--2" aria-hidden="true"><use href="#i-check"/></svg></span></span>
+          </button>
+          <button class="spr-btn spr-btn--icon" type="button" aria-label="Cancel">
+            <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--2" aria-hidden="true"><use href="#i-x"/></svg></span></span>
+          </button>
+        </div>
+        <p class="sheet-cap">Biscuit button &middot; rest, hover, pressed</p>
+
+        <div class="state-row" style="margin-top: calc(4 * var(--px));">
+          <div class="spr-seg" role="img" aria-label="Volume 2 of 8">
+            <i class="on"></i><i class="on"></i><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i>
+          </div>
+        </div>
+        <div class="state-row">
+          <div class="spr-seg" role="img" aria-label="Volume 5 of 8">
+            <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="off"></i><i class="off"></i><i class="off"></i>
+          </div>
+        </div>
+        <div class="state-row">
+          <div class="spr-seg" role="img" aria-label="Volume 8 of 8">
+            <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i>
+          </div>
+        </div>
+        <p class="sheet-cap">Segment bars</p>
+
+        <div class="spr-slider" style="margin-top: calc(3 * var(--px));">
+          <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" data-step="-1" aria-label="Lower value">
+            <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-minus"/></svg></span></span>
+          </button>
+          <span class="spr-rail"><input class="spr-range" type="range" min="0" max="8" value="5" aria-label="Hero demo slider" /></span>
+          <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" data-step="1" aria-label="Raise value">
+            <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-plus"/></svg></span></span>
+          </button>
+        </div>
+        <p class="sheet-cap">Wooden slider</p>
+      </div>
+
+      <div class="sheet-group">
+        <div class="spr-panel hero-panel">
+          <span class="spr-panel-shell"><span class="spr-panel-face">
+            <p class="spr-panel-title">Settings</p>
+            <div class="spr-row">
+              <svg class="spr-i i-when-on" aria-hidden="true"><use href="#i-speaker"/></svg>
+              <svg class="spr-i i-when-off" aria-hidden="true"><use href="#i-speaker-mute"/></svg>
+              <div>
+                <p class="spr-row-label">Sound</p>
+                <div class="spr-seg" role="img" aria-label="Sound volume 5 of 8">
+                  <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="off"></i><i class="off"></i><i class="off"></i>
+                </div>
+              </div>
+              <label class="spr-toggle" style="margin-left:auto;">
+                <input class="spr-sr" type="checkbox" checked />
+                <span class="spr-toggle-outline"><span class="spr-toggle-track"><span class="spr-toggle-knob"></span></span></span>
+                <span class="spr-sr">Sound on</span>
+              </label>
+            </div>
+            <div class="spr-row">
+              <svg class="spr-i i-when-on" aria-hidden="true"><use href="#i-note"/></svg>
+              <svg class="spr-i i-when-off" aria-hidden="true"><use href="#i-note-mute"/></svg>
+              <div>
+                <p class="spr-row-label">Music</p>
+                <div class="spr-seg" role="img" aria-label="Music volume 3 of 8">
+                  <i class="on"></i><i class="on"></i><i class="on"></i><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i>
+                </div>
+              </div>
+              <label class="spr-toggle" style="margin-left:auto;">
+                <input class="spr-sr" type="checkbox" />
+                <span class="spr-toggle-outline"><span class="spr-toggle-track"><span class="spr-toggle-knob"></span></span></span>
+                <span class="spr-sr">Music on</span>
+              </label>
+            </div>
+          </span></span>
+          <button class="spr-btn spr-btn--icon spr-btn--sm spr-panel-close" type="button" aria-label="Close settings">
+            <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-x"/></svg></span></span>
+          </button>
+        </div>
+        <p class="sheet-cap">Settings panel &middot; sound on, music muted</p>
+      </div>
+
+      <div class="sheet-group">
+        <div class="state-row" style="align-items: flex-start; gap: calc(6 * var(--px));">
+          <div class="spr-dpad" role="group" aria-label="Direction pad">
+            <span class="pad-c" aria-hidden="true"></span>
+            <button class="spr-btn spr-btn--cocoa spr-btn--icon" type="button" aria-label="Up">
+              <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8 spr-rot270" aria-hidden="true"><use href="#i8-tri"/></svg></span></span>
+            </button>
+            <span class="pad-c" aria-hidden="true"></span>
+            <button class="spr-btn spr-btn--cocoa spr-btn--icon" type="button" aria-label="Left">
+              <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8 spr-rot180" aria-hidden="true"><use href="#i8-tri"/></svg></span></span>
+            </button>
+            <span class="pad-c" aria-hidden="true"></span>
+            <button class="spr-btn spr-btn--cocoa spr-btn--icon" type="button" aria-label="Right">
+              <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-tri"/></svg></span></span>
+            </button>
+            <span class="pad-c" aria-hidden="true"></span>
+            <button class="spr-btn spr-btn--cocoa spr-btn--icon" type="button" aria-label="Down">
+              <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8 spr-rot90" aria-hidden="true"><use href="#i8-tri"/></svg></span></span>
+            </button>
+            <span class="pad-c" aria-hidden="true"></span>
+          </div>
+          <div class="spr-slider spr-slider--v">
+            <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" data-step="1" aria-label="Raise value">
+              <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-plus"/></svg></span></span>
+            </button>
+            <span class="spr-rail spr-rail--v"><input class="spr-range spr-range--v" type="range" min="0" max="8" value="6" aria-label="Vertical demo slider" /></span>
+            <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" data-step="-1" aria-label="Lower value">
+              <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-minus"/></svg></span></span>
+            </button>
+          </div>
+        </div>
+        <p class="sheet-cap">D-pad &middot; vertical slider</p>
+        <div class="state-row" style="margin-top: calc(2 * var(--px)); gap: calc(5 * var(--px));">
+          <svg class="spr-i" style="color: var(--cocoa);" role="img" aria-label="Plus cursor"><use href="#i-cursor-plus"/></svg>
+          <svg class="spr-i" style="color: var(--cocoa);" role="img" aria-label="Pointer cursor"><use href="#i-cursor-point"/></svg>
+          <svg class="spr-i" style="color: var(--cocoa);" role="img" aria-label="Coin"><use href="#i-coin"/></svg>
+        </div>
+        <p class="sheet-cap">Cursors &middot; coin</p>
+      </div>
+    </div>
+
+    <div class="hero-sign-row">
+      <div class="spr-sign spr-sign--big">
+        <svg class="spr-tendril spr-tendril--l" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+        <svg class="spr-tendril spr-tendril--r" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+        <span class="spr-sign-shell"><span class="spr-sign-snow">
+          <h1 class="spr-sign-face">Sprout<small>UI kit</small></h1>
+        </span></span>
+      </div>
+    </div>
+  </header>
+
+  <p class="intro">
+    Every control on this board is a physical prop: buttons are baked biscuits,
+    sliders are wooden planks, section headers are painted signs. Everything is
+    drawn on a 3px pixel grid - no smooth curve anywhere on the page.
+  </p>
+
+  <!-- ================= FOUNDATIONS ================= -->
+  <section class="sec">
+    <div class="sec-head">
+      <div class="spr-sign">
+        <svg class="spr-tendril spr-tendril--l" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+        <svg class="spr-tendril spr-tendril--r" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+        <span class="spr-sign-shell"><span class="spr-sign-snow">
+          <h2 class="spr-sign-face">Foundations</h2>
+        </span></span>
+      </div>
+    </div>
+    <p class="note">
+      Ten pinned colors and one pixel unit. Click a seed packet to copy its hex.
+      The four cocoa shades below the packets are derived - bevels for dark
+      pieces plus two verified text inks.
+    </p>
+
+    <div class="spr-plate tray">
+      <p class="tray-cap">Seed packets &middot; click to copy</p>
+      <div class="packet-grid">
+        <button class="spr-packet" type="button" data-hex="#b8cf70">
+          <span class="spr-packet-shell"><span class="spr-packet-face">
+            <span class="spr-packet-swatch" style="background:#b8cf70;"></span>
+            <span class="spr-packet-name">Matcha</span><span class="spr-packet-hex">#b8cf70</span>
+          </span></span>
+        </button>
+        <button class="spr-packet" type="button" data-hex="#a3bd5c">
+          <span class="spr-packet-shell"><span class="spr-packet-face">
+            <span class="spr-packet-swatch" style="background:#a3bd5c;"></span>
+            <span class="spr-packet-name">Matcha deep</span><span class="spr-packet-hex">#a3bd5c</span>
+          </span></span>
+        </button>
+        <button class="spr-packet" type="button" data-hex="#ecd7ab">
+          <span class="spr-packet-shell"><span class="spr-packet-face">
+            <span class="spr-packet-swatch" style="background:#ecd7ab;"></span>
+            <span class="spr-packet-name">Biscuit</span><span class="spr-packet-hex">#ecd7ab</span>
+          </span></span>
+        </button>
+        <button class="spr-packet" type="button" data-hex="#f6ead0">
+          <span class="spr-packet-shell"><span class="spr-packet-face">
+            <span class="spr-packet-swatch" style="background:#f6ead0;"></span>
+            <span class="spr-packet-name">Cream</span><span class="spr-packet-hex">#f6ead0</span>
+          </span></span>
+        </button>
+        <button class="spr-packet" type="button" data-hex="#d9b98a">
+          <span class="spr-packet-shell"><span class="spr-packet-face">
+            <span class="spr-packet-swatch" style="background:#d9b98a;"></span>
+            <span class="spr-packet-name">Biscuit shade</span><span class="spr-packet-hex">#d9b98a</span>
+          </span></span>
+        </button>
+        <button class="spr-packet" type="button" data-hex="#b08d62">
+          <span class="spr-packet-shell"><span class="spr-packet-face">
+            <span class="spr-packet-swatch" style="background:#b08d62;"></span>
+            <span class="spr-packet-name">Crust</span><span class="spr-packet-hex">#b08d62</span>
+          </span></span>
+        </button>
+        <button class="spr-packet" type="button" data-hex="#6b5346">
+          <span class="spr-packet-shell"><span class="spr-packet-face">
+            <span class="spr-packet-swatch" style="background:#6b5346;"></span>
+            <span class="spr-packet-name">Cocoa</span><span class="spr-packet-hex">#6b5346</span>
+          </span></span>
+        </button>
+        <button class="spr-packet" type="button" data-hex="#9ac059">
+          <span class="spr-packet-shell"><span class="spr-packet-face">
+            <span class="spr-packet-swatch" style="background:#9ac059;"></span>
+            <span class="spr-packet-name">Leaf</span><span class="spr-packet-hex">#9ac059</span>
+          </span></span>
+        </button>
+        <button class="spr-packet" type="button" data-hex="#7da644">
+          <span class="spr-packet-shell"><span class="spr-packet-face">
+            <span class="spr-packet-swatch" style="background:#7da644;"></span>
+            <span class="spr-packet-name">Leaf deep</span><span class="spr-packet-hex">#7da644</span>
+          </span></span>
+        </button>
+        <button class="spr-packet" type="button" data-hex="#fdfdf5">
+          <span class="spr-packet-shell"><span class="spr-packet-face">
+            <span class="spr-packet-swatch" style="background:#fdfdf5;"></span>
+            <span class="spr-packet-name">Snow</span><span class="spr-packet-hex">#fdfdf5</span>
+          </span></span>
+        </button>
+      </div>
+      <div class="tray-grid" style="margin-top: calc(5 * var(--px));">
+        <div class="spec"><span style="width:calc(8*var(--px)); height:calc(8*var(--px)); background:#4f3b31;"></span><span class="spec-label">cocoa deep &middot; text on greens</span></div>
+        <div class="spec"><span style="width:calc(8*var(--px)); height:calc(8*var(--px)); background:#7c6455;"></span><span class="spec-label">cocoa soft &middot; placeholder</span></div>
+        <div class="spec"><span style="width:calc(8*var(--px)); height:calc(8*var(--px)); background:#7d6252;"></span><span class="spec-label">cocoa light &middot; dark bevel top</span></div>
+        <div class="spec"><span style="width:calc(8*var(--px)); height:calc(8*var(--px)); background:#554136;"></span><span class="spec-label">cocoa dark &middot; dark bevel base</span></div>
+      </div>
+    </div>
+
+    <div class="spr-plate tray">
+      <p class="tray-cap">Type &middot; Silkscreen display, system body</p>
+      <div class="tline"><span class="spec-label">40px &middot; hero sign</span><span class="spr-pixel-text px40">Harvest day</span></div>
+      <div class="tline"><span class="spec-label">30px &middot; big label</span><span class="spr-pixel-text px30">Barn level 3</span></div>
+      <div class="tline"><span class="spec-label">20px &middot; sign, section</span><span class="spr-pixel-text px20">Seed shop</span></div>
+      <div class="tline"><span class="spec-label">15px &middot; button label</span><span class="spr-pixel-text px15">Water the crops</span></div>
+      <div class="tline"><span class="spec-label">10px &middot; caption</span><span class="spr-pixel-text px10">Stamina 6 of 8 &middot; rain tomorrow</span></div>
+      <div class="tline">
+        <span class="spec-label">14px &middot; body</span>
+        <p class="tbody-sample">
+          Body copy is a plain system sans so paragraphs stay easy on the eyes;
+          the pixel voice is saved for labels and signs. On green grounds body
+          ink darkens one step to keep its footing.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONSTRUCTION ================= -->
+  <section class="sec">
+    <div class="sec-head">
+      <div class="spr-sign">
+        <svg class="spr-tendril spr-tendril--l" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+        <svg class="spr-tendril spr-tendril--r" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+        <span class="spr-sign-shell"><span class="spr-sign-snow">
+          <h2 class="spr-sign-face">Construction</h2>
+        </span></span>
+      </div>
+    </div>
+    <p class="note">
+      No border-radius on this page. Corners are clip-path staircases stepping
+      two pixel-units in; edges are one-unit crust layers; depth is a one-unit
+      bevel - light on top, dark below. Press a biscuit and the bevel goes away
+      while the label drops exactly one unit.
+    </p>
+
+    <div class="spr-plate tray">
+      <p class="tray-cap">Anatomy &middot; the same markup at 1x, 2x and 4x</p>
+      <div class="anatomy">
+        <div class="spec">
+          <button class="spr-btn" type="button"><span class="spr-btn-body"><span class="spr-btn-face"><span>BAKE</span></span></span></button>
+          <span class="spec-label">1x &middot; --px: 3px</span>
+        </div>
+        <div class="spec x2">
+          <button class="spr-btn" type="button"><span class="spr-btn-body"><span class="spr-btn-face"><span>BAKE</span></span></span></button>
+          <span class="spec-label" style="--px: 3px;">2x &middot; --px: 6px</span>
+        </div>
+        <div class="spec x4">
+          <div class="corner-block" role="img" aria-label="Corner staircase detail at 4x"><b></b></div>
+          <span class="spec-label" style="--px: 3px;">4x corner &middot; two steps of one unit</span>
+        </div>
+        <ul class="legend">
+          <li><i style="background: var(--crust);"></i> outline &middot; crust, 1 unit</li>
+          <li><i style="background: var(--cream);"></i> top bevel &middot; cream, 1 unit</li>
+          <li><i style="background: var(--biscuit);"></i> face &middot; biscuit</li>
+          <li><i style="background: var(--biscuit-shade);"></i> bottom bevel &middot; shade, 1 unit</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="spr-plate tray">
+      <p class="tray-cap">Two ways to lay pixels</p>
+      <div class="tray-grid">
+        <div class="spec">
+          <div class="x4" style="position: relative; padding-top: calc(3 * 16px);">
+            <div class="spr-tip" style="position: static;">
+              <span class="spr-tip-bubble" style="position: static; translate: none; display: inline-block;">
+                <span class="spr-tip-shell" style="position: relative;">
+                  <span class="spr-tip-face">RIPE!</span>
+                  <span class="spr-tip-tail" aria-hidden="true"></span>
+                </span>
+              </span>
+            </div>
+          </div>
+          <span class="spec-label">tooltip tail &middot; stacked box-shadow pixels, 4x</span>
+        </div>
+        <div class="spec">
+          <svg class="spr-i x2" style="width: calc(16 * 6px); height: calc(16 * 6px); color: var(--cocoa);" role="img" aria-label="Sprout icon enlarged"><use href="#i-sprout"/></svg>
+          <span class="spec-label">sprite &middot; integer SVG rects, crispEdges</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PIECES ================= -->
+  <section class="sec">
+    <div class="sec-head">
+      <div class="spr-sign">
+        <svg class="spr-tendril spr-tendril--l" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+        <svg class="spr-tendril spr-tendril--r" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+        <span class="spr-sign-shell"><span class="spr-sign-snow">
+          <h2 class="spr-sign-face">Pieces</h2>
+        </span></span>
+      </div>
+    </div>
+    <p class="note">
+      The full pantry. Everything here is a real control - press, drag, tab
+      through it. Focus rings are two-pixel cocoa outlines around the whole prop.
+    </p>
+
+    <div class="spr-plate tray">
+      <p class="tray-cap">Buttons</p>
+      <div class="tray-grid">
+        <div class="spec">
+          <button class="spr-btn spr-btn--sm" type="button"><span class="spr-btn-body"><span class="spr-btn-face"><span>FEED</span></span></span></button>
+          <span class="spec-label">small</span>
+        </div>
+        <div class="spec">
+          <button class="spr-btn" type="button"><span class="spr-btn-body"><span class="spr-btn-face"><span>WATER</span></span></span></button>
+          <span class="spec-label">default</span>
+        </div>
+        <div class="spec">
+          <button class="spr-btn spr-btn--lg" type="button"><span class="spr-btn-body"><span class="spr-btn-face"><span>HARVEST</span></span></span></button>
+          <span class="spec-label">large</span>
+        </div>
+        <div class="spec">
+          <button class="spr-btn spr-btn--cocoa" type="button"><span class="spr-btn-body"><span class="spr-btn-face"><span>LEAVE</span></span></span></button>
+          <span class="spec-label">cocoa</span>
+        </div>
+        <div class="spec">
+          <button class="spr-btn" type="button" disabled><span class="spr-btn-body"><span class="spr-btn-face"><span>LOCKED</span></span></span></button>
+          <span class="spec-label">disabled</span>
+        </div>
+        <div class="spec">
+          <div class="state-row">
+            <button class="spr-btn spr-btn--icon" type="button" aria-label="Confirm"><span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--2" aria-hidden="true"><use href="#i-check"/></svg></span></span></button>
+            <button class="spr-btn spr-btn--icon" type="button" aria-label="Cancel"><span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--2" aria-hidden="true"><use href="#i-x"/></svg></span></span></button>
+            <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" aria-label="Add"><span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-plus"/></svg></span></span></button>
+            <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" aria-label="Remove"><span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-minus"/></svg></span></span></button>
+          </div>
+          <span class="spec-label">icon squares</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="spr-plate tray">
+      <p class="tray-cap">Toggles, checks, seeds</p>
+      <div class="tray-grid">
+        <div class="spec">
+          <div class="state-row">
+            <label class="spr-toggle"><input class="spr-sr" type="checkbox" checked /><span class="spr-toggle-outline"><span class="spr-toggle-track"><span class="spr-toggle-knob"></span></span></span><span class="spr-sr">Tool tips on</span></label>
+            <label class="spr-toggle"><input class="spr-sr" type="checkbox" /><span class="spr-toggle-outline"><span class="spr-toggle-track"><span class="spr-toggle-knob"></span></span></span><span class="spr-sr">Autosave on</span></label>
+            <label class="spr-toggle"><input class="spr-sr" type="checkbox" disabled /><span class="spr-toggle-outline"><span class="spr-toggle-track"><span class="spr-toggle-knob"></span></span></span><span class="spr-sr">Cloud sync (locked)</span></label>
+          </div>
+          <span class="spec-label">toggle &middot; on / off / locked</span>
+        </div>
+        <div class="spec">
+          <div class="state-row">
+            <label class="spr-check"><input class="spr-sr" type="checkbox" checked /><span class="spr-check-box"><span class="spr-check-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-check"/></svg></span></span><span class="spr-check-text">Rain alerts</span></label>
+            <label class="spr-check"><input class="spr-sr" type="checkbox" /><span class="spr-check-box"><span class="spr-check-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-check"/></svg></span></span><span class="spr-check-text">Night owls</span></label>
+          </div>
+          <span class="spec-label">checkbox</span>
+        </div>
+        <div class="spec">
+          <fieldset style="border: 0; margin: 0; padding: 0;">
+            <legend class="spr-sr">Watering time</legend>
+            <div class="state-row">
+              <label class="spr-radio"><input class="spr-sr" type="radio" name="water" checked /><svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg><span class="spr-check-text">Dawn</span></label>
+              <label class="spr-radio"><input class="spr-sr" type="radio" name="water" /><svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg><span class="spr-check-text">Noon</span></label>
+              <label class="spr-radio"><input class="spr-sr" type="radio" name="water" /><svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg><span class="spr-check-text">Dusk</span></label>
+            </div>
+          </fieldset>
+          <span class="spec-label">radio &middot; seed dots</span>
+        </div>
+        <div class="spec">
+          <nav class="spr-pager" aria-label="Almanac pages" id="demo-pager">
+            <button type="button" aria-label="Page 1"><svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg></button>
+            <button type="button" aria-label="Page 2" aria-current="page"><svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg></button>
+            <button type="button" aria-label="Page 3"><svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg></button>
+            <button type="button" aria-label="Page 4"><svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg></button>
+            <button type="button" aria-label="Page 5"><svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg></button>
+          </nav>
+          <span class="spec-label">pagination &middot; planted row</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="spr-plate tray">
+      <p class="tray-cap">Volume &amp; sliders &middot; wired together</p>
+      <div class="tray-grid">
+        <div class="spec">
+          <div class="spr-slider">
+            <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" data-step="-1" aria-label="Lower volume">
+              <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-minus"/></svg></span></span>
+            </button>
+            <span class="spr-rail"><input class="spr-range" type="range" id="vol-range" min="0" max="8" value="5" aria-label="Volume" /></span>
+            <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" data-step="1" aria-label="Raise volume">
+              <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-plus"/></svg></span></span>
+            </button>
+          </div>
+          <div class="spr-seg" id="vol-seg" role="img" aria-label="Volume 5 of 8" style="margin-top: calc(2 * var(--px));">
+            <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="off"></i><i class="off"></i><i class="off"></i>
+          </div>
+          <span class="spec-label">drag the plank, the dashes follow</span>
+        </div>
+        <div class="spec">
+          <div class="spr-slider spr-slider--v">
+            <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" data-step="1" aria-label="Raise value">
+              <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-plus"/></svg></span></span>
+            </button>
+            <span class="spr-rail spr-rail--v"><input class="spr-range spr-range--v" type="range" min="0" max="8" value="3" aria-label="Well depth" /></span>
+            <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" data-step="-1" aria-label="Lower value">
+              <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-minus"/></svg></span></span>
+            </button>
+          </div>
+          <span class="spec-label">vertical</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="spr-plate tray">
+      <p class="tray-cap">Tips, fields</p>
+      <div class="tray-grid">
+        <div class="spec spec--tip">
+          <div class="spr-tip">
+            <span class="spr-tip-bubble">
+              <span class="spr-tip-shell" style="position: relative;">
+                <span class="spr-tip-face">RIPE IN 2 DAYS</span>
+                <span class="spr-tip-tail" aria-hidden="true"></span>
+              </span>
+            </span>
+            <svg class="spr-i" style="color: var(--cocoa-deep);" role="img" aria-label="Seed"><use href="#i-seed"/></svg>
+          </div>
+          <span class="spec-label">tooltip &middot; always shown</span>
+        </div>
+        <div class="spec spec--tip">
+          <div class="spr-tip spr-tip--hover">
+            <span class="spr-tip-bubble">
+              <span class="spr-tip-shell" style="position: relative;">
+                <span class="spr-tip-face">REFILLS AT THE WELL</span>
+                <span class="spr-tip-tail" aria-hidden="true"></span>
+              </span>
+            </span>
+            <button class="spr-btn" type="button"><span class="spr-btn-body"><span class="spr-btn-face"><span>WATER CAN</span></span></span></button>
+          </div>
+          <span class="spec-label">tooltip &middot; hover / focus the button</span>
+        </div>
+        <div class="spec">
+          <label class="spec-label" for="farm-name" style="align-self: flex-start;">Farm name</label>
+          <span class="spr-field-wrap"><span class="spr-field">
+            <input class="spr-input" id="farm-name" type="text" placeholder="e.g. Cloverdale" />
+          </span></span>
+          <span class="spec-label">input &middot; cocoa caret</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="spr-plate tray">
+      <p class="tray-cap">Sprites &middot; 16-cell and 8-cell grids</p>
+      <div class="tray-grid" style="color: var(--cocoa);">
+        <div class="spec"><svg class="spr-i" role="img" aria-label="Speaker"><use href="#i-speaker"/></svg><span class="spec-label">speaker</span></div>
+        <div class="spec"><svg class="spr-i" role="img" aria-label="Speaker muted"><use href="#i-speaker-mute"/></svg><span class="spec-label">muted</span></div>
+        <div class="spec"><svg class="spr-i" role="img" aria-label="Note"><use href="#i-note"/></svg><span class="spec-label">note</span></div>
+        <div class="spec"><svg class="spr-i" role="img" aria-label="Note muted"><use href="#i-note-mute"/></svg><span class="spec-label">note muted</span></div>
+        <div class="spec"><svg class="spr-i" role="img" aria-label="Check"><use href="#i-check"/></svg><span class="spec-label">check</span></div>
+        <div class="spec"><svg class="spr-i" role="img" aria-label="Cross"><use href="#i-x"/></svg><span class="spec-label">x</span></div>
+        <div class="spec"><svg class="spr-i" role="img" aria-label="Arrow"><use href="#i-tri"/></svg><span class="spec-label">arrow</span></div>
+        <div class="spec"><svg class="spr-i" role="img" aria-label="Seed"><use href="#i-seed"/></svg><span class="spec-label">seed</span></div>
+        <div class="spec"><svg class="spr-i" role="img" aria-label="Sprout"><use href="#i-sprout"/></svg><span class="spec-label">sprout</span></div>
+        <div class="spec"><svg class="spr-i" role="img" aria-label="Coin"><use href="#i-coin"/></svg><span class="spec-label">coin</span></div>
+        <div class="spec"><svg class="spr-i" role="img" aria-label="Plus cursor"><use href="#i-cursor-plus"/></svg><span class="spec-label">plus cursor</span></div>
+        <div class="spec"><svg class="spr-i" role="img" aria-label="Pointer"><use href="#i-cursor-point"/></svg><span class="spec-label">pointer</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= IN THE FIELD ================= -->
+  <section class="sec">
+    <div class="sec-head">
+      <div class="spr-sign">
+        <svg class="spr-tendril spr-tendril--l" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+        <svg class="spr-tendril spr-tendril--r" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+        <span class="spr-sign-shell"><span class="spr-sign-snow">
+          <h2 class="spr-sign-face">In the field</h2>
+        </span></span>
+      </div>
+    </div>
+    <p class="note">
+      The kit at work: a shop dialog assembled entirely from the pieces above.
+      Pick a packet with the seed dots, set a quantity, and the buy biscuit
+      keeps its own arithmetic.
+    </p>
+
+    <div class="shop">
+      <div class="shop-sign">
+        <div class="spr-sign">
+          <svg class="spr-tendril spr-tendril--l" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+          <svg class="spr-tendril spr-tendril--r" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+          <span class="spr-sign-shell"><span class="spr-sign-snow">
+            <h3 class="spr-sign-face">Seed shop</h3>
+          </span></span>
+        </div>
+      </div>
+      <div class="spr-panel">
+        <span class="spr-panel-shell"><span class="spr-panel-face">
+          <label class="shop-row">
+            <input class="spr-sr" type="radio" name="shop-item" data-price="8" data-name="Carrot seeds" checked />
+            <svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg>
+            <svg class="spr-i" aria-hidden="true"><use href="#i-seed"/></svg>
+            <span>
+              <span class="shop-item-name">Carrot seeds</span>
+              <span class="shop-item-note" style="display:block;">Grows in 3 days</span>
+            </span>
+            <span class="spr-seg shop-stock" role="img" aria-label="Stock 6 of 8">
+              <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="off"></i><i class="off"></i>
+            </span>
+            <span class="shop-price">8 <svg class="spr-i spr-i--2" aria-hidden="true"><use href="#i-coin"/></svg></span>
+          </label>
+          <label class="shop-row">
+            <input class="spr-sr" type="radio" name="shop-item" data-price="12" data-name="Pumpkin seeds" />
+            <svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg>
+            <svg class="spr-i" aria-hidden="true"><use href="#i-seed"/></svg>
+            <span>
+              <span class="shop-item-name">Pumpkin seeds</span>
+              <span class="shop-item-note" style="display:block;">Grows in 7 days</span>
+            </span>
+            <span class="spr-seg shop-stock" role="img" aria-label="Stock 4 of 8">
+              <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i>
+            </span>
+            <span class="shop-price">12 <svg class="spr-i spr-i--2" aria-hidden="true"><use href="#i-coin"/></svg></span>
+          </label>
+          <label class="shop-row" style="border-bottom: 0;">
+            <input class="spr-sr" type="radio" name="shop-item" data-price="20" data-name="Berry sprout" />
+            <svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg>
+            <svg class="spr-i" aria-hidden="true"><use href="#i-sprout"/></svg>
+            <span>
+              <span class="shop-item-name">Berry sprout</span>
+              <span class="shop-item-note" style="display:block;">Fruits every 2 days</span>
+            </span>
+            <span class="spr-seg shop-stock" role="img" aria-label="Stock 2 of 8">
+              <i class="on"></i><i class="on"></i><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i>
+            </span>
+            <span class="shop-price">20 <svg class="spr-i spr-i--2" aria-hidden="true"><use href="#i-coin"/></svg></span>
+          </label>
+
+          <div class="shop-qty">
+            <span class="spr-row-label">Qty</span>
+            <div class="spr-slider">
+              <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" data-step="-1" aria-label="Fewer packets">
+                <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-minus"/></svg></span></span>
+              </button>
+              <span class="spr-rail"><input class="spr-range" type="range" id="shop-qty" min="1" max="10" value="3" aria-label="Quantity" /></span>
+              <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" data-step="1" aria-label="More packets">
+                <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-plus"/></svg></span></span>
+              </button>
+            </div>
+            <span class="spr-row-label" id="shop-qty-out">3 packets</span>
+          </div>
+          <label class="spr-check" style="margin: calc(2 * var(--px)) 0;">
+            <input class="spr-sr" type="checkbox" />
+            <span class="spr-check-box"><span class="spr-check-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-check"/></svg></span></span>
+            <span class="spr-check-text">Plant right away</span>
+          </label>
+          <div class="shop-actions">
+            <button class="spr-btn spr-btn--cocoa" type="button"><span class="spr-btn-body"><span class="spr-btn-face"><span>LEAVE</span></span></span></button>
+            <button class="spr-btn" type="button" id="shop-buy"><span class="spr-btn-body"><span class="spr-btn-face"><span id="shop-buy-label">BUY 3 FOR 24</span><svg class="spr-i spr-i--2" aria-hidden="true"><use href="#i-coin"/></svg></span></span></button>
+          </div>
+        </span></span>
+        <button class="spr-btn spr-btn--icon spr-btn--sm spr-panel-close" type="button" aria-label="Close shop">
+          <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-x"/></svg></span></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="foot">
+    <div class="spr-sign foot-sign">
+      <svg class="spr-tendril spr-tendril--l" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+      <svg class="spr-tendril spr-tendril--r" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+      <span class="spr-sign-shell"><span class="spr-sign-snow">
+        <p class="spr-sign-face">Field notes</p>
+      </span></span>
+    </div>
+    <p>
+      Every crop, price, and stock level on this sheet is synthetic demo data
+      from an imaginary farm. Sprout is an exploration in the UIplayground
+      workspace - an original CSS/SVG homage to the
+      <em>Sprout Lands</em> UI asset pack by Cup Nooble. The style is
+      recreated from scratch; no assets were copied.
+    </p>
+    <a class="spr-btn" href="/index.html">
+      <span class="spr-btn-body"><span class="spr-btn-face"><span>ALL SYSTEMS</span></span></span>
+    </a>
+  </footer>
+
+  <script>
+    // copy hex from seed packets
+    document.querySelectorAll(".spr-packet").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const name = btn.querySelector(".spr-packet-name");
+        const old = name.textContent;
+        try { await navigator.clipboard.writeText(btn.dataset.hex); } catch (e) { /* clipboard blocked: still flash */ }
+        name.textContent = "COPIED!";
+        setTimeout(() => { name.textContent = old; }, 900);
+      });
+    });
+
+    // minus/plus steppers drive their sibling range
+    document.querySelectorAll(".spr-slider").forEach((wrap) => {
+      const range = wrap.querySelector("input[type=range]");
+      if (!range) { return; }
+      wrap.querySelectorAll("[data-step]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const d = Number(btn.dataset.step);
+          if (d > 0) { range.stepUp(d); } else { range.stepDown(-d); }
+          range.dispatchEvent(new Event("input", { bubbles: true }));
+        });
+      });
+    });
+
+    // volume slider paints its segment bar
+    const volRange = document.getElementById("vol-range");
+    const volSeg = document.getElementById("vol-seg");
+    function paintSeg(seg, value, max) {
+      Array.from(seg.children).forEach((dash, i) => {
+        dash.className = i < value ? "on" : "off";
+      });
+      seg.setAttribute("aria-label", "Volume " + value + " of " + max);
+    }
+    volRange.addEventListener("input", () => { paintSeg(volSeg, Number(volRange.value), 8); });
+
+    // pagination seeds
+    document.querySelectorAll("#demo-pager button").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("#demo-pager button").forEach((b) => { b.removeAttribute("aria-current"); });
+        btn.setAttribute("aria-current", "page");
+      });
+    });
+
+    // seed shop arithmetic
+    const qty = document.getElementById("shop-qty");
+    const qtyOut = document.getElementById("shop-qty-out");
+    const buyLabel = document.getElementById("shop-buy-label");
+    function shopUpdate() {
+      const item = document.querySelector("input[name=shop-item]:checked");
+      const n = Number(qty.value);
+      const total = n * Number(item.dataset.price);
+      qtyOut.textContent = n + (n === 1 ? " packet" : " packets");
+      buyLabel.textContent = "BUY " + n + " FOR " + total;
+    }
+    qty.addEventListener("input", shopUpdate);
+    document.querySelectorAll("input[name=shop-item]").forEach((r) => {
+      r.addEventListener("change", shopUpdate);
+    });
+    shopUpdate();
+  </script>
+</body>
+</html>

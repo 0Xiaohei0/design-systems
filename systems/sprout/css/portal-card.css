@@ -1,0 +1,144 @@
+/*
+Sprout's entrance card on the root portal. Scoped to .sys-spr; loaded by the
+portal only. Mirrors the Sprout tokens by value: matcha board, biscuit pieces
+with pixel-step corners and one-pixel bevels, Silkscreen display voice, toggle
+and segment bar as living specimens. No border-radius anywhere - corners step.
+*/
+
+.sys-spr {
+  --px: 3px;
+  background: #b8cf70;
+  color: #6b5346;
+  font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 20px 18px;
+}
+
+/* wooden sign header */
+.sys-spr .sign {
+  position: relative;
+  background: #9ac059;
+  border: var(--px) solid #fdfdf5;
+  box-shadow: 0 var(--px) 0 #7da644, 0 0 0 var(--px) #7da644;
+  padding: 7px 16px 6px;
+  clip-path: polygon(
+    0 var(--px), var(--px) var(--px), var(--px) 0,
+    calc(100% - var(--px)) 0, calc(100% - var(--px)) var(--px), 100% var(--px),
+    100% calc(100% - var(--px)), calc(100% - var(--px)) calc(100% - var(--px)),
+    calc(100% - var(--px)) 100%, var(--px) 100%,
+    var(--px) calc(100% - var(--px)), 0 calc(100% - var(--px))
+  );
+}
+
+.sys-spr h3 {
+  margin: 0;
+  font-family: "Silkscreen", monospace;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fdfdf5;
+  text-shadow: 0 2px 0 #7da644;
+}
+
+.sys-spr .status {
+  margin: 10px 0 10px;
+  font-family: "Silkscreen", monospace;
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6b5346;
+}
+
+.sys-spr p {
+  margin: 0 0 12px;
+  flex: 1;
+  font-size: 0.78rem;
+  line-height: 1.55;
+  text-align: center;
+  max-width: 34ch;
+}
+
+/* specimen row: toggle on + segment bar */
+.sys-spr .row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.sys-spr .toggle {
+  position: relative;
+  width: 46px;
+  height: 22px;
+  background: #9ac059;
+  box-shadow: 0 0 0 var(--px) #7da644;
+}
+
+.sys-spr .toggle .knob {
+  position: absolute;
+  right: -2px;
+  top: -3px;
+  width: 26px;
+  height: 26px;
+  background: #ecd7ab;
+  box-shadow: inset 0 var(--px) 0 #f6ead0, inset 0 calc(-1 * var(--px)) 0 #d9b98a,
+    0 0 0 var(--px) #b08d62;
+  clip-path: polygon(
+    0 25%, 25% 25%, 25% 0, 75% 0, 75% 25%, 100% 25%,
+    100% 75%, 75% 75%, 75% 100%, 25% 100%, 25% 75%, 0 75%
+  );
+}
+
+.sys-spr .segs {
+  display: flex;
+  gap: 4px;
+}
+
+.sys-spr .segs i {
+  width: 5px;
+  height: 18px;
+  background: #6b5346;
+}
+
+.sys-spr .segs i.empty {
+  background: transparent;
+  box-shadow: inset 0 0 0 2px #6b5346;
+}
+
+/* biscuit button */
+.sys-spr .enter {
+  display: inline-block;
+  background: #ecd7ab;
+  color: #6b5346;
+  text-decoration: none;
+  font-family: "Silkscreen", monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 9px 16px 8px;
+  box-shadow: inset 0 var(--px) 0 #f6ead0, inset 0 calc(-1 * var(--px)) 0 #d9b98a,
+    0 0 0 var(--px) #b08d62;
+  clip-path: polygon(
+    0 var(--px), var(--px) var(--px), var(--px) 0,
+    calc(100% - var(--px)) 0, calc(100% - var(--px)) var(--px), 100% var(--px),
+    100% calc(100% - var(--px)), calc(100% - var(--px)) calc(100% - var(--px)),
+    calc(100% - var(--px)) 100%, var(--px) 100%,
+    var(--px) calc(100% - var(--px)), 0 calc(100% - var(--px))
+  );
+}
+
+.sys-spr .enter:hover { background: #f6ead0; }
+
+.sys-spr .enter:active {
+  background: #d9b98a;
+  box-shadow: inset 0 0 0 transparent, inset 0 0 0 transparent, 0 0 0 var(--px) #b08d62;
+  transform: translateY(var(--px));
+}
+
+.sys-spr .enter:focus-visible {
+  outline: 2px solid #6b5346;
+  outline-offset: 3px;
+}

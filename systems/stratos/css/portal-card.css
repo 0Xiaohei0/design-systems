@@ -1,0 +1,138 @@
+/*
+Stratos's entrance card on the root portal. Scoped to .sys-str; loaded by the
+portal only. Mirrors the Stratos tokens by value: black glass, white signal,
+one hot orange; underscore labels, hazard stripe, feed row, blinking live dot.
+Flat marks only - no glow, no radius, no gradient fills beyond the stripe.
+*/
+
+.sys-str {
+  background: #0b0b0b;
+  color: #f4f2ee;
+  border: 1px solid rgba(244, 242, 238, 0.22);
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+  display: flex;
+  flex-direction: column;
+  padding: 18px 18px 16px;
+}
+
+.sys-str .top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.sys-str .chip {
+  background: #f4f2ee;
+  color: #0b0b0b;
+  padding: 2px 7px;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.sys-str .num {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: #ff6a00;
+  font-variant-numeric: tabular-nums;
+}
+
+.sys-str h3 {
+  margin: 0 0 4px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 800;
+  font-size: 1.9rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+}
+
+.sys-str h3 .sq {
+  width: 11px;
+  height: 11px;
+  background: #ff6a00;
+  flex: none;
+}
+
+.sys-str .status {
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #9b9b9b;
+  margin-bottom: 12px;
+}
+
+.sys-str .hazard {
+  height: 8px;
+  background: repeating-linear-gradient(
+    45deg,
+    #ff6a00 0 8px,
+    #0b0b0b 8px 16px
+  );
+  margin-bottom: 12px;
+}
+
+.sys-str p {
+  margin: 0 0 12px;
+  flex: 1;
+  font-size: 0.74rem;
+  line-height: 1.65;
+  color: #9b9b9b;
+}
+
+.sys-str .feed {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.sys-str .feed .lead {
+  flex: 1;
+  border-bottom: 1px dotted rgba(244, 242, 238, 0.22);
+  transform: translateY(-2px);
+}
+
+.sys-str .feed .val { color: #ff6a00; }
+
+.sys-str .dot {
+  width: 7px;
+  height: 7px;
+  background: #ff6a00;
+  flex: none;
+  animation: str-blink 1.4s steps(1) infinite;
+}
+
+@keyframes str-blink { 50% { opacity: 0.15; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .sys-str .dot { animation: none; }
+}
+
+.sys-str .enter {
+  align-self: flex-start;
+  background: #f4f2ee;
+  color: #0b0b0b;
+  padding: 9px 13px;
+  text-decoration: none;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: background 0.12s steps(1);
+}
+
+.sys-str .enter:hover { background: #ff6a00; }
+
+.sys-str .enter:focus-visible {
+  outline: 2px solid #ff6a00;
+  outline-offset: 2px;
+}
