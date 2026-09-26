@@ -1,8 +1,7 @@
 /* ============================================================
    SDPG-HUD tokens + components
-   Ported from SDPromptGen/design/design-system.html - that file
-   remains the source of truth; keep in sync when the language evolves.
-   Single visual world, two grounds: light "blueprint" + dark "CRT"
+   Single visual world, two grounds: light "blueprint" + dark "CRT".
+   This file is the source of truth for the system.
    ============================================================ */
 
 :root {
@@ -112,6 +111,9 @@ a.tbtn { display:inline-flex; align-items:center; text-decoration:none; }
 
 /* ---- generic eyebrow / labels ---- */
 .eyebrow { font-size:.66rem; letter-spacing:.28em; text-transform:uppercase; color:var(--gray-500); }
+code { font-family:var(--font-mono); font-size:.86em; background:var(--field);
+  border:1px solid var(--line); border-radius:2px; padding:1px 4px; }
+
 .mono-note { font-size:.7rem; letter-spacing:.12em; color:var(--gray-500); text-transform:uppercase; }
 
 /* corner-bracket helper (two opposing corners) */
@@ -151,10 +153,6 @@ a.tbtn { display:inline-flex; align-items:center; text-decoration:none; }
 }
 /* direct child of .hero so bottom:0 anchors past the band - the character
    sinks into the inverted band and bleeds off the poster edge */
-.hero .mascot {
-  position:absolute; left:50%; bottom:0; transform:translateX(-50%);
-  height:min(90%, 780px); z-index:2; filter:grayscale(1); pointer-events:none;
-}
 .stage .sub {
   position:absolute; top:63%; z-index:3;
   font-size:clamp(.78rem, 1.5vw, 1.1rem); font-weight:700; letter-spacing:.24em;
@@ -173,7 +171,6 @@ a.tbtn { display:inline-flex; align-items:center; text-decoration:none; }
 @media (max-width:520px){ .hide-sm { display:none !important; } }
 @media (max-width:640px){
   .stage { height:clamp(340px, 105vw, 470px); }
-  .hero .mascot { height:86%; }
   .stage .sub { top:72%; }
   .sec-head { flex-wrap:wrap; row-gap:10px; }
   .sec-head h2 { white-space:normal; letter-spacing:.14em; }
@@ -245,11 +242,6 @@ section.block { padding:60px 0; border-bottom:1px solid var(--line); }
 .panel-corner { position:absolute; top:8px; right:8px; color:var(--gray-400); }
 
 /* ---- palette ---- */
-.ramp { display:grid; grid-template-columns:repeat(9,1fr); border:1px solid var(--line-strong); border-radius:4px; overflow:hidden; }
-@media (max-width:640px){ .ramp { grid-template-columns:repeat(3,1fr); } }
-.ramp .sw { aspect-ratio:1/1.15; display:flex; flex-direction:column; justify-content:flex-end; padding:8px; gap:2px; }
-.ramp .sw span { font-size:.58rem; letter-spacing:.06em; line-height:1.3; }
-.ramp .sw .nm { font-weight:700; }
 
 /* ---- type specimens ---- */
 .specimen { display:flex; flex-direction:column; gap:6px; }
@@ -355,22 +347,13 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow:0 0 0 3px col
 .gauge .lbl span { font-size:.56rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gray-500); }
 
 /* ---- application preview: generator ---- */
-.gen { display:flex; flex-direction:column; gap:12px; }
-.slot { display:grid; grid-template-columns:150px 1fr auto; gap:16px; align-items:center;
-  background:var(--panel-2); border:1px solid var(--line-strong); border-radius:4px; padding:14px 16px; }
-@media (max-width:720px){ .slot { grid-template-columns:1fr; align-items:stretch; } }
-.slot.locked { border-style:dashed; }
-.slot .meta { display:flex; flex-direction:column; gap:3px; }
-.slot .meta .n { font-size:.58rem; letter-spacing:.14em; color:var(--gray-400); }
-.slot .meta .cat { font-size:.74rem; letter-spacing:.16em; text-transform:uppercase; font-weight:700; }
-.slot .tags { font-size:.82rem; letter-spacing:.02em; color:var(--ink-700); word-break:break-word; }
-.slot .ctrl { display:flex; gap:8px; }
 .out { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:4px; }
 @media (max-width:720px){ .out { grid-template-columns:1fr; } }
+.gen-actions { display:flex; justify-content:center; margin-top:8px; }
+
 .out .block { background:var(--field); border:1px solid var(--line-strong); border-radius:4px; padding:14px; }
 .out .block .h { font-size:.6rem; letter-spacing:.18em; text-transform:uppercase; color:var(--gray-500); margin-bottom:9px; display:flex; justify-content:space-between; }
 .out .block pre { margin:0; font-family:var(--font-mono); font-size:.78rem; line-height:1.6; white-space:pre-wrap; word-break:break-word; color:var(--ink); }
-.gen-actions { display:flex; justify-content:center; margin-top:8px; }
 
 /* footer */
 footer { padding:44px 0 60px; }
@@ -381,6 +364,91 @@ footer { padding:44px 0 60px; }
 :focus-visible { outline:2px solid var(--ink); outline-offset:2px; }
 
 @media (prefers-reduced-motion: reduce) {
-  .blink, .reticle .ring.spin { animation:none !important; }
+  .blink { animation:none !important; }
   * { scroll-behavior:auto; }
+}
+
+/* ============================================================
+   SPEC FURNITURE
+   The catalog page's own parts: the implementer brief, token
+   tables, dual-theme swatches, scale bars, do/don't. Same rules
+   as everything else - mono, hairline, no chroma, emphasis by
+   fill. Nothing here is a component the system ships.
+   ============================================================ */
+
+/* ---- section index in the status bar ---- */
+.statusbar .idx { display:flex; gap:2px; overflow-x:auto; scrollbar-width:none; }
+.statusbar .idx::-webkit-scrollbar { display:none; }
+.statusbar .idx a {
+  color:var(--gray-500); text-decoration:none; font-size:.66rem;
+  letter-spacing:.14em; text-transform:uppercase; padding:4px 7px;
+  border:1px solid transparent; white-space:nowrap;
+}
+.statusbar .idx a:hover { color:var(--ink); border-color:var(--line-strong); }
+
+/* ---- implementer brief ---- */
+.brief { padding:26px 28px; background:var(--panel); border:1.5px solid var(--ink); }
+.brief .hd {
+  font-family:var(--font-mono); font-weight:700; font-size:.78rem;
+  letter-spacing:.22em; text-transform:uppercase; margin:0 0 16px;
+  display:flex; align-items:center; gap:10px;
+}
+.brief ol { margin:0; padding-left:20px; font-family:var(--font-body); }
+.brief li { font-size:.92rem; line-height:1.65; color:var(--ink-700); margin-bottom:9px; }
+.brief li:last-child { margin-bottom:0; }
+.brief b { color:var(--ink); font-weight:700; }
+
+/* ---- token tables ---- */
+table.spec { width:100%; border-collapse:collapse; font-size:.8rem; color:var(--ink); }
+table.spec th {
+  text-align:left; font-size:.62rem; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--gray-500); font-weight:500; padding:0 10px 8px 0;
+}
+table.spec td { padding:9px 10px 9px 0; border-top:1px solid var(--line); vertical-align:middle; }
+table.spec td:first-child { font-weight:700; white-space:nowrap; }
+table.spec td.v { color:var(--gray-500); white-space:nowrap; }
+table.spec td.d { font-family:var(--font-body); font-size:.86rem; line-height:1.6; color:var(--ink-700); letter-spacing:0; }
+
+/* ---- dual-theme swatches: both grounds at once, per R5 ---- */
+.duo { display:grid; grid-template-columns:repeat(auto-fill,minmax(188px,1fr)); gap:12px; }
+.duo .cell { border:1px solid var(--line-strong); }
+.duo .halves { display:flex; height:54px; }
+.duo .halves i { flex:1; display:block; }
+.duo .cap { padding:9px 11px 11px; background:var(--panel); }
+.duo .nm { display:block; font-weight:700; font-size:.76rem; letter-spacing:.1em; text-transform:uppercase; }
+.duo .role { display:block; font-family:var(--font-body); font-size:.78rem; line-height:1.5; color:var(--ink-700); margin-top:4px; letter-spacing:0; }
+.duo .hex { display:flex; gap:8px; margin-top:7px; font-size:.62rem; letter-spacing:.06em; color:var(--gray-500); }
+.duo .hex span { flex:1; }
+
+/* ---- scale bars ---- */
+.scale { height:12px; background:var(--ink); }
+.radius-demo { width:66px; height:40px; background:var(--gray-300); }
+
+/* ---- callout: the reason behind a number ---- */
+.callout {
+  border-left:3px solid var(--ink); padding:3px 0 3px 16px; margin:22px 0 0;
+  font-family:var(--font-body); font-size:.9rem; line-height:1.7;
+  color:var(--ink-700); max-width:66ch; letter-spacing:0;
+}
+.callout b { color:var(--ink); }
+
+/* ---- do / do not ---- */
+.dodont { display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(272px,1fr)); }
+.dodont ul { margin:0; padding-left:18px; font-family:var(--font-body); }
+.dodont li { font-size:.88rem; line-height:1.65; color:var(--ink-700); margin-bottom:9px; letter-spacing:0; }
+.dodont b { color:var(--ink); }
+
+/* ---- composition specimen: abstract module, no product in it ---- */
+.mod { display:flex; flex-direction:column; gap:10px; }
+.mod .unit {
+  display:grid; grid-template-columns:118px 1fr auto; gap:16px; align-items:center;
+  padding:13px 15px; background:var(--panel-2); border:1px solid var(--line-strong);
+}
+.mod .unit.held { background:var(--ink); color:var(--on-ink); border-color:var(--ink); }
+.mod .unit.held .k { color:var(--on-ink); opacity:.7; }
+.mod .unit .k { font-size:.62rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gray-500); }
+.mod .unit .val { font-size:.82rem; letter-spacing:.04em; }
+.mod .unit .ops { display:flex; gap:7px; }
+@media (max-width:640px){
+  .mod .unit { grid-template-columns:1fr; gap:9px; }
 }

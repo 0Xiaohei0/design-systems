@@ -50,6 +50,7 @@ no build step to understand: these are plain HTML and CSS files.
 ## Layout
 
 ```
+STANDARD.md         what a system must contain, and what must stay out of it
 index.html          portal: a card per design system, each card in its system's style
 shared/
   portal/           portal chrome only (system-neutral by design)
@@ -72,6 +73,12 @@ package to install and nothing to configure - that is deliberate. MIT licensed,
 so attribution is appreciated but not required.
 
 ## Adding a system
+
+**Read [`STANDARD.md`](STANDARD.md) first.** It defines the section spine every
+catalog follows and the content rules that keep these systems reusable - chiefly
+that a system documents *itself*, never the product it came from. No product
+names, no app copy, no internal paths, no third-party material, and token names
+that are roles rather than use cases.
 
 Copy `systems/_template` to `systems/<name>/`, rename it, and add a card to the
 root `index.html`. Give the card a `systems/<name>/css/portal-card.css` (linked

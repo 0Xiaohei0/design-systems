@@ -4,13 +4,12 @@ A newspaper desk as an interface: warm paper ground, one vermilion spot color,
 oversized tight headlines, hairline rules, and mono annotations. Type does the
 talking - decoration is almost entirely rules, kickers, and one poster scrim.
 
-Status: Derived from a shipped page (`recently-finished-anime-report`,
-documented from its live CSS 2026-09-26). Direction: editorial print, not
-neumorphism.
+Status: Documented 2026-09-26, extracted from a shipped page's live CSS. This
+folder is the whole system. Direction: editorial print, not neumorphism.
 
 ## Tokens
 
-Light theme (default) / dark theme (`prefers-color-scheme: dark`):
+Light theme (default) / dark theme (OS preference, or the catalog's toggle):
 
 | Token | Light | Dark | Role |
 |---|---|---|---|
@@ -24,7 +23,7 @@ Light theme (default) / dark theme (`prefers-color-scheme: dark`):
 | `--accent` | `#f04438` | `#ff6358` | Vermilion spot color: kickers, headline span, final tags |
 | `--accent-2` | `#007f8c` | `#53c3ca` | Teal second accent: focus ring, watch-channel ink |
 | `--badge` | `#dfdbcf` | `#252c33` | Tag plate |
-| `--watch-bg` / `--watch-ink` | `#e8f2ef` / `#075c62` | `#153034` / `#8fdde1` | "Has Chinese stream" info block |
+| `--note-bg` / `--note-ink` | `#e8f2ef` / `#075c62` | `#153034` / `#8fdde1` | "Has Chinese stream" info block |
 | `--scrim` | `rgba(9,11,15,.76)` | `rgba(0,0,0,.82)` | Dialog veil |
 | `--shadow` | `0 18px 55px rgba(24,22,17,.14)` | `0 22px 70px rgba(0,0,0,.44)` | The one large shadow, dialogs only |
 
@@ -85,8 +84,8 @@ box-shadow: 0 12px 26px rgba(26, 25, 22, .12);
 - `--muted` on `--bg`: ~5.5:1 - smallest allowed secondary text.
 - `--accent` kickers (11-12px mono) on `--bg`: ~4:1 - permitted for meta
   marks only, never body copy.
-- `.tag.final`: white on `--accent` - bold 10px mono, passes at this size.
-- `--watch-ink` on `--watch-bg`: ~7:1 - the teal info block.
+- `.tag.hot`: white on `--accent` - bold 10px mono, passes at this size.
+- `--note-ink` on `--note-bg`: ~7:1 - the teal info block.
 - Poster overlays: white mono on the scrim (`rgba(0,0,0,.62)` gradient) with
   text-shadow - legibility comes from the gradient, not the badge alone.
 - Focus: `outline: 3px solid var(--focus)` - the one permitted outline.
@@ -127,8 +126,8 @@ box-shadow: 0 12px 26px rgba(26, 25, 22, .12);
   small rect, 2px radius, hairline border.
 - **Toast** - bottom floating dark bar; fades and slides in (`.18s ease`).
 - **Focus** - `outline: 3px solid var(--focus); outline-offset: 2px`.
-- **Watch block** - `--watch-bg` plate with `--watch-ink` text: the "has a
-  Chinese stream" channel card.
+- **Note block** - `--note-bg` plate with `--note-ink` text at 7:1: a quiet
+  supporting note that must not compete with the headline above it.
 
 ## Motion
 

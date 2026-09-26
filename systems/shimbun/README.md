@@ -5,16 +5,22 @@ paper ground, one vermilion spot color, oversized tight headlines, hairline
 rules, and mono annotations. Chinese-first labels, three type stacks
 (Noto Sans SC / Archivo / IBM Plex Mono), light + dark paper themes.
 
-Status: **Documented** - derived from a shipped page's live CSS, 2026-09-26.
+Status: **Documented** 2026-09-26, extracted from a shipped page's live CSS.
+This folder is the whole system - there is no upstream file to keep in sync.
 
 ## Contents
 
 - `DESIGN.md` - the spec: tokens, the paper rule, contrast rules, motif
   vocabulary, component states, do/don't. Read this first.
-- `index.html` - the catalog: masthead hero, foundations, paper material,
-  motifs, components, and a miniature guide assembled from the kit.
-- `css/tokens.css` - palette (light + dark), type stacks, radii, the kicker
-  voice, focus and reduced-motion rules.
+- `index.html` - the catalog, following [`STANDARD.md`](../../STANDARD.md):
+  colour, type, space, paper and form, motion, components, motifs, one composed
+  specimen, and the rules. Theme toggle in the masthead.
+- `css/tokens.css` - palette (light + dark, both reachable by toggle), type
+  stacks, radii, the kicker voice, focus and reduced-motion rules.
 - `css/shimbun.css` - the catalog page, set in the system itself.
-- `css/portal-card.css` - the system's card on the root portal (owned by the
-  portal task).
+- `css/portal-card.css` - the system's card on the root portal.
+
+## Fonts
+
+Noto Sans SC, Archivo and IBM Plex Mono, all Google Fonts under the SIL Open
+Font License and loaded by URL - nothing is vendored into this repo.

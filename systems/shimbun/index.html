@@ -2,16 +2,14 @@
 <html lang="zh-CN">
 <!--
 THESIS: A newspaper desk as an interface - warm paper ground, one vermilion
-spot color, oversized tight headlines, hairline rules, mono annotations.
-OWN-WORLD: Editorial print crossed with a Chinese anime catalog: Noto Sans SC
-body, Archivo display numbers, IBM Plex Mono meta marks; 2px heavy rules,
-poster scrims, inverted filter pills. Flat print, never neumorphic.
-STORY: A designer scrolls: the masthead first, then paint chips, the paper
-material in both themes, each motif isolated, every component state, and a
-miniature anime guide assembled from the kit.
-FIRST VIEWPORT: Wordmark and idea beside the giant issue counter.
-FORM: Read-mode catalog; derived from a shipped page 2026-09-26; focus ring is
-the only outline.
+spot colour, oversized tight headlines, hairline rules, mono annotations.
+OWN-WORLD: Editorial print. Noto Sans SC body, Archivo display numerals,
+IBM Plex Mono meta marks; 2px heavy rules, media scrims, inverted filter
+pills. Flat print, never neumorphic.
+FORM: catalog page, set in the system itself, following STANDARD.md.
+CONTENT: every specimen here is neutral by rule. The placeholder copy is about
+printing itself, so the reader takes away the structure and not a guess at what
+the system was once used for - see STANDARD.md R1.
 -->
 <head>
   <meta charset="UTF-8" />
@@ -25,81 +23,196 @@ the only outline.
   <link rel="stylesheet" href="css/shimbun.css" />
 </head>
 <body>
+
+  <!-- ============ MASTHEAD ============ -->
+  <div class="topbar">
+    <span class="brand">新聞<span>SHIMBUN</span></span>
+    <nav aria-label="Sections">
+      <a href="#colour">01 色彩</a>
+      <a href="#type">02 字体</a>
+      <a href="#space">03 版面</a>
+      <a href="#form">04 纸与形</a>
+      <a href="#motion">05 动效</a>
+      <a href="#components">06 组件</a>
+      <a href="#motifs">07 母题</a>
+      <a href="#composition">08 组合</a>
+      <a href="#rules">09 准则</a>
+    </nav>
+    <button class="theme-btn" data-toggle-theme type="button">切换主题 FLIP</button>
+  </div>
+
   <div class="page">
 
-    <!-- ============ HERO ============ -->
+    <!-- ============ THESIS ============ -->
     <header class="hero">
       <div>
-        <span class="kicker">設計系統 Design System · No. 10</span>
+        <span class="kicker">設計系統 Design System</span>
         <h1>新聞<span class="accent-line" lang="en">SHIMBUN</span></h1>
         <p class="tag">
           报纸编辑部式的界面语言：暖纸底、一抹朱红套印、超大紧凑标题、单色细线、
-          等宽字体标注。字负责说话，装饰只剩下线条、眉题和一张海报渐隐。
+          等宽字体标注。字负责说话，装饰只剩下线条、眉题和一道渐隐。
         </p>
-        <nav class="nav-chips" aria-label="Sections">
-          <a href="#foundations">基础<span class="en">Foundations</span></a>
-          <a href="#paper">纸张<span class="en">Paper</span></a>
-          <a href="#motifs">母题<span class="en">Motifs</span></a>
-          <a href="#components">组件<span class="en">Components</span></a>
-          <a href="#application">应用<span class="en">In application</span></a>
-        </nav>
+        <p class="tag">
+          开读之前记住两件事。<b>颜色的名字是角色，不是色相</b>——深色主题下
+          <code>--ink</code> 是暖白，<code>--bg</code> 是暖黑，名字依然成立。
+          还有<b>朱红是声音，青是工具</b>：朱红只用来让人抬头，青只用来标记可操作的东西，
+          两者都不是装饰色。
+        </p>
       </div>
-      <div class="count" aria-label="24 titles">24<small>完結作品 TITLES</small></div>
+      <div class="count" aria-label="12 role tokens">12<small>色彩令牌 ROLE TOKENS</small></div>
     </header>
 
-    <!-- ============ FOUNDATIONS ============ -->
-    <section class="block" id="foundations" aria-labelledby="foundations-h">
+    <!-- ============ BRIEF ============ -->
+    <section class="block">
+      <div class="brief">
+        <p class="hd">实现前先读这段 / Read this first</p>
+        <ol>
+          <li><b>这些值就是系统本身。</b>下面每个数字都存在于 <code>css/tokens.css</code>，直接用，不要另起一套。</li>
+          <li><b>饱和色只有两个</b>——朱红和青。除此之外整套语言里没有第三个彩色，加一个就等于把「朱红＝抬头」这个约定作废。</li>
+          <li><b>圆角封顶 6px</b>，药丸除外。印刷品不圆，这条是系统的骨相而不是口味。</li>
+          <li><b>两套纸都要画。</b>深色不是自动推导出来的，是手写的；只检查一套不会有任何东西提醒你。</li>
+          <li><b>阴影是稀缺品。</b>全系统只有弹窗和卡片 hover 用得起，其余一律平放。</li>
+          <li><b>不要新造缓动曲线。</b>两个时长、一条 <code>ease</code>，够了。</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ 01 COLOUR ============ -->
+    <section class="block" id="colour" aria-labelledby="colour-h">
       <div class="cat-head">
-        <h2 id="foundations-h"><span class="en" lang="en">Foundations</span>基础</h2>
-        <span class="n">12 tokens · 3 type stacks</span>
+        <h2 id="colour-h"><span class="en" lang="en">Colour</span>色彩</h2>
+        <span class="n">12 role tokens</span>
       </div>
       <p class="lede">
-        一块纸、两种墨、几根线。浅色是暖纸灰，深色是暖纸的夜晚——不是冷黑。
-        朱红是声音，青色是工具，除此之外没有饱和色。
+        每张色卡<b>左边是白天的纸，右边是夜里的纸</b>，两套同时在场。
+        浅色是暖纸灰，深色是暖纸的夜晚——不是冷黑。中性色里没有一个是纯黑或纯白。
       </p>
-      <div class="tokens">
-        <div class="token"><div class="sw" style="background:#f2f0ea"></div><div class="meta"><code>--bg</code><span class="hex">#f2f0ea</span><p>页面底：暖纸灰</p></div></div>
-        <div class="token"><div class="sw" style="background:#fbfaf6"></div><div class="meta"><code>--surface</code><span class="hex">#fbfaf6</span><p>卡片底，比纸高半阶</p></div></div>
-        <div class="token"><div class="sw" style="background:#ffffff"></div><div class="meta"><code>--surface-strong</code><span class="hex">#ffffff</span><p>弹窗底，最亮的板</p></div></div>
-        <div class="token"><div class="sw" style="background:#111318"></div><div class="meta"><code>--ink</code><span class="hex">#111318</span><p>主文字；浅色下不用纯黑</p></div></div>
-        <div class="token"><div class="sw" style="background:#5e625f"></div><div class="meta"><code>--muted</code><span class="hex">#5e625f</span><p>次级文字</p></div></div>
-        <div class="token"><div class="sw" style="background:#c9c6bd"></div><div class="meta"><code>--line</code><span class="hex">#c9c6bd</span><p>细线：卡片边框、分隔</p></div></div>
-        <div class="token"><div class="sw" style="background:#111318"></div><div class="meta"><code>--line-strong</code><span class="hex">#111318</span><p>粗线（2px）：报名栏底、页脚冠</p></div></div>
-        <div class="token"><div class="sw" style="background:#f04438"></div><div class="meta"><code>--accent</code><span class="hex">#f04438</span><p>朱红套印：眉题、标题、完结签</p></div></div>
-        <div class="token"><div class="sw" style="background:#007f8c"></div><div class="meta"><code>--accent-2</code><span class="hex">#007f8c</span><p>青色：聚焦环、功能块</p></div></div>
-        <div class="token"><div class="sw" style="background:#dfdbcf"></div><div class="meta"><code>--badge</code><span class="hex">#dfdbcf</span><p>标签底板</p></div></div>
-        <div class="token"><div class="sw" style="background:#e8f2ef"></div><div class="meta"><code>--watch-bg</code><span class="hex">#e8f2ef</span><p>「有中文渠道」信息块底</p></div></div>
-        <div class="token"><div class="sw" style="background:#075c62"></div><div class="meta"><code>--watch-ink</code><span class="hex">#075c62</span><p>信息块文字（7:1）</p></div></div>
+
+      <div class="duo">
+        <div class="cell"><div class="halves"><i style="background:#f2f0ea"></i><i style="background:#0a0d12"></i></div><div class="cap"><span class="nm">--bg</span><span class="role">页面底。整份报纸铺在上面。</span><span class="hex"><span>#F2F0EA</span><span>#0A0D12</span></span></div></div>
+        <div class="cell"><div class="halves"><i style="background:#fbfaf6"></i><i style="background:#12171d"></i></div><div class="cap"><span class="nm">--surface</span><span class="role">卡片底，比纸高半阶。</span><span class="hex"><span>#FBFAF6</span><span>#12171D</span></span></div></div>
+        <div class="cell"><div class="halves"><i style="background:#ffffff"></i><i style="background:#181e25"></i></div><div class="cap"><span class="nm">--surface-strong</span><span class="role">弹窗底，最亮的一块板。</span><span class="hex"><span>#FFFFFF</span><span>#181E25</span></span></div></div>
+        <div class="cell"><div class="halves"><i style="background:#111318"></i><i style="background:#f4f0e7"></i></div><div class="cap"><span class="nm">--ink</span><span class="role">主文字。浅色下不用纯黑。</span><span class="hex"><span>#111318</span><span>#F4F0E7</span></span></div></div>
+        <div class="cell"><div class="halves"><i style="background:#5e625f"></i><i style="background:#a7adaf"></i></div><div class="cap"><span class="nm">--muted</span><span class="role">次级文字、说明、计数。</span><span class="hex"><span>#5E625F</span><span>#A7ADAF</span></span></div></div>
+        <div class="cell"><div class="halves"><i style="background:#c9c6bd"></i><i style="background:#343b42"></i></div><div class="cap"><span class="nm">--line</span><span class="role">细线：卡片边框、分隔。</span><span class="hex"><span>#C9C6BD</span><span>#343B42</span></span></div></div>
+        <div class="cell"><div class="halves"><i style="background:#111318"></i><i style="background:#e9e4d9"></i></div><div class="cap"><span class="nm">--line-strong</span><span class="role">2px 粗线：报名栏底、分区冠。</span><span class="hex"><span>#111318</span><span>#E9E4D9</span></span></div></div>
+        <div class="cell"><div class="halves"><i style="background:#f04438"></i><i style="background:#ff6358"></i></div><div class="cap"><span class="nm">--accent</span><span class="role">朱红套印。眉题、强调签——声音。</span><span class="hex"><span>#F04438</span><span>#FF6358</span></span></div></div>
+        <div class="cell"><div class="halves"><i style="background:#007f8c"></i><i style="background:#53c3ca"></i></div><div class="cap"><span class="nm">--accent-2</span><span class="role">青。聚焦环与功能块——工具。</span><span class="hex"><span>#007F8C</span><span>#53C3CA</span></span></div></div>
+        <div class="cell"><div class="halves"><i style="background:#dfdbcf"></i><i style="background:#252c33"></i></div><div class="cap"><span class="nm">--badge</span><span class="role">标签底板。</span><span class="hex"><span>#DFDBCF</span><span>#252C33</span></span></div></div>
+        <div class="cell"><div class="halves"><i style="background:#e8f2ef"></i><i style="background:#153034"></i></div><div class="cap"><span class="nm">--note-bg</span><span class="role">提示块底。安静的信息板。</span><span class="hex"><span>#E8F2EF</span><span>#153034</span></span></div></div>
+        <div class="cell"><div class="halves"><i style="background:#075c62"></i><i style="background:#8fdde1"></i></div><div class="cap"><span class="nm">--note-ink</span><span class="role">提示块文字。对比度 7:1。</span><span class="hex"><span>#075C62</span><span>#8FDDE1</span></span></div></div>
       </div>
+
+      <h3 class="kicker" style="display:block;margin:32px 0 12px">不随主题翻转的三个 / Theme-independent</h3>
+      <table class="spec">
+        <thead><tr><th>Token</th><th>Value</th><th>为什么不翻</th></tr></thead>
+        <tbody>
+          <tr><td>--media-scrim</td><td class="v">black 0.62 &rarr; 0</td><td class="d">压在图像底部的渐隐。<b>图像不会跟着主题翻转</b>，所以压在它上面的东西也不能翻——翻了就会在没动过的背景上反色。</td></tr>
+          <tr><td>--seq-chip</td><td class="v">rgba(8,10,14,.82)</td><td class="d">序号签的底。同样坐在图像上，同样必须钉死。</td></tr>
+          <tr><td>--scrim</td><td class="v">rgba(9,11,15,.76)</td><td class="d">弹窗遮罩。它的职责是压暗底下的一切，本来就与主题无关。</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <b>对比度是闸门，不是偏好。</b>正文必须过 AA 4.5:1，提示块做到 7:1。
+        浅色的 <code>--muted</code> 之所以是 <code>#5E625F</code> 这样一个偏暗的值，
+        就是为了在暖纸上刚好过线——把它调亮一点会好看，然后整页次级文字全部失效。
+      </div>
+    </section>
+
+    <!-- ============ 02 TYPE ============ -->
+    <section class="block" id="type" aria-labelledby="type-h">
+      <div class="cat-head">
+        <h2 id="type-h"><span class="en" lang="en">Typography</span>字体</h2>
+        <span class="n">3 stacks</span>
+      </div>
+      <p class="lede">三套字，各管一件事。<b>字距收紧是这套系统的签名</b>——标题 -0.065em，拉丁数字 -0.08em。</p>
 
       <div class="type-grid">
         <div class="type-card">
           <span class="stack">Noto Sans SC · 中文正文与标题</span>
-          <div class="spec-cn">日常向导</div>
-          <p>Body 与中文标题默认思源黑体，900 用于超大标题，字距收紧。</p>
+          <div class="spec-cn">活字排印</div>
+          <p>中文一律思源黑体。900 用于超大标题，字距收紧到 -0.065em。</p>
         </div>
         <div class="type-card">
           <span class="stack">Archivo · 拉丁展示</span>
           <div class="spec-lat">0124</div>
-          <p>巨型数字与英文副标题。字距 -0.08em 是这套系统的签名。</p>
+          <p>巨型数字与拉丁副题。字距 -0.08em，紧到几乎咬合。</p>
         </div>
         <div class="type-card">
           <span class="stack">IBM Plex Mono · 元标注</span>
-          <div class="spec-mono">ISSUE 24 · 12 部 · TAG</div>
-          <p>期号、计数、标签、日期、按钮微文案——全部元信息都用这个声音。</p>
+          <div class="spec-mono">SECTION 02 · TYPE · TAG</div>
+          <p>编号、计数、标签、日期、按钮微文案——所有元信息都用这个声音。</p>
         </div>
+      </div>
+
+      <table class="spec" style="margin-top:26px">
+        <thead><tr><th>Token</th><th>Size / weight</th><th>Tracking</th><th>用在哪</th></tr></thead>
+        <tbody>
+          <tr><td>display</td><td class="v">clamp(44–104px) / 900</td><td class="v">-0.065em</td><td class="d">报名栏主标题。每页一个。</td></tr>
+          <tr><td>numeral</td><td class="v">clamp(72–144px) / 800</td><td class="v">-0.08em</td><td class="d">Archivo 巨型计数。报名栏右侧的配重。</td></tr>
+          <tr><td>section</td><td class="v">clamp(34–62px) / 900</td><td class="v">-0.055em</td><td class="d">分区标题。</td></tr>
+          <tr><td>title</td><td class="v">1.15rem / 800</td><td class="v">-0.03em</td><td class="d">卡片标题。</td></tr>
+          <tr><td>body</td><td class="v">1.02rem / 400</td><td class="v">0</td><td class="d">正文，宽度封顶 56ch。</td></tr>
+          <tr><td>latin-sub</td><td class="v">0.8rem</td><td class="v">0.01em</td><td class="d">Archivo 副题，卡片标题下一行。</td></tr>
+          <tr><td>kicker</td><td class="v">11px / 500</td><td class="v">+0.08em</td><td class="d">等宽、朱红、大写。唯一放宽字距的一级。</td></tr>
+          <tr><td>tag</td><td class="v">10px / 500</td><td class="v">+0.06em</td><td class="d">等宽徽章。</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <b>只有眉题放宽字距，其余全部收紧。</b>这不是随手定的：收紧的标题读起来像印刷品，
+        放宽的等宽小字读起来像标注。两个方向同时存在，版面才会有「正文」和「批注」两层，
+        而不需要再多一号字或多一个颜色去区分。
       </div>
     </section>
 
-    <!-- ============ PAPER ============ -->
-    <section class="block" id="paper" aria-labelledby="paper-h">
+    <!-- ============ 03 SPACE ============ -->
+    <section class="block" id="space" aria-labelledby="space-h">
       <div class="cat-head">
-        <h2 id="paper-h"><span class="en" lang="en">Paper</span>纸张</h2>
+        <h2 id="space-h"><span class="en" lang="en">Space and layout</span>版面</h2>
+        <span class="n">fluid</span>
+      </div>
+      <p class="lede">一栏内容，一套间距，边距随视口流动。版心封顶 1440px——再宽，一行字就开始难读了。</p>
+
+      <table class="spec">
+        <thead><tr><th>Token</th><th>Value</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td>--page-max</td><td class="v">1440px</td><td class="d">版心上限，居中。</td></tr>
+          <tr><td>--page-pad</td><td class="v">clamp(18px, 4vw, 64px)</td><td class="d">左右边距。手机 18px，宽屏 64px。</td></tr>
+          <tr><td>--grid-gap</td><td class="v">clamp(14px, 2vw, 28px)</td><td class="d">栅格间隙，跟着边距一起呼吸。</td></tr>
+          <tr><td>measure</td><td class="v">56ch</td><td class="d">正文永不超过这个宽度。</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="kicker" style="display:block;margin:30px 0 12px">间距节奏 / Rhythm</h3>
+      <table class="spec">
+        <tbody>
+          <tr><td>4</td><td class="v">4px</td><td><div class="scale" style="width:4px"></div></td></tr>
+          <tr><td>6</td><td class="v">6px</td><td><div class="scale" style="width:6px"></div></td></tr>
+          <tr><td>12</td><td class="v">12px</td><td><div class="scale" style="width:12px"></div></td></tr>
+          <tr><td>18</td><td class="v">18px</td><td><div class="scale" style="width:18px"></div></td></tr>
+          <tr><td>28</td><td class="v">28px</td><td><div class="scale" style="width:28px"></div></td></tr>
+          <tr><td>40</td><td class="v">40px</td><td><div class="scale" style="width:40px"></div></td></tr>
+          <tr><td>64</td><td class="v">64px</td><td><div class="scale" style="width:64px"></div></td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <b>分区之间靠那条 2px 粗线断开，不靠留白。</b>所以分区间距可以比你预期的紧——
+        留白在这套语言里是纸，粗线才是段落。把线拿掉再去加空，版面立刻散成一堆卡片。
+      </div>
+    </section>
+
+    <!-- ============ 04 FORM ============ -->
+    <section class="block" id="form" aria-labelledby="form-h">
+      <div class="cat-head">
+        <h2 id="form-h"><span class="en" lang="en">Paper and form</span>纸与形</h2>
         <span class="n">the material</span>
       </div>
       <p class="lede">
         材质就是纸本身。卡片默认平放无阴影，hover 才轻轻浮起 3px；
-        整套语言里最大的阴影只属于弹窗。圆角封顶 6px，药丸除外——这里没有什么软乎乎的东西。
+        整套语言里最大的阴影只属于弹窗。
       </p>
       <div class="paper-panels">
         <div class="paper-panel light"><span class="ph">--bg</span><span class="pv">#f2f0ea · 页面</span></div>
@@ -111,89 +224,75 @@ the only outline.
         <div class="ink-chip vermilion"><span class="ph">--accent · 朱红</span><span class="pv">#f04438 · 声音</span></div>
         <div class="ink-chip teal"><span class="ph">--accent-2 · 青</span><span class="pv">#007f8c · 工具</span></div>
       </div>
+
+      <h3 class="kicker" style="display:block;margin:30px 0 12px">圆角 / Radii</h3>
+      <table class="spec">
+        <tbody>
+          <tr><td>--r-tag</td><td class="v">2px</td><td><div class="radius-demo" style="border-radius:2px"></div></td><td class="d">标签、输入框、小徽章。</td></tr>
+          <tr><td>--r-card</td><td class="v">4px</td><td><div class="radius-demo" style="border-radius:4px"></div></td><td class="d">卡片、图像框。</td></tr>
+          <tr><td>--r-dialog</td><td class="v">6px</td><td><div class="radius-demo" style="border-radius:6px"></div></td><td class="d">弹窗。整套语言的圆角上限。</td></tr>
+          <tr><td>--r-pill</td><td class="v">999px</td><td><div class="radius-demo" style="border-radius:999px"></div></td><td class="d">只给筛选药丸和圆形按钮。</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="kicker" style="display:block;margin:30px 0 12px">拒绝清单 / Refusals</h3>
       <ul class="refusals">
-        <li><strong>不加渐变</strong>——除了海报底部那道为了看清字的黑渐隐。</li>
+        <li><strong>不加渐变</strong>——除了图像底部那道为了看清字的黑渐隐。</li>
         <li><strong>不加阴影</strong>——除了弹窗那一记，和卡片 hover 的轻浮。</li>
         <li><strong>不用纯黑纯白</strong>做浅色底——每个中性色都是暖的。</li>
         <li><strong>圆角不超过 6px</strong>——药丸除外；这里不卖可爱。</li>
         <li><strong>能用眉题和线解决的</strong>，不用图标和插画装饰。</li>
       </ul>
+
+      <div class="callout">
+        <b>两级圆角之间只差 2px，这是故意的。</b>4px 和 6px 在视觉上几乎分不出，
+        分得出的是它们和 999px 药丸之间的鸿沟。系统只需要「方」和「圆」两种态度，
+        中间那些温吞的档位一个都不要。
+      </div>
     </section>
 
-    <!-- ============ MOTIFS ============ -->
-    <section class="block" id="motifs" aria-labelledby="motifs-h">
+    <!-- ============ 05 MOTION ============ -->
+    <section class="block" id="motion" aria-labelledby="motion-h">
       <div class="cat-head">
-        <h2 id="motifs-h"><span class="en" lang="en">Motifs</span>母题</h2>
-        <span class="n">5</span>
+        <h2 id="motion-h"><span class="en" lang="en">Motion</span>动效</h2>
+        <span class="n">2 durations</span>
       </div>
-      <p class="lede">报纸的固定版式，搬进界面：报名栏、海报、索引行、规格行、方法论署名。</p>
-      <div class="motif-grid">
-        <div class="motif">
-          <span class="kicker">Motif · 报名栏 Masthead</span>
-          <div class="mini-mast">
-            <h3>完结动画<span>日常向导</span></h3>
-            <div class="num">24</div>
-          </div>
-          <p class="note" style="font-size:.8rem;color:var(--muted)">标题左、计数右，底部 2px 粗线。每个页面的正门。</p>
-        </div>
-        <div class="motif">
-          <span class="kicker">Motif · 海报 Poster</span>
-          <div class="poster">
-            <div class="art-word">SLICE<br />OF<br />LIFE</div>
-            <span class="rank">RANK 01</span>
-            <span class="end-date">2026.03 完結</span>
-          </div>
-          <p class="note" style="font-size:.8rem;color:var(--muted)">底部黑渐隐 + 左上序号签 + 左下白字日期。</p>
-        </div>
-        <div class="motif">
-          <span class="kicker">Motif · 眉题 Kicker</span>
-          <p style="font-size:1.1rem;font-weight:700;margin:0 0 12px"> issue / eyebrow / 计数，全部这个声音：</p>
-          <span class="kicker" style="font-size:12px">ISSUE 24 · 2026 冬季新番</span>
-          <p class="note" style="font-size:.8rem;color:var(--muted)">11–12px 等宽、朱红、字距 +0.08em。</p>
-        </div>
-        <div class="motif">
-          <span class="kicker">Motif · 规格行 Name-row</span>
-          <div class="name-row"><span class="lbl">原作</span><span>漫画 · 芳文社</span><button class="copy-btn" type="button">COPY</button></div>
-          <div class="name-row"><span class="lbl">话数</span><span>全 12 话</span><button class="copy-btn" type="button">COPY</button></div>
-          <div class="name-row" style="border-bottom:0"><span class="lbl">放送</span><span>2026.01 – 2026.03</span><button class="copy-btn" type="button">COPY</button></div>
-          <p class="note" style="font-size:.8rem;color:var(--muted)">104px 等宽标签 / 正文 / 复制按钮，三栏规格表。</p>
-        </div>
-        <div class="motif">
-          <span class="kicker">Motif · 方法论 Method</span>
-          <div class="method">
-            <span class="lbl">METHOD</span>
-            <span>只收录已完结作品；简介为编辑手写；观看渠道每周核验一次。</span>
-          </div>
-          <p class="note" style="font-size:.8rem;color:var(--muted)">顶部 2px 粗线，左标签右正文——页面的署名。</p>
-        </div>
-        <div class="motif">
-          <span class="kicker">Motif · 分类栏 Category head</span>
-          <div class="cat-head" style="margin-bottom:0">
-            <h3 style="margin:0;font-size:1.4rem;letter-spacing:-0.03em">治愈日常</h3>
-            <span class="n">8 部</span>
-          </div>
-          <p class="note" style="font-size:.8rem;color:var(--muted)">题材名左、「N 部」计数右，目录的索引卡。</p>
-        </div>
+      <p class="lede">安静。两个时长、一条曲线，只有 <code>transform</code>、<code>opacity</code> 和颜色会动。</p>
+
+      <table class="spec">
+        <thead><tr><th>Token</th><th>Value</th><th>用在哪</th></tr></thead>
+        <tbody>
+          <tr><td>--t-hover</td><td class="v">0.18s</td><td class="d">卡片浮起、药丸反色、按钮换底。看得最多，所以压得最短。</td></tr>
+          <tr><td>--t-zoom</td><td class="v">0.35s</td><td class="d">弹窗进场。唯一允许慢下来的时刻。</td></tr>
+          <tr><td>--ease</td><td class="v">ease</td><td class="d">全系统唯一的曲线。<b>不要再引入第二条。</b></td></tr>
+          <tr><td>lift</td><td class="v">translateY(-3px)</td><td class="d">卡片 hover。整套语言里最大的一次位移。</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <b>3px 是上限而不是起点。</b>印刷品不会浮起来；这 3px 已经是对纸的最大让步，
+        再多一点，卡片就从「一张纸」变成「一个控件」，整套材质的说服力跟着没了。
+        <code>prefers-reduced-motion</code> 下全部归零,页面依旧完整。
       </div>
     </section>
 
-    <!-- ============ COMPONENTS ============ -->
+    <!-- ============ 06 COMPONENTS ============ -->
     <section class="block" id="components" aria-labelledby="components-h">
       <div class="cat-head">
         <h2 id="components-h"><span class="en" lang="en">Components</span>组件</h2>
         <span class="n">8</span>
       </div>
-      <p class="lede">把鼠标放到卡片上试试——那 3px 的浮起是整套语言里唯一的"动效高潮"。</p>
+      <p class="lede">每个状态都是活的——把鼠标放上去，药丸会反色，卡片会浮起 3px。占位内容一律中性（见 <code>STANDARD.md</code> R1）。</p>
       <div class="comp-grid">
         <div class="comp">
           <span class="kicker">Component · 卡片 Card</span>
           <div class="demo-card">
-            <div class="poster"><div class="art-word">YURU<br />CAMP</div><span class="rank">RANK 02</span><span class="end-date">2024.06 完結</span></div>
+            <div class="poster"><div class="art-word">活字<br />PAPER</div><span class="seq">NO. 01</span><span class="stamp">2026.03</span></div>
             <div class="body">
-              <h4>摇曳露营△ 第三季</h4>
-              <div class="english">Yuru Camp Season 3</div>
+              <h4>标题占位一行</h4>
+              <div class="english">Specimen Title · Latin subtitle</div>
               <div class="row">
-                <div class="tags"><span class="tag">日常</span><span class="tag final">故事完结</span></div>
+                <div class="tags"><span class="tag">分类</span><span class="tag hot">强调</span></div>
                 <button class="arrow-btn" type="button" aria-label="打开">→</button>
               </div>
             </div>
@@ -204,9 +303,9 @@ the only outline.
           <span class="kicker">Component · 筛选药丸 Filter</span>
           <div class="pills">
             <button class="pill is-active" type="button">全部</button>
-            <button class="pill" type="button">治愈日常</button>
-            <button class="pill" type="button">美食</button>
-            <button class="pill" type="button">旅行</button>
+            <button class="pill" type="button">选项一</button>
+            <button class="pill" type="button">选项二</button>
+            <button class="pill" type="button">选项三</button>
           </div>
           <p class="note">激活态反色填充：底和边框变 ink，字变 surface-strong。</p>
         </div>
@@ -214,93 +313,207 @@ the only outline.
           <span class="kicker">Component · 搜索 Search</span>
           <div class="search">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 10.5 L14 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-            <input type="search" placeholder="搜索番名…" aria-label="搜索" />
+            <input type="search" placeholder="搜索…" aria-label="搜索" />
           </div>
           <p class="note">2px 圆角 + 内嵌放大镜，细线边框。</p>
         </div>
         <div class="comp">
           <span class="kicker">Component · 标签 Tag</span>
           <div class="tags">
-            <span class="tag">日常</span>
-            <span class="tag">美食</span>
-            <span class="tag">芳文社</span>
-            <span class="tag final">故事完结</span>
+            <span class="tag">中性</span>
+            <span class="tag">分类</span>
+            <span class="tag">属性</span>
+            <span class="tag hot">强调</span>
           </div>
-          <p class="note">10px 等宽徽章；final 类是朱红底白字。</p>
+          <p class="note">10px 等宽徽章；<code>hot</code> 是朱红底白字，整页最多一处。</p>
         </div>
         <div class="comp">
           <span class="kicker">Component · 圆形按钮 Round buttons</span>
           <div class="round-btns">
-            <button class="arrow-btn" type="button" aria-label="下一张">→</button>
+            <button class="arrow-btn" type="button" aria-label="下一个">→</button>
             <button class="close-btn" type="button" aria-label="关闭">✕</button>
             <button class="copy-btn" type="button">COPY</button>
           </div>
           <p class="note">28px 箭头 / 40px 关闭 / 小矩形复制——都是细线描边。</p>
         </div>
         <div class="comp">
-          <span class="kicker">Component · 渠道块 Watch block</span>
-          <div class="watch">
-            <span class="kicker">WATCH · 有中文渠道</span>
-            Bilibili · 全 12 话 · 中文字幕
+          <span class="kicker">Component · 提示块 Note block</span>
+          <div class="note-block">
+            <span class="kicker">NOTE · 补充信息</span>
+            安静的青墨块，用来放一条不抢戏的补充说明。
           </div>
-          <p class="note">青墨块：watch-bg 底、watch-ink 字，对比度 7:1。</p>
+          <p class="note">note-bg 底、note-ink 字，对比度 7:1。</p>
         </div>
         <div class="comp">
           <span class="kicker">Component · 弹窗 Dialog</span>
           <div class="dialog-demo">
             <button class="close-btn" type="button" aria-label="关闭">✕</button>
-            <h4>白箱</h4>
-            <p>SHIROBAKO · 动画行业群像，24 话已完结。背景 blur(3px)，移动端全屏去圆角。</p>
+            <h4>弹窗标题</h4>
+            <p>正文占位。背景 blur(3px)，移动端全屏并去掉圆角。整套语言里唯一用得起大阴影的地方。</p>
           </div>
-          <p class="note">surface-strong 底、6px 圆角、整套语言最大的阴影。</p>
+          <p class="note">surface-strong 底、6px 圆角。</p>
         </div>
         <div class="comp">
-          <span class="kicker">Component · 提示 Toast</span>
+          <span class="kicker">Component · 提示条 Toast</span>
           <span class="toast-demo">已复制到剪贴板 COPIED</span>
           <p class="note">底部浮动小黑条：淡入 + 上滑 0.18s。</p>
         </div>
       </div>
     </section>
 
-    <!-- ============ APPLICATION ============ -->
-    <section class="block" id="application" aria-labelledby="application-h">
+    <!-- ============ 07 MOTIFS ============ -->
+    <section class="block" id="motifs" aria-labelledby="motifs-h">
       <div class="cat-head">
-        <h2 id="application-h"><span class="en" lang="en">In application</span>应用</h2>
-        <span class="n">mini guide</span>
+        <h2 id="motifs-h"><span class="en" lang="en">Motifs</span>母题</h2>
+        <span class="n">6</span>
       </div>
-      <p class="lede">用这套零件拼一页微缩的"完结动画日常向导"——原页面的血统，一眼可辨。</p>
-      <div class="app-mast">
+      <p class="lede">报纸的固定版式，搬进界面。认出这套系统靠的是这六样东西，不是配色。</p>
+      <div class="motif-grid">
+        <div class="motif">
+          <span class="kicker">Motif · 报名栏 Masthead</span>
+          <div class="mini-mast">
+            <h3>报名栏<span>MASTHEAD</span></h3>
+            <div class="num">01</div>
+          </div>
+          <p class="note" style="font-size:.8rem;color:var(--muted)">标题左、计数右，底部 2px 粗线。每个页面的正门。</p>
+        </div>
+        <div class="motif">
+          <span class="kicker">Motif · 图像框 Media frame</span>
+          <div class="poster">
+            <div class="art-word">MEDIA<br />FRAME</div>
+            <span class="seq">NO. 01</span>
+            <span class="stamp">2026.03</span>
+          </div>
+          <p class="note" style="font-size:.8rem;color:var(--muted)">底部黑渐隐 + 左上序号签 + 左下白字戳记。</p>
+        </div>
+        <div class="motif">
+          <span class="kicker">Motif · 眉题 Kicker</span>
+          <p style="font-size:1.1rem;font-weight:700;margin:0 0 12px">编号、眉题、计数，全部这个声音：</p>
+          <span class="kicker" style="font-size:12px">SECTION 07 · MOTIFS · 母题</span>
+          <p class="note" style="font-size:.8rem;color:var(--muted)">11–12px 等宽、朱红、字距 +0.08em。</p>
+        </div>
+        <div class="motif">
+          <span class="kicker">Motif · 规格行 Name-row</span>
+          <div class="name-row"><span class="lbl">字段一</span><span>值占位</span><button class="copy-btn" type="button">COPY</button></div>
+          <div class="name-row"><span class="lbl">字段二</span><span>值占位</span><button class="copy-btn" type="button">COPY</button></div>
+          <div class="name-row" style="border-bottom:0"><span class="lbl">字段三</span><span>值占位</span><button class="copy-btn" type="button">COPY</button></div>
+          <p class="note" style="font-size:.8rem;color:var(--muted)">104px 等宽标签 / 正文 / 复制按钮，三栏规格表。</p>
+        </div>
+        <div class="motif">
+          <span class="kicker">Motif · 版权说明 Colophon</span>
+          <div class="method">
+            <span class="lbl">METHOD</span>
+            <span>页面末尾的署名行：谁做的、怎么做的、什么时候核验过一次。</span>
+          </div>
+          <p class="note" style="font-size:.8rem;color:var(--muted)">顶部 2px 粗线，左标签右正文——页面的签名。</p>
+        </div>
+        <div class="motif">
+          <span class="kicker">Motif · 分类栏 Category head</span>
+          <div class="cat-head" style="margin-bottom:0">
+            <h3 style="margin:0;font-size:1.4rem;letter-spacing:-0.03em">分类名</h3>
+            <span class="n">8 项</span>
+          </div>
+          <p class="note" style="font-size:.8rem;color:var(--muted)">分类名左、计数右，目录的索引卡。</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <b>六个母题里有五个都是「左内容、右计数、底下一条线」。</b>
+        重复到这个程度才叫版式——读者第二次看到就不用再读标签了，
+        眼睛直接去右边找数字。每新增一个母题，先问它能不能复用这个骨架。
+      </div>
+    </section>
+
+    <!-- ============ 08 COMPOSITION ============ -->
+    <section class="block" id="composition" aria-labelledby="composition-h">
+      <div class="cat-head">
+        <h2 id="composition-h"><span class="en" lang="en">Composition</span>组合</h2>
+        <span class="n">specimen</span>
+      </div>
+      <p class="lede">把零件拼成一页：报名栏定调，下面一排卡片。占位内容讲的是印刷本身——看的是骨架，不是内容。</p>
+      <div class="spec-mast">
         <div>
-          <span class="kicker">ISSUE 24 · 完結アニメガイド</span>
-          <h2>完结动画<span>日常向导</span></h2>
+          <span class="kicker">SECTION 08 · COMPOSITION</span>
+          <h2>版面<span>SPECIMEN</span></h2>
         </div>
-        <div class="num">24</div>
+        <div class="num">03</div>
       </div>
-      <div class="app-grid">
+      <div class="spec-grid">
         <div class="demo-card">
-          <div class="poster"><div class="art-word">NEKO<br />YANI</div><span class="rank">RANK 01</span><span class="end-date">2026.03 完結</span></div>
+          <div class="poster"><div class="art-word">活字<br />TYPE</div><span class="seq">NO. 01</span><span class="stamp">2026.03</span></div>
           <div class="body">
-            <h4>尼古喵喵</h4>
-            <div class="english">Yani Neko · 治愈日常</div>
-            <div class="row"><div class="tags"><span class="tag">日常</span><span class="tag final">故事完结</span></div><button class="arrow-btn" type="button" aria-label="打开">→</button></div>
+            <h4>活字</h4>
+            <div class="english">Movable Type · 排印</div>
+            <div class="row"><div class="tags"><span class="tag">分类</span><span class="tag hot">强调</span></div><button class="arrow-btn" type="button" aria-label="打开">→</button></div>
           </div>
         </div>
         <div class="demo-card">
-          <div class="poster"><div class="art-word">YURU<br />CAMP</div><span class="rank">RANK 02</span><span class="end-date">2024.06 完結</span></div>
+          <div class="poster"><div class="art-word">校样<br />PROOF</div><span class="seq">NO. 02</span><span class="stamp">2026.02</span></div>
           <div class="body">
-            <h4>摇曳露营△</h4>
-            <div class="english">Yuru Camp · 户外日常</div>
-            <div class="row"><div class="tags"><span class="tag">旅行</span><span class="tag final">故事完结</span></div><button class="arrow-btn" type="button" aria-label="打开">→</button></div>
+            <h4>校样</h4>
+            <div class="english">Proof Sheet · 校对</div>
+            <div class="row"><div class="tags"><span class="tag">分类</span></div><button class="arrow-btn" type="button" aria-label="打开">→</button></div>
           </div>
         </div>
         <div class="demo-card">
-          <div class="poster"><div class="art-word">SHIRO<br />BAKO</div><span class="rank">RANK 03</span><span class="end-date">2015.03 完結</span></div>
+          <div class="poster"><div class="art-word">版面<br />LAYOUT</div><span class="seq">NO. 03</span><span class="stamp">2026.01</span></div>
           <div class="body">
-            <h4>白箱</h4>
-            <div class="english">SHIROBAKO · 行业群像</div>
-            <div class="row"><div class="tags"><span class="tag">职场</span><span class="tag final">故事完结</span></div><button class="arrow-btn" type="button" aria-label="打开">→</button></div>
+            <h4>版面</h4>
+            <div class="english">Layout · 拼版</div>
+            <div class="row"><div class="tags"><span class="tag">分类</span></div><button class="arrow-btn" type="button" aria-label="打开">→</button></div>
           </div>
         </div>
+      </div>
+
+      <h3 class="kicker" style="display:block;margin:34px 0 12px">解剖 / Anatomy</h3>
+      <table class="spec">
+        <thead><tr><th>部件</th><th>做法</th><th>为什么是这样</th></tr></thead>
+        <tbody>
+          <tr><td>报名栏</td><td class="v">1fr / auto</td><td class="d">标题左、巨型数字右，底部 2px 粗线。数字是配重，不是信息——它让紧排的标题不至于把版面压偏。</td></tr>
+          <tr><td>眉题</td><td class="v">kicker</td><td class="d">整页唯一先出现的朱红。它先说话，标题才接得上。</td></tr>
+          <tr><td>卡片栅格</td><td class="v">--grid-gap</td><td class="d">间隙跟着页边距一起流动，所以窄屏不会出现「边距很小但卡片间很宽」的错位。</td></tr>
+          <tr><td>图像框</td><td class="v">16/9 + scrim</td><td class="d">渐隐只为让戳记可读而存在，不是风格。没有压字的地方就不该有渐隐。</td></tr>
+          <tr><td>强调签</td><td class="v">tag hot</td><td class="d">一屏最多一处。第二处出现，读者就不知道该先看哪个了。</td></tr>
+          <tr><td>分隔</td><td class="v">2px rule</td><td class="d">分区靠线断开而不是靠留白，所以卡片可以贴得比直觉更紧。</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <b>注意这一段不是什么：它不是把某个产品的页面换掉文字。</b>
+        占位内容特意选了印刷业的词——活字、校样、版面——因为它们对任何读者都不构成「这套系统是做某某的」的暗示。
+        读者带走的是结构。
+      </div>
+    </section>
+
+    <!-- ============ 09 RULES ============ -->
+    <section class="block" id="rules" aria-labelledby="rules-h">
+      <div class="cat-head">
+        <h2 id="rules-h"><span class="en" lang="en">Rules</span>准则</h2>
+        <span class="n">拒绝比允许重要</span>
+      </div>
+      <div class="dodont">
+        <section class="do">
+          <p class="hd">应该 / Do</p>
+          <ul>
+            <li>让<b>朱红只负责抬头</b>：眉题、强调签。一屏最多一两处。</li>
+            <li>让<b>青只负责可操作</b>：聚焦环、提示块。它是工具色，不是第二个装饰色。</li>
+            <li>用 <b>2px 粗线</b>分段，用细线分行。两种线各有一份职责。</li>
+            <li><b>两套纸都手写</b>，并且用顶栏的切换按钮真的看一遍。</li>
+            <li>元信息一律交给<b>等宽</b>：编号、计数、标签、日期。</li>
+            <li>中性色<b>保持暖调</b>。冷灰放在这张纸上会显脏。</li>
+          </ul>
+        </section>
+        <section class="dont">
+          <p class="hd">不要 / Do not</p>
+          <ul>
+            <li>加<b>第三个饱和色</b>。加了就等于宣布朱红不再特殊。</li>
+            <li>加<b>渐变</b>——除了图像底部那道为了让字可读的渐隐。</li>
+            <li>加<b>阴影</b>——除了弹窗，和卡片 hover 的 3px。</li>
+            <li>用<b>纯黑或纯白</b>做浅色底。</li>
+            <li>把圆角开到 <b>6px 以上</b>，药丸除外。</li>
+            <li>用<b>色相给令牌命名</b>。深色主题一翻，名字就变成假话。</li>
+          </ul>
+        </section>
       </div>
     </section>
 
@@ -308,9 +521,34 @@ the only outline.
 
     <footer class="colophon">
       <span class="lbl">COLOPHON</span>
-      <span>SHIMBUN 新聞 · 暖纸编辑印刷系统。源自「完结动画日常向导」页面的线上 CSS，2026-09-26 建档。字体：Noto Sans SC / Archivo / IBM Plex Mono。</span>
+      <span>SHIMBUN 新聞 · 暖纸编辑印刷系统。字体：Noto Sans SC / Archivo / IBM Plex Mono，均为 Google Fonts 开放授权。本目录遵循仓库根目录的 STANDARD.md。</span>
     </footer>
 
   </div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    if (location.hash === "#light" || location.hash === "#dark") {
+      root.setAttribute("data-theme", location.hash.slice(1));
+    }
+    document.querySelectorAll("[data-toggle-theme]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var cur = root.getAttribute("data-theme");
+        if (!cur) cur = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        root.setAttribute("data-theme", cur === "dark" ? "light" : "dark");
+      });
+    });
+    // Pills flip themselves so the active state is live rather than pictured.
+    document.querySelectorAll(".pills").forEach(function (group) {
+      group.addEventListener("click", function (e) {
+        var p = e.target.closest(".pill");
+        if (!p) return;
+        group.querySelectorAll(".pill").forEach(function (o) { o.classList.remove("is-active"); });
+        p.classList.add("is-active");
+      });
+    });
+  })();
+</script>
 </body>
 </html>

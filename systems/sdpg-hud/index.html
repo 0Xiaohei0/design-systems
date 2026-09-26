@@ -1,5 +1,12 @@
 <!doctype html>
 <html lang="en">
+<!--
+THESIS: an arcade targeting-HUD as an interface. Monochrome, two grounds,
+emphasis by filled block; status encoded in form, never in colour.
+FORM: catalog page, set in the system itself, following STANDARD.md.
+CONTENT: every specimen on this page is neutral by rule. No product names, no
+app copy, no screenshots - see STANDARD.md R1.
+-->
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,31 +33,39 @@
 
 <div class="viewport-frame" aria-hidden="true"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i></div>
 
-<!-- ============ STATUS BAR ============ -->
+<!-- ============ MASTHEAD ============ -->
 <div class="statusbar">
   <div class="wrap">
-    <span class="seg"><b>SDPG-HUD</b> // REV 02</span>
-    <span class="seg hide-sm" style="display:flex;align-items:center;gap:8px"><span class="dot blink"></span> SYSTEM ONLINE</span>
+    <span class="seg hide-sm"><b>SDPG-HUD</b> // REV 02</span>
+    <nav class="idx" aria-label="Sections">
+      <a href="#colour">01 Colour</a>
+      <a href="#type">02 Type</a>
+      <a href="#space">03 Space</a>
+      <a href="#form">04 Form</a>
+      <a href="#motion">05 Motion</a>
+      <a href="#components">06 Components</a>
+      <a href="#motifs">07 Motifs</a>
+      <a href="#composition">08 Composition</a>
+      <a href="#rules">09 Rules</a>
+    </nav>
     <span class="spacer"></span>
-    <span class="seg hide-md">CH-01 · MONOCHROME</span>
     <a class="tbtn" href="../../index.html">All Systems</a>
-    <button class="tbtn" data-toggle-theme type="button">◐ Invert</button>
+    <button class="tbtn" data-toggle-theme type="button">&#9686; Invert</button>
   </div>
 </div>
 
-<!-- ============ HERO ============ -->
+<!-- ============ THESIS ============ -->
 <header class="hero">
   <div class="scanlines"></div>
-  <div class="poster-meta tl"><b>TEMP 0.90</b><br>SEED 19009304</div>
+  <div class="poster-meta tl"><b>GROUND 01</b><br>BLUEPRINT</div>
   <div class="poster-meta tc"><svg width="20" height="20"><use href="#i-target"/></svg></div>
-  <div class="poster-meta tr"><b>REV 02</b><br>MONOCHROME</div>
+  <div class="poster-meta tr"><b>GROUND 02</b><br>CRT</div>
 
-  <img class="mascot" src="mascot.png" alt="SDPromptGen mascot">
   <div class="stage">
     <h1 class="bigword solid">Design</h1>
     <div class="bigword outline" aria-hidden="true">Design</div>
-    <span class="sub l" lang="ja">デザイン</span>
-    <span class="sub r">dɪ·ˈzaɪn</span>
+    <span class="sub l" lang="ja">&#12487;&#12470;&#12452;&#12531;</span>
+    <span class="sub r">d&#618;&#183;&#712;za&#618;n</span>
     <i class="tickmark t1" aria-hidden="true"></i>
     <i class="tickmark t2" aria-hidden="true"></i>
   </div>
@@ -58,8 +73,8 @@
   <div class="band">
     <div class="band-left">
       <span class="coin"><span class="dot blink"></span> Insert Coin</span>
-      <p>A monochrome heads-up-display interface kit for SDPromptGen.</p>
-      <p class="dim">Targeting brackets, arcade readouts, pixel status - grayscale only, emphasis by filled block, never by color.</p>
+      <p>A monochrome arcade targeting-HUD. Two grounds, one visual world, and no chroma anywhere.</p>
+      <p class="dim">Two things to hold on to. <b>Emphasis is a filled block</b>, never a colour - there is no accent hue to reach for. And <b>status is encoded in form</b>: filled is active, outline is idle, dashed is disabled or in flux. Read shapes, not hues.</p>
     </div>
     <div class="band-right">
       <span class="pre">The system is</span>
@@ -69,116 +84,297 @@
 </header>
 
 <main>
-  <!-- ===== 01 FOUNDATIONS ===== -->
+
+  <!-- ===== 00 BRIEF ===== -->
   <section class="block"><div class="wrap">
+    <div class="brief brk">
+      <p class="hd"><svg width="15" height="15"><use href="#i-warn"/></svg> Read this first</p>
+      <ol>
+        <li><b>These values are the system.</b> Everything below is a token that exists in <code>css/hud-core.css</code>. Use them; do not invent parallel ones.</li>
+        <li><b>Never add colour.</b> The moment a hue appears, the whole encoding collapses - because form is carrying the meaning that colour usually carries, a single red breaks every other signal on the screen.</li>
+        <li><b>Reach for a filled block before anything else.</b> Emphasis, selection and active state are all one move: invert the surface.</li>
+        <li><b>Both grounds, always.</b> Blueprint and CRT are hand-authored, and nothing warns you if you only checked one. Hit Invert.</li>
+        <li><b>Names are roles.</b> <code>--ink</code> is the foreground, not the colour black - on the CRT ground it is near-white.</li>
+        <li><b>No ad-hoc values.</b> No raw hex, no one-off sizes, no new easing. If a token does not cover your case, that is a conversation about the system.</li>
+      </ol>
+    </div>
+  </div></section>
+
+  <!-- ===== 01 COLOUR ===== -->
+  <section class="block" id="colour"><div class="wrap">
     <div class="sec-head">
-      <span class="id">§01</span>
-      <h2>Foundations</h2>
+      <span class="id">&#167;01</span>
+      <h2>Colour</h2>
       <span class="rule"></span>
-      <span class="status"><span class="dot"></span> Stable</span>
+      <span class="status"><span class="dot"></span> No chroma</span>
     </div>
 
-    <p class="prose">Everything is grayscale. There is no accent hue - emphasis comes from a solid black fill or an inverted block, never from color. Status is encoded in <em>form</em>: a filled shape is active, an outline is idle, a dashed edge is disabled or in-flux.</p>
+    <p class="prose">Ten role tokens and no accent. Each swatch below shows <b>blueprint on the left, CRT on the right</b>, so both grounds are visible without switching - though the Invert button is there and everything on this page responds to it.</p>
 
-    <div style="height:26px"></div>
+    <div style="height:24px"></div>
 
-    <div class="panel" style="margin-bottom:30px">
-      <span class="panel-label">Grayscale ramp</span>
-      <div class="ramp">
-        <div class="sw" style="background:#15181c;color:#e6e8ea"><span class="nm">ink-900</span><span>#15181C</span></div>
-        <div class="sw" style="background:#3a3e44;color:#e6e8ea"><span class="nm">ink-700</span><span>#3A3E44</span></div>
-        <div class="sw" style="background:#6b7076;color:#e6e8ea"><span class="nm">500</span><span>#6B7076</span></div>
-        <div class="sw" style="background:#8b9096;color:#15181c"><span class="nm">400</span><span>#8B9096</span></div>
-        <div class="sw" style="background:#b3b7bd;color:#15181c"><span class="nm">300</span><span>#B3B7BD</span></div>
-        <div class="sw" style="background:#d1d4d8;color:#15181c"><span class="nm">200</span><span>#D1D4D8</span></div>
-        <div class="sw" style="background:#e6e8ea;color:#15181c"><span class="nm">ground</span><span>#E6E8EA</span></div>
-        <div class="sw" style="background:#f1f2f4;color:#15181c"><span class="nm">panel</span><span>#F1F2F4</span></div>
-        <div class="sw" style="background:#fafbfb;color:#15181c;border-left:1px solid #d1d4d8"><span class="nm">white</span><span>#FAFBFB</span></div>
-      </div>
+    <div class="duo">
+      <div class="cell"><div class="halves"><i style="background:#15181c"></i><i style="background:#e7e9ec"></i></div><div class="cap"><span class="nm">ink</span><span class="role">Foreground, and every filled surface.</span><span class="hex"><span>#15181C</span><span>#E7E9EC</span></span></div></div>
+      <div class="cell"><div class="halves"><i style="background:#3a3e44"></i><i style="background:#b9bdc3"></i></div><div class="cap"><span class="nm">ink-700</span><span class="role">Prose and secondary text.</span><span class="hex"><span>#3A3E44</span><span>#B9BDC3</span></span></div></div>
+      <div class="cell"><div class="halves"><i style="background:#6b7076"></i><i style="background:#9a9ea5"></i></div><div class="cap"><span class="nm">gray-500</span><span class="role">Labels, captions, meta marks.</span><span class="hex"><span>#6B7076</span><span>#9A9EA5</span></span></div></div>
+      <div class="cell"><div class="halves"><i style="background:#8b9096"></i><i style="background:#7c8087"></i></div><div class="cap"><span class="nm">gray-400</span><span class="role">Icons at rest, faint marks.</span><span class="hex"><span>#8B9096</span><span>#7C8087</span></span></div></div>
+      <div class="cell"><div class="halves"><i style="background:#b3b7bd"></i><i style="background:#565a61"></i></div><div class="cap"><span class="nm">gray-300</span><span class="role">Disabled edges and fills.</span><span class="hex"><span>#B3B7BD</span><span>#565A61</span></span></div></div>
+      <div class="cell"><div class="halves"><i style="background:#d1d4d8"></i><i style="background:#3a3d43"></i></div><div class="cap"><span class="nm">gray-200</span><span class="role">The quietest visible fill.</span><span class="hex"><span>#D1D4D8</span><span>#3A3D43</span></span></div></div>
+      <div class="cell"><div class="halves"><i style="background:#e6e8ea"></i><i style="background:#0b0c0e"></i></div><div class="cap"><span class="nm">ground</span><span class="role">The page itself. Carries the grid.</span><span class="hex"><span>#E6E8EA</span><span>#0B0C0E</span></span></div></div>
+      <div class="cell"><div class="halves"><i style="background:#f1f2f4"></i><i style="background:#131418"></i></div><div class="cap"><span class="nm">panel</span><span class="role">Panel surface, one step off ground.</span><span class="hex"><span>#F1F2F4</span><span>#131418</span></span></div></div>
+      <div class="cell"><div class="halves"><i style="background:#fafbfb"></i><i style="background:#191b1f"></i></div><div class="cap"><span class="nm">panel-2</span><span class="role">Raised panel, and text on a filled block.</span><span class="hex"><span>#FAFBFB</span><span>#191B1F</span></span></div></div>
+      <div class="cell"><div class="halves"><i style="background:#eceef0"></i><i style="background:#1d2025"></i></div><div class="cap"><span class="nm">field</span><span class="role">Input surface. Recessed, never raised.</span><span class="hex"><span>#ECEEF0</span><span>#1D2025</span></span></div></div>
     </div>
+
+    <h3 class="eyebrow" style="margin:30px 0 12px">Derived - never declared twice</h3>
+    <table class="spec">
+      <thead><tr><th>Token</th><th>Derivation</th><th>Role</th></tr></thead>
+      <tbody>
+        <tr><td>--line</td><td class="v">ink at 15%</td><td class="d">The hairline. Every border that is not load-bearing.</td></tr>
+        <tr><td>--line-strong</td><td class="v">ink at 32%</td><td class="d">Panel edges and section rules.</td></tr>
+        <tr><td>--grid</td><td class="v">ink at 6%</td><td class="d">The graph-paper ground, tiled behind everything.</td></tr>
+        <tr><td>--on</td><td class="v">ink</td><td class="d">The filled surface of an active control.</td></tr>
+        <tr><td>--on-ink</td><td class="v">panel-2 / ground</td><td class="d">Text sitting on that filled surface.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <b>The three derived neutrals are the reason the two grounds cost nothing.</b>
+      Because lines are mixed from <code>ink</code> rather than declared as their
+      own hex, inverting the ramp inverts every border with it. Hardcode one
+      hairline and it will be the single mark that stays dark on the CRT ground.
+    </div>
+  </div></section>
+
+  <!-- ===== 02 TYPE ===== -->
+  <section class="block" id="type"><div class="wrap">
+    <div class="sec-head">
+      <span class="id">&#167;02</span>
+      <h2>Typography</h2>
+      <span class="rule"></span>
+      <span class="status"><span class="dot"></span> Four voices</span>
+    </div>
+
+    <p class="prose">Three stacks doing four jobs, all from system fonts - nothing to download. <b>Mono is the default</b>, not the exception: the body font appears only inside running prose.</p>
+
+    <div style="height:24px"></div>
 
     <div class="cols c2">
       <div class="panel p2">
-        <span class="panel-label">Typography</span>
-        <div class="specimen" style="gap:20px">
+        <span class="panel-label">The four voices</span>
+        <div class="specimen" style="gap:22px">
           <div class="specimen">
-            <span class="tag">Display · wide · uppercase</span>
-            <div class="sp-display">Reroll</div>
+            <span class="tag">Display &middot; condensed heavy &middot; uppercase</span>
+            <div class="sp-display">Specimen</div>
           </div>
           <div class="specimen">
-            <span class="tag">Mono heading · tracked</span>
-            <div class="sp-h">Prompt Assembly</div>
+            <span class="tag">Heading &middot; mono &middot; tracked wide</span>
+            <div class="sp-h">Section Heading</div>
           </div>
           <div class="specimen">
-            <span class="tag">Body · humanist sans</span>
-            <div class="sp-body">Combine scenario, appearance, and clothing snippets into a single prompt, then reroll the slots you have not locked.</div>
+            <span class="tag">Body &middot; humanist sans</span>
+            <div class="sp-body">Running prose is the one place a proportional face is allowed. Everything else on the surface is set in mono, which is what makes columns of data line up without a table.</div>
           </div>
           <div class="specimen">
-            <span class="tag">Caption / data · mono</span>
-            <div class="sp-cap">CH-04 · TEMP 0.90 · SEED 19009304</div>
+            <span class="tag">Caption / data &middot; mono</span>
+            <div class="sp-cap">CH-01 &middot; GROUND 02 &middot; 19 009 304</div>
           </div>
         </div>
       </div>
 
       <div class="panel p2">
-        <span class="panel-label">Iconography</span>
-        <div class="motifs">
-          <div class="motif"><svg><use href="#i-target"/></svg><span>Target</span></div>
-          <div class="motif"><svg><use href="#i-cross"/></svg><span>Register</span></div>
-          <div class="motif"><svg><use href="#i-warn"/></svg><span>Warn</span></div>
-          <div class="motif"><svg><use href="#i-no"/></svg><span>Block</span></div>
-          <div class="motif"><svg><use href="#i-dice"/></svg><span>Reroll</span></div>
-          <div class="motif"><svg><use href="#i-lock"/></svg><span>Lock</span></div>
-          <div class="motif"><svg><use href="#i-unlock"/></svg><span>Unlock</span></div>
-          <div class="motif"><svg><use href="#i-copy"/></svg><span>Copy</span></div>
-          <div class="motif"><svg><use href="#i-check"/></svg><span>Done</span></div>
-          <div class="motif"><svg><use href="#i-heart"/></svg><span>Life</span></div>
-          <div class="motif"><svg><use href="#i-chevL"/></svg><span>Prev</span></div>
-          <div class="motif"><svg><use href="#i-chevR"/></svg><span>Next</span></div>
+        <span class="panel-label">Tokens</span>
+        <table class="spec">
+          <tbody>
+            <tr><td>display</td><td class="v">2.6rem / 900</td><td class="d">Heroes and numerals. Tracking .02em, scaled 1.05 wide.</td></tr>
+            <tr><td>heading</td><td class="v">1.2rem / 700</td><td class="d">Mono, uppercase, tracking .2em.</td></tr>
+            <tr><td>body</td><td class="v">1rem / 400</td><td class="d">Leading 1.7, capped at 60ch.</td></tr>
+            <tr><td>caption</td><td class="v">.72rem</td><td class="d">Mono, uppercase, tracking .16em.</td></tr>
+            <tr><td>eyebrow</td><td class="v">.66rem</td><td class="d">Tracking .28em. The widest thing in the system.</td></tr>
+            <tr><td>label</td><td class="v">.62rem</td><td class="d">Tracking .2em. Panel and specimen labels.</td></tr>
+          </tbody>
+        </table>
+        <div class="callout" style="margin-top:20px">
+          <b>Tracking widens as size shrinks</b> - the opposite of the usual rule,
+          and deliberate. Wide tracking on small mono is what makes a caption read
+          as instrument labelling rather than as fine print.
         </div>
       </div>
     </div>
   </div></section>
 
-  <!-- ===== 02 CONTROLS ===== -->
-  <section class="block"><div class="wrap">
+  <!-- ===== 03 SPACE ===== -->
+  <section class="block" id="space"><div class="wrap">
     <div class="sec-head">
-      <span class="id">§02</span>
-      <h2>Controls</h2>
+      <span class="id">&#167;03</span>
+      <h2>Space and layout</h2>
       <span class="rule"></span>
-      <span class="status"><span class="dot"></span> Interactive</span>
+      <span class="status"><span class="dot"></span> One column</span>
     </div>
+
+    <p class="prose">One measure, one gutter, four breakpoints. The grid behind the page is decoration, not a layout grid - do not snap to it.</p>
+
+    <div style="height:24px"></div>
+
+    <div class="cols c2">
+      <div class="panel p2">
+        <span class="panel-label">Scale</span>
+        <table class="spec">
+          <tbody>
+            <tr><td>4</td><td class="v">4px</td><td><div class="scale" style="width:4px"></div></td></tr>
+            <tr><td>8</td><td class="v">8px</td><td><div class="scale" style="width:8px"></div></td></tr>
+            <tr><td>14</td><td class="v">14px</td><td><div class="scale" style="width:14px"></div></td></tr>
+            <tr><td>22</td><td class="v">22px</td><td><div class="scale" style="width:22px"></div></td></tr>
+            <tr><td>26</td><td class="v">26px</td><td><div class="scale" style="width:26px"></div></td></tr>
+            <tr><td>34</td><td class="v">34px</td><td><div class="scale" style="width:34px"></div></td></tr>
+            <tr><td>58</td><td class="v">58px</td><td><div class="scale" style="width:58px"></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="panel p2">
+        <span class="panel-label">Measure and breaks</span>
+        <table class="spec">
+          <tbody>
+            <tr><td>measure</td><td class="v">1120px</td><td class="d">Max content width, centred, 22px gutter.</td></tr>
+            <tr><td>prose</td><td class="v">64ch</td><td class="d">Running text never runs wider.</td></tr>
+            <tr><td>bar</td><td class="v">44px</td><td class="d">Status bar height at every width.</td></tr>
+            <tr><td>break-lg</td><td class="v">820px</td><td class="d">Column grids collapse to one.</td></tr>
+            <tr><td>break-md</td><td class="v">720px</td><td class="d">Secondary bar segments drop.</td></tr>
+            <tr><td>break-sm</td><td class="v">640px</td><td class="d">Six-up motif grid becomes three-up; tickmarks go.</td></tr>
+            <tr><td>break-xs</td><td class="v">520px</td><td class="d">Bar keeps only the index and the controls.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="callout">
+      <b>Panels do not nest.</b> A panel inside a panel produces two hairlines a
+      few pixels apart, and at this line weight that reads as a rendering fault
+      rather than as hierarchy. Split the content into two panels side by side
+      instead.
+    </div>
+  </div></section>
+
+  <!-- ===== 04 FORM ===== -->
+  <section class="block" id="form"><div class="wrap">
+    <div class="sec-head">
+      <span class="id">&#167;04</span>
+      <h2>Form</h2>
+      <span class="rule"></span>
+      <span class="status"><span class="dot"></span> Hairline</span>
+    </div>
+
+    <p class="prose">Corners stay nearly square. The silhouette comes from line weight and from bracket furniture, not from radius.</p>
+
+    <div style="height:24px"></div>
+
+    <div class="cols c2">
+      <div class="panel p2">
+        <span class="panel-label">Radii</span>
+        <table class="spec">
+          <tbody>
+            <tr><td>1</td><td class="v">1px</td><td><div class="radius-demo" style="border-radius:1px"></div></td></tr>
+            <tr><td>2</td><td class="v">2px</td><td><div class="radius-demo" style="border-radius:2px"></div></td></tr>
+            <tr><td>3</td><td class="v">3px</td><td><div class="radius-demo" style="border-radius:3px"></div></td></tr>
+            <tr><td>4</td><td class="v">4px</td><td><div class="radius-demo" style="border-radius:4px"></div></td></tr>
+            <tr><td>pill</td><td class="v">100px</td><td><div class="radius-demo" style="border-radius:100px"></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="panel p2">
+        <span class="panel-label">Line weights</span>
+        <table class="spec">
+          <tbody>
+            <tr><td>hairline</td><td class="v">1px</td><td class="d">Dividers, inactive edges, the grid.</td></tr>
+            <tr><td>edge</td><td class="v">1.5px</td><td class="d">Panel and control borders. The default.</td></tr>
+            <tr><td>heavy</td><td class="v">2px</td><td class="d">Brackets, focus, the outlined display face.</td></tr>
+            <tr><td>dashed</td><td class="v">1px dashed</td><td class="d">Disabled, unsaved, in-flux. A state, not a style.</td></tr>
+          </tbody>
+        </table>
+        <div class="callout" style="margin-top:20px">
+          <b>There are no shadows.</b> Depth is faked with brackets and with the
+          one-step surface ramp. A drop shadow on the CRT ground turns into a
+          grey smear, so the system simply never learned the trick.
+        </div>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- ===== 05 MOTION ===== -->
+  <section class="block" id="motion"><div class="wrap">
+    <div class="sec-head">
+      <span class="id">&#167;05</span>
+      <h2>Motion</h2>
+      <span class="rule"></span>
+      <span class="status"><span class="dot blink"></span> One loop</span>
+    </div>
+
+    <p class="prose">Almost nothing moves, and what does moves instantly. There is no easing curve in this system - transitions are linear and short enough that a curve would not be visible anyway.</p>
+
+    <div style="height:24px"></div>
+
+    <table class="spec">
+      <thead><tr><th>Token</th><th>Value</th><th>Where</th></tr></thead>
+      <tbody>
+        <tr><td>tint</td><td class="v">120ms</td><td class="d">Background and colour on buttons and icon buttons.</td></tr>
+        <tr><td>track</td><td class="v">150ms</td><td class="d">The toggle knob travelling, and its track filling.</td></tr>
+        <tr><td>press</td><td class="v">50ms</td><td class="d">The 1px downward nudge on a pressed button.</td></tr>
+        <tr><td>blink</td><td class="v">1.4s steps(1)</td><td class="d">The live indicator. <b>Stepped, never faded</b> - a CRT dot is on or off.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <b><code>steps(1)</code> is the whole motion philosophy in one value.</b> A
+      smooth fade would read as a modern web animation and break the register
+      instantly. Everything that changes here snaps, because the hardware this
+      system imitates could not interpolate.
+    </div>
+    <p class="prose" style="margin-top:18px"><code>prefers-reduced-motion</code> kills the blink and every transition outright - there is nothing in the system whose meaning depends on movement.</p>
+  </div></section>
+
+  <!-- ===== 06 COMPONENTS ===== -->
+  <section class="block" id="components"><div class="wrap">
+    <div class="sec-head">
+      <span class="id">&#167;06</span>
+      <h2>Components</h2>
+      <span class="rule"></span>
+      <span class="status"><span class="dot"></span> Live - hover them</span>
+    </div>
+
+    <p class="prose">Every state below is real. Hover the buttons, drag the slider, click the toggles. Specimen labels are deliberately generic - see <code>STANDARD.md</code> R1.</p>
+
+    <div style="height:24px"></div>
 
     <div class="cols c2">
       <div class="panel">
         <span class="panel-label">Buttons</span>
         <svg class="panel-corner" width="16" height="16"><use href="#i-cross"/></svg>
         <div class="btn-row" style="margin-bottom:14px">
-          <button class="btn solid" type="button"><svg><use href="#i-dice"/></svg> Reroll Unlocked</button>
-          <button class="btn" type="button"><svg><use href="#i-copy"/></svg> Copy Merged</button>
+          <button class="btn solid" type="button"><svg><use href="#i-check"/></svg> Solid &middot; primary</button>
+          <button class="btn" type="button"><svg><use href="#i-copy"/></svg> Outline &middot; default</button>
         </div>
         <div class="btn-row" style="margin-bottom:14px">
           <button class="btn pill" type="button"><span class="dot"></span> Insert Coin</button>
-          <button class="btn ghost" type="button">Cancel</button>
-          <button class="btn" type="button" disabled>Empty</button>
+          <button class="btn ghost" type="button">Ghost</button>
+          <button class="btn" type="button" disabled>Disabled</button>
         </div>
         <div class="btn-row">
-          <button class="iconbtn" type="button" title="Copy"><svg><use href="#i-copy"/></svg></button>
-          <button class="iconbtn" type="button" title="Reroll"><svg><use href="#i-dice"/></svg></button>
-          <button class="iconbtn on" type="button" title="Locked"><svg><use href="#i-lock"/></svg></button>
-          <button class="iconbtn" type="button" title="Unlocked"><svg><use href="#i-unlock"/></svg></button>
+          <button class="iconbtn" type="button" title="Idle"><svg><use href="#i-copy"/></svg></button>
+          <button class="iconbtn" type="button" title="Idle"><svg><use href="#i-dice"/></svg></button>
+          <button class="iconbtn on" type="button" title="Active"><svg><use href="#i-lock"/></svg></button>
+          <button class="iconbtn" type="button" title="Idle"><svg><use href="#i-unlock"/></svg></button>
         </div>
       </div>
 
       <div class="panel">
         <span class="panel-label">Inputs</span>
-        <label class="field-label" for="d-in">New preset</label>
-        <input id="d-in" class="input" type="text" value="rain jacket, rubber boots, umbrella" style="margin-bottom:16px">
-        <label class="field-label" for="d-ta">Prompt template</label>
-        <textarea id="d-ta" class="textarea" rows="3">You generate tag-style snippets for the {category} category. {categoryRules}</textarea>
+        <label class="field-label" for="d-in">Single line</label>
+        <input id="d-in" class="input" type="text" value="Specimen value" style="margin-bottom:16px">
+        <label class="field-label" for="d-ta">Multi line</label>
+        <textarea id="d-ta" class="textarea" rows="3">Fields are recessed, never raised. The surface steps down to --field, and the border is the same edge weight as everything else.</textarea>
         <div style="height:16px"></div>
-        <label class="field-label">Temperature · 0.90</label>
-        <input type="range" min="0" max="2" step="0.05" value="0.9">
+        <label class="field-label">Range &middot; 0.90</label>
+        <input type="range" min="0" max="2" step="0.05" value="0.9" aria-label="Range specimen">
       </div>
     </div>
 
@@ -188,28 +384,28 @@
       <div class="panel p2">
         <span class="panel-label">Toggles</span>
         <div style="display:flex;flex-direction:column;gap:16px">
-          <span class="toggle on"><span class="track"></span><span>Lock general</span></span>
-          <span class="toggle"><span class="track"></span><span>AI coherence</span></span>
-          <span class="toggle on"><span class="track"></span><span>Structured out</span></span>
+          <span class="toggle on"><span class="track"></span><span>Filled is on</span></span>
+          <span class="toggle"><span class="track"></span><span>Outline is off</span></span>
+          <span class="toggle on"><span class="track"></span><span>Click to flip</span></span>
         </div>
       </div>
       <div class="panel p2">
         <span class="panel-label">Badges</span>
         <div class="badges">
-          <span class="badge solid">AI</span>
-          <span class="badge">Manual</span>
-          <span class="badge">Scenario</span>
-          <span class="badge">Clothing</span>
-          <span class="badge dash">Unsaved</span>
-          <span class="badge warn"><svg><use href="#i-warn"/></svg> Empty lib</span>
+          <span class="badge solid">Solid</span>
+          <span class="badge">Outline</span>
+          <span class="badge">Neutral</span>
+          <span class="badge">Tag</span>
+          <span class="badge dash">Dashed</span>
+          <span class="badge warn"><svg><use href="#i-warn"/></svg> Attention</span>
         </div>
       </div>
       <div class="panel p2">
         <span class="panel-label">Readouts</span>
         <div class="readout">
-          <div class="metric"><b>47</b><span>Presets</span></div>
+          <div class="metric"><b>47</b><span>Count</span></div>
           <div>
-            <div class="mono-note" style="margin-bottom:6px">Variation budget</div>
+            <div class="mono-note" style="margin-bottom:6px">Capacity</div>
             <div class="bar"><i style="width:64%"></i></div>
           </div>
           <div class="score"><span class="k">HI SCORE</span><span class="v">19 009 304</span></div>
@@ -217,18 +413,49 @@
         </div>
       </div>
     </div>
+
+    <div class="callout">
+      <b>The three badge states are the encoding in miniature.</b> Solid, outline
+      and dashed carry active, idle and disabled with no hue involved - and
+      because they are shapes rather than colours they survive being printed,
+      photocopied, or rendered by a reader who cannot distinguish red from green.
+    </div>
   </div></section>
 
-  <!-- ===== 03 CONSOLE ===== -->
-  <section class="block"><div class="wrap">
+  <!-- ===== 07 MOTIFS ===== -->
+  <section class="block" id="motifs"><div class="wrap">
     <div class="sec-head">
-      <span class="id">§03</span>
-      <h2>Operator Console</h2>
+      <span class="id">&#167;07</span>
+      <h2>Motifs</h2>
       <span class="rule"></span>
-      <span class="status">Decorative</span>
+      <span class="status">Recognisable at a glance</span>
     </div>
-    <p class="prose">The full-HUD register - reserved for heroes, empty states, and section furniture. Gauges, gain sliders, D-pad, and pixel lives set the arcade tone without cluttering the working surfaces.</p>
-    <div style="height:26px"></div>
+
+    <p class="prose">The marks that make the system identifiable. Icons are a single 1.7px stroke on a 24px box, with one deliberate exception - the pixel heart, which is drawn on a 9&times;7 grid and rendered with <code>crispEdges</code>.</p>
+
+    <div style="height:24px"></div>
+
+    <div class="panel" style="margin-bottom:22px">
+      <span class="panel-label">Icon set</span>
+      <div class="motifs">
+        <div class="motif"><svg><use href="#i-target"/></svg><span>Target</span></div>
+        <div class="motif"><svg><use href="#i-cross"/></svg><span>Register</span></div>
+        <div class="motif"><svg><use href="#i-warn"/></svg><span>Warn</span></div>
+        <div class="motif"><svg><use href="#i-no"/></svg><span>Block</span></div>
+        <div class="motif"><svg><use href="#i-dice"/></svg><span>Shuffle</span></div>
+        <div class="motif"><svg><use href="#i-lock"/></svg><span>Lock</span></div>
+        <div class="motif"><svg><use href="#i-unlock"/></svg><span>Unlock</span></div>
+        <div class="motif"><svg><use href="#i-copy"/></svg><span>Copy</span></div>
+        <div class="motif"><svg><use href="#i-check"/></svg><span>Done</span></div>
+        <div class="motif"><svg><use href="#i-heart"/></svg><span>Life</span></div>
+        <div class="motif"><svg><use href="#i-chevL"/></svg><span>Prev</span></div>
+        <div class="motif"><svg><use href="#i-chevR"/></svg><span>Next</span></div>
+      </div>
+    </div>
+
+    <p class="prose">Beyond the icons, four pieces of furniture carry the register: the <b>corner bracket</b> on panels, the <b>registration cross</b>, the <b>scanline wash</b>, and the <b>viewport frame</b> pinned to the four corners of the window. Below, the decorative register at full strength - reserved for heroes, empty states and section furniture, never for working surfaces.</p>
+
+    <div style="height:22px"></div>
 
     <div class="panel brk" style="padding:34px">
       <div class="console">
@@ -239,9 +466,9 @@
               <circle cx="60" cy="60" r="44" fill="none" stroke="var(--gray-300)" stroke-width="7" stroke-dasharray="207 277" transform="rotate(135 60 60)"/>
               <circle cx="60" cy="60" r="44" fill="none" stroke="var(--ink)" stroke-width="7" stroke-dasharray="186 277" transform="rotate(135 60 60)"/>
             </svg>
-            <div class="lbl"><b>0.90</b><span>Temp</span></div>
+            <div class="lbl"><b>0.90</b><span>Level</span></div>
           </div>
-          <span class="cap">Sampler</span>
+          <span class="cap">Dial</span>
         </div>
 
         <div class="col">
@@ -263,89 +490,155 @@
         </div>
       </div>
     </div>
+
+    <div class="callout">
+      <b>The decorative register has to stay quarantined.</b> Gauges and D-pads
+      are what make the system fun and what would make it unusable if they leaked
+      into the working surfaces - a dense list of controls does not need a dial
+      next to it. One console per page, at most, and never inside a form.
+    </div>
   </div></section>
 
-  <!-- ===== 04 APPLICATION ===== -->
-  <section class="block"><div class="wrap">
+  <!-- ===== 08 COMPOSITION ===== -->
+  <section class="block" id="composition"><div class="wrap">
     <div class="sec-head">
-      <span class="id">§04</span>
-      <h2>In Application</h2>
+      <span class="id">&#167;08</span>
+      <h2>Composition</h2>
       <span class="rule"></span>
-      <span class="status"><span class="dot"></span> Prompt Assembly</span>
+      <span class="status"><span class="dot"></span> Specimen</span>
     </div>
-    <p class="prose">The system applied to SDPromptGen's generator - full-HUD frame around the module, restrained and legible inside the dense slot list. Each category is a slot you copy, reroll, or lock.</p>
+
+    <p class="prose">The parts assembled into one arrangement: a framed module holding a list of units, each with a label, a value and its controls, one of them held in the inverted state. Deliberately abstract - what matters is the rhythm, not what the rows contain.</p>
+
     <div style="height:26px"></div>
 
     <div class="panel brk" style="padding:26px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px">
-        <span class="mono-note">MODULE // PROMPT ASSEMBLY</span>
-        <span class="mono-note">SEED <b style="color:var(--ink)">19009304</b></span>
+        <span class="mono-note">MODULE // SPECIMEN</span>
+        <span class="mono-note">REF <b style="color:var(--ink)">19 009 304</b></span>
       </div>
 
-      <div class="gen">
-        <div class="slot locked">
-          <div class="meta"><span class="n">SLOT 01 · LOCKED</span><span class="cat">General</span></div>
-          <div class="tags">masterpiece, best quality, highres, absurdres</div>
-          <div class="ctrl">
+      <div class="mod">
+        <div class="unit held">
+          <span class="k">Unit 01 &middot; Held</span>
+          <span class="val">alpha, bravo, charlie, delta</span>
+          <span class="ops">
             <button class="iconbtn" type="button" title="Copy"><svg><use href="#i-copy"/></svg></button>
-            <button class="iconbtn" type="button" title="Reroll"><svg><use href="#i-dice"/></svg></button>
-            <button class="iconbtn on" type="button" title="Locked"><svg><use href="#i-lock"/></svg></button>
-          </div>
+            <button class="iconbtn" type="button" title="Shuffle"><svg><use href="#i-dice"/></svg></button>
+            <button class="iconbtn on" type="button" title="Held"><svg><use href="#i-lock"/></svg></button>
+          </span>
         </div>
-        <div class="slot">
-          <div class="meta"><span class="n">SLOT 02</span><span class="cat">Scenario</span></div>
-          <div class="tags">1girl, solo, standing, park, day</div>
-          <div class="ctrl">
+        <div class="unit">
+          <span class="k">Unit 02</span>
+          <span class="val">echo, foxtrot, golf</span>
+          <span class="ops">
             <button class="iconbtn" type="button" title="Copy"><svg><use href="#i-copy"/></svg></button>
-            <button class="iconbtn" type="button" title="Reroll"><svg><use href="#i-dice"/></svg></button>
-            <button class="iconbtn" type="button" title="Unlocked"><svg><use href="#i-unlock"/></svg></button>
-          </div>
+            <button class="iconbtn" type="button" title="Shuffle"><svg><use href="#i-dice"/></svg></button>
+            <button class="iconbtn" type="button" title="Free"><svg><use href="#i-unlock"/></svg></button>
+          </span>
         </div>
-        <div class="slot">
-          <div class="meta"><span class="n">SLOT 03</span><span class="cat">Appearance</span></div>
-          <div class="tags">long brown hair, brown eyes, cheerful</div>
-          <div class="ctrl">
+        <div class="unit">
+          <span class="k">Unit 03</span>
+          <span class="val">hotel, india, juliett</span>
+          <span class="ops">
             <button class="iconbtn" type="button" title="Copy"><svg><use href="#i-copy"/></svg></button>
-            <button class="iconbtn" type="button" title="Reroll"><svg><use href="#i-dice"/></svg></button>
-            <button class="iconbtn" type="button" title="Unlocked"><svg><use href="#i-unlock"/></svg></button>
-          </div>
+            <button class="iconbtn" type="button" title="Shuffle"><svg><use href="#i-dice"/></svg></button>
+            <button class="iconbtn" type="button" title="Free"><svg><use href="#i-unlock"/></svg></button>
+          </span>
         </div>
-        <div class="slot">
-          <div class="meta"><span class="n">SLOT 04</span><span class="cat">Clothing</span></div>
-          <div class="tags">t-shirt, jeans, sneakers</div>
-          <div class="ctrl">
+        <div class="unit">
+          <span class="k">Unit 04</span>
+          <span class="val">kilo, lima, mike</span>
+          <span class="ops">
             <button class="iconbtn" type="button" title="Copy"><svg><use href="#i-copy"/></svg></button>
-            <button class="iconbtn" type="button" title="Reroll"><svg><use href="#i-dice"/></svg></button>
-            <button class="iconbtn" type="button" title="Unlocked"><svg><use href="#i-unlock"/></svg></button>
-          </div>
+            <button class="iconbtn" type="button" title="Shuffle"><svg><use href="#i-dice"/></svg></button>
+            <button class="iconbtn" type="button" title="Free"><svg><use href="#i-unlock"/></svg></button>
+          </span>
         </div>
       </div>
 
       <div class="out">
         <div class="block">
-          <div class="h"><span>Sections</span><svg width="13" height="13" style="color:var(--gray-400)"><use href="#i-copy"/></svg></div>
-          <pre>general: masterpiece, best quality, highres, absurdres
+          <div class="h"><span>Grouped</span><svg width="13" height="13" style="color:var(--gray-400)"><use href="#i-copy"/></svg></div>
+          <pre>01: alpha, bravo, charlie, delta
 
-scenario: 1girl, solo, standing, park, day
+02: echo, foxtrot, golf
 
-appearance: long brown hair, brown eyes, cheerful
+03: hotel, india, juliett
 
-clothing: t-shirt, jeans, sneakers</pre>
+04: kilo, lima, mike</pre>
         </div>
         <div class="block">
-          <div class="h"><span>Merged</span><svg width="13" height="13" style="color:var(--gray-400)"><use href="#i-copy"/></svg></div>
-          <pre>masterpiece, best quality, highres, absurdres,
+          <div class="h"><span>Flattened</span><svg width="13" height="13" style="color:var(--gray-400)"><use href="#i-copy"/></svg></div>
+          <pre>alpha, bravo, charlie, delta,
 
-1girl, solo, standing, park, day,
+echo, foxtrot, golf,
 
-long brown hair, brown eyes, cheerful,
+hotel, india, juliett,
 
-t-shirt, jeans, sneakers</pre>
+kilo, lima, mike</pre>
         </div>
       </div>
 
       <div class="gen-actions">
-        <button class="btn solid" type="button"><svg><use href="#i-chevL"/></svg> Reroll Unlocked <svg><use href="#i-chevR"/></svg></button>
+        <button class="btn solid" type="button"><svg><use href="#i-chevL"/></svg> Primary action <svg><use href="#i-chevR"/></svg></button>
+      </div>
+    </div>
+
+    <h3 class="eyebrow" style="margin:34px 0 12px">Anatomy</h3>
+    <table class="spec">
+      <thead><tr><th>Part</th><th>As built</th><th>Why it is that</th></tr></thead>
+      <tbody>
+        <tr><td>Frame</td><td class="v">panel + brk</td><td class="d">Corner brackets on two opposing corners only. Four would close the box and lose the instrument reading.</td></tr>
+        <tr><td>Module head</td><td class="v">caption / caption</td><td class="d">Identity left, reference right, both in the caption voice. The head never competes with the rows.</td></tr>
+        <tr><td>Unit row</td><td class="v">118px / 1fr / auto</td><td class="d">Fixed label column so the values align down the list without a table.</td></tr>
+        <tr><td>Held row</td><td class="v">inverted</td><td class="d">The whole surface fills. This is the only "selected" treatment the system has, and it is the same move as a solid button.</td></tr>
+        <tr><td>Controls</td><td class="v">icon buttons</td><td class="d">Per-row, right-aligned, outline at rest. The active one fills - matching the row's own encoding.</td></tr>
+        <tr><td>Output</td><td class="v">two panes</td><td class="d">Same content at two grains. Mono makes the comparison legible without labels on every line.</td></tr>
+        <tr><td>Footer action</td><td class="v">solid button</td><td class="d">One solid per module. A second would leave the reader with no primary.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <b>Note what this specimen is not.</b> It is not a screenshot of an
+      application with the labels changed. The rows carry the NATO alphabet
+      precisely because it means nothing - a reader takes away the structure
+      rather than a guess at what the module was for.
+    </div>
+  </div></section>
+
+  <!-- ===== 09 RULES ===== -->
+  <section class="block" id="rules"><div class="wrap">
+    <div class="sec-head">
+      <span class="id">&#167;09</span>
+      <h2>Rules</h2>
+      <span class="rule"></span>
+      <span class="status"><span class="dot"></span> The refusals matter most</span>
+    </div>
+
+    <div style="height:22px"></div>
+
+    <div class="dodont">
+      <div class="panel p2">
+        <span class="panel-label">Do</span>
+        <ul>
+          <li>Encode state in <b>form</b>: filled is active, outline is idle, dashed is disabled or in flux.</li>
+          <li>Reach for the <b>inverted block</b> for emphasis and selection. It is the whole vocabulary.</li>
+          <li>Author and check <b>both grounds</b>. Blueprint and CRT are hand-written, not derived.</li>
+          <li>Keep <b>mono as the default</b> and let the body face appear only in running prose.</li>
+          <li>Let the <b>dashed edge</b> mean something. It is a state, and spending it as decoration costs you a signal.</li>
+        </ul>
+      </div>
+      <div class="panel p2">
+        <span class="panel-label">Do not</span>
+        <ul>
+          <li>Add <b>any hue</b>. Not for errors, not for success, not "just this once" - form is already carrying that load.</li>
+          <li>Add a <b>shadow</b>. There is no elevation model; on the CRT ground a shadow is a grey smear.</li>
+          <li>Let the <b>decorative register</b> - gauges, D-pad, scanlines - onto a working surface.</li>
+          <li><b>Nest panels.</b> Two hairlines a few pixels apart read as a rendering fault.</li>
+          <li>Give anything a radius <b>above 4px</b>, pills excepted. Round corners drain the instrument out of it.</li>
+          <li><b>Interpolate.</b> The live dot steps; it never fades.</li>
+        </ul>
       </div>
     </div>
   </div></section>
@@ -353,9 +646,9 @@ t-shirt, jeans, sneakers</pre>
 
 <footer><div class="wrap">
   <div class="foot">
-    <span>SDPG-HUD · Design System · REV 02</span>
+    <span>SDPG-HUD &middot; Design System &middot; REV 02</span>
     <span class="end"><svg width="14" height="14"><use href="#i-target"/></svg> END OF LINE</span>
-    <span>Monochrome · No chroma · 2 grounds</span>
+    <span>Monochrome &middot; No chroma &middot; 2 grounds</span>
   </div>
 </div></footer>
 
@@ -372,7 +665,7 @@ t-shirt, jeans, sneakers</pre>
         root.setAttribute("data-theme", cur === "dark" ? "light" : "dark");
       });
     });
-    // demo toggles + lock buttons flip their own state (showcase only)
+    // Toggles flip themselves so the state is live rather than pictured.
     document.querySelectorAll(".toggle").forEach(function (t) {
       t.setAttribute("role", "switch");
       t.tabIndex = 0;
