@@ -85,6 +85,27 @@ Two boundaries worth keeping:
 - **One world per folder.** A system never imports another system's CSS. If two
   systems want the same component, each gets its own version.
 
+## Deploying
+
+These are plain static files - there is no build step to deploy. GitHub Pages
+serves the repo as-is:
+
+1. Settings -> Pages -> Source: **Deploy from a branch**, branch `main`, folder
+   `/ (root)`.
+2. That is it. The site appears at `https://<user>.github.io/design-systems/`.
+
+Two things keep it working under that subpath, so do not undo them:
+
+- **Every link is relative**, never rooted at `/`. A link like
+  `/systems/objekt/index.html` resolves to the domain root and 404s when the
+  site is served from a subdirectory.
+- **`.nojekyll` is committed.** Without it GitHub runs Jekyll, which silently
+  drops any directory starting with an underscore - `systems/_template/` would
+  vanish from the published site.
+
+`npm run build` exists for anyone who wants a minified bundle, but deployment
+does not use it.
+
 ## License
 
 [MIT](LICENSE).
