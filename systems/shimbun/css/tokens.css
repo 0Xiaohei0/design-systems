@@ -1,0 +1,101 @@
+/*
+SHIMBUN 新聞 - tokens.
+Warm-paper editorial print: paper grounds, one vermilion spot color, a teal
+tool color, three type stacks. Light by default; dark mirrors the warm paper
+under prefers-color-scheme: dark.
+*/
+
+:root {
+  /* ---- light: the paper desk ---- */
+  --bg: #f2f0ea;
+  --surface: #fbfaf6;
+  --surface-strong: #ffffff;
+  --ink: #111318;
+  --muted: #5e625f;
+  --line: #c9c6bd;
+  --line-strong: #111318;
+  --accent: #f04438;
+  --accent-2: #007f8c;
+  --badge: #dfdbcf;
+  --watch-bg: #e8f2ef;
+  --watch-ink: #075c62;
+  --scrim: rgba(9, 11, 15, 0.76);
+  --shadow: 0 18px 55px rgba(24, 22, 17, 0.14);
+  --focus: #007f8c;
+
+  /* poster overlays (theme-independent) */
+  --poster-scrim: linear-gradient(to top, rgba(0, 0, 0, 0.62) 0%, rgba(0, 0, 0, 0) 45%);
+  --rank-chip: rgba(8, 10, 14, 0.82);
+
+  /* ---- type ---- */
+  --font-cn: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-lat: "Archivo", "Noto Sans SC", sans-serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+
+  /* ---- radii: print stays square ---- */
+  --r-tag: 2px;
+  --r-card: 4px;
+  --r-dialog: 6px;
+  --r-pill: 999px;
+
+  /* ---- layout ---- */
+  --page-max: 1440px;
+  --page-pad: clamp(18px, 4vw, 64px);
+  --grid-gap: clamp(14px, 2vw, 28px);
+
+  /* ---- motion ---- */
+  --ease: ease;
+  --t-hover: 0.18s;
+  --t-zoom: 0.35s;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* dark: warm paper at night, never cold black */
+    --bg: #0a0d12;
+    --surface: #12171d;
+    --surface-strong: #181e25;
+    --ink: #f4f0e7;
+    --muted: #a7adaf;
+    --line: #343b42;
+    --line-strong: #e9e4d9;
+    --accent: #ff6358;
+    --accent-2: #53c3ca;
+    --badge: #252c33;
+    --watch-bg: #153034;
+    --watch-ink: #8fdde1;
+    --scrim: rgba(0, 0, 0, 0.82);
+    --shadow: 0 22px 70px rgba(0, 0, 0, 0.44);
+    --focus: #53c3ca;
+  }
+}
+
+/* kicker: every meta annotation speaks in this voice */
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+/* the heavy rule: masthead base, footer crown */
+.rule-strong {
+  border: 0;
+  border-top: 2px solid var(--line-strong);
+}
+
+/* focus: the one permitted outline */
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}

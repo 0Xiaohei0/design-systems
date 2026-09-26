@@ -5,7 +5,7 @@ Gallery portal. Indexes every design system under systems/ - one door per system
 THESIS: a specimen drawer. The chrome is neutral on purpose, but each entrance
 card is a genuine material sample of the system behind it, styled by that
 system's own systems/<name>/css/portal-card.css.
-STORY: a visitor scans nine unmistakably different doors and opens one; all
+STORY: a visitor scans ten unmistakably different doors and opens one; all
 iteration then stays inside that system.
 FIRST VIEWPORT: title, one line of purpose, the specimen cards.
 FORM: index page for pinned worlds; no seed roll.
@@ -15,11 +15,11 @@ FORM: index page for pinned worlds; no seed roll.
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Design Systems</title>
-  <!-- webfonts the specimen cards actually use (Objekt: Anton; Sprout: Silkscreen; Chaguan: Ma Shan Zheng; CJK labels: Noto Sans SC) -->
+  <!-- webfonts the specimen cards actually use (Objekt: Anton; Sprout: Silkscreen; Chaguan: Ma Shan Zheng; Shimbun: Archivo, IBM Plex Mono; CJK labels: Noto Sans SC) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Anton&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Silkscreen:wght@400;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@800&family=IBM+Plex+Mono:wght@500&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700;900&family=Silkscreen:wght@400;700&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="shared/portal/portal.css" />
   <!-- each system dresses its own door -->
@@ -32,6 +32,7 @@ FORM: index page for pinned worlds; no seed roll.
   <link rel="stylesheet" href="systems/benran/css/portal-card.css" />
   <link rel="stylesheet" href="systems/sprout/css/portal-card.css" />
   <link rel="stylesheet" href="systems/chaguan/css/portal-card.css" />
+  <link rel="stylesheet" href="systems/shimbun/css/portal-card.css" />
 </head>
 
 <body>
@@ -310,6 +311,21 @@ FORM: index page for pinned worlds; no seed roll.
         </p>
         <span class="status">Exploration</span>
         <a class="enter" href="systems/chaguan/index.html"><span lang="zh">进店</span> Enter</a>
+      </article>
+
+      <article class="system sys-shimbun">
+        <span class="kick" aria-hidden="true">Issue 24 · 完結アニメガイド</span>
+        <div class="mast" aria-hidden="true">
+          <h3>新聞</h3>
+          <span class="count">24</span>
+        </div>
+        <span class="status">Documented &middot; 暖纸编辑印刷</span>
+        <p>
+          Warm-paper editorial print: one vermilion spot color, oversized tight
+          headlines, hairline rules, mono annotations. Flat print, never
+          neumorphic.
+        </p>
+        <a class="enter" href="systems/shimbun/index.html">阅读 Read</a>
       </article>
 
     </div>

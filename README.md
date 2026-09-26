@@ -43,6 +43,9 @@ no build step to understand: these are plain HTML and CSS files.
 - **[Chaguan](systems/chaguan/)** - neo-Chinese teahouse mini-app system:
   brush-ink illustrations over gold sun discs, cream hero posters, service
   tiles, coffee-brown chrome.
+- **[Shimbun](systems/shimbun/)** - warm-paper editorial print system: one
+  vermilion spot color, oversized tight headlines, hairline rules, mono
+  annotations, light + dark paper themes.
 
 ## Layout
 

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--
+THESIS: A newspaper desk as an interface - warm paper ground, one vermilion
+spot color, oversized tight headlines, hairline rules, mono annotations.
+OWN-WORLD: Editorial print crossed with a Chinese anime catalog: Noto Sans SC
+body, Archivo display numbers, IBM Plex Mono meta marks; 2px heavy rules,
+poster scrims, inverted filter pills. Flat print, never neumorphic.
+STORY: A designer scrolls: the masthead first, then paint chips, the paper
+material in both themes, each motif isolated, every component state, and a
+miniature anime guide assembled from the kit.
+FIRST VIEWPORT: Wordmark and idea beside the giant issue counter.
+FORM: Read-mode catalog; derived from a shipped page 2026-09-26; focus ring is
+the only outline.
+-->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>新聞 SHIMBUN - Editorial Print System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="css/shimbun.css" />
+</head>
+<body>
+  <div class="page">
+
+    <!-- ============ HERO ============ -->
+    <header class="hero">
+      <div>
+        <span class="kicker">設計系統 Design System · No. 10</span>
+        <h1>新聞<span class="accent-line" lang="en">SHIMBUN</span></h1>
+        <p class="tag">
+          报纸编辑部式的界面语言：暖纸底、一抹朱红套印、超大紧凑标题、单色细线、
+          等宽字体标注。字负责说话，装饰只剩下线条、眉题和一张海报渐隐。
+        </p>
+        <nav class="nav-chips" aria-label="Sections">
+          <a href="#foundations">基础<span class="en">Foundations</span></a>
+          <a href="#paper">纸张<span class="en">Paper</span></a>
+          <a href="#motifs">母题<span class="en">Motifs</span></a>
+          <a href="#components">组件<span class="en">Components</span></a>
+          <a href="#application">应用<span class="en">In application</span></a>
+        </nav>
+      </div>
+      <div class="count" aria-label="24 titles">24<small>完結作品 TITLES</small></div>
+    </header>
+
+    <!-- ============ FOUNDATIONS ============ -->
+    <section class="block" id="foundations" aria-labelledby="foundations-h">
+      <div class="cat-head">
+        <h2 id="foundations-h"><span class="en" lang="en">Foundations</span>基础</h2>
+        <span class="n">12 tokens · 3 type stacks</span>
+      </div>
+      <p class="lede">
+        一块纸、两种墨、几根线。浅色是暖纸灰，深色是暖纸的夜晚——不是冷黑。
+        朱红是声音，青色是工具，除此之外没有饱和色。
+      </p>
+      <div class="tokens">
+        <div class="token"><div class="sw" style="background:#f2f0ea"></div><div class="meta"><code>--bg</code><span class="hex">#f2f0ea</span><p>页面底：暖纸灰</p></div></div>
+        <div class="token"><div class="sw" style="background:#fbfaf6"></div><div class="meta"><code>--surface</code><span class="hex">#fbfaf6</span><p>卡片底，比纸高半阶</p></div></div>
+        <div class="token"><div class="sw" style="background:#ffffff"></div><div class="meta"><code>--surface-strong</code><span class="hex">#ffffff</span><p>弹窗底，最亮的板</p></div></div>
+        <div class="token"><div class="sw" style="background:#111318"></div><div class="meta"><code>--ink</code><span class="hex">#111318</span><p>主文字；浅色下不用纯黑</p></div></div>
+        <div class="token"><div class="sw" style="background:#5e625f"></div><div class="meta"><code>--muted</code><span class="hex">#5e625f</span><p>次级文字</p></div></div>
+        <div class="token"><div class="sw" style="background:#c9c6bd"></div><div class="meta"><code>--line</code><span class="hex">#c9c6bd</span><p>细线：卡片边框、分隔</p></div></div>
+        <div class="token"><div class="sw" style="background:#111318"></div><div class="meta"><code>--line-strong</code><span class="hex">#111318</span><p>粗线（2px）：报名栏底、页脚冠</p></div></div>
+        <div class="token"><div class="sw" style="background:#f04438"></div><div class="meta"><code>--accent</code><span class="hex">#f04438</span><p>朱红套印：眉题、标题、完结签</p></div></div>
+        <div class="token"><div class="sw" style="background:#007f8c"></div><div class="meta"><code>--accent-2</code><span class="hex">#007f8c</span><p>青色：聚焦环、功能块</p></div></div>
+        <div class="token"><div class="sw" style="background:#dfdbcf"></div><div class="meta"><code>--badge</code><span class="hex">#dfdbcf</span><p>标签底板</p></div></div>
+        <div class="token"><div class="sw" style="background:#e8f2ef"></div><div class="meta"><code>--watch-bg</code><span class="hex">#e8f2ef</span><p>「有中文渠道」信息块底</p></div></div>
+        <div class="token"><div class="sw" style="background:#075c62"></div><div class="meta"><code>--watch-ink</code><span class="hex">#075c62</span><p>信息块文字（7:1）</p></div></div>
+      </div>
+
+      <div class="type-grid">
+        <div class="type-card">
+          <span class="stack">Noto Sans SC · 中文正文与标题</span>
+          <div class="spec-cn">日常向导</div>
+          <p>Body 与中文标题默认思源黑体，900 用于超大标题，字距收紧。</p>
+        </div>
+        <div class="type-card">
+          <span class="stack">Archivo · 拉丁展示</span>
+          <div class="spec-lat">0124</div>
+          <p>巨型数字与英文副标题。字距 -0.08em 是这套系统的签名。</p>
+        </div>
+        <div class="type-card">
+          <span class="stack">IBM Plex Mono · 元标注</span>
+          <div class="spec-mono">ISSUE 24 · 12 部 · TAG</div>
+          <p>期号、计数、标签、日期、按钮微文案——全部元信息都用这个声音。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PAPER ============ -->
+    <section class="block" id="paper" aria-labelledby="paper-h">
+      <div class="cat-head">
+        <h2 id="paper-h"><span class="en" lang="en">Paper</span>纸张</h2>
+        <span class="n">the material</span>
+      </div>
+      <p class="lede">
+        材质就是纸本身。卡片默认平放无阴影，hover 才轻轻浮起 3px；
+        整套语言里最大的阴影只属于弹窗。圆角封顶 6px，药丸除外——这里没有什么软乎乎的东西。
+      </p>
+      <div class="paper-panels">
+        <div class="paper-panel light"><span class="ph">--bg</span><span class="pv">#f2f0ea · 页面</span></div>
+        <div class="paper-panel surface"><span class="ph">--surface</span><span class="pv">#fbfaf6 · 卡片</span></div>
+        <div class="paper-panel strong"><span class="ph">--surface-strong</span><span class="pv">#ffffff · 弹窗</span></div>
+        <div class="paper-panel dark"><span class="ph">--bg · dark</span><span class="pv">#0a0d12 · 暖纸的夜晚</span></div>
+      </div>
+      <div class="ink-row">
+        <div class="ink-chip vermilion"><span class="ph">--accent · 朱红</span><span class="pv">#f04438 · 声音</span></div>
+        <div class="ink-chip teal"><span class="ph">--accent-2 · 青</span><span class="pv">#007f8c · 工具</span></div>
+      </div>
+      <ul class="refusals">
+        <li><strong>不加渐变</strong>——除了海报底部那道为了看清字的黑渐隐。</li>
+        <li><strong>不加阴影</strong>——除了弹窗那一记，和卡片 hover 的轻浮。</li>
+        <li><strong>不用纯黑纯白</strong>做浅色底——每个中性色都是暖的。</li>
+        <li><strong>圆角不超过 6px</strong>——药丸除外；这里不卖可爱。</li>
+        <li><strong>能用眉题和线解决的</strong>，不用图标和插画装饰。</li>
+      </ul>
+    </section>
+
+    <!-- ============ MOTIFS ============ -->
+    <section class="block" id="motifs" aria-labelledby="motifs-h">
+      <div class="cat-head">
+        <h2 id="motifs-h"><span class="en" lang="en">Motifs</span>母题</h2>
+        <span class="n">5</span>
+      </div>
+      <p class="lede">报纸的固定版式，搬进界面：报名栏、海报、索引行、规格行、方法论署名。</p>
+      <div class="motif-grid">
+        <div class="motif">
+          <span class="kicker">Motif · 报名栏 Masthead</span>
+          <div class="mini-mast">
+            <h3>完结动画<span>日常向导</span></h3>
+            <div class="num">24</div>
+          </div>
+          <p class="note" style="font-size:.8rem;color:var(--muted)">标题左、计数右，底部 2px 粗线。每个页面的正门。</p>
+        </div>
+        <div class="motif">
+          <span class="kicker">Motif · 海报 Poster</span>
+          <div class="poster">
+            <div class="art-word">SLICE<br />OF<br />LIFE</div>
+            <span class="rank">RANK 01</span>
+            <span class="end-date">2026.03 完結</span>
+          </div>
+          <p class="note" style="font-size:.8rem;color:var(--muted)">底部黑渐隐 + 左上序号签 + 左下白字日期。</p>
+        </div>
+        <div class="motif">
+          <span class="kicker">Motif · 眉题 Kicker</span>
+          <p style="font-size:1.1rem;font-weight:700;margin:0 0 12px"> issue / eyebrow / 计数，全部这个声音：</p>
+          <span class="kicker" style="font-size:12px">ISSUE 24 · 2026 冬季新番</span>
+          <p class="note" style="font-size:.8rem;color:var(--muted)">11–12px 等宽、朱红、字距 +0.08em。</p>
+        </div>
+        <div class="motif">
+          <span class="kicker">Motif · 规格行 Name-row</span>
+          <div class="name-row"><span class="lbl">原作</span><span>漫画 · 芳文社</span><button class="copy-btn" type="button">COPY</button></div>
+          <div class="name-row"><span class="lbl">话数</span><span>全 12 话</span><button class="copy-btn" type="button">COPY</button></div>
+          <div class="name-row" style="border-bottom:0"><span class="lbl">放送</span><span>2026.01 – 2026.03</span><button class="copy-btn" type="button">COPY</button></div>
+          <p class="note" style="font-size:.8rem;color:var(--muted)">104px 等宽标签 / 正文 / 复制按钮，三栏规格表。</p>
+        </div>
+        <div class="motif">
+          <span class="kicker">Motif · 方法论 Method</span>
+          <div class="method">
+            <span class="lbl">METHOD</span>
+            <span>只收录已完结作品；简介为编辑手写；观看渠道每周核验一次。</span>
+          </div>
+          <p class="note" style="font-size:.8rem;color:var(--muted)">顶部 2px 粗线，左标签右正文——页面的署名。</p>
+        </div>
+        <div class="motif">
+          <span class="kicker">Motif · 分类栏 Category head</span>
+          <div class="cat-head" style="margin-bottom:0">
+            <h3 style="margin:0;font-size:1.4rem;letter-spacing:-0.03em">治愈日常</h3>
+            <span class="n">8 部</span>
+          </div>
+          <p class="note" style="font-size:.8rem;color:var(--muted)">题材名左、「N 部」计数右，目录的索引卡。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ COMPONENTS ============ -->
+    <section class="block" id="components" aria-labelledby="components-h">
+      <div class="cat-head">
+        <h2 id="components-h"><span class="en" lang="en">Components</span>组件</h2>
+        <span class="n">8</span>
+      </div>
+      <p class="lede">把鼠标放到卡片上试试——那 3px 的浮起是整套语言里唯一的"动效高潮"。</p>
+      <div class="comp-grid">
+        <div class="comp">
+          <span class="kicker">Component · 卡片 Card</span>
+          <div class="demo-card">
+            <div class="poster"><div class="art-word">YURU<br />CAMP</div><span class="rank">RANK 02</span><span class="end-date">2024.06 完結</span></div>
+            <div class="body">
+              <h4>摇曳露营△ 第三季</h4>
+              <div class="english">Yuru Camp Season 3</div>
+              <div class="row">
+                <div class="tags"><span class="tag">日常</span><span class="tag final">故事完结</span></div>
+                <button class="arrow-btn" type="button" aria-label="打开">→</button>
+              </div>
+            </div>
+          </div>
+          <p class="note">1px 细线、4px 圆角、默认无阴影；hover 上浮 3px、边框转粗。</p>
+        </div>
+        <div class="comp">
+          <span class="kicker">Component · 筛选药丸 Filter</span>
+          <div class="pills">
+            <button class="pill is-active" type="button">全部</button>
+            <button class="pill" type="button">治愈日常</button>
+            <button class="pill" type="button">美食</button>
+            <button class="pill" type="button">旅行</button>
+          </div>
+          <p class="note">激活态反色填充：底和边框变 ink，字变 surface-strong。</p>
+        </div>
+        <div class="comp">
+          <span class="kicker">Component · 搜索 Search</span>
+          <div class="search">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 10.5 L14 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <input type="search" placeholder="搜索番名…" aria-label="搜索" />
+          </div>
+          <p class="note">2px 圆角 + 内嵌放大镜，细线边框。</p>
+        </div>
+        <div class="comp">
+          <span class="kicker">Component · 标签 Tag</span>
+          <div class="tags">
+            <span class="tag">日常</span>
+            <span class="tag">美食</span>
+            <span class="tag">芳文社</span>
+            <span class="tag final">故事完结</span>
+          </div>
+          <p class="note">10px 等宽徽章；final 类是朱红底白字。</p>
+        </div>
+        <div class="comp">
+          <span class="kicker">Component · 圆形按钮 Round buttons</span>
+          <div class="round-btns">
+            <button class="arrow-btn" type="button" aria-label="下一张">→</button>
+            <button class="close-btn" type="button" aria-label="关闭">✕</button>
+            <button class="copy-btn" type="button">COPY</button>
+          </div>
+          <p class="note">28px 箭头 / 40px 关闭 / 小矩形复制——都是细线描边。</p>
+        </div>
+        <div class="comp">
+          <span class="kicker">Component · 渠道块 Watch block</span>
+          <div class="watch">
+            <span class="kicker">WATCH · 有中文渠道</span>
+            Bilibili · 全 12 话 · 中文字幕
+          </div>
+          <p class="note">青墨块：watch-bg 底、watch-ink 字，对比度 7:1。</p>
+        </div>
+        <div class="comp">
+          <span class="kicker">Component · 弹窗 Dialog</span>
+          <div class="dialog-demo">
+            <button class="close-btn" type="button" aria-label="关闭">✕</button>
+            <h4>白箱</h4>
+            <p>SHIROBAKO · 动画行业群像，24 话已完结。背景 blur(3px)，移动端全屏去圆角。</p>
+          </div>
+          <p class="note">surface-strong 底、6px 圆角、整套语言最大的阴影。</p>
+        </div>
+        <div class="comp">
+          <span class="kicker">Component · 提示 Toast</span>
+          <span class="toast-demo">已复制到剪贴板 COPIED</span>
+          <p class="note">底部浮动小黑条：淡入 + 上滑 0.18s。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ APPLICATION ============ -->
+    <section class="block" id="application" aria-labelledby="application-h">
+      <div class="cat-head">
+        <h2 id="application-h"><span class="en" lang="en">In application</span>应用</h2>
+        <span class="n">mini guide</span>
+      </div>
+      <p class="lede">用这套零件拼一页微缩的"完结动画日常向导"——原页面的血统，一眼可辨。</p>
+      <div class="app-mast">
+        <div>
+          <span class="kicker">ISSUE 24 · 完結アニメガイド</span>
+          <h2>完结动画<span>日常向导</span></h2>
+        </div>
+        <div class="num">24</div>
+      </div>
+      <div class="app-grid">
+        <div class="demo-card">
+          <div class="poster"><div class="art-word">NEKO<br />YANI</div><span class="rank">RANK 01</span><span class="end-date">2026.03 完結</span></div>
+          <div class="body">
+            <h4>尼古喵喵</h4>
+            <div class="english">Yani Neko · 治愈日常</div>
+            <div class="row"><div class="tags"><span class="tag">日常</span><span class="tag final">故事完结</span></div><button class="arrow-btn" type="button" aria-label="打开">→</button></div>
+          </div>
+        </div>
+        <div class="demo-card">
+          <div class="poster"><div class="art-word">YURU<br />CAMP</div><span class="rank">RANK 02</span><span class="end-date">2024.06 完結</span></div>
+          <div class="body">
+            <h4>摇曳露营△</h4>
+            <div class="english">Yuru Camp · 户外日常</div>
+            <div class="row"><div class="tags"><span class="tag">旅行</span><span class="tag final">故事完结</span></div><button class="arrow-btn" type="button" aria-label="打开">→</button></div>
+          </div>
+        </div>
+        <div class="demo-card">
+          <div class="poster"><div class="art-word">SHIRO<br />BAKO</div><span class="rank">RANK 03</span><span class="end-date">2015.03 完結</span></div>
+          <div class="body">
+            <h4>白箱</h4>
+            <div class="english">SHIROBAKO · 行业群像</div>
+            <div class="row"><div class="tags"><span class="tag">职场</span><span class="tag final">故事完结</span></div><button class="arrow-btn" type="button" aria-label="打开">→</button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <a class="back-link" href="../../index.html">← All design systems</a>
+
+    <footer class="colophon">
+      <span class="lbl">COLOPHON</span>
+      <span>SHIMBUN 新聞 · 暖纸编辑印刷系统。源自「完结动画日常向导」页面的线上 CSS，2026-09-26 建档。字体：Noto Sans SC / Archivo / IBM Plex Mono。</span>
+    </footer>
+
+  </div>
+</body>
+</html>
