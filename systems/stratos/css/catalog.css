@@ -1,0 +1,419 @@
+/* ============================================================
+   STRATOS - catalog page
+   The spec page's own parts: masthead, thesis cluster, the brief,
+   token tables, dual-theme swatches, scale bars, callouts, do /
+   do not, the screen panels. Same rules as the kit - flat marks,
+   hairlines, no radius, no glow, the signal hue only where
+   something is live or alert. Nothing here is a component the
+   system ships; the kit is stratos-core.css.
+   ============================================================ */
+
+.page {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 28px var(--gutter) var(--section-gap);
+}
+
+.grow { flex: 1; }
+
+/* ---------- masthead: index + theme toggle ---------- */
+
+.mast {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--ground);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.mast-in {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 8px var(--gutter);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.mast-id {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.mast .idx {
+  display: flex;
+  gap: 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  min-width: 0;
+  flex: 1;
+}
+
+.mast .idx::-webkit-scrollbar { display: none; }
+
+.mast .idx a {
+  color: var(--ink-dim);
+  text-decoration: none;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 6px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.mast .idx a:hover {
+  color: var(--ink);
+  border-color: var(--hairline);
+  background: var(--panel);
+}
+
+.mast .s-btn { white-space: nowrap; }
+
+/* ---------- thesis cluster ---------- */
+
+.hero { padding: 24px; margin-bottom: 40px; }
+
+.hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px 24px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.hero-id { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+
+.hero-main {
+  display: grid;
+  grid-template-columns: 7fr 4fr;
+  gap: 24px 36px;
+  padding: 24px 0;
+}
+
+.hero-col { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+
+.hero-bottom {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px 22px;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--hairline);
+  padding-top: 16px;
+}
+
+.markers { display: flex; align-items: center; gap: 10px; }
+
+/* running prose: the one place the mono voice goes sentence case */
+.thesis,
+.lede {
+  font-size: 12px;
+  line-height: 1.7;
+  max-width: 72ch;
+  color: var(--ink-dim);
+}
+
+.thesis b,
+.lede b { color: var(--ink); font-weight: 700; }
+
+.thesis { color: var(--ink); }
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.95em;
+  color: var(--ink);
+  background: var(--panel);
+  padding: 0 4px;
+}
+
+/* ---------- implementer brief ---------- */
+
+.brief { background: var(--panel); padding: 0 0 20px; margin-bottom: var(--section-gap); }
+.brief .s-hazard { margin-bottom: 18px; }
+.brief .hd { display: flex; align-items: center; gap: 10px; padding: 0 22px; margin-bottom: 14px; }
+
+.brief ol {
+  list-style: none;
+  counter-reset: brief;
+  padding: 0 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.brief li {
+  counter-increment: brief;
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  font-size: 12px;
+  line-height: 1.65;
+  color: var(--ink-dim);
+  max-width: 96ch;
+}
+
+.brief li::before {
+  content: counter(brief, decimal-leading-zero) "_";
+  color: var(--ink);
+  letter-spacing: 0.08em;
+}
+
+.brief li b { color: var(--ink); }
+
+/* ---------- sections ---------- */
+
+.sec { margin-bottom: var(--section-gap); scroll-margin-top: 56px; }
+
+.sechead { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+
+.sechead h2 {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.sechead .s-rule { flex: 1; }
+
+.sec .lede { margin-bottom: 24px; }
+
+.sub-hd { display: block; margin: 30px 0 12px; color: var(--ink-dim); }
+
+/* ---------- callout: the reason behind a number ---------- */
+
+.callout {
+  margin-top: 24px;
+  padding: 14px 16px;
+  border: 1px solid var(--hairline);
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--ink-dim);
+  max-width: 84ch;
+}
+
+.callout::before {
+  content: "WHY //";
+  display: block;
+  margin-bottom: 6px;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+}
+
+.callout b { color: var(--ink); }
+
+.note {
+  margin-top: 14px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--ink-dim);
+  max-width: 84ch;
+}
+
+.note b { color: var(--ink); }
+
+/* ---------- dual-theme swatches: both grounds at once ---------- */
+
+.duo {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.duo .cell { border: 1px solid var(--hairline); display: flex; flex-direction: column; }
+.duo .halves { display: flex; height: 56px; }
+.duo .halves i { flex: 1; display: block; }
+.duo .cap { padding: 9px 10px 10px; display: flex; flex-direction: column; gap: 5px; flex: 1; }
+.duo .nm { font-size: 11px; font-weight: 700; letter-spacing: 0.04em; }
+.duo .role { font-size: 11px; line-height: 1.55; color: var(--ink-dim); }
+.duo .hex { display: flex; gap: 8px; margin-top: auto; padding-top: 4px; font-size: 9px; letter-spacing: 0.06em; color: var(--ink-dim); text-transform: uppercase; }
+.duo .hex span { flex: 1; }
+
+/* ---------- token tables ---------- */
+
+table.spec { width: 100%; border-collapse: collapse; font-size: 11px; }
+
+table.spec th {
+  text-align: left;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  padding: 0 12px 8px 0;
+}
+
+table.spec td {
+  padding: 9px 12px 9px 0;
+  border-top: 1px solid var(--hairline);
+  vertical-align: middle;
+}
+
+table.spec td:first-child { font-weight: 700; white-space: nowrap; }
+table.spec td.v { color: var(--ink-dim); white-space: nowrap; font-variant-numeric: tabular-nums; }
+table.spec td.d { line-height: 1.6; color: var(--ink-dim); min-width: 22ch; }
+table.spec td.d b { color: var(--ink); }
+
+.table-scroll { overflow-x: auto; }
+
+/* ---------- scale bars ---------- */
+
+.scale { height: 9px; background: var(--ink); }
+
+/* ---------- type specimens ---------- */
+
+.type-rows { display: flex; flex-direction: column; gap: 22px; margin-bottom: 26px; }
+.type-row { display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap; }
+.type-row .who { width: 170px; flex: none; color: var(--ink-dim); }
+.type-row .what { min-width: 0; overflow-wrap: anywhere; }
+
+.gram { list-style: none; max-width: 680px; }
+.gram li { display: flex; align-items: baseline; gap: 8px; padding: 5px 0; }
+.gram .pat { color: var(--ink-dim); white-space: nowrap; }
+.gram .lead { flex: 1; min-width: 12px; border-bottom: 1px dotted var(--hairline); transform: translateY(-3px); }
+.gram .ex { text-align: right; }
+
+/* ---------- specimen grid ---------- */
+
+.spec-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 18px;
+}
+
+.spec-grid .cell {
+  border: 1px solid var(--hairline);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.spec-grid .cap {
+  margin-top: auto;
+  padding-top: 10px;
+  color: var(--ink-dim);
+  border-top: 1px dotted var(--hairline);
+}
+
+.demo { display: flex; flex-direction: column; gap: 10px; }
+.demo-row { display: flex; flex-direction: row; align-items: center; gap: 10px; flex-wrap: wrap; }
+.demo-row--base { align-items: baseline; }
+
+.legend { margin-bottom: 8px; color: var(--ink-dim); }
+
+/* ---------- form tiles ---------- */
+
+.form-tile { height: 74px; }
+.form-tile--hair { border: 1px solid var(--hairline); }
+.form-tile--ink { border: 1px solid var(--ink); }
+.form-tile--dashed { border: 1px dashed var(--hairline); }
+.form-tile--panel { background: var(--panel); }
+
+.leader { border-bottom: 1px dotted var(--hairline); height: 1px; }
+
+.schem-sm { height: 110px; }
+
+/* ---------- motion demo ---------- */
+
+.scan-demo { height: 110px; border: 1px solid var(--hairline); }
+
+/* ---------- screen: the shader panels and their CSS fallback ---------- */
+
+.shaderRow { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.shaderCell { display: flex; flex-direction: column; gap: 10px; }
+
+.shaderStage {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: 1px solid var(--hairline);
+  background: var(--ground);
+}
+
+.shaderStage canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0; /* transparent until the first frame lands */
+  cursor: crosshair;
+}
+
+/* The fallback IS the design: two sets of hairline rings, hard-stop, from
+   the same tokens the shader reads - interference without a single fade. */
+#fieldFallback,
+.shaderStage.is-fallback {
+  background-color: var(--ground);
+  background-image:
+    repeating-radial-gradient(circle at 30% 62%, transparent 0 15px, var(--hairline) 15px 16px),
+    repeating-radial-gradient(circle at 70% 36%, transparent 0 15px, var(--hairline) 15px 16px);
+}
+
+.shaderCap { color: var(--ink-dim); }
+
+/* ---------- composition: the neutral console specimen ---------- */
+
+.console { background: var(--panel); padding: 22px; }
+.console .s-feed li:hover,
+.console .s-feed li.is-hot { background: var(--ground); }
+.console-head { display: flex; align-items: center; gap: 12px 18px; flex-wrap: wrap; margin-bottom: 14px; }
+.console-head .lockup { display: flex; align-items: baseline; gap: 12px; }
+.console-body { display: grid; grid-template-columns: 1fr 1.15fr 1fr; gap: 26px; padding: 20px 0 16px; }
+.console-col { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.console-col .blk { display: flex; flex-direction: column; gap: 8px; }
+.schem-console { height: 130px; }
+.console-foot { border-top: 1px solid var(--hairline); padding-top: 12px; display: flex; flex-direction: column; gap: 10px; }
+.ctrl-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+/* ---------- do / do not ---------- */
+
+.dodont { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.dodont .do,
+.dodont .dont { border: 1px solid var(--hairline); padding: 16px; }
+.dodont .hd { margin-bottom: 12px; }
+.dodont ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+
+.dodont li {
+  display: grid;
+  grid-template-columns: 16px 1fr;
+  font-size: 12px;
+  line-height: 1.65;
+  color: var(--ink-dim);
+}
+
+.dodont li::before { content: "+"; color: var(--ink); }
+.dodont .dont li::before { content: ""; width: 8px; height: 8px; margin-top: 6px; background: var(--signal); }
+.dodont b { color: var(--ink); }
+
+/* ---------- footer ---------- */
+
+.endcap { margin-top: 24px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+.endcap .s-hazard,
+.endcap .s-rule { align-self: stretch; }
+.endcap .v-display { max-width: 100%; overflow-wrap: anywhere; }
+
+/* ---------- breakpoints: 720 and 480 ---------- */
+
+@media (max-width: 720px) {
+  .hero-main { grid-template-columns: 1fr; }
+  .console-body { grid-template-columns: 1fr; }
+  .type-row .who { width: 100%; }
+  .hide-sm { display: none; }
+}
+
+@media (max-width: 480px) {
+  .page { padding: 18px 16px 48px; }
+  .mast-in { padding: 8px 16px; }
+  .hero { padding: 16px; }
+  .console { padding: 16px; }
+  .brief .hd, .brief ol { padding: 0 14px; }
+}

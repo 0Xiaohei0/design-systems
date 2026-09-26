@@ -1,0 +1,509 @@
+/* SPROUT - catalog page.
+   The spec furniture the catalog is built from: masthead plank, section
+   heads, ledgers (token tables), swatch packets for both themes, scale bars,
+   the screen stage and the do / do-not boards. Set in the kit's own terms -
+   step corners, 1-unit edges, pixel captions, no radius, no blur, no easing.
+   None of this is a component the kit ships; css/sprout-core.css is the kit. */
+
+html { overflow-x: clip; scroll-behavior: auto; }
+
+/* ---------- masthead: a plank across the top ---------- */
+
+.mast {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: calc(4 * var(--px));
+  padding: calc(2 * var(--px)) 20px;
+  background: var(--alt);
+  border-bottom: var(--px) solid var(--alt-lo);
+  color: var(--glint);
+}
+.mast :focus-visible { outline-color: var(--glint); }
+.mast-brand {
+  display: flex;
+  align-items: center;
+  gap: calc(2 * var(--px));
+  font-family: var(--font-pixel);
+  font-weight: 700;
+  font-size: var(--fs-label);
+  text-transform: uppercase;
+  color: var(--glint);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.mast-brand .spr-i { width: calc(8 * var(--px)); height: calc(8 * var(--px)); }
+.mast-nav {
+  display: flex;
+  gap: var(--px);
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.mast-nav::-webkit-scrollbar { display: none; }
+.mast-nav a {
+  font-family: var(--font-pixel);
+  font-size: var(--fs-caption);
+  text-transform: uppercase;
+  color: var(--glint);
+  text-decoration: none;
+  white-space: nowrap;
+  padding: var(--px) calc(2 * var(--px));
+  clip-path: var(--clip-px);
+}
+.mast-nav a:hover { background: var(--alt-hi); }
+.mast-nav a:focus-visible { outline-offset: -2px; }
+.mast-nav a b { font-weight: 400; opacity: 0.7; }
+
+/* ---------- page frame ---------- */
+
+.page {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 20px calc(30 * var(--px));
+}
+
+.sec {
+  padding-top: calc(22 * var(--px));
+  scroll-margin-top: calc(14 * var(--px));
+}
+
+.sec-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(4 * var(--px));
+  margin-bottom: calc(6 * var(--px));
+}
+.sec-no {
+  font-family: var(--font-pixel);
+  font-size: var(--fs-caption);
+  text-transform: uppercase;
+  color: var(--ground-ink);
+  margin-bottom: calc(10 * var(--px)); /* room for the tendrils */
+}
+
+.lede {
+  max-width: 640px;
+  margin: 0 auto calc(8 * var(--px));
+  color: var(--ground-ink);
+}
+.lede b, .prose b { font-weight: 700; }
+
+.prose {
+  max-width: 640px;
+  margin: calc(6 * var(--px)) auto 0;
+  color: var(--ground-ink);
+}
+
+code {
+  font-family: var(--font-code);
+  font-size: 0.92em;
+}
+
+/* the section's "why": a panel with its own measure */
+.why {
+  max-width: 720px;
+  margin: calc(8 * var(--px)) auto 0;
+}
+.why .spr-panel-face p + p { margin-top: calc(3 * var(--px)); }
+
+/* sub-heading inside a section: a pixel caption on the ground */
+.cap {
+  font-family: var(--font-pixel);
+  font-size: var(--fs-caption);
+  text-transform: uppercase;
+  color: var(--ground-ink);
+  margin: calc(8 * var(--px)) 0 calc(3 * var(--px));
+}
+
+/* ---------- thesis ---------- */
+
+.thesis {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: calc(22 * var(--px));
+  text-align: center;
+}
+.thesis .spr-sign { margin-bottom: calc(8 * var(--px)); }
+.thesis-text {
+  max-width: 640px;
+  text-align: left;
+  color: var(--ground-ink);
+}
+.thesis-text p + p { margin-top: calc(3 * var(--px)); }
+.thesis-text b { font-weight: 700; }
+.thesis-count {
+  display: flex;
+  gap: calc(10 * var(--px));
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: calc(8 * var(--px));
+}
+.thesis-count div {
+  font-family: var(--font-pixel);
+  font-weight: 700;
+  font-size: var(--fs-title);
+  line-height: 1;
+  color: var(--ground-ink);
+}
+.thesis-count small {
+  display: block;
+  font-weight: 400;
+  font-size: var(--fs-caption);
+  margin-top: calc(2 * var(--px));
+}
+
+/* ---------- read this first ---------- */
+
+.brief {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.brief ol { margin: 0; padding-left: calc(6 * var(--px)); }
+.brief li + li { margin-top: calc(2 * var(--px)); }
+.brief b { font-weight: 700; }
+
+/* ---------- trays of specimens ---------- */
+
+.tray + .tray { margin-top: calc(6 * var(--px)); }
+.tray-cap {
+  font-family: var(--font-pixel);
+  font-size: var(--fs-caption);
+  text-transform: uppercase;
+  color: var(--ground-ink);
+  margin: 0 0 calc(4 * var(--px));
+}
+.tray-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(8 * var(--px)) calc(10 * var(--px));
+  align-items: flex-end;
+}
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(3 * var(--px));
+}
+.item-label {
+  font-family: var(--font-pixel);
+  font-size: var(--fs-caption);
+  text-transform: uppercase;
+  color: var(--ground-ink);
+  text-align: center;
+}
+.item--tip { padding-top: calc(16 * var(--px)); }
+.item--sign { padding-top: calc(10 * var(--px)); } /* headroom for the tendrils inside a plate */
+.tray-note { max-width: 260px; font-size: 13px; color: var(--ground-ink); }
+
+.state-row {
+  display: flex;
+  align-items: center;
+  gap: calc(2 * var(--px));
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.state-arrow { color: var(--ground-ink); }
+.bare { border: 0; margin: 0; padding: 0; min-width: 0; }
+
+/* ---------- ledger: the token table ---------- */
+
+.ledger-wrap { overflow-x: auto; }
+.ledger {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--ground-ink);
+  font-size: 13px;
+}
+.ledger th {
+  text-align: left;
+  font-family: var(--font-pixel);
+  font-size: var(--fs-caption);
+  font-weight: 400;
+  text-transform: uppercase;
+  padding: 0 calc(4 * var(--px)) calc(2 * var(--px)) 0;
+}
+.ledger td {
+  padding: calc(2 * var(--px)) calc(4 * var(--px)) calc(2 * var(--px)) 0;
+  border-top: var(--px) solid var(--ground);
+  vertical-align: top;
+}
+.ledger td:first-child { font-family: var(--font-code); white-space: nowrap; }
+.ledger .v { font-family: var(--font-code); white-space: nowrap; }
+.ledger td.wrap { white-space: normal; min-width: 120px; }
+.ledger .d { min-width: 220px; }
+.ledger .d b { font-weight: 700; }
+
+/* scale bar: a run of whole units in the alt ink */
+.scale {
+  display: block;
+  height: calc(3 * var(--px));
+  background: var(--alt);
+}
+
+/* ---------- colour: both themes on one packet ---------- */
+
+.duo {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: calc(4 * var(--px));
+}
+.duo .spr-packet-face { width: auto; height: 100%; }
+.duo .spr-packet-shell { height: 100%; }
+.duo .spr-packet { height: 100%; width: 100%; }
+.duo-name {
+  display: block;
+  font-family: var(--font-code);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-top: calc(2 * var(--px));
+}
+.duo-role {
+  display: block;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  margin: var(--px) 0 calc(2 * var(--px));
+}
+.duo .spr-packet-hex { display: flex; gap: calc(2 * var(--px)); }
+.duo .spr-packet-hex span { flex: 1; }
+.duo-group {
+  font-family: var(--font-pixel);
+  font-size: var(--fs-caption);
+  text-transform: uppercase;
+  color: var(--ground-ink);
+  margin: calc(6 * var(--px)) 0 calc(3 * var(--px));
+}
+
+/* ---------- typography specimens ---------- */
+
+.tline {
+  display: flex;
+  align-items: baseline;
+  gap: calc(6 * var(--px));
+  flex-wrap: wrap;
+  padding: calc(2 * var(--px)) 0;
+  color: var(--ground-ink);
+}
+.tline + .tline { border-top: var(--px) solid var(--ground); }
+.tline .item-label { min-width: 150px; text-align: left; }
+.fs-hero { font-size: var(--fs-hero); font-weight: 700; }
+.fs-title { font-size: var(--fs-title); font-weight: 700; }
+.fs-heading { font-size: var(--fs-heading); font-weight: 700; }
+.fs-label { font-size: var(--fs-label); }
+.fs-caption { font-size: var(--fs-caption); }
+.fs-body { max-width: 60ch; font-size: var(--fs-body); }
+.fs-code { font-family: var(--font-code); font-size: 13px; }
+
+/* ---------- form: construction anatomy ---------- */
+
+.anatomy {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(10 * var(--px)) calc(16 * var(--px));
+  justify-content: center;
+  align-items: flex-end;
+}
+.x2 { --px: 6px; }
+.x4 { --px: 12px; }
+.x1 { --px: 3px; }   /* resets a caption inside a scaled subtree */
+.legend { list-style: none; margin: 0; padding: 0; display: grid; gap: calc(2 * var(--px)); }
+.legend li { display: flex; align-items: center; gap: calc(3 * var(--px)); color: var(--ground-ink); }
+.legend i {
+  width: calc(4 * var(--px));
+  height: calc(4 * var(--px));
+  flex: none;
+  box-shadow: inset 0 0 0 1px var(--ground-ink);
+}
+.corner-block {
+  background: var(--piece-edge);
+  clip-path: var(--clip-px);
+  padding: var(--px);
+  width: calc(18 * var(--px));
+  height: calc(18 * var(--px));
+}
+.corner-block b {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--piece);
+  clip-path: var(--clip-px);
+  box-shadow:
+    inset 0 var(--px) 0 0 var(--piece-hi),
+    inset 0 calc(-1 * var(--px)) 0 0 var(--piece-lo);
+}
+.x4 .spr-tip-face { font-size: var(--fs-hero); }
+
+/* ---------- screen: the shader stage and its fallback ---------- */
+
+.stage-row {
+  display: grid;
+  gap: calc(6 * var(--px));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+.stage-cell { display: flex; flex-direction: column; gap: calc(3 * var(--px)); }
+/* the field is framed like a prop: an alt plank, 2 units wide */
+.stage-frame {
+  --c1: calc(var(--px) * 2);
+  --c2: calc(var(--px) * 4);
+  background: var(--alt);
+  clip-path: var(--clip-px);
+  padding: calc(2 * var(--px));
+}
+.stage {
+  --c1: var(--px);
+  --c2: calc(var(--px) * 2);
+  position: relative;
+  aspect-ratio: 16 / 10;
+  clip-path: var(--clip-px);
+  background: var(--ground);
+}
+.stage canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;               /* transparent until the first frame lands - no fade, it steps in */
+  image-rendering: pixelated;
+  touch-action: none;
+}
+/* The fallback IS the design: the same mown stripes, built from the same two
+   tokens the shader reads, with hard stops so no colour is ever blended. */
+#fieldFallback, .stage.is-fallback {
+  background-color: var(--ground);
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--ground) 0 calc(16 * var(--px)),
+    var(--ground-inset) calc(16 * var(--px)) calc(32 * var(--px))
+  );
+}
+.stage-cap {
+  font-family: var(--font-pixel);
+  font-size: var(--fs-caption);
+  text-transform: uppercase;
+  color: var(--ground-ink);
+}
+
+/* ---------- motifs ---------- */
+
+.motif-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: calc(4 * var(--px));
+}
+.motif {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: calc(3 * var(--px));
+  min-height: calc(44 * var(--px));
+}
+.motif p {
+  font-size: 13px;
+  color: var(--ground-ink);
+  text-align: center;
+}
+.motif-tip { padding-bottom: calc(2 * var(--px)); }
+.motif-tip .spr-tip-bubble { position: relative; left: auto; bottom: auto; translate: none; display: inline-block; }
+.sprite-big { width: calc(16 * 6px); height: calc(16 * 6px); color: var(--ground-ink); }
+
+/* ---------- composition specimen ---------- */
+
+.specimen { max-width: 620px; margin: 0 auto; }
+.specimen-sign {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  margin-bottom: calc(-5 * var(--px));
+  padding-top: calc(10 * var(--px));
+}
+.pick-row {
+  display: flex;
+  align-items: center;
+  gap: calc(4 * var(--px));
+  padding: calc(3 * var(--px)) 0;
+  border-bottom: var(--px) solid var(--piece);
+  cursor: pointer;
+}
+.pick-row--last { border-bottom: 0; }
+.pick-row .spr-i { color: var(--ink); flex: none; }
+.pick-row:has(input:focus-visible) { outline: 2px solid var(--focus); outline-offset: 2px; }
+.pick-name {
+  display: block;
+  font-family: var(--font-pixel);
+  font-size: var(--fs-caption);
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.pick-note { display: block; font-size: 13px; color: var(--ink-soft); }
+.pick-level { margin-left: auto; }
+.pick-value {
+  font-family: var(--font-pixel);
+  font-size: var(--fs-label);
+  color: var(--ink);
+  min-width: calc(10 * var(--px));
+  text-align: right;
+}
+.amount {
+  display: flex;
+  align-items: center;
+  gap: calc(4 * var(--px));
+  flex-wrap: wrap;
+  padding: calc(4 * var(--px)) 0 calc(2 * var(--px));
+}
+.actions {
+  display: flex;
+  gap: calc(4 * var(--px));
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  margin-top: calc(4 * var(--px));
+}
+.spaced { margin: calc(2 * var(--px)) 0; }
+.specimen .spr-panel-face { padding-top: calc(12 * var(--px)); } /* clear of the sign and the close */
+
+/* ---------- rules: do / do not ---------- */
+
+.dodont {
+  display: grid;
+  gap: calc(6 * var(--px));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+.dodont ul { margin: 0; padding-left: calc(6 * var(--px)); }
+.dodont li + li { margin-top: calc(2 * var(--px)); }
+.dodont b { font-weight: 700; }
+.dodont .spr-panel-title { display: flex; align-items: center; gap: calc(2 * var(--px)); }
+
+/* ---------- foot ---------- */
+
+.foot {
+  max-width: 720px;
+  margin: calc(24 * var(--px)) auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(6 * var(--px));
+  text-align: center;
+  color: var(--ground-ink);
+}
+
+/* ---------- phone ---------- */
+
+@media (max-width: 720px) {
+  .mast { padding: calc(2 * var(--px)) 16px; }
+  .page { padding: 0 16px calc(20 * var(--px)); }
+  .spr-sign--big .spr-sign-face { font-size: var(--fs-title); }
+  .spr-sign--big .spr-sign-face small { font-size: var(--fs-label); }
+  .tline .item-label { min-width: 100%; }
+  .spr-input { width: 100%; }
+  .pick-level { display: none; } /* the value still carries the number */
+  .spr-plate { padding: calc(4 * var(--px)); }
+  .spr-panel-face { padding: calc(4 * var(--px)); }
+  .x4 { --px: 9px; }
+}

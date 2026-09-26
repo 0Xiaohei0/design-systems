@@ -808,3 +808,10 @@ table.spec td.d b { color: var(--ink); }
   letter-spacing: 0.06em;
   color: var(--muted);
 }
+
+/* Four-column token tables cannot fit a phone without crushing every cell to
+   one word per line. Below 640px they scroll inside their own box rather than
+   pushing the whole page sideways. */
+@media (max-width: 640px) {
+  table.spec { display: block; overflow-x: auto; }
+}

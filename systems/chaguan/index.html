@@ -1,26 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <!--
-THESIS: A teahouse storefront mini-app wearing literati ink-painting clothes -
-brush art sells the mood while tiles, bars, and tabs stay task-first scannable.
-Refuses the dark-luxury tea-brand default.
-OWN-WORLD: Caramel mount ground; cream paper posters; Ma Shan Zheng brush CJK
-with tiny tracked Georgia captions; solid-ink brush illustrations over a muted
-gold sun disc; vermilion seals as punctuation; deep-coffee blocks and tab bars;
-one olive variant.
-STORY: A designer scrolls the sheet - tokens, type voices, ink art, motifs,
-component states, then a full ordering screen - and can build a storefront
-from it.
-FIRST VIEWPORT: Bilingual CHAGUAN lockup on the mount over a sun disc, two
-complete phone storefronts side by side: cream teahouse home, olive dessert
-variant.
-FORM: Pinned client direction from a reference sheet; catalog page, Read mode
-showing Operate compositions.
+THESIS: Plain, task-first interface dressed in literati ink-painting clothes -
+brush display type, solid-ink still lifes over a flat disc, a vermilion seal
+as punctuation, warm paper pinned to a mount. The decoration never enters the
+working surface.
+FORM: catalog page, set in the system itself, following STANDARD.md.
+CONTENT: the documentation is English (STANDARD.md R7). CJK appears only where
+it is being demonstrated - the wordmark and the brush type specimen. Every
+other specimen is neutral placeholder copy (R1).
 -->
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chaguan 茶馆 - Teahouse Mini-App System</title>
+  <title>CHAGUAN - Ink and Paper System</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet" />
@@ -30,7 +23,7 @@ showing Operate compositions.
 
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
-      <!-- ink-brush illustrations: solid fills, tapered ends, evenodd white gaps -->
+      <!-- ink-brush still lifes: solid fills, tapered ends, evenodd white gaps -->
       <symbol id="ink-teapot" viewBox="0 0 120 120">
         <path fill="currentColor" fill-rule="evenodd" d="M33 61 C31 52 40 47 55 45.5 C74 43.5 92 47 97 56 C102 66 100 82 90 89.5 C78 97 49 97.5 39 89 C30 81.5 31 68 33 61 Z M45 55 C58 51.5 77 51.5 88 55.5 C77 58.5 56 58.5 45 55 Z" />
         <path fill="currentColor" d="M46 41 C51 33.5 77 33.5 84 41 C77 44 52 44.2 46 41 Z" />
@@ -95,12 +88,12 @@ showing Operate compositions.
           <path d="M62 77 C68 83 71 90 71 98 C66 92 62 85 60.8 78.5 Z" />
         </g>
       </symbol>
-      <symbol id="ink-wine" viewBox="0 0 120 120">
+      <symbol id="ink-flask" viewBox="0 0 120 120">
         <path fill="currentColor" fill-rule="evenodd" d="M53 15.5 C53 13.8 61 13.8 61 15.5 L61.8 29 C62 33 65 36 69 40.5 C74.5 46.5 77 53 77 63 C77 84 72.5 94.5 57 94.5 C41.5 94.5 37 84 37 63 C37 53 39.5 46.5 45 40.5 C49 36 52 33 52.2 29 Z M49.5 31.5 C54 30.3 60.5 30.3 64.8 31.5 C60.5 33 54 33 49.5 31.5 Z M45 60 C53 57.5 62 57.5 69.5 60 C62 63 51 63 45 60 Z" />
         <path fill="currentColor" d="M85 76.5 C85 75 89.5 74 95 74 C100.5 74 105 75 105 76.5 C104 84 100.5 88.5 95 88.5 C89.5 88.5 86 84 85 76.5 Z" />
         <path fill="currentColor" d="M91.5 90 L98.5 90 L99.5 93.5 C99.7 94.7 90.3 94.7 90.5 93.5 Z" />
       </symbol>
-      <symbol id="ink-noodle" viewBox="0 0 120 120">
+      <symbol id="ink-chopsticks" viewBox="0 0 120 120">
         <path fill="currentColor" fill-rule="evenodd" d="M20 66 C19.5 63.5 25 62.5 34 61.5 C52 59.5 74 59.5 89 62 C96 63 98 65 97 67.5 C93 82 80 91.5 58.5 91.5 C38.5 91.5 24.5 81.5 20 66 Z M30 68 C48 71.5 71 71.5 87 68 C71 74 44 74 30 68 Z" />
         <path fill="currentColor" d="M48 93.5 L70 93.5 L72.5 99 C73 100.5 45.5 100.5 46 99 Z" />
         <path fill="currentColor" d="M76.8 10.5 L80.5 12 L64 52 L61.5 51 Z" />
@@ -110,733 +103,994 @@ showing Operate compositions.
         <path fill="currentColor" d="M73.5 56.5 C71 60 73 63 70 66.5 C69.3 67.4 68 66.4 68.8 65.5 C71.5 62.4 69.6 59.8 71.9 55.6 Z" />
       </symbol>
 
-      <!-- 2px line icons, 24 grid: the task-row voice -->
-      <symbol id="lt-teapot" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.8 10.2 C6.8 8.6 9 7.6 12 7.6 C15 7.6 17.2 8.6 17.2 10.2 C17.6 14.2 16 17.6 12 17.6 C8 17.6 6.4 14.2 6.8 10.2 Z" /><path d="M7 11.5 L3.6 9" /><path d="M17.2 10.5 C19.6 10.8 20.2 13.2 18.6 14.8" /><path d="M9.8 7.2 C9.8 5.9 14.2 5.9 14.2 7.2" /><path d="M12 5.8 V4.8" /></g></symbol>
-      <symbol id="lt-scooter" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="17" r="2.1" /><circle cx="18" cy="17" r="2.1" /><path d="M8.1 17 H13.4 L15.4 10 H18.3" /><path d="M15 12.2 L15.7 14.9 C15.9 15.6 15.4 16.2 14.7 16.2" /></g></symbol>
+      <!-- 2px line icons, 24 grid: the working-surface voice -->
       <symbol id="lt-bag" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.8 9.2 H17.2 L18.2 19 H5.8 Z" /><path d="M9.6 9.2 V7.6 C9.6 5.4 14.4 5.4 14.4 7.6 V9.2" /></g></symbol>
       <symbol id="lt-crown" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.2 16.6 L4.2 8.4 L8.6 11.6 L12 6.6 L15.4 11.6 L19.8 8.4 L18.8 16.6 Z" /></g></symbol>
       <symbol id="lt-bell" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4.6 C8.8 4.6 7.2 7 7.2 10 C7.2 13.4 6.4 14.9 5.2 16.2 H18.8 C17.6 14.9 16.8 13.4 16.8 10 C16.8 7 15.2 4.6 12 4.6 Z" /><path d="M10.4 18.6 C10.7 19.6 13.3 19.6 13.6 18.6" /></g></symbol>
       <symbol id="lt-home" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.6 11.2 L12 5 L19.4 11.2" /><path d="M6.8 9.8 V19 H17.2 V9.8" /><path d="M10.4 19 V14.4 H13.6 V19" /></g></symbol>
-      <symbol id="lt-order" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4.6 H17 V19.4 L14.5 18 L12 19.4 L9.5 18 L7 19.4 Z" /><path d="M9.6 9 H14.4 M9.6 12.4 H13.2" /></g></symbol>
+      <symbol id="lt-list" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4.6 H17 V19.4 L14.5 18 L12 19.4 L9.5 18 L7 19.4 Z" /><path d="M9.6 9 H14.4 M9.6 12.4 H13.2" /></g></symbol>
       <symbol id="lt-ticket" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.6 7.6 H19.4 V10.6 C18.1 10.9 18.1 13.1 19.4 13.4 V16.4 H4.6 V13.4 C5.9 13.1 5.9 10.9 4.6 10.6 Z" /><path d="M12 9.4 V10.6 M12 13.4 V14.6" /></g></symbol>
       <symbol id="lt-user" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.2" /><path d="M5.8 19.4 C5.8 15.6 8.6 13.6 12 13.6 C15.4 13.6 18.2 15.6 18.2 19.4" /></g></symbol>
-      <symbol id="lt-cart" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9.6" cy="18.4" r="1.4" /><circle cx="16.4" cy="18.4" r="1.4" /><path d="M4.6 5.4 H6.8 L8.6 15 H17.6 L19.4 8.2 H7.3" /></g></symbol>
       <symbol id="lt-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.8" cy="10.8" r="4.8" /><path d="M14.4 14.4 L18.8 18.8" /></g></symbol>
       <symbol id="lt-plus" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5 V17.5 M6.5 12 H17.5" /></g></symbol>
       <symbol id="lt-minus" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 12 H17.5" /></g></symbol>
-      <symbol id="lt-cup" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9 H18 C18 13.8 15.8 16.8 12 16.8 C8.2 16.8 6 13.8 6 9 Z" /><path d="M5.4 19.4 H18.6" /><path d="M9.8 4 C9.4 5 10.2 5.8 9.8 6.8 M14.2 4 C13.8 5 14.6 5.8 14.2 6.8" /></g></symbol>
       <symbol id="lt-calendar" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.8" y="6" width="14.4" height="13" rx="2" /><path d="M4.8 10.2 H19.2 M8.6 4.4 V7.6 M15.4 4.4 V7.6" /></g></symbol>
-      <symbol id="lt-chev" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 7.5 L14.5 12 L10 16.5" /></g></symbol>
-
-      <!-- status-bar glyphs -->
-      <symbol id="st-signal" viewBox="0 0 15 10"><path d="M1.2 9 V7 M4.8 9 V5.4 M8.4 9 V3.6 M12 9 V1.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></symbol>
-      <symbol id="st-wifi" viewBox="0 0 14 10"><path d="M1.2 3.6 C4.6 0.7 9.4 0.7 12.8 3.6 M3.4 5.9 C5.6 4.1 8.4 4.1 10.6 5.9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" /><circle cx="7" cy="8.4" r="1.2" fill="currentColor" /></symbol>
-      <symbol id="st-batt" viewBox="0 0 21 10"><rect x="0.7" y="0.7" width="16" height="8.6" rx="2.6" fill="none" stroke="currentColor" stroke-width="1.2" /><rect x="2.5" y="2.5" width="9.6" height="5" rx="1.4" fill="currentColor" /><path d="M18.6 3.3 C19.8 3.7 19.8 6.3 18.6 6.7" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" /></symbol>
     </defs>
   </svg>
 
-  <div class="page">
+  <!-- ============ MASTHEAD ============ -->
+  <header class="topbar">
+    <div class="topbar-in">
+      <a class="topbar-brand" href="#top"><span class="b-mark" lang="zh-Hans">茶馆</span><span class="b-cap">Chaguan</span></a>
+      <nav aria-label="Sections">
+        <a href="#colour">01 Colour</a>
+        <a href="#type">02 Type</a>
+        <a href="#space">03 Space</a>
+        <a href="#form">04 Form</a>
+        <a href="#motion">05 Motion</a>
+        <a href="#screen">06 Screen</a>
+        <a href="#components">07 Components</a>
+        <a href="#motifs">08 Motifs</a>
+        <a href="#composition">09 Composition</a>
+        <a href="#rules">10 Rules</a>
+      </nav>
+      <button class="cg-btn-ghost is-sm" data-toggle-theme type="button">Flip theme</button>
+    </div>
+  </header>
 
-    <!-- ============ masthead: the sharing sheet ============ -->
-    <header class="masthead">
-      <div class="masthead-lockup">
-        <span class="cg-sun" aria-hidden="true"></span>
-        <h1 class="masthead-title" lang="zh-Hans">茶馆<span class="cg-seal" aria-hidden="true">印</span></h1>
-      </div>
-      <p class="cg-caption-rule">Chaguan · Design Sharing</p>
-      <p class="masthead-sub">
-        A neo-Chinese teahouse mini-app system: storefront task UI - order, pick up,
-        member - dressed in brush calligraphy, solid-ink illustration, and a gold sun
-        disc. Two complete storefronts below; every part of them is cataloged on this
-        sheet.
-      </p>
+  <div class="page" id="top">
 
-      <div class="hero-phones">
-
-        <!-- phone A: cream teahouse home -->
-        <section class="cg-phone" aria-label="Teahouse storefront home screen, cream theme">
-          <div class="cg-screen">
-            <div class="cg-status">
-              <span class="cg-status-time">9:41</span>
-              <span class="cg-status-icons">
-                <svg width="15" height="10" aria-hidden="true"><use href="#st-signal" /></svg>
-                <svg width="14" height="10" aria-hidden="true"><use href="#st-wifi" /></svg>
-                <svg width="21" height="10" aria-hidden="true"><use href="#st-batt" /></svg>
-              </span>
-            </div>
-            <div class="cg-screen-body">
-              <div class="cg-poster is-flush">
-                <div class="cg-poster-scene">
-                  <span class="cg-sun" style="width:120px;height:120px;left:6px;top:16px;" aria-hidden="true"></span>
-                  <span class="cg-ink" style="left:12px;top:26px;" aria-hidden="true">
-                    <svg width="112" height="112" viewBox="0 0 120 120"><use href="#ink-teapot" /></svg>
-                  </span>
-                  <p class="cg-poster-title-v" lang="zh-Hans">茶馆</p>
-                  <p class="cg-poster-subv" lang="zh-Hans" style="top:6px; right:64px;">山泉煮老茶</p>
-                  <span class="cg-seal" style="right:8px; bottom:2px;" aria-hidden="true">沁</span>
-                </div>
-                <p class="cg-caption-rule">Welcome to Chaguan</p>
-              </div>
-
-              <div class="cg-tile-row">
-                <button class="cg-tile" type="button">
-                  <svg width="24" height="24" aria-hidden="true"><use href="#lt-cup" /></svg>
-                  <span class="t-cjk" lang="zh-Hans">堂食</span><span class="t-lat">Dine in</span>
-                </button>
-                <button class="cg-tile" type="button">
-                  <svg width="24" height="24" aria-hidden="true"><use href="#lt-scooter" /></svg>
-                  <span class="t-cjk" lang="zh-Hans">外卖</span><span class="t-lat">Delivery</span>
-                </button>
-                <button class="cg-tile" type="button">
-                  <svg width="24" height="24" aria-hidden="true"><use href="#lt-bag" /></svg>
-                  <span class="t-cjk" lang="zh-Hans">自取</span><span class="t-lat">Pick up</span>
-                </button>
-                <button class="cg-tile" type="button">
-                  <span class="cg-tile-badge">2</span>
-                  <svg width="24" height="24" aria-hidden="true"><use href="#lt-crown" /></svg>
-                  <span class="t-cjk" lang="zh-Hans">会员</span><span class="t-lat">VIP</span>
-                </button>
-              </div>
-
-              <div class="cg-notice">
-                <svg width="18" height="18" aria-hidden="true"><use href="#lt-bell" /></svg>
-                <div class="cg-notice-clip">
-                  <div class="cg-notice-track">
-                    <span lang="zh-Hans">我的余额: 茶点券 ×5 · 红包 ¥12 · 积分 320 &nbsp;&nbsp;今日到店: 明前龙井 · 桂花酒酿</span>
-                    <span lang="zh-Hans" aria-hidden="true">我的余额: 茶点券 ×5 · 红包 ¥12 · 积分 320 &nbsp;&nbsp;今日到店: 明前龙井 · 桂花酒酿</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="cg-sheet">
-                <div class="cg-row">
-                  <div class="cg-row-main">
-                    <p class="cg-row-name" lang="zh-Hans">凤凰单丛 · 蜜兰香</p>
-                    <p class="cg-row-sub" lang="zh-Hans">潮州乌龙 · 高香一泡</p>
-                  </div>
-                  <p class="cg-row-price"><small>¥</small>28</p>
-                  <button class="cg-add" type="button" aria-label="加入 凤凰单丛 Add to order">
-                    <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#lt-plus" /></svg>
-                  </button>
-                </div>
-                <div class="cg-row">
-                  <div class="cg-row-main">
-                    <p class="cg-row-name" lang="zh-Hans">桂花冷萃乌龙</p>
-                    <p class="cg-row-sub" lang="zh-Hans">冰醇 · 桂香尾韵</p>
-                  </div>
-                  <p class="cg-row-price"><small>¥</small>22</p>
-                  <button class="cg-add" type="button" aria-label="加入 桂花冷萃乌龙 Add to order">
-                    <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#lt-plus" /></svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <nav class="cg-tabbar" aria-label="App tabs">
-              <button class="cg-tab is-active" type="button" aria-current="page">
-                <svg width="22" height="22" aria-hidden="true"><use href="#lt-home" /></svg>
-                <span lang="zh-Hans">首页</span>
-              </button>
-              <button class="cg-tab" type="button">
-                <svg width="22" height="22" aria-hidden="true"><use href="#lt-order" /></svg>
-                <span lang="zh-Hans">点单</span>
-              </button>
-              <button class="cg-tab" type="button">
-                <svg width="22" height="22" aria-hidden="true"><use href="#lt-ticket" /></svg>
-                <span lang="zh-Hans">券包</span>
-              </button>
-              <button class="cg-tab" type="button">
-                <svg width="22" height="22" aria-hidden="true"><use href="#lt-user" /></svg>
-                <span lang="zh-Hans">我的</span>
-              </button>
-            </nav>
-          </div>
-        </section>
-
-        <!-- phone B: olive dessert-shop variant -->
-        <section class="cg-phone" aria-label="Dessert shop storefront, olive variant">
-          <div class="cg-screen cg-olive">
-            <div class="cg-status">
-              <span class="cg-status-time">9:41</span>
-              <span class="cg-status-icons">
-                <svg width="15" height="10" aria-hidden="true"><use href="#st-signal" /></svg>
-                <svg width="14" height="10" aria-hidden="true"><use href="#st-wifi" /></svg>
-                <svg width="21" height="10" aria-hidden="true"><use href="#st-batt" /></svg>
-              </span>
-            </div>
-            <div class="cg-screen-body">
-              <div class="cg-poster is-flush">
-                <div class="cg-poster-scene" style="height:132px;">
-                  <span class="cg-sun" style="width:112px;height:112px;right:2px;top:8px;" aria-hidden="true"></span>
-                  <span class="cg-ink" style="right:0; top:12px;" aria-hidden="true">
-                    <svg width="108" height="108" viewBox="0 0 120 120"><use href="#ink-noodle" /></svg>
-                  </span>
-                  <p class="cg-poster-title-h" lang="zh-Hans" style="max-width:150px;">四时糖水</p>
-                  <p class="cg-poster-sub" lang="zh-Hans" style="max-width:120px;">一碗甜过一季</p>
-                  <span class="cg-seal" style="left:2px; bottom:0;" aria-hidden="true">甜</span>
-                </div>
-                <p class="cg-caption-rule">Si Shi Sweet Soup House</p>
-              </div>
-
-              <div class="cg-member">
-                <div class="cg-member-hello">
-                  <p class="m-name" lang="zh-Hans">晚上好, 阿云</p>
-                  <p class="m-sub" lang="zh-Hans">糖水会员 · 本季已省 ¥36</p>
-                </div>
-                <div class="cg-member-stat">
-                  <p class="m-val">¥45</p>
-                  <p class="m-key" lang="zh-Hans">余额 Balance</p>
-                </div>
-              </div>
-
-              <div class="cg-tile-row">
-                <button class="cg-tile" type="button">
-                  <svg width="24" height="24" aria-hidden="true"><use href="#lt-cup" /></svg>
-                  <span class="t-cjk" lang="zh-Hans">堂食</span><span class="t-lat">Dine in</span>
-                </button>
-                <button class="cg-tile" type="button">
-                  <svg width="24" height="24" aria-hidden="true"><use href="#lt-bag" /></svg>
-                  <span class="t-cjk" lang="zh-Hans">自取</span><span class="t-lat">Pick up</span>
-                </button>
-                <button class="cg-tile" type="button">
-                  <svg width="24" height="24" aria-hidden="true"><use href="#lt-scooter" /></svg>
-                  <span class="t-cjk" lang="zh-Hans">外卖</span><span class="t-lat">Delivery</span>
-                </button>
-                <button class="cg-tile" type="button">
-                  <svg width="24" height="24" aria-hidden="true"><use href="#lt-calendar" /></svg>
-                  <span class="t-cjk" lang="zh-Hans">预订</span><span class="t-lat">Reserve</span>
-                </button>
-              </div>
-
-              <div class="cg-sheet">
-                <div class="cg-row">
-                  <div class="cg-row-main">
-                    <p class="cg-row-name" lang="zh-Hans">杨枝甘露</p>
-                    <p class="cg-row-sub" lang="zh-Hans">芒果 · 西柚 · 西米</p>
-                  </div>
-                  <p class="cg-row-price"><small>¥</small>16</p>
-                  <button class="cg-add" type="button" aria-label="加入 杨枝甘露 Add to order">
-                    <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#lt-plus" /></svg>
-                  </button>
-                </div>
-                <div class="cg-row">
-                  <div class="cg-row-main">
-                    <p class="cg-row-name" lang="zh-Hans">陈皮红豆沙</p>
-                    <p class="cg-row-sub" lang="zh-Hans">十年陈皮 · 起沙绵密</p>
-                  </div>
-                  <p class="cg-row-price"><small>¥</small>12</p>
-                  <button class="cg-add" type="button" aria-label="加入 陈皮红豆沙 Add to order">
-                    <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#lt-plus" /></svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <nav class="cg-tabbar" aria-label="App tabs">
-              <button class="cg-tab is-active" type="button" aria-current="page">
-                <svg width="22" height="22" aria-hidden="true"><use href="#lt-home" /></svg>
-                <span lang="zh-Hans">首页</span>
-              </button>
-              <button class="cg-tab" type="button">
-                <svg width="22" height="22" aria-hidden="true"><use href="#lt-order" /></svg>
-                <span lang="zh-Hans">点单</span>
-              </button>
-              <button class="cg-tab" type="button">
-                <svg width="22" height="22" aria-hidden="true"><use href="#lt-ticket" /></svg>
-                <span lang="zh-Hans">券包</span>
-              </button>
-              <button class="cg-tab" type="button">
-                <svg width="22" height="22" aria-hidden="true"><use href="#lt-user" /></svg>
-                <span lang="zh-Hans">我的</span>
-              </button>
-            </nav>
-          </div>
-        </section>
-      </div>
-    </header>
-
-    <!-- ============ foundations ============ -->
-    <section class="section">
-      <div class="section-head">
-        <h2 class="section-title" lang="zh-Hans">基础</h2>
-        <p class="cg-caption-rule">Foundations · Palette and Voices</p>
-      </div>
-      <div class="grid-2">
-        <div class="panel">
-          <h3 class="panel-label"><span class="p-cjk" lang="zh-Hans">墨色</span><span class="p-lat">Palette</span></h3>
-          <div class="swatches">
-            <div class="swatch"><div class="swatch-chip" style="background:#b08d63;"></div><div class="swatch-meta"><span class="swatch-name">mount<small lang="zh-Hans">裱底 · page ground</small></span><span class="swatch-hex">#b08d63</span></div></div>
-            <div class="swatch"><div class="swatch-chip" style="background:#f0e8d3;"></div><div class="swatch-meta"><span class="swatch-name">paper<small lang="zh-Hans">纸 · poster cream</small></span><span class="swatch-hex">#f0e8d3</span></div></div>
-            <div class="swatch"><div class="swatch-chip" style="background:#e8ddc4;"></div><div class="swatch-meta"><span class="swatch-name">card<small lang="zh-Hans">笺 · tile fill</small></span><span class="swatch-hex">#e8ddc4</span></div></div>
-            <div class="swatch"><div class="swatch-chip" style="background:#fbf8f0;"></div><div class="swatch-meta"><span class="swatch-name">white<small lang="zh-Hans">绢 · sheet cards</small></span><span class="swatch-hex">#fbf8f0</span></div></div>
-            <div class="swatch"><div class="swatch-chip" style="background:#4a3421;"></div><div class="swatch-meta"><span class="swatch-name">coffee<small lang="zh-Hans">褐 · blocks, buttons</small></span><span class="swatch-hex">#4a3421</span></div></div>
-            <div class="swatch"><div class="swatch-chip" style="background:#2a2620;"></div><div class="swatch-meta"><span class="swatch-name">ink<small lang="zh-Hans">墨 · brush and display</small></span><span class="swatch-hex">#2a2620</span></div></div>
-            <div class="swatch"><div class="swatch-chip" style="background:#c9a35f;"></div><div class="swatch-meta"><span class="swatch-name">sun<small lang="zh-Hans">日 · disc behind art</small></span><span class="swatch-hex">#c9a35f</span></div></div>
-            <div class="swatch"><div class="swatch-chip" style="background:#b5442c;"></div><div class="swatch-meta"><span class="swatch-name">seal<small lang="zh-Hans">朱 · stamps, badges</small></span><span class="swatch-hex">#b5442c</span></div></div>
-            <div class="swatch"><div class="swatch-chip" style="background:#5c6b46;"></div><div class="swatch-meta"><span class="swatch-name">olive<small lang="zh-Hans">橄 · variant ground</small></span><span class="swatch-hex">#5c6b46</span></div></div>
-          </div>
-          <p class="panel-note">
-            Small text on the mount is always ink (4.9:1); coffee on the mount is for
-            large titles only. Small text never sits in sun or seal, and the seal
-            never carries body copy.
-          </p>
+    <!-- ============ THESIS ============ -->
+    <section class="hero" aria-labelledby="thesis-h">
+      <div>
+        <div class="hero-lockup">
+          <span class="cg-disc is-wash" aria-hidden="true"></span>
+          <h1 class="hero-title" id="thesis-h"><span lang="zh-Hans">茶馆</span><span class="cg-seal" aria-hidden="true" lang="zh-Hans">茶</span><span class="visually-hidden"> Chaguan</span></h1>
         </div>
-        <div class="panel">
-          <h3 class="panel-label"><span class="p-cjk" lang="zh-Hans">三声</span><span class="p-lat">Three Voices</span></h3>
-          <div class="voice">
-            <p class="v-brush" style="font-size:2.6rem;" lang="zh-Hans">煮雪烹茶</p>
-            <p class="voice-spec">Brush display · Ma Shan Zheng · 2-3.5rem · shop names and section titles, sometimes vertical</p>
-          </div>
-          <div class="voice">
-            <p class="v-caption">Welcome to Chaguan · Est. 2026</p>
-            <p class="voice-spec">Tracked Latin caption · Georgia · 10px · letter-spacing 0.3em · never task-critical</p>
-          </div>
-          <div class="voice">
-            <p style="font-size:14px;"><b lang="zh-Hans">凤凰单丛 · 蜜兰香</b> &nbsp;¥28 &nbsp;·&nbsp; <span lang="zh-Hans">堂食 外卖 自取 会员</span></p>
-            <p class="voice-spec">UI sans · PingFang SC / Noto Sans SC · 13-15px · tiles, lists, prices, buttons</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ ink art ============ -->
-    <section class="section">
-      <div class="section-head">
-        <h2 class="section-title" lang="zh-Hans">墨笔</h2>
-        <p class="cg-caption-rule">Ink Art · Six Brush Illustrations</p>
-        <p class="section-note">
-          Solid ink fills with tapered ends and small white gaps, 60-120px, always
-          paired with a sun disc - full, halved, or washed. These live in posters and
-          empty states only; task rows use the 2px line icons instead.
+        <p class="cg-caption-rule">Chaguan · Ink and Paper System</p>
+        <p class="hero-tag">
+          Plain, task-first interface dressed in literati ink-painting clothes:
+          brush display type, solid-ink still lifes over a flat disc, and a
+          vermilion seal as punctuation - all on warm paper pinned to a mount.
+        </p>
+        <p class="hero-tag">
+          Two things to hold on to. <b>The decoration never enters the working
+          surface</b>: brush art lives in posters and empty states, and every
+          control is plain sans with a 2px line icon. And <b>the seal is the only
+          hot colour</b> - it is punctuation, so it appears at most twice on a
+          surface and never carries a sentence.
         </p>
       </div>
-      <div class="art-grid">
-        <figure class="art-card">
-          <div class="art-scene">
-            <span class="cg-sun" style="width:116px;height:116px;left:50%;top:12px;transform:translateX(-50%);" aria-hidden="true"></span>
-            <span class="cg-ink" style="left:50%;top:18px;transform:translateX(-50%);" aria-hidden="true">
-              <svg width="118" height="118" viewBox="0 0 120 120"><use href="#ink-teapot" /></svg>
-            </span>
-          </div>
-          <figcaption class="art-name"><span class="a-cjk" lang="zh-Hans">茶壶</span><span class="a-lat">Teapot</span></figcaption>
-        </figure>
-        <figure class="art-card">
-          <div class="art-scene">
-            <span class="cg-sun is-wash" style="width:120px;height:120px;left:18px;top:6px;" aria-hidden="true"></span>
-            <span class="cg-ink" style="left:50%;top:22px;transform:translateX(-50%);" aria-hidden="true">
-              <svg width="112" height="112" viewBox="0 0 120 120"><use href="#ink-bowl" /></svg>
-            </span>
-          </div>
-          <figcaption class="art-name"><span class="a-cjk" lang="zh-Hans">茶碗</span><span class="a-lat">Tea bowl</span></figcaption>
-        </figure>
-        <figure class="art-card">
-          <div class="art-scene">
-            <span class="cg-sun" style="width:130px;height:130px;right:-46px;top:2px;" aria-hidden="true"></span>
-            <span class="cg-ink" style="left:50%;top:8px;transform:translateX(-50%);" aria-hidden="true">
-              <svg width="124" height="124" viewBox="0 0 120 120"><use href="#ink-plum" /></svg>
-            </span>
-          </div>
-          <figcaption class="art-name"><span class="a-cjk" lang="zh-Hans">梅枝</span><span class="a-lat">Plum branch</span></figcaption>
-        </figure>
-        <figure class="art-card">
-          <div class="art-scene">
-            <span class="cg-sun" style="width:104px;height:104px;left:10px;bottom:-24px;" aria-hidden="true"></span>
-            <span class="cg-ink" style="left:50%;top:8px;transform:translateX(-50%);" aria-hidden="true">
-              <svg width="124" height="124" viewBox="0 0 120 120"><use href="#ink-bamboo" /></svg>
-            </span>
-          </div>
-          <figcaption class="art-name"><span class="a-cjk" lang="zh-Hans">竹影</span><span class="a-lat">Bamboo</span></figcaption>
-        </figure>
-        <figure class="art-card">
-          <div class="art-scene">
-            <span class="cg-sun" style="width:96px;height:96px;right:6px;top:10px;" aria-hidden="true"></span>
-            <span class="cg-ink" style="left:50%;top:12px;transform:translateX(-50%);" aria-hidden="true">
-              <svg width="118" height="118" viewBox="0 0 120 120"><use href="#ink-wine" /></svg>
-            </span>
-          </div>
-          <figcaption class="art-name"><span class="a-cjk" lang="zh-Hans">点酒</span><span class="a-lat">Wine</span></figcaption>
-        </figure>
-        <figure class="art-card">
-          <div class="art-scene">
-            <span class="cg-sun" style="width:118px;height:118px;left:50%;top:10px;transform:translateX(-50%);" aria-hidden="true"></span>
-            <span class="cg-ink" style="left:50%;top:14px;transform:translateX(-50%);" aria-hidden="true">
-              <svg width="120" height="120" viewBox="0 0 120 120"><use href="#ink-noodle" /></svg>
-            </span>
-          </div>
-          <figcaption class="art-name"><span class="a-cjk" lang="zh-Hans">小面</span><span class="a-lat">Noodles</span></figcaption>
-        </figure>
+      <div class="cg-poster" aria-label="Poster specimen">
+        <div class="cg-poster-scene" style="height:190px;">
+          <span class="cg-disc" style="width:150px;height:150px;right:10px;top:10px;" aria-hidden="true"></span>
+          <span class="cg-ink" style="right:14px;top:18px;" aria-hidden="true">
+            <svg width="144" height="144" viewBox="0 0 120 120"><use href="#ink-teapot" /></svg>
+          </span>
+          <p class="cg-poster-title-h" style="max-width:150px;">Still life</p>
+          <p class="cg-poster-sub" style="max-width:140px;">brush, disc, seal</p>
+          <span class="cg-seal is-blank" style="left:0;bottom:4px;" aria-hidden="true"></span>
+        </div>
+        <p class="cg-caption-rule">Plate 00 · The Poster</p>
       </div>
     </section>
 
-    <!-- ============ motifs ============ -->
-    <section class="section">
+    <!-- ============ BRIEF ============ -->
+    <section class="brief" aria-labelledby="brief-h">
+      <div class="hd"><span class="cg-seal is-blank" aria-hidden="true"></span><h2 class="v-caption" id="brief-h">Read this first</h2></div>
+      <ol>
+        <li><b>These values are the system.</b> Every token below exists in <code>css/chaguan-core.css</code>. Use them; do not invent parallel ones - no raw hex, no new radius, no new duration.</li>
+        <li><b>Two registers, never mixed.</b> Brush type and ink art belong to posters and empty states. Anything a thumb operates gets the UI sans and a 2px line icon.</li>
+        <li><b>The seal is punctuation.</b> At most two per surface, never behind body copy; its only other job is the live count badge.</li>
+        <li><b>The disc never carries text.</b> It sits behind art or a title and holds nothing of its own.</li>
+        <li><b>Token names are roles.</b> <code>--primary</code> is a deep brown fill by day and a pale tan fill after dark; <code>--sheet</code> is the raised surface, not "white". Check both with the toggle.</li>
+        <li><b>Search before you build.</b> A row, a tile, a round button and a pill cover almost every control; a sixth shape is a conversation about the system.</li>
+      </ol>
+    </section>
+
+    <!-- ============ 01 COLOUR ============ -->
+    <section class="section" id="colour" aria-labelledby="colour-h">
       <div class="section-head">
-        <h2 class="section-title" lang="zh-Hans">纹样</h2>
-        <p class="cg-caption-rule">Motifs · Poster, Seal, Bars</p>
+        <h2 class="section-title" id="colour-h">Colour</h2>
+        <p class="cg-caption-rule">Section 01 · 17 role tokens</p>
+        <p class="lede">
+          Every swatch shows <b>daylight on the left and lamplight on the right</b>,
+          so both themes are in view at once. Daylight is cream paper on a caramel
+          mount; after dark the mount goes nearly black, the paper takes on the
+          brown of old silk, and ink turns pale. Nothing is pure black or pure white.
+        </p>
       </div>
-      <div class="grid-2">
-        <div class="panel is-card">
-          <h3 class="panel-label"><span class="p-cjk" lang="zh-Hans">招贴</span><span class="p-lat">Hero poster</span></h3>
-          <div class="cg-poster">
-            <div class="cg-poster-scene">
-              <span class="cg-sun" style="width:118px;height:118px;right:6px;top:8px;" aria-hidden="true"></span>
-              <span class="cg-ink" style="right:2px;top:2px;" aria-hidden="true">
-                <svg width="126" height="126" viewBox="0 0 120 120"><use href="#ink-plum" /></svg>
-              </span>
-              <p class="cg-poster-title-h" lang="zh-Hans" style="max-width:150px;">听雨轩</p>
-              <p class="cg-poster-sub" lang="zh-Hans">梅子黄时雨</p>
-              <span class="cg-seal" style="left:0;bottom:0;" aria-hidden="true">雨</span>
-            </div>
-            <p class="cg-caption-rule">Welcome to Tingyuxuan</p>
-          </div>
-          <p class="panel-note">Paper block, brush title (vertical or horizontal), sun disc + ink art, caption between rules, one seal. The disc never carries text.</p>
+
+      <div class="duo">
+        <div class="cell"><div class="halves"><i style="background:#b08d63"></i><i style="background:#17110c"></i></div><div class="cap"><span class="nm">--mount</span><span class="role">The ground everything is pinned to. Only ink, or large type, sits on it.</span><span class="hex"><span>#B08D63</span><span>#17110C</span></span></div></div>
+        <div class="cell"><div class="halves"><i style="background:#f0e8d3"></i><i style="background:#262019"></i></div><div class="cap"><span class="nm">--paper</span><span class="role">Posters, panels, and the default stage.</span><span class="hex"><span>#F0E8D3</span><span>#262019</span></span></div></div>
+        <div class="cell"><div class="halves"><i style="background:#e8ddc4"></i><i style="background:#30281f"></i></div><div class="cap"><span class="nm">--card</span><span class="role">Recessed fills: tiles, fields, chips at rest.</span><span class="hex"><span>#E8DDC4</span><span>#30281F</span></span></div></div>
+        <div class="cell"><div class="halves"><i style="background:#fbf8f0"></i><i style="background:#3a3026"></i></div><div class="cap"><span class="nm">--sheet</span><span class="role">Raised sheets: lists, the notice bar, the tab bar.</span><span class="hex"><span>#FBF8F0</span><span>#3A3026</span></span></div></div>
+        <div class="cell"><div class="halves"><i style="background:#2a2620"></i><i style="background:#efe6d2"></i></div><div class="cap"><span class="nm">--ink</span><span class="role">Text, brush art, display type.</span><span class="hex"><span>#2A2620</span><span>#EFE6D2</span></span></div></div>
+        <div class="cell"><div class="halves"><i style="background:#4a3421"></i><i style="background:#d8b98a"></i></div><div class="cap"><span class="nm">--primary</span><span class="role">The deep fill: buttons, selected states, captions.</span><span class="hex"><span>#4A3421</span><span>#D8B98A</span></span></div></div>
+        <div class="cell"><div class="halves"><i style="background:#38271a"></i><i style="background:#c4a372"></i></div><div class="cap"><span class="nm">--primary-press</span><span class="role">The primary fill while it is held down.</span><span class="hex"><span>#38271A</span><span>#C4A372</span></span></div></div>
+        <div class="cell"><div class="halves"><i style="background:#f0e8d3"></i><i style="background:#241a10"></i></div><div class="cap"><span class="nm">--on-primary</span><span class="role">Text and icons set on a primary fill.</span><span class="hex"><span>#F0E8D3</span><span>#241A10</span></span></div></div>
+        <div class="cell"><div class="halves"><i style="background:#c9a35f"></i><i style="background:#7d6234"></i></div><div class="cap"><span class="nm">--disc</span><span class="role">The disc behind art. Never carries text.</span><span class="hex"><span>#C9A35F</span><span>#7D6234</span></span></div></div>
+        <div class="cell"><div class="halves"><i style="background:#b5442c"></i><i style="background:#b84a31"></i></div><div class="cap"><span class="nm">--seal</span><span class="role">Seals and live badges. The only hot colour.</span><span class="hex"><span>#B5442C</span><span>#B84A31</span></span></div></div>
+        <div class="cell"><div class="halves"><i style="background:#fbf8f0"></i><i style="background:#fbf8f0"></i></div><div class="cap"><span class="nm">--on-seal</span><span class="role">The carved mark inside a seal or badge.</span><span class="hex"><span>#FBF8F0</span><span>#FBF8F0</span></span></div></div>
+        <div class="cell"><div class="halves"><i style="background:#5c6b46"></i><i style="background:#3f4a33"></i></div><div class="cap"><span class="nm">--alt-ground</span><span class="role">The alternate stage ground. One surface at a time.</span><span class="hex"><span>#5C6B46</span><span>#3F4A33</span></span></div></div>
+        <div class="cell"><div class="halves"><i style="background:#edeeda"></i><i style="background:#2a2f22"></i></div><div class="cap"><span class="nm">--alt-paper</span><span class="role">Replaces --paper inside the alternate ground.</span><span class="hex"><span>#EDEEDA</span><span>#2A2F22</span></span></div></div>
+        <div class="cell"><div class="halves"><i style="background:#e2e3c8"></i><i style="background:#333a2a"></i></div><div class="cap"><span class="nm">--alt-card</span><span class="role">Replaces --card inside the alternate ground.</span><span class="hex"><span>#E2E3C8</span><span>#333A2A</span></span></div></div>
+        <div class="cell"><div class="halves"><i style="background:#f6f4e6"></i><i style="background:#3c4433"></i></div><div class="cap"><span class="nm">--alt-sheet</span><span class="role">Replaces --sheet inside the alternate ground.</span><span class="hex"><span>#F6F4E6</span><span>#3C4433</span></span></div></div>
+        <div class="cell"><div class="halves"><i style="background:#f6f4e6"></i><i style="background:#eef0dc"></i></div><div class="cap"><span class="nm">--on-alt</span><span class="role">Type set straight on the alternate ground.</span><span class="hex"><span>#F6F4E6</span><span>#EEF0DC</span></span></div></div>
+        <div class="cell"><div class="halves"><i style="background:#241c14"></i><i style="background:#0b0806"></i></div><div class="cap"><span class="nm">--frame</span><span class="role">The bezel around a composed column.</span><span class="hex"><span>#241C14</span><span>#0B0806</span></span></div></div>
+      </div>
+
+      <div class="panel stack">
+        <h3 class="panel-label">Derived - mixed from the roles, so they follow the theme</h3>
+        <div class="spec-wrap">
+          <table class="spec">
+            <thead><tr><th>Token</th><th>Value</th><th>Job</th></tr></thead>
+            <tbody>
+              <tr><td>--stage</td><td class="v">--paper</td><td class="d">The ground inside a frame. <code>.cg-alt</code> points it at <code>--alt-ground</code>.</td></tr>
+              <tr><td>--muted</td><td class="v">ink 72%</td><td class="d">Secondary text: sub-lines, notes, keys.</td></tr>
+              <tr><td>--ink-faint</td><td class="v">ink 34%</td><td class="d">Ink art in an empty state, deliberately quiet.</td></tr>
+              <tr><td>--primary-soft</td><td class="v">primary 80%</td><td class="d">Idle tab labels, placeholders, small captions.</td></tr>
+              <tr><td>--primary-line</td><td class="v">primary 40%</td><td class="d">An idle control's outline: the toggle track, table heads.</td></tr>
+              <tr><td>--primary-wash</td><td class="v">primary 12%</td><td class="d">The press wash under an outlined control.</td></tr>
+              <tr><td>--rule</td><td class="v">primary 14%</td><td class="d">The hairline between rows.</td></tr>
+              <tr><td>--disc-wash</td><td class="v">disc 36%</td><td class="d">A washed disc, for when a full one would shout.</td></tr>
+            </tbody>
+          </table>
         </div>
-        <div class="panel is-card">
-          <h3 class="panel-label"><span class="p-cjk" lang="zh-Hans">印与铃</span><span class="p-lat">Seal, status, notice</span></h3>
-          <div class="staterow">
-            <span class="statecap">Seals</span>
-            <span class="cg-seal is-lg" aria-hidden="true">茶</span>
-            <span class="cg-seal" aria-hidden="true">沁</span>
-            <span class="cg-seal is-duo" lang="zh-Hans">茶馆</span>
-          </div>
-          <div class="staterow">
-            <span class="statecap">Status bar</span>
-            <div class="cg-sheet" style="flex:1;">
-              <div class="cg-status" style="padding:8px 14px;">
-                <span class="cg-status-time">9:41</span>
-                <span class="cg-status-icons">
-                  <svg width="15" height="10" aria-hidden="true"><use href="#st-signal" /></svg>
-                  <svg width="14" height="10" aria-hidden="true"><use href="#st-wifi" /></svg>
-                  <svg width="21" height="10" aria-hidden="true"><use href="#st-batt" /></svg>
-                </span>
-              </div>
+      </div>
+
+      <div class="panel stack">
+        <h3 class="panel-label">Contrast floor - measured, light / dark</h3>
+        <div class="spec-wrap">
+          <table class="spec">
+            <thead><tr><th>Pair</th><th>Light</th><th>Dark</th><th>Rule</th></tr></thead>
+            <tbody>
+              <tr><td>--ink on --paper</td><td class="v">12.3:1</td><td class="v">13.0:1</td><td class="d">Body text anywhere on paper.</td></tr>
+              <tr><td>--ink on --mount</td><td class="v">4.9:1</td><td class="v">15.1:1</td><td class="d">The only small text allowed on the mount.</td></tr>
+              <tr><td>--primary on --mount</td><td class="v">3.8:1</td><td class="v">10.0:1</td><td class="d"><b>Large text only.</b> Section titles, never a sentence.</td></tr>
+              <tr><td>--primary on --paper / --card / --sheet</td><td class="v">9.5 / 8.6 / 11.0</td><td class="v">8.6 / 7.7 / 6.9</td><td class="d">Captions, values, tile labels.</td></tr>
+              <tr><td>--on-primary on --primary</td><td class="v">9.5:1</td><td class="v">9.1:1</td><td class="d">Buttons, selected chips, the action bar.</td></tr>
+              <tr><td>--muted on --paper / --card</td><td class="v">5.4 / 5.1</td><td class="v">7.4 / 6.8</td><td class="d">The smallest secondary text, 11px.</td></tr>
+              <tr><td>--on-seal on --seal</td><td class="v">5.2:1</td><td class="v">4.9:1</td><td class="d">Badge counts and the carved mark.</td></tr>
+              <tr><td>--on-alt on --alt-ground</td><td class="v">5.2:1</td><td class="v">8.1:1</td><td class="d">Anything set straight on the alternate ground.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="callout">
+        <b>After dark, the fill and its text trade places - which is why the tokens
+        are named for roles.</b> By day <code>--primary</code> is a deep brown with
+        cream on it; by lamplight a deep fill would vanish into the mount, so it
+        becomes a pale tan carrying dark text. The same flip turns the disc from
+        a noon sun into a dim moon behind pale ink. A token called "coffee" or
+        "white" would be lying in one theme or the other.
+      </div>
+    </section>
+
+    <!-- ============ 02 TYPE ============ -->
+    <section class="section" id="type" aria-labelledby="type-h">
+      <div class="section-head">
+        <h2 class="section-title" id="type-h">Typography</h2>
+        <p class="cg-caption-rule">Section 02 · Three voices</p>
+        <p class="lede">
+          Three voices, one job each: <b>brush</b> to set the mood, a <b>tracked
+          caption</b> to label it, and a plain <b>UI sans</b> for everything a
+          thumb reads. The brush is a Simplified-Chinese calligraphy face; its
+          CJK is shown below because that is what the stack exists to render.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel">
+          <h3 class="panel-label">--font-brush · Ma Shan Zheng</h3>
+          <div class="voice">
+            <div class="voice-row">
+              <p class="v-brush" style="font-size:2.6rem;" lang="zh-Hans">山水清音</p>
+              <div class="voice-vbox"><p class="cg-poster-title-v" lang="zh-Hans">墨韵</p></div>
             </div>
+            <p class="voice-spec">Display only, weight 400. Horizontal or <code>writing-mode: vertical-rl</code> in a poster.</p>
+          </div>
+          <div class="voice">
+            <p class="v-brush" style="font-size:2.1rem;">Brush display, Latin</p>
+            <p class="voice-spec">The same face carries Latin, so a title does not change hand mid-line.</p>
+          </div>
+        </div>
+        <div class="panel">
+          <h3 class="panel-label">--font-caption · --font-ui</h3>
+          <div class="voice">
+            <p class="v-caption">Section 02 · Typography · Plate 01</p>
+            <p class="voice-spec">Georgia, 10px, uppercase, tracked 0.3em. Labels a thing; never carries the thing.</p>
+          </div>
+          <div class="voice">
+            <p style="font-size:14px;font-weight:600;">Item title, one line</p>
+            <p style="font-size:11px;color:var(--muted);">Supporting line · secondary detail</p>
+            <p class="voice-spec">System UI sans with PingFang SC / Noto Sans SC for CJK, 10-15px. Everything that is operated or counted.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel stack">
+        <h3 class="panel-label">Levels - as built</h3>
+        <div class="spec-wrap">
+          <table class="spec">
+            <thead><tr><th>Level</th><th>Voice</th><th>Size / weight</th><th>Tracking</th><th>Where</th></tr></thead>
+            <tbody>
+              <tr><td>poster-v</td><td class="v">brush</td><td class="v">2.35rem / 400</td><td class="v">4px</td><td class="d">Vertical poster title (<code>.cg-poster-title-v</code>).</td></tr>
+              <tr><td>poster-h</td><td class="v">brush</td><td class="v">2.1rem / 400</td><td class="v">0</td><td class="d">Horizontal poster title.</td></tr>
+              <tr><td>mark</td><td class="v">brush</td><td class="v">1.7rem / 400</td><td class="v">0</td><td class="d">The mark at the head of a banner.</td></tr>
+              <tr><td>empty</td><td class="v">brush</td><td class="v">1.25rem / 400</td><td class="v">0</td><td class="d">Empty-state line.</td></tr>
+              <tr><td>poster-sub</td><td class="v">brush</td><td class="v">1.05rem / 400</td><td class="v">0</td><td class="d">The aside under a poster title, in <code>--primary</code>.</td></tr>
+              <tr><td>caption</td><td class="v">caption</td><td class="v">10px</td><td class="v">0.3em</td><td class="d">Caption rules, panel labels.</td></tr>
+              <tr><td>caption-sm</td><td class="v">caption</td><td class="v">8-9px</td><td class="v">0.18-0.25em</td><td class="d">Under tile and banner labels, inside buttons.</td></tr>
+              <tr><td>body</td><td class="v">ui</td><td class="v">15px / 400, lh 1.6</td><td class="v">0</td><td class="d">Running text.</td></tr>
+              <tr><td>label</td><td class="v">ui</td><td class="v">13-14px / 600</td><td class="v">0</td><td class="d">Row names, buttons, chips, tile labels.</td></tr>
+              <tr><td>sub</td><td class="v">ui</td><td class="v">11px / 400</td><td class="v">0</td><td class="d">Row sub-lines, in <code>--muted</code>.</td></tr>
+              <tr><td>micro</td><td class="v">ui</td><td class="v">10px / 600-700</td><td class="v">0</td><td class="d">Tab labels and badge counts. The floor.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="callout">
+        <b>Legibility is never asked of the brush.</b> A calligraphic face is
+        beautiful exactly because its strokes vary, and that variation is what
+        makes it slow to read at small sizes. So the brush only ever sets a mood
+        at 1rem and up, and every number, count and state belongs to the UI sans.
+        If a piece of text has to be read correctly, it is not brush.
+      </div>
+    </section>
+
+    <!-- ============ 03 SPACE ============ -->
+    <section class="section" id="space" aria-labelledby="space-h">
+      <div class="section-head">
+        <h2 class="section-title" id="space-h">Space and layout</h2>
+        <p class="cg-caption-rule">Section 03 · A narrow column</p>
+        <p class="lede">
+          Components are drawn for one narrow column, <b>312px of frame</b> with
+          a 14px inset. Inside it the rhythm is small and even; outside it, the
+          mount gives the column generous room.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel">
+          <h3 class="panel-label">Rhythm - the steps in use</h3>
+          <div class="spec-wrap">
+            <table class="spec">
+              <tbody>
+                <tr><td>4</td><td style="width:96px"><div class="scale" style="width:4px"></div></td><td class="d">Icon to label in a tile.</td></tr>
+                <tr><td>8</td><td><div class="scale" style="width:8px"></div></td><td class="d">Between tiles, chips, icon and text.</td></tr>
+                <tr><td>10</td><td><div class="scale" style="width:10px"></div></td><td class="d">Between blocks on a stage; inside a row.</td></tr>
+                <tr><td>14</td><td><div class="scale" style="width:14px"></div></td><td class="d">The stage inset; banner gap.</td></tr>
+                <tr><td>16</td><td><div class="scale" style="width:16px"></div></td><td class="d">Poster padding.</td></tr>
+                <tr><td>22</td><td><div class="scale" style="width:22px"></div></td><td class="d">Catalog panel padding.</td></tr>
+                <tr><td>72</td><td><div class="scale" style="width:72px"></div></td><td class="d">Between catalog sections.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="panel">
+          <h3 class="panel-label">Layout</h3>
+          <div class="spec-wrap">
+            <table class="spec">
+              <thead><tr><th>Measure</th><th>Value</th><th>Note</th></tr></thead>
+              <tbody>
+                <tr><td>column</td><td class="v">312px</td><td class="d"><code>.cg-frame</code>: 9px bezel around the stage.</td></tr>
+                <tr><td>stage inset</td><td class="v">14px</td><td class="d">Leaves a 276px content width.</td></tr>
+                <tr><td>tile row</td><td class="v">4 columns</td><td class="d">Four tiles is the most a row carries.</td></tr>
+                <tr><td>page</td><td class="v">1120px</td><td class="d">Catalog measure, 24px side margin.</td></tr>
+                <tr><td>break</td><td class="v">900px</td><td class="d">Grids collapse to one column.</td></tr>
+                <tr><td>break</td><td class="v">420px</td><td class="d">16px gutter; the frame takes the full width.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <b>The steps stop at 16 inside a stage.</b> Brush art and a disc already
+        make a poster feel roomy, so the working surface under it can stay
+        tight: 8 between siblings, 10 between blocks. Pad the controls as
+        generously as the poster and the column stops reading as one sheet.
+      </div>
+    </section>
+
+    <!-- ============ 04 FORM ============ -->
+    <section class="section" id="form" aria-labelledby="form-h">
+      <div class="section-head">
+        <h2 class="section-title" id="form-h">Form</h2>
+        <p class="cg-caption-rule">Section 04 · Soft blocks, square seals</p>
+        <p class="lede">
+          Every block is a soft 14px rectangle, every control that is pressed is
+          a pill, and the seal alone is square. There are no borders on
+          surfaces - a block is told apart by its fill.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel">
+          <h3 class="panel-label">Radii</h3>
+          <div class="spec-wrap">
+            <table class="spec">
+              <tbody>
+                <tr><td>--radius-seal</td><td class="v">2px</td><td><div class="radius-demo" style="border-top-left-radius:var(--radius-seal)"></div></td><td class="d">Seals. The one hard corner.</td></tr>
+                <tr><td>--radius-block</td><td class="v">14px</td><td><div class="radius-demo" style="border-top-left-radius:var(--radius-block)"></div></td><td class="d">Posters, tiles, sheets, banners.</td></tr>
+                <tr><td>tab bar</td><td class="v">18px</td><td><div class="radius-demo" style="border-top-left-radius:18px"></div></td><td class="d">Top corners only; it docks to the foot.</td></tr>
+                <tr><td>--radius-stage</td><td class="v">20px</td><td><div class="radius-demo" style="border-top-left-radius:var(--radius-stage)"></div></td><td class="d">The stage inside a frame.</td></tr>
+                <tr><td>--radius-frame</td><td class="v">28px</td><td><div class="radius-demo" style="border-top-left-radius:var(--radius-frame)"></div></td><td class="d">The frame. Stage radius plus the bezel, near enough that the two curves run parallel.</td></tr>
+                <tr><td>--radius-pill</td><td class="v">999px</td><td><div class="radius-demo" style="border-top-left-radius:var(--radius-pill)"></div></td><td class="d">Buttons, chips, fields, the notice bar.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="panel">
+          <h3 class="panel-label">Elevation - two shadows, both earned</h3>
+          <div class="staterow">
+            <div class="shadow-demo" style="box-shadow:var(--shadow-frame)"></div>
+            <div class="shadow-demo" style="box-shadow:var(--shadow-float);border-radius:var(--radius-pill)"></div>
+          </div>
+          <div class="spec-wrap" style="margin-top:18px;">
+            <table class="spec">
+              <tbody>
+                <tr><td>--shadow-frame</td><td class="d">A composed column, lifted off the mount like a sheet pinned to it.</td></tr>
+                <tr><td>--shadow-float</td><td class="d">The action bar, the one control that floats over content.</td></tr>
+                <tr><td>everything else</td><td class="d">Flat. Paper on paper is separated by a change of fill.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <b>The seal is square because everything else is not.</b> In a field of
+        soft blocks and pills, a 2px corner is the loudest shape available, and
+        the seal needs to be loud at 30px. Round the seal to match its
+        neighbours and it becomes a red dot - a notification, not a signature.
+      </div>
+    </section>
+
+    <!-- ============ 05 MOTION ============ -->
+    <section class="section" id="motion" aria-labelledby="motion-h">
+      <div class="section-head">
+        <h2 class="section-title" id="motion-h">Motion</h2>
+        <p class="cg-caption-rule">Section 05 · A press and a scroll</p>
+        <p class="lede">
+          Restrained. A press darkens and settles 1px; the notice line scrolls on
+          a slow loop. <b>Nothing else moves.</b> Press the button and hover the bar.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel">
+          <h3 class="panel-label">Tokens</h3>
+          <div class="spec-wrap">
+            <table class="spec">
+              <tbody>
+                <tr><td>--t-press</td><td class="v">100ms</td><td class="d">Every press: fill, colour, the 1px drop.</td></tr>
+                <tr><td>--ease</td><td class="v">ease</td><td class="d">The only curve.</td></tr>
+                <tr><td>press</td><td class="v">translateY(1px)</td><td class="d">The largest displacement a control makes.</td></tr>
+                <tr><td>--t-marquee</td><td class="v">20s linear</td><td class="d">One pass of the notice line. Pauses on hover and focus.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="panel">
+          <h3 class="panel-label">Live</h3>
+          <div class="staterow">
+            <button class="cg-btn" type="button">Press and hold</button>
+            <button class="cg-round" type="button" aria-label="Increase"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#lt-plus" /></svg></button>
           </div>
           <div class="staterow">
-            <span class="statecap">Notice bar</span>
             <div class="cg-notice" style="flex:1;">
               <svg width="18" height="18" aria-hidden="true"><use href="#lt-bell" /></svg>
               <div class="cg-notice-clip">
                 <div class="cg-notice-track">
-                  <span lang="zh-Hans">会员日: 全场茶点 8 折 · 满 ¥50 赠桂花糕一份</span>
-                  <span lang="zh-Hans" aria-hidden="true">会员日: 全场茶点 8 折 · 满 ¥50 赠桂花糕一份</span>
+                  <span>A slow line of supporting text · it pauses under the pointer · and stops for reduced motion</span>
+                  <span aria-hidden="true">A slow line of supporting text · it pauses under the pointer · and stops for reduced motion</span>
                 </div>
               </div>
             </div>
           </div>
-          <p class="panel-note">At most two seals per screen. The notice text scrolls on a slow loop, pauses on hover and focus, and freezes under reduced motion.</p>
         </div>
-        <div class="panel is-card">
-          <h3 class="panel-label"><span class="p-cjk" lang="zh-Hans">底栏</span><span class="p-lat">Tab bar</span></h3>
-          <nav class="cg-tabbar" style="margin-top:0;border-radius:18px;" aria-label="Tab bar specimen">
-            <button class="cg-tab" type="button">
-              <svg width="22" height="22" aria-hidden="true"><use href="#lt-home" /></svg>
-              <span lang="zh-Hans">首页</span>
-            </button>
-            <button class="cg-tab is-active" type="button" aria-current="page">
-              <svg width="22" height="22" aria-hidden="true"><use href="#lt-order" /></svg>
-              <span lang="zh-Hans">点单</span>
-            </button>
-            <button class="cg-tab" type="button">
-              <svg width="22" height="22" aria-hidden="true"><use href="#lt-ticket" /></svg>
-              <span lang="zh-Hans">券包</span>
-            </button>
-            <button class="cg-tab" type="button">
-              <svg width="22" height="22" aria-hidden="true"><use href="#lt-user" /></svg>
-              <span lang="zh-Hans">我的</span>
-            </button>
-          </nav>
-          <p class="panel-note">White bar, 2px line icons, tiny labels; the active tab is coffee with a dot beneath. Bottom padding leaves room for the safe area.</p>
-        </div>
-        <div class="panel is-card">
-          <h3 class="panel-label"><span class="p-cjk" lang="zh-Hans">会员条</span><span class="p-lat">VIP strip</span></h3>
-          <div class="cg-vip">
-            <span class="cg-vip-brush" aria-hidden="true">VIP</span>
-            <div class="cg-vip-copy">
-              <p class="t-cjk" lang="zh-Hans">开通季卡 · 每周赠新茶一份</p>
-              <p class="t-lat">Member · Seasonal pass</p>
-            </div>
-            <button class="cg-btn-ghost is-sm" type="button"><span lang="zh-Hans">开通</span></button>
-          </div>
-          <p class="panel-note">Deep coffee banner with a faint diagonal thin-line pattern; brush VIP, paper text, ghost action.</p>
-        </div>
+      </div>
+
+      <div class="callout">
+        <b>A press is a stamp, not a bounce.</b> 100ms and one pixel is the
+        feeling of a seal meeting paper: short, final, no overshoot. Under
+        <code>prefers-reduced-motion</code> the transitions drop out and the
+        notice line stands still, and nothing on the page is lost.
       </div>
     </section>
 
-    <!-- ============ components ============ -->
-    <section class="section">
+    <!-- ============ 06 SCREEN ============ -->
+    <section class="section" id="screen" aria-labelledby="screen-h">
       <div class="section-head">
-        <h2 class="section-title" lang="zh-Hans">部件</h2>
-        <p class="cg-caption-rule">Components · Every State</p>
+        <h2 class="section-title" id="screen-h">Screen</h2>
+        <p class="cg-caption-rule">Section 06 · Ink wash</p>
+        <p class="lede">
+          One optional surface treatment: an <b>ink wash</b>. Three ridges of ink
+          drift slowly across absorbent paper in front of the disc, each darkest at
+          its crest and thinning to mist below. The pointer is a loaded brush -
+          rest it on the right-hand panel and ink blooms into the fibres.
+        </p>
       </div>
+
+      <div class="shaderRow">
+        <div class="shaderCell">
+          <div class="shaderStage" id="washFallback"></div>
+          <span class="shaderCap">Static fallback · paper, disc, wash</span>
+        </div>
+        <div class="shaderCell">
+          <div class="shaderStage"><canvas id="washCanvas"></canvas></div>
+          <span class="shaderCap">Live · rest the pointer on it</span>
+        </div>
+      </div>
+
+      <div class="panel stack">
+        <h3 class="panel-label">Uniforms</h3>
+        <div class="spec-wrap">
+          <table class="spec">
+            <thead><tr><th>Uniform</th><th>Value</th><th>What it does</th></tr></thead>
+            <tbody>
+              <tr><td>uReach</td><td class="v">0.2</td><td class="d">Radius of the brush bloom, in stage heights.</td></tr>
+              <tr><td>uBleed</td><td class="v">0.6</td><td class="d">How far ink feathers past a hard edge - the ridge crests and the frayed rim of the bloom. At 0 the wash turns into cut paper.</td></tr>
+              <tr><td>uFibre</td><td class="v">0.04</td><td class="d">Paper fibre, drawn as the faintest possible ink so it stays inside the palette.</td></tr>
+              <tr><td>uDrift</td><td class="v">0.018</td><td class="d">Ridge drift, in stage widths per second. The near ridge moves fastest, which is the only depth cue.</td></tr>
+              <tr><td>uDiscAt / uDiscR</td><td class="v">0.70, 0.62 / 0.17</td><td class="d">Where the disc sits and how large. The CSS fallback draws it in the same place.</td></tr>
+              <tr><td>uPaper / uDisc / uInk</td><td class="v">tokens</td><td class="d">Read from <code>--paper</code>, <code>--disc</code> and <code>--ink</code> at runtime, and re-read on every theme change.</td></tr>
+              <tr><td>spring</td><td class="v">k 40 / d 8</td><td class="d">The brush follows the pointer on a spring, heavier than a cursor, so it arrives rather than snaps.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="callout">
+        <b>The palette rule is structural here.</b> The shader's last line is
+        <code>mix(mix(uPaper, uDisc, disc), uInk, ink)</code> - only three
+        pigments go in, so only three can come out, and the greys between them.
+        After dark the same line gives pale ink on dark paper in front of a dim
+        moon, with no second shader. It stops rendering off screen, and under
+        <code>prefers-reduced-motion</code> it draws one settled frame and never
+        starts a loop. Without WebGL2 the canvas never becomes visible, and the
+        left panel is the whole design.
+      </div>
+      <p class="lede" style="text-align:left;margin-left:auto;margin-right:auto;max-width:76ch;">
+        <b>Where it belongs:</b> behind a poster, or filling an empty state that
+        has nothing else to show. Not behind a list, a field or any running text
+        - it is the decorative register, and the working surface never carries it.
+      </p>
+    </section>
+
+    <!-- ============ 07 COMPONENTS ============ -->
+    <section class="section" id="components" aria-labelledby="components-h">
+      <div class="section-head">
+        <h2 class="section-title" id="components-h">Components</h2>
+        <p class="cg-caption-rule">Section 07 · Every state, live</p>
+        <p class="lede">
+          Everything here works: press to see the press, click chips and tabs,
+          step quantities, type in the field. Where a state is also <b>pinned</b>
+          for comparison, the caption says so.
+        </p>
+      </div>
+
       <div class="grid-2">
         <div class="panel">
-          <h3 class="panel-label"><span class="p-cjk" lang="zh-Hans">按钮</span><span class="p-lat">Buttons and chips</span></h3>
+          <h3 class="panel-label">Buttons</h3>
           <div class="staterow">
             <span class="statecap">Primary</span>
-            <button class="cg-btn" type="button"><span lang="zh-Hans">去结算</span></button>
-            <button class="cg-btn is-pressed" type="button"><span lang="zh-Hans">去结算</span></button>
-            <button class="cg-btn" type="button" disabled><span lang="zh-Hans">去结算</span></button>
+            <button class="cg-btn" type="button">Continue</button>
+            <button class="cg-btn is-pressed" type="button">Pinned press</button>
+            <button class="cg-btn" type="button" disabled>Disabled</button>
           </div>
           <div class="staterow">
             <span class="statecap">Secondary</span>
-            <button class="cg-btn-ghost" type="button"><span lang="zh-Hans">查看茶单</span></button>
-            <button class="cg-btn-ghost is-pressed" type="button"><span lang="zh-Hans">查看茶单</span></button>
+            <button class="cg-btn-ghost" type="button">View all</button>
+            <button class="cg-btn-ghost is-pressed" type="button">Pinned press</button>
           </div>
           <div class="staterow">
-            <span class="statecap">Chips</span>
-            <button class="cg-chip is-on" type="button" lang="zh-Hans">招牌</button>
-            <button class="cg-chip" type="button" lang="zh-Hans">纯茶</button>
-            <button class="cg-chip" type="button" lang="zh-Hans">冷萃</button>
-            <button class="cg-chip" type="button" lang="zh-Hans">茶点</button>
+            <span class="statecap">Small</span>
+            <button class="cg-btn is-sm" type="button">Continue</button>
+            <button class="cg-btn-ghost is-sm" type="button">View all</button>
+            <button class="cg-btn is-sm" type="button">Label<span class="b-cap">Caption</span></button>
           </div>
-          <p class="panel-note">Presses darken and translate down 1px over 100ms; disabled drops to 45% opacity. Pressed states are pinned here with a demo class.</p>
+          <p class="panel-note">Press darkens to <code>--primary-press</code> and drops 1px over 100ms; the outline takes a <code>--primary-wash</code>. Disabled is a real <code>disabled</code> at 45% opacity. <b>There is no hover state</b> - the system is drawn for touch, and the press is the feedback.</p>
         </div>
+
         <div class="panel">
-          <h3 class="panel-label"><span class="p-cjk" lang="zh-Hans">方块</span><span class="p-lat">Service tiles</span></h3>
-          <div class="cg-tile-row" style="grid-template-columns:repeat(3,1fr);max-width:280px;">
+          <h3 class="panel-label">Chips - single select</h3>
+          <div class="cg-chip-row" data-single>
+            <button class="cg-chip is-on" type="button" aria-pressed="true">All</button>
+            <button class="cg-chip" type="button" aria-pressed="false">Option one</button>
+            <button class="cg-chip" type="button" aria-pressed="false">Option two</button>
+            <button class="cg-chip" type="button" aria-pressed="false">Option three</button>
+          </div>
+          <p class="panel-note">A <code>--card</code> pill at rest; selected fills with <code>--primary</code>. Click one - the selection moves.</p>
+
+          <h3 class="panel-label" style="margin-top:22px;">Search field</h3>
+          <div class="cg-search">
+            <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#lt-search" /></svg>
+            <input type="search" placeholder="Search" aria-label="Search" />
+          </div>
+          <p class="panel-note">A real input in a <code>--card</code> pill; focus rings the whole pill.</p>
+        </div>
+
+        <div class="panel">
+          <h3 class="panel-label">Tiles</h3>
+          <div class="cg-tile-row">
             <button class="cg-tile" type="button">
-              <svg width="24" height="24" aria-hidden="true"><use href="#lt-cup" /></svg>
-              <span class="t-cjk" lang="zh-Hans">堂食</span><span class="t-lat">Dine in</span>
+              <svg width="24" height="24" aria-hidden="true"><use href="#lt-calendar" /></svg>
+              <span class="t-main">Plan</span><span class="t-cap">Idle</span>
             </button>
             <button class="cg-tile is-pressed" type="button">
               <svg width="24" height="24" aria-hidden="true"><use href="#lt-bag" /></svg>
-              <span class="t-cjk" lang="zh-Hans">自取</span><span class="t-lat">Pick up</span>
+              <span class="t-main">Collect</span><span class="t-cap">Pinned</span>
             </button>
             <button class="cg-tile" type="button">
-              <span class="cg-tile-badge">3</span>
-              <svg width="22" height="24" aria-hidden="true"><use href="#lt-crown" /></svg>
-              <span class="t-cjk" lang="zh-Hans">会员</span><span class="t-lat">VIP</span>
+              <span class="cg-badge">3</span>
+              <svg width="24" height="24" aria-hidden="true"><use href="#lt-bell" /></svg>
+              <span class="t-main">Notices</span><span class="t-cap">Badge</span>
+            </button>
+            <button class="cg-tile" type="button">
+              <svg width="24" height="24" aria-hidden="true"><use href="#lt-crown" /></svg>
+              <span class="t-main">Featured</span><span class="t-cap">Idle</span>
             </button>
           </div>
-          <p class="panel-note">Default, pressed (coffee fill, paper ink), and badge (seal dot, white count). Icons here are always the 2px line voice, never brush art.</p>
+          <p class="panel-note">Idle, pressed (pinned; press any tile to see it live), and badge - the seal's one other job. Tile icons are always the 2px line voice, never brush art.</p>
         </div>
+
         <div class="panel">
-          <h3 class="panel-label"><span class="p-cjk" lang="zh-Hans">茶单行</span><span class="p-lat">List rows and stepper</span></h3>
+          <h3 class="panel-label">Rows and stepper</h3>
           <div class="cg-sheet">
             <div class="cg-row">
               <div class="cg-row-main">
-                <p class="cg-row-name" lang="zh-Hans">龙井雪芽</p>
-                <p class="cg-row-sub" lang="zh-Hans">明前头采 · 一盏</p>
+                <p class="cg-row-name">Item title</p>
+                <p class="cg-row-sub">Supporting line · detail</p>
               </div>
-              <p class="cg-row-price"><small>¥</small>32</p>
-              <button class="cg-add" type="button" aria-label="加入 龙井雪芽 Add to order">
+              <p class="cg-row-value"><small>No.</small>01</p>
+              <button class="cg-round" type="button" aria-label="Add item title">
                 <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#lt-plus" /></svg>
               </button>
             </div>
             <div class="cg-row">
               <div class="cg-row-main">
-                <p class="cg-row-name" lang="zh-Hans">桂花酒酿圆子</p>
-                <p class="cg-row-sub" lang="zh-Hans">温热 · 微醺甜口</p>
+                <p class="cg-row-name">Second item</p>
+                <p class="cg-row-sub">Supporting line · detail</p>
               </div>
-              <p class="cg-row-price"><small>¥</small>16</p>
-              <div class="cg-stepper">
-                <button class="cg-add is-minus" type="button" aria-label="减少 桂花酒酿圆子 Decrease">
+              <p class="cg-row-value"><small>No.</small>02</p>
+              <div class="cg-stepper" data-stepper>
+                <button class="cg-round is-outline" type="button" data-step="-1" aria-label="Decrease second item">
                   <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#lt-minus" /></svg>
                 </button>
                 <span class="cg-stepper-qty" aria-live="polite">2</span>
-                <button class="cg-add" type="button" aria-label="增加 桂花酒酿圆子 Increase">
+                <button class="cg-round" type="button" data-step="1" aria-label="Increase second item">
                   <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#lt-plus" /></svg>
                 </button>
               </div>
             </div>
           </div>
-          <p class="panel-note">A row holds name, note, price, and one round add button; once in the cart the add button grows into a stepper.</p>
+          <p class="panel-note">A row carries a name, a sub-line, one value and one round action. Once it has a quantity, the action grows into a stepper. Step it to zero and the minus disables itself.</p>
         </div>
+
         <div class="panel">
-          <h3 class="panel-label"><span class="p-cjk" lang="zh-Hans">检索与开关</span><span class="p-lat">Search and toggle</span></h3>
+          <h3 class="panel-label">Toggle</h3>
           <div class="staterow">
-            <div class="cg-search" style="flex:1;">
-              <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#lt-search" /></svg>
-              <input type="search" placeholder="搜索茶品 Search the menu" aria-label="搜索茶品 Search the menu" />
+            <label class="cg-toggle"><input type="checkbox" /><span class="tg-track" aria-hidden="true"></span><span>Off</span></label>
+            <label class="cg-toggle"><input type="checkbox" checked /><span class="tg-track" aria-hidden="true"></span><span>On</span></label>
+            <label class="cg-toggle"><input type="checkbox" disabled /><span class="tg-track" aria-hidden="true"></span><span>Disabled</span></label>
+          </div>
+          <p class="panel-note">A real checkbox: <code>--card</code> track with a <code>--primary-line</code> edge; on fills with <code>--primary</code>.</p>
+
+          <h3 class="panel-label" style="margin-top:22px;">Tab bar</h3>
+          <nav class="cg-tabbar is-floating" aria-label="Tab bar specimen" data-tabs>
+            <button class="cg-tab is-active" type="button" aria-current="page"><svg width="22" height="22" aria-hidden="true"><use href="#lt-home" /></svg><span>Home</span></button>
+            <button class="cg-tab" type="button"><svg width="22" height="22" aria-hidden="true"><use href="#lt-list" /></svg><span>Browse</span></button>
+            <button class="cg-tab" type="button"><svg width="22" height="22" aria-hidden="true"><use href="#lt-ticket" /></svg><span>Saved</span></button>
+            <button class="cg-tab" type="button"><svg width="22" height="22" aria-hidden="true"><use href="#lt-user" /></svg><span>Profile</span></button>
+          </nav>
+          <p class="panel-note">Idle tabs in <code>--primary-soft</code>; the active one in <code>--primary</code> with a dot beneath. Click to move it.</p>
+        </div>
+
+        <div class="panel">
+          <h3 class="panel-label">Banner and summary</h3>
+          <div class="cg-banner">
+            <span class="cg-banner-mark" aria-hidden="true">Aa</span>
+            <div class="cg-banner-copy">
+              <p class="t-main">A single line of banner copy</p>
+              <p class="t-cap">Caption · secondary</p>
+            </div>
+            <button class="cg-btn-ghost is-sm" type="button">Open</button>
+          </div>
+          <div class="cg-summary" style="margin-top:12px;">
+            <div class="cg-summary-main">
+              <p class="s-title">Summary title</p>
+              <p class="s-sub">Supporting line · detail</p>
+            </div>
+            <div class="cg-summary-stat">
+              <p class="s-val">128</p>
+              <p class="s-key">Stat key</p>
             </div>
           </div>
-          <div class="staterow">
-            <label class="cg-toggle">
-              <input type="checkbox" />
-              <span class="tg-track" aria-hidden="true"></span>
-              <span lang="zh-Hans">到店提醒 Arrival reminder</span>
-            </label>
+          <p class="panel-note">The banner is a <code>--primary</code> block with a faint 115° hairline weave and a brush mark. The summary is a sheet: title left, one stat right.</p>
+          <h3 class="panel-label" style="margin-top:22px;">Action bar</h3>
+          <div class="cg-actionbar">
+            <span class="cg-actionbar-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><use href="#lt-bag" /></svg>
+              <span class="cg-badge">3</span>
+            </span>
+            <span class="cg-actionbar-sum">3 selected<small>Summary line</small></span>
+            <button class="cg-btn is-sm" type="button">Continue</button>
           </div>
-          <div class="staterow">
-            <label class="cg-toggle">
-              <input type="checkbox" checked />
-              <span class="tg-track" aria-hidden="true"></span>
-              <span lang="zh-Hans">少糖默认 Less sugar by default</span>
-            </label>
-          </div>
-          <p class="panel-note">Rounded card-fill field with a real input; the toggle is a real checkbox, coffee when on.</p>
+          <p class="panel-note">The one floating control: a <code>--primary</code> pill with <code>--shadow-float</code>, the button inside it inverted. One per surface - it owns the final decision.</p>
         </div>
+
         <div class="panel">
-          <h3 class="panel-label"><span class="p-cjk" lang="zh-Hans">空盏</span><span class="p-lat">Empty state</span></h3>
+          <h3 class="panel-label">Empty state</h3>
           <div class="cg-empty">
             <span class="cg-ink" aria-hidden="true">
               <svg width="96" height="96" viewBox="0 0 120 120"><use href="#ink-bowl" /></svg>
             </span>
-            <p class="cg-empty-cjk" lang="zh-Hans">盏中还空着</p>
-            <p class="cg-empty-lat">No orders yet</p>
-            <button class="cg-btn-ghost is-sm" type="button"><span lang="zh-Hans">去点一盏</span></button>
+            <p class="cg-empty-title">Nothing here yet</p>
+            <p class="cg-empty-cap">Empty state · caption</p>
+            <button class="cg-btn-ghost is-sm" type="button">Start</button>
           </div>
-          <p class="panel-note">A faint ink bowl (34% ink), bilingual caption, one quiet action. Brush art may carry an empty state; it still never enters task rows.</p>
+          <p class="panel-note">Ink art at <code>--ink-faint</code>, a brush line, a caption, one quiet action. The one place outside a poster where brush art is allowed.</p>
         </div>
-        <div class="panel cg-olive" style="background:var(--screen);">
-          <h3 class="panel-label"><span class="p-cjk" lang="zh-Hans" style="color:var(--paper);">橄榄变奏</span><span class="p-lat" style="color:var(--white);">Olive variant</span></h3>
-          <div class="cg-tile-row" style="grid-template-columns:repeat(3,1fr);max-width:280px;">
-            <button class="cg-tile" type="button">
-              <svg width="24" height="24" aria-hidden="true"><use href="#lt-cup" /></svg>
-              <span class="t-cjk" lang="zh-Hans">堂食</span><span class="t-lat">Dine in</span>
-            </button>
-            <button class="cg-tile is-pressed" type="button">
-              <svg width="24" height="24" aria-hidden="true"><use href="#lt-bag" /></svg>
-              <span class="t-cjk" lang="zh-Hans">自取</span><span class="t-lat">Pick up</span>
-            </button>
-            <button class="cg-tile" type="button">
-              <svg width="24" height="24" aria-hidden="true"><use href="#lt-scooter" /></svg>
-              <span class="t-cjk" lang="zh-Hans">外卖</span><span class="t-lat">Delivery</span>
-            </button>
+
+        <div class="panel is-alt cg-alt">
+          <h3 class="panel-label">Alternate ground - .cg-alt</h3>
+          <div class="cg-tile-row" style="grid-template-columns:repeat(3,1fr);">
+            <button class="cg-tile" type="button"><svg width="24" height="24" aria-hidden="true"><use href="#lt-calendar" /></svg><span class="t-main">Plan</span><span class="t-cap">Idle</span></button>
+            <button class="cg-tile is-pressed" type="button"><svg width="24" height="24" aria-hidden="true"><use href="#lt-bag" /></svg><span class="t-main">Collect</span><span class="t-cap">Pinned</span></button>
+            <button class="cg-tile" type="button"><svg width="24" height="24" aria-hidden="true"><use href="#lt-crown" /></svg><span class="t-main">Featured</span><span class="t-cap">Idle</span></button>
           </div>
           <div class="staterow" style="margin-top:14px;">
-            <button class="cg-btn" type="button"><span lang="zh-Hans">去结算</span></button>
-            <span class="cg-seal" aria-hidden="true">橄</span>
+            <button class="cg-btn" type="button">Continue</button>
+            <span class="cg-seal is-blank" aria-hidden="true"></span>
           </div>
-          <p class="panel-note" style="color:var(--white);">One class swaps the scheme: olive ground, olive-tinted paper and card, white captions. Same grammar everywhere else; use for at most one screen per composition.</p>
+          <p class="panel-note">One class swaps the grounds: <code>--stage</code>, <code>--paper</code>, <code>--card</code> and <code>--sheet</code> take their <code>--alt-*</code> values, type on the ground takes <code>--on-alt</code>. Same grammar everywhere else.</p>
         </div>
+      </div>
+
+      <div class="callout">
+        <b>Every control is one of four shapes</b> - a soft tile, a pill, a round
+        button, a row. That is deliberate: the posters above them are where the
+        variety lives, so the working surface can afford to be boring, and a
+        reader who has seen one pill knows every pill.
       </div>
     </section>
 
-    <!-- ============ in application ============ -->
-    <section class="section">
+    <!-- ============ 08 MOTIFS ============ -->
+    <section class="section" id="motifs" aria-labelledby="motifs-h">
       <div class="section-head">
-        <h2 class="section-title" lang="zh-Hans">成篇</h2>
-        <p class="cg-caption-rule">In Application · A Full Ordering Screen</p>
+        <h2 class="section-title" id="motifs-h">Motifs</h2>
+        <p class="cg-caption-rule">Section 08 · Ink, disc, seal</p>
+        <p class="lede">
+          Six solid-ink still lifes, a disc behind each, and a seal nearby. These
+          are what make the system recognisable - not the palette. Draw new
+          subjects in the same hand: solid fills, tapered ends, small white gaps.
+        </p>
       </div>
-      <div class="apply-wrap">
-        <section class="cg-phone apply-phone" aria-label="Complete ordering screen demo">
-          <div class="cg-screen">
-            <div class="cg-status">
-              <span class="cg-status-time">9:41</span>
-              <span class="cg-status-icons">
-                <svg width="15" height="10" aria-hidden="true"><use href="#st-signal" /></svg>
-                <svg width="14" height="10" aria-hidden="true"><use href="#st-wifi" /></svg>
-                <svg width="21" height="10" aria-hidden="true"><use href="#st-batt" /></svg>
-              </span>
+
+      <div class="art-grid">
+        <figure class="art-card">
+          <div class="art-scene">
+            <span class="cg-disc" style="width:116px;height:116px;left:50%;top:12px;transform:translateX(-50%);" aria-hidden="true"></span>
+            <span class="cg-ink" style="left:50%;top:18px;transform:translateX(-50%);" aria-hidden="true"><svg width="118" height="118" viewBox="0 0 120 120"><use href="#ink-teapot" /></svg></span>
+          </div>
+          <figcaption class="art-name"><span class="a-main">Teapot</span><span class="a-cap">Full disc</span></figcaption>
+        </figure>
+        <figure class="art-card">
+          <div class="art-scene">
+            <span class="cg-disc is-wash" style="width:120px;height:120px;left:18px;top:6px;" aria-hidden="true"></span>
+            <span class="cg-ink" style="left:50%;top:22px;transform:translateX(-50%);" aria-hidden="true"><svg width="112" height="112" viewBox="0 0 120 120"><use href="#ink-bowl" /></svg></span>
+          </div>
+          <figcaption class="art-name"><span class="a-main">Bowl</span><span class="a-cap">Washed disc</span></figcaption>
+        </figure>
+        <figure class="art-card">
+          <div class="art-scene">
+            <span class="cg-disc" style="width:130px;height:130px;right:-46px;top:2px;" aria-hidden="true"></span>
+            <span class="cg-ink" style="left:50%;top:8px;transform:translateX(-50%);" aria-hidden="true"><svg width="124" height="124" viewBox="0 0 120 120"><use href="#ink-plum" /></svg></span>
+          </div>
+          <figcaption class="art-name"><span class="a-main">Plum branch</span><span class="a-cap">Disc off the edge</span></figcaption>
+        </figure>
+        <figure class="art-card">
+          <div class="art-scene">
+            <span class="cg-disc" style="width:104px;height:104px;left:10px;bottom:-24px;" aria-hidden="true"></span>
+            <span class="cg-ink" style="left:50%;top:8px;transform:translateX(-50%);" aria-hidden="true"><svg width="124" height="124" viewBox="0 0 120 120"><use href="#ink-bamboo" /></svg></span>
+          </div>
+          <figcaption class="art-name"><span class="a-main">Bamboo</span><span class="a-cap">Setting disc</span></figcaption>
+        </figure>
+        <figure class="art-card">
+          <div class="art-scene">
+            <span class="cg-disc" style="width:96px;height:96px;right:6px;top:10px;" aria-hidden="true"></span>
+            <span class="cg-ink" style="left:50%;top:12px;transform:translateX(-50%);" aria-hidden="true"><svg width="118" height="118" viewBox="0 0 120 120"><use href="#ink-flask" /></svg></span>
+          </div>
+          <figcaption class="art-name"><span class="a-main">Flask and cup</span><span class="a-cap">Offset disc</span></figcaption>
+        </figure>
+        <figure class="art-card">
+          <div class="art-scene">
+            <span class="cg-disc" style="width:118px;height:118px;left:50%;top:10px;transform:translateX(-50%);" aria-hidden="true"></span>
+            <span class="cg-ink" style="left:50%;top:14px;transform:translateX(-50%);" aria-hidden="true"><svg width="120" height="120" viewBox="0 0 120 120"><use href="#ink-chopsticks" /></svg></span>
+          </div>
+          <figcaption class="art-name"><span class="a-main">Bowl and sticks</span><span class="a-cap">Full disc</span></figcaption>
+        </figure>
+      </div>
+
+      <div class="grid-2 stack">
+        <div class="panel is-card">
+          <h3 class="panel-label">Poster</h3>
+          <div class="cg-poster">
+            <div class="cg-poster-scene">
+              <span class="cg-disc" style="width:118px;height:118px;right:6px;top:8px;" aria-hidden="true"></span>
+              <span class="cg-ink" style="right:2px;top:2px;" aria-hidden="true"><svg width="126" height="126" viewBox="0 0 120 120"><use href="#ink-plum" /></svg></span>
+              <p class="cg-poster-title-h" style="max-width:150px;">Poster title</p>
+              <p class="cg-poster-sub">a brush aside</p>
+              <span class="cg-seal is-blank" style="left:0;bottom:0;" aria-hidden="true"></span>
             </div>
-            <div class="cg-screen-body">
+            <p class="cg-caption-rule">Caption between rules</p>
+          </div>
+          <p class="panel-note">Paper block, brush title, disc and ink art, a caption between rules, one seal. The disc never carries text.</p>
+        </div>
+        <div class="panel is-card">
+          <h3 class="panel-label">Seal and caption rule</h3>
+          <div class="staterow">
+            <span class="statecap">Seals</span>
+            <span class="cg-seal is-lg is-blank" aria-hidden="true"></span>
+            <span class="cg-seal is-blank" aria-hidden="true"></span>
+            <span class="cg-seal is-duo" aria-hidden="true">CG</span>
+          </div>
+          <div class="staterow">
+            <span class="statecap">Disc</span>
+            <span class="cg-disc" style="width:44px;height:44px;display:inline-block;" aria-hidden="true"></span>
+            <span class="cg-disc is-wash" style="width:44px;height:44px;display:inline-block;" aria-hidden="true"></span>
+          </div>
+          <div class="staterow">
+            <span class="statecap">Caption</span>
+            <p class="cg-caption-rule" style="flex:1;">Welcome · Plate 08</p>
+          </div>
+          <p class="panel-note">30px or 44px, 2px corner, a carved mark or a two-letter monogram in <code>--on-seal</code>. The caption rule labels a poster the way a colophon labels a scroll.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <b>The disc is what lets flat ink read as a painting.</b> A solid-black
+        teapot on cream is clip art; put a flat disc behind it and the eye reads
+        sun, space and a horizon that is not drawn. That is why the disc may be
+        halved, washed or pushed off the edge, but never removed - and why it
+        never carries text, which would turn it back into a button.
+      </div>
+    </section>
+
+    <!-- ============ 09 COMPOSITION ============ -->
+    <section class="section" id="composition" aria-labelledby="composition-h">
+      <div class="section-head">
+        <h2 class="section-title" id="composition-h">Composition</h2>
+        <p class="cg-caption-rule">Section 09 · One composed column</p>
+        <p class="lede">
+          The parts assembled into one column: a poster sets the mood, the working
+          surface under it stays plain, and one primary block owns the decision.
+          The copy is placeholder by design - what matters is how the parts sit.
+        </p>
+      </div>
+
+      <div class="apply-wrap">
+        <section class="cg-frame apply-frame" aria-label="Composed column specimen">
+          <div class="cg-stage">
+            <div class="cg-stage-body">
               <div class="cg-poster is-flush" style="padding-bottom:0;">
                 <div class="cg-poster-scene" style="height:120px;">
-                  <span class="cg-sun is-wash" style="width:118px;height:118px;right:-20px;top:-10px;" aria-hidden="true"></span>
-                  <span class="cg-ink" style="right:-6px;top:-4px;" aria-hidden="true">
-                    <svg width="118" height="118" viewBox="0 0 120 120"><use href="#ink-bamboo" /></svg>
-                  </span>
-                  <p class="cg-poster-title-h" lang="zh-Hans" style="max-width:160px;font-size:1.9rem;">冬藏 · 冷萃上新</p>
-                  <p class="cg-poster-sub" lang="zh-Hans">竹下一盏, 慢慢喝</p>
+                  <span class="cg-disc is-wash" style="width:118px;height:118px;right:-20px;top:-10px;" aria-hidden="true"></span>
+                  <span class="cg-ink" style="right:-6px;top:-4px;" aria-hidden="true"><svg width="118" height="118" viewBox="0 0 120 120"><use href="#ink-bamboo" /></svg></span>
+                  <p class="cg-poster-title-h" style="max-width:170px;font-size:1.9rem;">Specimen</p>
+                  <p class="cg-poster-sub">a composed column</p>
                 </div>
-                <p class="cg-caption-rule">Winter Menu · Chaguan</p>
+                <p class="cg-caption-rule">Plate 09</p>
               </div>
 
               <div class="cg-search">
                 <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#lt-search" /></svg>
-                <input type="search" placeholder="搜索茶品 Search" aria-label="搜索茶品 Search the menu" />
+                <input type="search" placeholder="Search" aria-label="Search the specimen" />
               </div>
 
-              <div class="staterow" style="gap:8px;">
-                <button class="cg-chip is-on" type="button" lang="zh-Hans">招牌</button>
-                <button class="cg-chip" type="button" lang="zh-Hans">纯茶</button>
-                <button class="cg-chip" type="button" lang="zh-Hans">冷萃</button>
-                <button class="cg-chip" type="button" lang="zh-Hans">茶点</button>
+              <div class="cg-chip-row" data-single>
+                <button class="cg-chip is-on" type="button" aria-pressed="true">All</button>
+                <button class="cg-chip" type="button" aria-pressed="false">One</button>
+                <button class="cg-chip" type="button" aria-pressed="false">Two</button>
+                <button class="cg-chip" type="button" aria-pressed="false">Three</button>
               </div>
 
-              <div class="cg-sheet">
+              <div class="cg-sheet" data-tally>
                 <div class="cg-row">
-                  <div class="cg-row-main">
-                    <p class="cg-row-name" lang="zh-Hans">龙井雪芽</p>
-                    <p class="cg-row-sub" lang="zh-Hans">明前头采 · 一盏</p>
-                  </div>
-                  <p class="cg-row-price"><small>¥</small>32</p>
-                  <div class="cg-stepper">
-                    <button class="cg-add is-minus" type="button" aria-label="减少 龙井雪芽 Decrease">
-                      <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#lt-minus" /></svg>
-                    </button>
+                  <div class="cg-row-main"><p class="cg-row-name">First item</p><p class="cg-row-sub">Supporting line</p></div>
+                  <div class="cg-stepper" data-stepper>
+                    <button class="cg-round is-outline" type="button" data-step="-1" aria-label="Decrease first item"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#lt-minus" /></svg></button>
                     <span class="cg-stepper-qty" aria-live="polite">1</span>
-                    <button class="cg-add" type="button" aria-label="增加 龙井雪芽 Increase">
-                      <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#lt-plus" /></svg>
-                    </button>
+                    <button class="cg-round" type="button" data-step="1" aria-label="Increase first item"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#lt-plus" /></svg></button>
                   </div>
                 </div>
                 <div class="cg-row">
-                  <div class="cg-row-main">
-                    <p class="cg-row-name" lang="zh-Hans">陈皮白茶</p>
-                    <p class="cg-row-sub" lang="zh-Hans">五年陈 · 煮饮</p>
+                  <div class="cg-row-main"><p class="cg-row-name">Second item</p><p class="cg-row-sub">Supporting line</p></div>
+                  <div class="cg-stepper" data-stepper>
+                    <button class="cg-round is-outline" type="button" data-step="-1" aria-label="Decrease second item" disabled><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#lt-minus" /></svg></button>
+                    <span class="cg-stepper-qty" aria-live="polite">0</span>
+                    <button class="cg-round" type="button" data-step="1" aria-label="Increase second item"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#lt-plus" /></svg></button>
                   </div>
-                  <p class="cg-row-price"><small>¥</small>26</p>
-                  <button class="cg-add" type="button" aria-label="加入 陈皮白茶 Add to order">
-                    <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#lt-plus" /></svg>
-                  </button>
                 </div>
                 <div class="cg-row">
-                  <div class="cg-row-main">
-                    <p class="cg-row-name" lang="zh-Hans">桂花酒酿圆子</p>
-                    <p class="cg-row-sub" lang="zh-Hans">温热 · 微醺甜口</p>
-                  </div>
-                  <p class="cg-row-price"><small>¥</small>16</p>
-                  <div class="cg-stepper">
-                    <button class="cg-add is-minus" type="button" aria-label="减少 桂花酒酿圆子 Decrease">
-                      <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#lt-minus" /></svg>
-                    </button>
+                  <div class="cg-row-main"><p class="cg-row-name">Third item</p><p class="cg-row-sub">Supporting line</p></div>
+                  <div class="cg-stepper" data-stepper>
+                    <button class="cg-round is-outline" type="button" data-step="-1" aria-label="Decrease third item"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#lt-minus" /></svg></button>
                     <span class="cg-stepper-qty" aria-live="polite">2</span>
-                    <button class="cg-add" type="button" aria-label="增加 桂花酒酿圆子 Increase">
-                      <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#lt-plus" /></svg>
-                    </button>
+                    <button class="cg-round" type="button" data-step="1" aria-label="Increase third item"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#lt-plus" /></svg></button>
                   </div>
-                </div>
-                <div class="cg-row">
-                  <div class="cg-row-main">
-                    <p class="cg-row-name" lang="zh-Hans">绿豆冰糕</p>
-                    <p class="cg-row-sub" lang="zh-Hans">六块装 · 佐茶</p>
-                  </div>
-                  <p class="cg-row-price"><small>¥</small>18</p>
-                  <button class="cg-add" type="button" aria-label="加入 绿豆冰糕 Add to order">
-                    <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><use href="#lt-plus" /></svg>
-                  </button>
                 </div>
               </div>
 
-              <div class="cg-cartbar" style="margin-top:auto;">
-                <span class="cg-cartbar-icon">
-                  <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><use href="#lt-cart" /></svg>
-                  <span class="cg-tile-badge">3</span>
+              <div class="cg-actionbar" style="margin-top:auto;">
+                <span class="cg-actionbar-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><use href="#lt-bag" /></svg>
+                  <span class="cg-badge" data-tally-badge>3</span>
                 </span>
-                <span class="cg-cartbar-total">¥64<small lang="zh-Hans">合计 · 已含茶位</small></span>
-                <button class="cg-btn is-sm" type="button"><span lang="zh-Hans">去结算</span></button>
+                <span class="cg-actionbar-sum"><span data-tally-sum>3</span> selected<small>Summary line</small></span>
+                <button class="cg-btn is-sm" type="button">Continue</button>
               </div>
             </div>
+
+            <nav class="cg-tabbar" aria-label="Specimen tabs" data-tabs>
+              <button class="cg-tab is-active" type="button" aria-current="page"><svg width="22" height="22" aria-hidden="true"><use href="#lt-home" /></svg><span>Home</span></button>
+              <button class="cg-tab" type="button"><svg width="22" height="22" aria-hidden="true"><use href="#lt-list" /></svg><span>Browse</span></button>
+              <button class="cg-tab" type="button"><svg width="22" height="22" aria-hidden="true"><use href="#lt-ticket" /></svg><span>Saved</span></button>
+              <button class="cg-tab" type="button"><svg width="22" height="22" aria-hidden="true"><use href="#lt-user" /></svg><span>Profile</span></button>
+            </nav>
           </div>
         </section>
-        <div class="apply-notes">
-          <h3 class="panel-label"><span class="p-cjk" lang="zh-Hans" style="color:var(--ink);">章法</span><span class="p-lat" style="color:var(--ink);">Rules at work</span></h3>
-          <ul>
-            <li>Brush art lives only in the poster; every control below it uses the line-icon voice.</li>
-            <li>The sun disc is washed to 36% and slides off the corner; it still carries no text.</li>
-            <li>One coffee block per screen owns the money moment: the cart bar with total and checkout.</li>
-            <li>Steppers appear only for items already in the cart; everything else keeps the single round add.</li>
-            <li>No seal on this screen: the poster caption does the branding, and two is the ceiling anyway.</li>
-          </ul>
+
+        <div class="panel">
+          <h3 class="panel-label">Anatomy</h3>
+          <div class="spec-wrap">
+            <table class="spec">
+              <thead><tr><th>Part</th><th>As built</th><th>Why it is that</th></tr></thead>
+              <tbody>
+                <tr><td>Poster</td><td class="v">flush, 120px</td><td class="d">The only brush art on the surface. It sits flush with the stage so the mood is a place, not a card.</td></tr>
+                <tr><td>Disc</td><td class="v">--disc-wash</td><td class="d">Washed and pushed off the corner: the poster is short, and a full disc would outweigh everything under it.</td></tr>
+                <tr><td>Controls</td><td class="v">sans + line icons</td><td class="d">From the search field down, nothing is brush. The line between registers is the poster's caption rule.</td></tr>
+                <tr><td>Rows</td><td class="v">--sheet, --rule</td><td class="d">One raised sheet, hairlines between rows. Steppers only where a quantity exists.</td></tr>
+                <tr><td>Action bar</td><td class="v">--primary, float</td><td class="d">The one deep block and the one shadow on the surface, pinned to the foot. It owns the decision; its badge follows the steppers.</td></tr>
+                <tr><td>Seals</td><td class="v">0</td><td class="d">None here: the caption does the signing, and a badge already spends the hot colour once.</td></tr>
+                <tr><td>Tab bar</td><td class="v">--sheet, 18px top</td><td class="d">Docked, not floating; safe-area cushion under the labels.</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
+      </div>
+
+      <div class="callout">
+        <b>Note what this is not: a screen from a product with the copy
+        swapped.</b> The labels are placeholders because the structure is the
+        point - one poster, a plain working surface, one deep block owning the
+        decision. Swap the ink subject and the words, and the same column fits
+        any list-and-decide task.
       </div>
     </section>
 
-    <!-- ============ footer ============ -->
+    <!-- ============ 10 RULES ============ -->
+    <section class="section" id="rules" aria-labelledby="rules-h">
+      <div class="section-head">
+        <h2 class="section-title" id="rules-h">Rules</h2>
+        <p class="cg-caption-rule">Section 10 · The refusals matter more</p>
+      </div>
+      <div class="grid-2 dodont">
+        <section class="panel do" aria-label="Do">
+          <p class="hd"><span class="cg-disc" style="width:18px;height:18px;display:inline-block;" aria-hidden="true"></span><span class="v-brush">Do</span></p>
+          <ul>
+            <li>Keep <b>brush art in posters and empty states</b>. Give task rows the 2px line icons.</li>
+            <li>Put the <b>disc behind art or a title</b> - full, washed, halved or off the edge.</li>
+            <li>Keep <b>values, counts and states in the UI sans</b>.</li>
+            <li>Give each surface <b>one deep block</b> that owns its decision.</li>
+            <li>Set small text on the mount in <code>--ink</code> only; <code>--primary</code> there is for large titles.</li>
+            <li><b>Check both themes</b> with the masthead toggle before calling anything done.</li>
+          </ul>
+        </section>
+        <section class="panel dont" aria-label="Do not">
+          <p class="hd"><span class="cg-seal is-blank" style="width:18px;height:18px;" aria-hidden="true"></span><span class="v-brush">Do not</span></p>
+          <ul>
+            <li>Use <b>brush illustrations as icons</b> inside rows, tiles or tabs.</li>
+            <li>Put <b>text on the disc</b>, ever.</li>
+            <li>Use <b>more than two seals</b> on a surface - a seal is punctuation, not a pattern.</li>
+            <li>Set <b>task-critical text in brush or caption</b>.</li>
+            <li>Add a <b>border or a third shadow</b>; blocks separate by fill.</li>
+            <li>Use the <b>alternate ground on more than one surface</b> of a composition - it is a variant, not a second theme.</li>
+            <li>Run the <b>ink wash behind a list or running text</b>.</li>
+          </ul>
+        </section>
+      </div>
+    </section>
+
+    <div class="back-link"><a class="cg-btn" href="../../index.html">All design systems</a></div>
+
     <footer class="footer">
-      <span class="cg-seal is-lg" aria-hidden="true">茶</span>
-      <p class="footer-caption">Chaguan · A Teahouse Mini-App System</p>
+      <span class="cg-seal is-lg is-blank" aria-hidden="true"></span>
+      <p class="footer-caption">Chaguan · Ink and Paper System</p>
       <p class="footer-note">
-        All shops, dishes, prices, and balances on this sheet are synthetic demo
-        content. Style homage to Lulu's mini-program design sharing sheet.
+        Brush face: Ma Shan Zheng, SIL Open Font License, loaded by URL. Captions
+        and UI use system stacks. All ink illustrations are original to this
+        system. This catalog follows STANDARD.md at the repository root.
       </p>
-      <a class="cg-btn" href="../../index.html"><span lang="zh-Hans">所有系统</span><span class="b-lat">All Systems</span></a>
     </footer>
 
   </div>
 
+<script src="js/inkwash.js"></script>
+<script>
+  (function () {
+    var root = document.documentElement;
+    if (location.hash === "#light" || location.hash === "#dark") {
+      root.setAttribute("data-theme", location.hash.slice(1));
+    }
+    document.querySelectorAll("[data-toggle-theme]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var cur = root.getAttribute("data-theme");
+        if (!cur) cur = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        root.setAttribute("data-theme", cur === "dark" ? "light" : "dark");
+      });
+    });
+
+    // Chips select themselves, so the selected state is live rather than pictured.
+    document.querySelectorAll("[data-single]").forEach(function (group) {
+      group.addEventListener("click", function (e) {
+        var c = e.target.closest(".cg-chip");
+        if (!c) return;
+        group.querySelectorAll(".cg-chip").forEach(function (o) {
+          o.classList.remove("is-on");
+          o.setAttribute("aria-pressed", "false");
+        });
+        c.classList.add("is-on");
+        c.setAttribute("aria-pressed", "true");
+      });
+    });
+
+    // Tabs move their active dot.
+    document.querySelectorAll("[data-tabs]").forEach(function (bar) {
+      bar.addEventListener("click", function (e) {
+        var t = e.target.closest(".cg-tab");
+        if (!t) return;
+        bar.querySelectorAll(".cg-tab").forEach(function (o) {
+          o.classList.remove("is-active");
+          o.removeAttribute("aria-current");
+        });
+        t.classList.add("is-active");
+        t.setAttribute("aria-current", "page");
+      });
+    });
+
+    // Steppers step; the minus disables at zero. In the composition the
+    // action bar's badge follows the total.
+    function tally(sheet) {
+      var sum = 0;
+      sheet.querySelectorAll(".cg-stepper-qty").forEach(function (q) { sum += parseInt(q.textContent, 10) || 0; });
+      var frame = sheet.closest(".cg-stage");
+      if (!frame) return;
+      var badge = frame.querySelector("[data-tally-badge]");
+      var label = frame.querySelector("[data-tally-sum]");
+      if (badge) { badge.textContent = sum; badge.hidden = sum === 0; }
+      if (label) label.textContent = sum;
+    }
+    document.querySelectorAll("[data-stepper]").forEach(function (st) {
+      var qty = st.querySelector(".cg-stepper-qty");
+      var minus = st.querySelector('[data-step="-1"]');
+      st.addEventListener("click", function (e) {
+        var b = e.target.closest("[data-step]");
+        if (!b || b.disabled) return;
+        var n = Math.max(0, Math.min(99, (parseInt(qty.textContent, 10) || 0) + parseInt(b.getAttribute("data-step"), 10)));
+        qty.textContent = n;
+        minus.disabled = n === 0;
+        var sheet = st.closest("[data-tally]");
+        if (sheet) tally(sheet);
+      });
+    });
+  })();
+</script>
 </body>
 </html>

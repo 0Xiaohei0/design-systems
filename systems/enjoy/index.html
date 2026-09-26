@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <!--
-THESIS: The catalog IS the desktop it specifies - windows on a wavy cream desk,
-refusing the neutral white specimen-grid scaffold.
-OWN-WORLD: Cream desk under pastel-aqua waves; paper windows with 2px ink outlines,
-traffic dots, hard 3px offset shadows; one saturated blue lyrics pane; one mono
-face at six sizes; peach and aqua pill meters; tiny red record dots.
-STORY: A teammate scrolls a riced retro desktop, reads tokens, motifs, and
-component states as windows, and leaves knowing the three laws: one typeface,
-hard offsets, one blue field.
-FIRST VIEWPORT: Menu bar pinned top; clock window (big 11:28 AM, vol/cpu/ram,
-now-playing chip) left; qutebrowser window center; desktop-icon column right;
-track info card lower left.
-FORM: Client-pinned direction from a ricing-screenshot reference; mode Read;
-no seed roll.
+THESIS: Personal computing as a warm hobby. Every element is a window or a desk
+object: 2px ink outlines, surface fills, hard offset shadows, one mono face, and
+exactly one saturated field per screen.
+FORM: catalog page, set in the system itself, following STANDARD.md. Every
+section is a window on the desk.
+CONTENT: every specimen on this page is neutral by rule (STANDARD.md R1). The
+copy talks about the desk itself, so a reader takes away structure, not a guess
+at a use case.
 -->
 <head>
   <meta charset="UTF-8" />
@@ -25,7 +20,7 @@ no seed roll.
 
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
     <defs>
-      <!-- menu glyph: little smiley -->
+      <!-- the system's mark: a little smiley -->
       <symbol id="g-enjoy" viewBox="0 0 24 24">
         <circle cx="12" cy="12" r="9" />
         <path class="fill" d="M8.4 9.4 a1.3 1.3 0 1 0 2.6 0 a1.3 1.3 0 1 0 -2.6 0 Z M13 9.4 a1.3 1.3 0 1 0 2.6 0 a1.3 1.3 0 1 0 -2.6 0 Z" />
@@ -59,458 +54,954 @@ no seed roll.
       <!-- small ui glyphs, 24 grid -->
       <symbol id="g-home" viewBox="0 0 24 24"><path d="M4.5 11 L12 4.5 L19.5 11" /><path d="M6.5 9.5 V19 H17.5 V9.5" /><path d="M10.5 19 V14 H13.5 V19" /></symbol>
       <symbol id="g-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="5.6" /><path d="M15 15 L20 20" /></symbol>
-      <symbol id="g-library" viewBox="0 0 24 24"><path d="M5.5 5 V19 M10.5 5 V19 M14.5 5.6 L18.8 18.8" /></symbol>
-      <symbol id="g-playlist" viewBox="0 0 24 24"><path d="M4.5 7.5 H13.5 M4.5 12 H13.5 M4.5 16.5 H9.5" /><path d="M17.5 12.5 V19.5 M14 16 H21" /></symbol>
+      <symbol id="g-shelf" viewBox="0 0 24 24"><path d="M5.5 5 V19 M10.5 5 V19 M14.5 5.6 L18.8 18.8" /></symbol>
+      <symbol id="g-list" viewBox="0 0 24 24"><path d="M4.5 7.5 H13.5 M4.5 12 H13.5 M4.5 16.5 H9.5" /><path d="M17.5 12.5 V19.5 M14 16 H21" /></symbol>
       <symbol id="g-heart" viewBox="0 0 24 24"><path d="M12 19.5 C7.2 15.6 4.5 12.6 4.5 9.4 a3.9 3.9 0 0 1 7.5 -1.4 a3.9 3.9 0 0 1 7.5 1.4 c0 3.2 -2.7 6.2 -7.5 10.1 Z" /></symbol>
-      <symbol id="g-episodes" viewBox="0 0 24 24"><rect x="4.5" y="4.5" width="6.4" height="6.4" rx="1.2" /><rect x="13.1" y="4.5" width="6.4" height="6.4" rx="1.2" /><rect x="4.5" y="13.1" width="6.4" height="6.4" rx="1.2" /><rect x="13.1" y="13.1" width="6.4" height="6.4" rx="1.2" /></symbol>
+      <symbol id="g-grid" viewBox="0 0 24 24"><rect x="4.5" y="4.5" width="6.4" height="6.4" rx="1.2" /><rect x="13.1" y="4.5" width="6.4" height="6.4" rx="1.2" /><rect x="4.5" y="13.1" width="6.4" height="6.4" rx="1.2" /><rect x="13.1" y="13.1" width="6.4" height="6.4" rx="1.2" /></symbol>
       <symbol id="g-prev" viewBox="0 0 24 24"><path d="M7 6 V18" /><path d="M18 6.5 L10 12 L18 17.5 Z" /></symbol>
       <symbol id="g-play" viewBox="0 0 24 24"><path d="M8 5.5 L18.5 12 L8 18.5 Z" /></symbol>
       <symbol id="g-pause" viewBox="0 0 24 24"><path d="M9 6 V18 M15 6 V18" /></symbol>
       <symbol id="g-next" viewBox="0 0 24 24"><path d="M17 6 V18" /><path d="M6 6.5 L14 12 L6 17.5 Z" /></symbol>
-      <symbol id="g-volume" viewBox="0 0 24 24"><path d="M4.5 10 V14 H8 L12.5 18 V6 L8 10 Z" /><path d="M15.5 9.2 a4.6 4.6 0 0 1 0 5.6" /></symbol>
-      <symbol id="g-github" viewBox="0 0 24 24"><circle cx="12" cy="13.5" r="6.5" /><path d="M7.5 8.5 L6.5 4.5 L10 6.4 M16.5 8.5 L17.5 4.5 L14 6.4" /><path class="fill" d="M9 12.6 a1.1 1.1 0 1 0 2.2 0 a1.1 1.1 0 1 0 -2.2 0 Z M12.8 12.6 a1.1 1.1 0 1 0 2.2 0 a1.1 1.1 0 1 0 -2.2 0 Z" /></symbol>
-      <symbol id="g-reddit" viewBox="0 0 24 24"><circle cx="12" cy="14" r="6" /><path d="M12 8 c0 -3 1.6 -4 4 -4" /><circle cx="17.2" cy="4" r="1.4" /><path class="fill" d="M8.9 13.4 a1.1 1.1 0 1 0 2.2 0 a1.1 1.1 0 1 0 -2.2 0 Z M12.9 13.4 a1.1 1.1 0 1 0 2.2 0 a1.1 1.1 0 1 0 -2.2 0 Z" /><path d="M9.8 16.4 a3.4 3.4 0 0 0 4.4 0" /></symbol>
-      <symbol id="g-rss" viewBox="0 0 24 24"><path d="M5.5 11.5 a7 7 0 0 1 7 7 M5.5 5.5 a13 13 0 0 1 13 13" /><path class="fill" d="M5 17.4 a1.7 1.7 0 1 0 3.4 0 a1.7 1.7 0 1 0 -3.4 0 Z" /></symbol>
+      <symbol id="g-level" viewBox="0 0 24 24"><path d="M4.5 10 V14 H8 L12.5 18 V6 L8 10 Z" /><path d="M15.5 9.2 a4.6 4.6 0 0 1 0 5.6" /></symbol>
+      <symbol id="g-feed" viewBox="0 0 24 24"><path d="M5.5 11.5 a7 7 0 0 1 7 7 M5.5 5.5 a13 13 0 0 1 13 13" /><path class="fill" d="M5 17.4 a1.7 1.7 0 1 0 3.4 0 a1.7 1.7 0 1 0 -3.4 0 Z" /></symbol>
       <symbol id="g-mail" viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2" /><path d="M4.5 8 L12 13.5 L19.5 8" /></symbol>
     </defs>
   </svg>
 
-  <!-- wave wallpaper: big lazy aqua shapes on the cream desk -->
+  <!-- wave wallpaper: big lazy shapes in --tint, painted through currentColor -->
   <div class="wallpaper" aria-hidden="true">
     <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" focusable="false">
-      <circle cx="1300" cy="30" r="210" fill="#bcdfe1" opacity="0.55" />
-      <circle cx="120" cy="270" r="70" fill="#bcdfe1" opacity="0.4" />
-      <path fill="#bcdfe1" opacity="0.5" d="M0 560 C 260 480 480 640 760 580 C 1040 520 1220 660 1440 590 V900 H0 Z" />
-      <path fill="#bcdfe1" d="M0 680 C 300 600 540 760 880 690 C 1140 636 1310 750 1440 710 V900 H0 Z" />
+      <circle cx="1300" cy="30" r="210" fill="currentColor" opacity="0.55" />
+      <circle cx="120" cy="270" r="70" fill="currentColor" opacity="0.4" />
+      <path fill="currentColor" opacity="0.5" d="M0 560 C 260 480 480 640 760 580 C 1040 520 1220 660 1440 590 V900 H0 Z" />
+      <path fill="currentColor" d="M0 680 C 300 600 540 760 880 690 C 1140 636 1310 750 1440 710 V900 H0 Z" />
     </svg>
   </div>
 
   <div class="desk-surface">
 
-    <header class="menubar" aria-label="Menu bar">
+    <!-- ============ MASTHEAD: the menu bar ============ -->
+    <header class="menubar">
       <svg class="menu-glyph glyph" aria-hidden="true" focusable="false"><use href="#g-enjoy" /></svg>
-      <nav class="menu-words" aria-label="Menus">
-        <span>Play</span><span>Edit</span><span>Video</span><span>Window</span><span>Enjoy</span>
+      <span class="menu-brand">enjoy</span>
+      <nav class="menu-words" aria-label="Sections">
+        <a href="#colour">Colour</a>
+        <a href="#type">Type</a>
+        <a href="#space">Space</a>
+        <a href="#form">Form</a>
+        <a href="#motion">Motion</a>
+        <a href="#screen">Screen</a>
+        <a href="#components">Components</a>
+        <a href="#motifs">Motifs</a>
+        <a href="#composition">Composition</a>
+        <a href="#rules">Rules</a>
       </nav>
-      <span class="menu-clock">Sat Oct 16 11:28 AM</span>
+      <button class="btn chip" data-toggle-theme type="button">flip theme</button>
     </header>
 
     <main class="desk">
 
-      <!-- ============ HERO: the reference desktop ============ -->
-      <section class="hero" aria-label="The ENJOY desktop">
-
-        <section class="window win-clock" aria-label="Clock widget window">
+      <!-- ============ THESIS ============ -->
+      <header class="thesis" id="top">
+        <section class="window" aria-labelledby="thesis-h">
           <div class="titlebar">
             <div class="traffic" aria-hidden="true"><span></span><span></span><span></span></div>
-            <span class="title">clock</span>
+            <span class="title">~/enjoy/about.txt</span>
             <span></span>
           </div>
-          <div class="window-body" style="display:grid; gap:14px;">
-            <div>
-              <p class="clock-time">11<span class="colon">:</span>28 <span style="font-size:0.5em;">AM</span></p>
-              <p class="clock-date">Saturday, October 16</p>
-            </div>
-            <div style="display:grid; gap:8px;">
-              <div class="meter"><span class="meter-label">vol</span><div class="meter-track"><div class="meter-fill" style="width:64%;"></div></div></div>
-              <div class="meter"><span class="meter-label">cpu</span><div class="meter-track"><div class="meter-fill meter-fill--peach" style="width:32%;"></div></div></div>
-              <div class="meter"><span class="meter-label">ram</span><div class="meter-track"><div class="meter-fill" style="width:51%;"></div></div></div>
-            </div>
-            <div class="now-playing">
-              <span class="album" aria-hidden="true"></span>
-              <span class="np-title">Where Did You Sleep Last Night</span>
-              <span class="np-controls">
-                <button class="glyph-btn" type="button" aria-label="Previous track"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-prev" /></svg></button>
-                <button class="glyph-btn" type="button" aria-label="Pause"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-pause" /></svg></button>
-                <button class="glyph-btn" type="button" aria-label="Next track"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-next" /></svg></button>
-              </span>
-            </div>
+          <div class="window-body">
+            <h1 id="thesis-h">enjoy</h1>
+            <p class="tag">
+              Personal computing as a warm hobby. Every element is a window or a
+              desk object - a 2px ink outline, a surface fill and a hard offset
+              shadow - sitting on a sunny desk under big lazy waves. One mono face
+              does all the talking.
+            </p>
+            <p class="tag">
+              Two things to hold on to. <b>Depth is a hard offset, never a blur</b>:
+              3px for a window, 2px for a control, and pressing a control takes its
+              shadow away. And <b>there is exactly one saturated field per screen</b>
+              - <code>--feature</code> - so everything else stays soft enough for
+              that one pane to be heard.
+            </p>
           </div>
         </section>
-
-        <section class="window win-info" aria-label="Track info card">
-          <div class="titlebar">
-            <div class="traffic" aria-hidden="true"><span></span><span></span><span></span></div>
-            <span class="title">track.txt</span>
-            <span></span>
-          </div>
-          <div class="window-body info-lines">
-            <span class="track">Where Did You Sleep Last Night</span>
-            <span class="artist">Nirvana - MTV Unplugged In New York</span>
-          </div>
-        </section>
-
-        <section class="window win-browser" aria-label="Browser window">
-          <div class="titlebar">
-            <div class="traffic" aria-hidden="true"><span></span><span></span><span></span></div>
-            <span class="title">/home/fun - qutebrowser</span>
-            <span></span>
-          </div>
-          <div class="window-body" style="display:grid; gap:18px;">
-            <input class="field" type="search" placeholder="Search" aria-label="Search" />
-            <div class="welcome-card">
-              <svg class="glyph" style="width:34px; height:34px;" aria-hidden="true" focusable="false"><use href="#g-enjoy" /></svg>
-              <p class="hello">Welcome! Me</p>
-              <p class="sub">a tiny homepage for a tiny internet - links to the places i actually visit.</p>
-              <div class="chip-row">
-                <a class="btn chip" href="#components">@github</a>
-                <a class="btn chip" href="#components">@reddit</a>
-                <a class="btn chip" href="#components">@tumblr</a>
-              </div>
-              <div class="icon-row">
-                <a class="btn icon-btn" href="#components" aria-label="GitHub"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-github" /></svg></a>
-                <a class="btn icon-btn" href="#components" aria-label="Reddit"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-reddit" /></svg></a>
-                <a class="btn icon-btn" href="#components" aria-label="RSS feed"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-rss" /></svg></a>
-                <a class="btn icon-btn" href="#components" aria-label="Mail"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-mail" /></svg></a>
-              </div>
-            </div>
-          </div>
-        </section>
-
         <nav class="icon-col" aria-label="Desktop icons">
-          <button class="desk-icon" type="button">
+          <a class="desk-icon" href="#colour">
             <svg class="icon-art" aria-hidden="true" focusable="false"><use href="#d-computer" /></svg>
-            <span class="icon-label">Desktop</span>
-          </button>
-          <button class="desk-icon" type="button">
+            <span class="icon-label">Colour</span>
+          </a>
+          <a class="desk-icon" href="#components">
             <svg class="icon-art" aria-hidden="true" focusable="false"><use href="#d-folder" /></svg>
-            <span class="icon-label">Downloads</span>
-          </button>
-          <button class="desk-icon" type="button">
+            <span class="icon-label">Parts</span>
+          </a>
+          <a class="desk-icon" href="#screen">
             <svg class="icon-art" aria-hidden="true" focusable="false"><use href="#d-ear" /></svg>
-            <span class="icon-label">Internet</span>
-          </button>
-          <button class="desk-icon" type="button">
+            <span class="icon-label">Screen</span>
+          </a>
+          <a class="desk-icon" href="#rules">
             <svg class="icon-art" aria-hidden="true" focusable="false"><use href="#d-jar" /></svg>
-            <span class="icon-label">My Life</span>
-          </button>
+            <span class="icon-label">Rules</span>
+          </a>
         </nav>
-      </section>
+      </header>
 
-      <!-- ============ README ============ -->
-      <section class="window" aria-label="About this system" id="about">
+      <!-- ============ READ THIS FIRST ============ -->
+      <section class="window" aria-labelledby="brief-h">
         <div class="titlebar">
           <div class="traffic" aria-hidden="true"><span></span><span></span><span></span></div>
-          <span class="title">/home/enjoy/readme.txt</span>
+          <span class="title">~/enjoy/read-this-first.txt</span>
           <span></span>
         </div>
         <div class="window-body">
-          <p class="window-note" style="margin-bottom:12px;">
-            <strong>enjoy</strong> is personal computing as a warm hobby. every element is
-            a window or a desk object: 2px ink outlines, cream fills, hard 3px offset
-            shadows, one mono typeface, and exactly one saturated blue field. scroll the
-            desk: foundations, motifs, components, then the player.
-          </p>
-          <div class="spec-row">
-            <a class="btn" href="#foundations">foundations</a>
-            <a class="btn" href="#motifs">motifs</a>
-            <a class="btn" href="#components">components</a>
-            <a class="btn" href="#player">the player</a>
-          </div>
+          <h2 class="sheet-h" id="brief-h">Read this first</h2>
+          <ol class="brief">
+            <li><span><b>These values are the system.</b> Every number on this page exists in <code>css/enjoy-core.css</code>. Use the tokens; do not invent parallel ones.</span></li>
+            <li><span><b>Search for an existing part before building a second one.</b> Almost everything is a window, a button, a meter or a row.</span></li>
+            <li><span><b>No ad-hoc values.</b> No raw hex, no one-off sizes, no new easing curve. Every outline is <code>--line</code>, every shadow is one of the three offsets.</span></li>
+            <li><span><b>Token names are roles.</b> <code>--tint</code> is the soft fill, not "the aqua"; in the dark theme it is a deep teal and the name is still true.</span></li>
+            <li><span><b><code>--feature</code> appears once per screen.</b> It is a content pane, never chrome, a button or an accent. <code>--live</code> is a dot, never a fill or a text colour.</span></li>
+            <li><span><b>No blur, no gradient, no second typeface.</b> These three refusals are the system.</span></li>
+          </ol>
         </div>
       </section>
 
-      <!-- ============ FOUNDATIONS ============ -->
-      <div class="section-row section-row--split" id="foundations">
-        <section class="window" aria-label="Palette paint chips">
-          <div class="titlebar">
-            <div class="traffic" aria-hidden="true"><span></span><span></span><span></span></div>
-            <span class="title">/home/enjoy/foundations - paint</span>
-            <span></span>
-          </div>
-          <div class="window-body">
-            <p class="window-note">
-              seven paints, three jobs: cream grounds, aqua and peach fills, one blue
-              field, and tiny red dots. depth is always a hard offset shadow - 3px for
-              windows, 2px for controls - never blurred.
-            </p>
-            <div class="chip-grid">
-              <div class="paint-chip"><div class="swatch" style="background:#f2ecdc;"></div><div class="meta"><span class="name">desk</span><span class="val">#f2ecdc</span><span class="use">the ground</span></div></div>
-              <div class="paint-chip"><div class="swatch" style="background:#bcdfe1;"></div><div class="meta"><span class="name">wave</span><span class="val">#bcdfe1</span><span class="use">waves + fills</span></div></div>
-              <div class="paint-chip"><div class="swatch" style="background:#faf6ea;"></div><div class="meta"><span class="name">paper</span><span class="val">#faf6ea</span><span class="use">window fill</span></div></div>
-              <div class="paint-chip"><div class="swatch" style="background:#22201c;"></div><div class="meta"><span class="name">ink</span><span class="val">#22201c</span><span class="use">outlines + text</span></div></div>
-              <div class="paint-chip"><div class="swatch" style="background:#f2cdaa;"></div><div class="meta"><span class="name">peach</span><span class="val">#f2cdaa</span><span class="use">meters + marks</span></div></div>
-              <div class="paint-chip"><div class="swatch" style="background:#2b7bc7;"></div><div class="meta"><span class="name">player</span><span class="val">#2b7bc7</span><span class="use">the one field</span></div></div>
-              <div class="paint-chip"><div class="swatch" style="background:#d0472e;"></div><div class="meta"><span class="name">record</span><span class="val">#d0472e</span><span class="use">live dots only</span></div></div>
-            </div>
-            <p class="spec-label">depth</p>
-            <div class="spec-row">
-              <div class="specimen">
-                <div style="width:88px; height:56px; background:var(--paper); border:2px solid var(--ink); border-radius:10px; box-shadow:3px 3px 0 rgba(34,32,28,0.9);"></div>
-                <span class="state-tag">window: 3px 3px 0</span>
-              </div>
-              <div class="specimen">
-                <div style="width:88px; height:56px; background:var(--paper); border:2px solid var(--ink); border-radius:8px; box-shadow:2px 2px 0 var(--ink);"></div>
-                <span class="state-tag">control: 2px 2px 0</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="window" aria-label="Type scale specimen">
-          <div class="titlebar">
-            <div class="traffic" aria-hidden="true"><span></span><span></span><span></span></div>
-            <span class="title">/home/enjoy/foundations - type</span>
-            <span></span>
-          </div>
-          <div class="window-body">
-            <p class="window-note">
-              one typeface: ui-monospace, "SF Mono", Menlo, Consolas. no second face,
-              no caps - scale and case do all the work. lowercase for actions, Title
-              Case for things.
-            </p>
-            <div class="type-line"><span class="spec">11px - label</span><span class="sample" style="font-size:11px; letter-spacing:0.08em;">vol cpu ram</span></div>
-            <div class="type-line"><span class="spec">12px - window title</span><span class="sample" style="font-size:12px;">/home/fun - qutebrowser</span></div>
-            <div class="type-line"><span class="spec">13px - body</span><span class="sample" style="font-size:13px;">a tiny homepage for a tiny internet.</span></div>
-            <div class="type-line"><span class="spec">14px - ui</span><span class="sample" style="font-size:14px;">Where Did You Sleep Last Night</span></div>
-            <div class="type-line"><span class="spec">22px - display-s</span><span class="sample" style="font-size:22px; line-height:1.5;">Welcome! Me</span></div>
-            <div class="type-line"><span class="spec">28px - display</span><span class="sample" style="font-size:28px; line-height:1.6;">We're no strangers to love</span></div>
-          </div>
-        </section>
-      </div>
-
-      <!-- ============ MOTIFS ============ -->
-      <section class="window" aria-label="Motif vocabulary" id="motifs">
+      <!-- ============ 01 COLOUR ============ -->
+      <section class="window" id="colour" aria-labelledby="colour-h">
         <div class="titlebar">
           <div class="traffic" aria-hidden="true"><span></span><span></span><span></span></div>
-          <span class="title">/home/enjoy/motifs</span>
+          <span class="title">~/enjoy/01-colour</span>
           <span></span>
         </div>
         <div class="window-body">
-          <p class="window-note">
-            everything on the desk is built from a small kit of desk objects. each one
-            keeps the same three moves: 2px ink outline, cream fill, hard offset shadow.
+          <h2 class="sheet-h" id="colour-h">Colour</h2>
+          <p class="lede">
+            Nine paints. Each chip shows <b>the sunny desk on the left and the same
+            desk after dark on the right</b>, so both themes are on screen at once.
+            The dark theme is hand-authored: a lamp-lit brown desk, cream ink, and
+            the soft fills pulled down until cream text sits on them comfortably.
           </p>
 
-          <p class="spec-label">window anatomy</p>
-          <div class="spec-row" style="align-items:center;">
-            <div class="specimen">
-              <div class="window" style="width:250px;">
-                <div class="titlebar">
-                  <div class="traffic" aria-hidden="true"><span></span><span></span><span></span></div>
-                  <span class="title">~/any/window</span>
-                  <span></span>
-                </div>
-                <div class="window-body" style="font-size:13px;">body, 13-14px mono on paper.</div>
-              </div>
-              <span class="state-tag">the master container</span>
-            </div>
-            <ul class="anatomy-list">
-              <li><span class="k" aria-hidden="true">1</span>frame: 2px ink, 10px radius, paper fill</li>
-              <li><span class="k" aria-hidden="true">2</span>traffic dots: three outlined circles, left</li>
-              <li><span class="k" aria-hidden="true">3</span>title: 12px mono path voice, centered</li>
-              <li><span class="k" aria-hidden="true">4</span>2px rule between bar and body</li>
-              <li><span class="k" aria-hidden="true">5</span>shadow: 3px 3px 0, zero blur</li>
-            </ul>
+          <div class="duo">
+            <div class="cell"><div class="halves"><i style="background:#f2ecdc"></i><i style="background:#24211c"></i></div><div class="cap"><span class="nm">--ground</span><span class="role">The desk. Every window sits on it.</span><span class="hex"><span>#F2ECDC</span><span>#24211C</span></span></div></div>
+            <div class="cell"><div class="halves"><i style="background:#faf6ea"></i><i style="background:#2e2a24"></i></div><div class="cap"><span class="nm">--surface</span><span class="role">Window, panel and control fill.</span><span class="hex"><span>#FAF6EA</span><span>#2E2A24</span></span></div></div>
+            <div class="cell"><div class="halves"><i style="background:#22201c"></i><i style="background:#f0e8d6"></i></div><div class="cap"><span class="nm">--ink</span><span class="role">Every outline, glyph and letter.</span><span class="hex"><span>#22201C</span><span>#F0E8D6</span></span></div></div>
+            <div class="cell"><div class="halves"><i style="background:#bcdfe1"></i><i style="background:#2f5a5d"></i></div><div class="cap"><span class="nm">--tint</span><span class="role">Soft fill: wallpaper, meters, active rows, selection.</span><span class="hex"><span>#BCDFE1</span><span>#2F5A5D</span></span></div></div>
+            <div class="cell"><div class="halves"><i style="background:#f2cdaa"></i><i style="background:#6e4a31"></i></div><div class="cap"><span class="nm">--tint-2</span><span class="role">Second soft fill: markers, knobs, notes.</span><span class="hex"><span>#F2CDAA</span><span>#6E4A31</span></span></div></div>
+            <div class="cell"><div class="halves"><i style="background:#2b7bc7"></i><i style="background:#2566a6"></i></div><div class="cap"><span class="nm">--feature</span><span class="role">The one saturated field. One pane per screen.</span><span class="hex"><span>#2B7BC7</span><span>#2566A6</span></span></div></div>
+            <div class="cell"><div class="halves"><i style="background:#faf6ea"></i><i style="background:#faf6ea"></i></div><div class="cap"><span class="nm">--on-feature</span><span class="role">Text on the feature field. Pinned in both themes.</span><span class="hex"><span>#FAF6EA</span><span>#FAF6EA</span></span></div></div>
+            <div class="cell"><div class="halves"><i style="background:#d0472e"></i><i style="background:#ec6a48"></i></div><div class="cap"><span class="nm">--live</span><span class="role">Tiny live-state dots. Nothing else.</span><span class="hex"><span>#D0472E</span><span>#EC6A48</span></span></div></div>
+            <div class="cell"><div class="halves"><i style="background:#22201c"></i><i style="background:#0b0a08"></i></div><div class="cap"><span class="nm">--shadow-ink</span><span class="role">What every hard shadow is cut from.</span><span class="hex"><span>#22201C</span><span>#0B0A08</span></span></div></div>
           </div>
 
-          <p class="spec-label">pill meters</p>
-          <div class="spec-row">
-            <div class="specimen" style="width:220px;">
-              <div style="display:grid; gap:8px; width:100%;">
-                <div class="meter"><span class="meter-label">vol</span><div class="meter-track"><div class="meter-fill" style="width:64%;"></div></div></div>
-                <div class="meter"><span class="meter-label">cpu</span><div class="meter-track"><div class="meter-fill meter-fill--peach" style="width:32%;"></div></div></div>
-                <div class="meter"><span class="meter-label">ram</span><div class="meter-track"><div class="meter-fill" style="width:51%;"></div></div></div>
-              </div>
-              <span class="state-tag">fills in wave or peach, rounded ends</span>
-            </div>
+          <p class="spec-label">derived inks and shadows</p>
+          <div class="table-wrap">
+            <table class="spec">
+              <thead><tr><th>token</th><th>light</th><th>dark</th><th>job</th></tr></thead>
+              <tbody>
+                <tr><td>--ink-dim</td><td class="v">ink at 0.72</td><td class="v">ink at 0.72</td><td class="d">Secondary text, ledes, state tags.</td></tr>
+                <tr><td>--ink-off</td><td class="v">ink at 0.5</td><td class="v">ink at 0.5</td><td class="d">Disabled labels only, always with a dashed outline beside it.</td></tr>
+                <tr><td>--ink-faint</td><td class="v">ink at 0.35</td><td class="v">ink at 0.35</td><td class="d">Progress rails and the dotted rules between table rows.</td></tr>
+                <tr><td>--shadow-win</td><td class="v">3px 3px 0 rgba(34,32,28,.9)</td><td class="v">3px 3px 0 rgba(11,10,8,.9)</td><td class="d">Window depth.</td></tr>
+                <tr><td>--shadow-ctl</td><td class="v">2px 2px 0 --shadow-ink</td><td class="v">same</td><td class="d">Control depth: buttons, chips, toggles, chips of paint.</td></tr>
+                <tr><td>--shadow-lift</td><td class="v">3px 3px 0 --shadow-ink</td><td class="v">same</td><td class="d">A hovered control, lifted one pixel.</td></tr>
+              </tbody>
+            </table>
           </div>
 
-          <p class="spec-label">desktop icons - hand-drawn line glyphs</p>
-          <div class="spec-row">
-            <div class="specimen"><button class="desk-icon" type="button"><svg class="icon-art" aria-hidden="true" focusable="false"><use href="#d-computer" /></svg><span class="icon-label">Desktop</span></button><span class="state-tag">retro computer</span></div>
-            <div class="specimen"><button class="desk-icon" type="button"><svg class="icon-art" aria-hidden="true" focusable="false"><use href="#d-folder" /></svg><span class="icon-label">Downloads</span></button><span class="state-tag">folder with papers</span></div>
-            <div class="specimen"><button class="desk-icon" type="button"><svg class="icon-art" aria-hidden="true" focusable="false"><use href="#d-ear" /></svg><span class="icon-label">Internet</span></button><span class="state-tag">ear</span></div>
-            <div class="specimen"><button class="desk-icon" type="button"><svg class="icon-art" aria-hidden="true" focusable="false"><use href="#d-jar" /></svg><span class="icon-label">My Life</span></button><span class="state-tag">jam jar</span></div>
+          <p class="spec-label">contrast floor</p>
+          <div class="table-wrap">
+            <table class="spec">
+              <thead><tr><th>pair</th><th>light</th><th>dark</th><th>rule</th></tr></thead>
+              <tbody>
+                <tr><td>--ink on --ground</td><td class="v">13.8:1</td><td class="v">13.2:1</td><td class="d">Body text anywhere on the desk.</td></tr>
+                <tr><td>--ink on --surface</td><td class="v">15.1:1</td><td class="v">11.7:1</td><td class="d">Body text inside a window.</td></tr>
+                <tr><td>--ink-dim on --surface</td><td class="v">6.2:1</td><td class="v">6.8:1</td><td class="d">Secondary text clears AA at every size.</td></tr>
+                <tr><td>--ink on --tint / --tint-2</td><td class="v">11.5 / 10.9:1</td><td class="v">6.3 / 6.4:1</td><td class="d">Text on an active row, a meter or a note.</td></tr>
+                <tr><td>--on-feature on --feature</td><td class="v">4.1:1</td><td class="v">5.5:1</td><td class="d"><b>Large text only.</b> Nothing on the feature field is set below 24px.</td></tr>
+              </tbody>
+            </table>
           </div>
 
-          <p class="spec-label">now-playing chip + info card + search</p>
-          <div class="spec-row">
-            <div class="specimen" style="width:250px;">
-              <div class="now-playing" style="width:100%;">
-                <span class="album" aria-hidden="true"></span>
-                <span class="np-title">Where Did You Sleep Last Night</span>
-                <span class="np-controls">
-                  <button class="glyph-btn" type="button" aria-label="Previous track"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-prev" /></svg></button>
-                  <button class="glyph-btn" type="button" aria-label="Pause"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-pause" /></svg></button>
-                  <button class="glyph-btn" type="button" aria-label="Next track"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-next" /></svg></button>
-                </span>
-              </div>
-              <span class="state-tag">now-playing chip: album square + truncating title</span>
-            </div>
-            <div class="specimen">
-              <div class="window" style="box-shadow:2px 2px 0 var(--ink);">
-                <div class="window-body info-lines" style="padding:12px 14px;">
-                  <span class="track">About A Girl</span>
-                  <span class="artist">Nirvana - MTV Unplugged In New York</span>
-                </div>
-              </div>
-              <span class="state-tag">info card: stacked mono lines</span>
-            </div>
-            <div class="specimen" style="width:220px;">
-              <input class="field" type="search" placeholder="Search" aria-label="Search example" />
-              <span class="state-tag">search field</span>
-            </div>
-          </div>
+          <aside class="callout">
+            <span class="why">why</span>
+            <b>The feature field is the only colour allowed to be loud, and it pays
+            for it in contrast.</b> Cream on that blue is about 4.1:1 in the light
+            theme - fine for large text, not for body text. So the rule is
+            structural rather than a reminder: the feature pane's type starts at
+            24px, and <code>--feature</code> never carries small labels, buttons or
+            chrome. Everything else on the desk is a soft tint so that one pane
+            reads as the point of the screen.
+          </aside>
         </div>
       </section>
 
-      <!-- ============ COMPONENTS ============ -->
-      <section class="window" aria-label="Component states" id="components">
+      <!-- ============ 02 TYPE ============ -->
+      <section class="window" id="type" aria-labelledby="type-h">
         <div class="titlebar">
           <div class="traffic" aria-hidden="true"><span></span><span></span><span></span></div>
-          <span class="title">/home/enjoy/components</span>
+          <span class="title">~/enjoy/02-type</span>
           <span></span>
         </div>
         <div class="window-body">
-          <p class="window-note">
-            every control is live markup - inspect and copy. hover lifts a control 1px
-            and grows its shadow; press sinks it flat onto the desk; disabled goes
-            dashed at half ink.
+          <h2 class="sheet-h" id="type-h">Typography</h2>
+          <p class="lede">
+            One face: <code>ui-monospace, "SF Mono", Menlo, Consolas, monospace</code>
+            - the platform's own mono, so nothing is downloaded. Seven sizes, no
+            second family, no all-caps. <b>lowercase for actions, Title Case for
+            things.</b>
           </p>
 
-          <p class="spec-label">buttons</p>
-          <div class="spec-row">
-            <div class="specimen"><button class="btn" type="button">play album</button><span class="state-tag">rest</span></div>
-            <div class="specimen"><button class="btn demo-hover" type="button">play album</button><span class="state-tag">hover: lifted</span></div>
-            <div class="specimen"><button class="btn demo-press" type="button">play album</button><span class="state-tag">press: flat</span></div>
-            <div class="specimen"><button class="btn" type="button" disabled>play album</button><span class="state-tag">disabled: dashed, 50% ink</span></div>
+          <div class="type-line"><span class="spec">--fs-readout</span><span class="sample readout">10<span class="tick">:</span>24</span></div>
+          <div class="type-line"><span class="spec">--fs-display</span><span class="sample" style="font-size:var(--fs-display); line-height:1.6;">One field is allowed to shout</span></div>
+          <div class="type-line"><span class="spec">--fs-display-s</span><span class="sample" style="font-size:var(--fs-display-s); line-height:1.3;">A secondary display line</span></div>
+          <div class="type-line"><span class="spec">--fs-ui</span><span class="sample" style="font-size:var(--fs-ui);">Specimen Title In Title Case</span></div>
+          <div class="type-line"><span class="spec">--fs-body</span><span class="sample" style="font-size:var(--fs-body);">body text, buttons and rows - the default voice of the desk.</span></div>
+          <div class="type-line"><span class="spec">--fs-title</span><span class="sample" style="font-size:var(--fs-title); letter-spacing:0.03em;">~/any/window - title bar</span></div>
+          <div class="type-line"><span class="spec">--fs-label</span><span class="sample" style="font-size:var(--fs-label); letter-spacing:0.06em;">lvl use cap</span></div>
+
+          <p class="spec-label">scale</p>
+          <div class="table-wrap">
+            <table class="spec">
+              <thead><tr><th>token</th><th>size</th><th>leading</th><th>where</th></tr></thead>
+              <tbody>
+                <tr><td>--fs-readout</td><td class="v">clamp(38px, 5vw, 52px)</td><td class="v">1.1</td><td class="d">The desk numeral, and the page's one <code>h1</code>.</td></tr>
+                <tr><td>--fs-display</td><td class="v">28px</td><td class="v">1.6</td><td class="d">Feature-pane lines (floored at 24px) and section headings.</td></tr>
+                <tr><td>--fs-display-s</td><td class="v">22px</td><td class="v">1.3</td><td class="d">A secondary display line inside a window.</td></tr>
+                <tr><td>--fs-ui</td><td class="v">14px</td><td class="v">1.55</td><td class="d">Emphasised body, ledes, the primary line of an info card.</td></tr>
+                <tr><td>--fs-body</td><td class="v">13px</td><td class="v">1.55</td><td class="d">The default: body, buttons, rows, fields.</td></tr>
+                <tr><td>--fs-title</td><td class="v">12px</td><td class="v">1.55</td><td class="d">Window titles, menu words, icon labels, tooltips.</td></tr>
+                <tr><td>--fs-label</td><td class="v">11px</td><td class="v">1.55</td><td class="d">Meter labels, state tags, table headers. Tracked +0.06-0.08em.</td></tr>
+              </tbody>
+            </table>
           </div>
 
-          <p class="spec-label">handle chips + icon buttons</p>
+          <aside class="callout">
+            <span class="why">why</span>
+            <b>A single mono face makes the desk feel like one machine.</b> Mono
+            gives every size the same rhythm, so hierarchy has to come from scale
+            and case alone - which keeps the steps honest. The moment a second
+            family arrives, the windows stop looking like they share an operating
+            system.
+          </aside>
+        </div>
+      </section>
+
+      <!-- ============ 03 SPACE ============ -->
+      <section class="window" id="space" aria-labelledby="space-h">
+        <div class="titlebar">
+          <div class="traffic" aria-hidden="true"><span></span><span></span><span></span></div>
+          <span class="title">~/enjoy/03-space</span>
+          <span></span>
+        </div>
+        <div class="window-body">
+          <h2 class="sheet-h" id="space-h">Space and layout</h2>
+          <p class="lede">
+            Eight spacing steps, one desk measure, three breakpoints. Windows get
+            16px of padding inside and 34px of desk between them - the desk is
+            always allowed to show.
+          </p>
+
+          <div class="table-wrap">
+            <table class="spec">
+              <thead><tr><th>token</th><th>value</th><th>bar</th><th>typical job</th></tr></thead>
+              <tbody>
+                <tr><td>--sp-1</td><td class="v">4px</td><td><div class="scale" style="width:4px"></div></td><td class="d">Chip padding, tray actions.</td></tr>
+                <tr><td>--sp-2</td><td class="v">6px</td><td><div class="scale" style="width:6px"></div></td><td class="d">Traffic dots, icon to label.</td></tr>
+                <tr><td>--sp-3</td><td class="v">8px</td><td><div class="scale" style="width:8px"></div></td><td class="d">Inside a button, specimen to its tag.</td></tr>
+                <tr><td>--sp-4</td><td class="v">10px</td><td><div class="scale" style="width:10px"></div></td><td class="d">Row padding, glyph to text.</td></tr>
+                <tr><td>--sp-5</td><td class="v">14px</td><td><div class="scale" style="width:14px"></div></td><td class="d">Button sides, menu bar gaps.</td></tr>
+                <tr><td>--sp-6</td><td class="v">16px</td><td><div class="scale" style="width:16px"></div></td><td class="d">Window body padding.</td></tr>
+                <tr><td>--sp-7</td><td class="v">22px</td><td><div class="scale" style="width:22px"></div></td><td class="d">Between windows in one group.</td></tr>
+                <tr><td>--sp-8</td><td class="v">34px</td><td><div class="scale" style="width:34px"></div></td><td class="d">Between windows on the desk.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="spec-label">measure and breakpoints</p>
+          <div class="table-wrap">
+            <table class="spec">
+              <thead><tr><th>name</th><th>value</th><th>what happens</th></tr></thead>
+              <tbody>
+                <tr><td>--measure</td><td class="v">1140px</td><td class="d">The desk stops widening. Past this, windows just get more wallpaper around them.</td></tr>
+                <tr><td>--prose</td><td class="v">62ch</td><td class="d">Running text never runs wider.</td></tr>
+                <tr><td>1020px</td><td class="v">max-width</td><td class="d">Side-by-side groups stack; desktop icons move from a column to a row.</td></tr>
+                <tr><td>760px</td><td class="v">max-width</td><td class="d">Split windows stack their side list above the pane; the menu bar drops its wordmark.</td></tr>
+                <tr><td>420px</td><td class="v">max-width</td><td class="d">Window padding tightens to 12px.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <aside class="callout">
+            <span class="why">why</span>
+            <b>The gap between windows is bigger than anything inside them.</b>
+            34px of desk against 16px of padding is what makes each window read as
+            an object rather than a region of one big page. Close the gap and the
+            desk disappears - and with it the idea that these are things you could
+            pick up and move.
+          </aside>
+        </div>
+      </section>
+
+      <!-- ============ 04 FORM ============ -->
+      <section class="window" id="form" aria-labelledby="form-h">
+        <div class="titlebar">
+          <div class="traffic" aria-hidden="true"><span></span><span></span><span></span></div>
+          <span class="title">~/enjoy/04-form</span>
+          <span></span>
+        </div>
+        <div class="window-body">
+          <h2 class="sheet-h" id="form-h">Form</h2>
+          <p class="lede">
+            Three moves give every object its silhouette: <b>one 2px ink outline,
+            a friendly radius, and a hard offset shadow</b>. Nothing else - no
+            hairlines, no second border weight, no blur.
+          </p>
+
+          <p class="spec-label">radii</p>
+          <div class="table-wrap">
+            <table class="spec">
+              <tbody>
+                <tr><td>--r-win</td><td class="v">10px</td><td><div class="radius-demo" style="border-radius:var(--r-win)"></div></td><td class="d">Windows, the screen stage.</td></tr>
+                <tr><td>--r-ctl</td><td class="v">8px</td><td><div class="radius-demo" style="border-radius:var(--r-ctl)"></div></td><td class="d">Buttons, fields, the menu bar, notes.</td></tr>
+                <tr><td>--r-knob</td><td class="v">6px</td><td><div class="radius-demo" style="border-radius:var(--r-knob)"></div></td><td class="d">The toggle knob, tooltips, icon labels.</td></tr>
+                <tr><td>--r-pill</td><td class="v">999px</td><td><div class="radius-demo" style="border-radius:var(--r-pill)"></div></td><td class="d">Chips, meter tracks, the toggle track.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="spec-label">depth</p>
           <div class="spec-row">
             <div class="specimen">
-              <span style="display:inline-flex; gap:10px; flex-wrap:wrap;">
-                <button class="btn chip" type="button">@github</button>
-                <button class="btn chip" type="button">@reddit</button>
-                <button class="btn chip" type="button">@tumblr</button>
+              <div class="depth-demo" style="border-radius:var(--r-win); box-shadow:var(--shadow-win);"></div>
+              <span class="state-tag">--shadow-win: 3px 3px 0</span>
+            </div>
+            <div class="specimen">
+              <div class="depth-demo" style="border-radius:var(--r-ctl); box-shadow:var(--shadow-lift); transform:translate(-1px,-1px);"></div>
+              <span class="state-tag">--shadow-lift: hovered control</span>
+            </div>
+            <div class="specimen">
+              <div class="depth-demo" style="border-radius:var(--r-ctl); box-shadow:var(--shadow-ctl);"></div>
+              <span class="state-tag">--shadow-ctl: 2px 2px 0</span>
+            </div>
+            <div class="specimen">
+              <div class="depth-demo" style="border-radius:var(--r-ctl); transform:translate(2px,2px);"></div>
+              <span class="state-tag">pressed: no shadow, sunk 2px</span>
+            </div>
+            <div class="specimen">
+              <div class="depth-demo" style="border-radius:var(--r-ctl); border-style:dashed;"></div>
+              <span class="state-tag">disabled: dashed, no shadow</span>
+            </div>
+          </div>
+
+          <aside class="callout">
+            <span class="why">why</span>
+            <b>A hard offset is a physical promise.</b> The shadow sits exactly where
+            a control will land when you press it - 2px down and 2px right - so the
+            press reads as the object meeting the desk. A blurred shadow cannot
+            make that promise; it has no edge to land on.
+          </aside>
+        </div>
+      </section>
+
+      <!-- ============ 05 MOTION ============ -->
+      <section class="window" id="motion" aria-labelledby="motion-h">
+        <div class="titlebar">
+          <div class="traffic" aria-hidden="true"><span></span><span></span><span></span></div>
+          <span class="title">~/enjoy/05-motion</span>
+          <span></span>
+        </div>
+        <div class="window-body">
+          <h2 class="sheet-h" id="motion-h">Motion</h2>
+          <p class="lede">
+            Cozy and tiny. Controls lift and sink in 80ms, the readout's colon ticks
+            once a second, and that is all. Only <code>transform</code>,
+            <code>box-shadow</code>, <code>opacity</code> and a fill colour are
+            allowed to move.
+          </p>
+
+          <div class="spec-row" style="align-items:center; margin-bottom:var(--sp-7);">
+            <div class="specimen"><button class="btn" type="button">hover, then press</button><span class="state-tag">lift and sink, 80ms</span></div>
+            <div class="specimen"><p class="readout">10<span class="tick">:</span>24</p><span class="state-tag">the tick, 1s steps</span></div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="spec">
+              <thead><tr><th>token</th><th>value</th><th>where</th></tr></thead>
+              <tbody>
+                <tr><td>--t-press</td><td class="v">80ms</td><td class="d">Button lift and sink, toggle knob, tooltip fade. Seen constantly, so kept almost instant.</td></tr>
+                <tr><td>--ease</td><td class="v">ease-out</td><td class="d">The only curve. <b>Do not introduce a second.</b></td></tr>
+                <tr><td>--t-blink</td><td class="v">1s, steps(1, end)</td><td class="d">The readout's colon. A step, not a fade - clocks tick.</td></tr>
+                <tr><td>hover</td><td class="v">translate(-1px, -1px)</td><td class="d">Plus <code>--shadow-lift</code>. The largest displacement a control ever makes upward.</td></tr>
+                <tr><td>press</td><td class="v">translate(2px, 2px)</td><td class="d">Shadow removed. The control lands on its own shadow.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <aside class="callout">
+            <span class="why">why</span>
+            <b>80ms is short enough to feel like a click, not an animation.</b> A
+            button that takes a quarter second to sink feels soft and far away; the
+            desk wants objects that answer immediately. Under
+            <code>prefers-reduced-motion</code> the tick stops, transitions drop to
+            zero, and the page is still complete.
+          </aside>
+        </div>
+      </section>
+
+      <!-- ============ 06 SCREEN ============ -->
+      <section class="window" id="screen" aria-labelledby="screen-h">
+        <div class="titlebar">
+          <div class="traffic" aria-hidden="true"><span></span><span></span><span></span></div>
+          <span class="title">~/enjoy/06-screen</span>
+          <span></span>
+        </div>
+        <div class="window-body">
+          <h2 class="sheet-h" id="screen-h">Screen</h2>
+          <p class="lede">
+            One optional surface treatment: the <b>wallpaper tide</b>. The desk's
+            wave wallpaper comes alive - two lazy waves drift, the front one wears
+            the system's ink outline, and an outlined buoy rides it. Move across the
+            right-hand stage: the tide leans toward the pointer and the buoy
+            follows along the crest.
+          </p>
+
+          <div class="screen-row">
+            <div class="screen-cell">
+              <div class="screen-stage">
+                <svg viewBox="0 0 480 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+                  <circle class="tide-sun" cx="412.8" cy="30" r="78" />
+                  <path class="tide-back" d="M0.0 138.3 L10.0 140.1 L20.0 141.7 L30.0 143.2 L40.0 144.4 L50.0 145.3 L60.0 145.9 L70.0 146.3 L80.0 146.3 L90.0 146.2 L100.0 145.9 L110.0 145.5 L120.0 145.1 L130.0 144.8 L140.0 144.6 L150.0 144.5 L160.0 144.8 L170.0 145.2 L180.0 145.9 L190.0 146.9 L200.0 148.1 L210.0 149.5 L220.0 150.9 L230.0 152.4 L240.0 153.8 L250.0 155.1 L260.0 156.2 L270.0 156.9 L280.0 157.3 L290.0 157.3 L300.0 156.8 L310.0 155.9 L320.0 154.6 L330.0 152.9 L340.0 150.9 L350.0 148.7 L360.0 146.3 L370.0 143.9 L380.0 141.5 L390.0 139.3 L400.0 137.3 L410.0 135.6 L420.0 134.3 L430.0 133.3 L440.0 132.8 L450.0 132.7 L460.0 132.9 L470.0 133.5 L480.0 134.3 L480 302 L0 302 Z" />
+                  <circle class="tide-shadow" cx="339" cy="196.4" r="13" />
+                  <circle class="tide-buoy" cx="336" cy="193.4" r="13" vector-effect="non-scaling-stroke" />
+                  <circle class="tide-buoy" cx="336" cy="193.4" r="5.9" vector-effect="non-scaling-stroke" />
+                  <path class="tide-front" vector-effect="non-scaling-stroke" d="M-4 199.2 L0.0 198.0 L10.0 195.1 L20.0 192.3 L30.0 189.7 L40.0 187.5 L50.0 185.7 L60.0 184.3 L70.0 183.5 L80.0 183.1 L90.0 183.2 L100.0 183.8 L110.0 184.8 L120.0 186.0 L130.0 187.5 L140.0 189.1 L150.0 190.6 L160.0 192.1 L170.0 193.4 L180.0 194.4 L190.0 195.2 L200.0 195.7 L210.0 195.8 L220.0 195.7 L230.0 195.4 L240.0 195.0 L250.0 194.4 L260.0 193.9 L270.0 193.5 L280.0 193.3 L290.0 193.3 L300.0 193.6 L310.0 194.4 L320.0 195.4 L330.0 196.9 L340.0 198.7 L350.0 200.7 L360.0 203.0 L370.0 205.3 L380.0 207.7 L390.0 209.9 L400.0 211.9 L410.0 213.6 L420.0 214.8 L430.0 215.6 L440.0 215.9 L450.0 215.5 L460.0 214.7 L470.0 213.3 L480.0 211.5 L484 210.8 L484 306 L-4 306 Z" />
+                </svg>
+              </div>
+              <span class="state-tag">Static fallback - flat SVG, the same tokens</span>
+            </div>
+            <div class="screen-cell">
+              <div class="screen-stage">
+                <svg viewBox="0 0 480 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+                  <circle class="tide-sun" cx="412.8" cy="30" r="78" />
+                  <path class="tide-back" d="M0.0 138.3 L10.0 140.1 L20.0 141.7 L30.0 143.2 L40.0 144.4 L50.0 145.3 L60.0 145.9 L70.0 146.3 L80.0 146.3 L90.0 146.2 L100.0 145.9 L110.0 145.5 L120.0 145.1 L130.0 144.8 L140.0 144.6 L150.0 144.5 L160.0 144.8 L170.0 145.2 L180.0 145.9 L190.0 146.9 L200.0 148.1 L210.0 149.5 L220.0 150.9 L230.0 152.4 L240.0 153.8 L250.0 155.1 L260.0 156.2 L270.0 156.9 L280.0 157.3 L290.0 157.3 L300.0 156.8 L310.0 155.9 L320.0 154.6 L330.0 152.9 L340.0 150.9 L350.0 148.7 L360.0 146.3 L370.0 143.9 L380.0 141.5 L390.0 139.3 L400.0 137.3 L410.0 135.6 L420.0 134.3 L430.0 133.3 L440.0 132.8 L450.0 132.7 L460.0 132.9 L470.0 133.5 L480.0 134.3 L480 302 L0 302 Z" />
+                  <circle class="tide-shadow" cx="339" cy="196.4" r="13" />
+                  <circle class="tide-buoy" cx="336" cy="193.4" r="13" vector-effect="non-scaling-stroke" />
+                  <circle class="tide-buoy" cx="336" cy="193.4" r="5.9" vector-effect="non-scaling-stroke" />
+                  <path class="tide-front" vector-effect="non-scaling-stroke" d="M-4 199.2 L0.0 198.0 L10.0 195.1 L20.0 192.3 L30.0 189.7 L40.0 187.5 L50.0 185.7 L60.0 184.3 L70.0 183.5 L80.0 183.1 L90.0 183.2 L100.0 183.8 L110.0 184.8 L120.0 186.0 L130.0 187.5 L140.0 189.1 L150.0 190.6 L160.0 192.1 L170.0 193.4 L180.0 194.4 L190.0 195.2 L200.0 195.7 L210.0 195.8 L220.0 195.7 L230.0 195.4 L240.0 195.0 L250.0 194.4 L260.0 193.9 L270.0 193.5 L280.0 193.3 L290.0 193.3 L300.0 193.6 L310.0 194.4 L320.0 195.4 L330.0 196.9 L340.0 198.7 L350.0 200.7 L360.0 203.0 L370.0 205.3 L380.0 207.7 L390.0 209.9 L400.0 211.9 L410.0 213.6 L420.0 214.8 L430.0 215.6 L440.0 215.9 L450.0 215.5 L460.0 214.7 L470.0 213.3 L480.0 211.5 L484 210.8 L484 306 L-4 306 Z" />
+                </svg>
+                <canvas id="tideCanvas"></canvas>
+              </div>
+              <span class="state-tag" id="tideCap">Live - move the pointer across it</span>
+            </div>
+          </div>
+
+          <p class="spec-label">uniforms - js/tide.js</p>
+          <div class="table-wrap">
+            <table class="spec">
+              <thead><tr><th>uniform</th><th>value</th><th>what it does</th></tr></thead>
+              <tbody>
+                <tr><td>uDrift</td><td class="v">0.12</td><td class="d">Wave speed. Slow enough that the tide reads as wallpaper, not weather.</td></tr>
+                <tr><td>uSwell</td><td class="v">0.6</td><td class="d">How far the crest leans toward the pointer's height. The back wave leans half as far.</td></tr>
+                <tr><td>uReach</td><td class="v">0.18</td><td class="d">Width of the lean, in stage widths. A hand under the water, not a spike.</td></tr>
+                <tr><td>uBuoy</td><td class="v">14px</td><td class="d">Buoy radius. It floats at 70% across at rest and follows the pointer when engaged.</td></tr>
+                <tr><td>uLine</td><td class="v">2px</td><td class="d">The outline weight, matching <code>--line</code>. The front wave and the buoy wear it.</td></tr>
+                <tr><td>uShadow</td><td class="v">3px</td><td class="d">The buoy's hard offset, matching <code>--shadow-win</code>. The waves cast none - they are wallpaper.</td></tr>
+                <tr><td>uGround, uTint, uTint2, uInk, uShade</td><td class="v">tokens</td><td class="d">Read from <code>--ground</code>, <code>--tint</code>, <code>--tint-2</code>, <code>--ink</code>, <code>--shadow-ink</code> at runtime, and re-read on every theme change.</td></tr>
+                <tr><td>spring</td><td class="v">k 40 / d 7</td><td class="d">The pointer is followed on a spring, softer than a control's, so the tide has weight and settles.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <aside class="callout">
+            <span class="why">why</span>
+            <b>The shader is built so it cannot draw a gradient.</b> The system
+            refuses gradients, so every region is a flat token colour - ground,
+            half-tint, tint, tint-2, ink - and the only in-between pixels are the
+            one-pixel antialiased edges. It is enhancement only: the static SVG
+            under the canvas is the complete design, the canvas stays transparent
+            until its first frame, it stops rendering off screen, and under
+            <code>prefers-reduced-motion</code> it draws one settled frame
+            identical to the SVG and never starts a loop.
+          </aside>
+          <p class="aside-note">
+            <b>Where it belongs:</b> an empty frame, a hero behind a readout, a
+            screen with nothing in it yet. Not behind body text, and never on the
+            same screen as a feature pane - the tide is soft on purpose, and the
+            feature field should not have to compete with moving water.
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ 07 COMPONENTS ============ -->
+      <section class="window" id="components" aria-labelledby="components-h">
+        <div class="titlebar">
+          <div class="traffic" aria-hidden="true"><span></span><span></span><span></span></div>
+          <span class="title">~/enjoy/07-components</span>
+          <span></span>
+        </div>
+        <div class="window-body">
+          <h2 class="sheet-h" id="components-h">Components</h2>
+          <p class="lede">
+            Every state here is live markup. Hover lifts a control 1px and grows
+            its shadow; press sinks it flat onto the desk; disabled goes dashed at
+            half ink; focus is a 2px ink ring. Tab through them.
+          </p>
+
+          <p class="spec-label">button</p>
+          <div class="spec-row">
+            <div class="specimen"><button class="btn" type="button">save</button><span class="state-tag">rest - hover - press</span></div>
+            <div class="specimen"><a class="btn" href="#components">open link</a><span class="state-tag">link as button</span></div>
+            <div class="specimen"><button class="btn" type="button"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-mail" /></svg>send</button><span class="state-tag">with glyph</span></div>
+            <div class="specimen"><button class="btn" type="button" disabled>save</button><span class="state-tag">disabled: dashed, --ink-off</span></div>
+          </div>
+
+          <p class="spec-label">chip and icon button</p>
+          <div class="spec-row">
+            <div class="specimen">
+              <span style="display:inline-flex; gap:var(--sp-4); flex-wrap:wrap;">
+                <button class="btn chip" type="button">@handle</button>
+                <button class="btn chip" type="button">#tag</button>
+                <button class="btn chip" type="button" disabled>@away</button>
               </span>
-              <span class="state-tag">lowercase handles</span>
+              <span class="state-tag">chip: pill button, same states</span>
             </div>
             <div class="specimen">
-              <span style="display:inline-flex; gap:10px;">
-                <button class="btn icon-btn" type="button" aria-label="GitHub"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-github" /></svg></button>
-                <button class="btn icon-btn" type="button" aria-label="Reddit"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-reddit" /></svg></button>
-                <button class="btn icon-btn" type="button" aria-label="RSS feed"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-rss" /></svg></button>
+              <span style="display:inline-flex; gap:var(--sp-4);">
+                <button class="btn icon-btn" type="button" aria-label="Home"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-home" /></svg></button>
+                <button class="btn icon-btn" type="button" aria-label="Feed"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-feed" /></svg></button>
                 <button class="btn icon-btn" type="button" aria-label="Mail"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-mail" /></svg></button>
+                <button class="btn icon-btn" type="button" aria-label="Unavailable" disabled><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-heart" /></svg></button>
               </span>
-              <span class="state-tag">platform glyph row</span>
+              <span class="state-tag">icon button: 36px round</span>
             </div>
           </div>
 
-          <p class="spec-label">sidebar list</p>
+          <p class="spec-label">field</p>
           <div class="spec-row">
-            <div class="specimen" style="width:240px;">
-              <ul class="side-list" style="width:100%;">
-                <li><button class="side-row" type="button"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-home" /></svg>Home</button></li>
-                <li><button class="side-row is-active" type="button" aria-current="true"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-search" /></svg>Search</button></li>
-                <li><button class="side-row" type="button"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-library" /></svg>Your Library</button></li>
-                <li><button class="side-row" type="button"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-playlist" /></svg>Create Playlist</button></li>
-                <li><button class="side-row" type="button"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-heart" /></svg>Liked Songs</button></li>
-                <li><button class="side-row" type="button"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-episodes" /></svg>Your Episodes</button></li>
-                <li><button class="side-row" type="button"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-volume" /></svg>On Record<span class="rec-dot" aria-hidden="true"></span></button></li>
-              </ul>
-              <span class="state-tag">active fills wave; the record dot is the only red on the desk</span>
+            <div class="specimen" style="width:min(260px, 100%);">
+              <input class="field" type="search" placeholder="Search" aria-label="Search specimen" />
+              <span class="state-tag">rest - type to focus</span>
+            </div>
+            <div class="specimen" style="width:min(260px, 100%);">
+              <input class="field" type="text" placeholder="Unavailable" aria-label="Disabled specimen" disabled />
+              <span class="state-tag">disabled: dashed</span>
             </div>
           </div>
 
-          <p class="spec-label">transport bar</p>
+          <p class="spec-label">toggle and tooltip</p>
+          <div class="spec-row" style="align-items:flex-end;">
+            <div class="specimen"><button class="toggle" type="button" aria-pressed="false" aria-label="Option A"></button><span class="state-tag">off - click it</span></div>
+            <div class="specimen"><button class="toggle" type="button" aria-pressed="true" aria-label="Option B"></button><span class="state-tag">on: --tint track</span></div>
+            <div class="specimen"><button class="toggle" type="button" aria-pressed="false" aria-label="Option C, unavailable" disabled></button><span class="state-tag">disabled: dashed</span></div>
+            <div class="specimen" style="padding-top:40px;">
+              <span class="tip-anchor">
+                <span class="tooltip" role="tooltip" id="tip-spec">ink bubble, square caret</span>
+                <button class="btn icon-btn" type="button" aria-label="Show tooltip" aria-describedby="tip-spec"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-search" /></svg></button>
+              </span>
+              <span class="state-tag">tooltip: hover or focus</span>
+            </div>
+          </div>
+
+          <p class="spec-label">pill meter</p>
+          <div class="spec-row">
+            <div class="specimen" style="width:min(240px, 100%);">
+              <div style="display:grid; gap:var(--sp-3); width:100%;">
+                <div class="meter"><span class="meter-label">lvl</span><div class="meter-track"><div class="meter-fill" style="width:64%;"></div></div></div>
+                <div class="meter"><span class="meter-label">use</span><div class="meter-track"><div class="meter-fill meter-fill--alt" style="width:32%;"></div></div></div>
+                <div class="meter"><span class="meter-label">cap</span><div class="meter-track"><div class="meter-fill" style="width:51%;"></div></div></div>
+              </div>
+              <span class="state-tag">--tint or --tint-2 fill, 3ch lowercase label</span>
+            </div>
+          </div>
+
+          <p class="spec-label">side list</p>
+          <div class="spec-row">
+            <div class="specimen" style="width:min(240px, 100%);">
+              <ul class="side-list" style="width:100%;" data-select>
+                <li><button class="side-row" type="button"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-home" /></svg>Overview</button></li>
+                <li><button class="side-row is-active" type="button" aria-current="true"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-search" /></svg>Search</button></li>
+                <li><button class="side-row" type="button"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-shelf" /></svg>Collection</button></li>
+                <li><button class="side-row" type="button"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-list" /></svg>New List</button></li>
+                <li><button class="side-row" type="button"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-heart" /></svg>Favourites</button></li>
+                <li><button class="side-row" type="button"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-level" /></svg>Live<span class="live-dot" aria-hidden="true"></span></button></li>
+              </ul>
+              <span class="state-tag">hover: --ground; active: --tint - click a row</span>
+            </div>
+          </div>
+
+          <p class="spec-label">transport</p>
           <div class="spec-row">
             <div class="specimen" style="width:min(520px, 100%);">
               <div class="transport" style="width:100%;">
                 <span class="t-buttons">
-                  <button class="btn icon-btn" type="button" aria-label="Previous track"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-prev" /></svg></button>
-                  <button class="btn icon-btn" type="button" aria-label="Play"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-play" /></svg></button>
-                  <button class="btn icon-btn" type="button" aria-label="Next track"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-next" /></svg></button>
+                  <button class="btn icon-btn" type="button" aria-label="Previous"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-prev" /></svg></button>
+                  <button class="btn icon-btn" type="button" aria-label="Play" aria-pressed="false" data-playpause><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-play" /></svg></button>
+                  <button class="btn icon-btn" type="button" aria-label="Next"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-next" /></svg></button>
                 </span>
                 <span class="t-progress" aria-hidden="true"><span class="rail"></span><span class="done" style="width:34%;"></span><span class="knob" style="left:34%;"></span></span>
                 <span class="t-time">1:12 / 3:33</span>
-                <span class="t-vol">
-                  <svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-volume" /></svg>
-                  <span class="meter-track"><span class="meter-fill" style="display:block; width:64%;"></span></span>
+                <span class="t-level">
+                  <svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-level" /></svg>
+                  <span class="meter-track"><span class="meter-fill" style="width:64%;"></span></span>
                 </span>
               </div>
-              <span class="state-tag">prev / play / next, progress line, volume</span>
+              <span class="state-tag">prev / play-pause / next, progress rail with a --tint-2 knob, level</span>
             </div>
           </div>
 
-          <p class="spec-label">toggle + tooltip</p>
-          <div class="spec-row" style="align-items:flex-end;">
-            <div class="specimen"><button class="toggle" type="button" aria-pressed="false" aria-label="Shuffle off"></button><span class="state-tag">off</span></div>
-            <div class="specimen"><button class="toggle" type="button" aria-pressed="true" aria-label="Shuffle on"></button><span class="state-tag">on: wave fill</span></div>
-            <div class="specimen"><button class="toggle" type="button" aria-pressed="false" aria-label="Crossfade unavailable" disabled></button><span class="state-tag">disabled: dashed</span></div>
-            <div class="specimen" style="padding-top:40px;">
-              <span class="tip-anchor">
-                <span class="tooltip" role="tooltip" id="tip-repeat">repeat: this song forever</span>
-                <button class="btn icon-btn" type="button" aria-label="Repeat" aria-describedby="tip-repeat"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-play" /></svg></button>
-              </span>
-              <span class="state-tag">tooltip: ink bubble, cream text</span>
+          <p class="spec-label">tray item and info card</p>
+          <div class="spec-row">
+            <div class="specimen" style="width:min(250px, 100%);">
+              <div class="tray-item" style="width:100%;">
+                <span class="tray-thumb" aria-hidden="true"></span>
+                <span class="tray-title">Specimen title that runs long enough to clip</span>
+                <span class="tray-actions">
+                  <button class="glyph-btn" type="button" aria-label="Previous"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-prev" /></svg></button>
+                  <button class="glyph-btn" type="button" aria-label="Pause"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-pause" /></svg></button>
+                  <button class="glyph-btn" type="button" aria-label="Next"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-next" /></svg></button>
+                </span>
+              </div>
+              <span class="state-tag">tray item: thumb, clipping title, glyph actions</span>
+            </div>
+            <div class="specimen">
+              <div class="window" style="box-shadow:var(--shadow-ctl);">
+                <div class="window-body info-lines" style="padding:12px var(--sp-5);">
+                  <span class="primary">Specimen Title</span>
+                  <span class="secondary">secondary line - detail</span>
+                </div>
+              </div>
+              <span class="state-tag">info card: stacked mono lines</span>
             </div>
           </div>
-        </div>
-      </section>
 
-      <!-- ============ THE PLAYER ============ -->
-      <section class="window window--dark" aria-label="Player window showcase" id="player">
-        <div class="titlebar">
-          <div class="traffic" aria-hidden="true"><span></span><span></span><span></span></div>
-          <span class="title">enjoy player - now singing</span>
-          <span></span>
-        </div>
-        <div class="player-body">
-          <aside class="player-side" aria-label="Player sidebar">
-            <ul class="side-list">
-              <li><button class="side-row" type="button"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-home" /></svg>Home</button></li>
-              <li><button class="side-row" type="button"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-search" /></svg>Search</button></li>
-              <li><button class="side-row" type="button"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-library" /></svg>Your Library</button></li>
-              <li><button class="side-row" type="button"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-playlist" /></svg>Create Playlist</button></li>
-              <li><button class="side-row is-active" type="button" aria-current="true"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-heart" /></svg>Liked Songs</button></li>
-              <li><button class="side-row" type="button"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-episodes" /></svg>Your Episodes</button></li>
-              <li><button class="side-row" type="button"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-volume" /></svg>On Record<span class="rec-dot" aria-hidden="true"></span></button></li>
-            </ul>
+          <p class="spec-label">desktop icon</p>
+          <div class="spec-row">
+            <div class="specimen"><button class="desk-icon" type="button"><svg class="icon-art" aria-hidden="true" focusable="false"><use href="#d-computer" /></svg><span class="icon-label">Computer</span></button><span class="state-tag">hover: --tint label</span></div>
+            <div class="specimen"><button class="desk-icon" type="button"><svg class="icon-art" aria-hidden="true" focusable="false"><use href="#d-folder" /></svg><span class="icon-label">Folder</span></button><span class="state-tag">press: inverted label</span></div>
+          </div>
+
+          <aside class="callout">
+            <span class="why">why</span>
+            <b>Every control has the same three states because they are one
+            gesture.</b> Lift on hover, land on press, go dashed when unavailable.
+            A reader learns it on the first button and never has to learn it again
+            - which is why a new control that invents its own hover is a bug, not a
+            flourish.
           </aside>
-          <div class="player-pane">
-            <p class="lyric">A full commitment's what I'm thinking of</p>
-            <p class="lyric">You wouldn't get this from any other guy</p>
-            <p class="lyric is-current">We're no strangers to love</p>
-            <p class="lyric">You know the rules and so do I</p>
-          </div>
-          <div class="player-transport">
-            <div class="transport">
-              <span class="t-track">Never Gonna Give You Up - Rick Astley</span>
-              <span class="t-buttons">
-                <button class="btn icon-btn" type="button" aria-label="Previous track"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-prev" /></svg></button>
-                <button class="btn icon-btn" type="button" aria-label="Pause"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-pause" /></svg></button>
-                <button class="btn icon-btn" type="button" aria-label="Next track"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-next" /></svg></button>
-              </span>
-              <span class="t-progress" aria-hidden="true"><span class="rail"></span><span class="done" style="width:22%;"></span><span class="knob" style="left:22%;"></span></span>
-              <span class="t-time">0:47 / 3:33</span>
-              <span class="t-vol">
-                <svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-volume" /></svg>
-                <span class="meter-track"><span class="meter-fill" style="display:block; width:64%;"></span></span>
-              </span>
-            </div>
-          </div>
         </div>
       </section>
 
-      <!-- ============ FOOTER ============ -->
-      <footer class="window footer-window" aria-label="Footer">
+      <!-- ============ 08 MOTIFS ============ -->
+      <section class="window" id="motifs" aria-labelledby="motifs-h">
         <div class="titlebar">
           <div class="traffic" aria-hidden="true"><span></span><span></span><span></span></div>
-          <span class="title">goodbye.txt</span>
+          <span class="title">~/enjoy/08-motifs</span>
           <span></span>
         </div>
         <div class="window-body">
-          <p class="window-note" style="margin-bottom:0; max-width:44ch; text-align:center;">
-            everything on this desk is synthetic demo data - the songs, handles, and
-            meters are set dressing for the design fiction. spec lives in DESIGN.md.
+          <h2 class="sheet-h" id="motifs-h">Motifs</h2>
+          <p class="lede">
+            What makes the desk recognisable at a glance - not the palette. Each
+            motif keeps the same three moves: 2px ink, surface fill, hard offset.
           </p>
-          <a class="btn chip" href="../../index.html">@all-systems</a>
+
+          <p class="spec-label">window - the master container</p>
+          <div class="spec-row" style="align-items:center;">
+            <div class="window" style="width:min(260px, 100%);">
+              <div class="titlebar">
+                <div class="traffic" aria-hidden="true"><span></span><span></span><span></span></div>
+                <span class="title">~/any/window</span>
+                <span></span>
+              </div>
+              <div class="window-body">body, 13-14px mono on the surface.</div>
+            </div>
+            <ol class="brief" style="max-width:44ch;">
+              <li><span>Frame: 2px ink, <code>--r-win</code>, surface fill.</span></li>
+              <li><span>Traffic dots: three outlined circles, left.</span></li>
+              <li><span>Title: 12px path voice, centred.</span></li>
+              <li><span>A 2px rule between bar and body.</span></li>
+              <li><span>Shadow: 3px 3px 0, zero blur.</span></li>
+            </ol>
+          </div>
+
+          <p class="spec-label">wave wallpaper - behind everything</p>
+          <div class="spec-row">
+            <div class="specimen" style="width:min(320px, 100%);">
+              <div class="screen-stage" style="width:100%; box-shadow:var(--shadow-ctl);">
+                <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false" style="color:var(--tint);">
+                  <circle cx="1300" cy="30" r="210" fill="currentColor" opacity="0.55" />
+                  <circle cx="120" cy="270" r="70" fill="currentColor" opacity="0.4" />
+                  <path fill="currentColor" opacity="0.5" d="M0 560 C 260 480 480 640 760 580 C 1040 520 1220 660 1440 590 V900 H0 Z" />
+                  <path fill="currentColor" d="M0 680 C 300 600 540 760 880 690 C 1140 636 1310 750 1440 710 V900 H0 Z" />
+                </svg>
+              </div>
+              <span class="state-tag">2-3 huge slow --tint shapes, flat, fixed to the viewport</span>
+            </div>
+          </div>
+
+          <p class="spec-label">readout and menu bar</p>
+          <div class="spec-row" style="align-items:center;">
+            <div class="specimen">
+              <div>
+                <p class="readout">10<span class="tick">:</span>24</p>
+                <p class="readout-sub">a quiet second line</p>
+              </div>
+              <span class="state-tag">readout: one big numeral, blinking tick</span>
+            </div>
+            <div class="specimen" style="width:min(360px, 100%);">
+              <div class="menubar" style="position:static; margin:0; width:100%;">
+                <svg class="menu-glyph glyph" aria-hidden="true" focusable="false"><use href="#g-enjoy" /></svg>
+                <span class="menu-words" style="overflow:hidden;"><a href="#motifs">File</a><a href="#motifs">Edit</a><a href="#motifs">View</a><a href="#motifs">Window</a></span>
+              </div>
+              <span class="state-tag">menu bar: a slim window with no title bar</span>
+            </div>
+          </div>
+
+          <p class="spec-label">desktop icons - hand-drawn line glyphs, 2.5 stroke</p>
+          <div class="spec-row">
+            <div class="specimen"><button class="desk-icon" type="button"><svg class="icon-art" aria-hidden="true" focusable="false"><use href="#d-computer" /></svg><span class="icon-label">Computer</span></button></div>
+            <div class="specimen"><button class="desk-icon" type="button"><svg class="icon-art" aria-hidden="true" focusable="false"><use href="#d-folder" /></svg><span class="icon-label">Folder</span></button></div>
+            <div class="specimen"><button class="desk-icon" type="button"><svg class="icon-art" aria-hidden="true" focusable="false"><use href="#d-ear" /></svg><span class="icon-label">Ear</span></button></div>
+            <div class="specimen"><button class="desk-icon" type="button"><svg class="icon-art" aria-hidden="true" focusable="false"><use href="#d-jar" /></svg><span class="icon-label">Jar</span></button></div>
+          </div>
+
+          <aside class="callout">
+            <span class="why">why</span>
+            <b>Everything is a window because a window explains itself.</b> A title
+            bar says "this is one thing, and here is its name"; traffic dots say
+            "you could close me". Giving every group that frame is what turns a
+            page into a desk - and it means a new feature never needs a new kind of
+            container, just a new title.
+          </aside>
         </div>
-      </footer>
+      </section>
+
+      <!-- ============ 09 COMPOSITION ============ -->
+      <section class="window" id="composition" aria-labelledby="composition-h">
+        <div class="titlebar">
+          <div class="traffic" aria-hidden="true"><span></span><span></span><span></span></div>
+          <span class="title">~/enjoy/09-composition</span>
+          <span></span>
+        </div>
+        <div class="window-body">
+          <h2 class="sheet-h" id="composition-h">Composition</h2>
+          <p class="lede">
+            The parts assembled into one specimen desk: a small window of readout
+            and meters, and one inverse-chrome split window that spends the
+            screen's single feature field. The copy is about the desk itself, so
+            what a reader takes away is the arrangement.
+          </p>
+
+          <div class="compose">
+            <div class="compose-col">
+              <section class="window" aria-label="Specimen status window">
+                <div class="titlebar">
+                  <div class="traffic" aria-hidden="true"><span></span><span></span><span></span></div>
+                  <span class="title">status</span>
+                  <span></span>
+                </div>
+                <div class="window-body compose-stack">
+                  <div>
+                    <p class="readout">10<span class="tick">:</span>24</p>
+                    <p class="readout-sub">a quiet second line</p>
+                  </div>
+                  <div class="compose-stack" style="gap:var(--sp-3);">
+                    <div class="meter"><span class="meter-label">lvl</span><div class="meter-track"><div class="meter-fill" style="width:64%;"></div></div></div>
+                    <div class="meter"><span class="meter-label">use</span><div class="meter-track"><div class="meter-fill meter-fill--alt" style="width:32%;"></div></div></div>
+                  </div>
+                  <div class="tray-item">
+                    <span class="tray-thumb" aria-hidden="true"></span>
+                    <span class="tray-title">Specimen item in the tray</span>
+                    <span class="tray-actions">
+                      <button class="glyph-btn" type="button" aria-label="Pause"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-pause" /></svg></button>
+                      <button class="glyph-btn" type="button" aria-label="Next"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-next" /></svg></button>
+                    </span>
+                  </div>
+                </div>
+              </section>
+              <section class="window" aria-label="Specimen note window">
+                <div class="titlebar">
+                  <div class="traffic" aria-hidden="true"><span></span><span></span><span></span></div>
+                  <span class="title">note.txt</span>
+                  <span></span>
+                </div>
+                <div class="window-body compose-stack">
+                  <p style="font-size:var(--fs-display-s); line-height:1.3;">A small window</p>
+                  <input class="field" type="search" placeholder="Search" aria-label="Search the specimen" />
+                  <span style="display:flex; gap:var(--sp-4); flex-wrap:wrap;">
+                    <button class="btn" type="button">open</button>
+                    <button class="btn chip" type="button">@handle</button>
+                  </span>
+                </div>
+              </section>
+            </div>
+
+            <section class="window window--inverse" aria-label="Specimen split window">
+              <div class="titlebar">
+                <div class="traffic" aria-hidden="true"><span></span><span></span><span></span></div>
+                <span class="title">~/specimen - split window</span>
+                <span></span>
+              </div>
+              <div class="split-body">
+                <aside class="split-side" aria-label="Specimen side list">
+                  <ul class="side-list" data-select>
+                    <li><button class="side-row" type="button"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-home" /></svg>Overview</button></li>
+                    <li><button class="side-row" type="button"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-search" /></svg>Search</button></li>
+                    <li><button class="side-row" type="button"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-shelf" /></svg>Collection</button></li>
+                    <li><button class="side-row is-active" type="button" aria-current="true"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-heart" /></svg>Favourites</button></li>
+                    <li><button class="side-row" type="button"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-grid" /></svg>Grid View</button></li>
+                    <li><button class="side-row" type="button"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-level" /></svg>Live<span class="live-dot" aria-hidden="true"></span></button></li>
+                  </ul>
+                </aside>
+                <div class="feature-pane">
+                  <p class="feature-line">Windows sit on a warm desk</p>
+                  <p class="feature-line">Edges are two pixels of ink</p>
+                  <p class="feature-line is-current">One field is allowed to shout</p>
+                  <p class="feature-line">The rest keeps its voice down</p>
+                </div>
+                <div class="split-foot">
+                  <div class="transport">
+                    <span class="t-label">Specimen item - one line</span>
+                    <span class="t-buttons">
+                      <button class="btn icon-btn" type="button" aria-label="Previous"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-prev" /></svg></button>
+                      <button class="btn icon-btn" type="button" aria-label="Pause" aria-pressed="true" data-playpause><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-pause" /></svg></button>
+                      <button class="btn icon-btn" type="button" aria-label="Next"><svg class="glyph" aria-hidden="true" focusable="false"><use href="#g-next" /></svg></button>
+                    </span>
+                    <span class="t-progress" aria-hidden="true"><span class="rail"></span><span class="done" style="width:22%;"></span><span class="knob" style="left:22%;"></span></span>
+                    <span class="t-time">0:47 / 3:33</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <p class="spec-label">anatomy</p>
+          <div class="table-wrap">
+            <table class="spec">
+              <thead><tr><th>part</th><th>as built</th><th>why it is that</th></tr></thead>
+              <tbody>
+                <tr><td>Desk gap</td><td class="v">--sp-7 / --sp-8</td><td class="d">Windows never touch. The desk showing between them is what makes each one an object.</td></tr>
+                <tr><td>Small windows</td><td class="v">.window</td><td class="d">Readout, meters and a tray item stacked in one frame; a field and two buttons in another. Grouping is by window, not by whitespace.</td></tr>
+                <tr><td>Inverse chrome</td><td class="v">.window--inverse</td><td class="d">The frame takes the ink. It is how the feature pane is announced, so it appears at most once per screen.</td></tr>
+                <tr><td>Side list</td><td class="v">.split-side</td><td class="d">On the surface, not the feature. Navigation stays calm so the pane beside it can be loud.</td></tr>
+                <tr><td>Feature pane</td><td class="v">--feature, 24px floor</td><td class="d">The one saturated field. The current line is marked with a <code>&gt;</code> and full opacity, never with a second colour on the field.</td></tr>
+                <tr><td>Foot bar</td><td class="v">.split-foot</td><td class="d">Controls go back on the surface. Buttons never sit on the feature field.</td></tr>
+                <tr><td>Live dot</td><td class="v">--live, 8px</td><td class="d">The only red on the desk. One dot, pushed to the row's end.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <aside class="callout">
+            <span class="why">why</span>
+            <b>This is not a screen from a product with the copy swapped out.</b>
+            The words describe the desk - windows, ink, one field - precisely so
+            they imply nothing about what the system is for. The same arrangement
+            holds a reader, a dashboard or a notebook just as well.
+          </aside>
+        </div>
+      </section>
+
+      <!-- ============ 10 RULES ============ -->
+      <section class="window" id="rules" aria-labelledby="rules-h">
+        <div class="titlebar">
+          <div class="traffic" aria-hidden="true"><span></span><span></span><span></span></div>
+          <span class="title">~/enjoy/10-rules</span>
+          <span></span>
+        </div>
+        <div class="window-body">
+          <h2 class="sheet-h" id="rules-h">Rules</h2>
+          <p class="lede">The refusals matter more than the permissions.</p>
+          <div class="dodont">
+            <section class="window do" aria-label="Do">
+              <div class="titlebar">
+                <div class="traffic" aria-hidden="true"><span></span><span></span><span></span></div>
+                <span class="title">do.txt</span>
+                <span></span>
+              </div>
+              <div class="window-body">
+                <ul>
+                  <li><span>Put <b>every group in a window</b>, with a title that names it.</span></li>
+                  <li><span>Keep <b>every outline at <code>--line</code></b> (2px) in ink.</span></li>
+                  <li><span>Keep <b>every shadow a hard offset</b>: 3px for windows, 2px for controls, gone on press.</span></li>
+                  <li><span>Spend <b><code>--feature</code> once per screen</b>, on a content pane, with type at 24px or more.</span></li>
+                  <li><span>Use <b>lowercase for actions</b> and Title Case for things.</span></li>
+                  <li><span><b>Check both themes</b> with the menu bar toggle. Dark is hand-authored, not derived.</span></li>
+                </ul>
+              </div>
+            </section>
+            <section class="window dont" aria-label="Do not">
+              <div class="titlebar">
+                <div class="traffic" aria-hidden="true"><span></span><span></span><span></span></div>
+                <span class="title">do-not.txt</span>
+                <span></span>
+              </div>
+              <div class="window-body">
+                <ul>
+                  <li><span>Add a <b>blurred shadow</b>. Ever.</span></li>
+                  <li><span>Add a <b>gradient</b>. Flat fills only - the shader included.</span></li>
+                  <li><span>Add a <b>hairline or a second border weight</b>.</span></li>
+                  <li><span>Add a <b>second typeface</b>, or set anything in all-caps.</span></li>
+                  <li><span>Use <b><code>--feature</code> for chrome, buttons or accents</b>, or put small text on it.</span></li>
+                  <li><span>Use <b><code>--live</code> as a fill or a text colour</b>. It is a dot.</span></li>
+                  <li><span>Run the <b>tide behind body text</b> or beside a feature pane.</span></li>
+                </ul>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <div class="back-row">
+        <a class="btn chip" href="../../index.html">@all-systems</a>
+      </div>
 
     </main>
   </div>
+
+<script src="js/tide.js"></script>
+<script>
+  (function () {
+    var root = document.documentElement;
+    if (location.hash === "#light" || location.hash === "#dark") {
+      root.setAttribute("data-theme", location.hash.slice(1));
+    }
+    document.querySelectorAll("[data-toggle-theme]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var cur = root.getAttribute("data-theme");
+        if (!cur) cur = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        root.setAttribute("data-theme", cur === "dark" ? "light" : "dark");
+      });
+    });
+    // Toggles flip themselves so the on state is live rather than pictured.
+    document.querySelectorAll(".toggle").forEach(function (t) {
+      t.addEventListener("click", function () {
+        t.setAttribute("aria-pressed", t.getAttribute("aria-pressed") === "true" ? "false" : "true");
+      });
+    });
+    // Side lists: clicking a row makes it the active one.
+    document.querySelectorAll("[data-select]").forEach(function (list) {
+      list.addEventListener("click", function (e) {
+        var row = e.target.closest(".side-row");
+        if (!row) return;
+        list.querySelectorAll(".side-row").forEach(function (r) {
+          r.classList.remove("is-active");
+          r.removeAttribute("aria-current");
+        });
+        row.classList.add("is-active");
+        row.setAttribute("aria-current", "true");
+      });
+    });
+    // Play and pause swap glyphs.
+    document.querySelectorAll("[data-playpause]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var on = b.getAttribute("aria-pressed") !== "true";
+        b.setAttribute("aria-pressed", on ? "true" : "false");
+        b.setAttribute("aria-label", on ? "Pause" : "Play");
+        b.querySelector("use").setAttribute("href", on ? "#g-pause" : "#g-play");
+      });
+    });
+  })();
+</script>
 </body>
 </html>

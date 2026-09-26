@@ -1,134 +1,181 @@
-# MOCHI - soft neumorphic kawaii widget system
+# MOCHI - soft neumorphic widget system
 
-The phone as a plush desk toy: every widget is a soft pillow extruded from one
-warm greige material, and depth comes from light, never from lines. Muted pastel
-plates, big friendly rounded numbers, and bilingual labels (Chinese first,
-English nearby) make it read like a lovingly themed home screen.
+Every surface is a soft pillow pressed from one warm material, the same colour
+as the page, and depth comes from light - never from lines. Colour sits inside
+the material as flat plates; it is never the material itself. Big friendly
+rounded numbers and a few cute motifs (flip digits, pill gauges, a blushing
+face) give it its character.
 
-Status: Exploration. Direction pinned by the client from a reference home screen,
-2026-08-03.
+Status: Documented 2026-09-26. This folder is the whole system.
+
+## Thesis
+
+1. **The material has exactly two states**: raised at rest, pressed when
+   active. There is no third depth - no hover lift, no floating.
+2. **Colour sits inside the material, never instead of it.** A raised or
+   pressed surface is always `--ground`. If the fill differs, it is a plate,
+   and a plate lies flat inside a widget with a small shadow.
 
 ## Tokens
 
-| Token | Value | Role |
-|---|---|---|
-| `--ground` | `#ece9e2` | Page AND widget material - the same warm greige |
-| `--plate` | `#f7f5f0` | Inner plates: clock-digit tiles, list wells, inputs |
-| `--ink` | `#5d574e` | All body text; soft warm dark, never pure black |
-| `--ink-soft` | `#6b665c` | Secondary text, captions, placeholders (derived; 4.7:1 on ground) |
-| `--blue` | `#93a9cb` | Pastel fill |
-| `--rose` | `#d698a0` | Pastel fill; page-dot active, blush |
-| `--sage` | `#8fb5a4` | Pastel fill; toggle-on |
-| `--peach` | `#e5c39c` | Pastel fill |
-| `--blue-deep` | `#6d87b1` | Deepened blue - the only blue that carries white text |
-| `--rose-deep` | `#bd747f` | Deepened rose - white-text plate (music card, gauges) |
-| `--sage-deep` | `#679181` | Deepened sage - white-text plate |
-| `--blue-lt` `--rose-lt` `--sage-lt` `--peach-lt` | `#c9d4e6` `#eccfd3` `#cfdfd7` `#f2dfc8` | Light tints - the pastels that carry small `--ink` text |
-| `--deep` | `#3e5c68` | Deep teal: analog clock face, rare dark plates, focus ring |
-| `--gold` | `#d4a94e` | Clock hour dots, tiny accents only |
-| `--white` | `#fbfaf7` | Text on `--deep` and deepened pastels; hands, knobs |
+Light theme (default) / dark theme (OS preference, or the catalog's toggle).
+Dark is the same mochi dusted in roasted sesame: warm, never cold black.
 
-Note: the client's reference deepened pastels (`#c9848f` `#7f97bd` `#7aa392`)
-measured 2.7-2.9:1 under white text. Per the pinned fix rule - deepen the plate,
-never shrink the text - they were deepened one more step to the values above
-(3.4-3.5:1).
+### The material
 
-Radii: `--r-sm: 18px`, `--r-md: 22px`, `--r-lg: 28px`; the phone shell uses 44px.
-Corners are always large squircles, 18-28px on components.
+| Token | Light | Dark | Role |
+|---|---|---|---|
+| `--ground` | `#ece9e2` | `#2d2926` | Page AND every widget - one material |
+| `--plate` | `#f7f5f0` | `#36322e` | Neutral inner plates: digit tiles, callouts |
+| `--seam` | `#efece5` | `#2f2b28` | The soft fold across a digit tile |
+| `--light` | `#ffffff` | `#45403b` | The lit side of every shadow recipe |
+| `--shade` | `#a69e90` | `#0d0b09` | The shaded side of every shadow recipe |
+| `--track` | `#d6d1c5` | `#45403a` | Empty tracks, idle page dots |
 
-Type: `ui-rounded, "SF Pro Rounded", "Hiragino Maru Gothic ProN", "Yuanti SC",
-"PingFang SC", sans-serif`. Big friendly numbers (48-72px, tabular), 15-17px
-body, 12-13px labels. Bilingual by default: Chinese label with English nearby.
+### Ink
+
+| Token | Light | Dark | Role |
+|---|---|---|---|
+| `--ink` | `#5d574e` | `#ebe4d8` | All body text; soft warm dark, never black |
+| `--ink-soft` | `#6b665c` | `#b3ab9e` | Secondary text, captions, placeholders |
+| `--on-deep` | `#fbfaf7` | `#f6f1e8` | Text and dial hands on `--anchor` and `-deep` plates |
+| `--lit` | `#fbfaf7` | `#e4ddd1` | The brightest body: toggle knobs, slider thumbs |
+
+### Anchor, glint, focus
+
+| Token | Light | Dark | Role |
+|---|---|---|---|
+| `--anchor` | `#3e5c68` | `#3b6170` | The one deep plate: primary button, dial face |
+| `--glint` | `#d4a94e` | `#d9b566` | Tiny sparks only: dial marks, glyph details |
+| `--focus` | `#3e5c68` | `#93c3cf` | The focus ring - the only outline in the system |
+
+### Fill roles
+
+Each role is a plain fill (colour only, no text), a `-deep` plate (carries
+`--on-deep` at large-bold sizes) and a `-tint` plate (carries `--ink` at any
+size). Names are jobs, not hues, so they stay true in both themes.
+
+| Role | Fill | Deep | Tint | Job |
+|---|---|---|---|---|
+| `--level` | `#93a9cb` / `#8398ba` | `#6d87b1` / `#56709a` | `#c9d4e6` / `#3a4150` | Quantity: slider fill, ring arc, gauge liquid |
+| `--cue` | `#d698a0` / `#c98f98` | `#bd747f` / `#a25f6b` | `#eccfd3` / `#4a3a3c` | "Look here": colon, active dot, blush, feature plate |
+| `--active` | `#8fb5a4` / `#84a998` | `#679181` / `#4f7b6b` | `#cfdfd7` / `#34443d` | Switched on: toggle track, selected chip, active row |
+| `--decor` | `#e5c39c` / `#cfae88` | - | `#f2dfc8` / `#4a4033` | Decoration only - means nothing, on purpose |
+
+(Values are light / dark.)
+
+### Form, type, motion
+
+- Radii: `--r-sm: 18px`, `--r-md: 22px`, `--r-lg: 28px`, `--r-shell: 44px`
+  (36px below 420px). Small parts sit at 12-20px, sized to their height.
+- Type: `--font: ui-rounded, "SF Pro Rounded", "Hiragino Maru Gothic ProN",
+  "Yuanti SC", "PingFang SC", sans-serif` - system fonts only. Display
+  clamp(44-64px)/700; digits clamp(46-62px)/700 tabular; section 26/700;
+  gauge numbers 21-22/700 tabular; lead 17/400; title 16/700; body 15/400
+  at 1.55; label 13/600; caption floor 12/600. `--font-code` for token names.
+- Motion: `--press-ease: 120ms ease-out` (raised to pressed, fills, knob,
+  tooltip); `--fade-ease: 240ms ease-out` (blush, canvas reveal); the digit
+  colon blinks at 1s `steps(1)`.
 
 ## The material rule (the signature)
 
-One material, two states. Verbatim recipes - do not restyle:
+The recipes are written once, in terms of `--light` and `--shade`. A theme
+changes the two lights, never the recipe:
 
 ```css
-/* raised (rest) */
-box-shadow: -6px -6px 14px rgba(255,255,255,0.85), 7px 7px 16px rgba(166,158,144,0.42);
-
-/* pressed / inset (active) */
-box-shadow: inset -4px -4px 10px rgba(255,255,255,0.8), inset 5px 5px 12px rgba(166,158,144,0.4);
+--raised: -6px -6px 14px color-mix(in srgb, var(--light) 85%, transparent),
+  7px 7px 16px color-mix(in srgb, var(--shade) 42%, transparent);
+--pressed: inset -4px -4px 10px color-mix(in srgb, var(--light) 80%, transparent),
+  inset 5px 5px 12px color-mix(in srgb, var(--shade) 40%, transparent);
+--plate-shadow: -3px -3px 8px color-mix(in srgb, var(--light) 55%, transparent),
+  3px 3px 8px color-mix(in srgb, var(--shade) 30%, transparent);
 ```
 
-- Every interactive element is raised at rest and pressed (inset) when active.
-- Raised and pressed surfaces are ALWAYS `--ground` - the same color as the
-  page. If the fill differs, it is a plate, not the material.
-- Pastel plates sit INSIDE raised widgets as flat fills with soft-blurred,
-  small shadows: `box-shadow: 3px 3px 8px rgba(166,158,144,0.28)`.
-- Light source is fixed top-left. Never flip the shadow direction.
+Plus `--knob-shadow`, `--thumb-shadow`, and `--deep-inset` (the inner shade of
+the anchor plate).
 
-## Contrast rules (verified 2026-08-03)
+- Every interactive element is raised at rest and pressed when active.
+- Raised and pressed surfaces are always `--ground`.
+- Light comes from the top-left. Never flip a shadow.
+- The smallest gap between two raised things is 14px, set by the shadow blur.
 
-- `--ink` on `--ground` / `--plate`: 5.9:1 / 6.6:1 - body text anywhere.
-- `--ink-soft` on `--ground` / `--plate`: 4.7:1 / 5.2:1 - smallest allowed
-  secondary text and placeholders.
-- `--white` text ONLY on `--deep` (6.9:1), or on deepened pastels
-  (`--*-deep`, 3.4-3.5:1) at large-bold sizes: >= 19px, or >= 14px bold.
-- Never small white text on a light pastel.
-- Small text on pastel plates uses `--ink` on the LIGHT tints (`--*-lt`,
-  4.8-5.5:1). The saturated pastels (`--rose` etc.) are ~3:1 under ink -
-  fills and decoration only, no small text.
-- Disabled: flat material, 45% ink (exempt from contrast).
+## Contrast rules
 
-## Motif vocabulary
+| Pair | Light | Dark | Allowed for |
+|---|---|---|---|
+| `--ink` on `--ground` / `--plate` | 5.9 / 6.6 | 11.4 / 10.1 | Body text anywhere |
+| `--ink-soft` on `--ground` / `--plate` | 4.7 / 5.2 | 6.3 / 5.6 | The floor for secondary text |
+| `--ink` on `-tint` plates | 4.8 - 5.5 | 8.0 - 8.5 | Small text on colour |
+| `--on-deep` on `--anchor` | 6.9 | 6.0 | Any size |
+| `--on-deep` on `-deep` plates | 3.4 - 3.5 | 4.3 - 4.5 | Large bold only: >= 19px, or >= 14px bold |
+| `--ink` on a plain fill | about 3.0 | about 2.1 | Never text |
+| `--focus` on `--ground` | 5.9 | 7.5 | The focus ring |
 
-- **Widget** - raised squircle of ground material, padded, optionally holding
-  pastel or plate fills. The only container.
-- **Flip-clock** - two `--plate` tiles with huge digits and a soft center seam;
-  a blinking colon dot pair between them; below, a date row
-  ("07月25日 星期四") and a small pressed pill ("Wednesday").
-- **Pill gauge** - tall vertical pill: pressed track, pastel liquid rising from
-  the bottom in a deepened pastel, white bold label on the liquid
-  ("100% 电量剩余").
-- **Analog clock** - circular `--deep` face inside a raised squircle; `--gold`
-  hour dots, `--white` hands, small center cap. Set to 10:08.
-- **Ring gauge** - countdown ring in `--blue` on a soft track, rounded caps,
-  center text "生日倒计时 / 0124 天".
-- **Kawaii face plate** - wide `--sage-lt` plate with a ">u<" face: closed
-  happy eyes, small mouth, two `--rose` blush ovals. Blush fades in on hover.
-- **App squircle** - 56-64px raised squircle, pastel-filled, with a simple cute
-  inline-SVG glyph (penguin, flower, camera, phone handset, chat bubbles) in
-  2-3 muted colors, rounded strokes.
-- **Music card** - `--rose-deep` plate with a music-note roundel and
-  "网易云音乐 Netease Cloud" in white bold.
-- **Page dots** - one `--rose` dot plus inactive greige dots.
+The deep plates were darkened until light text cleared 3:1: deepen the plate,
+never shrink the text. Disabled is flat material at 45% ink (exempt).
+
+## Motifs
+
+- **Widget** - raised squircle of ground material. The only container.
+- **Flip digits** - two `--plate` tiles with a soft `--seam`, a ticking
+  `--cue` colon, a caption row with a small pressed pill.
+- **Pill gauge** - pressed track, a `-deep` liquid rising from the bottom,
+  bold `--on-deep` value and label on the liquid.
+- **Dial** - `--anchor` face as a dish (`--deep-inset`), `--glint` marks,
+  `--on-deep` hands and cap.
+- **Ring gauge** - `--level` arc on a `--track` ring, rounded caps, value in
+  the centre.
+- **Face plate** - an `--active-tint` plate with a ">u<" face; `--cue` blush
+  fades in on hover.
+- **Squircle** - 60px raised squircle with a fill role and a glyph in 2-3
+  token colours, rounded strokes.
+- **Feature plate** - a `--cue-deep` plate with a roundel and large bold
+  `--on-deep` text. One per board.
+- **Page dots** - one `--cue` pill, the rest `--track`.
+- **Bilingual label** - when a product is bilingual, the CJK label leads and
+  the Latin gloss follows in `--ink-soft`.
+- **Shell and board** - a `--r-shell` raised shell holding a 4-column board
+  of widgets spanning 2 or 4, with a pressed shelf of squircles.
 
 ## Components and states
 
-- **Button** - raised at rest; pressed (inset) on `:active` / `.is-pressed`;
-  disabled = flat (no shadow), 45% ink. Primary variant is a `--deep` plate
-  with white text.
-- **Toggle** - pressed pill track, raised `--white` knob; track fills `--sage`
-  when on.
-- **Slider** - pressed track, pastel fill from the left, raised round thumb.
-- **List rows** - divider-free rows inside a widget; active row is a light
-  pastel plate; chevrons are soft ink glyphs.
-- **Chip** - small raised pill; selected = pressed with `--sage-lt` fill.
-- **Tooltip** - tiny raised plate, small ink text.
-- **Input** - pressed field, `--ink-soft` placeholder, focus shows the ring.
-- **Focus** - `outline: 2px solid var(--deep); outline-offset: 3px` - the one
-  permitted outline in the whole system.
+- **Button** - raised at rest; pressed on `:active` / `.is-pressed`; disabled
+  is flat at 45% ink. `.btn-primary` is the `--anchor` plate. `.btn-sm`,
+  `.btn-round`.
+- **Toggle** - pressed track, raised `--lit` knob; track fills `--active` when on.
+- **Slider** - pressed track, `--level` fill from the left (or `--cue`),
+  raised `--lit` thumb; disabled fill drops to `--track`.
+- **List rows** - divider-free rows in a tray; the selected row is an
+  `--active-tint` plate.
+- **Chip** - small raised pill; selected is pressed with `--active-tint`.
+- **Tooltip** - tiny raised plate on hover or focus.
+- **Input** - pressed field, `--ink-soft` placeholder; disabled is flat.
+- **Focus** - `outline: 2px solid var(--focus); outline-offset: 3px`.
+- **Hover** changes nothing but the cursor - a hover state would need a third
+  depth.
 
-## Motion
+## Screen (optional)
 
-Soft and small, nothing else:
+`js/dough.js` - a WebGL2 dough press: one pillow of `--ground`, lit from the
+top-left, breathing slightly. A resting pointer touches it; holding the button
+presses a dimple that swells a ring around it and blushes toward `--cue`.
+Colours are read from `--ground`, `--light`, `--shade` and `--cue` at runtime.
+Enhancement only (a CSS pillow is the fallback), visibility-gated, one settled
+frame under reduced motion. It belongs in an empty state or a hero - never
+behind text or controls.
 
-- Colon blinks at 1s `steps(1)`.
-- Press transitions 120ms ease-out, on `box-shadow` (plus background where a
-  fill changes).
-- The kawaii blush fades in on hover (240ms).
-- `prefers-reduced-motion`: colon stays lit, blush stays visible, transitions
-  removed.
+## Do / Do not
 
-## Do / Don't
-
-- DO mold everything from `--ground`; depth comes from light.
-- DO keep labels bilingual: Chinese first, English nearby.
-- DON'T use borders or outlines anywhere - ever - except the focus ring.
-- DON'T use pure black or pure gray; every neutral is warm.
-- DON'T use hard shadows; both shadow recipes are soft and offset.
-- DON'T add a second dark plate color: `--deep` only, used sparingly.
-- DON'T put small white text on any pastel, or small ink text on a saturated
-  pastel - use the light tints.
+- DO mould everything from `--ground`; depth comes from light.
+- DO keep the light top-left in both themes.
+- DO put colour on plates inside widgets.
+- DO use a `-tint` plate for small text on colour, a `-deep` plate for large
+  bold light text.
+- DO spend `--cue` in small doses.
+- DON'T draw a border or outline anywhere, except the focus ring.
+- DON'T use pure black, pure white or a cold grey.
+- DON'T use a hard shadow, or write a new shadow instead of the recipes.
+- DON'T add a second deep plate colour: `--anchor` only.
+- DON'T put small light text on any pastel, or any text on a plain fill.
+- DON'T add a third depth: no hover lift, no floating.
+- DON'T run the dough press behind text or controls.

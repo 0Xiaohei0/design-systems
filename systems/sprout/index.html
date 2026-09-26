@@ -1,272 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <!--
-THESIS: A UI kit presented as the asset sheet itself - every control a hand-baked
-game prop (biscuit, plank, sprout) laid out on a matcha board; refuses the
-neutral swatch-grid catalog page.
-OWN-WORLD: 3px pixel unit; matcha ground, biscuit/cream/crust bakery ramp, cocoa
-ink, leaf signs; clip-path step corners (border-radius banned), 1-unit crust
-outlines, 1-unit bevels; Silkscreen display over system-sans body; steps() only.
-STORY: A game dev scans the sheet, presses the biscuits, flips the toggles, reads
-the construction anatomy, and leaves able to rebuild any piece from tokens.
-FIRST VIEWPORT: The recreated reference sheet - credit line, button-state row
-with snow arrows, settings panel (sound on / music muted), segment rows, slider
-assemblies, D-pad, scattered seeds, big wooden SPROUT / UI KIT sign at center.
-FORM: Client-pinned homage to Sprout Lands by Cup Nooble; no seed roll; mode
-Read, asset-sheet catalog.
+THESIS: A UI kit whose every control is a small physical prop - a baked piece,
+a wooden plank, a painted sign - drawn on a 3px pixel grid over a flat board.
+OWN-WORLD: 3px pixel unit; ground / piece / alt / ink / accent roles; clip-path
+step corners (border-radius banned), 1-unit edges, 1-unit bevels; Silkscreen
+display over a system sans body; steps() only. Day and night themes.
+FORM: catalog page, set in the kit itself, following STANDARD.md.
+CONTENT: all specimen copy is neutral (R1). Labels are generic interface verbs
+and placeholders, so a reader takes away the construction, not a use case.
 -->
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Sprout - a cozy farm-game pixel UI kit built from CSS step corners and SVG rect-art. Homage to Sprout Lands by Cup Nooble." />
-  <title>Sprout - Cozy Farm Pixel UI Kit</title>
+  <meta name="description" content="Sprout - a pixel-prop UI kit built from CSS step corners, one-unit bevels and SVG rect-art. Day and night themes." />
+  <title>Sprout - Pixel-Prop UI Kit</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/sprout-core.css" />
-  <style>
-    /* catalog-page layout only; the system lives in css/sprout-core.css */
-    html { overflow-x: clip; }
-
-    .ic-s { fill: var(--snow); }
-
-    .hero {
-      position: relative;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: calc(8 * var(--px)) 20px calc(14 * var(--px));
-    }
-    .hero-credit {
-      text-align: center;
-      font-family: var(--font-pixel);
-      font-size: 10px;
-      text-transform: uppercase;
-      color: var(--cocoa-deep);
-      margin-bottom: calc(10 * var(--px));
-    }
-    .hero-sheet {
-      position: relative;
-      display: flex;
-      flex-wrap: wrap;
-      gap: calc(12 * var(--px)) calc(16 * var(--px));
-      justify-content: center;
-      align-items: flex-start;
-    }
-    .sheet-group {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: calc(4 * var(--px));
-    }
-    .sheet-cap {
-      font-family: var(--font-pixel);
-      font-size: 10px;
-      text-transform: uppercase;
-      color: var(--cocoa-deep);
-      text-align: center;
-    }
-    .state-row {
-      display: flex;
-      align-items: center;
-      gap: calc(2 * var(--px));
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .state-arrow { color: var(--snow); }
-    .hero-panel { width: 340px; max-width: 100%; }
-    .hero-sign-row {
-      display: flex;
-      justify-content: center;
-      margin-top: calc(16 * var(--px));
-    }
-    .hero-seed { position: absolute; color: var(--cocoa-deep); }
-    .hero-seed--leaf { color: var(--leaf-deep); }
-
-    .intro {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: calc(10 * var(--px)) 20px 0;
-      text-align: center;
-    }
-
-    .sec {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: calc(22 * var(--px)) 20px 0;
-    }
-    .sec-head {
-      display: flex;
-      justify-content: center;
-      padding-top: calc(10 * var(--px)); /* room for tendrils */
-      margin-bottom: calc(8 * var(--px));
-    }
-    .note {
-      max-width: 640px;
-      margin: 0 auto calc(8 * var(--px));
-      text-align: center;
-    }
-
-    .tray { margin-top: calc(8 * var(--px)); }
-    .tray-cap {
-      font-family: var(--font-pixel);
-      font-size: 10px;
-      text-transform: uppercase;
-      color: var(--cocoa-deep);
-      margin: 0 0 calc(4 * var(--px));
-    }
-    .tray-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: calc(8 * var(--px)) calc(10 * var(--px));
-      align-items: flex-end;
-    }
-    .spec {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: calc(3 * var(--px));
-    }
-    .spec-label {
-      font-family: var(--font-pixel);
-      font-size: 10px;
-      text-transform: uppercase;
-      color: var(--cocoa-deep);
-      text-align: center;
-    }
-    .spec--tip { padding-top: calc(16 * var(--px)); }
-
-    .packet-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: calc(6 * var(--px));
-      justify-content: center;
-    }
-
-    .tline {
-      display: flex;
-      align-items: baseline;
-      gap: calc(6 * var(--px));
-      flex-wrap: wrap;
-      padding: calc(2 * var(--px)) 0;
-    }
-    .tline .spec-label { min-width: 150px; text-align: left; }
-    .tline .px40 { font-size: 40px; font-weight: 700; }
-    .tline .px30 { font-size: 30px; font-weight: 700; }
-    .tline .px20 { font-size: 20px; font-weight: 700; }
-    .tline .px15 { font-size: 15px; }
-    .tline .px10 { font-size: 10px; }
-    .tline .spr-pixel-text { color: var(--cocoa-deep); }
-    .tbody-sample { max-width: 60ch; color: var(--cocoa-deep); }
-
-    .anatomy {
-      display: flex;
-      flex-wrap: wrap;
-      gap: calc(10 * var(--px)) calc(16 * var(--px));
-      justify-content: center;
-      align-items: flex-end;
-    }
-    .x2 { --px: 6px; }
-    .x4 { --px: 12px; }
-    .legend { list-style: none; margin: 0; padding: 0; display: grid; gap: calc(2 * var(--px)); }
-    .legend li { display: flex; align-items: center; gap: calc(3 * var(--px)); color: var(--cocoa-deep); }
-    .legend i {
-      width: calc(4 * var(--px));
-      height: calc(4 * var(--px));
-      flex: none;
-      box-shadow: inset 0 0 0 1px var(--cocoa-dark);
-    }
-    .corner-block {
-      background: var(--crust);
-      clip-path: var(--clip-px);
-      padding: var(--px);
-      width: calc(18 * var(--px));
-      height: calc(18 * var(--px));
-    }
-    .corner-block b {
-      display: block;
-      width: 100%;
-      height: 100%;
-      background: var(--biscuit);
-      clip-path: var(--clip-px);
-      box-shadow:
-        inset 0 var(--px) 0 0 var(--cream),
-        inset 0 calc(-1 * var(--px)) 0 0 var(--biscuit-shade);
-    }
-
-    .shop { max-width: 620px; margin: 0 auto; }
-    .shop-sign {
-      display: flex;
-      justify-content: center;
-      position: relative;
-      z-index: 2;
-      margin-bottom: calc(-5 * var(--px));
-      padding-top: calc(10 * var(--px));
-    }
-    .shop-row {
-      display: flex;
-      align-items: center;
-      gap: calc(4 * var(--px));
-      padding: calc(3 * var(--px)) 0;
-      border-bottom: var(--px) solid var(--biscuit);
-      cursor: pointer;
-    }
-    .shop-row .spr-i { color: var(--cocoa); flex: none; }
-    .shop-item-name {
-      font-family: var(--font-pixel);
-      font-size: 10px;
-      text-transform: uppercase;
-      color: var(--cocoa);
-    }
-    .shop-item-note { font-size: 13px; color: var(--cocoa-soft); }
-    .shop-stock { margin-left: auto; }
-    .shop-price {
-      display: flex;
-      align-items: center;
-      gap: var(--px);
-      font-family: var(--font-pixel);
-      font-size: 15px;
-      color: var(--cocoa);
-      min-width: calc(16 * var(--px));
-      justify-content: flex-end;
-    }
-    .shop-price .spr-i--2 { color: var(--cocoa); }
-    .shop-qty {
-      display: flex;
-      align-items: center;
-      gap: calc(4 * var(--px));
-      flex-wrap: wrap;
-      padding: calc(4 * var(--px)) 0 calc(2 * var(--px));
-    }
-    .shop-actions {
-      display: flex;
-      gap: calc(4 * var(--px));
-      justify-content: flex-end;
-      flex-wrap: wrap;
-      margin-top: calc(4 * var(--px));
-    }
-
-    .foot {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: calc(24 * var(--px)) 20px calc(30 * var(--px));
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: calc(6 * var(--px));
-      text-align: center;
-    }
-    .x4 .spr-tip-face { font-size: 40px; }
-
-    @media (max-width: 720px) {
-      .hero-sheet { flex-direction: column; align-items: center; }
-      .spr-sign--big .spr-sign-face { font-size: 30px; }
-      .spr-sign--big .spr-sign-face small { font-size: 15px; }
-      .tline .spec-label { min-width: 100%; }
-      .spr-input { width: 100%; }
-      .shop-stock { display: none; } /* keep rows honest at phone width */
-      .spr-plate { padding: calc(4 * var(--px)); }
-    }
-  </style>
+  <link rel="stylesheet" href="css/catalog.css" />
 </head>
 <body>
 
@@ -353,19 +106,11 @@ Read, asset-sheet catalog.
         <rect x="9" y="6" width="4" height="1"/>
         <rect x="9" y="7" width="2" height="1"/>
       </symbol>
-      <symbol id="i-coin" viewBox="0 0 16 16">
-        <rect x="5" y="2" width="6" height="1"/>
-        <rect x="3" y="3" width="10" height="1"/>
-        <rect x="2" y="4" width="12" height="8"/>
-        <rect x="3" y="12" width="10" height="1"/>
-        <rect x="5" y="13" width="6" height="1"/>
-        <rect class="ic-s" x="7" y="5" width="2" height="6"/>
-      </symbol>
       <symbol id="i-cursor-plus" viewBox="0 0 16 16">
         <rect x="6" y="1" width="4" height="14"/>
         <rect x="1" y="6" width="14" height="4"/>
-        <rect class="ic-s" x="7" y="2" width="2" height="12"/>
-        <rect class="ic-s" x="2" y="7" width="12" height="2"/>
+        <rect class="spr-glint" x="7" y="2" width="2" height="12"/>
+        <rect class="spr-glint" x="2" y="7" width="12" height="2"/>
       </symbol>
       <symbol id="i-cursor-point" viewBox="0 0 16 16">
         <rect x="4" y="1" width="1" height="11"/>
@@ -376,15 +121,15 @@ Read, asset-sheet catalog.
         <rect x="7" y="9" width="5" height="1"/>
         <rect x="6" y="10" width="1" height="1"/><rect x="6" y="11" width="1" height="1"/>
         <rect x="4" y="12" width="3" height="1"/>
-        <rect class="ic-s" x="5" y="3" width="1" height="1"/>
-        <rect class="ic-s" x="5" y="4" width="2" height="1"/>
-        <rect class="ic-s" x="5" y="5" width="3" height="1"/>
-        <rect class="ic-s" x="5" y="6" width="4" height="1"/>
-        <rect class="ic-s" x="5" y="7" width="5" height="1"/>
-        <rect class="ic-s" x="5" y="8" width="6" height="1"/>
-        <rect class="ic-s" x="5" y="9" width="2" height="1"/>
-        <rect class="ic-s" x="5" y="10" width="1" height="1"/>
-        <rect class="ic-s" x="5" y="11" width="1" height="1"/>
+        <rect class="spr-glint" x="5" y="3" width="1" height="1"/>
+        <rect class="spr-glint" x="5" y="4" width="2" height="1"/>
+        <rect class="spr-glint" x="5" y="5" width="3" height="1"/>
+        <rect class="spr-glint" x="5" y="6" width="4" height="1"/>
+        <rect class="spr-glint" x="5" y="7" width="5" height="1"/>
+        <rect class="spr-glint" x="5" y="8" width="6" height="1"/>
+        <rect class="spr-glint" x="5" y="9" width="2" height="1"/>
+        <rect class="spr-glint" x="5" y="10" width="1" height="1"/>
+        <rect class="spr-glint" x="5" y="11" width="1" height="1"/>
       </symbol>
       <symbol id="i8-check" viewBox="0 0 8 8">
         <rect x="0" y="4" width="1" height="2"/><rect x="1" y="5" width="1" height="2"/>
@@ -434,702 +179,1075 @@ Read, asset-sheet catalog.
     </defs>
   </svg>
 
-  <!-- ================= HERO: the asset sheet ================= -->
-  <header class="hero">
-    <p class="hero-credit">Sprout &middot; cozy farm UI kit &middot; homage to Sprout Lands by Cup Nooble</p>
+  <!-- ================= MASTHEAD ================= -->
+  <header class="mast">
+    <a class="mast-brand" href="#top"><svg class="spr-i" aria-hidden="true"><use href="#i-sprout"/></svg>Sprout</a>
+    <nav class="mast-nav" aria-label="Sections">
+      <a href="#colour"><b>01</b> Colour</a>
+      <a href="#type"><b>02</b> Type</a>
+      <a href="#space"><b>03</b> Space</a>
+      <a href="#form"><b>04</b> Form</a>
+      <a href="#motion"><b>05</b> Motion</a>
+      <a href="#screen"><b>06</b> Screen</a>
+      <a href="#components"><b>07</b> Components</a>
+      <a href="#motifs"><b>08</b> Motifs</a>
+      <a href="#composition"><b>09</b> Composition</a>
+      <a href="#rules"><b>10</b> Rules</a>
+    </nav>
+    <button class="spr-btn spr-btn--sm" type="button" data-toggle-theme>
+      <span class="spr-btn-body"><span class="spr-btn-face"><span>Day / night</span></span></span>
+    </button>
+  </header>
 
-    <svg class="spr-i hero-seed" style="top:10%; left:3%;" aria-hidden="true"><use href="#i-seed"/></svg>
-    <svg class="spr-i hero-seed hero-seed--leaf" style="top:52%; left:6%;" aria-hidden="true"><use href="#i-sprout"/></svg>
-    <svg class="spr-i--2 spr-i hero-seed" style="top:78%; left:12%;" aria-hidden="true"><use href="#i-seed"/></svg>
-    <svg class="spr-i hero-seed hero-seed--leaf" style="top:14%; right:4%;" aria-hidden="true"><use href="#i-sprout"/></svg>
-    <svg class="spr-i--2 spr-i hero-seed" style="top:48%; right:8%;" aria-hidden="true"><use href="#i-seed"/></svg>
-    <svg class="spr-i hero-seed" style="top:82%; right:5%;" aria-hidden="true"><use href="#i-seed"/></svg>
+  <main class="page" id="top">
 
-    <div class="hero-sheet">
-
-      <div class="sheet-group">
-        <div class="state-row">
-          <span class="spr-btn"><span class="spr-btn-body"><span class="spr-btn-face"><span>PLANT</span></span></span></span>
-          <svg class="spr-i spr-i--2 state-arrow" aria-hidden="true"><use href="#i-tri"/></svg>
-          <span class="spr-btn is-hover"><span class="spr-btn-body"><span class="spr-btn-face"><span>PLANT</span></span></span></span>
-          <svg class="spr-i spr-i--2 state-arrow" aria-hidden="true"><use href="#i-tri"/></svg>
-          <span class="spr-btn is-pressed"><span class="spr-btn-body"><span class="spr-btn-face"><span>PLANT</span></span></span></span>
-        </div>
-        <div class="state-row">
-          <span class="spr-btn is-disabled"><span class="spr-btn-body"><span class="spr-btn-face"><span>SLEEP</span></span></span></span>
-          <button class="spr-btn spr-btn--icon" type="button" aria-label="Confirm">
-            <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--2" aria-hidden="true"><use href="#i-check"/></svg></span></span>
-          </button>
-          <button class="spr-btn spr-btn--icon" type="button" aria-label="Cancel">
-            <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--2" aria-hidden="true"><use href="#i-x"/></svg></span></span>
-          </button>
-        </div>
-        <p class="sheet-cap">Biscuit button &middot; rest, hover, pressed</p>
-
-        <div class="state-row" style="margin-top: calc(4 * var(--px));">
-          <div class="spr-seg" role="img" aria-label="Volume 2 of 8">
-            <i class="on"></i><i class="on"></i><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i>
-          </div>
-        </div>
-        <div class="state-row">
-          <div class="spr-seg" role="img" aria-label="Volume 5 of 8">
-            <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="off"></i><i class="off"></i><i class="off"></i>
-          </div>
-        </div>
-        <div class="state-row">
-          <div class="spr-seg" role="img" aria-label="Volume 8 of 8">
-            <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i>
-          </div>
-        </div>
-        <p class="sheet-cap">Segment bars</p>
-
-        <div class="spr-slider" style="margin-top: calc(3 * var(--px));">
-          <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" data-step="-1" aria-label="Lower value">
-            <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-minus"/></svg></span></span>
-          </button>
-          <span class="spr-rail"><input class="spr-range" type="range" min="0" max="8" value="5" aria-label="Hero demo slider" /></span>
-          <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" data-step="1" aria-label="Raise value">
-            <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-plus"/></svg></span></span>
-          </button>
-        </div>
-        <p class="sheet-cap">Wooden slider</p>
-      </div>
-
-      <div class="sheet-group">
-        <div class="spr-panel hero-panel">
-          <span class="spr-panel-shell"><span class="spr-panel-face">
-            <p class="spr-panel-title">Settings</p>
-            <div class="spr-row">
-              <svg class="spr-i i-when-on" aria-hidden="true"><use href="#i-speaker"/></svg>
-              <svg class="spr-i i-when-off" aria-hidden="true"><use href="#i-speaker-mute"/></svg>
-              <div>
-                <p class="spr-row-label">Sound</p>
-                <div class="spr-seg" role="img" aria-label="Sound volume 5 of 8">
-                  <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="off"></i><i class="off"></i><i class="off"></i>
-                </div>
-              </div>
-              <label class="spr-toggle" style="margin-left:auto;">
-                <input class="spr-sr" type="checkbox" checked />
-                <span class="spr-toggle-outline"><span class="spr-toggle-track"><span class="spr-toggle-knob"></span></span></span>
-                <span class="spr-sr">Sound on</span>
-              </label>
-            </div>
-            <div class="spr-row">
-              <svg class="spr-i i-when-on" aria-hidden="true"><use href="#i-note"/></svg>
-              <svg class="spr-i i-when-off" aria-hidden="true"><use href="#i-note-mute"/></svg>
-              <div>
-                <p class="spr-row-label">Music</p>
-                <div class="spr-seg" role="img" aria-label="Music volume 3 of 8">
-                  <i class="on"></i><i class="on"></i><i class="on"></i><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i>
-                </div>
-              </div>
-              <label class="spr-toggle" style="margin-left:auto;">
-                <input class="spr-sr" type="checkbox" />
-                <span class="spr-toggle-outline"><span class="spr-toggle-track"><span class="spr-toggle-knob"></span></span></span>
-                <span class="spr-sr">Music on</span>
-              </label>
-            </div>
-          </span></span>
-          <button class="spr-btn spr-btn--icon spr-btn--sm spr-panel-close" type="button" aria-label="Close settings">
-            <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-x"/></svg></span></span>
-          </button>
-        </div>
-        <p class="sheet-cap">Settings panel &middot; sound on, music muted</p>
-      </div>
-
-      <div class="sheet-group">
-        <div class="state-row" style="align-items: flex-start; gap: calc(6 * var(--px));">
-          <div class="spr-dpad" role="group" aria-label="Direction pad">
-            <span class="pad-c" aria-hidden="true"></span>
-            <button class="spr-btn spr-btn--cocoa spr-btn--icon" type="button" aria-label="Up">
-              <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8 spr-rot270" aria-hidden="true"><use href="#i8-tri"/></svg></span></span>
-            </button>
-            <span class="pad-c" aria-hidden="true"></span>
-            <button class="spr-btn spr-btn--cocoa spr-btn--icon" type="button" aria-label="Left">
-              <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8 spr-rot180" aria-hidden="true"><use href="#i8-tri"/></svg></span></span>
-            </button>
-            <span class="pad-c" aria-hidden="true"></span>
-            <button class="spr-btn spr-btn--cocoa spr-btn--icon" type="button" aria-label="Right">
-              <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-tri"/></svg></span></span>
-            </button>
-            <span class="pad-c" aria-hidden="true"></span>
-            <button class="spr-btn spr-btn--cocoa spr-btn--icon" type="button" aria-label="Down">
-              <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8 spr-rot90" aria-hidden="true"><use href="#i8-tri"/></svg></span></span>
-            </button>
-            <span class="pad-c" aria-hidden="true"></span>
-          </div>
-          <div class="spr-slider spr-slider--v">
-            <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" data-step="1" aria-label="Raise value">
-              <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-plus"/></svg></span></span>
-            </button>
-            <span class="spr-rail spr-rail--v"><input class="spr-range spr-range--v" type="range" min="0" max="8" value="6" aria-label="Vertical demo slider" /></span>
-            <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" data-step="-1" aria-label="Lower value">
-              <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-minus"/></svg></span></span>
-            </button>
-          </div>
-        </div>
-        <p class="sheet-cap">D-pad &middot; vertical slider</p>
-        <div class="state-row" style="margin-top: calc(2 * var(--px)); gap: calc(5 * var(--px));">
-          <svg class="spr-i" style="color: var(--cocoa);" role="img" aria-label="Plus cursor"><use href="#i-cursor-plus"/></svg>
-          <svg class="spr-i" style="color: var(--cocoa);" role="img" aria-label="Pointer cursor"><use href="#i-cursor-point"/></svg>
-          <svg class="spr-i" style="color: var(--cocoa);" role="img" aria-label="Coin"><use href="#i-coin"/></svg>
-        </div>
-        <p class="sheet-cap">Cursors &middot; coin</p>
-      </div>
-    </div>
-
-    <div class="hero-sign-row">
+    <!-- ================= THESIS ================= -->
+    <header class="thesis">
       <div class="spr-sign spr-sign--big">
         <svg class="spr-tendril spr-tendril--l" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
         <svg class="spr-tendril spr-tendril--r" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
-        <span class="spr-sign-shell"><span class="spr-sign-snow">
-          <h1 class="spr-sign-face">Sprout<small>UI kit</small></h1>
+        <span class="spr-sign-shell"><span class="spr-sign-rim">
+          <h1 class="spr-sign-face">Sprout<small>Pixel-prop kit</small></h1>
         </span></span>
       </div>
-    </div>
-  </header>
-
-  <p class="intro">
-    Every control on this board is a physical prop: buttons are baked biscuits,
-    sliders are wooden planks, section headers are painted signs. Everything is
-    drawn on a 3px pixel grid - no smooth curve anywhere on the page.
-  </p>
-
-  <!-- ================= FOUNDATIONS ================= -->
-  <section class="sec">
-    <div class="sec-head">
-      <div class="spr-sign">
-        <svg class="spr-tendril spr-tendril--l" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
-        <svg class="spr-tendril spr-tendril--r" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
-        <span class="spr-sign-shell"><span class="spr-sign-snow">
-          <h2 class="spr-sign-face">Foundations</h2>
-        </span></span>
-      </div>
-    </div>
-    <p class="note">
-      Ten pinned colors and one pixel unit. Click a seed packet to copy its hex.
-      The four cocoa shades below the packets are derived - bevels for dark
-      pieces plus two verified text inks.
-    </p>
-
-    <div class="spr-plate tray">
-      <p class="tray-cap">Seed packets &middot; click to copy</p>
-      <div class="packet-grid">
-        <button class="spr-packet" type="button" data-hex="#b8cf70">
-          <span class="spr-packet-shell"><span class="spr-packet-face">
-            <span class="spr-packet-swatch" style="background:#b8cf70;"></span>
-            <span class="spr-packet-name">Matcha</span><span class="spr-packet-hex">#b8cf70</span>
-          </span></span>
-        </button>
-        <button class="spr-packet" type="button" data-hex="#a3bd5c">
-          <span class="spr-packet-shell"><span class="spr-packet-face">
-            <span class="spr-packet-swatch" style="background:#a3bd5c;"></span>
-            <span class="spr-packet-name">Matcha deep</span><span class="spr-packet-hex">#a3bd5c</span>
-          </span></span>
-        </button>
-        <button class="spr-packet" type="button" data-hex="#ecd7ab">
-          <span class="spr-packet-shell"><span class="spr-packet-face">
-            <span class="spr-packet-swatch" style="background:#ecd7ab;"></span>
-            <span class="spr-packet-name">Biscuit</span><span class="spr-packet-hex">#ecd7ab</span>
-          </span></span>
-        </button>
-        <button class="spr-packet" type="button" data-hex="#f6ead0">
-          <span class="spr-packet-shell"><span class="spr-packet-face">
-            <span class="spr-packet-swatch" style="background:#f6ead0;"></span>
-            <span class="spr-packet-name">Cream</span><span class="spr-packet-hex">#f6ead0</span>
-          </span></span>
-        </button>
-        <button class="spr-packet" type="button" data-hex="#d9b98a">
-          <span class="spr-packet-shell"><span class="spr-packet-face">
-            <span class="spr-packet-swatch" style="background:#d9b98a;"></span>
-            <span class="spr-packet-name">Biscuit shade</span><span class="spr-packet-hex">#d9b98a</span>
-          </span></span>
-        </button>
-        <button class="spr-packet" type="button" data-hex="#b08d62">
-          <span class="spr-packet-shell"><span class="spr-packet-face">
-            <span class="spr-packet-swatch" style="background:#b08d62;"></span>
-            <span class="spr-packet-name">Crust</span><span class="spr-packet-hex">#b08d62</span>
-          </span></span>
-        </button>
-        <button class="spr-packet" type="button" data-hex="#6b5346">
-          <span class="spr-packet-shell"><span class="spr-packet-face">
-            <span class="spr-packet-swatch" style="background:#6b5346;"></span>
-            <span class="spr-packet-name">Cocoa</span><span class="spr-packet-hex">#6b5346</span>
-          </span></span>
-        </button>
-        <button class="spr-packet" type="button" data-hex="#9ac059">
-          <span class="spr-packet-shell"><span class="spr-packet-face">
-            <span class="spr-packet-swatch" style="background:#9ac059;"></span>
-            <span class="spr-packet-name">Leaf</span><span class="spr-packet-hex">#9ac059</span>
-          </span></span>
-        </button>
-        <button class="spr-packet" type="button" data-hex="#7da644">
-          <span class="spr-packet-shell"><span class="spr-packet-face">
-            <span class="spr-packet-swatch" style="background:#7da644;"></span>
-            <span class="spr-packet-name">Leaf deep</span><span class="spr-packet-hex">#7da644</span>
-          </span></span>
-        </button>
-        <button class="spr-packet" type="button" data-hex="#fdfdf5">
-          <span class="spr-packet-shell"><span class="spr-packet-face">
-            <span class="spr-packet-swatch" style="background:#fdfdf5;"></span>
-            <span class="spr-packet-name">Snow</span><span class="spr-packet-hex">#fdfdf5</span>
-          </span></span>
-        </button>
-      </div>
-      <div class="tray-grid" style="margin-top: calc(5 * var(--px));">
-        <div class="spec"><span style="width:calc(8*var(--px)); height:calc(8*var(--px)); background:#4f3b31;"></span><span class="spec-label">cocoa deep &middot; text on greens</span></div>
-        <div class="spec"><span style="width:calc(8*var(--px)); height:calc(8*var(--px)); background:#7c6455;"></span><span class="spec-label">cocoa soft &middot; placeholder</span></div>
-        <div class="spec"><span style="width:calc(8*var(--px)); height:calc(8*var(--px)); background:#7d6252;"></span><span class="spec-label">cocoa light &middot; dark bevel top</span></div>
-        <div class="spec"><span style="width:calc(8*var(--px)); height:calc(8*var(--px)); background:#554136;"></span><span class="spec-label">cocoa dark &middot; dark bevel base</span></div>
-      </div>
-    </div>
-
-    <div class="spr-plate tray">
-      <p class="tray-cap">Type &middot; Silkscreen display, system body</p>
-      <div class="tline"><span class="spec-label">40px &middot; hero sign</span><span class="spr-pixel-text px40">Harvest day</span></div>
-      <div class="tline"><span class="spec-label">30px &middot; big label</span><span class="spr-pixel-text px30">Barn level 3</span></div>
-      <div class="tline"><span class="spec-label">20px &middot; sign, section</span><span class="spr-pixel-text px20">Seed shop</span></div>
-      <div class="tline"><span class="spec-label">15px &middot; button label</span><span class="spr-pixel-text px15">Water the crops</span></div>
-      <div class="tline"><span class="spec-label">10px &middot; caption</span><span class="spr-pixel-text px10">Stamina 6 of 8 &middot; rain tomorrow</span></div>
-      <div class="tline">
-        <span class="spec-label">14px &middot; body</span>
-        <p class="tbody-sample">
-          Body copy is a plain system sans so paragraphs stay easy on the eyes;
-          the pixel voice is saved for labels and signs. On green grounds body
-          ink darkens one step to keep its footing.
+      <div class="thesis-text">
+        <p>
+          A UI kit in which every control is a small physical prop: buttons are
+          baked pieces, sliders are planks, headings are painted signs. Everything
+          is drawn on a 3px pixel grid, and there is not one smooth curve in it.
+        </p>
+        <p>
+          Two things to hold on to. <b>Everything is a whole number of units</b> -
+          size, corner, edge, bevel, gap and every step of motion is an integer
+          multiple of <code>--px</code>, so the kit rescales by changing one value.
+          And <b>pieces are objects, not paint</b>: at night the ground goes dark
+          but a piece keeps its baked colour, dimmed as if lamplit. It never
+          inverts.
         </p>
       </div>
-    </div>
-  </section>
+      <div class="thesis-count">
+        <div>3PX<small>one unit</small></div>
+        <div>22<small>colour roles</small></div>
+        <div>0<small>radii</small></div>
+      </div>
+    </header>
 
-  <!-- ================= CONSTRUCTION ================= -->
-  <section class="sec">
-    <div class="sec-head">
-      <div class="spr-sign">
-        <svg class="spr-tendril spr-tendril--l" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
-        <svg class="spr-tendril spr-tendril--r" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
-        <span class="spr-sign-shell"><span class="spr-sign-snow">
-          <h2 class="spr-sign-face">Construction</h2>
+    <!-- ================= READ THIS FIRST ================= -->
+    <section class="sec" aria-label="Read this first">
+      <div class="spr-panel brief">
+        <span class="spr-panel-shell"><span class="spr-panel-face">
+          <p class="spr-panel-title">Read this first</p>
+          <ol>
+            <li><b>These values are the system.</b> Every token below is declared in <code>css/sprout-core.css</code>. Use them; do not invent parallel ones.</li>
+            <li><b>Search for an existing piece before building a second one.</b> A new control is almost always an existing shell, face and bevel with a different label.</li>
+            <li><b>Whole units only.</b> Every size is <code>calc(n * var(--px))</code> with a whole <code>n</code>. No raw hex, no half units, no one-off pixel sizes.</li>
+            <li><b>No <code>border-radius</code>, anywhere.</b> Corners are <code>clip-path</code> staircases. A single rounded corner breaks the illusion for the whole page.</li>
+            <li><b>Token names are roles.</b> <code>--piece</code> is the face of a control, not "a beige". Read what a token is for before reaching for it.</li>
+            <li><b>Motion is <code>steps()</code> only.</b> Nothing eases, fades or blurs. If it moves, it jumps.</li>
+          </ol>
         </span></span>
       </div>
-    </div>
-    <p class="note">
-      No border-radius on this page. Corners are clip-path staircases stepping
-      two pixel-units in; edges are one-unit crust layers; depth is a one-unit
-      bevel - light on top, dark below. Press a biscuit and the bevel goes away
-      while the label drops exactly one unit.
-    </p>
+    </section>
 
-    <div class="spr-plate tray">
-      <p class="tray-cap">Anatomy &middot; the same markup at 1x, 2x and 4x</p>
-      <div class="anatomy">
-        <div class="spec">
-          <button class="spr-btn" type="button"><span class="spr-btn-body"><span class="spr-btn-face"><span>BAKE</span></span></span></button>
-          <span class="spec-label">1x &middot; --px: 3px</span>
-        </div>
-        <div class="spec x2">
-          <button class="spr-btn" type="button"><span class="spr-btn-body"><span class="spr-btn-face"><span>BAKE</span></span></span></button>
-          <span class="spec-label" style="--px: 3px;">2x &middot; --px: 6px</span>
-        </div>
-        <div class="spec x4">
-          <div class="corner-block" role="img" aria-label="Corner staircase detail at 4x"><b></b></div>
-          <span class="spec-label" style="--px: 3px;">4x corner &middot; two steps of one unit</span>
-        </div>
-        <ul class="legend">
-          <li><i style="background: var(--crust);"></i> outline &middot; crust, 1 unit</li>
-          <li><i style="background: var(--cream);"></i> top bevel &middot; cream, 1 unit</li>
-          <li><i style="background: var(--biscuit);"></i> face &middot; biscuit</li>
-          <li><i style="background: var(--biscuit-shade);"></i> bottom bevel &middot; shade, 1 unit</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="spr-plate tray">
-      <p class="tray-cap">Two ways to lay pixels</p>
-      <div class="tray-grid">
-        <div class="spec">
-          <div class="x4" style="position: relative; padding-top: calc(3 * 16px);">
-            <div class="spr-tip" style="position: static;">
-              <span class="spr-tip-bubble" style="position: static; translate: none; display: inline-block;">
-                <span class="spr-tip-shell" style="position: relative;">
-                  <span class="spr-tip-face">RIPE!</span>
-                  <span class="spr-tip-tail" aria-hidden="true"></span>
-                </span>
-              </span>
-            </div>
-          </div>
-          <span class="spec-label">tooltip tail &middot; stacked box-shadow pixels, 4x</span>
-        </div>
-        <div class="spec">
-          <svg class="spr-i x2" style="width: calc(16 * 6px); height: calc(16 * 6px); color: var(--cocoa);" role="img" aria-label="Sprout icon enlarged"><use href="#i-sprout"/></svg>
-          <span class="spec-label">sprite &middot; integer SVG rects, crispEdges</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= PIECES ================= -->
-  <section class="sec">
-    <div class="sec-head">
-      <div class="spr-sign">
-        <svg class="spr-tendril spr-tendril--l" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
-        <svg class="spr-tendril spr-tendril--r" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
-        <span class="spr-sign-shell"><span class="spr-sign-snow">
-          <h2 class="spr-sign-face">Pieces</h2>
-        </span></span>
-      </div>
-    </div>
-    <p class="note">
-      The full pantry. Everything here is a real control - press, drag, tab
-      through it. Focus rings are two-pixel cocoa outlines around the whole prop.
-    </p>
-
-    <div class="spr-plate tray">
-      <p class="tray-cap">Buttons</p>
-      <div class="tray-grid">
-        <div class="spec">
-          <button class="spr-btn spr-btn--sm" type="button"><span class="spr-btn-body"><span class="spr-btn-face"><span>FEED</span></span></span></button>
-          <span class="spec-label">small</span>
-        </div>
-        <div class="spec">
-          <button class="spr-btn" type="button"><span class="spr-btn-body"><span class="spr-btn-face"><span>WATER</span></span></span></button>
-          <span class="spec-label">default</span>
-        </div>
-        <div class="spec">
-          <button class="spr-btn spr-btn--lg" type="button"><span class="spr-btn-body"><span class="spr-btn-face"><span>HARVEST</span></span></span></button>
-          <span class="spec-label">large</span>
-        </div>
-        <div class="spec">
-          <button class="spr-btn spr-btn--cocoa" type="button"><span class="spr-btn-body"><span class="spr-btn-face"><span>LEAVE</span></span></span></button>
-          <span class="spec-label">cocoa</span>
-        </div>
-        <div class="spec">
-          <button class="spr-btn" type="button" disabled><span class="spr-btn-body"><span class="spr-btn-face"><span>LOCKED</span></span></span></button>
-          <span class="spec-label">disabled</span>
-        </div>
-        <div class="spec">
-          <div class="state-row">
-            <button class="spr-btn spr-btn--icon" type="button" aria-label="Confirm"><span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--2" aria-hidden="true"><use href="#i-check"/></svg></span></span></button>
-            <button class="spr-btn spr-btn--icon" type="button" aria-label="Cancel"><span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--2" aria-hidden="true"><use href="#i-x"/></svg></span></span></button>
-            <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" aria-label="Add"><span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-plus"/></svg></span></span></button>
-            <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" aria-label="Remove"><span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-minus"/></svg></span></span></button>
-          </div>
-          <span class="spec-label">icon squares</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="spr-plate tray">
-      <p class="tray-cap">Toggles, checks, seeds</p>
-      <div class="tray-grid">
-        <div class="spec">
-          <div class="state-row">
-            <label class="spr-toggle"><input class="spr-sr" type="checkbox" checked /><span class="spr-toggle-outline"><span class="spr-toggle-track"><span class="spr-toggle-knob"></span></span></span><span class="spr-sr">Tool tips on</span></label>
-            <label class="spr-toggle"><input class="spr-sr" type="checkbox" /><span class="spr-toggle-outline"><span class="spr-toggle-track"><span class="spr-toggle-knob"></span></span></span><span class="spr-sr">Autosave on</span></label>
-            <label class="spr-toggle"><input class="spr-sr" type="checkbox" disabled /><span class="spr-toggle-outline"><span class="spr-toggle-track"><span class="spr-toggle-knob"></span></span></span><span class="spr-sr">Cloud sync (locked)</span></label>
-          </div>
-          <span class="spec-label">toggle &middot; on / off / locked</span>
-        </div>
-        <div class="spec">
-          <div class="state-row">
-            <label class="spr-check"><input class="spr-sr" type="checkbox" checked /><span class="spr-check-box"><span class="spr-check-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-check"/></svg></span></span><span class="spr-check-text">Rain alerts</span></label>
-            <label class="spr-check"><input class="spr-sr" type="checkbox" /><span class="spr-check-box"><span class="spr-check-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-check"/></svg></span></span><span class="spr-check-text">Night owls</span></label>
-          </div>
-          <span class="spec-label">checkbox</span>
-        </div>
-        <div class="spec">
-          <fieldset style="border: 0; margin: 0; padding: 0;">
-            <legend class="spr-sr">Watering time</legend>
-            <div class="state-row">
-              <label class="spr-radio"><input class="spr-sr" type="radio" name="water" checked /><svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg><span class="spr-check-text">Dawn</span></label>
-              <label class="spr-radio"><input class="spr-sr" type="radio" name="water" /><svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg><span class="spr-check-text">Noon</span></label>
-              <label class="spr-radio"><input class="spr-sr" type="radio" name="water" /><svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg><span class="spr-check-text">Dusk</span></label>
-            </div>
-          </fieldset>
-          <span class="spec-label">radio &middot; seed dots</span>
-        </div>
-        <div class="spec">
-          <nav class="spr-pager" aria-label="Almanac pages" id="demo-pager">
-            <button type="button" aria-label="Page 1"><svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg></button>
-            <button type="button" aria-label="Page 2" aria-current="page"><svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg></button>
-            <button type="button" aria-label="Page 3"><svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg></button>
-            <button type="button" aria-label="Page 4"><svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg></button>
-            <button type="button" aria-label="Page 5"><svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg></button>
-          </nav>
-          <span class="spec-label">pagination &middot; planted row</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="spr-plate tray">
-      <p class="tray-cap">Volume &amp; sliders &middot; wired together</p>
-      <div class="tray-grid">
-        <div class="spec">
-          <div class="spr-slider">
-            <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" data-step="-1" aria-label="Lower volume">
-              <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-minus"/></svg></span></span>
-            </button>
-            <span class="spr-rail"><input class="spr-range" type="range" id="vol-range" min="0" max="8" value="5" aria-label="Volume" /></span>
-            <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" data-step="1" aria-label="Raise volume">
-              <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-plus"/></svg></span></span>
-            </button>
-          </div>
-          <div class="spr-seg" id="vol-seg" role="img" aria-label="Volume 5 of 8" style="margin-top: calc(2 * var(--px));">
-            <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="off"></i><i class="off"></i><i class="off"></i>
-          </div>
-          <span class="spec-label">drag the plank, the dashes follow</span>
-        </div>
-        <div class="spec">
-          <div class="spr-slider spr-slider--v">
-            <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" data-step="1" aria-label="Raise value">
-              <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-plus"/></svg></span></span>
-            </button>
-            <span class="spr-rail spr-rail--v"><input class="spr-range spr-range--v" type="range" min="0" max="8" value="3" aria-label="Well depth" /></span>
-            <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" data-step="-1" aria-label="Lower value">
-              <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-minus"/></svg></span></span>
-            </button>
-          </div>
-          <span class="spec-label">vertical</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="spr-plate tray">
-      <p class="tray-cap">Tips, fields</p>
-      <div class="tray-grid">
-        <div class="spec spec--tip">
-          <div class="spr-tip">
-            <span class="spr-tip-bubble">
-              <span class="spr-tip-shell" style="position: relative;">
-                <span class="spr-tip-face">RIPE IN 2 DAYS</span>
-                <span class="spr-tip-tail" aria-hidden="true"></span>
-              </span>
-            </span>
-            <svg class="spr-i" style="color: var(--cocoa-deep);" role="img" aria-label="Seed"><use href="#i-seed"/></svg>
-          </div>
-          <span class="spec-label">tooltip &middot; always shown</span>
-        </div>
-        <div class="spec spec--tip">
-          <div class="spr-tip spr-tip--hover">
-            <span class="spr-tip-bubble">
-              <span class="spr-tip-shell" style="position: relative;">
-                <span class="spr-tip-face">REFILLS AT THE WELL</span>
-                <span class="spr-tip-tail" aria-hidden="true"></span>
-              </span>
-            </span>
-            <button class="spr-btn" type="button"><span class="spr-btn-body"><span class="spr-btn-face"><span>WATER CAN</span></span></span></button>
-          </div>
-          <span class="spec-label">tooltip &middot; hover / focus the button</span>
-        </div>
-        <div class="spec">
-          <label class="spec-label" for="farm-name" style="align-self: flex-start;">Farm name</label>
-          <span class="spr-field-wrap"><span class="spr-field">
-            <input class="spr-input" id="farm-name" type="text" placeholder="e.g. Cloverdale" />
-          </span></span>
-          <span class="spec-label">input &middot; cocoa caret</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="spr-plate tray">
-      <p class="tray-cap">Sprites &middot; 16-cell and 8-cell grids</p>
-      <div class="tray-grid" style="color: var(--cocoa);">
-        <div class="spec"><svg class="spr-i" role="img" aria-label="Speaker"><use href="#i-speaker"/></svg><span class="spec-label">speaker</span></div>
-        <div class="spec"><svg class="spr-i" role="img" aria-label="Speaker muted"><use href="#i-speaker-mute"/></svg><span class="spec-label">muted</span></div>
-        <div class="spec"><svg class="spr-i" role="img" aria-label="Note"><use href="#i-note"/></svg><span class="spec-label">note</span></div>
-        <div class="spec"><svg class="spr-i" role="img" aria-label="Note muted"><use href="#i-note-mute"/></svg><span class="spec-label">note muted</span></div>
-        <div class="spec"><svg class="spr-i" role="img" aria-label="Check"><use href="#i-check"/></svg><span class="spec-label">check</span></div>
-        <div class="spec"><svg class="spr-i" role="img" aria-label="Cross"><use href="#i-x"/></svg><span class="spec-label">x</span></div>
-        <div class="spec"><svg class="spr-i" role="img" aria-label="Arrow"><use href="#i-tri"/></svg><span class="spec-label">arrow</span></div>
-        <div class="spec"><svg class="spr-i" role="img" aria-label="Seed"><use href="#i-seed"/></svg><span class="spec-label">seed</span></div>
-        <div class="spec"><svg class="spr-i" role="img" aria-label="Sprout"><use href="#i-sprout"/></svg><span class="spec-label">sprout</span></div>
-        <div class="spec"><svg class="spr-i" role="img" aria-label="Coin"><use href="#i-coin"/></svg><span class="spec-label">coin</span></div>
-        <div class="spec"><svg class="spr-i" role="img" aria-label="Plus cursor"><use href="#i-cursor-plus"/></svg><span class="spec-label">plus cursor</span></div>
-        <div class="spec"><svg class="spr-i" role="img" aria-label="Pointer"><use href="#i-cursor-point"/></svg><span class="spec-label">pointer</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= IN THE FIELD ================= -->
-  <section class="sec">
-    <div class="sec-head">
-      <div class="spr-sign">
-        <svg class="spr-tendril spr-tendril--l" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
-        <svg class="spr-tendril spr-tendril--r" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
-        <span class="spr-sign-shell"><span class="spr-sign-snow">
-          <h2 class="spr-sign-face">In the field</h2>
-        </span></span>
-      </div>
-    </div>
-    <p class="note">
-      The kit at work: a shop dialog assembled entirely from the pieces above.
-      Pick a packet with the seed dots, set a quantity, and the buy biscuit
-      keeps its own arithmetic.
-    </p>
-
-    <div class="shop">
-      <div class="shop-sign">
+    <!-- ================= 01 COLOUR ================= -->
+    <section class="sec" id="colour" aria-labelledby="colour-h">
+      <div class="sec-head">
+        <span class="sec-no">Section 01</span>
         <div class="spr-sign">
           <svg class="spr-tendril spr-tendril--l" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
           <svg class="spr-tendril spr-tendril--r" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
-          <span class="spr-sign-shell"><span class="spr-sign-snow">
-            <h3 class="spr-sign-face">Seed shop</h3>
+          <span class="spr-sign-shell"><span class="spr-sign-rim"><h2 class="spr-sign-face" id="colour-h">Colour</h2></span></span>
+        </div>
+      </div>
+      <p class="lede">
+        Twenty-two role tokens in six families. Every packet shows <b>day on the
+        left and night on the right</b>, so both themes are always in view.
+        Click a packet to copy its <code>var()</code>.
+      </p>
+
+      <div class="spr-plate">
+        <p class="duo-group">Ground &middot; the board</p>
+        <div class="duo">
+          <button class="spr-packet" type="button" data-copy="var(--ground)"><span class="spr-packet-shell"><span class="spr-packet-face"><span class="spr-packet-swatch"><i style="background:#b8cf70"></i><i style="background:#141d16"></i></span><span class="duo-name">--ground</span><span class="duo-role">The board. Every section sits directly on it.</span><span class="spr-packet-hex"><span>#b8cf70</span><span>#141d16</span></span></span></span></button>
+          <button class="spr-packet" type="button" data-copy="var(--ground-inset)"><span class="spr-packet-shell"><span class="spr-packet-face"><span class="spr-packet-swatch"><i style="background:#a3bd5c"></i><i style="background:#0d140f"></i></span><span class="duo-name">--ground-inset</span><span class="duo-role">Recessed plates: trays and stages. No outline.</span><span class="spr-packet-hex"><span>#a3bd5c</span><span>#0d140f</span></span></span></span></button>
+          <button class="spr-packet" type="button" data-copy="var(--ground-ink)"><span class="spr-packet-shell"><span class="spr-packet-face"><span class="spr-packet-swatch"><i style="background:#4f3b31"></i><i style="background:#eadfc4"></i></span><span class="duo-name">--ground-ink</span><span class="duo-role">Text set straight on the ground. The one ink that flips.</span><span class="spr-packet-hex"><span>#4f3b31</span><span>#eadfc4</span></span></span></span></button>
+        </div>
+
+        <p class="duo-group">Piece &middot; the raised face</p>
+        <div class="duo">
+          <button class="spr-packet" type="button" data-copy="var(--piece)"><span class="spr-packet-shell"><span class="spr-packet-face"><span class="spr-packet-swatch"><i style="background:#ecd7ab"></i><i style="background:#d2b98b"></i></span><span class="duo-name">--piece</span><span class="duo-role">The face of every raised control.</span><span class="spr-packet-hex"><span>#ecd7ab</span><span>#d2b98b</span></span></span></span></button>
+          <button class="spr-packet" type="button" data-copy="var(--piece-hi)"><span class="spr-packet-shell"><span class="spr-packet-face"><span class="spr-packet-swatch"><i style="background:#f6ead0"></i><i style="background:#e2cfa6"></i></span><span class="duo-name">--piece-hi</span><span class="duo-role">Top bevel, hover face, and the face of a sheet.</span><span class="spr-packet-hex"><span>#f6ead0</span><span>#e2cfa6</span></span></span></span></button>
+          <button class="spr-packet" type="button" data-copy="var(--piece-lo)"><span class="spr-packet-shell"><span class="spr-packet-face"><span class="spr-packet-swatch"><i style="background:#d9b98a"></i><i style="background:#b89c6c"></i></span><span class="duo-name">--piece-lo</span><span class="duo-role">Bottom bevel, pressed face, the lip of a field.</span><span class="spr-packet-hex"><span>#d9b98a</span><span>#b89c6c</span></span></span></span></button>
+          <button class="spr-packet" type="button" data-copy="var(--piece-edge)"><span class="spr-packet-shell"><span class="spr-packet-face"><span class="spr-packet-swatch"><i style="background:#b08d62"></i><i style="background:#94754f"></i></span><span class="duo-name">--piece-edge</span><span class="duo-role">The 1-unit outline. Never small text.</span><span class="spr-packet-hex"><span>#b08d62</span><span>#94754f</span></span></span></span></button>
+          <button class="spr-packet" type="button" data-copy="var(--glint)"><span class="spr-packet-shell"><span class="spr-packet-face"><span class="spr-packet-swatch"><i style="background:#fdfdf5"></i><i style="background:#fbf3df"></i></span><span class="duo-name">--glint</span><span class="duo-role">The brightest pixel: hover bevel, sprite highlight, text on alt and accent.</span><span class="spr-packet-hex"><span>#fdfdf5</span><span>#fbf3df</span></span></span></span></button>
+        </div>
+
+        <p class="duo-group">Alt &middot; the counter-piece</p>
+        <div class="duo">
+          <button class="spr-packet" type="button" data-copy="var(--alt)"><span class="spr-packet-shell"><span class="spr-packet-face"><span class="spr-packet-swatch"><i style="background:#6b5346"></i><i style="background:#80654f"></i></span><span class="duo-name">--alt</span><span class="duo-role">Secondary buttons, toggle track, rail, dashes, the chosen seed.</span><span class="spr-packet-hex"><span>#6b5346</span><span>#80654f</span></span></span></span></button>
+          <button class="spr-packet" type="button" data-copy="var(--alt-hi)"><span class="spr-packet-shell"><span class="spr-packet-face"><span class="spr-packet-swatch"><i style="background:#7d6252"></i><i style="background:#927561"></i></span><span class="duo-name">--alt-hi</span><span class="duo-role">Top bevel and hover face of an alt piece.</span><span class="spr-packet-hex"><span>#7d6252</span><span>#927561</span></span></span></span></button>
+          <button class="spr-packet" type="button" data-copy="var(--alt-lo)"><span class="spr-packet-shell"><span class="spr-packet-face"><span class="spr-packet-swatch"><i style="background:#554136"></i><i style="background:#654f3f"></i></span><span class="duo-name">--alt-lo</span><span class="duo-role">Bottom bevel and outline of an alt piece.</span><span class="spr-packet-hex"><span>#554136</span><span>#654f3f</span></span></span></span></button>
+          <button class="spr-packet" type="button" data-copy="var(--alt-glint)"><span class="spr-packet-shell"><span class="spr-packet-face"><span class="spr-packet-swatch"><i style="background:#8f7361"></i><i style="background:#a58772"></i></span><span class="duo-name">--alt-glint</span><span class="duo-role">Hover top bevel of an alt piece.</span><span class="spr-packet-hex"><span>#8f7361</span><span>#a58772</span></span></span></span></button>
+        </div>
+
+        <p class="duo-group">Ink &middot; on pieces and sheets</p>
+        <div class="duo">
+          <button class="spr-packet" type="button" data-copy="var(--ink)"><span class="spr-packet-shell"><span class="spr-packet-face"><span class="spr-packet-swatch"><i style="background:#6b5346"></i><i style="background:#4a372c"></i></span><span class="duo-name">--ink</span><span class="duo-role">Labels, text and glyphs on a piece or a sheet.</span><span class="spr-packet-hex"><span>#6b5346</span><span>#4a372c</span></span></span></span></button>
+          <button class="spr-packet" type="button" data-copy="var(--ink-soft)"><span class="spr-packet-shell"><span class="spr-packet-face"><span class="spr-packet-swatch"><i style="background:#7c6455"></i><i style="background:#65503f"></i></span><span class="duo-name">--ink-soft</span><span class="duo-role">Placeholders and secondary lines, on a sheet only.</span><span class="spr-packet-hex"><span>#7c6455</span><span>#65503f</span></span></span></span></button>
+        </div>
+
+        <p class="duo-group">Accent &middot; the living signal</p>
+        <div class="duo">
+          <button class="spr-packet" type="button" data-copy="var(--accent)"><span class="spr-packet-shell"><span class="spr-packet-face"><span class="spr-packet-swatch"><i style="background:#9ac059"></i><i style="background:#5f8a34"></i></span><span class="duo-name">--accent</span><span class="duo-role">The on state, and the face of a heading sign.</span><span class="spr-packet-hex"><span>#9ac059</span><span>#5f8a34</span></span></span></span></button>
+          <button class="spr-packet" type="button" data-copy="var(--accent-lo)"><span class="spr-packet-shell"><span class="spr-packet-face"><span class="spr-packet-swatch"><i style="background:#7da644"></i><i style="background:#4d7629"></i></span><span class="duo-name">--accent-lo</span><span class="duo-role">Sign edge and shade, tendrils.</span><span class="spr-packet-hex"><span>#7da644</span><span>#4d7629</span></span></span></span></button>
+        </div>
+
+        <p class="duo-group">Disabled &middot; an unbaked piece</p>
+        <div class="duo">
+          <button class="spr-packet" type="button" data-copy="var(--disabled)"><span class="spr-packet-shell"><span class="spr-packet-face"><span class="spr-packet-swatch"><i style="background:#e7decb"></i><i style="background:#4a4840"></i></span><span class="duo-name">--disabled</span><span class="duo-role">Face of a disabled piece.</span><span class="spr-packet-hex"><span>#e7decb</span><span>#4a4840</span></span></span></span></button>
+          <button class="spr-packet" type="button" data-copy="var(--disabled-hi)"><span class="spr-packet-shell"><span class="spr-packet-face"><span class="spr-packet-swatch"><i style="background:#f1ebdd"></i><i style="background:#57554c"></i></span><span class="duo-name">--disabled-hi</span><span class="duo-role">Its top bevel.</span><span class="spr-packet-hex"><span>#f1ebdd</span><span>#57554c</span></span></span></span></button>
+          <button class="spr-packet" type="button" data-copy="var(--disabled-lo)"><span class="spr-packet-shell"><span class="spr-packet-face"><span class="spr-packet-swatch"><i style="background:#d2c7ae"></i><i style="background:#3d3b35"></i></span><span class="duo-name">--disabled-lo</span><span class="duo-role">Its bottom bevel, and a disabled track.</span><span class="spr-packet-hex"><span>#d2c7ae</span><span>#3d3b35</span></span></span></span></button>
+          <button class="spr-packet" type="button" data-copy="var(--disabled-edge)"><span class="spr-packet-shell"><span class="spr-packet-face"><span class="spr-packet-swatch"><i style="background:#c4b499"></i><i style="background:#33312c"></i></span><span class="duo-name">--disabled-edge</span><span class="duo-role">Its outline, and a disabled knob.</span><span class="spr-packet-hex"><span>#c4b499</span><span>#33312c</span></span></span></span></button>
+          <button class="spr-packet" type="button" data-copy="var(--disabled-ink)"><span class="spr-packet-shell"><span class="spr-packet-face"><span class="spr-packet-swatch"><i style="background:#b08d62"></i><i style="background:#928c7b"></i></span><span class="duo-name">--disabled-ink</span><span class="duo-role">The label on a disabled piece.</span><span class="spr-packet-hex"><span>#b08d62</span><span>#928c7b</span></span></span></span></button>
+        </div>
+
+        <p class="duo-group">Focus</p>
+        <div class="duo">
+          <button class="spr-packet" type="button" data-copy="var(--focus)"><span class="spr-packet-shell"><span class="spr-packet-face"><span class="spr-packet-swatch"><i style="background:#6b5346"></i><i style="background:#80654f"></i></span><span class="duo-name">--focus</span><span class="duo-role">The 2px ring, always on an unclipped wrapper.</span><span class="spr-packet-hex"><span>#6b5346</span><span>#80654f</span></span></span></span></button>
+        </div>
+      </div>
+
+      <p class="cap">Contrast floor &middot; measured, day / night</p>
+      <div class="spr-plate ledger-wrap">
+        <table class="ledger">
+          <thead><tr><th>Pair</th><th>Day</th><th>Night</th><th>Rule</th></tr></thead>
+          <tbody>
+            <tr><td>--ink on --piece</td><td class="v">5.0:1</td><td class="v">5.9:1</td><td class="d">The standard text pair: every button label.</td></tr>
+            <tr><td>--ink on --piece-hi</td><td class="v">6.0:1</td><td class="v">7.3:1</td><td class="d">Text on a sheet: panels, fields, packets.</td></tr>
+            <tr><td>--ink-soft on --piece-hi</td><td class="v">4.6:1</td><td class="v">4.9:1</td><td class="d">Placeholders. <b>Sheet face only</b> - on <code>--piece</code> it would drop under 4.5.</td></tr>
+            <tr><td>--ground-ink on --ground</td><td class="v">6.1:1</td><td class="v">13.0:1</td><td class="d">All small text on the board.</td></tr>
+            <tr><td>--ground-ink on --ground-inset</td><td class="v">5.0:1</td><td class="v">14.1:1</td><td class="d">Captions and tables on a plate.</td></tr>
+            <tr><td>--glint on --alt</td><td class="v">7.0:1</td><td class="v">4.9:1</td><td class="d">Labels on a secondary button.</td></tr>
+            <tr><td>--glint on --accent</td><td class="v">2.0:1</td><td class="v">3.7:1</td><td class="d"><b>Large display only.</b> Sign text is 20px bold and up; small text never sits on green.</td></tr>
+            <tr><td>--alt on --ground</td><td class="v">4.1:1</td><td class="v">3.2:1</td><td class="d">Tracks, dashes and the focus ring clear 3:1 against the board.</td></tr>
+            <tr><td>--focus on --piece-hi</td><td class="v">6.0:1</td><td class="v">3.5:1</td><td class="d">The ring stays visible when it sits on a sheet.</td></tr>
+            <tr><td>--disabled-ink on --disabled</td><td class="v">2.3:1</td><td class="v">2.7:1</td><td class="d">Deliberately faint. A disabled piece is exempt, and should look it.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="spr-panel why">
+        <span class="spr-panel-shell"><span class="spr-panel-face">
+          <p class="spr-panel-title">Why two inks</p>
+          <p>
+            Text on a piece and text on the ground look like one colour by day, and
+            the kit could have used one token for both. It does not, because at
+            night they have to part ways: the ground goes dark and needs a light
+            ink, while the pieces stay lamplit and keep a dark one. <code>--ink</code>
+            and <code>--ground-ink</code> are the same idea on two different
+            surfaces, and naming them separately is what lets night exist without
+            a single exception in the component CSS.
+          </p>
+          <p>
+            The same reasoning split <code>--alt</code> from <code>--ink</code>: by
+            day both are one cocoa, but a track has to clear 3:1 against a dark
+            board and a lamplit sheet at once, and a text ink does not.
+          </p>
+        </span></span>
+      </div>
+    </section>
+
+    <!-- ================= 02 TYPE ================= -->
+    <section class="sec" id="type" aria-labelledby="type-h">
+      <div class="sec-head">
+        <span class="sec-no">Section 02</span>
+        <div class="spr-sign">
+          <svg class="spr-tendril spr-tendril--l" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+          <svg class="spr-tendril spr-tendril--r" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+          <span class="spr-sign-shell"><span class="spr-sign-rim"><h2 class="spr-sign-face" id="type-h">Typography</h2></span></span>
+        </div>
+      </div>
+      <p class="lede">
+        Two voices. A pixel face, always uppercase, for everything a prop would
+        have painted on it; a plain system sans for anything a person has to
+        read in sentences. Every size below is rendered at its real size.
+      </p>
+
+      <div class="spr-plate">
+        <div class="tline"><span class="item-label">--fs-hero &middot; 40px</span><span class="spr-pixel-text fs-hero">Hero sign</span></div>
+        <div class="tline"><span class="item-label">--fs-title &middot; 30px</span><span class="spr-pixel-text fs-title">Title line</span></div>
+        <div class="tline"><span class="item-label">--fs-heading &middot; 20px</span><span class="spr-pixel-text fs-heading">Section heading</span></div>
+        <div class="tline"><span class="item-label">--fs-label &middot; 15px</span><span class="spr-pixel-text fs-label">Button label</span></div>
+        <div class="tline"><span class="item-label">--fs-caption &middot; 10px</span><span class="spr-pixel-text fs-caption">Caption &middot; row label &middot; 6 of 8</span></div>
+        <div class="tline">
+          <span class="item-label">--fs-body &middot; 14px</span>
+          <p class="fs-body">
+            Body copy is a plain system sans so paragraphs stay easy on the eyes;
+            the pixel voice is saved for labels and signs. On the ground, body
+            text takes <code>--ground-ink</code>; on a sheet it takes <code>--ink</code>.
+          </p>
+        </div>
+        <div class="tline"><span class="item-label">--font-code &middot; 13px</span><span class="fs-code">--piece-hi: #f6ead0;</span></div>
+      </div>
+
+      <p class="cap">Type tokens</p>
+      <div class="spr-plate ledger-wrap">
+        <table class="ledger">
+          <thead><tr><th>Token</th><th>Value</th><th>Face</th><th>Where</th></tr></thead>
+          <tbody>
+            <tr><td>--fs-hero</td><td class="v">40px / 700</td><td class="v">--font-pixel</td><td class="d">The big sign. One per page.</td></tr>
+            <tr><td>--fs-title</td><td class="v">30px / 700</td><td class="v">--font-pixel</td><td class="d">The big sign on a phone; large figures.</td></tr>
+            <tr><td>--fs-heading</td><td class="v">20px / 700</td><td class="v">--font-pixel</td><td class="d">Sign faces, the large button.</td></tr>
+            <tr><td>--fs-label</td><td class="v">15px</td><td class="v">--font-pixel</td><td class="d">Button labels, panel titles.</td></tr>
+            <tr><td>--fs-caption</td><td class="v">10px</td><td class="v">--font-pixel</td><td class="d">Captions, row labels, tooltips, check text. The floor.</td></tr>
+            <tr><td>--fs-body</td><td class="v">14px / 1.6</td><td class="v">--font-body</td><td class="d">Running text and inputs.</td></tr>
+            <tr><td>--font-pixel</td><td class="v">"Silkscreen", monospace</td><td class="v">display</td><td class="d">SIL Open Font License, loaded by URL. Uppercase always.</td></tr>
+            <tr><td>--font-body</td><td class="v">system-ui stack</td><td class="v">body</td><td class="d">Nothing to download.</td></tr>
+            <tr><td>--font-code</td><td class="v">ui-monospace stack</td><td class="v">code</td><td class="d">Token names in documentation. Never on a prop.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="spr-panel why">
+        <span class="spr-panel-shell"><span class="spr-panel-face">
+          <p class="spr-panel-title">Why the split is by length</p>
+          <p>
+            The pixel face is paint on a prop. At label length it reads as
+            something lettered onto the object; stretched across a paragraph it
+            becomes tiring, because every glyph is a block of squares. So the rule
+            is decided by length, not by importance: a label, a title, a caption
+            goes pixel; anything a reader has to follow across more than a line
+            goes to the body face, however important it is.
+          </p>
+          <p>
+            Display sizes are fixed <code>px</code> and run 10, 15, 20, 30, 40,
+            never a <code>rem</code>: a painted label is part of the piece it sits
+            on, and the piece is sized in units, not by the reader's text setting.
+          </p>
+        </span></span>
+      </div>
+    </section>
+
+    <!-- ================= 03 SPACE ================= -->
+    <section class="sec" id="space" aria-labelledby="space-h">
+      <div class="sec-head">
+        <span class="sec-no">Section 03</span>
+        <div class="spr-sign">
+          <svg class="spr-tendril spr-tendril--l" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+          <svg class="spr-tendril spr-tendril--r" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+          <span class="spr-sign-shell"><span class="spr-sign-rim"><h2 class="spr-sign-face" id="space-h">Space and layout</h2></span></span>
+        </div>
+      </div>
+      <p class="lede">
+        One unit, <code>--px: 3px</code>, and every distance is a whole multiple
+        of it. The scale is not a list of chosen sizes but the multiples the kit
+        actually uses, each with a job.
+      </p>
+
+      <div class="spr-plate ledger-wrap">
+        <table class="ledger">
+          <thead><tr><th>Units</th><th>At 1x</th><th>Bar</th><th>Where</th></tr></thead>
+          <tbody>
+            <tr><td>1u</td><td class="v">3px</td><td><span class="scale" style="width:calc(1 * var(--px))"></span></td><td class="d">Every edge, every bevel, the pressed drop, the D-pad gap.</td></tr>
+            <tr><td>2u</td><td class="v">6px</td><td><span class="scale" style="width:calc(2 * var(--px))"></span></td><td class="d">Gap between a control's parts: dashes, stepper and rail, seed dots.</td></tr>
+            <tr><td>3u</td><td class="v">9px</td><td><span class="scale" style="width:calc(3 * var(--px))"></span></td><td class="d">Button face, vertical padding; checkbox to its label.</td></tr>
+            <tr><td>4u</td><td class="v">12px</td><td><span class="scale" style="width:calc(4 * var(--px))"></span></td><td class="d">Between an icon, a label and a toggle in a row.</td></tr>
+            <tr><td>5u</td><td class="v">15px</td><td><span class="scale" style="width:calc(5 * var(--px))"></span></td><td class="d">Button face, horizontal padding; sign face, horizontal padding.</td></tr>
+            <tr><td>6u</td><td class="v">18px</td><td><span class="scale" style="width:calc(6 * var(--px))"></span></td><td class="d">Plate and panel padding.</td></tr>
+            <tr><td>8u</td><td class="v">24px</td><td><span class="scale" style="width:calc(8 * var(--px))"></span></td><td class="d">Between specimens on a plate.</td></tr>
+            <tr><td>10u</td><td class="v">30px</td><td><span class="scale" style="width:calc(10 * var(--px))"></span></td><td class="d">Headroom above a sign, so the tendrils have somewhere to grow.</td></tr>
+            <tr><td>22u</td><td class="v">66px</td><td><span class="scale" style="width:calc(22 * var(--px))"></span></td><td class="d">Between sections.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="cap">Measures and breakpoint</p>
+      <div class="spr-plate ledger-wrap">
+        <table class="ledger">
+          <thead><tr><th>Measure</th><th>Value</th><th>Note</th></tr></thead>
+          <tbody>
+            <tr><td>page</td><td class="v">1120px</td><td class="d">Content ceiling, centred on the board.</td></tr>
+            <tr><td>reading</td><td class="v">640px</td><td class="d">Ledes and running text never run wider.</td></tr>
+            <tr><td>panel</td><td class="v">720px</td><td class="d">The widest a sheet of prose gets.</td></tr>
+            <tr><td>gutter</td><td class="v">20px / 16px</td><td class="d">Side margin; the second value applies under the breakpoint.</td></tr>
+            <tr><td>breakpoint</td><td class="v">720px</td><td class="d">The one breakpoint. Below it the hero sign drops to <code>--fs-title</code> and plates tighten from 6u to 4u.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="spr-panel why">
+        <span class="spr-panel-shell"><span class="spr-panel-face">
+          <p class="spr-panel-title">Why one unit</p>
+          <p>
+            Because it makes the whole kit scale as a single object. Set
+            <code>--px: 6px</code> on any wrapper and the geometry inside doubles -
+            corners, edges, bevels, gaps and sprites together - and still lands on
+            the grid. Only the painted labels hold their size, since type is set in
+            fixed pixels. A kit with a free-form spacing scale cannot do that: its
+            10px gap and its 3px edge would drift out of step the moment either
+            was scaled. The Form section below shows the same button at 1x and 2x.
+          </p>
+        </span></span>
+      </div>
+    </section>
+
+    <!-- ================= 04 FORM ================= -->
+    <section class="sec" id="form" aria-labelledby="form-h">
+      <div class="sec-head">
+        <span class="sec-no">Section 04</span>
+        <div class="spr-sign">
+          <svg class="spr-tendril spr-tendril--l" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+          <svg class="spr-tendril spr-tendril--r" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+          <span class="spr-sign-shell"><span class="spr-sign-rim"><h2 class="spr-sign-face" id="form-h">Form</h2></span></span>
+        </div>
+      </div>
+      <p class="lede">
+        The silhouette is three layers. An outer layer in the edge colour, clipped
+        to a staircase and padded by one unit; a face inside it, clipped to the
+        same staircase; and a one-unit bevel on the face - light above, dark below.
+        Press a piece and the bevel goes while the label drops exactly one unit.
+      </p>
+
+      <div class="spr-plate">
+        <p class="tray-cap">Anatomy &middot; one button at 1x and 2x, its corner at 4x</p>
+        <div class="anatomy">
+          <div class="item">
+            <button class="spr-btn" type="button"><span class="spr-btn-body"><span class="spr-btn-face"><span>Press</span></span></span></button>
+            <span class="item-label">1x &middot; --px: 3px</span>
+          </div>
+          <div class="item x2">
+            <button class="spr-btn" type="button"><span class="spr-btn-body"><span class="spr-btn-face"><span>Press</span></span></span></button>
+            <span class="item-label x1">2x &middot; --px: 6px</span>
+          </div>
+          <div class="item x4">
+            <div class="corner-block" role="img" aria-label="Corner staircase at 4x"><b></b></div>
+            <span class="item-label x1">4x corner &middot; two steps of one unit</span>
+          </div>
+          <ul class="legend">
+            <li><i style="background: var(--piece-edge);"></i> edge &middot; 1 unit</li>
+            <li><i style="background: var(--piece-hi);"></i> top bevel &middot; 1 unit</li>
+            <li><i style="background: var(--piece);"></i> face</li>
+            <li><i style="background: var(--piece-lo);"></i> bottom bevel &middot; 1 unit</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="cap">Form values</p>
+      <div class="spr-plate ledger-wrap">
+        <table class="ledger">
+          <thead><tr><th>Part</th><th>Value</th><th>What it does</th></tr></thead>
+          <tbody>
+            <tr><td>--c1 / --c2</td><td class="v">1u / 2u</td><td class="d">The standard staircase: the corner steps two units in, one unit per step.</td></tr>
+            <tr><td>.spr-clip-lg</td><td class="v">2u / 4u</td><td class="d">The same two-step staircase at double stride, for plates, panels, the big sign and stages.</td></tr>
+            <tr><td>--clip-px</td><td class="v">20-point polygon</td><td class="d">The staircase itself, driven by <code>--c1</code> and <code>--c2</code>. Rescope those two to resize the corner.</td></tr>
+            <tr><td>edge</td><td class="v">1u</td><td class="d">An outer element in <code>--piece-edge</code> with <code>padding: var(--px)</code>. Not a border - a border cannot follow a staircase.</td></tr>
+            <tr><td>bevel</td><td class="v">1u + 1u</td><td class="d">Two inset shadows on the face: <code>--piece-hi</code> above, <code>--piece-lo</code> below. Zero blur, always.</td></tr>
+            <tr><td>shade</td><td class="v">2u bottom</td><td class="d">Signs and panels carry one extra unit of edge at the bottom: the object's weight.</td></tr>
+            <tr><td>pressed</td><td class="v">bevel off, 1u down</td><td class="d">The piece is pushed flat. Content moves, the outline does not.</td></tr>
+            <tr><td>border-radius</td><td class="v">none</td><td class="d">Not a small value. Absent.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="spr-panel why">
+        <span class="spr-panel-shell"><span class="spr-panel-face">
+          <p class="spr-panel-title">Why layers and not borders</p>
+          <p>
+            A CSS border is drawn along the element's box and then cut by the
+            clip-path, so at every stepped corner the border is sliced off and the
+            outline opens. An outer layer clipped to the same staircase has no box
+            edge to lose: the edge is simply the one unit of outer colour left
+            showing around the face, and it follows every step. The same reason
+            puts the focus ring on an unclipped wrapper - a clip-path would cut
+            the ring away too.
+          </p>
+        </span></span>
+      </div>
+    </section>
+
+    <!-- ================= 05 MOTION ================= -->
+    <section class="sec" id="motion" aria-labelledby="motion-h">
+      <div class="sec-head">
+        <span class="sec-no">Section 05</span>
+        <div class="spr-sign">
+          <svg class="spr-tendril spr-tendril--l" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+          <svg class="spr-tendril spr-tendril--r" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+          <span class="spr-sign-shell"><span class="spr-sign-rim"><h2 class="spr-sign-face" id="motion-h">Motion</h2></span></span>
+        </div>
+      </div>
+      <p class="lede">
+        Toy motion. Things jump between whole positions and never pass through
+        the space between them. Flip the toggle and watch the knob hop; the
+        tendrils on every sign sway one unit each way.
+      </p>
+
+      <div class="spr-plate">
+        <div class="tray-grid">
+          <div class="item">
+            <label class="spr-toggle"><input class="spr-sr" type="checkbox" /><span class="spr-toggle-outline"><span class="spr-toggle-track"><span class="spr-toggle-knob"></span></span></span><span class="spr-sr">Hop demo</span></label>
+            <span class="item-label">hop &middot; 2 steps</span>
+          </div>
+          <div class="item">
+            <button class="spr-btn" type="button"><span class="spr-btn-body"><span class="spr-btn-face"><span>Hold me</span></span></span></button>
+            <span class="item-label">press &middot; instant</span>
+          </div>
+          <div class="item item--sign">
+            <div class="spr-sign">
+              <svg class="spr-tendril spr-tendril--l" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+              <svg class="spr-tendril spr-tendril--r" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+              <span class="spr-sign-shell"><span class="spr-sign-rim"><span class="spr-sign-face">Sway</span></span></span>
+            </div>
+            <span class="item-label">sway &middot; 1 unit, 2 holds</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="cap">Motion values</p>
+      <div class="spr-plate ledger-wrap">
+        <table class="ledger">
+          <thead><tr><th>Token</th><th>Value</th><th>Where</th></tr></thead>
+          <tbody>
+            <tr><td>press</td><td class="v">0s</td><td class="d">Bevel off, content down 1u. No transition at all.</td></tr>
+            <tr><td>--t-hop</td><td class="v">0.2s steps(2)</td><td class="d">The toggle knob: two jumps across ten units, never a slide.</td></tr>
+            <tr><td>--t-sway</td><td class="v">2.6s per hold</td><td class="d">Tendrils: one unit left for 2.6s, one unit right for 2.6s, <code>steps(1)</code>. The right tendril runs one hold behind the left.</td></tr>
+            <tr><td>tooltip</td><td class="v">display swap</td><td class="d">A hover tip appears whole. No fade, no rise.</td></tr>
+            <tr><td>reduced</td><td class="v">prefers-reduced-motion</td><td class="d">The sway stops and the knob jumps without its two steps. State changes stay instant, so nothing is lost.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="spr-panel why">
+        <span class="spr-panel-shell"><span class="spr-panel-face">
+          <p class="spr-panel-title">Why steps and not easing</p>
+          <p>
+            An eased transition renders every in-between position, and on a kit
+            drawn in 3px squares the in-betweens land between squares - for a
+            frame or two the art is blurred. <code>steps()</code> only ever shows
+            positions on the grid, so the illusion holds while things move. The
+            sway is written as explicit holds rather than <code>alternate</code>
+            for a practical reason: a one-step timing played in reverse never
+            leaves its first frame, and an alternating sway silently stands still.
+          </p>
+        </span></span>
+      </div>
+    </section>
+
+    <!-- ================= 06 SCREEN ================= -->
+    <section class="sec" id="screen" aria-labelledby="screen-h">
+      <div class="sec-head">
+        <span class="sec-no">Section 06</span>
+        <div class="spr-sign">
+          <svg class="spr-tendril spr-tendril--l" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+          <svg class="spr-tendril spr-tendril--r" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+          <span class="spr-sign-shell"><span class="spr-sign-rim"><h2 class="spr-sign-face" id="screen-h">Screen</h2></span></span>
+        </div>
+      </div>
+      <p class="lede">
+        One optional surface treatment: a <b>furrow field</b>. The board resolves
+        into whole cells in mown stripes, with a few tufts flicking on a slow
+        tick. Move across the right-hand panel and rings of cells lift in a
+        pixel diamond around the pointer, travelling outward one whole cell per
+        tick.
+      </p>
+
+      <div class="stage-row">
+        <div class="stage-cell">
+          <div class="stage-frame"><div class="stage" id="fieldFallback"></div></div>
+          <span class="stage-cap">Static fallback &middot; mown stripes</span>
+        </div>
+        <div class="stage-cell">
+          <div class="stage-frame"><div class="stage"><canvas id="fieldCanvas"></canvas></div></div>
+          <span class="stage-cap">Live &middot; move the pointer across it</span>
+        </div>
+      </div>
+
+      <p class="cap">Uniforms</p>
+      <div class="spr-plate ledger-wrap">
+        <table class="ledger">
+          <thead><tr><th>Uniform</th><th>Value</th><th>What it does</th></tr></thead>
+          <tbody>
+            <tr><td>uCell</td><td class="v">12px (4u)</td><td class="d">Cell size, rounded to whole device pixels. Every decision in the shader is made per cell, so nothing finer than a cell can appear.</td></tr>
+            <tr><td>uStep</td><td class="v">8 per second</td><td class="d">The only clock: a whole tick count. Time in the shader never has a fraction.</td></tr>
+            <tr><td>uStripe</td><td class="v">4 cells</td><td class="d">Width of a mown stripe - 16u, the same stripe the fallback draws in CSS.</td></tr>
+            <tr><td>uGap</td><td class="v">3 cells</td><td class="d">Spacing between ripple rings. The front sits where distance minus tick is a multiple of the gap.</td></tr>
+            <tr><td>uReach</td><td class="v">10 cells</td><td class="d">How far the rings run at full engagement. It grows and shrinks one whole ring at a time as the pointer enters and leaves.</td></tr>
+            <tr><td>uTuft</td><td class="v">0.045</td><td class="d">Share of cells carrying a tuft, each flicking on its own phase of an eight-tick cycle.</td></tr>
+            <tr><td class="wrap">uGround, uInset, uAccent, uAccentLo, uGlint</td><td class="v">tokens</td><td class="d">Read from the live values and re-read on every theme change. The glint cell marks the pointer.</td></tr>
+            <tr><td>spring</td><td class="v">k 58 / d 9</td><td class="d">The ripple's centre follows the pointer on a spring, then snaps to a whole cell - weight in the motion, no smear in the drawing.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="spr-panel why">
+        <span class="spr-panel-shell"><span class="spr-panel-face">
+          <p class="spr-panel-title">Why it cannot blend</p>
+          <p>
+            The kit refuses gradients, and the shader makes that refusal
+            structural rather than a matter of care. Each cell <b>picks</b> one of
+            five token colours and never mixes two: there is no fractional weight
+            anywhere in it. Space is quantised to the cell and time to the tick,
+            so the field moves the way the rest of the kit moves - in steps. It
+            also only redraws when a whole step changes: a new tick, a new cell
+            under the pointer, a ring gained or lost.
+          </p>
+          <p>
+            Enhancement only. The canvas is transparent until its first frame, so
+            a machine without WebGL2 sees the static stripes on the left and loses
+            nothing. It stops when scrolled off screen, and under
+            <code>prefers-reduced-motion</code> it draws one settled frame and
+            never starts a loop.
+          </p>
+        </span></span>
+      </div>
+      <p class="prose">
+        <b>Where it belongs:</b> an empty state, a title screen, the frame around
+        a hero sign - a place with nothing to read. Not behind body text or
+        controls: a moving checker under a label costs the contrast the Colour
+        section measured, and a ripple under a button reads as the button doing
+        something it is not.
+      </p>
+    </section>
+
+    <!-- ================= 07 COMPONENTS ================= -->
+    <section class="sec" id="components" aria-labelledby="components-h">
+      <div class="sec-head">
+        <span class="sec-no">Section 07</span>
+        <div class="spr-sign">
+          <svg class="spr-tendril spr-tendril--l" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+          <svg class="spr-tendril spr-tendril--r" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+          <span class="spr-sign-shell"><span class="spr-sign-rim"><h2 class="spr-sign-face" id="components-h">Components</h2></span></span>
+        </div>
+      </div>
+      <p class="lede">
+        Every piece here is a real control - press it, drag it, tab through it.
+        Focus is a 2px <code>--focus</code> ring around the whole prop. The one
+        row of pinned states exists only so hover and pressed can be compared
+        side by side; everything else is live.
+      </p>
+
+      <div class="spr-plate tray">
+        <p class="tray-cap">Button &middot; pinned for comparison: rest, hover, pressed, disabled</p>
+        <div class="state-row">
+          <span class="spr-btn"><span class="spr-btn-body"><span class="spr-btn-face"><span>Label</span></span></span></span>
+          <svg class="spr-i spr-i--2 state-arrow" aria-hidden="true"><use href="#i-tri"/></svg>
+          <span class="spr-btn is-hover"><span class="spr-btn-body"><span class="spr-btn-face"><span>Label</span></span></span></span>
+          <svg class="spr-i spr-i--2 state-arrow" aria-hidden="true"><use href="#i-tri"/></svg>
+          <span class="spr-btn is-pressed"><span class="spr-btn-body"><span class="spr-btn-face"><span>Label</span></span></span></span>
+          <svg class="spr-i spr-i--2 state-arrow" aria-hidden="true"><use href="#i-tri"/></svg>
+          <span class="spr-btn is-disabled"><span class="spr-btn-body"><span class="spr-btn-face"><span>Label</span></span></span></span>
+        </div>
+      </div>
+
+      <div class="spr-plate tray">
+        <p class="tray-cap">Buttons &middot; live</p>
+        <div class="tray-grid">
+          <div class="item">
+            <button class="spr-btn spr-btn--sm" type="button"><span class="spr-btn-body"><span class="spr-btn-face"><span>Small</span></span></span></button>
+            <span class="item-label">small</span>
+          </div>
+          <div class="item">
+            <button class="spr-btn" type="button"><span class="spr-btn-body"><span class="spr-btn-face"><span>Continue</span></span></span></button>
+            <span class="item-label">default</span>
+          </div>
+          <div class="item">
+            <button class="spr-btn spr-btn--lg" type="button"><span class="spr-btn-body"><span class="spr-btn-face"><span>Start</span></span></span></button>
+            <span class="item-label">large</span>
+          </div>
+          <div class="item">
+            <button class="spr-btn spr-btn--alt" type="button"><span class="spr-btn-body"><span class="spr-btn-face"><span>Back</span></span></span></button>
+            <span class="item-label">alt</span>
+          </div>
+          <div class="item">
+            <button class="spr-btn" type="button" disabled><span class="spr-btn-body"><span class="spr-btn-face"><span>Locked</span></span></span></button>
+            <span class="item-label">disabled</span>
+          </div>
+          <div class="item">
+            <div class="state-row">
+              <button class="spr-btn spr-btn--icon" type="button" aria-label="Confirm"><span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--2" aria-hidden="true"><use href="#i-check"/></svg></span></span></button>
+              <button class="spr-btn spr-btn--icon" type="button" aria-label="Cancel"><span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--2" aria-hidden="true"><use href="#i-x"/></svg></span></span></button>
+              <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" aria-label="Add"><span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-plus"/></svg></span></span></button>
+              <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" aria-label="Remove"><span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-minus"/></svg></span></span></button>
+            </div>
+            <span class="item-label">icon squares</span>
+          </div>
+          <div class="item">
+            <div class="spr-dpad" role="group" aria-label="Direction pad">
+              <span class="spr-pad-gap" aria-hidden="true"></span>
+              <button class="spr-btn spr-btn--alt spr-btn--icon" type="button" aria-label="Up"><span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8 spr-rot270" aria-hidden="true"><use href="#i8-tri"/></svg></span></span></button>
+              <span class="spr-pad-gap" aria-hidden="true"></span>
+              <button class="spr-btn spr-btn--alt spr-btn--icon" type="button" aria-label="Left"><span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8 spr-rot180" aria-hidden="true"><use href="#i8-tri"/></svg></span></span></button>
+              <span class="spr-pad-gap" aria-hidden="true"></span>
+              <button class="spr-btn spr-btn--alt spr-btn--icon" type="button" aria-label="Right"><span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-tri"/></svg></span></span></button>
+              <span class="spr-pad-gap" aria-hidden="true"></span>
+              <button class="spr-btn spr-btn--alt spr-btn--icon" type="button" aria-label="Down"><span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8 spr-rot90" aria-hidden="true"><use href="#i8-tri"/></svg></span></span></button>
+              <span class="spr-pad-gap" aria-hidden="true"></span>
+            </div>
+            <span class="item-label">D-pad &middot; alt icon squares</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="spr-plate tray">
+        <p class="tray-cap">Toggles, checks, seed dots</p>
+        <div class="tray-grid">
+          <div class="item">
+            <div class="state-row">
+              <label class="spr-toggle"><input class="spr-sr" type="checkbox" checked /><span class="spr-toggle-outline"><span class="spr-toggle-track"><span class="spr-toggle-knob"></span></span></span><span class="spr-sr">Option one</span></label>
+              <label class="spr-toggle"><input class="spr-sr" type="checkbox" /><span class="spr-toggle-outline"><span class="spr-toggle-track"><span class="spr-toggle-knob"></span></span></span><span class="spr-sr">Option two</span></label>
+              <label class="spr-toggle"><input class="spr-sr" type="checkbox" disabled /><span class="spr-toggle-outline"><span class="spr-toggle-track"><span class="spr-toggle-knob"></span></span></span><span class="spr-sr">Option three, unavailable</span></label>
+            </div>
+            <span class="item-label">toggle &middot; on / off / disabled</span>
+          </div>
+          <div class="item">
+            <div class="state-row">
+              <label class="spr-check"><input class="spr-sr" type="checkbox" checked /><span class="spr-check-box"><span class="spr-check-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-check"/></svg></span></span><span class="spr-check-text">Option A</span></label>
+              <label class="spr-check"><input class="spr-sr" type="checkbox" /><span class="spr-check-box"><span class="spr-check-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-check"/></svg></span></span><span class="spr-check-text">Option B</span></label>
+              <label class="spr-check"><input class="spr-sr" type="checkbox" checked disabled /><span class="spr-check-box"><span class="spr-check-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-check"/></svg></span></span><span class="spr-check-text">Fixed</span></label>
+            </div>
+            <span class="item-label">checkbox &middot; on / off / disabled</span>
+          </div>
+          <div class="item">
+            <fieldset class="bare">
+              <legend class="spr-sr">Choose one</legend>
+              <div class="state-row">
+                <label class="spr-radio"><input class="spr-sr" type="radio" name="demo-radio" checked /><svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg><span class="spr-check-text">First</span></label>
+                <label class="spr-radio"><input class="spr-sr" type="radio" name="demo-radio" /><svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg><span class="spr-check-text">Second</span></label>
+                <label class="spr-radio"><input class="spr-sr" type="radio" name="demo-radio" /><svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg><span class="spr-check-text">Third</span></label>
+              </div>
+            </fieldset>
+            <span class="item-label">radio &middot; seed dots</span>
+          </div>
+          <div class="item">
+            <nav class="spr-pager" aria-label="Pages" id="demo-pager">
+              <button type="button" aria-label="Page 1"><svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg></button>
+              <button type="button" aria-label="Page 2" aria-current="page"><svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg></button>
+              <button type="button" aria-label="Page 3"><svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg></button>
+              <button type="button" aria-label="Page 4"><svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg></button>
+              <button type="button" aria-label="Page 5"><svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg></button>
+            </nav>
+            <span class="item-label">pagination &middot; a planted row</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="spr-plate tray">
+        <p class="tray-cap">Sliders and segment bar &middot; wired together</p>
+        <div class="tray-grid">
+          <div class="item">
+            <div class="spr-slider">
+              <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" data-step="-1" aria-label="Lower level"><span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-minus"/></svg></span></span></button>
+              <span class="spr-rail"><input class="spr-range" type="range" id="level-range" min="0" max="8" value="5" aria-label="Level" /></span>
+              <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" data-step="1" aria-label="Raise level"><span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-plus"/></svg></span></span></button>
+            </div>
+            <div class="spr-seg" id="level-seg" role="img" aria-label="Level 5 of 8">
+              <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="off"></i><i class="off"></i><i class="off"></i>
+            </div>
+            <span class="item-label">drag the plank, the dashes follow</span>
+          </div>
+          <div class="item">
+            <div class="spr-slider spr-slider--v">
+              <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" data-step="1" aria-label="Raise value"><span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-plus"/></svg></span></span></button>
+              <span class="spr-rail spr-rail--v"><input class="spr-range spr-range--v" type="range" min="0" max="8" value="3" aria-label="Vertical value" /></span>
+              <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" data-step="-1" aria-label="Lower value"><span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-minus"/></svg></span></span></button>
+            </div>
+            <span class="item-label">vertical</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="spr-plate tray">
+        <p class="tray-cap">Tooltips and field</p>
+        <div class="tray-grid">
+          <div class="item item--tip">
+            <div class="spr-tip">
+              <span class="spr-tip-bubble"><span class="spr-tip-shell"><span class="spr-tip-face">Always shown</span></span><span class="spr-tip-tail" aria-hidden="true"></span></span>
+              <svg class="spr-i state-arrow" role="img" aria-label="Seed"><use href="#i-seed"/></svg>
+            </div>
+            <span class="item-label">tooltip &middot; pinned</span>
+          </div>
+          <div class="item item--tip">
+            <div class="spr-tip spr-tip--hover">
+              <span class="spr-tip-bubble"><span class="spr-tip-shell"><span class="spr-tip-face">Shown on hover</span></span><span class="spr-tip-tail" aria-hidden="true"></span></span>
+              <button class="spr-btn" type="button"><span class="spr-btn-body"><span class="spr-btn-face"><span>Hover me</span></span></span></button>
+            </div>
+            <span class="item-label">tooltip &middot; hover or focus</span>
+          </div>
+          <div class="item">
+            <label class="item-label" for="demo-field">Field label</label>
+            <span class="spr-field-wrap"><span class="spr-field"><input class="spr-input" id="demo-field" type="text" placeholder="Placeholder text" /></span></span>
+            <span class="item-label">input &middot; ink caret</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="spr-plate tray">
+        <p class="tray-cap">Panel &middot; sheet, title, rows, close</p>
+        <div class="tray-grid">
+          <div class="spr-panel" style="width: 340px; max-width: 100%;">
+            <span class="spr-panel-shell"><span class="spr-panel-face">
+              <p class="spr-panel-title">Panel title</p>
+              <div class="spr-row">
+                <svg class="spr-i spr-when-on" aria-hidden="true"><use href="#i-speaker"/></svg>
+                <svg class="spr-i spr-when-off" aria-hidden="true"><use href="#i-speaker-mute"/></svg>
+                <div>
+                  <p class="spr-row-label">Sound</p>
+                  <div class="spr-seg" role="img" aria-label="5 of 8"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="off"></i><i class="off"></i><i class="off"></i></div>
+                </div>
+                <label class="spr-toggle" style="margin-left:auto;"><input class="spr-sr" type="checkbox" checked /><span class="spr-toggle-outline"><span class="spr-toggle-track"><span class="spr-toggle-knob"></span></span></span><span class="spr-sr">Sound on</span></label>
+              </div>
+              <div class="spr-row">
+                <svg class="spr-i spr-when-on" aria-hidden="true"><use href="#i-note"/></svg>
+                <svg class="spr-i spr-when-off" aria-hidden="true"><use href="#i-note-mute"/></svg>
+                <div>
+                  <p class="spr-row-label">Music</p>
+                  <div class="spr-seg" role="img" aria-label="3 of 8"><i class="on"></i><i class="on"></i><i class="on"></i><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i></div>
+                </div>
+                <label class="spr-toggle" style="margin-left:auto;"><input class="spr-sr" type="checkbox" /><span class="spr-toggle-outline"><span class="spr-toggle-track"><span class="spr-toggle-knob"></span></span></span><span class="spr-sr">Music on</span></label>
+              </div>
+            </span></span>
+            <button class="spr-btn spr-btn--icon spr-btn--sm spr-panel-close" type="button" aria-label="Close panel"><span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-x"/></svg></span></span></button>
+          </div>
+          <p class="tray-note">Flip a toggle: the row swaps its sprite for the muted one. The close button docks two units in from the corner, on top of the edge.</p>
+        </div>
+      </div>
+
+      <div class="spr-plate tray">
+        <p class="tray-cap">Sprites &middot; 16-cell and 8-cell grids</p>
+        <div class="tray-grid" style="color: var(--ground-ink);">
+          <div class="item"><svg class="spr-i" role="img" aria-label="Speaker"><use href="#i-speaker"/></svg><span class="item-label">speaker</span></div>
+          <div class="item"><svg class="spr-i" role="img" aria-label="Speaker muted"><use href="#i-speaker-mute"/></svg><span class="item-label">muted</span></div>
+          <div class="item"><svg class="spr-i" role="img" aria-label="Note"><use href="#i-note"/></svg><span class="item-label">note</span></div>
+          <div class="item"><svg class="spr-i" role="img" aria-label="Note muted"><use href="#i-note-mute"/></svg><span class="item-label">note muted</span></div>
+          <div class="item"><svg class="spr-i" role="img" aria-label="Check"><use href="#i-check"/></svg><span class="item-label">check</span></div>
+          <div class="item"><svg class="spr-i" role="img" aria-label="Cross"><use href="#i-x"/></svg><span class="item-label">cross</span></div>
+          <div class="item"><svg class="spr-i" role="img" aria-label="Arrow"><use href="#i-tri"/></svg><span class="item-label">arrow</span></div>
+          <div class="item"><svg class="spr-i" role="img" aria-label="Seed"><use href="#i-seed"/></svg><span class="item-label">seed</span></div>
+          <div class="item"><svg class="spr-i" role="img" aria-label="Sprout"><use href="#i-sprout"/></svg><span class="item-label">sprout</span></div>
+          <div class="item"><svg class="spr-i" role="img" aria-label="Plus cursor"><use href="#i-cursor-plus"/></svg><span class="item-label">plus cursor</span></div>
+          <div class="item"><svg class="spr-i" role="img" aria-label="Pointer"><use href="#i-cursor-point"/></svg><span class="item-label">pointer</span></div>
+        </div>
+      </div>
+
+      <div class="spr-panel why">
+        <span class="spr-panel-shell"><span class="spr-panel-face">
+          <p class="spr-panel-title">Why every control is three spans deep</p>
+          <p>
+            Shell, face, content. The shell carries the edge, the face carries the
+            bevel, and the content is what moves when the piece is pressed - so
+            the outline stays put while the label drops a unit, the way a real
+            key would. Collapse the layers into one element and one of those three
+            jobs has nowhere to live. The real input is always present and only
+            visually hidden, so every toggle, check and seed dot is keyboard and
+            screen-reader native.
+          </p>
+        </span></span>
+      </div>
+    </section>
+
+    <!-- ================= 08 MOTIFS ================= -->
+    <section class="sec" id="motifs" aria-labelledby="motifs-h">
+      <div class="sec-head">
+        <span class="sec-no">Section 08</span>
+        <div class="spr-sign">
+          <svg class="spr-tendril spr-tendril--l" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+          <svg class="spr-tendril spr-tendril--r" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+          <span class="spr-sign-shell"><span class="spr-sign-rim"><h2 class="spr-sign-face" id="motifs-h">Motifs</h2></span></span>
+        </div>
+      </div>
+      <p class="lede">
+        What makes the kit recognisable at a glance, before a single colour is
+        read. Two ways of laying pixels - stacked box-shadows and integer SVG
+        rects - and a handful of shapes that recur everywhere.
+      </p>
+
+      <div class="motif-grid">
+        <div class="spr-plate motif">
+          <div class="x4"><div class="corner-block" role="img" aria-label="Staircase corner"><b></b></div></div>
+          <p><b>Staircase corner.</b> Two steps, never a curve.</p>
+        </div>
+        <div class="spr-plate motif item--sign">
+          <div class="spr-sign">
+            <svg class="spr-tendril spr-tendril--l" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+            <svg class="spr-tendril spr-tendril--r" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+            <span class="spr-sign-shell"><span class="spr-sign-rim"><span class="spr-sign-face">Sign</span></span></span>
+          </div>
+          <p><b>Painted sign.</b> Accent face, glint rim, accent-lo edge and shade, two tendrils.</p>
+        </div>
+        <div class="spr-plate motif">
+          <div class="x4 motif-tip">
+            <span class="spr-tip-bubble"><span class="spr-tip-shell"><span class="spr-tip-face">Tip</span></span><span class="spr-tip-tail" aria-hidden="true"></span></span>
+          </div>
+          <p><b>Stepped tail.</b> One cell plus stacked box-shadow pixels, shown at 4x.</p>
+        </div>
+        <div class="spr-plate motif">
+          <svg class="spr-i sprite-big" role="img" aria-label="Sprout sprite enlarged"><use href="#i-sprout"/></svg>
+          <p><b>Rect-art sprite.</b> Integer rects, <code>crispEdges</code>, 16 cells.</p>
+        </div>
+        <div class="spr-plate motif">
+          <div class="x2" style="color: var(--ground-ink);">
+            <div class="state-row">
+              <svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg>
+              <svg class="spr-i spr-i--8 spr-seed-dot" style="color: var(--alt-lo); --seed-meat: var(--alt);" aria-hidden="true"><use href="#i-seed8"/></svg>
+            </div>
+          </div>
+          <p><b>Seed dot.</b> Two-tone: outline in <code>color</code>, meat in <code>--seed-meat</code>.</p>
+        </div>
+        <div class="spr-plate motif">
+          <div class="x2">
+            <div class="spr-seg" role="img" aria-label="4 of 6"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="off"></i><i class="off"></i></div>
+          </div>
+          <p><b>Segment dash.</b> Filled or outlined, nothing in between.</p>
+        </div>
+      </div>
+
+      <div class="spr-panel why">
+        <span class="spr-panel-shell"><span class="spr-panel-face">
+          <p class="spr-panel-title">Why these, and not the palette</p>
+          <p>
+            Recolour the kit and it is still recognisable, because the staircase,
+            the one-unit bevel and the rect-art are doing the identifying. That is
+            also why night was possible without redrawing anything: every motif is
+            geometry plus role tokens, and the geometry does not care which theme
+            it is standing in. Before adding a motif, check that it is made of
+            whole units and at most one bevel.
+          </p>
+        </span></span>
+      </div>
+    </section>
+
+    <!-- ================= 09 COMPOSITION ================= -->
+    <section class="sec" id="composition" aria-labelledby="composition-h">
+      <div class="sec-head">
+        <span class="sec-no">Section 09</span>
+        <div class="spr-sign">
+          <svg class="spr-tendril spr-tendril--l" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+          <svg class="spr-tendril spr-tendril--r" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+          <span class="spr-sign-shell"><span class="spr-sign-rim"><h2 class="spr-sign-face" id="composition-h">Composition</h2></span></span>
+        </div>
+      </div>
+      <p class="lede">
+        The pieces assembled into one neutral dialog: a sign overlapping a sheet,
+        a list to choose from, an amount, an option and two actions. Pick a row,
+        set the amount, and the confirm label keeps count. The copy is
+        placeholder, so what you take away is the arrangement.
+      </p>
+
+      <div class="specimen">
+        <div class="specimen-sign">
+          <div class="spr-sign">
+            <svg class="spr-tendril spr-tendril--l" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+            <svg class="spr-tendril spr-tendril--r" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+            <span class="spr-sign-shell"><span class="spr-sign-rim"><h3 class="spr-sign-face">Dialog title</h3></span></span>
+          </div>
+        </div>
+        <div class="spr-panel">
+          <span class="spr-panel-shell"><span class="spr-panel-face">
+            <label class="pick-row spr-radio">
+              <input class="spr-sr" type="radio" name="pick" value="1" checked />
+              <svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg>
+              <svg class="spr-i" aria-hidden="true"><use href="#i-seed"/></svg>
+              <span><span class="pick-name">Item one</span><span class="pick-note">Secondary line</span></span>
+              <span class="spr-seg pick-level" role="img" aria-label="6 of 8"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="off"></i><i class="off"></i></span>
+              <span class="pick-value">6</span>
+            </label>
+            <label class="pick-row spr-radio">
+              <input class="spr-sr" type="radio" name="pick" value="2" />
+              <svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg>
+              <svg class="spr-i" aria-hidden="true"><use href="#i-sprout"/></svg>
+              <span><span class="pick-name">Item two</span><span class="pick-note">Secondary line</span></span>
+              <span class="spr-seg pick-level" role="img" aria-label="4 of 8"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i></span>
+              <span class="pick-value">4</span>
+            </label>
+            <label class="pick-row pick-row--last spr-radio">
+              <input class="spr-sr" type="radio" name="pick" value="3" />
+              <svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg>
+              <svg class="spr-i" aria-hidden="true"><use href="#i-note"/></svg>
+              <span><span class="pick-name">Item three</span><span class="pick-note">Secondary line</span></span>
+              <span class="spr-seg pick-level" role="img" aria-label="2 of 8"><i class="on"></i><i class="on"></i><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i></span>
+              <span class="pick-value">2</span>
+            </label>
+
+            <div class="amount">
+              <span class="spr-row-label">Amount</span>
+              <div class="spr-slider">
+                <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" data-step="-1" aria-label="Less"><span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-minus"/></svg></span></span></button>
+                <span class="spr-rail"><input class="spr-range" type="range" id="amount" min="1" max="10" value="3" aria-label="Amount" /></span>
+                <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" data-step="1" aria-label="More"><span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-plus"/></svg></span></span></button>
+              </div>
+              <span class="spr-row-label" id="amount-out">3 of 10</span>
+            </div>
+            <label class="spr-check spaced">
+              <input class="spr-sr" type="checkbox" />
+              <span class="spr-check-box"><span class="spr-check-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-check"/></svg></span></span>
+              <span class="spr-check-text">Remember this choice</span>
+            </label>
+            <div class="actions">
+              <button class="spr-btn spr-btn--alt" type="button"><span class="spr-btn-body"><span class="spr-btn-face"><span>Back</span></span></span></button>
+              <button class="spr-btn" type="button"><span class="spr-btn-body"><span class="spr-btn-face"><span id="confirm-label">Confirm 3</span></span></span></button>
+            </div>
+          </span></span>
+          <button class="spr-btn spr-btn--icon spr-btn--sm spr-panel-close" type="button" aria-label="Close dialog"><span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-x"/></svg></span></span></button>
+        </div>
+      </div>
+
+      <p class="cap">Anatomy</p>
+      <div class="spr-plate ledger-wrap">
+        <table class="ledger">
+          <thead><tr><th>Part</th><th>As built</th><th>Why it is that</th></tr></thead>
+          <tbody>
+            <tr><td>Sign</td><td class="v">-5u overlap</td><td class="d">The heading sits on the sheet's top edge, not above it, so it reads as a label nailed to the object rather than a caption floating near it.</td></tr>
+            <tr><td>Sheet</td><td class="v">--piece-hi, 6u pad</td><td class="d">The lightest face in the kit, so the pieces laid on it - rows, buttons, the rail - still read as raised.</td></tr>
+            <tr><td>Rows</td><td class="v">1u --piece rule</td><td class="d">Divided by a one-unit line in the piece colour: visible, but quieter than any edge.</td></tr>
+            <tr><td>Level</td><td class="v">segment + value</td><td class="d">The dashes are a picture of the number, and the number stays beside them. On a phone the dashes go and the number carries it alone.</td></tr>
+            <tr><td>Actions</td><td class="v">alt, then piece</td><td class="d">The way back is the dark counter-piece; the way forward is the lighter, raised one. The eye lands on the lighter piece first.</td></tr>
+            <tr><td>Close</td><td class="v">2u in from the corner</td><td class="d">Docked over the edge, inside the staircase - it belongs to the sheet, not to the page.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="spr-panel why">
+        <span class="spr-panel-shell"><span class="spr-panel-face">
+          <p class="spr-panel-title">Why it says nothing</p>
+          <p>
+            Item one, item two, an amount, confirm. Those words were chosen because
+            they imply nothing about what the kit is for. The same arrangement is
+            a settings sheet, an order form, a level select or a file picker, and a
+            reader in any of those fields should be able to lift it whole.
+          </p>
+        </span></span>
+      </div>
+    </section>
+
+    <!-- ================= 10 RULES ================= -->
+    <section class="sec" id="rules" aria-labelledby="rules-h">
+      <div class="sec-head">
+        <span class="sec-no">Section 10</span>
+        <div class="spr-sign">
+          <svg class="spr-tendril spr-tendril--l" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+          <svg class="spr-tendril spr-tendril--r" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
+          <span class="spr-sign-shell"><span class="spr-sign-rim"><h2 class="spr-sign-face" id="rules-h">Rules</h2></span></span>
+        </div>
+      </div>
+      <p class="lede">The refusals matter more than the permissions.</p>
+
+      <div class="dodont">
+        <div class="spr-panel">
+          <span class="spr-panel-shell"><span class="spr-panel-face">
+            <p class="spr-panel-title"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-check"/></svg>Do</p>
+            <ul>
+              <li>Build every size as <b>whole units</b> of <code>--px</code>.</li>
+              <li>Draw corners with the <b>staircase clip</b>, and edges as an <b>outer layer</b>.</li>
+              <li>Give depth with a <b>one-unit bevel</b>, and take it away when pressed.</li>
+              <li>Use <b>flat fills</b> and chunky rect-art with <code>crispEdges</code>.</li>
+              <li>Put small text on the ground in <code>--ground-ink</code>, and on a piece in <code>--ink</code>.</li>
+              <li>Check both themes with the <b>Day / night</b> button in the masthead.</li>
+            </ul>
+          </span></span>
+        </div>
+        <div class="spr-panel">
+          <span class="spr-panel-shell"><span class="spr-panel-face">
+            <p class="spr-panel-title"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-x"/></svg>Do not</p>
+            <ul>
+              <li>Use <b>border-radius</b>, or any smooth curve.</li>
+              <li>Add a <b>gradient</b>, a <b>blur</b>, or a shadow with any blur radius.</li>
+              <li><b>Ease</b> anything. Motion is <code>steps()</code> only.</li>
+              <li>Set <b>small text</b> in <code>--piece-edge</code>, or small glint text on the accent.</li>
+              <li><b>Invert a piece</b> for night. The ground goes dark; the piece is lamplit.</li>
+              <li>Run the <b>furrow field behind text or controls</b>.</li>
+              <li>Size the pixel face in <b>rem</b> or in-between steps. It runs 10, 15, 20, 30, 40.</li>
+            </ul>
           </span></span>
         </div>
       </div>
-      <div class="spr-panel">
-        <span class="spr-panel-shell"><span class="spr-panel-face">
-          <label class="shop-row">
-            <input class="spr-sr" type="radio" name="shop-item" data-price="8" data-name="Carrot seeds" checked />
-            <svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg>
-            <svg class="spr-i" aria-hidden="true"><use href="#i-seed"/></svg>
-            <span>
-              <span class="shop-item-name">Carrot seeds</span>
-              <span class="shop-item-note" style="display:block;">Grows in 3 days</span>
-            </span>
-            <span class="spr-seg shop-stock" role="img" aria-label="Stock 6 of 8">
-              <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="off"></i><i class="off"></i>
-            </span>
-            <span class="shop-price">8 <svg class="spr-i spr-i--2" aria-hidden="true"><use href="#i-coin"/></svg></span>
-          </label>
-          <label class="shop-row">
-            <input class="spr-sr" type="radio" name="shop-item" data-price="12" data-name="Pumpkin seeds" />
-            <svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg>
-            <svg class="spr-i" aria-hidden="true"><use href="#i-seed"/></svg>
-            <span>
-              <span class="shop-item-name">Pumpkin seeds</span>
-              <span class="shop-item-note" style="display:block;">Grows in 7 days</span>
-            </span>
-            <span class="spr-seg shop-stock" role="img" aria-label="Stock 4 of 8">
-              <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i>
-            </span>
-            <span class="shop-price">12 <svg class="spr-i spr-i--2" aria-hidden="true"><use href="#i-coin"/></svg></span>
-          </label>
-          <label class="shop-row" style="border-bottom: 0;">
-            <input class="spr-sr" type="radio" name="shop-item" data-price="20" data-name="Berry sprout" />
-            <svg class="spr-i spr-i--8 spr-seed-dot" aria-hidden="true"><use href="#i-seed8"/></svg>
-            <svg class="spr-i" aria-hidden="true"><use href="#i-sprout"/></svg>
-            <span>
-              <span class="shop-item-name">Berry sprout</span>
-              <span class="shop-item-note" style="display:block;">Fruits every 2 days</span>
-            </span>
-            <span class="spr-seg shop-stock" role="img" aria-label="Stock 2 of 8">
-              <i class="on"></i><i class="on"></i><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i>
-            </span>
-            <span class="shop-price">20 <svg class="spr-i spr-i--2" aria-hidden="true"><use href="#i-coin"/></svg></span>
-          </label>
+    </section>
 
-          <div class="shop-qty">
-            <span class="spr-row-label">Qty</span>
-            <div class="spr-slider">
-              <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" data-step="-1" aria-label="Fewer packets">
-                <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-minus"/></svg></span></span>
-              </button>
-              <span class="spr-rail"><input class="spr-range" type="range" id="shop-qty" min="1" max="10" value="3" aria-label="Quantity" /></span>
-              <button class="spr-btn spr-btn--icon spr-btn--sm" type="button" data-step="1" aria-label="More packets">
-                <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-plus"/></svg></span></span>
-              </button>
-            </div>
-            <span class="spr-row-label" id="shop-qty-out">3 packets</span>
-          </div>
-          <label class="spr-check" style="margin: calc(2 * var(--px)) 0;">
-            <input class="spr-sr" type="checkbox" />
-            <span class="spr-check-box"><span class="spr-check-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-check"/></svg></span></span>
-            <span class="spr-check-text">Plant right away</span>
-          </label>
-          <div class="shop-actions">
-            <button class="spr-btn spr-btn--cocoa" type="button"><span class="spr-btn-body"><span class="spr-btn-face"><span>LEAVE</span></span></span></button>
-            <button class="spr-btn" type="button" id="shop-buy"><span class="spr-btn-body"><span class="spr-btn-face"><span id="shop-buy-label">BUY 3 FOR 24</span><svg class="spr-i spr-i--2" aria-hidden="true"><use href="#i-coin"/></svg></span></span></button>
-          </div>
-        </span></span>
-        <button class="spr-btn spr-btn--icon spr-btn--sm spr-panel-close" type="button" aria-label="Close shop">
-          <span class="spr-btn-body"><span class="spr-btn-face"><svg class="spr-i spr-i--8" aria-hidden="true"><use href="#i8-x"/></svg></span></span>
-        </button>
-      </div>
-    </div>
-  </section>
+    <!-- ================= FOOT ================= -->
+    <footer class="foot">
+      <p>
+        Sprout - a pixel-prop UI kit. An original CSS and SVG work: every sprite
+        is inline rect-art drawn for this kit. Type: Silkscreen, SIL Open Font
+        License, loaded by URL; the body face is the platform's own. This
+        catalog follows STANDARD.md at the repository root.
+      </p>
+      <a class="spr-btn" href="../../index.html">
+        <span class="spr-btn-body"><span class="spr-btn-face"><span>All systems</span></span></span>
+      </a>
+    </footer>
 
-  <!-- ================= FOOTER ================= -->
-  <footer class="foot">
-    <div class="spr-sign foot-sign">
-      <svg class="spr-tendril spr-tendril--l" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
-      <svg class="spr-tendril spr-tendril--r" aria-hidden="true" viewBox="0 0 12 12"><use href="#s-tendril"/></svg>
-      <span class="spr-sign-shell"><span class="spr-sign-snow">
-        <p class="spr-sign-face">Field notes</p>
-      </span></span>
-    </div>
-    <p>
-      Every crop, price, and stock level on this sheet is synthetic demo data
-      from an imaginary farm. Sprout is an exploration in the UIplayground
-      workspace - an original CSS/SVG homage to the
-      <em>Sprout Lands</em> UI asset pack by Cup Nooble. The style is
-      recreated from scratch; no assets were copied.
-    </p>
-    <a class="spr-btn" href="../../index.html">
-      <span class="spr-btn-body"><span class="spr-btn-face"><span>ALL SYSTEMS</span></span></span>
-    </a>
-  </footer>
+  </main>
 
+  <script src="js/furrow.js"></script>
   <script>
-    // copy hex from seed packets
-    document.querySelectorAll(".spr-packet").forEach((btn) => {
-      btn.addEventListener("click", async () => {
-        const name = btn.querySelector(".spr-packet-name");
-        const old = name.textContent;
-        try { await navigator.clipboard.writeText(btn.dataset.hex); } catch (e) { /* clipboard blocked: still flash */ }
-        name.textContent = "COPIED!";
-        setTimeout(() => { name.textContent = old; }, 900);
-      });
-    });
-
-    // minus/plus steppers drive their sibling range
-    document.querySelectorAll(".spr-slider").forEach((wrap) => {
-      const range = wrap.querySelector("input[type=range]");
-      if (!range) { return; }
-      wrap.querySelectorAll("[data-step]").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const d = Number(btn.dataset.step);
-          if (d > 0) { range.stepUp(d); } else { range.stepDown(-d); }
-          range.dispatchEvent(new Event("input", { bubbles: true }));
+    (function () {
+      // theme toggle: explicit choice wins in both directions
+      var root = document.documentElement;
+      if (location.hash === "#light" || location.hash === "#dark") {
+        root.setAttribute("data-theme", location.hash.slice(1));
+      }
+      document.querySelectorAll("[data-toggle-theme]").forEach(function (b) {
+        b.addEventListener("click", function () {
+          var cur = root.getAttribute("data-theme");
+          if (!cur) cur = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          root.setAttribute("data-theme", cur === "dark" ? "light" : "dark");
         });
       });
-    });
 
-    // volume slider paints its segment bar
-    const volRange = document.getElementById("vol-range");
-    const volSeg = document.getElementById("vol-seg");
-    function paintSeg(seg, value, max) {
-      Array.from(seg.children).forEach((dash, i) => {
-        dash.className = i < value ? "on" : "off";
+      // swatch packets copy their var() and say so
+      document.querySelectorAll(".spr-packet[data-copy]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var name = btn.querySelector(".duo-name");
+          var old = name.textContent;
+          if (navigator.clipboard) { navigator.clipboard.writeText(btn.dataset.copy).catch(function () {}); }
+          name.textContent = "Copied";
+          setTimeout(function () { name.textContent = old; }, 900);
+        });
       });
-      seg.setAttribute("aria-label", "Volume " + value + " of " + max);
-    }
-    volRange.addEventListener("input", () => { paintSeg(volSeg, Number(volRange.value), 8); });
 
-    // pagination seeds
-    document.querySelectorAll("#demo-pager button").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll("#demo-pager button").forEach((b) => { b.removeAttribute("aria-current"); });
-        btn.setAttribute("aria-current", "page");
+      // minus / plus steppers drive their sibling range
+      document.querySelectorAll(".spr-slider").forEach(function (wrap) {
+        var range = wrap.querySelector("input[type=range]");
+        if (!range) return;
+        wrap.querySelectorAll("[data-step]").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var d = Number(btn.dataset.step);
+            if (d > 0) { range.stepUp(d); } else { range.stepDown(-d); }
+            range.dispatchEvent(new Event("input", { bubbles: true }));
+          });
+        });
       });
-    });
 
-    // seed shop arithmetic
-    const qty = document.getElementById("shop-qty");
-    const qtyOut = document.getElementById("shop-qty-out");
-    const buyLabel = document.getElementById("shop-buy-label");
-    function shopUpdate() {
-      const item = document.querySelector("input[name=shop-item]:checked");
-      const n = Number(qty.value);
-      const total = n * Number(item.dataset.price);
-      qtyOut.textContent = n + (n === 1 ? " packet" : " packets");
-      buyLabel.textContent = "BUY " + n + " FOR " + total;
-    }
-    qty.addEventListener("input", shopUpdate);
-    document.querySelectorAll("input[name=shop-item]").forEach((r) => {
-      r.addEventListener("change", shopUpdate);
-    });
-    shopUpdate();
+      // the level slider paints its segment bar
+      var levelRange = document.getElementById("level-range");
+      var levelSeg = document.getElementById("level-seg");
+      levelRange.addEventListener("input", function () {
+        var v = Number(levelRange.value);
+        Array.prototype.forEach.call(levelSeg.children, function (dash, i) {
+          dash.className = i < v ? "on" : "off";
+        });
+        levelSeg.setAttribute("aria-label", "Level " + v + " of 8");
+      });
+
+      // pagination seeds
+      var pager = document.querySelectorAll("#demo-pager button");
+      pager.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          pager.forEach(function (b) { b.removeAttribute("aria-current"); });
+          btn.setAttribute("aria-current", "page");
+        });
+      });
+
+      // composition: the confirm label keeps count
+      var amount = document.getElementById("amount");
+      var amountOut = document.getElementById("amount-out");
+      var confirmLabel = document.getElementById("confirm-label");
+      function recount() {
+        var n = Number(amount.value);
+        amountOut.textContent = n + " of " + amount.max;
+        confirmLabel.textContent = "Confirm " + n;
+      }
+      amount.addEventListener("input", recount);
+      recount();
+    })();
   </script>
 </body>
 </html>

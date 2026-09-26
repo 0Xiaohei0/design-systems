@@ -1,8 +1,10 @@
 /*
 Sprout's entrance card on the root portal. Scoped to .sys-spr; loaded by the
-portal only. Mirrors the Sprout tokens by value: matcha board, biscuit pieces
-with pixel-step corners and one-pixel bevels, Silkscreen display voice, toggle
-and segment bar as living specimens. No border-radius anywhere - corners step.
+portal only. Mirrors the day-theme Sprout tokens by value (the portal does not
+load css/sprout-core.css): --ground board, --piece faces with --piece-hi /
+--piece-lo bevels and a --piece-edge outline, an --accent sign with a --glint
+rim, --alt ink for the toggle and segment bar. Pixel-step corners, one-unit
+bevels, Silkscreen display voice. No border-radius anywhere - corners step.
 */
 
 .sys-spr {

@@ -1,14 +1,20 @@
 /*
 Objekt's entrance card on the root portal. Scoped to .sys-obj; loaded by the
-portal only. Mirrors the Objekt tokens by value: a black sticker strip with a
-vertical display word and barcode, on the concrete sheet, kraft tag, serial
-plate, stamp button with the hard sticker-lift shadow. Print rules: no radius,
-no blur, no chroma.
+portal only. Mirrors the day-sheet tokens by value, under the same role names:
+a lead-stock strip with a vertical display word and barcode, on the ground,
+a mark-stock tag, a serial plate, and a stamp button with the hard
+sticker-lift shadow. Print rules: no radius, no blur, no chroma.
 */
 
 .sys-obj {
-  background: #d7d5d0;
-  color: #1a1a1a;
+  --ground: #d7d5d0;
+  --stock-lead: #161616;
+  --stock-mark: #c7ac83;
+  --ink: #1a1a1a;
+  --ink-on-lead: #eae7df;
+
+  background: var(--ground);
+  color: var(--ink);
   display: flex;
   gap: 16px;
   padding: 14px;
@@ -19,8 +25,8 @@ no blur, no chroma.
 .sys-obj .strip {
   flex: none;
   width: 74px;
-  background: #161616;
-  color: #eae7df;
+  background: var(--stock-lead);
+  color: var(--ink-on-lead);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,7 +49,7 @@ no blur, no chroma.
 .sys-obj .barcode {
   width: 44px;
   height: 30px;
-  color: #eae7df;
+  color: var(--ink-on-lead);
 }
 
 .sys-obj .side {
@@ -56,8 +62,8 @@ no blur, no chroma.
 }
 
 .sys-obj .tag {
-  background: #c7ac83;
-  color: #1a1a1a;
+  background: var(--stock-mark);
+  color: var(--ink);
   padding: 3px 8px;
   font-size: 0.6rem;
   letter-spacing: 0.14em;
@@ -70,7 +76,7 @@ no blur, no chroma.
   letter-spacing: 0.08em;
   text-transform: uppercase;
   line-height: 1.8;
-  border-top: 3px solid #1a1a1a;
+  border-top: 3px solid var(--ink);
   padding-top: 8px;
   align-self: stretch;
 }
@@ -81,13 +87,13 @@ no blur, no chroma.
   font-family: "Arial Narrow", Arial, sans-serif;
   font-size: 0.8rem;
   line-height: 1.5;
-  color: #1a1a1a;
+  color: var(--ink);
 }
 
 .sys-obj .enter {
   display: inline-block;
-  background: #161616;
-  color: #eae7df;
+  background: var(--stock-lead);
+  color: var(--ink-on-lead);
   padding: 9px 14px;
   text-decoration: none;
   font-family: "Anton", "Arial Narrow", Impact, sans-serif;
@@ -100,7 +106,7 @@ no blur, no chroma.
 /* sticker lift: the system's one motion - hard offset shadow, no blur */
 .sys-obj .enter:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 3px 3px 0 #1a1a1a;
+  box-shadow: 3px 3px 0 var(--ink);
 }
 
 .sys-obj .enter:active {
@@ -109,7 +115,7 @@ no blur, no chroma.
 }
 
 .sys-obj .enter:focus-visible {
-  outline: 2px solid #1a1a1a;
+  outline: 2px solid var(--ink);
   outline-offset: 2px;
 }
 
@@ -121,7 +127,7 @@ no blur, no chroma.
   position: absolute;
   right: 12px;
   bottom: 12px;
-  border: 1.5px solid #1a1a1a;
+  border: 1.5px solid var(--ink);
   padding: 2px 7px;
   font-size: 0.58rem;
   letter-spacing: 0.12em;

@@ -3,16 +3,14 @@
 <!--
 THESIS: Every UI element is a printed label: stickers, stamps, barcodes and spec
 sheets on a concrete sheet inside a black press frame.
-OWN-WORLD: Four paper stocks (black, kraft, steel, bone) and their inks are the
-whole palette; Anton display set vertically, mono serial data, justified fine
-print; depth only as the hard offset sticker lift.
-STORY: A designer scans the sheet: the four reference strips, then stocks, type
-voices, motifs, components with every state, and one assembled product spec
-sheet, and leaves knowing exactly which label to peel.
-FIRST VIEWPORT: The four vertical strip labels, OBJEKT SYSTEM MODUL KINETIC,
-side by side at scale 1:1.
-FORM: Single catalog sheet (mode: Read); fixed frame chrome with registration
-marks; plain CSS tokens in objekt-core.css; synthetic industrial data.
+OWN-WORLD: Four paper stocks named by role (lead, mark, plate, base) and their
+inks are the whole palette; Anton display set vertically, mono serial data,
+justified fine print; depth only as the hard offset sticker lift.
+FORM: catalog sheet, set in the system itself, following STANDARD.md. Day and
+night sheets, both hand-authored, flipped from the masthead.
+CONTENT: every serial, batch and figure on this sheet is synthetic specimen
+data. The composed specimen describes a label, so a reader takes away the
+structure rather than a guess at a use case.
 -->
 <head>
   <meta charset="UTF-8" />
@@ -22,74 +20,7 @@ marks; plain CSS tokens in objekt-core.css; synthetic industrial data.
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/objekt-core.css" />
-  <style>
-    /* catalog layout only; the system itself lives in objekt-core.css */
-    .masthead-row {
-      display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
-      margin-bottom: 18px;
-    }
-    .hero-grid {
-      display: grid; grid-template-columns: repeat(4, minmax(0, 220px));
-      gap: clamp(12px, 2.4vw, 26px); justify-content: center; align-items: stretch;
-    }
-    .hero-under {
-      max-width: 1010px; margin: 26px auto 0;
-      display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap;
-    }
-    .hero-under .t-fine { flex: 1 1 320px; max-width: 62ch; }
-    .anchor-row { display: flex; flex-wrap: wrap; gap: 8px; }
-    .anchor-row a { text-decoration: none; }
-    .anchor-row a:hover { background: var(--stock-black); color: var(--ink-on-dark); border-color: var(--stock-black); }
-
-    .g-plates { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
-    .g-plates-wide { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-
-    .swatch-plate { display: flex; flex-direction: column; min-height: 200px; }
-    .swatch-plate .t-display { font-size: clamp(30px, 4vw, 44px); }
-    .swatch-plate .rule { margin: 10px 0; }
-    .swatch-rows { margin-top: auto; }
-    .swatch-rows .r { display: flex; justify-content: space-between; gap: 8px; padding: 3px 0; }
-
-    .voice-display { font-size: clamp(42px, 6vw, 74px); }
-    .voice-note { margin-top: 12px; }
-
-    .states-row { display: flex; flex-wrap: wrap; gap: 14px 18px; align-items: center; }
-    .states-row + .plate-cap { margin-top: 18px; }
-    .stack-14 > * + * { margin-top: 14px; }
-    .stack-22 > * + * { margin-top: 22px; }
-
-    .draw-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 20px; }
-    .draw-gallery figure { display: flex; flex-direction: column; gap: 8px; }
-    .draw-gallery .tdraw { flex: 1; display: flex; align-items: flex-end; justify-content: center; }
-    /* uniform figure height so stroke weight reads consistently across drawings */
-    .draw-gallery .tdraw svg { width: auto; height: 170px; max-width: 100%; }
-    .draw-gallery figcaption {
-      font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--ink-sec);
-    }
-    .rule-demo > * + * { margin-top: 22px; }
-
-    .app-grid { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 20px; align-items: start; }
-    .app-head { display: flex; align-items: baseline; gap: 14px; padding: 10px 14px 8px; margin-bottom: 16px; }
-    .app-head .t-display { font-size: clamp(26px, 3.4vw, 38px); }
-    .app-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; }
-    .app-actions .field { flex: 0 1 120px; }
-    .badge-row { display: flex; flex-wrap: wrap; gap: 8px; }
-
-    .sheet-foot { margin-top: clamp(48px, 7vw, 84px); text-align: center; }
-    .sheet-foot .barcode { max-width: 260px; margin: 26px auto 0; }
-    .sheet-foot .t-display { font-size: clamp(30px, 5vw, 52px); margin-top: 18px; }
-    .sheet-foot .t-data { margin-top: 10px; }
-    .sheet-foot .btn { margin-top: 22px; }
-
-    @media (max-width: 1000px) {
-      .hero-grid { grid-template-columns: repeat(2, minmax(0, 220px)); }
-    }
-    @media (max-width: 720px) {
-      .hero-grid { grid-template-columns: minmax(0, 220px); }
-      .app-grid { grid-template-columns: minmax(0, 1fr); }
-    }
-  </style>
+  <link rel="stylesheet" href="css/catalog.css" />
 </head>
 <body>
 
@@ -183,433 +114,815 @@ marks; plain CSS tokens in objekt-core.css; synthetic industrial data.
   <svg class="frame-cross tr" aria-hidden="true"><use href="#reg-cross"/></svg>
   <svg class="frame-cross bl" aria-hidden="true"><use href="#reg-cross"/></svg>
   <svg class="frame-cross br" aria-hidden="true"><use href="#reg-cross"/></svg>
-  <span class="frame-cap top" aria-hidden="true">PROJECT: DESIGN_PLAYGROUND / SHEET: OBJEKT</span>
-  <span class="frame-cap bottom" aria-hidden="true">K.S.A.R. BRUTALIST STICKERS - PRINTED WERK 3</span>
-  <span class="frame-cap left" aria-hidden="true">DEV STAGE: APPROVED - REV.04</span>
-  <span class="frame-cap right" aria-hidden="true">SERIES K - LABELS 88-301 TO 88-304</span>
+  <span class="frame-cap top" aria-hidden="true">SHEET: OBJEKT / CATALOG / SCALE 1:1</span>
+  <span class="frame-cap bottom" aria-hidden="true">PRINT, NOT SCREEN - NO RADIUS, NO BLUR, NO HUE</span>
+  <span class="frame-cap left" aria-hidden="true">REV.05 - DOCUMENTED</span>
+  <span class="frame-cap right" aria-hidden="true">SPECIMEN SHEET 01/001</span>
 
-  <div class="sheet">
+  <!-- ============ MASTHEAD ============ -->
+  <div class="mast">
+    <a class="mast-word" href="#top">Objekt</a>
+    <nav class="mast-idx" aria-label="Sections">
+      <a href="#colour">01 Colour</a>
+      <a href="#type">02 Type</a>
+      <a href="#space">03 Space</a>
+      <a href="#form">04 Form</a>
+      <a href="#motion">05 Motion</a>
+      <a href="#screen">06 Screen</a>
+      <a href="#components">07 Components</a>
+      <a href="#motifs">08 Motifs</a>
+      <a href="#composition">09 Composition</a>
+      <a href="#rules">10 Rules</a>
+    </nav>
+    <button class="btn btn-base" data-toggle-theme type="button">Flip sheet</button>
+  </div>
+
+  <div class="sheet" id="top">
     <main class="sheet-inner" id="main">
-      <h1 class="visually-hidden">OBJEKT industrial label system - catalog sheet</h1>
 
-      <!-- ============ HERO: the reference strip set ============ -->
+      <!-- ============ THESIS ============ -->
       <header>
-        <div class="masthead-row t-data">
-          <span>OBJEKT INDUSTRIAL LABEL SYSTEM / SERIES K</span>
-          <span class="t-data-sec">SCALE 1:1 / SHEET 01/007</span>
-        </div>
-
         <div class="hero-grid">
-          <article class="strip stock-black">
+          <article class="strip stock-lead">
             <div class="strip-word-area"><span class="strip-word">OBJEKT</span></div>
             <div class="rule" role="presentation"></div>
-            <div class="strip-rev"><span>REV.04</span><span>VOL.1</span></div>
+            <div class="strip-rev"><span>REV.05</span><span>VOL.1</span></div>
             <div class="strip-mid">
-              <div class="strip-data">SERIAL: 88-301 &middot; CAPACITY: 4000 &middot; 0100 1100 0010</div>
+              <div class="strip-data">SERIAL: 000-001 &middot; QTY: 4000 &middot; 0100 1100 0010</div>
               <div class="strip-draw tdraw"><svg viewBox="0 0 120 90" aria-hidden="true"><use href="#td-reels"/></svg></div>
             </div>
             <div class="barcode">
               <svg preserveAspectRatio="none" aria-hidden="true"><use href="#bc-a"/></svg>
-              <div class="digits">5 8 8 9 1 8 - 0 6 8 0 7</div>
+              <div class="digits">0 0 0 0 0 1 - 0 0 0 0 1</div>
             </div>
             <div class="strip-foot">
-              <span class="stamp-index">01/007</span>
-              <span class="made">WERK 3 / DE</span>
+              <span class="stamp-index">01/004</span>
+              <span class="made">LEAD STOCK</span>
             </div>
           </article>
 
-          <article class="strip stock-kraft">
+          <article class="strip stock-mark">
             <div class="strip-word-area"><span class="strip-word">SYSTEM</span></div>
             <div class="rule" role="presentation"></div>
             <div class="strip-rev"><span>REV.02</span><span>VOL.1</span></div>
             <div class="strip-mid">
-              <div class="strip-data">SERIAL: 88-302 &middot; CAPACITY: 2600 &middot; 0101 0011 0001</div>
+              <div class="strip-data">SERIAL: 000-002 &middot; QTY: 2600 &middot; 0101 0011 0001</div>
               <div class="strip-draw tdraw"><svg viewBox="0 0 120 100" aria-hidden="true"><use href="#td-box"/></svg></div>
             </div>
             <div class="barcode">
               <svg preserveAspectRatio="none" aria-hidden="true"><use href="#bc-b"/></svg>
-              <div class="digits">5 8 8 9 1 8 - 0 6 8 0 8</div>
+              <div class="digits">0 0 0 0 0 1 - 0 0 0 0 2</div>
             </div>
             <div class="strip-foot">
-              <span class="stamp-index">02/007</span>
-              <span class="made">WERK 3 / DE</span>
+              <span class="stamp-index">02/004</span>
+              <span class="made">MARK STOCK</span>
             </div>
           </article>
 
-          <article class="strip stock-steel">
-            <div class="strip-word-area"><span class="strip-word">MODUL</span></div>
+          <article class="strip stock-plate">
+            <div class="strip-word-area"><span class="strip-word">MODULE</span></div>
             <div class="rule" role="presentation"></div>
             <div class="strip-rev"><span>REV.07</span><span>VOL.2</span></div>
             <div class="strip-mid">
-              <div class="strip-data">SERIAL: 88-303 &middot; CAPACITY: 1200 &middot; 0100 1101 0100</div>
+              <div class="strip-data">SERIAL: 000-003 &middot; QTY: 1200 &middot; 0100 1101 0100</div>
               <div class="strip-draw tdraw"><svg viewBox="0 0 100 110" aria-hidden="true"><use href="#td-rotor"/></svg></div>
             </div>
             <div class="barcode">
               <svg preserveAspectRatio="none" aria-hidden="true"><use href="#bc-a"/></svg>
-              <div class="digits">5 8 8 9 1 8 - 0 6 8 0 9</div>
+              <div class="digits">0 0 0 0 0 1 - 0 0 0 0 3</div>
             </div>
             <div class="strip-foot">
-              <span class="stamp-index">03/007</span>
-              <span class="made">WERK 3 / DE</span>
+              <span class="stamp-index">03/004</span>
+              <span class="made">PLATE STOCK</span>
             </div>
           </article>
 
-          <article class="strip stock-bone">
+          <article class="strip stock-base">
             <div class="strip-word-area"><span class="strip-word">KINETIC</span></div>
             <div class="rule" role="presentation"></div>
             <div class="strip-rev"><span>REV.01</span><span>VOL.2</span></div>
             <div class="strip-mid">
-              <div class="strip-data">SERIAL: 88-304 &middot; CAPACITY: 800 &middot; 0100 1011 0110</div>
+              <div class="strip-data">SERIAL: 000-004 &middot; QTY: 0800 &middot; 0100 1011 0110</div>
               <div class="strip-draw tdraw"><svg viewBox="0 0 60 110" aria-hidden="true"><use href="#td-spring"/></svg></div>
             </div>
             <div class="barcode">
               <svg preserveAspectRatio="none" aria-hidden="true"><use href="#bc-b"/></svg>
-              <div class="digits">5 8 8 9 1 8 - 0 6 8 1 0</div>
+              <div class="digits">0 0 0 0 0 1 - 0 0 0 0 4</div>
             </div>
             <div class="strip-foot">
-              <span class="stamp-index">04/007</span>
-              <span class="made">WERK 3 / DE</span>
+              <span class="stamp-index">04/004</span>
+              <span class="made">BASE STOCK</span>
             </div>
           </article>
         </div>
 
-        <div class="hero-under">
-          <p class="t-fine">
-            OBJEKT is a design system in which every interface element is a printed
-            label. Buttons are stamps, values are serials, panels are paper stock,
-            and depth exists only as the hard shadow of a sticker lifting off the
-            sheet. Four stocks and their inks are the entire palette; no accent
-            hue, no gradient, no radius, no blur. This sheet is the catalog:
-            stocks, type voices, motifs, components with every state, and one
-            assembled spec sheet, printed at scale 1:1 for designers picking parts.
-          </p>
-          <nav class="anchor-row" aria-label="Sheet contents">
-            <a class="badge stock-bone" href="#sec-stocks">01 STOCKS</a>
-            <a class="badge stock-bone" href="#sec-type">02 TYPE</a>
-            <a class="badge stock-bone" href="#sec-motifs">03 MOTIFS</a>
-            <a class="badge stock-bone" href="#sec-components">04 COMPONENTS</a>
-            <a class="badge stock-bone" href="#sec-application">05 APPLICATION</a>
-          </nav>
+        <div class="thesis">
+          <h1 class="t-display">Every element is a printed label.</h1>
+          <div class="thesis-copy">
+            <div class="rule" role="presentation"></div>
+            <p>
+              OBJEKT is a brutalist industrial label system. Buttons are stamps,
+              values are serials, panels are paper stock, and the page is a
+              concrete sheet inside a black press frame. Print, not screen.
+            </p>
+            <p>
+              Two things to hold on to. <b>Colour is material</b>: four stocks
+              and their inks are the whole palette, and there is no accent hue to
+              reach for. And <b>depth is a hard offset shadow</b>: a sticker lifts
+              off the sheet with zero blur, or it lies flat. Nothing in between.
+            </p>
+          </div>
         </div>
       </header>
 
-      <!-- ============ 01 STOCKS AND INKS ============ -->
-      <section class="sec" id="sec-stocks">
+      <!-- ============ READ THIS FIRST ============ -->
+      <section class="brief stock-lead" aria-labelledby="brief-h">
+        <div class="brief-head">
+          <h2 id="brief-h">Read this first</h2>
+          <span class="t-data t-data-sec">Handling instructions / 6 items</span>
+        </div>
+        <ol>
+          <li><span><b>These values are the system.</b> Every token below exists in <code>css/objekt-core.css</code>. Use them; do not invent parallel ones.</span></li>
+          <li><span><b>Pick a stock before you pick a colour.</b> A surface is lead, mark, plate or base, and the stock class sets its ink. Never set text colour on a label by hand.</span></li>
+          <li><span><b>No radius, no blur, no gradient, no opacity.</b> Disabled is a pre-mixed solid ink, not a faded one. These four refusals are the silhouette.</span></li>
+          <li><span><b>Search for an existing label before building a second one.</b> The strip, the plate, the stamp and the serial plate cover almost everything.</span></li>
+          <li><span><b>Token names are roles.</b> <code>--stock-lead</code> is the loudest label, not the colour black - on the night sheet it is the palest thing on the page.</span></li>
+          <li><span><b>Both sheets, always.</b> Day and night are hand-authored and nothing warns you if you only checked one. Flip the sheet.</span></li>
+        </ol>
+      </section>
+
+      <!-- ============ 01 COLOUR ============ -->
+      <section class="sec" id="colour" aria-labelledby="colour-h">
         <div class="sec-head">
-          <h2>Stocks and inks</h2>
-          <span class="idx">SEC.01 / 05</span>
+          <h2 id="colour-h">Colour</h2>
+          <span class="idx">SEC.01 / 10 - 16 ROLE TOKENS</span>
         </div>
+        <p class="lede">
+          Sixteen role tokens and no accent. Each swatch shows <b>the day sheet on
+          the left and the night sheet on the right</b>, so both are visible
+          without flipping. The night sheet is hand-authored: the lead stock turns
+          pale so it stays the loudest label, and the other three stocks darken
+          under a light ink.
+        </p>
+
+        <p class="sub-cap">The sheet and the frame</p>
+        <div class="duo">
+          <div class="swatch stock-base"><div class="halves"><i style="background:#d7d5d0"></i><i style="background:#1f1e1b"></i></div><div class="swatch-cap"><span class="nm">--ground</span><span class="role">The sheet every label is stuck to.</span><span class="hex"><span>#D7D5D0</span><span>#1F1E1B</span></span></div></div>
+          <div class="swatch stock-base"><div class="halves"><i style="background:#0e0e0e"></i><i style="background:#080808"></i></div><div class="swatch-cap"><span class="nm">--frame</span><span class="role">The press frame, and every hard lift shadow.</span><span class="hex"><span>#0E0E0E</span><span>#080808</span></span></div></div>
+          <div class="swatch stock-base"><div class="halves"><i style="background:#bcbab4"></i><i style="background:#0a0a09"></i></div><div class="swatch-cap"><span class="nm">--shade</span><span class="role">The resting shadow a label casts on the sheet.</span><span class="hex"><span>#BCBAB4</span><span>#0A0A09</span></span></div></div>
+          <div class="swatch stock-base"><div class="halves"><i style="background:#b9b5aa"></i><i style="background:#8f8b81"></i></div><div class="swatch-cap"><span class="nm">--frame-ink</span><span class="role">Registration marks and edge captions on the frame.</span><span class="hex"><span>#B9B5AA</span><span>#8F8B81</span></span></div></div>
+        </div>
+
+        <p class="sub-cap">The four stocks</p>
+        <div class="duo">
+          <div class="swatch stock-base"><div class="halves"><i style="background:#161616"></i><i style="background:#e6e2d8"></i></div><div class="swatch-cap"><span class="nm">--stock-lead</span><span class="role">The loudest label: section strips, primary stamps, error stamps.</span><span class="hex"><span>#161616</span><span>#E6E2D8</span></span></div></div>
+          <div class="swatch stock-base"><div class="halves"><i style="background:#c7ac83"></i><i style="background:#4f412e"></i></div><div class="swatch-cap"><span class="nm">--stock-mark</span><span class="role">Marking stock: tags, secondary stamps, notes.</span><span class="hex"><span>#C7AC83</span><span>#4F412E</span></span></div></div>
+          <div class="swatch stock-base"><div class="halves"><i style="background:#a4a8ab"></i><i style="background:#3c4044"></i></div><div class="swatch-cap"><span class="nm">--stock-plate</span><span class="role">Plate stock: technical and serial labels.</span><span class="hex"><span>#A4A8AB</span><span>#3C4044</span></span></div></div>
+          <div class="swatch stock-base"><div class="halves"><i style="background:#edeae2"></i><i style="background:#35342f"></i></div><div class="swatch-cap"><span class="nm">--stock-base</span><span class="role">Base stock: forms, tables, anything read at length.</span><span class="hex"><span>#EDEAE2</span><span>#35342F</span></span></div></div>
+        </div>
+
+        <p class="sub-cap">The inks</p>
+        <div class="duo">
+          <div class="swatch stock-base"><div class="halves"><i style="background:#1a1a1a"></i><i style="background:#ece8de"></i></div><div class="swatch-cap"><span class="nm">--ink</span><span class="role">Ink on mark, plate, base and the sheet.</span><span class="hex"><span>#1A1A1A</span><span>#ECE8DE</span></span></div></div>
+          <div class="swatch stock-base"><div class="halves"><i style="background:#34312b"></i><i style="background:#bdb8ac"></i></div><div class="swatch-cap"><span class="nm">--ink-2</span><span class="role">Secondary step of the same ink. Never a mid grey.</span><span class="hex"><span>#34312B</span><span>#BDB8AC</span></span></div></div>
+          <div class="swatch stock-base"><div class="halves"><i style="background:#989791"></i><i style="background:#7a776e"></i></div><div class="swatch-cap"><span class="nm">--ink-dis</span><span class="role">Disabled ink on base stock, pre-mixed solid.</span><span class="hex"><span>#989791</span><span>#7A776E</span></span></div></div>
+          <div class="swatch stock-base"><div class="halves"><i style="background:#7e7059"></i><i style="background:#837154"></i></div><div class="swatch-cap"><span class="nm">--ink-dis-mark</span><span class="role">Disabled ink on mark stock.</span><span class="hex"><span>#7E7059</span><span>#837154</span></span></div></div>
+          <div class="swatch stock-base"><div class="halves"><i style="background:#6d7072"></i><i style="background:#71757a"></i></div><div class="swatch-cap"><span class="nm">--ink-dis-plate</span><span class="role">Disabled ink on plate stock.</span><span class="hex"><span>#6D7072</span><span>#71757A</span></span></div></div>
+          <div class="swatch stock-base"><div class="halves"><i style="background:#eae7df"></i><i style="background:#161616"></i></div><div class="swatch-cap"><span class="nm">--ink-on-lead</span><span class="role">Ink on lead stock.</span><span class="hex"><span>#EAE7DF</span><span>#161616</span></span></div></div>
+          <div class="swatch stock-base"><div class="halves"><i style="background:#b9b5aa"></i><i style="background:#3e3a33"></i></div><div class="swatch-cap"><span class="nm">--ink-on-lead-2</span><span class="role">Secondary ink on lead stock.</span><span class="hex"><span>#B9B5AA</span><span>#3E3A33</span></span></div></div>
+          <div class="swatch stock-base"><div class="halves"><i style="background:#6b6a66"></i><i style="background:#8a877f"></i></div><div class="swatch-cap"><span class="nm">--ink-on-lead-dis</span><span class="role">Disabled ink on lead stock.</span><span class="hex"><span>#6B6A66</span><span>#8A877F</span></span></div></div>
+        </div>
+
+        <p class="sub-cap">The stocks as labels - these follow the sheet</p>
         <div class="g-plates">
-          <div class="plate swatch-plate stock-black">
-            <span class="t-display">Black</span>
+          <div class="plate swatch-plate stock-lead">
+            <span class="t-display">Lead</span>
             <div class="rule" role="presentation"></div>
             <div class="swatch-rows t-data">
-              <div class="r"><span>STOCK</span><span>#161616</span></div>
-              <div class="r"><span>INK</span><span>#EAE7DF</span></div>
-              <div class="r t-data-sec"><span>INK 2ND</span><span>#B9B5AA</span></div>
-              <div class="r t-data-sec"><span>USE</span><span>HEADERS, STAMPS</span></div>
+              <div class="r"><span>STOCK</span><span class="tk">--stock-lead</span></div>
+              <div class="r"><span>INK</span><span class="tk">--ink-on-lead</span></div>
+              <div class="r t-data-sec"><span>INK 2ND</span><span class="tk">--ink-on-lead-2</span></div>
+              <div class="r t-data-sec"><span>ROLE</span><span>STRIPS, STAMPS</span></div>
             </div>
           </div>
-          <div class="plate swatch-plate stock-kraft">
-            <span class="t-display">Kraft</span>
+          <div class="plate swatch-plate stock-mark">
+            <span class="t-display">Mark</span>
             <div class="rule" role="presentation"></div>
             <div class="swatch-rows t-data">
-              <div class="r"><span>STOCK</span><span>#C7AC83</span></div>
-              <div class="r"><span>INK</span><span>#1A1A1A</span></div>
-              <div class="r t-data-sec"><span>INK 2ND</span><span>#34312B</span></div>
-              <div class="r t-data-sec"><span>USE</span><span>WARM UTILITY</span></div>
+              <div class="r"><span>STOCK</span><span class="tk">--stock-mark</span></div>
+              <div class="r"><span>INK</span><span class="tk">--ink</span></div>
+              <div class="r t-data-sec"><span>INK 2ND</span><span class="tk">--ink-2</span></div>
+              <div class="r t-data-sec"><span>ROLE</span><span>TAGS, NOTES</span></div>
             </div>
           </div>
-          <div class="plate swatch-plate stock-steel">
-            <span class="t-display">Steel</span>
+          <div class="plate swatch-plate stock-plate">
+            <span class="t-display">Plate</span>
             <div class="rule" role="presentation"></div>
             <div class="swatch-rows t-data">
-              <div class="r"><span>STOCK</span><span>#A4A8AB</span></div>
-              <div class="r"><span>INK</span><span>#1A1A1A</span></div>
-              <div class="r t-data-sec"><span>INK 2ND</span><span>#34312B</span></div>
-              <div class="r t-data-sec"><span>USE</span><span>COOL UTILITY</span></div>
+              <div class="r"><span>STOCK</span><span class="tk">--stock-plate</span></div>
+              <div class="r"><span>INK</span><span class="tk">--ink</span></div>
+              <div class="r t-data-sec"><span>INK 2ND</span><span class="tk">--ink-2</span></div>
+              <div class="r t-data-sec"><span>ROLE</span><span>TECHNICAL</span></div>
             </div>
           </div>
-          <div class="plate swatch-plate stock-bone">
-            <span class="t-display">Bone</span>
+          <div class="plate swatch-plate stock-base">
+            <span class="t-display">Base</span>
             <div class="rule" role="presentation"></div>
             <div class="swatch-rows t-data">
-              <div class="r"><span>STOCK</span><span>#EDEAE2</span></div>
-              <div class="r"><span>INK</span><span>#1A1A1A</span></div>
-              <div class="r t-data-sec"><span>INK 2ND</span><span>#34312B</span></div>
-              <div class="r t-data-sec"><span>USE</span><span>FORMS, TABLES</span></div>
+              <div class="r"><span>STOCK</span><span class="tk">--stock-base</span></div>
+              <div class="r"><span>INK</span><span class="tk">--ink</span></div>
+              <div class="r t-data-sec"><span>INK 2ND</span><span class="tk">--ink-2</span></div>
+              <div class="r t-data-sec"><span>ROLE</span><span>FORMS, TABLES</span></div>
             </div>
           </div>
         </div>
-        <div class="hero-under" style="margin-top: 20px; max-width: none;">
-          <p class="t-fine" style="max-width: 62ch;">
-            The sheet itself is GROUND #D7D5D0 and the press frame is FRAME
-            #0E0E0E, the deepest black on the page and the color of every hard
-            shadow. Secondary text is always a darker or lighter step of the
-            stock's own ink, never a mid gray: #34312B on the light stocks,
-            #B9B5AA on black. All body ink holds at least 4.5:1 on its stock.
-          </p>
+
+        <p class="sub-cap">Contrast floor</p>
+        <table class="spec-table tok stock-base">
+          <thead><tr><th>Pair</th><th>Day</th><th>Night</th><th>Rule</th></tr></thead>
+          <tbody>
+            <tr><td>--ink on --stock-base</td><td class="v">14.5:1</td><td class="v">10.2:1</td><td class="d">Reading surfaces get the widest margin.</td></tr>
+            <tr><td>--ink-2 on --stock-mark</td><td class="v">6.0:1</td><td class="v">5.0:1</td><td class="d">The tightest body pair in the system, and still above AA 4.5:1.</td></tr>
+            <tr><td>--ink-2 on --stock-plate</td><td class="v">5.4:1</td><td class="v">5.3:1</td><td class="d">Secondary text on plate stock.</td></tr>
+            <tr><td>--ink-on-lead-2 on --stock-lead</td><td class="v">8.8:1</td><td class="v">8.7:1</td><td class="d">Secondary ink on the loudest label.</td></tr>
+            <tr><td>--ink-dis*</td><td class="v">2.1 - 3.3:1</td><td class="v">2.1 - 2.8:1</td><td class="d">Disabled only. <b>Always paired with a dashed edge</b>, so the state never rests on contrast alone.</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout stock-mark">
+          <span class="callout-tag">Why</span>
+          Secondary text is always <b>a step of the stock's own ink</b>, never a
+          mid grey. A mid grey on mark or plate stock sits at the same luminance
+          as the paper and disappears; <code>--ink-2</code> is a darker step of the
+          ink itself, so it clears 4.5:1 on every stock on both sheets. And
+          disabled is a pre-mixed solid rather than an opacity, because a
+          translucent ink would pick up whatever stock it sits on and read as a
+          different colour on each one.
         </div>
       </section>
 
-      <!-- ============ 02 TYPE VOICES ============ -->
-      <section class="sec" id="sec-type">
+      <!-- ============ 02 TYPE ============ -->
+      <section class="sec" id="type" aria-labelledby="type-h">
         <div class="sec-head">
-          <h2>Type voices</h2>
-          <span class="idx">SEC.02 / 05</span>
+          <h2 id="type-h">Typography</h2>
+          <span class="idx">SEC.02 / 10 - 3 VOICES</span>
         </div>
+        <p class="lede">
+          Three voices, one job each. <b>Display is the stamp</b>, ultra-heavy and
+          condensed, often run vertically up a strip. <b>Data is the serial</b>:
+          every number on the sheet is mono, uppercase, tracked wide. <b>Fine
+          print is the legal band</b>: small, condensed, justified.
+        </p>
+
         <div class="g-plates-wide">
-          <div class="plate stock-bone">
-            <p class="plate-cap">VOICE 01 / DISPLAY - ANTON, UPPERCASE, TRACKING -0.01EM</p>
-            <p class="t-display voice-display">Arkiv 4000&nbsp;KG</p>
-            <p class="t-data voice-note t-data-sec">
-              ULTRA-HEAVY CONDENSED GROTESQUE. HEADLINES, STRIP WORDS, STAMP
-              BUTTONS. OFTEN SET VERTICALLY TO RUN UP A STRIP.
-            </p>
+          <div class="plate stock-base">
+            <p class="plate-cap">Voice 01 / display - Anton, uppercase, -0.01em</p>
+            <p class="t-display voice-display">Specimen 01</p>
+            <p class="t-data voice-note t-data-sec">Strip words, section strips, stamp buttons. Often set vertically to run up a strip.</p>
           </div>
-          <div class="plate stock-bone">
-            <p class="plate-cap">VOICE 02 / DATA - UI-MONOSPACE, TRACKING 0.12EM</p>
+          <div class="plate stock-base">
+            <p class="plate-cap">Voice 02 / data - ui-monospace, 0.12em</p>
             <p class="t-data">
-              SERIAL: 88-301<br />
-              CAPACITY: 4000 M<br />
-              BATCH: 2206-K / PLANT: WERK 3<br />
+              SERIAL: 000-001<br />
+              QTY: 4000<br />
+              BATCH: A-01 / SHEET: 01<br />
               0100 1100 0010 0110
             </p>
-            <p class="t-data voice-note t-data-sec">
-              SERIALS, CAPACITIES, BINARY STRINGS. EVERY NUMBER ON THE SHEET
-              SPEAKS IN THIS VOICE.
-            </p>
+            <p class="t-data voice-note t-data-sec">Serials, quantities, binary strings. Every number on the sheet speaks in this voice.</p>
           </div>
-          <div class="plate stock-bone">
-            <p class="plate-cap">VOICE 03 / FINE PRINT - CONDENSED SANS, JUSTIFIED</p>
+          <div class="plate stock-base">
+            <p class="plate-cap">Voice 03 / fine print - condensed sans, justified</p>
             <p class="t-fine">
-              HANDLING: Store flat between 10 and 25 degrees C at 35 to 45
-              percent relative humidity. Labels are pressure-set and must not be
-              repositioned after 24 hours. Adhesive class B2 per works standard
-              KSAR-88. Damaged strips are void and must be returned to plant
-              WERK 3 for reprint. Serial continuity is the operator's
-              responsibility; report gaps to the registry before the next
-              production run is released.
+              Specimen fine print. This block stands where a legal band or a
+              handling note would go on a real label. It is set small, condensed
+              and justified so that it reads as a texture first and as text only
+              when someone leans in. It never carries anything a reader must see
+              at a glance; that belongs to the display and data voices above it.
             </p>
-            <p class="t-data voice-note t-data-sec">
-              LEGAL BANDS, HANDLING NOTES, MICRO COPY.
-            </p>
+            <p class="t-data voice-note t-data-sec">Legal bands, handling notes, micro copy.</p>
           </div>
+        </div>
+
+        <p class="sub-cap">At real size</p>
+        <div class="plate stock-base type-ladder">
+          <div><span class="plate-cap lbl">strip word / clamp(56px, 7.2vw, 92px) / 1.0</span><div class="sp-strip">Strip</div></div>
+          <div><span class="plate-cap lbl">section strip / clamp(20px, 3vw, 30px) / 1.0</span><div class="sp-sec">Section heading</div></div>
+          <div><span class="plate-cap lbl">stamp / 14px / +0.01em</span><div class="sp-stamp">Stamp button</div></div>
+          <div><span class="plate-cap lbl">value / mono 13px / 0.08em</span><div class="sp-value">Field value 000-001</div></div>
+          <div><span class="plate-cap lbl">data / mono 10px / 0.12em / 1.7</span><div class="t-data">Serial: 000-001 &middot; qty: 4000</div></div>
+          <div><span class="plate-cap lbl">label / mono 9px / 0.14em</span><div class="sp-label">Plate caption, badge, field label</div></div>
+          <div><span class="plate-cap lbl">digits / mono 9px / 0.28em</span><div class="sp-digits">0 0 0 0 0 1 - 0 0 0 0 1</div></div>
+          <div><span class="plate-cap lbl">body / fine 14px / 1.45</span><div class="sp-body">Running text on the sheet, set in the condensed fine stack.</div></div>
+          <div><span class="plate-cap lbl">fine / 10.5px / 1.5 / justified</span><div class="t-fine">Fine print, the legal band under everything else.</div></div>
+        </div>
+
+        <table class="spec-table tok stock-base" style="margin-top:20px">
+          <thead><tr><th>Token</th><th>Stack</th><th>Job</th></tr></thead>
+          <tbody>
+            <tr><td>--font-display</td><td class="v">"Anton", "Arial Narrow", Impact</td><td class="d">Stamps and strips. Weight 400 only - Anton has one weight, and that is the point.</td></tr>
+            <tr><td>--font-mono</td><td class="v">ui-monospace, "SF Mono", Menlo, Consolas</td><td class="d">Every number, caption, badge and field value. The platform mono, nothing to download.</td></tr>
+            <tr><td>--font-fine</td><td class="v">"Arial Narrow", "Helvetica Neue", Arial</td><td class="d">Body text and the fine-print band. Condensed so it sits beside Anton without looking wide.</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout stock-mark">
+          <span class="callout-tag">Why</span>
+          <b>Small type opens up; large type closes in.</b> Mono captions run at
+          0.12 to 0.28em and the display face at -0.01em. On a real label the
+          big word is stamped and the small data is typed by a machine, and the
+          two trackings reproduce exactly that difference. It is what lets a
+          9px caption read as machine data instead of as fine print.
         </div>
       </section>
 
-      <!-- ============ 03 MOTIFS ============ -->
-      <section class="sec" id="sec-motifs">
+      <!-- ============ 03 SPACE ============ -->
+      <section class="sec" id="space" aria-labelledby="space-h">
         <div class="sec-head">
-          <h2>Motifs</h2>
-          <span class="idx">SEC.03 / 05</span>
+          <h2 id="space-h">Space and layout</h2>
+          <span class="idx">SEC.03 / 10 - ONE SHEET</span>
         </div>
-        <div class="g-plates">
-          <div class="plate stock-bone stack-14">
-            <p class="plate-cap">BARCODE / TWO CUTS</p>
-            <div class="barcode">
-              <svg preserveAspectRatio="none" aria-hidden="true"><use href="#bc-a"/></svg>
-              <div class="digits">5 8 8 9 1 8 - 0 6 8 0 7</div>
-            </div>
-            <div class="barcode">
-              <svg preserveAspectRatio="none" aria-hidden="true"><use href="#bc-b"/></svg>
-              <div class="digits">2 2 0 6 - K / 8 8 3 0 1</div>
-            </div>
-          </div>
-          <div class="plate stock-bone stack-14">
-            <p class="plate-cap">INDEX STAMP / SERIAL PLATE</p>
-            <p><span class="stamp-index">01/007</span> <span class="stamp-index lg">04/007</span></p>
-            <div class="serial-plate">
-              <div class="rows">
-                <div class="row">SERIAL: 88-301</div>
-                <div class="row">BATCH: 2206-K</div>
-                <div class="row">PLANT: WERK 3 / DE</div>
-              </div>
-              <div class="row-rot">QC PASSED 2026-07</div>
-            </div>
-          </div>
-          <div class="plate stock-bone stack-14">
-            <p class="plate-cap">REGISTRATION / RULES</p>
-            <p><svg class="regmark" aria-hidden="true"><use href="#reg-cross"/></svg></p>
-            <div class="rule-demo">
-              <div class="rule" role="presentation"></div>
-              <div class="rule-thin" role="presentation"></div>
-            </div>
-            <p class="t-data t-data-sec">
-              CROSSES AND CROP TICKS SIT AT FRAME CORNERS. THICK RULES ARE 3PX
-              WITH "I" END TICKS; THIN RULES ARE 1PX ROW SEPARATORS.
-            </p>
-          </div>
-        </div>
-        <div class="plate stock-bone" style="margin-top: 20px;">
-          <p class="plate-cap">TECHNICAL DRAWINGS / PATENT LINE ART, 1.4PX CURRENTCOLOR STROKES</p>
-          <div class="draw-gallery">
-            <figure>
-              <div class="tdraw"><svg viewBox="0 0 120 90" aria-hidden="true"><use href="#td-reels"/></svg></div>
-              <figcaption>FIG.1 - TAPE TRANSPORT</figcaption>
-            </figure>
-            <figure>
-              <div class="tdraw"><svg viewBox="0 0 120 100" aria-hidden="true"><use href="#td-box"/></svg></div>
-              <figcaption>FIG.2 - ENCLOSURE, EXPLODED</figcaption>
-            </figure>
-            <figure>
-              <div class="tdraw"><svg viewBox="0 0 100 110" aria-hidden="true"><use href="#td-rotor"/></svg></div>
-              <figcaption>FIG.3 - ROTOR AND NUT</figcaption>
-            </figure>
-            <figure>
-              <div class="tdraw"><svg viewBox="0 0 60 110" aria-hidden="true"><use href="#td-spring"/></svg></div>
-              <figcaption>FIG.4 - DAMPER SPRING</figcaption>
-            </figure>
-          </div>
-        </div>
-      </section>
+        <p class="lede">
+          A black frame, a concrete sheet inside it, and one centred measure on the
+          sheet. Spacing is a short ladder of small steps; the large gaps are
+          between sections, where a lead strip does the dividing.
+        </p>
 
-      <!-- ============ 04 COMPONENTS ============ -->
-      <section class="sec" id="sec-components">
-        <div class="sec-head">
-          <h2>Components</h2>
-          <span class="idx">SEC.04 / 05</span>
-        </div>
         <div class="g-plates-wide">
-          <div class="plate stock-bone">
-            <p class="plate-cap">STAMP BUTTONS / DEFAULT, LIFTED (HOVER), PRESSED, FOCUS, DISABLED</p>
+          <div class="plate stock-base">
+            <p class="plate-cap">Steps in use</p>
+            <table class="spec-table tok">
+              <tbody>
+                <tr><td>4</td><td class="v">4px</td><td class="demo"><div class="scale-bar" style="width:4px"></div></td></tr>
+                <tr><td>6</td><td class="v">6px</td><td class="demo"><div class="scale-bar" style="width:6px"></div></td></tr>
+                <tr><td>8</td><td class="v">8px</td><td class="demo"><div class="scale-bar" style="width:8px"></div></td></tr>
+                <tr><td>10</td><td class="v">10px</td><td class="demo"><div class="scale-bar" style="width:10px"></div></td></tr>
+                <tr><td>12</td><td class="v">12px</td><td class="demo"><div class="scale-bar" style="width:12px"></div></td></tr>
+                <tr><td>14</td><td class="v">14px</td><td class="demo"><div class="scale-bar" style="width:14px"></div></td></tr>
+                <tr><td>16</td><td class="v">16px</td><td class="demo"><div class="scale-bar" style="width:16px"></div></td></tr>
+                <tr><td>24</td><td class="v">24px</td><td class="demo"><div class="scale-bar" style="width:24px"></div></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="plate stock-base">
+            <p class="plate-cap">Measure and breaks</p>
+            <table class="spec-table tok">
+              <tbody>
+                <tr><td>--frame-w</td><td class="v">28 / 20 / 14px</td><td class="d">The press frame. Narrows at 900px and again at 720px.</td></tr>
+                <tr><td>sheet pad</td><td class="v">clamp(16px, 4vw, 56px)</td><td class="d">Side margin of the sheet inside the frame.</td></tr>
+                <tr><td>measure</td><td class="v">1120px</td><td class="d">Max content width, centred on the sheet.</td></tr>
+                <tr><td>section gap</td><td class="v">clamp(40px, 6vw, 72px)</td><td class="d">Above every section strip.</td></tr>
+                <tr><td>plate pad</td><td class="v">16px</td><td class="d">Inside every plate. Strips use 14px.</td></tr>
+                <tr><td>break 900</td><td class="v">900px</td><td class="d">Frame drops to 20px.</td></tr>
+                <tr><td>break 720</td><td class="v">720px</td><td class="d">Frame drops to 14px, edge captions go, crosses shrink to 9px.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="callout stock-mark">
+          <span class="callout-tag">Why</span>
+          <b>The frame is part of the layout, not a border around it.</b> It is
+          what makes the page read as one printed sheet rather than a web page,
+          so it narrows on small screens but never disappears. Registration
+          crosses stay at every width; only the edge captions drop, because at
+          14px there is no room to set them.
+        </div>
+      </section>
+
+      <!-- ============ 04 FORM ============ -->
+      <section class="sec" id="form" aria-labelledby="form-h">
+        <div class="sec-head">
+          <h2 id="form-h">Form</h2>
+          <span class="idx">SEC.04 / 10 - RADIUS 0</span>
+        </div>
+        <p class="lede">
+          Every corner is square. The silhouette comes from rule weight and from
+          the hard shadow of a lifted sticker - four line weights, three shadows,
+          and no blur on any of them.
+        </p>
+
+        <div class="g-plates-wide">
+          <div class="plate stock-base">
+            <p class="plate-cap">Line weights</p>
+            <table class="spec-table tok">
+              <tbody>
+                <tr><td>thin</td><td class="v">1px</td><td class="demo"><div class="edge-demo" style="border:1px solid var(--ink)"></div></td><td class="d">Table rows, badges, serial rows.</td></tr>
+                <tr><td>stamp</td><td class="v">1.5px</td><td class="demo"><div class="edge-demo" style="border:1.5px solid var(--ink)"></div></td><td class="d">Index stamps, serial plates.</td></tr>
+                <tr><td>edge</td><td class="v">2px</td><td class="demo"><div class="edge-demo" style="border:2px solid var(--ink)"></div></td><td class="d">Button edges, field underline, checkbox, focus.</td></tr>
+                <tr><td>--rule-w</td><td class="v">3px</td><td class="demo"><div class="edge-demo" style="border-top:3px solid var(--ink)"></div></td><td class="d">The thick rule, table tops, error underline.</td></tr>
+                <tr><td>void</td><td class="v">1.5px dashed</td><td class="demo"><div class="edge-demo" style="border:1.5px dashed var(--ink-dis)"></div></td><td class="d">Disabled. A state, never a style.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="plate stock-base">
+            <p class="plate-cap">Shadows and corners</p>
+            <table class="spec-table tok">
+              <tbody>
+                <tr><td>strip rest</td><td class="v">6px 6px 0 --shade</td><td class="demo"><div class="lift-demo rest-6"></div></td><td class="d">A strip label resting on the sheet.</td></tr>
+                <tr><td>plate rest</td><td class="v">4px 4px 0 --shade</td><td class="demo"><div class="lift-demo rest-4"></div></td><td class="d">A plate resting on the sheet.</td></tr>
+                <tr><td>--lift</td><td class="v">4px 4px 0 --frame</td><td class="demo"><div class="lift-demo lifted"></div></td><td class="d">A sticker peeled up: translate(-2px, -2px) plus this.</td></tr>
+                <tr><td>radius</td><td class="v">0</td><td class="demo"><div class="corner-demo"></div></td><td class="d">Everywhere, including inputs.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="callout stock-mark">
+          <span class="callout-tag">Why</span>
+          <b>Two shadow colours, two meanings.</b> <code>--shade</code> is a label
+          lying on the sheet: soft in tone, never in edge. <code>--frame</code> is a
+          label peeled up toward you, so its shadow is the darkest thing on the
+          page. Keep them apart and a reader can tell resting from lifted without
+          being told; blur either one and the page stops being paper.
+        </div>
+      </section>
+
+      <!-- ============ 05 MOTION ============ -->
+      <section class="sec" id="motion" aria-labelledby="motion-h">
+        <div class="sec-head">
+          <h2 id="motion-h">Motion</h2>
+          <span class="idx">SEC.05 / 10 - ONE MOMENT</span>
+        </div>
+        <p class="lede">
+          Print does not move. The system has exactly one authored motion - the
+          sticker lift - and everything else changes state instantly. Hover the
+          stamp below, then press it.
+        </p>
+
+        <div class="g-plates-wide">
+          <div class="plate stock-base">
+            <p class="plate-cap">Live - hover, press, tab to it</p>
+            <div class="states-row"><button type="button" class="btn">Lift me</button><button type="button" class="btn btn-mark">Lift me</button></div>
+          </div>
+          <div class="plate stock-base">
+            <table class="spec-table tok">
+              <tbody>
+                <tr><td>--t-lift</td><td class="v">120ms</td><td class="d">The lift, on transform and box-shadow only.</td></tr>
+                <tr><td>--ease-lift</td><td class="v">cubic-bezier(0.2, 0.9, 0.2, 1)</td><td class="d">Fast out, hard landing. <b>The only curve.</b></td></tr>
+                <tr><td>hover</td><td class="v">translate(-2px, -2px)</td><td class="d">Plus <code>--lift</code>. The largest movement in the system.</td></tr>
+                <tr><td>active</td><td class="v">translate(0, 0)</td><td class="d">Pressed flat, shadow gone.</td></tr>
+                <tr><td>checkbox</td><td class="v">instant</td><td class="d">The X is stamped, not drawn.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="callout stock-mark">
+          <span class="callout-tag">Why</span>
+          <b>A stamp lands, it does not glide.</b> The curve front-loads almost
+          all of the movement, so the lift feels like a thumb peeling a sticker
+          and the press feels like it hitting the sheet. Anything slower reads as
+          a screen animation. Under <code>prefers-reduced-motion</code> the
+          transition is removed and states still change - nothing here depends
+          on movement to be understood.
+        </div>
+      </section>
+
+      <!-- ============ 06 SCREEN ============ -->
+      <section class="sec" id="screen" aria-labelledby="screen-h">
+        <div class="sec-head">
+          <h2 id="screen-h">Screen</h2>
+          <span class="idx">SEC.06 / 10 - ENHANCEMENT ONLY</span>
+        </div>
+        <p class="lede">
+          One optional surface treatment: a <b>thermal head</b>. A sheet of
+          die-cut labels feeds slowly out of the printer, already carrying their
+          index block, data rows and barcode. <b>The pointer is the print
+          head</b> - move it across the right-hand panel and the stock burns in
+          square dots under it. Hold still and it burns solid. What it printed
+          rides up with the paper and cools off.
+        </p>
+
+        <div class="shader-row">
+          <div class="shader-cell">
+            <div class="shader-stage" id="thermalFallback"></div>
+            <span class="shader-cap">Static fallback - unprinted die-cut sheet</span>
+          </div>
+          <div class="shader-cell">
+            <div class="shader-stage"><canvas id="thermalCanvas"></canvas></div>
+            <span class="shader-cap">Live - move the pointer across it</span>
+          </div>
+        </div>
+
+        <table class="spec-table tok stock-base" style="margin-top:26px">
+          <thead><tr><th>Uniform</th><th>Value</th><th>What it does</th></tr></thead>
+          <tbody>
+            <tr><td>uDot</td><td class="v">4px x DPR</td><td class="d">Thermal dot pitch. Each dot is burnt or not as a whole, with a hairline gap between dots as a real head leaves.</td></tr>
+            <tr><td>uLabel</td><td class="v">34 x 22 dots</td><td class="d">Label pitch, so a label is 136 x 88px. The static fallback uses the same pitch.</td></tr>
+            <tr><td>uFeedPx</td><td class="v">3 dots/s</td><td class="d">Paper feed. Slow enough to read as a machine idling, not as scrolling.</td></tr>
+            <tr><td>uRadius</td><td class="v">0.075</td><td class="d">Head reach, in stage heights. Squeezed 2.2x along the feed, because a head is a line across the paper.</td></tr>
+            <tr><td>uTrail</td><td class="v">32 x 45ms</td><td class="d">Head samples, stored in sheet space so the print moves with the paper. Each one carries heat 0.34, cooling on a 0.9s time constant.</td></tr>
+            <tr><td>dither</td><td class="v">4 x 4 ordered</td><td class="d">Heat becomes density of burnt dots. There is no grey on a thermal head, so there is none here.</td></tr>
+            <tr><td>uStock / uInk / uCut</td><td class="v">tokens</td><td class="d"><code>--stock-base</code>, <code>--ink</code> and <code>--ink-dis</code>, read live and re-read when the sheet flips.</td></tr>
+            <tr><td>spring</td><td class="v">k 60 / d 10</td><td class="d">The head follows the pointer on a spring, so it has the weight of a carriage and settles instead of snapping.</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout stock-mark">
+          <span class="callout-tag">Why</span>
+          <b>The print rules are structural here, not a matter of care.</b> Every
+          pixel the shader writes is one of exactly three token colours - stock,
+          ink or die line - because ink is decided per dot by a hard threshold
+          and never blended. It cannot emit a gradient, a blur or a hue without
+          rewriting its last two lines. It is also enhancement only: the canvas
+          is transparent until its first frame, so a machine without WebGL2 sees
+          the complete static sheet on the left. It stops when scrolled off
+          screen, and under <code>prefers-reduced-motion</code> it draws one
+          settled frame and never starts a loop.
+        </div>
+        <p class="note">
+          <b>Where it belongs:</b> an empty state, a loading or printing moment,
+          or a hero with nothing else in it. Not behind body text or a form - the
+          printed dots sit at full ink density and would take the contrast the
+          colour section just defended.
+        </p>
+      </section>
+
+      <!-- ============ 07 COMPONENTS ============ -->
+      <section class="sec" id="components" aria-labelledby="components-h">
+        <div class="sec-head">
+          <h2 id="components-h">Components</h2>
+          <span class="idx">SEC.07 / 10 - EVERY STATE LIVE</span>
+        </div>
+        <p class="lede">
+          Every state here is live: hover lifts, press flattens, tab focuses,
+          boxes strike, the field rejects an out-of-range value as you type.
+          The pinned row exists only for side-by-side comparison.
+        </p>
+
+        <div class="g-plates-wide">
+          <div class="plate stock-base">
+            <p class="plate-cap">Stamp buttons / live</p>
             <div class="states-row">
-              <button type="button" class="btn">Add to manifest</button>
-              <button type="button" class="btn is-lifted">Add to manifest</button>
-              <button type="button" class="btn is-pressed">Add to manifest</button>
-              <button type="button" class="btn is-focused">Add to manifest</button>
-              <button type="button" class="btn" disabled>Add to manifest</button>
+              <button type="button" class="btn">Confirm</button>
+              <button type="button" class="btn btn-base">Secondary</button>
+              <button type="button" class="btn btn-mark">Tertiary</button>
             </div>
-            <p class="plate-cap">BONE AND KRAFT VARIANTS</p>
+            <p class="plate-cap">Disabled / really disabled</p>
             <div class="states-row">
-              <button type="button" class="btn btn-bone">Request quote</button>
-              <button type="button" class="btn btn-bone" disabled>Request quote</button>
-              <button type="button" class="btn btn-kraft">Print label</button>
-              <button type="button" class="btn btn-kraft" disabled>Print label</button>
+              <button type="button" class="btn" disabled>Confirm</button>
+              <button type="button" class="btn btn-base" disabled>Secondary</button>
+              <button type="button" class="btn btn-mark" disabled>Tertiary</button>
             </div>
-            <p class="t-data t-data-sec" style="margin-top: 16px;">
-              THE STICKER LIFT IS THE SYSTEM'S ONLY AUTHORED MOTION: HOVER RAISES
-              THE LABEL 2PX WITH A HARD 4PX SHADOW, ACTIVE PRESSES IT FLAT.
-            </p>
+            <p class="plate-cap">Pinned for comparison / rest, lifted, pressed, focus</p>
+            <div class="states-row">
+              <span class="btn">Rest</span>
+              <span class="btn is-lifted">Lifted</span>
+              <span class="btn is-pressed">Pressed</span>
+              <span class="btn is-focused">Focus</span>
+            </div>
+            <p class="note">Lead stock is the primary stamp. Base and mark variants carry a 2px ink edge. Disabled is solid disabled ink plus a dashed edge.</p>
           </div>
 
-          <div class="plate stock-bone stack-22">
-            <p class="plate-cap">TEXT FIELD / DEFAULT, FILLED, ERROR, DISABLED</p>
+          <div class="plate stock-base stack-22">
+            <p class="plate-cap">Text field / empty, filled, error, disabled</p>
             <div class="field">
-              <label class="field-label" for="f-batch">Batch code</label>
-              <input id="f-batch" type="text" placeholder="2206-K" autocomplete="off" />
+              <label class="field-label" for="f-a">Field one</label>
+              <input id="f-a" type="text" placeholder="A-01" autocomplete="off" />
             </div>
             <div class="field">
-              <label class="field-label" for="f-serial">Serial</label>
-              <input id="f-serial" type="text" value="88-301" autocomplete="off" />
+              <label class="field-label" for="f-b">Field two</label>
+              <input id="f-b" type="text" value="000-001" autocomplete="off" />
             </div>
-            <div class="field is-error">
-              <label class="field-label" for="f-capacity">Capacity (M)</label>
-              <input id="f-capacity" type="text" value="4800" aria-invalid="true" aria-describedby="f-capacity-err" autocomplete="off" />
-              <span class="field-error" id="f-capacity-err">REJECTED: RANGE 0 - 4000</span>
+            <div class="field is-error" data-range="0,400">
+              <label class="field-label" for="f-c">Quantity (0 - 400)</label>
+              <input id="f-c" type="text" inputmode="numeric" value="480" aria-invalid="true" aria-describedby="f-c-err" autocomplete="off" />
+              <span class="field-error" id="f-c-err">Rejected: range 0 - 400</span>
             </div>
             <div class="field is-disabled">
-              <label class="field-label" for="f-plant">Plant</label>
-              <input id="f-plant" type="text" value="WERK 3" disabled />
+              <label class="field-label" for="f-d">Field four</label>
+              <input id="f-d" type="text" value="LOCKED" disabled />
             </div>
+            <p class="note">Edit the quantity: the REJECTED stamp comes and goes with the value.</p>
           </div>
 
-          <div class="plate stock-bone stack-14">
-            <p class="plate-cap">BADGES / STOCK CHIPS</p>
+          <div class="plate stock-base stack-14">
+            <p class="plate-cap">Badges / one per stock, and disabled</p>
             <div class="states-row">
-              <span class="badge stock-black">SERIES K</span>
-              <span class="badge stock-kraft">REV.04</span>
-              <span class="badge stock-steel">12.7 MM</span>
-              <span class="badge stock-bone">QC PASSED</span>
-              <span class="badge stock-bone is-disabled">RETIRED</span>
-              <span class="badge stock-black is-disabled">VOID</span>
+              <span class="badge stock-lead">Lead</span>
+              <span class="badge stock-mark">Mark</span>
+              <span class="badge stock-plate">Plate</span>
+              <span class="badge stock-base">Base</span>
+              <span class="badge stock-base is-disabled">Void</span>
+              <span class="badge stock-lead is-disabled">Void</span>
             </div>
-            <p class="plate-cap" style="margin-top: 10px;">CHECKBOX / STAMP BOX WITH X</p>
+            <p class="plate-cap" style="margin-top:18px">Checkbox / a stamp box struck with an X</p>
             <div class="stack-14">
               <label class="check">
                 <input type="checkbox" checked />
                 <span class="box" aria-hidden="true"></span>
-                <span class="check-label">Archival sleeve (+2 KG)</span>
+                <span class="check-label">Option one</span>
               </label>
               <label class="check">
                 <input type="checkbox" />
                 <span class="box" aria-hidden="true"></span>
-                <span class="check-label">Humidity seal</span>
+                <span class="check-label">Option two</span>
               </label>
               <label class="check is-disabled">
                 <input type="checkbox" disabled />
                 <span class="box" aria-hidden="true"></span>
-                <span class="check-label">Cold store crate - out of stock</span>
+                <span class="check-label">Option three - unavailable</span>
               </label>
               <label class="check is-disabled">
                 <input type="checkbox" checked disabled />
                 <span class="box" aria-hidden="true"></span>
-                <span class="check-label">Works certificate (included)</span>
+                <span class="check-label">Option four - locked on</span>
               </label>
             </div>
           </div>
 
-          <div class="plate stock-bone">
-            <p class="plate-cap">SPEC TABLE / THICK TOP RULE, THIN ROW RULES</p>
+          <div class="plate stock-base">
+            <p class="plate-cap">Spec table / thick top rule, thin row rules</p>
             <table class="spec-table">
-              <caption>K-301 ARCHIVE TAPE UNIT</caption>
+              <caption>Specimen record</caption>
               <tbody>
-                <tr><th scope="row">Media</th><td>12.7 MM MAGNETIC</td></tr>
-                <tr><th scope="row">Capacity</th><td>4000 M</td></tr>
-                <tr><th scope="row">Spool</th><td>ALU, 267 MM</td></tr>
-                <tr><th scope="row">Weight</th><td>6.4 KG</td></tr>
-                <tr><th scope="row">Stock</th><td>BLACK #161616</td></tr>
-                <tr><th scope="row">Serial</th><td>88-301</td></tr>
+                <tr><th scope="row">Field one</th><td>Value</td></tr>
+                <tr><th scope="row">Field two</th><td>000-001</td></tr>
+                <tr><th scope="row">Width</th><td>100 MM</td></tr>
+                <tr><th scope="row">Height</th><td>62 MM</td></tr>
+                <tr><th scope="row">Stock</th><td>Base</td></tr>
+                <tr><th scope="row">Index</th><td>01/004</td></tr>
+              </tbody>
+            </table>
+            <p class="note">Keys in the fine voice, bold, left. Values in mono, right. Every row ruled in ink, never in a grey.</p>
+          </div>
+        </div>
+
+        <div class="callout stock-mark">
+          <span class="callout-tag">Why</span>
+          <b>Errors are stamps, not colours.</b> With no red to reach for, a
+          rejected field thickens its underline to 3px and gets a lead-stock
+          stamp naming the problem and the valid range. That works on both
+          sheets, in greyscale, and for a reader who cannot tell hues apart -
+          which a red underline never did.
+        </div>
+      </section>
+
+      <!-- ============ 08 MOTIFS ============ -->
+      <section class="sec" id="motifs" aria-labelledby="motifs-h">
+        <div class="sec-head">
+          <h2 id="motifs-h">Motifs</h2>
+          <span class="idx">SEC.08 / 10 - 7 MARKS</span>
+        </div>
+        <p class="lede">
+          The marks of industrial print. These, more than the palette, are what
+          make the system recognisable at a glance - all of them drawn in
+          <code>currentColor</code>, so each one inherits the ink of whatever stock
+          it lands on.
+        </p>
+
+        <div class="g-plates">
+          <div class="plate stock-base stack-14">
+            <p class="plate-cap">Barcode / two cuts</p>
+            <div class="barcode">
+              <svg preserveAspectRatio="none" aria-hidden="true"><use href="#bc-a"/></svg>
+              <div class="digits">0 0 0 0 0 1 - 0 0 0 0 1</div>
+            </div>
+            <div class="barcode">
+              <svg preserveAspectRatio="none" aria-hidden="true"><use href="#bc-b"/></svg>
+              <div class="digits">A - 0 1 / 0 0 0 0 1</div>
+            </div>
+          </div>
+          <div class="plate stock-base stack-14">
+            <p class="plate-cap">Index stamp / serial plate</p>
+            <p><span class="stamp-index">01/004</span> <span class="stamp-index lg">04/004</span></p>
+            <div class="serial-plate">
+              <div class="rows">
+                <div class="row">SERIAL: 000-001</div>
+                <div class="row">BATCH: A-01</div>
+                <div class="row">SHEET: 01 OF 04</div>
+              </div>
+              <div class="row-rot">CHECKED 2026-09</div>
+            </div>
+          </div>
+          <div class="plate stock-base stack-14">
+            <p class="plate-cap">Registration / rules</p>
+            <svg class="regmark" aria-hidden="true"><use href="#reg-cross"/></svg>
+            <div class="rule-demo">
+              <div class="rule" role="presentation"></div>
+              <div class="rule-thin" role="presentation"></div>
+            </div>
+            <p class="t-data t-data-sec">Crosses sit at the frame corners. Thick rules are 3px with "I" end ticks; thin rules are 1px row separators.</p>
+          </div>
+        </div>
+
+        <div class="plate stock-plate" style="margin-top:20px">
+          <p class="plate-cap">Technical drawings / patent line art, 1.4px currentColor strokes</p>
+          <div class="draw-gallery">
+            <figure>
+              <div class="tdraw"><svg viewBox="0 0 120 90" aria-hidden="true"><use href="#td-reels"/></svg></div>
+              <figcaption>Fig.1 - twin reels</figcaption>
+            </figure>
+            <figure>
+              <div class="tdraw"><svg viewBox="0 0 120 100" aria-hidden="true"><use href="#td-box"/></svg></div>
+              <figcaption>Fig.2 - enclosure, exploded</figcaption>
+            </figure>
+            <figure>
+              <div class="tdraw"><svg viewBox="0 0 100 110" aria-hidden="true"><use href="#td-rotor"/></svg></div>
+              <figcaption>Fig.3 - rotor and nut</figcaption>
+            </figure>
+            <figure>
+              <div class="tdraw"><svg viewBox="0 0 60 110" aria-hidden="true"><use href="#td-spring"/></svg></div>
+              <figcaption>Fig.4 - spring</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <p class="sub-cap">The strip label - the card primitive</p>
+        <div class="strip-solo">
+          <article class="strip stock-mark">
+            <div class="strip-word-area"><span class="strip-word">LABEL</span></div>
+            <div class="rule" role="presentation"></div>
+            <div class="strip-rev"><span>REV.01</span><span>VOL.1</span></div>
+            <div class="strip-mid">
+              <div class="strip-data">SERIAL: 000-005 &middot; QTY: 0100 &middot; 0110 0001</div>
+              <div class="strip-draw tdraw"><svg viewBox="0 0 120 100" aria-hidden="true"><use href="#td-box"/></svg></div>
+            </div>
+            <div class="barcode">
+              <svg preserveAspectRatio="none" aria-hidden="true"><use href="#bc-a"/></svg>
+              <div class="digits">0 0 0 0 0 1 - 0 0 0 0 5</div>
+            </div>
+            <div class="strip-foot">
+              <span class="stamp-index">05/005</span>
+              <span class="made">SPECIMEN</span>
+            </div>
+          </article>
+          <div class="note">
+            <p>A tall narrow column in one stock, stacked top to bottom: the giant
+            vertical display word, a thick rule, the revision and volume tag, a
+            rotated data column beside a technical drawing, a barcode, and an
+            index stamp. Every other motif on this page is a part of this one.</p>
+            <table class="spec-table tok" style="margin-top:14px">
+              <tbody>
+                <tr><td>width</td><td class="v">max 220px</td><td class="d">Strips sit in a row of up to four.</td></tr>
+                <tr><td>word area</td><td class="v">min 300px</td><td class="d">The word is the label; the rest is data under it.</td></tr>
+                <tr><td>data column</td><td class="v">vertical-rl + rotate(180deg)</td><td class="d">Reads bottom to top, as print on a spine does.</td></tr>
               </tbody>
             </table>
           </div>
         </div>
+
+        <div class="callout stock-mark">
+          <span class="callout-tag">Why</span>
+          <b>Every motif is drawn in <code>currentColor</code>.</b> A barcode on
+          lead stock is pale, on mark stock it is dark, and on the night sheet
+          both flip - with no motif knowing which stock it is on. Hardcode one
+          stroke and it becomes the single mark that vanishes when the sheet
+          flips.
+        </div>
       </section>
 
-      <!-- ============ 05 IN APPLICATION ============ -->
-      <section class="sec" id="sec-application">
+      <!-- ============ 09 COMPOSITION ============ -->
+      <section class="sec" id="composition" aria-labelledby="composition-h">
         <div class="sec-head">
-          <h2>In application</h2>
-          <span class="idx">SEC.05 / 05</span>
+          <h2 id="composition-h">Composition</h2>
+          <span class="idx">SEC.09 / 10 - SPECIMEN</span>
         </div>
+        <p class="lede">
+          The parts assembled into one record: a lead strip to name it, fine print,
+          a spec table, options, and an action row, with a data label pinned
+          beside it. The copy is placeholder and describes a label, so what a
+          reader takes away is the arrangement.
+        </p>
+
         <div class="app-grid">
-          <form class="plate stock-bone" aria-label="Order form for K-301 archive tape unit" onsubmit="return false;">
-            <div class="app-head stock-black">
-              <span class="t-display">K-301</span>
-              <span class="t-data" style="color: var(--ink-on-dark-2);">ARCHIVE TAPE UNIT</span>
+          <form class="plate stock-base" aria-label="Specimen record" onsubmit="return false;">
+            <div class="app-head stock-lead">
+              <span class="t-display">Specimen 01</span>
+              <span class="t-data t-data-sec">Record title</span>
             </div>
-            <p class="t-fine" style="max-width: 60ch; margin-bottom: 16px;">
-              Long-term magnetic archive spool for series K transports. 4000
-              meters of 12.7 mm media on an aluminium spool, rated for 30 years
-              of flat cold storage. Shipped shrink-labeled on black stock with
-              works certificate and QC stamp.
+            <p class="t-fine" style="max-width:60ch;margin-bottom:16px">
+              Specimen fine print. A short description sits here in the fine
+              voice, justified, under the lead strip and above the table. It is
+              the one paragraph on the record, and it never runs wider than
+              sixty characters.
             </p>
-            <table class="spec-table" style="margin-bottom: 18px;">
-              <caption>SPECIFICATION</caption>
+            <table class="spec-table" style="margin-bottom:18px">
+              <caption>Specification</caption>
               <tbody>
-                <tr><th scope="row">Media</th><td>12.7 MM MAGNETIC</td></tr>
-                <tr><th scope="row">Capacity</th><td>4000 M</td></tr>
-                <tr><th scope="row">Spool</th><td>ALU, 267 MM</td></tr>
-                <tr><th scope="row">Weight</th><td>6.4 KG</td></tr>
-                <tr><th scope="row">Batch</th><td>2206-K</td></tr>
+                <tr><th scope="row">Width</th><td>100 MM</td></tr>
+                <tr><th scope="row">Height</th><td>62 MM</td></tr>
+                <tr><th scope="row">Stock</th><td>Base</td></tr>
+                <tr><th scope="row">Rule</th><td>3 PX</td></tr>
+                <tr><th scope="row">Batch</th><td>A-01</td></tr>
               </tbody>
             </table>
-            <p class="plate-cap">OPTIONS</p>
-            <div class="stack-14" style="margin-bottom: 20px;">
+            <p class="plate-cap">Options</p>
+            <div class="stack-14" style="margin-bottom:20px">
               <label class="check">
                 <input type="checkbox" checked />
                 <span class="box" aria-hidden="true"></span>
-                <span class="check-label">Archival sleeve (+2 KG)</span>
+                <span class="check-label">Option one</span>
               </label>
               <label class="check">
                 <input type="checkbox" />
                 <span class="box" aria-hidden="true"></span>
-                <span class="check-label">Humidity seal</span>
+                <span class="check-label">Option two</span>
               </label>
               <label class="check is-disabled">
                 <input type="checkbox" disabled />
                 <span class="box" aria-hidden="true"></span>
-                <span class="check-label">Cold store crate - out of stock</span>
+                <span class="check-label">Option three - unavailable</span>
               </label>
             </div>
             <div class="app-actions">
@@ -617,56 +930,144 @@ marks; plain CSS tokens in objekt-core.css; synthetic industrial data.
                 <label class="field-label" for="f-qty">Quantity</label>
                 <input id="f-qty" type="text" inputmode="numeric" value="2" autocomplete="off" />
               </div>
-              <button type="submit" class="btn">Add to manifest</button>
-              <button type="button" class="btn btn-bone">Request quote</button>
+              <button type="submit" class="btn">Confirm</button>
+              <button type="button" class="btn btn-base">Secondary</button>
             </div>
           </form>
 
-          <aside class="stack-22" aria-label="K-301 label data">
-            <div class="plate stock-bone stack-14">
+          <aside class="stack-22" aria-label="Specimen data label">
+            <div class="plate stock-base stack-14">
               <div class="serial-plate">
                 <div class="rows">
-                  <div class="row">SERIAL: 88-301</div>
-                  <div class="row">BATCH: 2206-K</div>
-                  <div class="row">PLANT: WERK 3 / DE</div>
+                  <div class="row">SERIAL: 000-001</div>
+                  <div class="row">BATCH: A-01</div>
+                  <div class="row">SHEET: 01 OF 04</div>
                 </div>
-                <div class="row-rot">QC PASSED 2026-07</div>
+                <div class="row-rot">CHECKED 2026-09</div>
               </div>
               <div class="badge-row">
-                <span class="badge stock-black">SERIES K</span>
-                <span class="badge stock-kraft">REV.04</span>
-                <span class="badge stock-steel">12.7 MM</span>
+                <span class="badge stock-lead">Lead</span>
+                <span class="badge stock-mark">Rev.05</span>
+                <span class="badge stock-plate">100 x 62</span>
               </div>
               <div class="barcode">
                 <svg preserveAspectRatio="none" aria-hidden="true"><use href="#bc-a"/></svg>
-                <div class="digits">5 8 8 9 1 8 - 0 6 8 0 7</div>
+                <div class="digits">0 0 0 0 0 1 - 0 0 0 0 1</div>
               </div>
             </div>
-            <div class="plate stock-kraft">
-              <p class="plate-cap">FIG.1 - TAPE TRANSPORT</p>
+            <div class="plate stock-mark">
+              <p class="plate-cap">Fig.1 - twin reels</p>
               <div class="tdraw"><svg viewBox="0 0 120 90" aria-hidden="true"><use href="#td-reels"/></svg></div>
-              <p class="t-data t-data-sec" style="margin-top: 10px;">MOUNT SPOOL HUB-FIRST. TENSION 2.4 N NOMINAL.</p>
+              <p class="t-data t-data-sec" style="margin-top:10px">Figure caption in the data voice.</p>
             </div>
           </aside>
         </div>
+
+        <p class="sub-cap">Anatomy</p>
+        <table class="spec-table tok stock-base">
+          <thead><tr><th>Part</th><th>As built</th><th>Why it is that way</th></tr></thead>
+          <tbody>
+            <tr><td>Record</td><td class="v">plate stock-base</td><td class="d">Anything read at length sits on base stock, the pale reading surface with the widest contrast margin.</td></tr>
+            <tr><td>Name strip</td><td class="v">app-head stock-lead</td><td class="d">The only lead stock on the record besides the primary stamp. It names the thing, then gets out of the way.</td></tr>
+            <tr><td>Fine print</td><td class="v">t-fine, 60ch</td><td class="d">One paragraph, capped. A label with two paragraphs is a document and wants a different layout.</td></tr>
+            <tr><td>Spec table</td><td class="v">spec-table</td><td class="d">The 3px top rule is the section break inside the record; rows break on 1px. No whitespace doing a rule's job.</td></tr>
+            <tr><td>Action row</td><td class="v">field + btn + btn-base</td><td class="d">One lead stamp per record. A second one leaves the eye with no idea which is primary.</td></tr>
+            <tr><td>Data label</td><td class="v">aside, 1fr of 3</td><td class="d">Serials, badges and barcode live beside the record, not in it - data a machine reads is kept apart from text a person reads.</td></tr>
+            <tr><td>Figure</td><td class="v">plate stock-mark</td><td class="d">A change of stock separates the illustration from the record without a border or a heading.</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout stock-mark">
+          <span class="callout-tag">Why</span>
+          <b>Note what this is not: a product page with the copy swapped out.</b>
+          The record describes a label - width, height, stock, rule - precisely
+          because that says nothing about what the system is for. A reader in any
+          industry leaves with the same thing: where the lead stock is spent, and
+          how the stocks alternate.
+        </div>
       </section>
 
-      <!-- ============ FOOTER ============ -->
+      <!-- ============ 10 RULES ============ -->
+      <section class="sec" id="rules" aria-labelledby="rules-h">
+        <div class="sec-head">
+          <h2 id="rules-h">Rules</h2>
+          <span class="idx">SEC.10 / 10 - THE REFUSALS MATTER MORE</span>
+        </div>
+        <div class="dodont">
+          <div class="stock-base">
+            <span class="verdict">Pass</span>
+            <ul>
+              <li>Use <b>hard edges and hard offset shadows</b>. Zero blur, always.</li>
+              <li>Pick a <b>stock class</b> and let it set the ink, secondary ink and disabled ink.</li>
+              <li>Spend <b>lead stock</b> sparingly: section strips, the primary stamp, error stamps.</li>
+              <li>Draw every mark in <b>currentColor</b> so it follows the stock and the sheet.</li>
+              <li>Mark disabled with a <b>dashed edge</b> as well as a lighter ink.</li>
+              <li>Check <b>both sheets</b> with the masthead flip before shipping anything.</li>
+            </ul>
+          </div>
+          <div class="stock-lead">
+            <span class="verdict">Rejected</span>
+            <ul>
+              <li>No <b>gradients</b>, no <b>border-radius</b>, no <b>blur</b>, no soft shadows.</li>
+              <li>No <b>transparency or opacity</b> effects. Disabled inks are pre-mixed solids.</li>
+              <li>No <b>accent hue</b>, not even for errors. Errors are stamps.</li>
+              <li>No <b>mid-grey text</b> on mark or plate stock. Use the stock's own <code>--ink-2</code>.</li>
+              <li>No token named for a <b>hue or material</b>. One sheet flip and the name is a lie.</li>
+              <li>No <b>glows, glass, rounded chrome</b> or decorative motion. And no thermal head behind body text.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ FOOT ============ -->
       <footer class="sheet-foot">
-        <div class="rule" role="presentation" style="max-width: 420px; margin: 0 auto;"></div>
+        <div class="rule" role="presentation"></div>
         <div class="barcode">
           <svg preserveAspectRatio="none" aria-hidden="true"><use href="#bc-b"/></svg>
-          <div class="digits">0 7 / 0 0 7 - E N D</div>
+          <div class="digits">1 0 / 1 0 - E N D</div>
         </div>
         <p class="t-display">End of sheet</p>
         <p class="t-data t-data-sec">
-          ALL SERIALS, VOLUMES AND CAPACITIES ON THIS SHEET ARE SYNTHETIC
-          SPECIMEN DATA.
+          All serials, batches and quantities on this sheet are synthetic specimen
+          data. Display type: Anton, SIL Open Font License, loaded from Google
+          Fonts. Mono and fine print use system stacks. This catalog follows
+          STANDARD.md at the repository root.
         </p>
-        <a class="btn" href="../../index.html">Return to portal</a>
+        <a class="btn" href="../../index.html">All design systems</a>
       </footer>
     </main>
   </div>
 
+<script src="js/thermal.js"></script>
+<script>
+  (function () {
+    var root = document.documentElement;
+    if (location.hash === "#light" || location.hash === "#dark") {
+      root.setAttribute("data-theme", location.hash.slice(1));
+    }
+    document.querySelectorAll("[data-toggle-theme]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var cur = root.getAttribute("data-theme");
+        if (!cur) cur = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        root.setAttribute("data-theme", cur === "dark" ? "light" : "dark");
+      });
+    });
+    // The range field validates as you type, so the error stamp is live
+    // rather than pictured.
+    document.querySelectorAll(".field[data-range]").forEach(function (f) {
+      var r = f.getAttribute("data-range").split(",").map(Number);
+      var input = f.querySelector("input");
+      function check() {
+        var v = input.value.trim();
+        var n = Number(v);
+        var bad = v === "" || !/^\d+$/.test(v) || n < r[0] || n > r[1];
+        f.classList.toggle("is-error", bad);
+        input.setAttribute("aria-invalid", bad ? "true" : "false");
+      }
+      input.addEventListener("input", check);
+      check();
+    });
+  })();
+</script>
 </body>
 </html>

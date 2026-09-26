@@ -1,8 +1,10 @@
 /*
 Konbini's entrance card on the root portal. Scoped to .sys-kon; loaded by the
-portal only. Mirrors the Konbini tokens by value: the one vertical sky gradient,
-white poster display type, a crisp pixel storefront on the snow line, cobalt
-captions on snow. Pixels stay hard-edged; nothing else decorates.
+portal only. Mirrors the day-poster tokens by value (the portal does not load
+the system's CSS): the one vertical field gradient (--field-top, --field-mid,
+--field-low) falling into --paper, --lit display type, a crisp pixel
+storefront on the ground line, --ink captions, --ink-strong prose and shadow.
+Pixels stay hard-edged; nothing else decorates.
 */
 
 .sys-kon {

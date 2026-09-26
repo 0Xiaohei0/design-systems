@@ -1,0 +1,304 @@
+/*
+BENRAN - the catalog page, set in the system itself.
+Layout for index.html plus the spec furniture: masthead, implementer brief,
+token tables, day/night swatches, scale bars, callouts, the still-water
+stage, and do / do not. None of this is a component the system ships; it is
+written in the same voice - hairlines, tracked captions, air, no panels.
+*/
+
+/* ---------- page ---------- */
+
+.b-page { max-width: var(--page-max); margin: 0 auto; padding: 0 var(--page-pad) 120px; }
+
+/* ---------- sticky masthead ---------- */
+
+.b-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  padding: 12px var(--page-pad);
+  background: var(--paper);
+  border-bottom: var(--rule) solid var(--hairline);
+}
+.b-topbar .tb-mark { display: flex; align-items: baseline; gap: 12px; white-space: nowrap; }
+.b-topbar .tb-mark .tb-glyph { font: 400 var(--fs-label) / 1 var(--font-serif); letter-spacing: 0.2em; }
+.b-topbar nav { display: flex; gap: 12px; flex: 1; overflow-x: auto; scrollbar-width: none; }
+.b-topbar nav::-webkit-scrollbar { display: none; }
+.b-topbar nav .b-link { white-space: nowrap; letter-spacing: 0.22em; }
+
+/* theme toggle: a tracked caption in a hairline frame; hover inks it like a stamp */
+.b-theme-btn {
+  font: 400 var(--fs-caption) / 1.8 var(--font-sans);
+  letter-spacing: var(--track-caption);
+  text-transform: uppercase;
+  color: var(--ink);
+  background: transparent;
+  border: var(--rule) solid var(--hairline);
+  padding: 4px 10px 4px 13px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--t-ink) var(--ease), color var(--t-ink) var(--ease), border-color var(--t-ink) var(--ease);
+}
+.b-theme-btn:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+
+/* ---------- thesis ---------- */
+
+.b-hero { position: relative; min-height: 88vh; display: flex; flex-direction: column; }
+.b-hero-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 60px; padding-top: 64px; }
+
+.b-thesis { max-width: 34em; display: flex; flex-direction: column; gap: 18px; }
+.b-thesis .v-body { max-width: none; }
+
+.b-titleblock { display: flex; gap: 16px; align-items: flex-start; text-align: right; }
+.b-titleblock .tb-display { font-size: var(--fs-display); height: 3em; } /* explicit height keeps the column from wrapping */
+.b-titleblock .tb-captions { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
+
+/* the shelf: five objects resting on one long horizon */
+.b-shelf { margin-top: 12vh; }
+.b-shelf-row { display: flex; align-items: flex-end; justify-content: space-between; padding: 0 6%; }
+.b-shelf-row .shelf-slot { position: relative; display: flex; align-items: flex-end; }
+.b-shelf-row .shelf-steam { position: absolute; left: 50%; transform: translateX(-50%); bottom: calc(100% + 10px); }
+.b-shelf-ripple { position: absolute; left: 50%; transform: translateX(-50%); top: 100%; margin-top: -13px; pointer-events: none; }
+
+/* vast space; the roundel alone */
+.b-hero-void { flex: 1; display: flex; align-items: center; justify-content: center; padding: 60px 0; }
+
+/* ---------- sections ---------- */
+
+.b-section { margin-top: var(--space-section); scroll-margin-top: 70px; }
+.b-sect-head { display: flex; align-items: baseline; gap: 22px; }
+.b-sect-head .sh-title { font: 400 var(--fs-heading) / 1.4 var(--font-serif); letter-spacing: var(--track-wide); text-transform: uppercase; }
+.b-sect-rule { margin-top: 22px; max-width: 200px; }
+.b-lede { margin-top: 30px; }
+.b-sect-body { margin-top: var(--space-block); }
+.b-sub { display: block; margin: var(--space-block) 0 20px; }
+
+/* ---------- implementer brief ---------- */
+
+.b-brief { margin-top: 30px; list-style: none; counter-reset: brief; max-width: 40em; }
+.b-brief li { counter-increment: brief; position: relative; padding: 10px 0 10px 44px; border-bottom: var(--rule) solid var(--hairline); }
+.b-brief li:first-child { border-top: var(--rule) solid var(--hairline); }
+.b-brief li::before {
+  content: counter(brief, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 10px;
+  font: 300 var(--fs-caption) / 2.6 var(--font-sans);
+  letter-spacing: var(--track-num);
+}
+
+/* token names are code, not captions: no uppercase transform */
+.b-code { font: 400 var(--fs-caption) / 1.6 var(--font-sans); letter-spacing: 0.08em; color: var(--ink); white-space: nowrap; }
+
+/* ---------- spec table ---------- */
+
+.b-spec { width: 100%; border-collapse: collapse; }
+.b-spec th {
+  text-align: left;
+  font: 300 var(--fs-caption) / 1.8 var(--font-sans);
+  letter-spacing: var(--track-caption);
+  text-transform: uppercase;
+  padding: 0 18px 10px 0;
+  border-bottom: var(--rule) solid var(--hairline);
+}
+.b-spec td { padding: 12px 18px 12px 0; border-bottom: var(--rule) solid var(--hairline); vertical-align: middle; font-size: 12px; line-height: 1.8; }
+.b-spec td:first-child { font: 400 var(--fs-caption) / 1.6 var(--font-sans); letter-spacing: 0.08em; white-space: nowrap; }
+.b-spec td.v { font: 300 var(--fs-caption) / 1.6 var(--font-sans); letter-spacing: 0.12em; white-space: nowrap; }
+.b-spec td.sc { width: 190px; }
+.b-spec-wrap { overflow-x: auto; }
+
+/* ---------- day / night swatches ---------- */
+
+.b-duo { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 48px 40px; }
+.b-duo-cell { display: flex; gap: 18px; align-items: flex-start; }
+.b-duo-dot {
+  flex: none;
+  display: flex;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: var(--rule) solid var(--hairline);
+}
+.b-duo-dot i { flex: 1; display: block; }
+.b-duo-cap { display: flex; flex-direction: column; gap: 4px; }
+.b-duo-cap .role { font-size: 12px; line-height: 1.8; }
+
+/* ---------- type specimens ---------- */
+
+.b-voices { display: flex; flex-wrap: wrap; gap: 60px 70px; align-items: flex-start; }
+.b-voice { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
+.b-voice .vo-display { font-size: var(--fs-display-lg); min-height: 150px; }
+
+/* ---------- scale bars: a measured shelf ---------- */
+
+.b-scale { position: relative; height: var(--rule); background: var(--ink); }
+.b-scale::before,
+.b-scale::after { content: ""; position: absolute; top: -3px; width: var(--rule); height: 7px; background: var(--ink); }
+.b-scale::before { left: 0; }
+.b-scale::after { right: 0; }
+
+/* ---------- form specimens ---------- */
+
+.b-forms { display: flex; flex-wrap: wrap; gap: 50px 70px; align-items: flex-end; }
+.b-form { display: flex; flex-direction: column; align-items: center; gap: 18px; }
+.b-form .fo-stage { display: flex; align-items: center; justify-content: center; min-height: 60px; min-width: 60px; }
+.b-form-edge { width: 56px; height: 40px; border: var(--rule) solid var(--hairline); background: var(--surface); }
+.b-form-edge.is-ink { border-color: var(--ink); }
+
+/* ---------- motion stage ---------- */
+
+.b-motion-stage { position: relative; display: flex; align-items: flex-end; justify-content: center; height: 150px; max-width: 420px; }
+.b-motion-stage .b-horizon { position: absolute; left: 10%; right: 10%; bottom: 30px; }
+.b-motion-stage .ms-obj { position: relative; margin-bottom: 30px; }
+.b-motion-stage .ms-steam { position: absolute; left: 50%; transform: translateX(-50%); bottom: calc(100% + 10px); }
+.b-motion-stage .b-ripple { position: absolute; left: 50%; bottom: 8px; transform: translateX(-50%); }
+
+/* ---------- screen: still water ---------- */
+
+.b-screen-row { display: grid; gap: 28px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.b-screen-cell { display: flex; flex-direction: column; gap: 12px; }
+.b-screen-cap { min-height: 1.8em; } /* also the hook the shader rewrites when it falls back */
+.b-screen-stage {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border: var(--rule) solid var(--hairline);
+  background: var(--paper);
+  overflow: hidden;
+}
+/* The fallback IS the design: the static ripple motif at the waterline,
+   coloured by the same token the shader reads. */
+.b-screen-still { position: absolute; left: 50%; top: 42%; width: 70%; height: auto; transform: translate(-50%, -50%); }
+.b-screen-stage canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0; /* transparent until the first frame lands */
+  transition: opacity var(--t-ink) var(--ease);
+  touch-action: none;
+}
+/* the object and its horizon sit above both, so the two panels match */
+.b-screen-over { position: absolute; inset: 0; pointer-events: none; }
+.b-screen-over .b-horizon { position: absolute; left: 14%; right: 14%; top: 38%; }
+.b-screen-over .b-obj { position: absolute; left: 50%; bottom: 62%; transform: translateX(-50%); }
+
+/* ---------- components ---------- */
+
+.b-comp-grid { display: flex; flex-wrap: wrap; gap: 70px 90px; }
+.b-comp { display: flex; flex-direction: column; gap: 22px; }
+.b-comp .co-row { display: flex; align-items: flex-start; gap: 26px; flex-wrap: wrap; }
+.b-comp .co-note { font: 300 var(--fs-caption) / 1.9 var(--font-sans); letter-spacing: 0.15em; color: var(--ink); max-width: 26em; }
+.b-sheets { display: flex; gap: 24px; align-items: flex-start; }
+.b-sheets .b-poster { width: 210px; }
+.b-sheets .b-bookmark { width: 104px; }
+
+/* ---------- motifs ---------- */
+
+.b-motifs { display: flex; flex-wrap: wrap; gap: 60px 70px; align-items: flex-end; }
+.b-motif { display: flex; flex-direction: column; align-items: center; gap: 18px; }
+.b-motif .mo-stage { display: flex; align-items: flex-end; justify-content: center; gap: 20px; min-height: 96px; }
+.b-motif .mo-stage.is-center { align-items: center; }
+.b-motif .mo-stage.is-stack { flex-direction: column; align-items: center; justify-content: center; gap: 14px; }
+.b-motif-wide { flex-basis: 100%; align-items: flex-start; }
+.b-motif-wide .mo-stage { width: 100%; max-width: 620px; min-height: 0; padding: 12px 0; align-items: center; }
+.b-motif-wide .mo-stage .b-horizon { width: 100%; }
+
+/* ---------- composition: one neutral sheet ---------- */
+
+.b-sheet {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 22em) 1fr auto;
+  grid-template-areas:
+    "head . title"
+    "text . title"
+    "shelf shelf shelf";
+  gap: 44px 40px;
+  min-height: 660px;
+  padding: 40px 44px 36px;
+  background: var(--surface);
+  border: var(--rule) solid var(--hairline);
+}
+.b-sheet .sh-head { grid-area: head; display: flex; align-items: center; gap: 14px; }
+.b-sheet .sh-title { grid-area: title; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+.b-sheet .sh-title .v-vertical { font-size: var(--fs-display); }
+.b-sheet .sh-text { grid-area: text; display: flex; flex-direction: column; gap: 26px; align-self: start; }
+.b-sheet .sh-shelf { grid-area: shelf; align-self: end; display: flex; flex-direction: column; align-items: center; gap: 22px; }
+.b-sheet .sh-stand { position: relative; display: flex; flex-direction: column; align-items: center; width: 60%; }
+.b-sheet .sh-stand .b-horizon { width: 100%; }
+.b-sheet .sh-stand .sh-steam { margin-bottom: 10px; }
+.b-sheet .sh-stand .b-ripple { position: absolute; left: 50%; top: 100%; transform: translate(-50%, -48%); pointer-events: none; }
+
+/* ---------- callout: a trail entry that says why ---------- */
+
+.b-callout { position: relative; margin-top: 44px; padding-left: 24px; max-width: 40em; }
+.b-callout::before {
+  content: "";
+  position: absolute;
+  left: 1px;
+  top: 7px;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--ink);
+}
+.b-callout::after {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 18px;
+  bottom: 6px;
+  width: 1px;
+  background-image: radial-gradient(circle at 0.5px 1px, var(--faint) 0.8px, transparent 0.9px);
+  background-size: 1px 7px;
+  background-repeat: repeat-y;
+}
+.b-callout .v-caption { display: block; margin-bottom: 6px; line-height: 1.2; }
+.b-callout .v-body { max-width: none; }
+
+/* ---------- do / do not ---------- */
+
+.b-dodont { display: grid; gap: 50px 70px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.b-dodont .dd-head { display: flex; align-items: center; gap: 12px; padding-bottom: 14px; border-bottom: var(--rule) solid var(--hairline); }
+.b-dodont .dd-mark { width: 5px; height: 5px; border-radius: 50%; background: var(--ink); }
+.b-dodont .dd-mark.is-hollow { background: transparent; border: var(--rule) solid var(--ink); }
+.b-dodont ul { list-style: none; }
+.b-dodont li { padding: 12px 0; border-bottom: var(--rule) solid var(--hairline); line-height: 1.9; }
+
+/* ---------- footer ---------- */
+
+.b-footer { margin-top: var(--space-section); display: flex; flex-direction: column; align-items: center; gap: 26px; text-align: center; }
+.b-footer .ft-note { max-width: 40em; }
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 900px) {
+  .b-sheet { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "head title" "text title" "shelf shelf"; }
+}
+
+@media (max-width: 760px) {
+  .b-topbar { gap: 16px; }
+  .b-topbar .tb-mark .v-caption { display: none; }
+  .b-hero-top { flex-direction: column-reverse; gap: 40px; padding-top: 44px; }
+  .b-titleblock { text-align: left; }
+  .b-shelf { margin-top: 8vh; }
+  .b-shelf-row { zoom: 0.78; padding: 0; } /* one row, scaled: objects never leave the horizon */
+  .b-spec thead { display: none; }
+  .b-spec tr { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 16px; padding: 12px 0; border-bottom: var(--rule) solid var(--hairline); }
+  .b-spec td { padding: 0; border-bottom: 0; }
+  .b-spec td.v { white-space: normal; }
+  .b-spec td:last-child { flex-basis: 100%; }
+  .b-spec td.sc { width: auto; flex: 1; }
+  .b-sheet { padding: 28px 22px; gap: 34px 20px; min-height: 0; }
+  .b-sheet .sh-stand { width: 86%; }
+  .b-sheets { flex-wrap: wrap; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .b-screen-stage canvas, .b-theme-btn { transition: none; }
+}

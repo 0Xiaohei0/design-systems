@@ -98,7 +98,7 @@ box-shadow: 0 12px 26px rgba(26, 25, 22, .12);
 - **Kicker** - 11-12px `--font-mono`, `--accent`, `letter-spacing: .08em`.
   Issue numbers, eyebrows, collection kickers - all meta information speaks
   in this voice.
-- **Category head** - subject left, mono count right ("N 部"), 14px margin
+- **Category head** - subject left, mono count right ("N items"), 14px margin
   below. The index-card divider of the catalog.
 - **Poster** - cover image with `::after` bottom scrim: transparent at 55%,
   `rgba(0,0,0,.62)` at 100%. Rank badge top-left: `rgba(8,10,14,.82)`,

@@ -62,7 +62,7 @@ reading the design system, the system has leaked.
 ### R2 - No project details
 
 Nothing that points at a codebase the reader cannot open. No internal file paths
-(`src/theme/tokens.css.ts`), no repo names, no "the source of truth lives in
+(`../app/styles/colors.ts`), no repo names, no "the source of truth lives in
 X", no internal preview URLs, no ticket numbers, no team or client names.
 
 A system's folder **is** the source of truth. If it was extracted from somewhere,

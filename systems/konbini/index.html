@@ -1,917 +1,1114 @@
 <!DOCTYPE html>
 <html lang="en">
 <!--
-THESIS: A design system as a pixel travel-poster series about quiet everyday
-places; it refuses the component-grid dashboard catalog.
-OWN-WORLD: One vertical winter-sky gradient falling into snow-white paper;
-heavy white Helvetica display floating in sky; cobalt captions and giant
-katakana as graphic; all illustration rect-only pixel art on an integer grid;
-orange is the sign's warm accent only: band, stripes, cone, price marks.
-STORY: A visitor lands on the Hokkaido-style poster, understands the system is
-posters plus the pixel rule, pages through spreads 28-32, and leaves able to
-build with the kit.
-FIRST VIEWPORT: Full-width sky, giant white KONBINI, the pixel Seimart scene
-standing on the snow line; captions, katakana, footnote, folio 28 below.
-FORM: Client-pinned direction (reference travel poster); catalog paced as
-paginated poster spreads; no seed roll.
+THESIS: A design system drawn as a series of pixel travel posters about quiet
+everyday places. Every surface is a poster: one vertical sky falling into
+snow-white paper, heavy display type floating in it, small type resting on the
+paper, and one carefully built pixel scene as the centrepiece.
+OWN-WORLD: One gradient, always vertical, always the field. All illustration is
+rect-only pixel art on an integer grid, scaled in whole steps. The accent is
+the sign's warm stripe and never carries a word. States snap; nothing eases.
+FORM: catalog page, set in the system itself, following STANDARD.md.
+CONTENT: the documentation is English. Katakana appears only where it is
+demonstrated - the wordmark, the type specimen, and the katakana-block motif.
+Specimen copy is about posters and pixels, so a reader takes away the
+structure rather than a guess at a use case.
 -->
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KONBINI - Pixel Travel-Poster Design System</title>
-  <meta name="description" content="KONBINI: a pixel-art travel-poster design system. Winter sky, snow paper, cobalt type, one lovingly detailed pixel scene." />
+  <title>KONBINI - Pixel Travel-Poster System</title>
+  <meta name="description" content="KONBINI: a pixel-art travel-poster design system. One vertical sky, snow-white paper, heavy display type, rect-only pixel art on an integer grid, and a night poster for the dark theme." />
   <link rel="stylesheet" href="css/konbini-core.css" />
 </head>
 <body>
 
-  <!-- pixel icon symbols (16x16 grid, rects only) -->
+  <!-- pixel icon symbols (16x16 grid, rects only, art inks only) -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
       <symbol id="px-pole" viewBox="0 0 16 16">
-        <rect x="7" y="0" width="2" height="1" fill="var(--white)"/>
-        <rect x="3" y="1" width="2" height="1" fill="var(--navy)"/>
-        <rect x="7" y="1" width="2" height="1" fill="var(--cobalt)"/>
-        <rect x="11" y="1" width="2" height="1" fill="var(--navy)"/>
-        <rect x="1" y="2" width="14" height="2" fill="var(--cobalt)"/>
-        <rect x="7" y="4" width="2" height="2" fill="var(--cobalt)"/>
-        <rect x="4" y="6" width="8" height="2" fill="var(--cobalt)"/>
-        <rect x="7" y="8" width="2" height="7" fill="var(--cobalt)"/>
-        <rect x="6" y="15" width="4" height="1" fill="var(--navy)"/>
+        <rect x="7" y="0" width="2" height="1" fill="var(--art-lit)"/>
+        <rect x="3" y="1" width="2" height="1" fill="var(--art-line)"/>
+        <rect x="7" y="1" width="2" height="1" fill="var(--art-detail)"/>
+        <rect x="11" y="1" width="2" height="1" fill="var(--art-line)"/>
+        <rect x="1" y="2" width="14" height="2" fill="var(--art-detail)"/>
+        <rect x="7" y="4" width="2" height="2" fill="var(--art-detail)"/>
+        <rect x="4" y="6" width="8" height="2" fill="var(--art-detail)"/>
+        <rect x="7" y="8" width="2" height="7" fill="var(--art-detail)"/>
+        <rect x="6" y="15" width="4" height="1" fill="var(--art-line)"/>
       </symbol>
       <symbol id="px-vending" viewBox="0 0 16 16">
-        <rect x="3" y="1" width="10" height="2" fill="var(--cobalt)"/>
-        <rect x="3" y="3" width="2" height="4" fill="var(--cobalt)"/>
-        <rect x="5" y="3" width="6" height="1" fill="var(--sky-pale)"/>
-        <rect x="11" y="3" width="2" height="4" fill="var(--cobalt)"/>
-        <rect x="5" y="4" width="1" height="2" fill="var(--sky-pale)"/>
-        <rect x="6" y="4" width="1" height="2" fill="var(--white)"/>
-        <rect x="7" y="4" width="1" height="2" fill="var(--sky-pale)"/>
-        <rect x="8" y="4" width="1" height="2" fill="var(--sign)"/>
-        <rect x="9" y="4" width="1" height="2" fill="var(--sky-pale)"/>
-        <rect x="10" y="4" width="1" height="2" fill="var(--white)"/>
-        <rect x="5" y="6" width="6" height="1" fill="var(--sky-pale)"/>
-        <rect x="3" y="7" width="10" height="2" fill="var(--cobalt)"/>
-        <rect x="3" y="9" width="2" height="2" fill="var(--cobalt)"/>
-        <rect x="5" y="9" width="4" height="2" fill="var(--navy)"/>
-        <rect x="9" y="9" width="4" height="2" fill="var(--cobalt)"/>
-        <rect x="3" y="11" width="10" height="4" fill="var(--cobalt)"/>
-        <rect x="3" y="15" width="10" height="1" fill="var(--navy)"/>
+        <rect x="3" y="1" width="10" height="2" fill="var(--art-detail)"/>
+        <rect x="3" y="3" width="2" height="4" fill="var(--art-detail)"/>
+        <rect x="5" y="3" width="6" height="1" fill="var(--art-haze)"/>
+        <rect x="11" y="3" width="2" height="4" fill="var(--art-detail)"/>
+        <rect x="5" y="4" width="1" height="2" fill="var(--art-haze)"/>
+        <rect x="6" y="4" width="1" height="2" fill="var(--art-lit)"/>
+        <rect x="7" y="4" width="1" height="2" fill="var(--art-haze)"/>
+        <rect x="8" y="4" width="1" height="2" fill="var(--art-accent)"/>
+        <rect x="9" y="4" width="1" height="2" fill="var(--art-haze)"/>
+        <rect x="10" y="4" width="1" height="2" fill="var(--art-lit)"/>
+        <rect x="5" y="6" width="6" height="1" fill="var(--art-haze)"/>
+        <rect x="3" y="7" width="10" height="2" fill="var(--art-detail)"/>
+        <rect x="3" y="9" width="2" height="2" fill="var(--art-detail)"/>
+        <rect x="5" y="9" width="4" height="2" fill="var(--art-line)"/>
+        <rect x="9" y="9" width="4" height="2" fill="var(--art-detail)"/>
+        <rect x="3" y="11" width="10" height="4" fill="var(--art-detail)"/>
+        <rect x="3" y="15" width="10" height="1" fill="var(--art-line)"/>
       </symbol>
       <symbol id="px-cone" viewBox="0 0 16 16">
-        <rect x="7" y="2" width="2" height="2" fill="var(--sign)"/>
-        <rect x="6" y="4" width="4" height="2" fill="var(--sign)"/>
-        <rect x="5" y="6" width="6" height="2" fill="var(--white)"/>
-        <rect x="5" y="8" width="6" height="2" fill="var(--sign)"/>
-        <rect x="4" y="10" width="8" height="2" fill="var(--sign)"/>
-        <rect x="3" y="12" width="10" height="2" fill="var(--sign)"/>
-        <rect x="2" y="14" width="12" height="1" fill="var(--navy)"/>
+        <rect x="7" y="2" width="2" height="2" fill="var(--art-accent)"/>
+        <rect x="6" y="4" width="4" height="2" fill="var(--art-accent)"/>
+        <rect x="5" y="6" width="6" height="2" fill="var(--art-lit)"/>
+        <rect x="5" y="8" width="6" height="2" fill="var(--art-accent)"/>
+        <rect x="4" y="10" width="8" height="2" fill="var(--art-accent)"/>
+        <rect x="3" y="12" width="10" height="2" fill="var(--art-accent)"/>
+        <rect x="2" y="14" width="12" height="1" fill="var(--art-line)"/>
       </symbol>
       <symbol id="px-ac" viewBox="0 0 16 16">
-        <rect x="2" y="3" width="12" height="1" fill="var(--sky-pale)"/>
-        <rect x="2" y="4" width="12" height="2" fill="var(--cobalt)"/>
-        <rect x="2" y="6" width="2" height="4" fill="var(--cobalt)"/>
-        <rect x="4" y="6" width="1" height="4" fill="var(--white)"/>
-        <rect x="5" y="6" width="1" height="4" fill="var(--cobalt)"/>
-        <rect x="6" y="6" width="1" height="4" fill="var(--white)"/>
-        <rect x="7" y="6" width="1" height="4" fill="var(--cobalt)"/>
-        <rect x="8" y="6" width="1" height="4" fill="var(--white)"/>
-        <rect x="9" y="6" width="1" height="4" fill="var(--cobalt)"/>
-        <rect x="10" y="6" width="1" height="4" fill="var(--white)"/>
-        <rect x="11" y="6" width="3" height="4" fill="var(--cobalt)"/>
-        <rect x="2" y="10" width="12" height="2" fill="var(--cobalt)"/>
-        <rect x="2" y="12" width="12" height="1" fill="var(--navy)"/>
-        <rect x="3" y="13" width="2" height="2" fill="var(--navy)"/>
-        <rect x="11" y="13" width="2" height="2" fill="var(--navy)"/>
+        <rect x="2" y="3" width="12" height="1" fill="var(--art-haze)"/>
+        <rect x="2" y="4" width="12" height="2" fill="var(--art-detail)"/>
+        <rect x="2" y="6" width="2" height="4" fill="var(--art-detail)"/>
+        <rect x="4" y="6" width="1" height="4" fill="var(--art-lit)"/>
+        <rect x="5" y="6" width="1" height="4" fill="var(--art-detail)"/>
+        <rect x="6" y="6" width="1" height="4" fill="var(--art-lit)"/>
+        <rect x="7" y="6" width="1" height="4" fill="var(--art-detail)"/>
+        <rect x="8" y="6" width="1" height="4" fill="var(--art-lit)"/>
+        <rect x="9" y="6" width="1" height="4" fill="var(--art-detail)"/>
+        <rect x="10" y="6" width="1" height="4" fill="var(--art-lit)"/>
+        <rect x="11" y="6" width="3" height="4" fill="var(--art-detail)"/>
+        <rect x="2" y="10" width="12" height="2" fill="var(--art-detail)"/>
+        <rect x="2" y="12" width="12" height="1" fill="var(--art-line)"/>
+        <rect x="3" y="13" width="2" height="2" fill="var(--art-line)"/>
+        <rect x="11" y="13" width="2" height="2" fill="var(--art-line)"/>
       </symbol>
       <symbol id="px-truck" viewBox="0 0 16 16">
-        <rect x="2" y="4" width="4" height="1" fill="var(--cobalt)"/>
-        <rect x="1" y="5" width="1" height="2" fill="var(--cobalt)"/>
-        <rect x="2" y="5" width="3" height="2" fill="var(--sky-pale)"/>
-        <rect x="5" y="5" width="1" height="1" fill="var(--cobalt)"/>
-        <rect x="5" y="6" width="10" height="1" fill="var(--cobalt)"/>
-        <rect x="1" y="7" width="14" height="1" fill="var(--cobalt)"/>
-        <rect x="1" y="8" width="6" height="1" fill="var(--cobalt)"/>
-        <rect x="7" y="8" width="7" height="1" fill="var(--sky-pale)"/>
-        <rect x="14" y="8" width="1" height="1" fill="var(--cobalt)"/>
-        <rect x="1" y="9" width="14" height="1" fill="var(--cobalt)"/>
-        <rect x="1" y="10" width="14" height="1" fill="var(--navy)"/>
-        <rect x="3" y="11" width="3" height="1" fill="var(--navy)"/>
-        <rect x="10" y="11" width="3" height="1" fill="var(--navy)"/>
-        <rect x="3" y="12" width="1" height="1" fill="var(--navy)"/>
-        <rect x="4" y="12" width="1" height="1" fill="var(--white)"/>
-        <rect x="5" y="12" width="1" height="1" fill="var(--navy)"/>
-        <rect x="10" y="12" width="1" height="1" fill="var(--navy)"/>
-        <rect x="11" y="12" width="1" height="1" fill="var(--white)"/>
-        <rect x="12" y="12" width="1" height="1" fill="var(--navy)"/>
+        <rect x="2" y="4" width="4" height="1" fill="var(--art-detail)"/>
+        <rect x="1" y="5" width="1" height="2" fill="var(--art-detail)"/>
+        <rect x="2" y="5" width="3" height="2" fill="var(--art-haze)"/>
+        <rect x="5" y="5" width="1" height="1" fill="var(--art-detail)"/>
+        <rect x="5" y="6" width="10" height="1" fill="var(--art-detail)"/>
+        <rect x="1" y="7" width="14" height="1" fill="var(--art-detail)"/>
+        <rect x="1" y="8" width="6" height="1" fill="var(--art-detail)"/>
+        <rect x="7" y="8" width="7" height="1" fill="var(--art-haze)"/>
+        <rect x="14" y="8" width="1" height="1" fill="var(--art-detail)"/>
+        <rect x="1" y="9" width="14" height="1" fill="var(--art-detail)"/>
+        <rect x="1" y="10" width="14" height="1" fill="var(--art-line)"/>
+        <rect x="3" y="11" width="3" height="1" fill="var(--art-line)"/>
+        <rect x="10" y="11" width="3" height="1" fill="var(--art-line)"/>
+        <rect x="3" y="12" width="1" height="1" fill="var(--art-line)"/>
+        <rect x="4" y="12" width="1" height="1" fill="var(--art-lit)"/>
+        <rect x="5" y="12" width="1" height="1" fill="var(--art-line)"/>
+        <rect x="10" y="12" width="1" height="1" fill="var(--art-line)"/>
+        <rect x="11" y="12" width="1" height="1" fill="var(--art-lit)"/>
+        <rect x="12" y="12" width="1" height="1" fill="var(--art-line)"/>
       </symbol>
       <symbol id="px-snowflake" viewBox="0 0 16 16">
-        <rect x="7" y="1" width="2" height="2" fill="var(--cobalt)"/>
-        <rect x="3" y="3" width="1" height="1" fill="var(--cobalt)"/>
-        <rect x="6" y="3" width="4" height="1" fill="var(--cobalt)"/>
-        <rect x="12" y="3" width="1" height="1" fill="var(--cobalt)"/>
-        <rect x="4" y="4" width="1" height="1" fill="var(--cobalt)"/>
-        <rect x="7" y="4" width="2" height="3" fill="var(--cobalt)"/>
-        <rect x="11" y="4" width="1" height="1" fill="var(--cobalt)"/>
-        <rect x="5" y="5" width="1" height="1" fill="var(--cobalt)"/>
-        <rect x="10" y="5" width="1" height="1" fill="var(--cobalt)"/>
-        <rect x="3" y="6" width="1" height="1" fill="var(--cobalt)"/>
-        <rect x="12" y="6" width="1" height="1" fill="var(--cobalt)"/>
-        <rect x="1" y="7" width="14" height="2" fill="var(--cobalt)"/>
-        <rect x="3" y="9" width="1" height="1" fill="var(--cobalt)"/>
-        <rect x="7" y="9" width="2" height="3" fill="var(--cobalt)"/>
-        <rect x="12" y="9" width="1" height="1" fill="var(--cobalt)"/>
-        <rect x="5" y="10" width="1" height="1" fill="var(--cobalt)"/>
-        <rect x="10" y="10" width="1" height="1" fill="var(--cobalt)"/>
-        <rect x="4" y="11" width="1" height="1" fill="var(--cobalt)"/>
-        <rect x="11" y="11" width="1" height="1" fill="var(--cobalt)"/>
-        <rect x="3" y="12" width="1" height="1" fill="var(--cobalt)"/>
-        <rect x="6" y="12" width="4" height="1" fill="var(--cobalt)"/>
-        <rect x="12" y="12" width="1" height="1" fill="var(--cobalt)"/>
-        <rect x="7" y="13" width="2" height="2" fill="var(--cobalt)"/>
+        <rect x="7" y="1" width="2" height="2" fill="var(--art-detail)"/>
+        <rect x="3" y="3" width="1" height="1" fill="var(--art-detail)"/>
+        <rect x="6" y="3" width="4" height="1" fill="var(--art-detail)"/>
+        <rect x="12" y="3" width="1" height="1" fill="var(--art-detail)"/>
+        <rect x="4" y="4" width="1" height="1" fill="var(--art-detail)"/>
+        <rect x="7" y="4" width="2" height="3" fill="var(--art-detail)"/>
+        <rect x="11" y="4" width="1" height="1" fill="var(--art-detail)"/>
+        <rect x="5" y="5" width="1" height="1" fill="var(--art-detail)"/>
+        <rect x="10" y="5" width="1" height="1" fill="var(--art-detail)"/>
+        <rect x="3" y="6" width="1" height="1" fill="var(--art-detail)"/>
+        <rect x="12" y="6" width="1" height="1" fill="var(--art-detail)"/>
+        <rect x="1" y="7" width="14" height="2" fill="var(--art-detail)"/>
+        <rect x="3" y="9" width="1" height="1" fill="var(--art-detail)"/>
+        <rect x="7" y="9" width="2" height="3" fill="var(--art-detail)"/>
+        <rect x="12" y="9" width="1" height="1" fill="var(--art-detail)"/>
+        <rect x="5" y="10" width="1" height="1" fill="var(--art-detail)"/>
+        <rect x="10" y="10" width="1" height="1" fill="var(--art-detail)"/>
+        <rect x="4" y="11" width="1" height="1" fill="var(--art-detail)"/>
+        <rect x="11" y="11" width="1" height="1" fill="var(--art-detail)"/>
+        <rect x="3" y="12" width="1" height="1" fill="var(--art-detail)"/>
+        <rect x="6" y="12" width="4" height="1" fill="var(--art-detail)"/>
+        <rect x="12" y="12" width="1" height="1" fill="var(--art-detail)"/>
+        <rect x="7" y="13" width="2" height="2" fill="var(--art-detail)"/>
       </symbol>
-      <symbol id="px-onigiri" viewBox="0 0 16 16">
-        <rect x="7" y="2" width="2" height="1" fill="var(--navy)"/>
-        <rect x="6" y="3" width="1" height="1" fill="var(--navy)"/>
-        <rect x="7" y="3" width="2" height="1" fill="var(--white)"/>
-        <rect x="9" y="3" width="1" height="1" fill="var(--navy)"/>
-        <rect x="5" y="4" width="1" height="2" fill="var(--navy)"/>
-        <rect x="6" y="4" width="4" height="2" fill="var(--white)"/>
-        <rect x="10" y="4" width="1" height="2" fill="var(--navy)"/>
-        <rect x="4" y="6" width="1" height="2" fill="var(--navy)"/>
-        <rect x="5" y="6" width="6" height="2" fill="var(--white)"/>
-        <rect x="11" y="6" width="1" height="2" fill="var(--navy)"/>
-        <rect x="3" y="8" width="1" height="2" fill="var(--navy)"/>
-        <rect x="4" y="8" width="8" height="1" fill="var(--white)"/>
-        <rect x="12" y="8" width="1" height="2" fill="var(--navy)"/>
-        <rect x="4" y="9" width="2" height="1" fill="var(--white)"/>
-        <rect x="6" y="9" width="4" height="3" fill="var(--navy)"/>
-        <rect x="10" y="9" width="2" height="1" fill="var(--white)"/>
-        <rect x="2" y="10" width="1" height="2" fill="var(--navy)"/>
-        <rect x="3" y="10" width="3" height="2" fill="var(--white)"/>
-        <rect x="10" y="10" width="3" height="2" fill="var(--white)"/>
-        <rect x="13" y="10" width="1" height="2" fill="var(--navy)"/>
-        <rect x="2" y="12" width="12" height="1" fill="var(--navy)"/>
+      <symbol id="px-riceball" viewBox="0 0 16 16">
+        <rect x="7" y="2" width="2" height="1" fill="var(--art-line)"/>
+        <rect x="6" y="3" width="1" height="1" fill="var(--art-line)"/>
+        <rect x="7" y="3" width="2" height="1" fill="var(--art-lit)"/>
+        <rect x="9" y="3" width="1" height="1" fill="var(--art-line)"/>
+        <rect x="5" y="4" width="1" height="2" fill="var(--art-line)"/>
+        <rect x="6" y="4" width="4" height="2" fill="var(--art-lit)"/>
+        <rect x="10" y="4" width="1" height="2" fill="var(--art-line)"/>
+        <rect x="4" y="6" width="1" height="2" fill="var(--art-line)"/>
+        <rect x="5" y="6" width="6" height="2" fill="var(--art-lit)"/>
+        <rect x="11" y="6" width="1" height="2" fill="var(--art-line)"/>
+        <rect x="3" y="8" width="1" height="2" fill="var(--art-line)"/>
+        <rect x="4" y="8" width="8" height="1" fill="var(--art-lit)"/>
+        <rect x="12" y="8" width="1" height="2" fill="var(--art-line)"/>
+        <rect x="4" y="9" width="2" height="1" fill="var(--art-lit)"/>
+        <rect x="6" y="9" width="4" height="3" fill="var(--art-line)"/>
+        <rect x="10" y="9" width="2" height="1" fill="var(--art-lit)"/>
+        <rect x="2" y="10" width="1" height="2" fill="var(--art-line)"/>
+        <rect x="3" y="10" width="3" height="2" fill="var(--art-lit)"/>
+        <rect x="10" y="10" width="3" height="2" fill="var(--art-lit)"/>
+        <rect x="13" y="10" width="1" height="2" fill="var(--art-line)"/>
+        <rect x="2" y="12" width="12" height="1" fill="var(--art-line)"/>
       </symbol>
-      <symbol id="px-hotcan" viewBox="0 0 16 16">
-        <rect x="6" y="0" width="1" height="1" fill="var(--ice)"/>
-        <rect x="9" y="1" width="1" height="1" fill="var(--ice)"/>
-        <rect x="7" y="2" width="1" height="1" fill="var(--ice)"/>
-        <rect x="5" y="3" width="6" height="1" fill="var(--navy)"/>
-        <rect x="5" y="4" width="6" height="3" fill="var(--cobalt)"/>
-        <rect x="5" y="7" width="6" height="1" fill="var(--white)"/>
-        <rect x="5" y="8" width="6" height="1" fill="var(--sign)"/>
-        <rect x="5" y="9" width="6" height="1" fill="var(--white)"/>
-        <rect x="5" y="10" width="6" height="3" fill="var(--cobalt)"/>
-        <rect x="5" y="13" width="6" height="1" fill="var(--navy)"/>
+      <symbol id="px-can" viewBox="0 0 16 16">
+        <rect x="6" y="0" width="1" height="1" fill="var(--art-far)"/>
+        <rect x="9" y="1" width="1" height="1" fill="var(--art-far)"/>
+        <rect x="7" y="2" width="1" height="1" fill="var(--art-far)"/>
+        <rect x="5" y="3" width="6" height="1" fill="var(--art-line)"/>
+        <rect x="5" y="4" width="6" height="3" fill="var(--art-detail)"/>
+        <rect x="5" y="7" width="6" height="1" fill="var(--art-lit)"/>
+        <rect x="5" y="8" width="6" height="1" fill="var(--art-accent)"/>
+        <rect x="5" y="9" width="6" height="1" fill="var(--art-lit)"/>
+        <rect x="5" y="10" width="6" height="3" fill="var(--art-detail)"/>
+        <rect x="5" y="13" width="6" height="1" fill="var(--art-line)"/>
       </symbol>
     </defs>
   </svg>
 
-  <!-- ============ the poster (hero) ============ -->
-  <header>
-    <div class="poster-sky k-sky">
+  <!-- ============ MASTHEAD ============ -->
+  <div class="mast">
+    <div class="mast-row">
+      <a class="mast-brand" href="#top">KONBINI</a>
+      <nav aria-label="Sections">
+        <a href="#colour">01 colour</a>
+        <a href="#type">02 type</a>
+        <a href="#space">03 space</a>
+        <a href="#form">04 form</a>
+        <a href="#motion">05 motion</a>
+        <a href="#screen">06 screen</a>
+        <a href="#components">07 components</a>
+        <a href="#motifs">08 motifs</a>
+        <a href="#composition">09 composition</a>
+        <a href="#rules">10 rules</a>
+      </nav>
+      <button class="k-btn" data-toggle-theme type="button">day / night</button>
+    </div>
+    <div class="k-band k-band--thin" role="presentation"></div>
+  </div>
+
+  <!-- ============ THESIS: the poster itself ============ -->
+  <header id="top">
+    <div class="poster-sky k-field">
       <h1 class="k-display poster-title">KONBINI</h1>
       <p class="poster-sub">design system</p>
       <div class="poster-scene">
         <svg viewBox="0 0 176 104" role="img"
-          aria-label="Pixel art scene: the Seimart convenience store on a snowy street. A snow-capped flat roof with two AC units, an orange sign band reading Seimart, a dark glass storefront with posters and a sliding door, a vending machine by the entrance, a white kei truck parked in the foreground, a traffic cone, power poles with sagging lines and small birds, distant pale buildings, and one cloud drifting in a winter sky.">
+          aria-label="Pixel art scene: a small corner store on a snowy street. A snow-capped flat roof with two air-conditioning units, an orange sign band lettered KONBINI, a glass storefront with posters and a sliding door, a vending machine by the entrance, a small white truck parked in the foreground, a traffic cone, power poles with sagging lines and small birds, distant pale buildings, and one cloud drifting in the sky.">
         <g class="k-cloud">
-          <rect x="18" y="10" width="7" height="1" fill="var(--white)"/>
-          <rect x="15" y="11" width="13" height="1" fill="var(--white)"/>
-          <rect x="13" y="12" width="17" height="1" fill="var(--white)"/>
-          <rect x="12" y="13" width="20" height="1" fill="var(--white)"/>
-          <rect x="14" y="14" width="12" height="1" fill="var(--white)"/>
+          <rect x="18" y="10" width="7" height="1" fill="var(--art-lit)"/>
+          <rect x="15" y="11" width="13" height="1" fill="var(--art-lit)"/>
+          <rect x="13" y="12" width="17" height="1" fill="var(--art-lit)"/>
+          <rect x="12" y="13" width="20" height="1" fill="var(--art-lit)"/>
+          <rect x="14" y="14" width="12" height="1" fill="var(--art-lit)"/>
         </g>
-        <rect x="23" y="32" width="4" height="1" fill="var(--white)"/>
-        <rect x="24" y="33" width="2" height="3" fill="var(--navy)"/>
-        <rect x="16" y="36" width="18" height="1" fill="var(--white)"/>
-        <rect x="16" y="37" width="18" height="1" fill="var(--navy)"/>
-        <rect x="16" y="38" width="19" height="1" fill="var(--navy)"/>
-        <rect x="14" y="39" width="2" height="1" fill="var(--navy)"/>
-        <rect x="24" y="39" width="2" height="4" fill="var(--navy)"/>
-        <rect x="35" y="39" width="3" height="1" fill="var(--navy)"/>
-        <rect x="0" y="40" width="2" height="1" fill="var(--navy)"/>
-        <rect x="11" y="40" width="3" height="1" fill="var(--navy)"/>
-        <rect x="38" y="40" width="3" height="1" fill="var(--navy)"/>
-        <rect x="2" y="41" width="9" height="1" fill="var(--navy)"/>
-        <rect x="41" y="41" width="3" height="1" fill="var(--navy)"/>
-        <rect x="44" y="42" width="3" height="1" fill="var(--navy)"/>
-        <rect x="18" y="43" width="14" height="1" fill="var(--white)"/>
-        <rect x="47" y="43" width="4" height="1" fill="var(--navy)"/>
-        <rect x="18" y="44" width="14" height="1" fill="var(--navy)"/>
-        <rect x="51" y="44" width="3" height="1" fill="var(--navy)"/>
-        <rect x="17" y="45" width="16" height="1" fill="var(--navy)"/>
-        <rect x="54" y="45" width="4" height="1" fill="var(--navy)"/>
-        <rect x="0" y="46" width="2" height="1" fill="var(--navy)"/>
-        <rect x="15" y="46" width="2" height="1" fill="var(--navy)"/>
-        <rect x="24" y="46" width="2" height="45" fill="var(--navy)"/>
-        <rect x="33" y="46" width="3" height="1" fill="var(--navy)"/>
-        <rect x="58" y="46" width="4" height="1" fill="var(--navy)"/>
-        <rect x="2" y="47" width="5" height="1" fill="var(--navy)"/>
-        <rect x="10" y="47" width="5" height="1" fill="var(--navy)"/>
-        <rect x="36" y="47" width="4" height="1" fill="var(--navy)"/>
-        <rect x="62" y="47" width="4" height="1" fill="var(--navy)"/>
-        <rect x="7" y="48" width="3" height="1" fill="var(--navy)"/>
-        <rect x="40" y="48" width="3" height="1" fill="var(--navy)"/>
-        <rect x="66" y="48" width="5" height="1" fill="var(--navy)"/>
-        <rect x="43" y="49" width="4" height="1" fill="var(--navy)"/>
-        <rect x="71" y="49" width="5" height="1" fill="var(--navy)"/>
-        <rect x="47" y="50" width="4" height="1" fill="var(--navy)"/>
-        <rect x="64" y="50" width="11" height="1" fill="var(--white)"/>
-        <rect x="76" y="50" width="5" height="1" fill="var(--navy)"/>
-        <rect x="100" y="50" width="11" height="1" fill="var(--white)"/>
-        <rect x="152" y="50" width="4" height="1" fill="var(--white)"/>
-        <rect x="51" y="51" width="4" height="1" fill="var(--navy)"/>
-        <rect x="64" y="51" width="11" height="1" fill="var(--ice)"/>
-        <rect x="81" y="51" width="7" height="1" fill="var(--navy)"/>
-        <rect x="100" y="51" width="11" height="1" fill="var(--ice)"/>
-        <rect x="153" y="51" width="2" height="2" fill="var(--navy)"/>
-        <rect x="55" y="52" width="4" height="1" fill="var(--navy)"/>
-        <rect x="64" y="52" width="2" height="3" fill="var(--ice)"/>
-        <rect x="66" y="52" width="1" height="3" fill="var(--navy)"/>
-        <rect x="67" y="52" width="1" height="3" fill="var(--ice)"/>
-        <rect x="68" y="52" width="1" height="3" fill="var(--navy)"/>
-        <rect x="69" y="52" width="1" height="3" fill="var(--ice)"/>
-        <rect x="70" y="52" width="1" height="3" fill="var(--navy)"/>
-        <rect x="71" y="52" width="1" height="3" fill="var(--ice)"/>
-        <rect x="72" y="52" width="1" height="3" fill="var(--navy)"/>
-        <rect x="73" y="52" width="2" height="3" fill="var(--ice)"/>
-        <rect x="88" y="52" width="7" height="1" fill="var(--navy)"/>
-        <rect x="100" y="52" width="2" height="3" fill="var(--ice)"/>
-        <rect x="102" y="52" width="1" height="3" fill="var(--navy)"/>
-        <rect x="103" y="52" width="1" height="3" fill="var(--ice)"/>
-        <rect x="104" y="52" width="1" height="3" fill="var(--navy)"/>
-        <rect x="105" y="52" width="1" height="3" fill="var(--ice)"/>
-        <rect x="106" y="52" width="1" height="3" fill="var(--navy)"/>
-        <rect x="107" y="52" width="1" height="3" fill="var(--ice)"/>
-        <rect x="108" y="52" width="1" height="3" fill="var(--navy)"/>
-        <rect x="109" y="52" width="2" height="3" fill="var(--ice)"/>
-        <rect x="59" y="53" width="5" height="1" fill="var(--navy)"/>
-        <rect x="95" y="53" width="5" height="1" fill="var(--navy)"/>
-        <rect x="148" y="53" width="12" height="1" fill="var(--white)"/>
-        <rect x="111" y="54" width="9" height="1" fill="var(--navy)"/>
-        <rect x="139" y="54" width="21" height="1" fill="var(--navy)"/>
-        <rect x="64" y="55" width="11" height="1" fill="var(--ice)"/>
-        <rect x="100" y="55" width="11" height="1" fill="var(--ice)"/>
-        <rect x="120" y="55" width="19" height="1" fill="var(--navy)"/>
-        <rect x="148" y="55" width="14" height="1" fill="var(--navy)"/>
-        <rect x="64" y="56" width="16" height="1" fill="var(--navy)"/>
-        <rect x="100" y="56" width="11" height="1" fill="var(--navy)"/>
-        <rect x="153" y="56" width="2" height="2" fill="var(--navy)"/>
-        <rect x="162" y="56" width="2" height="1" fill="var(--navy)"/>
-        <rect x="58" y="57" width="8" height="1" fill="var(--white)"/>
-        <rect x="69" y="57" width="12" height="1" fill="var(--white)"/>
-        <rect x="81" y="57" width="3" height="1" fill="var(--navy)"/>
-        <rect x="84" y="57" width="9" height="1" fill="var(--white)"/>
-        <rect x="96" y="57" width="14" height="1" fill="var(--white)"/>
-        <rect x="113" y="57" width="7" height="1" fill="var(--white)"/>
-        <rect x="164" y="57" width="3" height="1" fill="var(--navy)"/>
-        <rect x="174" y="57" width="2" height="1" fill="var(--navy)"/>
-        <rect x="56" y="58" width="66" height="2" fill="var(--white)"/>
-        <rect x="150" y="58" width="8" height="1" fill="var(--white)"/>
-        <rect x="167" y="58" width="7" height="1" fill="var(--navy)"/>
-        <rect x="144" y="59" width="14" height="1" fill="var(--navy)"/>
-        <rect x="57" y="60" width="87" height="1" fill="var(--navy)"/>
-        <rect x="150" y="60" width="10" height="1" fill="var(--navy)"/>
-        <rect x="57" y="61" width="64" height="1" fill="var(--white)"/>
-        <rect x="153" y="61" width="2" height="33" fill="var(--navy)"/>
-        <rect x="160" y="61" width="3" height="1" fill="var(--navy)"/>
-        <rect x="57" y="62" width="64" height="1" fill="var(--sign)"/>
-        <rect x="163" y="62" width="3" height="1" fill="var(--navy)"/>
-        <rect x="173" y="62" width="3" height="1" fill="var(--navy)"/>
-        <rect x="57" y="63" width="17" height="3" fill="var(--sign)"/>
-        <rect x="74" y="63" width="3" height="1" fill="var(--white)"/>
-        <rect x="77" y="63" width="1" height="1" fill="var(--sign)"/>
-        <rect x="78" y="63" width="3" height="1" fill="var(--white)"/>
-        <rect x="81" y="63" width="1" height="1" fill="var(--sign)"/>
-        <rect x="82" y="63" width="3" height="1" fill="var(--white)"/>
-        <rect x="85" y="63" width="1" height="1" fill="var(--sign)"/>
-        <rect x="86" y="63" width="1" height="1" fill="var(--white)"/>
-        <rect x="87" y="63" width="3" height="1" fill="var(--sign)"/>
-        <rect x="90" y="63" width="1" height="1" fill="var(--white)"/>
-        <rect x="91" y="63" width="1" height="5" fill="var(--sign)"/>
-        <rect x="92" y="63" width="3" height="1" fill="var(--white)"/>
-        <rect x="95" y="63" width="1" height="5" fill="var(--sign)"/>
-        <rect x="96" y="63" width="2" height="1" fill="var(--white)"/>
-        <rect x="98" y="63" width="2" height="1" fill="var(--sign)"/>
-        <rect x="100" y="63" width="3" height="1" fill="var(--white)"/>
-        <rect x="103" y="63" width="18" height="1" fill="var(--sign)"/>
-        <rect x="166" y="63" width="7" height="1" fill="var(--navy)"/>
-        <rect x="74" y="64" width="1" height="1" fill="var(--white)"/>
-        <rect x="75" y="64" width="3" height="1" fill="var(--sign)"/>
-        <rect x="78" y="64" width="1" height="1" fill="var(--white)"/>
-        <rect x="79" y="64" width="4" height="1" fill="var(--sign)"/>
-        <rect x="83" y="64" width="1" height="3" fill="var(--white)"/>
-        <rect x="84" y="64" width="2" height="3" fill="var(--sign)"/>
-        <rect x="86" y="64" width="2" height="1" fill="var(--white)"/>
-        <rect x="88" y="64" width="1" height="1" fill="var(--sign)"/>
-        <rect x="89" y="64" width="2" height="1" fill="var(--white)"/>
-        <rect x="92" y="64" width="1" height="1" fill="var(--white)"/>
-        <rect x="93" y="64" width="1" height="1" fill="var(--sign)"/>
-        <rect x="94" y="64" width="1" height="1" fill="var(--white)"/>
-        <rect x="96" y="64" width="1" height="1" fill="var(--white)"/>
-        <rect x="97" y="64" width="1" height="1" fill="var(--sign)"/>
-        <rect x="98" y="64" width="1" height="1" fill="var(--white)"/>
-        <rect x="99" y="64" width="2" height="1" fill="var(--sign)"/>
-        <rect x="101" y="64" width="1" height="4" fill="var(--white)"/>
-        <rect x="102" y="64" width="19" height="4" fill="var(--sign)"/>
-        <rect x="74" y="65" width="3" height="1" fill="var(--white)"/>
-        <rect x="77" y="65" width="1" height="3" fill="var(--sign)"/>
-        <rect x="78" y="65" width="3" height="1" fill="var(--white)"/>
-        <rect x="81" y="65" width="2" height="1" fill="var(--sign)"/>
-        <rect x="86" y="65" width="1" height="3" fill="var(--white)"/>
-        <rect x="87" y="65" width="1" height="1" fill="var(--sign)"/>
-        <rect x="88" y="65" width="1" height="1" fill="var(--white)"/>
-        <rect x="89" y="65" width="1" height="1" fill="var(--sign)"/>
-        <rect x="90" y="65" width="1" height="3" fill="var(--white)"/>
-        <rect x="92" y="65" width="3" height="1" fill="var(--white)"/>
-        <rect x="96" y="65" width="2" height="1" fill="var(--white)"/>
-        <rect x="98" y="65" width="3" height="1" fill="var(--sign)"/>
-        <rect x="57" y="66" width="19" height="1" fill="var(--sign)"/>
-        <rect x="76" y="66" width="1" height="1" fill="var(--white)"/>
-        <rect x="78" y="66" width="1" height="1" fill="var(--white)"/>
-        <rect x="79" y="66" width="4" height="1" fill="var(--sign)"/>
-        <rect x="87" y="66" width="3" height="2" fill="var(--sign)"/>
-        <rect x="92" y="66" width="1" height="2" fill="var(--white)"/>
-        <rect x="93" y="66" width="1" height="2" fill="var(--sign)"/>
-        <rect x="94" y="66" width="1" height="2" fill="var(--white)"/>
-        <rect x="96" y="66" width="1" height="2" fill="var(--white)"/>
-        <rect x="97" y="66" width="1" height="2" fill="var(--sign)"/>
-        <rect x="98" y="66" width="1" height="2" fill="var(--white)"/>
-        <rect x="99" y="66" width="2" height="2" fill="var(--sign)"/>
-        <rect x="57" y="67" width="17" height="1" fill="var(--sign)"/>
-        <rect x="74" y="67" width="3" height="1" fill="var(--white)"/>
-        <rect x="78" y="67" width="3" height="1" fill="var(--white)"/>
-        <rect x="81" y="67" width="1" height="1" fill="var(--sign)"/>
-        <rect x="82" y="67" width="3" height="1" fill="var(--white)"/>
-        <rect x="85" y="67" width="1" height="1" fill="var(--sign)"/>
-        <rect x="57" y="68" width="64" height="1" fill="var(--sign)"/>
-        <rect x="57" y="69" width="64" height="1" fill="var(--white)"/>
-        <rect x="57" y="70" width="64" height="1" fill="var(--navy)"/>
-        <rect x="57" y="71" width="1" height="18" fill="var(--navy)"/>
-        <rect x="58" y="71" width="3" height="18" fill="var(--snow)"/>
-        <rect x="61" y="71" width="56" height="1" fill="var(--navy)"/>
-        <rect x="117" y="71" width="3" height="7" fill="var(--snow)"/>
-        <rect x="120" y="71" width="1" height="21" fill="var(--navy)"/>
-        <rect x="15" y="72" width="9" height="1" fill="var(--white)"/>
-        <rect x="26" y="72" width="4" height="1" fill="var(--white)"/>
-        <rect x="61" y="72" width="2" height="2" fill="var(--navy)"/>
-        <rect x="63" y="72" width="2" height="2" fill="var(--sky-deep)"/>
-        <rect x="65" y="72" width="6" height="2" fill="var(--navy)"/>
-        <rect x="71" y="72" width="2" height="2" fill="var(--sky-deep)"/>
-        <rect x="73" y="72" width="21" height="2" fill="var(--navy)"/>
-        <rect x="94" y="72" width="2" height="15" fill="var(--snow)"/>
-        <rect x="96" y="72" width="5" height="2" fill="var(--sky-deep)"/>
-        <rect x="101" y="72" width="1" height="19" fill="var(--navy)"/>
-        <rect x="102" y="72" width="5" height="8" fill="var(--sky-deep)"/>
-        <rect x="107" y="72" width="2" height="15" fill="var(--snow)"/>
-        <rect x="109" y="72" width="8" height="6" fill="var(--navy)"/>
-        <rect x="15" y="73" width="9" height="2" fill="var(--ice)"/>
-        <rect x="26" y="73" width="4" height="2" fill="var(--ice)"/>
-        <rect x="61" y="74" width="4" height="11" fill="var(--navy)"/>
-        <rect x="65" y="74" width="2" height="1" fill="var(--sky-deep)"/>
-        <rect x="67" y="74" width="6" height="1" fill="var(--navy)"/>
-        <rect x="73" y="74" width="2" height="1" fill="var(--sky-deep)"/>
-        <rect x="75" y="74" width="19" height="1" fill="var(--navy)"/>
-        <rect x="96" y="74" width="1" height="2" fill="var(--sky-deep)"/>
-        <rect x="97" y="74" width="3" height="2" fill="var(--sign)"/>
-        <rect x="100" y="74" width="1" height="2" fill="var(--sky-deep)"/>
-        <rect x="15" y="75" width="2" height="2" fill="var(--ice)"/>
-        <rect x="17" y="75" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="19" y="75" width="2" height="2" fill="var(--ice)"/>
-        <rect x="21" y="75" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="23" y="75" width="1" height="2" fill="var(--ice)"/>
-        <rect x="26" y="75" width="1" height="2" fill="var(--sky-pale)"/>
-        <rect x="27" y="75" width="3" height="2" fill="var(--ice)"/>
-        <rect x="65" y="75" width="6" height="2" fill="var(--white)"/>
-        <rect x="71" y="75" width="1" height="5" fill="var(--navy)"/>
-        <rect x="72" y="75" width="6" height="2" fill="var(--white)"/>
-        <rect x="78" y="75" width="16" height="3" fill="var(--navy)"/>
-        <rect x="96" y="76" width="5" height="4" fill="var(--sky-deep)"/>
-        <rect x="121" y="76" width="15" height="1" fill="var(--white)"/>
-        <rect x="15" y="77" width="9" height="3" fill="var(--ice)"/>
-        <rect x="26" y="77" width="4" height="3" fill="var(--ice)"/>
-        <rect x="65" y="77" width="1" height="1" fill="var(--white)"/>
-        <rect x="66" y="77" width="4" height="1" fill="var(--cobalt)"/>
-        <rect x="70" y="77" width="1" height="1" fill="var(--white)"/>
-        <rect x="72" y="77" width="1" height="4" fill="var(--white)"/>
-        <rect x="73" y="77" width="4" height="4" fill="var(--cobalt)"/>
-        <rect x="77" y="77" width="1" height="4" fill="var(--white)"/>
-        <rect x="121" y="77" width="15" height="2" fill="var(--ice)"/>
-        <rect x="0" y="78" width="14" height="1" fill="var(--white)"/>
-        <rect x="65" y="78" width="6" height="1" fill="var(--white)"/>
-        <rect x="78" y="78" width="1" height="2" fill="var(--sky-deep)"/>
-        <rect x="79" y="78" width="1" height="2" fill="var(--navy)"/>
-        <rect x="80" y="78" width="2" height="2" fill="var(--white)"/>
-        <rect x="82" y="78" width="1" height="2" fill="var(--navy)"/>
-        <rect x="83" y="78" width="2" height="2" fill="var(--cobalt)"/>
-        <rect x="85" y="78" width="1" height="2" fill="var(--navy)"/>
-        <rect x="86" y="78" width="2" height="2" fill="var(--sign)"/>
-        <rect x="88" y="78" width="1" height="2" fill="var(--navy)"/>
-        <rect x="89" y="78" width="2" height="2" fill="var(--white)"/>
-        <rect x="91" y="78" width="3" height="2" fill="var(--navy)"/>
-        <rect x="109" y="78" width="10" height="1" fill="var(--white)"/>
-        <rect x="119" y="78" width="1" height="14" fill="var(--snow)"/>
-        <rect x="155" y="78" width="21" height="1" fill="var(--white)"/>
-        <rect x="0" y="79" width="14" height="2" fill="var(--ice)"/>
-        <rect x="65" y="79" width="1" height="1" fill="var(--white)"/>
-        <rect x="66" y="79" width="3" height="1" fill="var(--cobalt)"/>
-        <rect x="69" y="79" width="2" height="1" fill="var(--white)"/>
-        <rect x="109" y="79" width="1" height="7" fill="var(--navy)"/>
-        <rect x="110" y="79" width="8" height="1" fill="var(--cobalt)"/>
-        <rect x="118" y="79" width="1" height="7" fill="var(--navy)"/>
-        <rect x="121" y="79" width="1" height="2" fill="var(--ice)"/>
-        <rect x="122" y="79" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="124" y="79" width="2" height="2" fill="var(--ice)"/>
-        <rect x="126" y="79" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="128" y="79" width="2" height="2" fill="var(--ice)"/>
-        <rect x="130" y="79" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="132" y="79" width="4" height="2" fill="var(--ice)"/>
-        <rect x="155" y="79" width="21" height="2" fill="var(--ice)"/>
-        <rect x="15" y="80" width="2" height="2" fill="var(--ice)"/>
-        <rect x="17" y="80" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="19" y="80" width="2" height="2" fill="var(--ice)"/>
-        <rect x="21" y="80" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="23" y="80" width="1" height="2" fill="var(--ice)"/>
-        <rect x="26" y="80" width="1" height="2" fill="var(--sky-pale)"/>
-        <rect x="27" y="80" width="3" height="2" fill="var(--ice)"/>
-        <rect x="44" y="80" width="10" height="1" fill="var(--white)"/>
-        <rect x="65" y="80" width="6" height="1" fill="var(--white)"/>
-        <rect x="71" y="80" width="1" height="2" fill="var(--sky-deep)"/>
-        <rect x="78" y="80" width="1" height="2" fill="var(--navy)"/>
-        <rect x="79" y="80" width="1" height="1" fill="var(--sky-deep)"/>
-        <rect x="80" y="80" width="13" height="1" fill="var(--ice)"/>
-        <rect x="93" y="80" width="1" height="1" fill="var(--navy)"/>
-        <rect x="96" y="80" width="1" height="1" fill="var(--sky-deep)"/>
-        <rect x="97" y="80" width="4" height="1" fill="var(--white)"/>
-        <rect x="102" y="80" width="4" height="1" fill="var(--white)"/>
-        <rect x="106" y="80" width="1" height="1" fill="var(--sky-deep)"/>
-        <rect x="110" y="80" width="8" height="1" fill="var(--sky-pale)"/>
-        <rect x="0" y="81" width="2" height="2" fill="var(--ice)"/>
-        <rect x="2" y="81" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="4" y="81" width="2" height="2" fill="var(--ice)"/>
-        <rect x="6" y="81" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="8" y="81" width="2" height="2" fill="var(--ice)"/>
-        <rect x="10" y="81" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="12" y="81" width="2" height="2" fill="var(--ice)"/>
-        <rect x="44" y="81" width="10" height="2" fill="var(--ice)"/>
-        <rect x="65" y="81" width="1" height="1" fill="var(--white)"/>
-        <rect x="66" y="81" width="4" height="1" fill="var(--cobalt)"/>
-        <rect x="70" y="81" width="1" height="1" fill="var(--white)"/>
-        <rect x="72" y="81" width="6" height="1" fill="var(--white)"/>
-        <rect x="79" y="81" width="2" height="1" fill="var(--sky-deep)"/>
-        <rect x="81" y="81" width="13" height="1" fill="var(--navy)"/>
-        <rect x="96" y="81" width="5" height="6" fill="var(--sky-deep)"/>
-        <rect x="102" y="81" width="5" height="6" fill="var(--sky-deep)"/>
-        <rect x="110" y="81" width="1" height="2" fill="var(--sky-pale)"/>
-        <rect x="111" y="81" width="1" height="2" fill="var(--white)"/>
-        <rect x="112" y="81" width="1" height="2" fill="var(--sky-pale)"/>
-        <rect x="113" y="81" width="1" height="2" fill="var(--sign)"/>
-        <rect x="114" y="81" width="1" height="2" fill="var(--sky-pale)"/>
-        <rect x="115" y="81" width="1" height="2" fill="var(--cobalt)"/>
-        <rect x="116" y="81" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="121" y="81" width="15" height="3" fill="var(--ice)"/>
-        <rect x="155" y="81" width="1" height="2" fill="var(--ice)"/>
-        <rect x="156" y="81" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="158" y="81" width="2" height="2" fill="var(--ice)"/>
-        <rect x="160" y="81" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="162" y="81" width="2" height="2" fill="var(--ice)"/>
-        <rect x="164" y="81" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="166" y="81" width="2" height="2" fill="var(--ice)"/>
-        <rect x="168" y="81" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="170" y="81" width="2" height="2" fill="var(--ice)"/>
-        <rect x="172" y="81" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="174" y="81" width="2" height="2" fill="var(--ice)"/>
-        <rect x="15" y="82" width="9" height="3" fill="var(--ice)"/>
-        <rect x="26" y="82" width="4" height="3" fill="var(--ice)"/>
-        <rect x="65" y="82" width="6" height="1" fill="var(--white)"/>
-        <rect x="71" y="82" width="1" height="3" fill="var(--navy)"/>
-        <rect x="72" y="82" width="1" height="1" fill="var(--white)"/>
-        <rect x="73" y="82" width="4" height="1" fill="var(--cobalt)"/>
-        <rect x="77" y="82" width="1" height="1" fill="var(--white)"/>
-        <rect x="78" y="82" width="3" height="1" fill="var(--navy)"/>
-        <rect x="81" y="82" width="2" height="1" fill="var(--sky-deep)"/>
-        <rect x="83" y="82" width="11" height="1" fill="var(--navy)"/>
-        <rect x="137" y="82" width="14" height="1" fill="var(--white)"/>
-        <rect x="0" y="83" width="14" height="3" fill="var(--ice)"/>
-        <rect x="44" y="83" width="2" height="2" fill="var(--ice)"/>
-        <rect x="46" y="83" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="48" y="83" width="2" height="2" fill="var(--ice)"/>
-        <rect x="50" y="83" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="52" y="83" width="2" height="2" fill="var(--ice)"/>
-        <rect x="65" y="83" width="3" height="1" fill="var(--white)"/>
-        <rect x="68" y="83" width="2" height="1" fill="var(--sign)"/>
-        <rect x="70" y="83" width="1" height="1" fill="var(--white)"/>
-        <rect x="72" y="83" width="6" height="2" fill="var(--white)"/>
-        <rect x="78" y="83" width="2" height="2" fill="var(--navy)"/>
-        <rect x="80" y="83" width="2" height="2" fill="var(--cobalt)"/>
-        <rect x="82" y="83" width="1" height="1" fill="var(--sky-deep)"/>
-        <rect x="83" y="83" width="2" height="2" fill="var(--sign)"/>
-        <rect x="85" y="83" width="1" height="2" fill="var(--navy)"/>
-        <rect x="86" y="83" width="2" height="2" fill="var(--white)"/>
-        <rect x="88" y="83" width="1" height="2" fill="var(--navy)"/>
-        <rect x="89" y="83" width="2" height="2" fill="var(--white)"/>
-        <rect x="91" y="83" width="3" height="2" fill="var(--navy)"/>
-        <rect x="110" y="83" width="8" height="1" fill="var(--sky-pale)"/>
-        <rect x="137" y="83" width="14" height="2" fill="var(--ice)"/>
-        <rect x="155" y="83" width="21" height="3" fill="var(--ice)"/>
-        <rect x="31" y="84" width="12" height="1" fill="var(--white)"/>
-        <rect x="65" y="84" width="6" height="1" fill="var(--white)"/>
-        <rect x="82" y="84" width="1" height="1" fill="var(--navy)"/>
-        <rect x="110" y="84" width="1" height="2" fill="var(--sky-pale)"/>
-        <rect x="111" y="84" width="1" height="2" fill="var(--sign)"/>
-        <rect x="112" y="84" width="1" height="2" fill="var(--sky-pale)"/>
-        <rect x="113" y="84" width="1" height="2" fill="var(--cobalt)"/>
-        <rect x="114" y="84" width="1" height="2" fill="var(--sky-pale)"/>
-        <rect x="115" y="84" width="1" height="2" fill="var(--white)"/>
-        <rect x="116" y="84" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="121" y="84" width="1" height="2" fill="var(--ice)"/>
-        <rect x="122" y="84" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="124" y="84" width="2" height="2" fill="var(--ice)"/>
-        <rect x="126" y="84" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="128" y="84" width="2" height="2" fill="var(--ice)"/>
-        <rect x="130" y="84" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="132" y="84" width="4" height="2" fill="var(--ice)"/>
-        <rect x="15" y="85" width="2" height="2" fill="var(--ice)"/>
-        <rect x="17" y="85" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="19" y="85" width="2" height="2" fill="var(--ice)"/>
-        <rect x="21" y="85" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="23" y="85" width="1" height="2" fill="var(--ice)"/>
-        <rect x="26" y="85" width="1" height="2" fill="var(--sky-pale)"/>
-        <rect x="27" y="85" width="3" height="2" fill="var(--ice)"/>
-        <rect x="31" y="85" width="7" height="1" fill="var(--ice)"/>
-        <rect x="38" y="85" width="9" height="1" fill="var(--white)"/>
-        <rect x="47" y="85" width="7" height="1" fill="var(--ice)"/>
-        <rect x="61" y="85" width="14" height="1" fill="var(--navy)"/>
-        <rect x="75" y="85" width="2" height="1" fill="var(--sky-deep)"/>
-        <rect x="77" y="85" width="3" height="1" fill="var(--navy)"/>
-        <rect x="80" y="85" width="13" height="1" fill="var(--ice)"/>
-        <rect x="93" y="85" width="1" height="1" fill="var(--navy)"/>
-        <rect x="137" y="85" width="2" height="2" fill="var(--ice)"/>
-        <rect x="139" y="85" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="141" y="85" width="2" height="2" fill="var(--ice)"/>
-        <rect x="143" y="85" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="145" y="85" width="2" height="2" fill="var(--ice)"/>
-        <rect x="147" y="85" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="149" y="85" width="2" height="2" fill="var(--ice)"/>
-        <rect x="0" y="86" width="2" height="2" fill="var(--ice)"/>
-        <rect x="2" y="86" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="4" y="86" width="2" height="2" fill="var(--ice)"/>
-        <rect x="6" y="86" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="8" y="86" width="2" height="2" fill="var(--ice)"/>
-        <rect x="10" y="86" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="12" y="86" width="2" height="2" fill="var(--ice)"/>
-        <rect x="31" y="86" width="6" height="1" fill="var(--ice)"/>
-        <rect x="37" y="86" width="11" height="1" fill="var(--white)"/>
-        <rect x="48" y="86" width="6" height="2" fill="var(--ice)"/>
-        <rect x="61" y="86" width="16" height="2" fill="var(--navy)"/>
-        <rect x="77" y="86" width="2" height="2" fill="var(--sky-deep)"/>
-        <rect x="79" y="86" width="15" height="2" fill="var(--navy)"/>
-        <rect x="109" y="86" width="10" height="1" fill="var(--navy)"/>
-        <rect x="121" y="86" width="15" height="3" fill="var(--ice)"/>
-        <rect x="155" y="86" width="1" height="2" fill="var(--ice)"/>
-        <rect x="156" y="86" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="158" y="86" width="2" height="2" fill="var(--ice)"/>
-        <rect x="160" y="86" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="162" y="86" width="2" height="2" fill="var(--ice)"/>
-        <rect x="164" y="86" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="166" y="86" width="2" height="2" fill="var(--ice)"/>
-        <rect x="168" y="86" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="170" y="86" width="2" height="2" fill="var(--ice)"/>
-        <rect x="172" y="86" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="174" y="86" width="2" height="2" fill="var(--ice)"/>
-        <rect x="15" y="87" width="9" height="3" fill="var(--ice)"/>
-        <rect x="26" y="87" width="4" height="3" fill="var(--ice)"/>
-        <rect x="31" y="87" width="2" height="2" fill="var(--ice)"/>
-        <rect x="33" y="87" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="35" y="87" width="2" height="1" fill="var(--ice)"/>
-        <rect x="37" y="87" width="1" height="4" fill="var(--white)"/>
-        <rect x="38" y="87" width="8" height="1" fill="var(--navy)"/>
-        <rect x="46" y="87" width="2" height="3" fill="var(--white)"/>
-        <rect x="94" y="87" width="7" height="4" fill="var(--snow)"/>
-        <rect x="102" y="87" width="7" height="4" fill="var(--snow)"/>
-        <rect x="109" y="87" width="1" height="3" fill="var(--navy)"/>
-        <rect x="110" y="87" width="5" height="2" fill="var(--cobalt)"/>
-        <rect x="115" y="87" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="117" y="87" width="1" height="2" fill="var(--cobalt)"/>
-        <rect x="118" y="87" width="1" height="6" fill="var(--navy)"/>
-        <rect x="137" y="87" width="14" height="3" fill="var(--ice)"/>
-        <rect x="0" y="88" width="14" height="6" fill="var(--ice)"/>
-        <rect x="35" y="88" width="1" height="1" fill="var(--ice)"/>
-        <rect x="36" y="88" width="1" height="2" fill="var(--navy)"/>
-        <rect x="38" y="88" width="1" height="2" fill="var(--navy)"/>
-        <rect x="39" y="88" width="6" height="2" fill="var(--sky-deep)"/>
-        <rect x="45" y="88" width="1" height="2" fill="var(--navy)"/>
-        <rect x="48" y="88" width="2" height="1" fill="var(--ice)"/>
-        <rect x="50" y="88" width="2" height="1" fill="var(--sky-pale)"/>
-        <rect x="52" y="88" width="2" height="1" fill="var(--ice)"/>
-        <rect x="61" y="88" width="33" height="1" fill="var(--navy)"/>
-        <rect x="155" y="88" width="21" height="6" fill="var(--ice)"/>
-        <rect x="31" y="89" width="5" height="1" fill="var(--ice)"/>
-        <rect x="48" y="89" width="1" height="1" fill="var(--ice)"/>
-        <rect x="49" y="89" width="18" height="1" fill="var(--white)"/>
-        <rect x="67" y="89" width="27" height="2" fill="var(--navy)"/>
-        <rect x="110" y="89" width="8" height="1" fill="var(--cobalt)"/>
-        <rect x="121" y="89" width="1" height="2" fill="var(--ice)"/>
-        <rect x="122" y="89" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="124" y="89" width="2" height="2" fill="var(--ice)"/>
-        <rect x="126" y="89" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="128" y="89" width="2" height="2" fill="var(--ice)"/>
-        <rect x="130" y="89" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="132" y="89" width="4" height="4" fill="var(--ice)"/>
-        <rect x="15" y="90" width="2" height="2" fill="var(--ice)"/>
-        <rect x="17" y="90" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="19" y="90" width="2" height="2" fill="var(--ice)"/>
-        <rect x="21" y="90" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="23" y="90" width="1" height="1" fill="var(--ice)"/>
-        <rect x="26" y="90" width="1" height="1" fill="var(--sky-pale)"/>
-        <rect x="27" y="90" width="3" height="2" fill="var(--ice)"/>
-        <rect x="31" y="90" width="6" height="4" fill="var(--ice)"/>
-        <rect x="38" y="90" width="8" height="1" fill="var(--navy)"/>
-        <rect x="46" y="90" width="21" height="1" fill="var(--white)"/>
-        <rect x="109" y="90" width="5" height="1" fill="var(--navy)"/>
-        <rect x="114" y="90" width="4" height="2" fill="var(--cobalt)"/>
-        <rect x="137" y="90" width="2" height="2" fill="var(--ice)"/>
-        <rect x="139" y="90" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="141" y="90" width="2" height="2" fill="var(--ice)"/>
-        <rect x="143" y="90" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="145" y="90" width="2" height="2" fill="var(--ice)"/>
-        <rect x="147" y="90" width="2" height="2" fill="var(--sky-pale)"/>
-        <rect x="149" y="90" width="2" height="2" fill="var(--ice)"/>
-        <rect x="23" y="91" width="4" height="1" fill="var(--navy)"/>
-        <rect x="37" y="91" width="1" height="1" fill="var(--sign)"/>
-        <rect x="38" y="91" width="12" height="1" fill="var(--white)"/>
-        <rect x="50" y="91" width="16" height="2" fill="var(--ice)"/>
-        <rect x="66" y="91" width="1" height="2" fill="var(--white)"/>
-        <rect x="67" y="91" width="47" height="1" fill="var(--navy)"/>
-        <rect x="121" y="91" width="9" height="1" fill="var(--ice)"/>
-        <rect x="130" y="91" width="2" height="2" fill="var(--sign)"/>
-        <rect x="15" y="92" width="8" height="2" fill="var(--ice)"/>
-        <rect x="23" y="92" width="5" height="2" fill="var(--white)"/>
-        <rect x="28" y="92" width="2" height="2" fill="var(--ice)"/>
-        <rect x="37" y="92" width="13" height="1" fill="var(--white)"/>
-        <rect x="67" y="92" width="42" height="1" fill="var(--snow)"/>
-        <rect x="109" y="92" width="1" height="1" fill="var(--navy)"/>
-        <rect x="110" y="92" width="8" height="1" fill="var(--cobalt)"/>
-        <rect x="119" y="92" width="4" height="2" fill="var(--white)"/>
-        <rect x="123" y="92" width="7" height="1" fill="var(--ice)"/>
-        <rect x="137" y="92" width="14" height="1" fill="var(--ice)"/>
-        <rect x="37" y="93" width="30" height="1" fill="var(--white)"/>
-        <rect x="67" y="93" width="32" height="1" fill="var(--navy)"/>
-        <rect x="99" y="93" width="6" height="1" fill="var(--white)"/>
-        <rect x="105" y="93" width="14" height="1" fill="var(--navy)"/>
-        <rect x="123" y="93" width="6" height="1" fill="var(--ice)"/>
-        <rect x="129" y="93" width="4" height="1" fill="var(--white)"/>
-        <rect x="133" y="93" width="3" height="1" fill="var(--ice)"/>
-        <rect x="137" y="93" width="3" height="1" fill="var(--ice)"/>
-        <rect x="140" y="93" width="6" height="1" fill="var(--white)"/>
-        <rect x="146" y="93" width="5" height="1" fill="var(--ice)"/>
-        <rect x="0" y="94" width="22" height="1" fill="var(--snow)"/>
-        <rect x="22" y="94" width="7" height="1" fill="var(--ice)"/>
-        <rect x="29" y="94" width="8" height="1" fill="var(--snow)"/>
-        <rect x="37" y="94" width="1" height="1" fill="var(--sky-pale)"/>
-        <rect x="38" y="94" width="29" height="1" fill="var(--white)"/>
-        <rect x="67" y="94" width="54" height="1" fill="var(--ice)"/>
-        <rect x="121" y="94" width="8" height="1" fill="var(--snow)"/>
-        <rect x="129" y="94" width="4" height="1" fill="var(--sign)"/>
-        <rect x="133" y="94" width="19" height="1" fill="var(--snow)"/>
-        <rect x="152" y="94" width="6" height="1" fill="var(--ice)"/>
-        <rect x="158" y="94" width="18" height="1" fill="var(--snow)"/>
-        <rect x="0" y="95" width="37" height="1" fill="var(--snow)"/>
-        <rect x="37" y="95" width="3" height="1" fill="var(--ice)"/>
-        <rect x="40" y="95" width="5" height="1" fill="var(--navy)"/>
-        <rect x="45" y="95" width="13" height="1" fill="var(--ice)"/>
-        <rect x="58" y="95" width="5" height="1" fill="var(--navy)"/>
-        <rect x="63" y="95" width="4" height="1" fill="var(--ice)"/>
-        <rect x="67" y="95" width="61" height="1" fill="var(--snow)"/>
-        <rect x="128" y="95" width="6" height="1" fill="var(--sign)"/>
-        <rect x="134" y="95" width="42" height="1" fill="var(--snow)"/>
-        <rect x="0" y="96" width="12" height="1" fill="var(--ice)"/>
-        <rect x="12" y="96" width="4" height="1" fill="var(--snow)"/>
-        <rect x="16" y="96" width="10" height="1" fill="var(--ice)"/>
-        <rect x="26" y="96" width="11" height="1" fill="var(--snow)"/>
-        <rect x="37" y="96" width="5" height="1" fill="var(--navy)"/>
-        <rect x="42" y="96" width="1" height="1" fill="var(--ice)"/>
-        <rect x="43" y="96" width="17" height="1" fill="var(--navy)"/>
-        <rect x="60" y="96" width="1" height="1" fill="var(--ice)"/>
-        <rect x="61" y="96" width="6" height="1" fill="var(--navy)"/>
-        <rect x="67" y="96" width="36" height="1" fill="var(--snow)"/>
-        <rect x="103" y="96" width="1" height="1" fill="var(--ice)"/>
-        <rect x="104" y="96" width="23" height="1" fill="var(--snow)"/>
-        <rect x="127" y="96" width="8" height="1" fill="var(--sign)"/>
-        <rect x="135" y="96" width="41" height="2" fill="var(--snow)"/>
-        <rect x="0" y="97" width="40" height="1" fill="var(--snow)"/>
-        <rect x="40" y="97" width="5" height="1" fill="var(--navy)"/>
-        <rect x="45" y="97" width="13" height="1" fill="var(--snow)"/>
-        <rect x="58" y="97" width="5" height="1" fill="var(--navy)"/>
-        <rect x="63" y="97" width="34" height="1" fill="var(--snow)"/>
-        <rect x="97" y="97" width="1" height="1" fill="var(--ice)"/>
-        <rect x="98" y="97" width="12" height="1" fill="var(--snow)"/>
-        <rect x="110" y="97" width="1" height="1" fill="var(--ice)"/>
-        <rect x="111" y="97" width="5" height="1" fill="var(--snow)"/>
-        <rect x="116" y="97" width="1" height="1" fill="var(--ice)"/>
-        <rect x="117" y="97" width="10" height="1" fill="var(--snow)"/>
-        <rect x="127" y="97" width="8" height="1" fill="var(--ice)"/>
-        <rect x="0" y="98" width="41" height="1" fill="var(--snow)"/>
-        <rect x="41" y="98" width="3" height="1" fill="var(--navy)"/>
-        <rect x="44" y="98" width="15" height="1" fill="var(--snow)"/>
-        <rect x="59" y="98" width="3" height="1" fill="var(--navy)"/>
-        <rect x="62" y="98" width="38" height="1" fill="var(--snow)"/>
-        <rect x="100" y="98" width="1" height="1" fill="var(--ice)"/>
-        <rect x="101" y="98" width="5" height="1" fill="var(--snow)"/>
-        <rect x="106" y="98" width="1" height="1" fill="var(--ice)"/>
-        <rect x="107" y="98" width="69" height="1" fill="var(--snow)"/>
-        <rect x="0" y="99" width="8" height="1" fill="var(--ice)"/>
-        <rect x="8" y="99" width="4" height="1" fill="var(--snow)"/>
-        <rect x="12" y="99" width="12" height="1" fill="var(--ice)"/>
-        <rect x="24" y="99" width="4" height="1" fill="var(--snow)"/>
-        <rect x="28" y="99" width="39" height="1" fill="var(--ice)"/>
-        <rect x="67" y="99" width="46" height="1" fill="var(--snow)"/>
-        <rect x="113" y="99" width="1" height="1" fill="var(--ice)"/>
-        <rect x="114" y="99" width="16" height="1" fill="var(--snow)"/>
-        <rect x="130" y="99" width="1" height="1" fill="var(--white)"/>
-        <rect x="131" y="99" width="45" height="1" fill="var(--snow)"/>
-        <rect x="0" y="100" width="176" height="1" fill="var(--snow)"/>
-        <rect x="0" y="101" width="30" height="1" fill="var(--snow)"/>
-        <rect x="30" y="101" width="1" height="1" fill="var(--white)"/>
-        <rect x="31" y="101" width="115" height="1" fill="var(--snow)"/>
-        <rect x="146" y="101" width="1" height="1" fill="var(--white)"/>
-        <rect x="147" y="101" width="29" height="1" fill="var(--snow)"/>
-        <rect x="0" y="102" width="12" height="1" fill="var(--snow)"/>
-        <rect x="12" y="102" width="1" height="1" fill="var(--white)"/>
-        <rect x="13" y="102" width="77" height="1" fill="var(--snow)"/>
-        <rect x="90" y="102" width="1" height="1" fill="var(--white)"/>
-        <rect x="91" y="102" width="69" height="1" fill="var(--snow)"/>
-        <rect x="160" y="102" width="1" height="1" fill="var(--white)"/>
-        <rect x="161" y="102" width="15" height="1" fill="var(--snow)"/>
-        <rect x="0" y="103" width="176" height="1" fill="var(--snow)"/>
-        <g class="k-bird k-bird-1">
-          <rect x="72" y="47" width="2" height="2" fill="var(--navy)"/>
-          <rect x="74" y="46" width="1" height="1" fill="var(--navy)"/>
+        <rect x="23" y="32" width="4" height="1" fill="var(--art-lit)"/>
+        <rect x="24" y="33" width="2" height="3" fill="var(--art-line)"/>
+        <rect x="16" y="36" width="18" height="1" fill="var(--art-lit)"/>
+        <rect x="16" y="37" width="18" height="1" fill="var(--art-line)"/>
+        <rect x="16" y="38" width="19" height="1" fill="var(--art-line)"/>
+        <rect x="14" y="39" width="2" height="1" fill="var(--art-line)"/>
+        <rect x="24" y="39" width="2" height="4" fill="var(--art-line)"/>
+        <rect x="35" y="39" width="3" height="1" fill="var(--art-line)"/>
+        <rect x="0" y="40" width="2" height="1" fill="var(--art-line)"/>
+        <rect x="11" y="40" width="3" height="1" fill="var(--art-line)"/>
+        <rect x="38" y="40" width="3" height="1" fill="var(--art-line)"/>
+        <rect x="2" y="41" width="9" height="1" fill="var(--art-line)"/>
+        <rect x="41" y="41" width="3" height="1" fill="var(--art-line)"/>
+        <rect x="44" y="42" width="3" height="1" fill="var(--art-line)"/>
+        <rect x="18" y="43" width="14" height="1" fill="var(--art-lit)"/>
+        <rect x="47" y="43" width="4" height="1" fill="var(--art-line)"/>
+        <rect x="18" y="44" width="14" height="1" fill="var(--art-line)"/>
+        <rect x="51" y="44" width="3" height="1" fill="var(--art-line)"/>
+        <rect x="17" y="45" width="16" height="1" fill="var(--art-line)"/>
+        <rect x="54" y="45" width="4" height="1" fill="var(--art-line)"/>
+        <rect x="0" y="46" width="2" height="1" fill="var(--art-line)"/>
+        <rect x="15" y="46" width="2" height="1" fill="var(--art-line)"/>
+        <rect x="24" y="46" width="2" height="45" fill="var(--art-line)"/>
+        <rect x="33" y="46" width="3" height="1" fill="var(--art-line)"/>
+        <rect x="58" y="46" width="4" height="1" fill="var(--art-line)"/>
+        <rect x="2" y="47" width="5" height="1" fill="var(--art-line)"/>
+        <rect x="10" y="47" width="5" height="1" fill="var(--art-line)"/>
+        <rect x="36" y="47" width="4" height="1" fill="var(--art-line)"/>
+        <rect x="62" y="47" width="4" height="1" fill="var(--art-line)"/>
+        <rect x="7" y="48" width="3" height="1" fill="var(--art-line)"/>
+        <rect x="40" y="48" width="3" height="1" fill="var(--art-line)"/>
+        <rect x="66" y="48" width="5" height="1" fill="var(--art-line)"/>
+        <rect x="43" y="49" width="4" height="1" fill="var(--art-line)"/>
+        <rect x="71" y="49" width="5" height="1" fill="var(--art-line)"/>
+        <rect x="47" y="50" width="4" height="1" fill="var(--art-line)"/>
+        <rect x="64" y="50" width="11" height="1" fill="var(--art-lit)"/>
+        <rect x="76" y="50" width="5" height="1" fill="var(--art-line)"/>
+        <rect x="100" y="50" width="11" height="1" fill="var(--art-lit)"/>
+        <rect x="152" y="50" width="4" height="1" fill="var(--art-lit)"/>
+        <rect x="51" y="51" width="4" height="1" fill="var(--art-line)"/>
+        <rect x="64" y="51" width="11" height="1" fill="var(--art-far)"/>
+        <rect x="81" y="51" width="7" height="1" fill="var(--art-line)"/>
+        <rect x="100" y="51" width="11" height="1" fill="var(--art-far)"/>
+        <rect x="153" y="51" width="2" height="2" fill="var(--art-line)"/>
+        <rect x="55" y="52" width="4" height="1" fill="var(--art-line)"/>
+        <rect x="64" y="52" width="2" height="3" fill="var(--art-far)"/>
+        <rect x="66" y="52" width="1" height="3" fill="var(--art-line)"/>
+        <rect x="67" y="52" width="1" height="3" fill="var(--art-far)"/>
+        <rect x="68" y="52" width="1" height="3" fill="var(--art-line)"/>
+        <rect x="69" y="52" width="1" height="3" fill="var(--art-far)"/>
+        <rect x="70" y="52" width="1" height="3" fill="var(--art-line)"/>
+        <rect x="71" y="52" width="1" height="3" fill="var(--art-far)"/>
+        <rect x="72" y="52" width="1" height="3" fill="var(--art-line)"/>
+        <rect x="73" y="52" width="2" height="3" fill="var(--art-far)"/>
+        <rect x="88" y="52" width="7" height="1" fill="var(--art-line)"/>
+        <rect x="100" y="52" width="2" height="3" fill="var(--art-far)"/>
+        <rect x="102" y="52" width="1" height="3" fill="var(--art-line)"/>
+        <rect x="103" y="52" width="1" height="3" fill="var(--art-far)"/>
+        <rect x="104" y="52" width="1" height="3" fill="var(--art-line)"/>
+        <rect x="105" y="52" width="1" height="3" fill="var(--art-far)"/>
+        <rect x="106" y="52" width="1" height="3" fill="var(--art-line)"/>
+        <rect x="107" y="52" width="1" height="3" fill="var(--art-far)"/>
+        <rect x="108" y="52" width="1" height="3" fill="var(--art-line)"/>
+        <rect x="109" y="52" width="2" height="3" fill="var(--art-far)"/>
+        <rect x="59" y="53" width="5" height="1" fill="var(--art-line)"/>
+        <rect x="95" y="53" width="5" height="1" fill="var(--art-line)"/>
+        <rect x="148" y="53" width="12" height="1" fill="var(--art-lit)"/>
+        <rect x="111" y="54" width="9" height="1" fill="var(--art-line)"/>
+        <rect x="139" y="54" width="21" height="1" fill="var(--art-line)"/>
+        <rect x="64" y="55" width="11" height="1" fill="var(--art-far)"/>
+        <rect x="100" y="55" width="11" height="1" fill="var(--art-far)"/>
+        <rect x="120" y="55" width="19" height="1" fill="var(--art-line)"/>
+        <rect x="148" y="55" width="14" height="1" fill="var(--art-line)"/>
+        <rect x="64" y="56" width="16" height="1" fill="var(--art-line)"/>
+        <rect x="100" y="56" width="11" height="1" fill="var(--art-line)"/>
+        <rect x="153" y="56" width="2" height="2" fill="var(--art-line)"/>
+        <rect x="162" y="56" width="2" height="1" fill="var(--art-line)"/>
+        <rect x="58" y="57" width="8" height="1" fill="var(--art-lit)"/>
+        <rect x="69" y="57" width="12" height="1" fill="var(--art-lit)"/>
+        <rect x="81" y="57" width="3" height="1" fill="var(--art-line)"/>
+        <rect x="84" y="57" width="9" height="1" fill="var(--art-lit)"/>
+        <rect x="96" y="57" width="14" height="1" fill="var(--art-lit)"/>
+        <rect x="113" y="57" width="7" height="1" fill="var(--art-lit)"/>
+        <rect x="164" y="57" width="3" height="1" fill="var(--art-line)"/>
+        <rect x="174" y="57" width="2" height="1" fill="var(--art-line)"/>
+        <rect x="56" y="58" width="66" height="2" fill="var(--art-lit)"/>
+        <rect x="150" y="58" width="8" height="1" fill="var(--art-lit)"/>
+        <rect x="167" y="58" width="7" height="1" fill="var(--art-line)"/>
+        <rect x="144" y="59" width="14" height="1" fill="var(--art-line)"/>
+        <rect x="57" y="60" width="87" height="1" fill="var(--art-line)"/>
+        <rect x="150" y="60" width="10" height="1" fill="var(--art-line)"/>
+        <rect x="57" y="61" width="64" height="1" fill="var(--art-lit)"/>
+        <rect x="153" y="61" width="2" height="33" fill="var(--art-line)"/>
+        <rect x="160" y="61" width="3" height="1" fill="var(--art-line)"/>
+        <rect x="57" y="62" width="64" height="7" fill="var(--art-accent)"/>
+          <rect x="76" y="63" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="78" y="63" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="76" y="64" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="78" y="64" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="76" y="65" width="2" height="1" fill="var(--art-lit)"/>
+          <rect x="76" y="66" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="78" y="66" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="76" y="67" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="78" y="67" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="80" y="63" width="3" height="1" fill="var(--art-lit)"/>
+          <rect x="80" y="64" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="82" y="64" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="80" y="65" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="82" y="65" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="80" y="66" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="82" y="66" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="80" y="67" width="3" height="1" fill="var(--art-lit)"/>
+          <rect x="84" y="63" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="87" y="63" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="84" y="64" width="2" height="1" fill="var(--art-lit)"/>
+          <rect x="87" y="64" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="84" y="65" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="86" y="65" width="2" height="1" fill="var(--art-lit)"/>
+          <rect x="84" y="66" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="87" y="66" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="84" y="67" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="87" y="67" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="89" y="63" width="2" height="1" fill="var(--art-lit)"/>
+          <rect x="89" y="64" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="91" y="64" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="89" y="65" width="2" height="1" fill="var(--art-lit)"/>
+          <rect x="89" y="66" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="91" y="66" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="89" y="67" width="2" height="1" fill="var(--art-lit)"/>
+          <rect x="93" y="63" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="93" y="64" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="93" y="65" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="93" y="66" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="93" y="67" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="95" y="63" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="98" y="63" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="95" y="64" width="2" height="1" fill="var(--art-lit)"/>
+          <rect x="98" y="64" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="95" y="65" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="97" y="65" width="2" height="1" fill="var(--art-lit)"/>
+          <rect x="95" y="66" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="98" y="66" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="95" y="67" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="98" y="67" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="100" y="63" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="100" y="64" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="100" y="65" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="100" y="66" width="1" height="1" fill="var(--art-lit)"/>
+          <rect x="100" y="67" width="1" height="1" fill="var(--art-lit)"/>
+        <rect x="163" y="62" width="3" height="1" fill="var(--art-line)"/>
+        <rect x="173" y="62" width="3" height="1" fill="var(--art-line)"/>
+        <rect x="166" y="63" width="7" height="1" fill="var(--art-line)"/>
+        <rect x="57" y="69" width="64" height="1" fill="var(--art-lit)"/>
+        <rect x="57" y="70" width="64" height="1" fill="var(--art-line)"/>
+        <rect x="57" y="71" width="1" height="18" fill="var(--art-line)"/>
+        <rect x="58" y="71" width="3" height="18" fill="var(--art-ground)"/>
+        <rect x="61" y="71" width="56" height="1" fill="var(--art-line)"/>
+        <rect x="117" y="71" width="3" height="7" fill="var(--art-ground)"/>
+        <rect x="120" y="71" width="1" height="21" fill="var(--art-line)"/>
+        <rect x="15" y="72" width="9" height="1" fill="var(--art-lit)"/>
+        <rect x="26" y="72" width="4" height="1" fill="var(--art-lit)"/>
+        <rect x="61" y="72" width="2" height="2" fill="var(--art-line)"/>
+        <rect x="63" y="72" width="2" height="2" fill="var(--art-glass)"/>
+        <rect x="65" y="72" width="6" height="2" fill="var(--art-line)"/>
+        <rect x="71" y="72" width="2" height="2" fill="var(--art-glass)"/>
+        <rect x="73" y="72" width="21" height="2" fill="var(--art-line)"/>
+        <rect x="94" y="72" width="2" height="15" fill="var(--art-ground)"/>
+        <rect x="96" y="72" width="5" height="2" fill="var(--art-glass)"/>
+        <rect x="101" y="72" width="1" height="19" fill="var(--art-line)"/>
+        <rect x="102" y="72" width="5" height="8" fill="var(--art-glass)"/>
+        <rect x="107" y="72" width="2" height="15" fill="var(--art-ground)"/>
+        <rect x="109" y="72" width="8" height="6" fill="var(--art-line)"/>
+        <rect x="15" y="73" width="9" height="2" fill="var(--art-far)"/>
+        <rect x="26" y="73" width="4" height="2" fill="var(--art-far)"/>
+        <rect x="61" y="74" width="4" height="11" fill="var(--art-line)"/>
+        <rect x="65" y="74" width="2" height="1" fill="var(--art-glass)"/>
+        <rect x="67" y="74" width="6" height="1" fill="var(--art-line)"/>
+        <rect x="73" y="74" width="2" height="1" fill="var(--art-glass)"/>
+        <rect x="75" y="74" width="19" height="1" fill="var(--art-line)"/>
+        <rect x="96" y="74" width="1" height="2" fill="var(--art-glass)"/>
+        <rect x="97" y="74" width="3" height="2" fill="var(--art-accent)"/>
+        <rect x="100" y="74" width="1" height="2" fill="var(--art-glass)"/>
+        <rect x="15" y="75" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="17" y="75" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="19" y="75" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="21" y="75" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="23" y="75" width="1" height="2" fill="var(--art-far)"/>
+        <rect x="26" y="75" width="1" height="2" fill="var(--art-haze)"/>
+        <rect x="27" y="75" width="3" height="2" fill="var(--art-far)"/>
+        <rect x="65" y="75" width="6" height="2" fill="var(--art-lit)"/>
+        <rect x="71" y="75" width="1" height="5" fill="var(--art-line)"/>
+        <rect x="72" y="75" width="6" height="2" fill="var(--art-lit)"/>
+        <rect x="78" y="75" width="16" height="3" fill="var(--art-line)"/>
+        <rect x="96" y="76" width="5" height="4" fill="var(--art-glass)"/>
+        <rect x="121" y="76" width="15" height="1" fill="var(--art-lit)"/>
+        <rect x="15" y="77" width="9" height="3" fill="var(--art-far)"/>
+        <rect x="26" y="77" width="4" height="3" fill="var(--art-far)"/>
+        <rect x="65" y="77" width="1" height="1" fill="var(--art-lit)"/>
+        <rect x="66" y="77" width="4" height="1" fill="var(--art-detail)"/>
+        <rect x="70" y="77" width="1" height="1" fill="var(--art-lit)"/>
+        <rect x="72" y="77" width="1" height="4" fill="var(--art-lit)"/>
+        <rect x="73" y="77" width="4" height="4" fill="var(--art-detail)"/>
+        <rect x="77" y="77" width="1" height="4" fill="var(--art-lit)"/>
+        <rect x="121" y="77" width="15" height="2" fill="var(--art-far)"/>
+        <rect x="0" y="78" width="14" height="1" fill="var(--art-lit)"/>
+        <rect x="65" y="78" width="6" height="1" fill="var(--art-lit)"/>
+        <rect x="78" y="78" width="1" height="2" fill="var(--art-glass)"/>
+        <rect x="79" y="78" width="1" height="2" fill="var(--art-line)"/>
+        <rect x="80" y="78" width="2" height="2" fill="var(--art-lit)"/>
+        <rect x="82" y="78" width="1" height="2" fill="var(--art-line)"/>
+        <rect x="83" y="78" width="2" height="2" fill="var(--art-detail)"/>
+        <rect x="85" y="78" width="1" height="2" fill="var(--art-line)"/>
+        <rect x="86" y="78" width="2" height="2" fill="var(--art-accent)"/>
+        <rect x="88" y="78" width="1" height="2" fill="var(--art-line)"/>
+        <rect x="89" y="78" width="2" height="2" fill="var(--art-lit)"/>
+        <rect x="91" y="78" width="3" height="2" fill="var(--art-line)"/>
+        <rect x="109" y="78" width="10" height="1" fill="var(--art-lit)"/>
+        <rect x="119" y="78" width="1" height="14" fill="var(--art-ground)"/>
+        <rect x="155" y="78" width="21" height="1" fill="var(--art-lit)"/>
+        <rect x="0" y="79" width="14" height="2" fill="var(--art-far)"/>
+        <rect x="65" y="79" width="1" height="1" fill="var(--art-lit)"/>
+        <rect x="66" y="79" width="3" height="1" fill="var(--art-detail)"/>
+        <rect x="69" y="79" width="2" height="1" fill="var(--art-lit)"/>
+        <rect x="109" y="79" width="1" height="7" fill="var(--art-line)"/>
+        <rect x="110" y="79" width="8" height="1" fill="var(--art-detail)"/>
+        <rect x="118" y="79" width="1" height="7" fill="var(--art-line)"/>
+        <rect x="121" y="79" width="1" height="2" fill="var(--art-far)"/>
+        <rect x="122" y="79" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="124" y="79" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="126" y="79" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="128" y="79" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="130" y="79" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="132" y="79" width="4" height="2" fill="var(--art-far)"/>
+        <rect x="155" y="79" width="21" height="2" fill="var(--art-far)"/>
+        <rect x="15" y="80" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="17" y="80" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="19" y="80" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="21" y="80" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="23" y="80" width="1" height="2" fill="var(--art-far)"/>
+        <rect x="26" y="80" width="1" height="2" fill="var(--art-haze)"/>
+        <rect x="27" y="80" width="3" height="2" fill="var(--art-far)"/>
+        <rect x="44" y="80" width="10" height="1" fill="var(--art-lit)"/>
+        <rect x="65" y="80" width="6" height="1" fill="var(--art-lit)"/>
+        <rect x="71" y="80" width="1" height="2" fill="var(--art-glass)"/>
+        <rect x="78" y="80" width="1" height="2" fill="var(--art-line)"/>
+        <rect x="79" y="80" width="1" height="1" fill="var(--art-glass)"/>
+        <rect x="80" y="80" width="13" height="1" fill="var(--art-far)"/>
+        <rect x="93" y="80" width="1" height="1" fill="var(--art-line)"/>
+        <rect x="96" y="80" width="1" height="1" fill="var(--art-glass)"/>
+        <rect x="97" y="80" width="4" height="1" fill="var(--art-lit)"/>
+        <rect x="102" y="80" width="4" height="1" fill="var(--art-lit)"/>
+        <rect x="106" y="80" width="1" height="1" fill="var(--art-glass)"/>
+        <rect x="110" y="80" width="8" height="1" fill="var(--art-haze)"/>
+        <rect x="0" y="81" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="2" y="81" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="4" y="81" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="6" y="81" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="8" y="81" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="10" y="81" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="12" y="81" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="44" y="81" width="10" height="2" fill="var(--art-far)"/>
+        <rect x="65" y="81" width="1" height="1" fill="var(--art-lit)"/>
+        <rect x="66" y="81" width="4" height="1" fill="var(--art-detail)"/>
+        <rect x="70" y="81" width="1" height="1" fill="var(--art-lit)"/>
+        <rect x="72" y="81" width="6" height="1" fill="var(--art-lit)"/>
+        <rect x="79" y="81" width="2" height="1" fill="var(--art-glass)"/>
+        <rect x="81" y="81" width="13" height="1" fill="var(--art-line)"/>
+        <rect x="96" y="81" width="5" height="6" fill="var(--art-glass)"/>
+        <rect x="102" y="81" width="5" height="6" fill="var(--art-glass)"/>
+        <rect x="110" y="81" width="1" height="2" fill="var(--art-haze)"/>
+        <rect x="111" y="81" width="1" height="2" fill="var(--art-lit)"/>
+        <rect x="112" y="81" width="1" height="2" fill="var(--art-haze)"/>
+        <rect x="113" y="81" width="1" height="2" fill="var(--art-accent)"/>
+        <rect x="114" y="81" width="1" height="2" fill="var(--art-haze)"/>
+        <rect x="115" y="81" width="1" height="2" fill="var(--art-detail)"/>
+        <rect x="116" y="81" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="121" y="81" width="15" height="3" fill="var(--art-far)"/>
+        <rect x="155" y="81" width="1" height="2" fill="var(--art-far)"/>
+        <rect x="156" y="81" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="158" y="81" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="160" y="81" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="162" y="81" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="164" y="81" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="166" y="81" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="168" y="81" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="170" y="81" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="172" y="81" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="174" y="81" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="15" y="82" width="9" height="3" fill="var(--art-far)"/>
+        <rect x="26" y="82" width="4" height="3" fill="var(--art-far)"/>
+        <rect x="65" y="82" width="6" height="1" fill="var(--art-lit)"/>
+        <rect x="71" y="82" width="1" height="3" fill="var(--art-line)"/>
+        <rect x="72" y="82" width="1" height="1" fill="var(--art-lit)"/>
+        <rect x="73" y="82" width="4" height="1" fill="var(--art-detail)"/>
+        <rect x="77" y="82" width="1" height="1" fill="var(--art-lit)"/>
+        <rect x="78" y="82" width="3" height="1" fill="var(--art-line)"/>
+        <rect x="81" y="82" width="2" height="1" fill="var(--art-glass)"/>
+        <rect x="83" y="82" width="11" height="1" fill="var(--art-line)"/>
+        <rect x="137" y="82" width="14" height="1" fill="var(--art-lit)"/>
+        <rect x="0" y="83" width="14" height="3" fill="var(--art-far)"/>
+        <rect x="44" y="83" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="46" y="83" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="48" y="83" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="50" y="83" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="52" y="83" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="65" y="83" width="3" height="1" fill="var(--art-lit)"/>
+        <rect x="68" y="83" width="2" height="1" fill="var(--art-accent)"/>
+        <rect x="70" y="83" width="1" height="1" fill="var(--art-lit)"/>
+        <rect x="72" y="83" width="6" height="2" fill="var(--art-lit)"/>
+        <rect x="78" y="83" width="2" height="2" fill="var(--art-line)"/>
+        <rect x="80" y="83" width="2" height="2" fill="var(--art-detail)"/>
+        <rect x="82" y="83" width="1" height="1" fill="var(--art-glass)"/>
+        <rect x="83" y="83" width="2" height="2" fill="var(--art-accent)"/>
+        <rect x="85" y="83" width="1" height="2" fill="var(--art-line)"/>
+        <rect x="86" y="83" width="2" height="2" fill="var(--art-lit)"/>
+        <rect x="88" y="83" width="1" height="2" fill="var(--art-line)"/>
+        <rect x="89" y="83" width="2" height="2" fill="var(--art-lit)"/>
+        <rect x="91" y="83" width="3" height="2" fill="var(--art-line)"/>
+        <rect x="110" y="83" width="8" height="1" fill="var(--art-haze)"/>
+        <rect x="137" y="83" width="14" height="2" fill="var(--art-far)"/>
+        <rect x="155" y="83" width="21" height="3" fill="var(--art-far)"/>
+        <rect x="31" y="84" width="12" height="1" fill="var(--art-lit)"/>
+        <rect x="65" y="84" width="6" height="1" fill="var(--art-lit)"/>
+        <rect x="82" y="84" width="1" height="1" fill="var(--art-line)"/>
+        <rect x="110" y="84" width="1" height="2" fill="var(--art-haze)"/>
+        <rect x="111" y="84" width="1" height="2" fill="var(--art-accent)"/>
+        <rect x="112" y="84" width="1" height="2" fill="var(--art-haze)"/>
+        <rect x="113" y="84" width="1" height="2" fill="var(--art-detail)"/>
+        <rect x="114" y="84" width="1" height="2" fill="var(--art-haze)"/>
+        <rect x="115" y="84" width="1" height="2" fill="var(--art-lit)"/>
+        <rect x="116" y="84" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="121" y="84" width="1" height="2" fill="var(--art-far)"/>
+        <rect x="122" y="84" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="124" y="84" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="126" y="84" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="128" y="84" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="130" y="84" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="132" y="84" width="4" height="2" fill="var(--art-far)"/>
+        <rect x="15" y="85" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="17" y="85" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="19" y="85" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="21" y="85" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="23" y="85" width="1" height="2" fill="var(--art-far)"/>
+        <rect x="26" y="85" width="1" height="2" fill="var(--art-haze)"/>
+        <rect x="27" y="85" width="3" height="2" fill="var(--art-far)"/>
+        <rect x="31" y="85" width="7" height="1" fill="var(--art-far)"/>
+        <rect x="38" y="85" width="9" height="1" fill="var(--art-lit)"/>
+        <rect x="47" y="85" width="7" height="1" fill="var(--art-far)"/>
+        <rect x="61" y="85" width="14" height="1" fill="var(--art-line)"/>
+        <rect x="75" y="85" width="2" height="1" fill="var(--art-glass)"/>
+        <rect x="77" y="85" width="3" height="1" fill="var(--art-line)"/>
+        <rect x="80" y="85" width="13" height="1" fill="var(--art-far)"/>
+        <rect x="93" y="85" width="1" height="1" fill="var(--art-line)"/>
+        <rect x="137" y="85" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="139" y="85" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="141" y="85" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="143" y="85" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="145" y="85" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="147" y="85" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="149" y="85" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="0" y="86" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="2" y="86" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="4" y="86" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="6" y="86" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="8" y="86" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="10" y="86" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="12" y="86" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="31" y="86" width="6" height="1" fill="var(--art-far)"/>
+        <rect x="37" y="86" width="11" height="1" fill="var(--art-lit)"/>
+        <rect x="48" y="86" width="6" height="2" fill="var(--art-far)"/>
+        <rect x="61" y="86" width="16" height="2" fill="var(--art-line)"/>
+        <rect x="77" y="86" width="2" height="2" fill="var(--art-glass)"/>
+        <rect x="79" y="86" width="15" height="2" fill="var(--art-line)"/>
+        <rect x="109" y="86" width="10" height="1" fill="var(--art-line)"/>
+        <rect x="121" y="86" width="15" height="3" fill="var(--art-far)"/>
+        <rect x="155" y="86" width="1" height="2" fill="var(--art-far)"/>
+        <rect x="156" y="86" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="158" y="86" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="160" y="86" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="162" y="86" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="164" y="86" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="166" y="86" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="168" y="86" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="170" y="86" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="172" y="86" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="174" y="86" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="15" y="87" width="9" height="3" fill="var(--art-far)"/>
+        <rect x="26" y="87" width="4" height="3" fill="var(--art-far)"/>
+        <rect x="31" y="87" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="33" y="87" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="35" y="87" width="2" height="1" fill="var(--art-far)"/>
+        <rect x="37" y="87" width="1" height="4" fill="var(--art-lit)"/>
+        <rect x="38" y="87" width="8" height="1" fill="var(--art-line)"/>
+        <rect x="46" y="87" width="2" height="3" fill="var(--art-lit)"/>
+        <rect x="94" y="87" width="7" height="4" fill="var(--art-ground)"/>
+        <rect x="102" y="87" width="7" height="4" fill="var(--art-ground)"/>
+        <rect x="109" y="87" width="1" height="3" fill="var(--art-line)"/>
+        <rect x="110" y="87" width="5" height="2" fill="var(--art-detail)"/>
+        <rect x="115" y="87" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="117" y="87" width="1" height="2" fill="var(--art-detail)"/>
+        <rect x="118" y="87" width="1" height="6" fill="var(--art-line)"/>
+        <rect x="137" y="87" width="14" height="3" fill="var(--art-far)"/>
+        <rect x="0" y="88" width="14" height="6" fill="var(--art-far)"/>
+        <rect x="35" y="88" width="1" height="1" fill="var(--art-far)"/>
+        <rect x="36" y="88" width="1" height="2" fill="var(--art-line)"/>
+        <rect x="38" y="88" width="1" height="2" fill="var(--art-line)"/>
+        <rect x="39" y="88" width="6" height="2" fill="var(--art-glass)"/>
+        <rect x="45" y="88" width="1" height="2" fill="var(--art-line)"/>
+        <rect x="48" y="88" width="2" height="1" fill="var(--art-far)"/>
+        <rect x="50" y="88" width="2" height="1" fill="var(--art-haze)"/>
+        <rect x="52" y="88" width="2" height="1" fill="var(--art-far)"/>
+        <rect x="61" y="88" width="33" height="1" fill="var(--art-line)"/>
+        <rect x="155" y="88" width="21" height="6" fill="var(--art-far)"/>
+        <rect x="31" y="89" width="5" height="1" fill="var(--art-far)"/>
+        <rect x="48" y="89" width="1" height="1" fill="var(--art-far)"/>
+        <rect x="49" y="89" width="18" height="1" fill="var(--art-lit)"/>
+        <rect x="67" y="89" width="27" height="2" fill="var(--art-line)"/>
+        <rect x="110" y="89" width="8" height="1" fill="var(--art-detail)"/>
+        <rect x="121" y="89" width="1" height="2" fill="var(--art-far)"/>
+        <rect x="122" y="89" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="124" y="89" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="126" y="89" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="128" y="89" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="130" y="89" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="132" y="89" width="4" height="4" fill="var(--art-far)"/>
+        <rect x="15" y="90" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="17" y="90" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="19" y="90" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="21" y="90" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="23" y="90" width="1" height="1" fill="var(--art-far)"/>
+        <rect x="26" y="90" width="1" height="1" fill="var(--art-haze)"/>
+        <rect x="27" y="90" width="3" height="2" fill="var(--art-far)"/>
+        <rect x="31" y="90" width="6" height="4" fill="var(--art-far)"/>
+        <rect x="38" y="90" width="8" height="1" fill="var(--art-line)"/>
+        <rect x="46" y="90" width="21" height="1" fill="var(--art-lit)"/>
+        <rect x="109" y="90" width="5" height="1" fill="var(--art-line)"/>
+        <rect x="114" y="90" width="4" height="2" fill="var(--art-detail)"/>
+        <rect x="137" y="90" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="139" y="90" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="141" y="90" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="143" y="90" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="145" y="90" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="147" y="90" width="2" height="2" fill="var(--art-haze)"/>
+        <rect x="149" y="90" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="23" y="91" width="4" height="1" fill="var(--art-line)"/>
+        <rect x="37" y="91" width="1" height="1" fill="var(--art-accent)"/>
+        <rect x="38" y="91" width="12" height="1" fill="var(--art-lit)"/>
+        <rect x="50" y="91" width="16" height="2" fill="var(--art-far)"/>
+        <rect x="66" y="91" width="1" height="2" fill="var(--art-lit)"/>
+        <rect x="67" y="91" width="47" height="1" fill="var(--art-line)"/>
+        <rect x="121" y="91" width="9" height="1" fill="var(--art-far)"/>
+        <rect x="130" y="91" width="2" height="2" fill="var(--art-accent)"/>
+        <rect x="15" y="92" width="8" height="2" fill="var(--art-far)"/>
+        <rect x="23" y="92" width="5" height="2" fill="var(--art-lit)"/>
+        <rect x="28" y="92" width="2" height="2" fill="var(--art-far)"/>
+        <rect x="37" y="92" width="13" height="1" fill="var(--art-lit)"/>
+        <rect x="67" y="92" width="42" height="1" fill="var(--art-ground)"/>
+        <rect x="109" y="92" width="1" height="1" fill="var(--art-line)"/>
+        <rect x="110" y="92" width="8" height="1" fill="var(--art-detail)"/>
+        <rect x="119" y="92" width="4" height="2" fill="var(--art-lit)"/>
+        <rect x="123" y="92" width="7" height="1" fill="var(--art-far)"/>
+        <rect x="137" y="92" width="14" height="1" fill="var(--art-far)"/>
+        <rect x="37" y="93" width="30" height="1" fill="var(--art-lit)"/>
+        <rect x="67" y="93" width="32" height="1" fill="var(--art-line)"/>
+        <rect x="99" y="93" width="6" height="1" fill="var(--art-lit)"/>
+        <rect x="105" y="93" width="14" height="1" fill="var(--art-line)"/>
+        <rect x="123" y="93" width="6" height="1" fill="var(--art-far)"/>
+        <rect x="129" y="93" width="4" height="1" fill="var(--art-lit)"/>
+        <rect x="133" y="93" width="3" height="1" fill="var(--art-far)"/>
+        <rect x="137" y="93" width="3" height="1" fill="var(--art-far)"/>
+        <rect x="140" y="93" width="6" height="1" fill="var(--art-lit)"/>
+        <rect x="146" y="93" width="5" height="1" fill="var(--art-far)"/>
+        <rect x="0" y="94" width="22" height="1" fill="var(--art-ground)"/>
+        <rect x="22" y="94" width="7" height="1" fill="var(--art-far)"/>
+        <rect x="29" y="94" width="8" height="1" fill="var(--art-ground)"/>
+        <rect x="37" y="94" width="1" height="1" fill="var(--art-haze)"/>
+        <rect x="38" y="94" width="29" height="1" fill="var(--art-lit)"/>
+        <rect x="67" y="94" width="54" height="1" fill="var(--art-far)"/>
+        <rect x="121" y="94" width="8" height="1" fill="var(--art-ground)"/>
+        <rect x="129" y="94" width="4" height="1" fill="var(--art-accent)"/>
+        <rect x="133" y="94" width="19" height="1" fill="var(--art-ground)"/>
+        <rect x="152" y="94" width="6" height="1" fill="var(--art-far)"/>
+        <rect x="158" y="94" width="18" height="1" fill="var(--art-ground)"/>
+        <rect x="0" y="95" width="37" height="1" fill="var(--art-ground)"/>
+        <rect x="37" y="95" width="3" height="1" fill="var(--art-far)"/>
+        <rect x="40" y="95" width="5" height="1" fill="var(--art-line)"/>
+        <rect x="45" y="95" width="13" height="1" fill="var(--art-far)"/>
+        <rect x="58" y="95" width="5" height="1" fill="var(--art-line)"/>
+        <rect x="63" y="95" width="4" height="1" fill="var(--art-far)"/>
+        <rect x="67" y="95" width="61" height="1" fill="var(--art-ground)"/>
+        <rect x="128" y="95" width="6" height="1" fill="var(--art-accent)"/>
+        <rect x="134" y="95" width="42" height="1" fill="var(--art-ground)"/>
+        <rect x="0" y="96" width="12" height="1" fill="var(--art-far)"/>
+        <rect x="12" y="96" width="4" height="1" fill="var(--art-ground)"/>
+        <rect x="16" y="96" width="10" height="1" fill="var(--art-far)"/>
+        <rect x="26" y="96" width="11" height="1" fill="var(--art-ground)"/>
+        <rect x="37" y="96" width="5" height="1" fill="var(--art-line)"/>
+        <rect x="42" y="96" width="1" height="1" fill="var(--art-far)"/>
+        <rect x="43" y="96" width="17" height="1" fill="var(--art-line)"/>
+        <rect x="60" y="96" width="1" height="1" fill="var(--art-far)"/>
+        <rect x="61" y="96" width="6" height="1" fill="var(--art-line)"/>
+        <rect x="67" y="96" width="36" height="1" fill="var(--art-ground)"/>
+        <rect x="103" y="96" width="1" height="1" fill="var(--art-far)"/>
+        <rect x="104" y="96" width="23" height="1" fill="var(--art-ground)"/>
+        <rect x="127" y="96" width="8" height="1" fill="var(--art-accent)"/>
+        <rect x="135" y="96" width="41" height="2" fill="var(--art-ground)"/>
+        <rect x="0" y="97" width="40" height="1" fill="var(--art-ground)"/>
+        <rect x="40" y="97" width="5" height="1" fill="var(--art-line)"/>
+        <rect x="45" y="97" width="13" height="1" fill="var(--art-ground)"/>
+        <rect x="58" y="97" width="5" height="1" fill="var(--art-line)"/>
+        <rect x="63" y="97" width="34" height="1" fill="var(--art-ground)"/>
+        <rect x="97" y="97" width="1" height="1" fill="var(--art-far)"/>
+        <rect x="98" y="97" width="12" height="1" fill="var(--art-ground)"/>
+        <rect x="110" y="97" width="1" height="1" fill="var(--art-far)"/>
+        <rect x="111" y="97" width="5" height="1" fill="var(--art-ground)"/>
+        <rect x="116" y="97" width="1" height="1" fill="var(--art-far)"/>
+        <rect x="117" y="97" width="10" height="1" fill="var(--art-ground)"/>
+        <rect x="127" y="97" width="8" height="1" fill="var(--art-far)"/>
+        <rect x="0" y="98" width="41" height="1" fill="var(--art-ground)"/>
+        <rect x="41" y="98" width="3" height="1" fill="var(--art-line)"/>
+        <rect x="44" y="98" width="15" height="1" fill="var(--art-ground)"/>
+        <rect x="59" y="98" width="3" height="1" fill="var(--art-line)"/>
+        <rect x="62" y="98" width="38" height="1" fill="var(--art-ground)"/>
+        <rect x="100" y="98" width="1" height="1" fill="var(--art-far)"/>
+        <rect x="101" y="98" width="5" height="1" fill="var(--art-ground)"/>
+        <rect x="106" y="98" width="1" height="1" fill="var(--art-far)"/>
+        <rect x="107" y="98" width="69" height="1" fill="var(--art-ground)"/>
+        <rect x="0" y="99" width="8" height="1" fill="var(--art-far)"/>
+        <rect x="8" y="99" width="4" height="1" fill="var(--art-ground)"/>
+        <rect x="12" y="99" width="12" height="1" fill="var(--art-far)"/>
+        <rect x="24" y="99" width="4" height="1" fill="var(--art-ground)"/>
+        <rect x="28" y="99" width="39" height="1" fill="var(--art-far)"/>
+        <rect x="67" y="99" width="46" height="1" fill="var(--art-ground)"/>
+        <rect x="113" y="99" width="1" height="1" fill="var(--art-far)"/>
+        <rect x="114" y="99" width="16" height="1" fill="var(--art-ground)"/>
+        <rect x="130" y="99" width="1" height="1" fill="var(--art-lit)"/>
+        <rect x="131" y="99" width="45" height="1" fill="var(--art-ground)"/>
+        <rect x="0" y="100" width="176" height="1" fill="var(--art-ground)"/>
+        <rect x="0" y="101" width="30" height="1" fill="var(--art-ground)"/>
+        <rect x="30" y="101" width="1" height="1" fill="var(--art-lit)"/>
+        <rect x="31" y="101" width="115" height="1" fill="var(--art-ground)"/>
+        <rect x="146" y="101" width="1" height="1" fill="var(--art-lit)"/>
+        <rect x="147" y="101" width="29" height="1" fill="var(--art-ground)"/>
+        <rect x="0" y="102" width="12" height="1" fill="var(--art-ground)"/>
+        <rect x="12" y="102" width="1" height="1" fill="var(--art-lit)"/>
+        <rect x="13" y="102" width="77" height="1" fill="var(--art-ground)"/>
+        <rect x="90" y="102" width="1" height="1" fill="var(--art-lit)"/>
+        <rect x="91" y="102" width="69" height="1" fill="var(--art-ground)"/>
+        <rect x="160" y="102" width="1" height="1" fill="var(--art-lit)"/>
+        <rect x="161" y="102" width="15" height="1" fill="var(--art-ground)"/>
+        <rect x="0" y="103" width="176" height="1" fill="var(--art-ground)"/>
+        <g class="k-bird-1">
+          <rect x="72" y="47" width="2" height="2" fill="var(--art-line)"/>
+          <rect x="74" y="46" width="1" height="1" fill="var(--art-line)"/>
         </g>
-        <g class="k-bird k-bird-2">
-          <rect x="96" y="51" width="2" height="2" fill="var(--navy)"/>
-          <rect x="98" y="50" width="1" height="1" fill="var(--navy)"/>
+        <g class="k-bird-2">
+          <rect x="96" y="51" width="2" height="2" fill="var(--art-line)"/>
+          <rect x="98" y="50" width="1" height="1" fill="var(--art-line)"/>
         </g>
-        <g class="k-bird k-bird-3">
-          <rect x="122" y="53" width="2" height="2" fill="var(--navy)"/>
-          <rect x="124" y="52" width="1" height="1" fill="var(--navy)"/>
+        <g class="k-bird-3">
+          <rect x="122" y="53" width="2" height="2" fill="var(--art-line)"/>
+          <rect x="124" y="52" width="1" height="1" fill="var(--art-line)"/>
         </g>
         </svg>
       </div>
     </div>
     <div class="poster-snow">
       <p class="k-captions" aria-label="poster captions">
-        <span class="k-caption">never too</span>
-        <span class="k-caption">far away</span>
-        <span class="k-caption">always there</span>
+        <span class="k-caption">one sky</span>
+        <span class="k-caption">one scene</span>
+        <span class="k-caption">whole pixels</span>
       </p>
-      <p class="k-kana poster-kana" lang="ja" aria-label="konbini, in katakana">コンビニ</p>
+      <p class="k-kana poster-kana" lang="ja" aria-label="konbini, the wordmark in katakana">コンビニ</p>
       <div class="poster-foot">
-        <p class="k-footnote">the omnipresent konbini will always be there for you.</p>
-        <p class="k-pageno" aria-label="page 28">28</p>
+        <div class="thesis">
+          <p class="k-body">
+            A design system drawn as a series of pixel travel posters about
+            quiet everyday places. Every surface is a poster: one vertical sky
+            falling into snow-white paper, heavy display type floating in the
+            sky, small type resting on the paper, and one carefully built pixel
+            scene as the centrepiece.
+          </p>
+          <p class="k-body">
+            Two things to hold on to. <b>All illustration is pixel art on a
+            whole-number grid</b> - rectangles only, scaled 1x, 2x, 3x or 4x and
+            never in between. And <b>there is exactly one gradient</b>: the
+            vertical field behind the display type. Everything else is a flat
+            fill.
+          </p>
+        </div>
+        <p class="k-pageno" aria-label="page 00">00</p>
       </div>
     </div>
   </header>
 
   <div class="k-band" role="presentation"></div>
 
-  <nav class="spread" style="padding-top:2rem;padding-bottom:2rem" aria-label="catalog sections">
-    <p class="k-captions">
-      <a class="k-link" href="#foundations">foundations</a>
-      <a class="k-link" href="#pixel-rule">the pixel rule</a>
-      <a class="k-link" href="#motifs">motifs</a>
-      <a class="k-link" href="#components">components</a>
-      <a class="k-link" href="#application">in application</a>
-    </p>
-  </nav>
-
-  <div class="k-band k-band--thin" role="presentation"></div>
-
   <main>
 
-    <!-- ============ foundations ============ -->
-    <section class="spread" id="foundations">
+    <!-- ============ READ THIS FIRST ============ -->
+    <section class="spread" aria-label="Read this first">
+      <div class="brief">
+        <p class="hd">read this first</p>
+        <ol>
+          <li><b>These values are the system.</b> Every colour on this page is a token in <code>css/konbini-core.css</code>. Use them; do not add an eleventh ink.</li>
+          <li><b>Look for an existing part before drawing a new one.</b> The plate, the chip, the band and the folio cover more ground than they seem to.</li>
+          <li><b>No ad-hoc values.</b> No raw hex - pixel art included, it fills with the <code>--art-*</code> inks. No fractional pixel scale, no blur, no easing curve.</li>
+          <li><b>Token names are roles.</b> <code>--lit</code> is whatever catches light; <code>--ink</code> is every word on paper. Read what a token is for, not what colour it happens to be today.</li>
+          <li><b>One gradient, vertical, and it is the field.</b> Nothing else grades: not a button, not a word, not a shadow.</li>
+          <li><b>The accent never carries text.</b> It is the sign's colour - stripes, marks, a cone. A word set in it is a word nobody can read.</li>
+        </ol>
+      </div>
+    </section>
+
+    <div class="k-band k-band--thin" role="presentation"></div>
+
+    <!-- ============ 01 COLOUR ============ -->
+    <section class="spread" id="colour" aria-labelledby="colour-h">
       <div class="spread-head">
-        <h2>foundations</h2>
-        <span class="kana" lang="ja" aria-hidden="true">カラー と タイプ</span>
+        <h2 id="colour-h">colour</h2>
+        <span class="n">10 roles, 8 art inks</span>
+      </div>
+      <p class="lede">
+        Ten flat colours and nothing else. Every plate below is split: <b>day
+        on the left, night on the right</b>, so both posters are on the page at
+        once. The night poster is the same street after dark - the sky goes to
+        ink, the paper to blue snow - never a neutral grey.
+      </p>
+
+      <div class="duo">
+        <div class="plate"><div class="halves"><i style="background:#5fb2dd"></i><i style="background:#0a1430"></i></div><div class="cap"><span class="nm">--field-top</span><span class="role">Top stop of the one gradient.</span><span class="hex"><span>#5fb2dd</span><span>#0a1430</span></span></div></div>
+        <div class="plate"><div class="halves"><i style="background:#8ecbe9"></i><i style="background:#1b2d5a"></i></div><div class="cap"><span class="nm">--field-mid</span><span class="role">Middle stop, pinned at 55%.</span><span class="hex"><span>#8ecbe9</span><span>#1b2d5a</span></span></div></div>
+        <div class="plate"><div class="halves"><i style="background:#c9e6f4"></i><i style="background:#3d5590"></i></div><div class="cap"><span class="nm">--field-low</span><span class="role">The horizon. Where the field meets the paper.</span><span class="hex"><span>#c9e6f4</span><span>#3d5590</span></span></div></div>
+        <div class="plate"><div class="halves"><i style="background:#f4f8fa"></i><i style="background:#0e1629"></i></div><div class="cap"><span class="nm">--paper</span><span class="role">The page, and the ground under every scene.</span><span class="hex"><span>#f4f8fa</span><span>#0e1629</span></span></div></div>
+        <div class="plate"><div class="halves"><i style="background:#ffffff"></i><i style="background:#17223d"></i></div><div class="cap"><span class="nm">--plate</span><span class="role">Raised plates: buttons, fields, chips, frames.</span><span class="hex"><span>#ffffff</span><span>#17223d</span></span></div></div>
+        <div class="plate"><div class="halves"><i style="background:#ffffff"></i><i style="background:#f1f5fb"></i></div><div class="cap"><span class="nm">--lit</span><span class="role">Whatever catches light: display type on the field.</span><span class="hex"><span>#ffffff</span><span>#f1f5fb</span></span></div></div>
+        <div class="plate"><div class="halves"><i style="background:#2563eb"></i><i style="background:#8db3ff"></i></div><div class="cap"><span class="nm">--ink</span><span class="role">Every word on paper. Links. The primary plate.</span><span class="hex"><span>#2563eb</span><span>#8db3ff</span></span></div></div>
+        <div class="plate"><div class="halves"><i style="background:#2b3a55"></i><i style="background:#dbe5f4"></i></div><div class="cap"><span class="nm">--ink-strong</span><span class="role">The strongest ink: pixel-step borders, labels, hover.</span><span class="hex"><span>#2b3a55</span><span>#dbe5f4</span></span></div></div>
+        <div class="plate"><div class="halves"><i style="background:#f08c1e"></i><i style="background:#ff9b3d"></i></div><div class="cap"><span class="nm">--accent</span><span class="role">The sign's warm stripe. Marks, never words.</span><span class="hex"><span>#f08c1e</span><span>#ff9b3d</span></span></div></div>
+        <div class="plate"><div class="halves"><i style="background:#a8cede"></i><i style="background:#34466f"></i></div><div class="cap"><span class="nm">--recede</span><span class="role">Whatever is far away: flat shadows, disabled.</span><span class="hex"><span>#a8cede</span><span>#34466f</span></span></div></div>
       </div>
 
-      <h3>palette</h3>
+      <h3>the art ramp - inks for pixel illustration</h3>
       <p>
-        Nine flat colors and nothing else. Three skies that only ever appear
-        inside the one gradient, two papers, cobalt for every word on snow,
-        navy for outlines and dark details, one warm orange that belongs to
-        the sign, and ice for everything far away.
+        Pixel art never reaches for a UI role directly; it is filled with these
+        eight inks. Seven are aliases, so the scene follows the page through a
+        theme flip. <code>--art-line</code> is authored on its own, and
+        <code>--art-glass</code> changes its alias at night.
       </p>
-      <div class="row" style="margin-top:1.5rem">
-        <div class="swatch-cell">
-          <div class="k-swatch" style="background:#5fb2dd"></div>
-          <span class="name">--sky-deep</span><span class="hex">#5fb2dd</span>
-        </div>
-        <div class="swatch-cell">
-          <div class="k-swatch" style="background:#8ecbe9"></div>
-          <span class="name">--sky</span><span class="hex">#8ecbe9</span>
-        </div>
-        <div class="swatch-cell">
-          <div class="k-swatch" style="background:#c9e6f4"></div>
-          <span class="name">--sky-pale</span><span class="hex">#c9e6f4</span>
-        </div>
-        <div class="swatch-cell">
-          <div class="k-swatch" style="background:#f4f8fa"></div>
-          <span class="name">--snow</span><span class="hex">#f4f8fa</span>
-        </div>
-        <div class="swatch-cell">
-          <div class="k-swatch" style="background:#ffffff"></div>
-          <span class="name">--white</span><span class="hex">#ffffff</span>
-        </div>
-        <div class="swatch-cell">
-          <div class="k-swatch" style="background:#2563eb"></div>
-          <span class="name">--cobalt</span><span class="hex">#2563eb</span>
-        </div>
-        <div class="swatch-cell">
-          <div class="k-swatch" style="background:#2b3a55"></div>
-          <span class="name">--navy</span><span class="hex">#2b3a55</span>
-        </div>
-        <div class="swatch-cell">
-          <div class="k-swatch" style="background:#f08c1e"></div>
-          <span class="name">--sign</span><span class="hex">#f08c1e</span>
-        </div>
-        <div class="swatch-cell">
-          <div class="k-swatch" style="background:#a8cede"></div>
-          <span class="name">--ice</span><span class="hex">#a8cede</span>
-        </div>
+      <div class="duo">
+        <div class="plate"><div class="halves"><i style="background:#ffffff"></i><i style="background:#f1f5fb"></i></div><div class="cap"><span class="nm">--art-lit</span><span class="role">Snow caps, lit faces. = --lit</span><span class="hex"><span>#ffffff</span><span>#f1f5fb</span></span></div></div>
+        <div class="plate"><div class="halves"><i style="background:#2b3a55"></i><i style="background:#506596"></i></div><div class="cap"><span class="nm">--art-line</span><span class="role">Outlines, frames, dark detail. Authored per theme.</span><span class="hex"><span>#2b3a55</span><span>#506596</span></span></div></div>
+        <div class="plate"><div class="halves"><i style="background:#a8cede"></i><i style="background:#34466f"></i></div><div class="cap"><span class="nm">--art-far</span><span class="role">Distant silhouettes. = --recede</span><span class="hex"><span>#a8cede</span><span>#34466f</span></span></div></div>
+        <div class="plate"><div class="halves"><i style="background:#c9e6f4"></i><i style="background:#3d5590"></i></div><div class="cap"><span class="nm">--art-haze</span><span class="role">Haze near the horizon. = --field-low</span><span class="hex"><span>#c9e6f4</span><span>#3d5590</span></span></div></div>
+        <div class="plate"><div class="halves"><i style="background:#f4f8fa"></i><i style="background:#0e1629"></i></div><div class="cap"><span class="nm">--art-ground</span><span class="role">The ground strip. = --paper</span><span class="hex"><span>#f4f8fa</span><span>#0e1629</span></span></div></div>
+        <div class="plate"><div class="halves"><i style="background:#2563eb"></i><i style="background:#8db3ff"></i></div><div class="cap"><span class="nm">--art-detail</span><span class="role">Painted detail, posters, poles. = --ink</span><span class="hex"><span>#2563eb</span><span>#8db3ff</span></span></div></div>
+        <div class="plate"><div class="halves"><i style="background:#f08c1e"></i><i style="background:#ff9b3d"></i></div><div class="cap"><span class="nm">--art-accent</span><span class="role">Sign band, cone, marks. = --accent</span><span class="hex"><span>#f08c1e</span><span>#ff9b3d</span></span></div></div>
+        <div class="plate"><div class="halves"><i style="background:#5fb2dd"></i><i style="background:#f1f5fb"></i></div><div class="cap"><span class="nm">--art-glass</span><span class="role">Glass. = --field-top by day, --lit at night.</span><span class="hex"><span>#5fb2dd</span><span>#f1f5fb</span></span></div></div>
       </div>
 
-      <h3>the one gradient</h3>
-      <p>
-        Exactly one gradient exists in the whole system: the vertical sky,
-        deep at the top and pale at the horizon. It is always vertical and
-        always a sky. Bands, plates, buttons, and shadows are flat fills.
-      </p>
-      <div class="k-sky" style="height:120px;max-width:520px;margin-top:1rem" role="img" aria-label="the sky gradient: sky-deep at the top, sky in the middle, sky-pale at the bottom"></div>
-
-      <h3>display voice</h3>
-      <p>
-        A heavy neutral grotesque, 700 to 800, tight tracking, set white and
-        giant when it floats in sky. On sky it is a poster voice only: at
-        least 32px and bold, never body copy.
-      </p>
-      <div class="specimen-sky k-sky" style="max-width:520px">
-        <span class="k-display">HOKKAIDO</span>
+      <h3>the contrast floor</h3>
+      <div class="table-wrap">
+        <table class="spec">
+          <thead><tr><th>pair</th><th>day</th><th>night</th><th>verdict</th></tr></thead>
+          <tbody>
+            <tr><td>--ink on --paper</td><td class="v">4.8:1</td><td class="v">8.6:1</td><td class="d">Body text. Clears AA 4.5:1 in both.</td></tr>
+            <tr><td>--ink on --plate</td><td class="v">5.2:1</td><td class="v">7.5:1</td><td class="d">Text on buttons, chips and fields.</td></tr>
+            <tr><td>--plate on --ink</td><td class="v">5.2:1</td><td class="v">7.5:1</td><td class="d">Primary plate and selected chip label.</td></tr>
+            <tr><td>--ink-strong on --paper</td><td class="v">10.7:1</td><td class="v">14.2:1</td><td class="d">Labels, sub-heads, pixel-step edges.</td></tr>
+            <tr><td>--ink-strong on --field-mid</td><td class="v">6.5:1</td><td class="v">10.5:1</td><td class="d">Small type on the field: captions, the spaced line.</td></tr>
+            <tr><td>--lit on --field-top</td><td class="v">2.4:1</td><td class="v">16.6:1</td><td class="d">Display on the field. <b>Poster size only</b> - by day it is a shape, not a sentence.</td></tr>
+            <tr><td>--art-line on --paper</td><td class="v">10.7:1</td><td class="v">3.1:1</td><td class="d">Icon outlines on the page. Clears the 3:1 floor for graphics in both.</td></tr>
+            <tr><td>--art-line on --field-mid</td><td class="v">6.5:1</td><td class="v">2.3:1</td><td class="d">Poles and wires against the sky. Decoration: read as silhouette, not detail.</td></tr>
+            <tr><td>--recede on --paper</td><td class="v">1.6:1</td><td class="v">1.9:1</td><td class="d">Disabled and far away. <b>Never body text.</b></td></tr>
+          </tbody>
+        </table>
       </div>
 
-      <h3>text voices</h3>
-      <div class="row">
-        <div class="cell">
-          <span class="lbl">caption - lowercase, 700, cobalt</span>
-          <span class="k-caption">lights on the snow</span>
-        </div>
-        <div class="cell">
-          <span class="lbl">body - 400, cobalt, max 62ch</span>
-          <p class="k-body" style="max-width:36ch">
-            The store at the end of the street keeps its lights on all
-            night, and the snow outside stays blue until morning.
-          </p>
-        </div>
-        <div class="cell">
-          <span class="lbl">footnote - 24ch, ragged right, folio in the corner</span>
-          <p class="k-footnote">the heater above the door hums a little louder when it snows.</p>
-        </div>
+      <div class="callout">
+        <b>The old names were hues, and the night poster would have made every
+        one of them a lie.</b> What is navy by day is near-white at night; what
+        is white on the field stays white, but the plate it used to share a name
+        with goes dark. So <code>--ink-strong</code> names the job - the
+        strongest ink on the paper - and <code>--lit</code> and
+        <code>--plate</code> are separate roles that happen to match in
+        daylight. <code>--art-line</code> is authored on its own for the same
+        reason: an outline dark enough to sit beside text is invisible around a
+        silhouette against a night sky.
       </div>
-
-      <h3>cjk display voice</h3>
-      <p>
-        Giant katakana set in cobalt as pure graphic shape. It is texture and
-        scenery, not navigation: a word made of pixels-in-spirit.
-      </p>
-      <p class="k-kana" lang="ja" style="font-size:clamp(3rem,10vw,6rem)" aria-label="yuki, snow, in katakana">ユキ</p>
-
-      <div class="spread-folio"><span class="k-pageno" aria-label="page 29">29</span></div>
+      <div class="spread-folio"><span class="k-pageno">01</span></div>
     </section>
 
     <div class="k-band" role="presentation"></div>
 
-    <!-- ============ the pixel rule ============ -->
-    <section class="spread" id="pixel-rule">
+    <!-- ============ 02 TYPE ============ -->
+    <section class="spread" id="type" aria-labelledby="type-h">
       <div class="spread-head">
-        <h2>the pixel rule</h2>
-        <span class="kana" lang="ja" aria-hidden="true">ピクセル</span>
+        <h2 id="type-h">typography</h2>
+        <span class="n">2 stacks, 11 voices</span>
       </div>
-      <p>
-        All illustration is pixel art on a fixed integer grid: inline SVG made
-        only of axis-aligned rects at integer coordinates, rendered with
-        crisp edges. No curves, no strokes, no anti-aliasing. Scenes are
-        drawn on a 176x104 grid, icons on 16x16.
+      <p class="lede">
+        One neutral grotesque does almost everything, from giant display to the
+        smallest label. A system CJK stack sets kana as graphic shape. Both are
+        platform fonts - nothing is downloaded, nothing is vendored.
       </p>
-      <p>
-        Scaling happens in whole steps. A pixel is 1x, 2x, 3x, or 4x, and
-        never 1.5x: CSS width is always an integer multiple of the grid, so
-        the pixels stay square and crisp at every size.
-      </p>
-      <div class="scale-demo" style="margin-top:2rem">
+
+      <h3>display - on the field, at real size</h3>
+      <div class="specimen-field k-field" style="max-width:none">
+        <span class="k-display poster-title">POSTER</span>
+        <span class="k-caption">.poster-title - clamp(3.25rem, 12vw, 8rem) / 800</span>
+      </div>
+
+      <h3>kana display - as graphic, at real size</h3>
+      <p class="k-kana poster-kana" lang="ja" aria-label="yuki, snow, in katakana" style="text-align:left">ユキ</p>
+      <p class="k-footnote" style="margin-top:0.75rem">.poster-kana - clamp(3.5rem, 16vw, 10rem) / 700, tracked 0.04em.</p>
+
+      <h3>the text voices</h3>
+      <div class="row">
         <div class="cell">
-          <svg width="16" height="16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-snowflake" /></svg>
+          <span class="lbl">section - .spread-head h2</span>
+          <span class="t-section">section heading</span>
+        </div>
+        <div class="cell">
+          <span class="lbl">folio - .k-pageno</span>
+          <span class="k-pageno">03</span>
+        </div>
+        <div class="cell">
+          <span class="lbl">caption - lowercase, 700</span>
+          <span class="k-caption">lights on the snow</span>
+        </div>
+        <div class="cell">
+          <span class="lbl">spaced - .poster-sub</span>
+          <span class="poster-sub" style="margin:0">design system</span>
+        </div>
+      </div>
+      <div class="row" style="margin-top:2rem">
+        <div class="cell">
+          <span class="lbl">body - 400, max 62ch</span>
+          <p class="k-body" style="max-width:36ch;margin:0">
+            A body paragraph sits on the paper in ink. It is the only voice
+            allowed to run long, and even it stops at sixty-two characters.
+          </p>
+        </div>
+        <div class="cell">
+          <span class="lbl">footnote - 24ch, ragged right</span>
+          <p class="k-footnote" style="margin:0">a footnote keeps a narrow measure and sits in the corner beside its folio.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap" style="margin-top:2rem">
+        <table class="spec">
+          <thead><tr><th>voice</th><th>size / weight</th><th>tracking</th><th>where</th></tr></thead>
+          <tbody>
+            <tr><td>.poster-title</td><td class="v">clamp(3.25rem, 12vw, 8rem) / 800</td><td class="v">-0.03em</td><td class="d">The poster headline, <b>lit on the field</b>. One per page. Line height 0.95.</td></tr>
+            <tr><td>.specimen-field .k-display</td><td class="v">clamp(2.5rem, 6vw, 4rem) / 800</td><td class="v">-0.03em</td><td class="d">Display inside a smaller field block. Never under 32px.</td></tr>
+            <tr><td>.poster-kana</td><td class="v">clamp(3.5rem, 16vw, 10rem) / 700</td><td class="v">0.04em</td><td class="d">Kana as graphic texture, in ink on paper.</td></tr>
+            <tr><td>.spread-head h2</td><td class="v">clamp(1.75rem, 4vw, 2.5rem) / 800</td><td class="v">-0.02em</td><td class="d">Section heading. Lowercase.</td></tr>
+            <tr><td>.k-pageno</td><td class="v">1.375rem / 800</td><td class="v">-0.02em</td><td class="d">The folio: a page number tucked in the corner.</td></tr>
+            <tr><td>.spread h3</td><td class="v">1.0625rem / 800</td><td class="v">-0.01em</td><td class="d">Sub-head, in ink-strong. Lowercase.</td></tr>
+            <tr><td>.k-body</td><td class="v">1rem / 400</td><td class="v">0</td><td class="d">Running text. Line height 1.6, capped at <code>--measure</code>.</td></tr>
+            <tr><td>.k-caption</td><td class="v">0.9375rem / 700</td><td class="v">0.01em</td><td class="d">Lowercase captions, three to a row.</td></tr>
+            <tr><td>.poster-sub</td><td class="v">0.9375rem / 700</td><td class="v">0.28em</td><td class="d">The spaced line under a headline. The only voice that opens up.</td></tr>
+            <tr><td>.k-footnote</td><td class="v">0.8125rem / 400</td><td class="v">0</td><td class="d">Ragged right at <code>--measure-note</code>. Line height 1.55.</td></tr>
+            <tr><td>.lbl</td><td class="v">0.75rem / 700</td><td class="v">0</td><td class="d">Specimen labels, in ink-strong. Lowercase.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-wrap">
+        <table class="spec">
+          <thead><tr><th>stack</th><th>families</th><th>licence</th></tr></thead>
+          <tbody>
+            <tr><td>--font-display</td><td class="d">"Helvetica Neue", Helvetica, Arial, sans-serif</td><td class="d">Platform fonts. Nothing is shipped.</td></tr>
+            <tr><td>--font-cjk</td><td class="d">"Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif</td><td class="d">Platform fonts, with Noto Sans JP (SIL OFL) if the reader has it installed.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <b>Lit type is for the field only, and only at poster size.</b> Against
+        the daytime sky white sits at barely 2:1 - acceptable for an 8rem word
+        that reads as a shape, useless for a sentence. So anything small on the
+        field is set in ink-strong, and the display voice never carries body
+        copy. Captions are lowercase for the same reason the headline is huge:
+        the poster has one voice that shouts, and everything else speaks quietly
+        underneath it.
+      </div>
+      <div class="spread-folio"><span class="k-pageno">02</span></div>
+    </section>
+
+    <div class="k-band" role="presentation"></div>
+
+    <!-- ============ 03 SPACE ============ -->
+    <section class="spread" id="space" aria-labelledby="space-h">
+      <div class="spread-head">
+        <h2 id="space-h">space and layout</h2>
+        <span class="n">enormous margins</span>
+      </div>
+      <p class="lede">
+        A poster is mostly empty. One centred column, margins that grow with the
+        viewport, and a measure that stops short - the empty paper is the
+        material, not leftover room.
+      </p>
+
+      <div class="table-wrap">
+        <table class="spec">
+          <thead><tr><th>token</th><th>value</th><th>note</th></tr></thead>
+          <tbody>
+            <tr><td>--page-max</td><td class="v">1180px</td><td class="d">The column ceiling, centred.</td></tr>
+            <tr><td>--page-pad</td><td class="v">clamp(1.25rem, 5vw, 4rem)</td><td class="d">Side margin: 20px on a phone, 64px on a wide screen.</td></tr>
+            <tr><td>--measure</td><td class="v">62ch</td><td class="d">Running text never runs wider.</td></tr>
+            <tr><td>--measure-note</td><td class="v">24ch</td><td class="d">Footnotes: narrow and ragged on purpose.</td></tr>
+            <tr><td>spread padding</td><td class="v">clamp(3rem, 8vh, 5.5rem)</td><td class="d">Top and bottom of every section. Scales with viewport height, not width.</td></tr>
+            <tr><td>--scene-px</td><td class="v">2px / 3px / 4px</td><td class="d">One scene pixel. Whole numbers only, switched at breakpoints - never computed.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>rhythm</h3>
+      <div class="table-wrap">
+        <table class="spec">
+          <tbody>
+            <tr><td>0.5rem</td><td class="v">8px</td><td style="width:30%"><div class="scale-bar" style="width:8px"></div></td><td class="d">Label to specimen.</td></tr>
+            <tr><td>1rem</td><td class="v">16px</td><td><div class="scale-bar" style="width:16px"></div></td><td class="d">Tight rows, caption gaps.</td></tr>
+            <tr><td>1.5rem</td><td class="v">24px</td><td><div class="scale-bar" style="width:24px"></div></td><td class="d">Plate body blocks.</td></tr>
+            <tr><td>2rem</td><td class="v">32px</td><td><div class="scale-bar" style="width:32px"></div></td><td class="d">Specimen rows.</td></tr>
+            <tr><td>2.5rem</td><td class="v">40px</td><td><div class="scale-bar" style="width:40px"></div></td><td class="d">Section head to content.</td></tr>
+            <tr><td>3rem</td><td class="v">48px</td><td><div class="scale-bar" style="width:48px"></div></td><td class="d">Content to folio.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>breakpoints</h3>
+      <div class="table-wrap">
+        <table class="spec">
+          <thead><tr><th>width</th><th>--scene-px</th><th>what changes</th></tr></thead>
+          <tbody>
+            <tr><td>&ge; 1500px</td><td class="v">4px</td><td class="d">The scene draws at 704 x 416.</td></tr>
+            <tr><td>701 - 1499px</td><td class="v">3px</td><td class="d">The default: 528 x 312.</td></tr>
+            <tr><td>&le; 700px</td><td class="v">2px</td><td class="d">352 x 208 - still fits a 380px phone with its margins.</td></tr>
+            <tr><td>&le; 640px</td><td class="v">-</td><td class="d">Captions stack and centre; the poster foot and section heads stack.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <b>The scene steps; it never scales.</b> A 176 x 104 grid at 2.7px per
+        pixel would put some pixel edges on half-pixels, and the browser would
+        smear them. So the scene jumps between whole sizes at breakpoints and
+        lets the margin absorb the difference. The same logic runs the
+        whitespace: the poster is allowed to look emptier on a wide screen,
+        because emptiness is the point.
+      </div>
+      <div class="spread-folio"><span class="k-pageno">03</span></div>
+    </section>
+
+    <div class="k-band" role="presentation"></div>
+
+    <!-- ============ 04 FORM ============ -->
+    <section class="spread" id="form" aria-labelledby="form-h">
+      <div class="spread-head">
+        <h2 id="form-h">form</h2>
+        <span class="n">the pixel rule</span>
+      </div>
+      <p class="lede">
+        Everything is square and drawn in 2px steps. There is no radius, no blur
+        and no stroke: a border is four flat edges that leave the corners empty,
+        and a shadow is a second flat plate offset down and to the right.
+      </p>
+
+      <h3>plates and their shadows</h3>
+      <div class="row">
+        <div class="cell"><div class="plate-demo"></div><span class="lbl">edge - 2px, corners notched</span></div>
+        <div class="cell"><div class="plate-demo plate-demo--rest"></div><span class="lbl">rest - 4px offset</span></div>
+        <div class="cell"><div class="plate-demo plate-demo--lift"></div><span class="lbl">lift - 6px, plate up 2px</span></div>
+        <div class="cell"><div class="plate-demo plate-demo--frame"></div><span class="lbl">frame - 8px offset</span></div>
+        <div class="cell">
+          <svg class="notch-demo" viewBox="0 0 12 12" aria-hidden="true">
+            <rect x="0" y="0" width="12" height="12" fill="var(--paper)"/>
+            <rect x="1" y="1" width="10" height="10" fill="var(--plate)"/>
+            <rect x="1" y="0" width="10" height="1" fill="var(--ink-strong)"/>
+            <rect x="1" y="11" width="10" height="1" fill="var(--ink-strong)"/>
+            <rect x="0" y="1" width="1" height="10" fill="var(--ink-strong)"/>
+            <rect x="11" y="1" width="1" height="10" fill="var(--ink-strong)"/>
+          </svg>
+          <span class="lbl">the corner, magnified</span>
+        </div>
+      </div>
+
+      <div class="table-wrap" style="margin-top:2rem">
+        <table class="spec">
+          <thead><tr><th>part</th><th>value</th><th>why</th></tr></thead>
+          <tbody>
+            <tr><td>radius</td><td class="v">0</td><td class="d">Everywhere. A pixel has no curve to give.</td></tr>
+            <tr><td>edge</td><td class="v">4 x 2px box-shadow</td><td class="d">Top, bottom, left, right - no corners. It reads as a rectangle drawn in pixels, not a CSS border.</td></tr>
+            <tr><td>rest shadow</td><td class="v">4px 4px 0 --recede</td><td class="d">Buttons at rest. Flat, zero blur.</td></tr>
+            <tr><td>lift</td><td class="v">translate(-2px, -2px) + 6px</td><td class="d">Hover: the plate rises one step and the shadow grows one step.</td></tr>
+            <tr><td>press</td><td class="v">translate(4px, 4px), no shadow</td><td class="d">Active: the plate lands exactly on its own shadow.</td></tr>
+            <tr><td>frame</td><td class="v">8px 8px 0 --recede</td><td class="d">A whole poster plate, the heaviest object on the page.</td></tr>
+            <tr><td>sign band</td><td class="v">24px, 6px stripes / 14px, 4px stripes</td><td class="d">Lit, accent, lit, held by 2px art-line hairlines. Divides sections.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>whole steps only - 16 grid at 1x to 4x</h3>
+      <div class="scale-demo">
+        <div class="cell">
+          <svg width="16" height="16" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-snowflake" /></svg>
           <span class="lbl">1x - 16px</span>
         </div>
         <div class="cell">
@@ -928,219 +1125,403 @@ paginated poster spreads; no seed roll.
         </div>
       </div>
 
-      <div class="spread-folio"><span class="k-pageno" aria-label="page 30">30</span></div>
+      <div class="callout">
+        <b>The press lands exactly on the shadow, and that is the whole trick.</b>
+        Rest is 4px of offset, press moves the plate 4px - so pressing a button
+        does not animate anything, it just shows you where the plate was always
+        going to go. Every distance in the component set is a multiple of the
+        same 2px step, which is what lets states snap without looking broken:
+        a jump of one whole step reads as pixel art, a jump of 3.4px reads as a
+        bug.
+      </div>
+      <div class="spread-folio"><span class="k-pageno">04</span></div>
     </section>
 
     <div class="k-band" role="presentation"></div>
 
-    <!-- ============ motifs ============ -->
-    <section class="spread" id="motifs">
+    <!-- ============ 05 MOTION ============ -->
+    <section class="spread" id="motion" aria-labelledby="motion-h">
       <div class="spread-head">
-        <h2>motifs</h2>
-        <span class="kana" lang="ja" aria-hidden="true">モチーフ</span>
+        <h2 id="motion-h">motion</h2>
+        <span class="n">posters do not move</span>
       </div>
+      <p class="lede">
+        Almost none. Two authored moments live in the hero scene - birds on the
+        wire and one drifting cloud - and both move in whole steps with
+        <code>steps()</code> timing. Component states have no transition at
+        all: they snap.
+      </p>
+
+      <div class="table-wrap">
+        <table class="spec">
+          <thead><tr><th>moment</th><th>timing</th><th>what moves</th></tr></thead>
+          <tbody>
+            <tr><td>k-hop-a</td><td class="v">9s steps(1, end) infinite</td><td class="d">First bird: shuffles 3px along the wire and hops 2px.</td></tr>
+            <tr><td>k-hop-b</td><td class="v">13s steps(1, end) infinite, 2s delay</td><td class="d">Second bird: one hop back along the wire.</td></tr>
+            <tr><td>k-away</td><td class="v">17s steps(1, end) infinite, 5s delay</td><td class="d">Third bird: leaves for a moment and comes back.</td></tr>
+            <tr><td>k-drift</td><td class="v">160s steps(28) infinite alternate</td><td class="d">The cloud: 28 grid pixels, one pixel per step, there and back.</td></tr>
+            <tr><td>states</td><td class="v">none</td><td class="d">Hover, press, focus and selection change in a single frame.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p style="margin-top:1.5rem">Hover this plate and press it: there is no in-between frame to see.</p>
+      <button class="k-btn" type="button">snap</button>
+
+      <div class="callout">
+        <b>Steps, not curves, because a pixel cannot be half-way anywhere.</b>
+        An eased tween would move a bird through fractional positions and
+        anti-alias it into a smudge for the length of the tween. <code>steps()</code>
+        keeps every frame on the grid. Under <code>prefers-reduced-motion</code>
+        the birds and the cloud stop where they are, and the poster is still
+        complete - nothing on it ever depended on moving.
+      </div>
+      <div class="spread-folio"><span class="k-pageno">05</span></div>
+    </section>
+
+    <div class="k-band" role="presentation"></div>
+
+    <!-- ============ 06 SCREEN ============ -->
+    <section class="spread" id="screen" aria-labelledby="screen-h">
+      <div class="spread-head">
+        <h2 id="screen-h">screen</h2>
+        <span class="n">enhancement only</span>
+      </div>
+      <p class="lede">
+        One optional surface treatment: the <b>pixel sky</b>. It redraws the
+        field as pixel art - cut into whole cells, its three stops dithered
+        into each other, snow falling through it one cell at a time. The
+        pointer is a lamp: it lifts the sky toward the horizon tone underneath
+        it and pushes the snow sideways as wind.
+      </p>
+
+      <div class="shader-row">
+        <div class="shader-cell">
+          <div class="shader-stage k-field"><span class="k-display" aria-hidden="true">FIELD</span></div>
+          <span class="lbl">static fallback - the field gradient, exactly as designed</span>
+        </div>
+        <div class="shader-cell">
+          <div class="shader-stage k-field"><canvas id="skyCanvas" aria-hidden="true"></canvas><span class="k-display" aria-hidden="true">FIELD</span></div>
+          <span class="lbl">live - move the pointer across it</span>
+        </div>
+      </div>
+
+      <div class="table-wrap" style="margin-top:2rem">
+        <table class="spec">
+          <thead><tr><th>uniform</th><th>value</th><th>what it does</th></tr></thead>
+          <tbody>
+            <tr><td>uPx</td><td class="v">4 CSS px</td><td class="d">One sky pixel, rounded to whole device pixels. The pixel rule, enforced by the shader rather than by care.</td></tr>
+            <tr><td>uSplit</td><td class="v">0.55</td><td class="d">Where the middle stop sits, from the top - the same 55% as the CSS gradient.</td></tr>
+            <tr><td>uSpread</td><td class="v">3.0</td><td class="d">How tightly the 4x4 Bayer dither hugs each seam. At 1 the whole sky is dithered noise; at 3 it reads as flat bands with stitched edges.</td></tr>
+            <tr><td>uDensity</td><td class="v">0.012</td><td class="d">Share of cells holding a flake in the near layer. The far layer carries 0.6 of that.</td></tr>
+            <tr><td>uFall</td><td class="v">7.0 cells/s</td><td class="d">Near-layer fall speed, varied per column. The far layer falls at 0.45 of it.</td></tr>
+            <tr><td>uRadius</td><td class="v">0.42</td><td class="d">Reach of the lamp, in stage heights.</td></tr>
+            <tr><td>uLift</td><td class="v">0.55</td><td class="d">How far the lamp pushes the sky toward the horizon stop.</td></tr>
+            <tr><td>uDrift</td><td class="v">wind 14 / breeze 1.5 cells/s</td><td class="d">Accumulated wind. The pointer's distance from centre sets the gust; away, a light breeze.</td></tr>
+            <tr><td>uTop, uMid, uLow, uSnow</td><td class="v">--field-top, --field-mid, --field-low, --lit</td><td class="d">Read from the live tokens and re-read on every theme change, so the night poster gets a night sky.</td></tr>
+            <tr><td>spring</td><td class="v">k 58 / d 9</td><td class="d">Lamp and wind follow the pointer on a spring, so a gust builds and settles rather than snapping.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <b>It can only emit four colours, and they are all tokens.</b> Every
+        pixel is a choice between two field stops, or snow - never a blend - so
+        the shader is structurally incapable of anti-aliasing, grading, or
+        inventing a hue. That is the pixel rule and the one-gradient rule made
+        mechanical. And it is enhancement only: the canvas is transparent until
+        its first frame, so a machine without WebGL2 sees the plain field. It
+        stops when scrolled off screen, and under
+        <code>prefers-reduced-motion</code> it draws one settled frame and never
+        starts a loop.
+      </div>
+      <p class="callout-note">
+        <b>Where it belongs:</b> in a field block behind display type, or in an
+        empty poster frame. Not behind body text, not in the hero scene - the
+        scene already has its two authored moments - and never more than once
+        on a page.
+      </p>
+      <div class="spread-folio"><span class="k-pageno">06</span></div>
+    </section>
+
+    <div class="k-band" role="presentation"></div>
+
+    <!-- ============ 07 COMPONENTS ============ -->
+    <section class="spread" id="components" aria-labelledby="components-h">
+      <div class="spread-head">
+        <h2 id="components-h">components</h2>
+        <span class="n">5, every state live</span>
+      </div>
+      <p class="lede">
+        Every state here is real: hover it, press it, tab to it, type in it.
+        The pinned rows beside the live ones hold a state still so it can be
+        compared, and are labelled as such.
+      </p>
+
+      <h3>text link</h3>
+      <div class="row">
+        <div class="cell">
+          <span class="lbl">live - hover, then tab for the focus ring</span>
+          <a class="k-link" href="#components">a link resting on the paper</a>
+        </div>
+        <div class="cell">
+          <span class="lbl">pinned hover - ink-strong, 2px underline</span>
+          <a class="k-link is-hover" href="#components" tabindex="-1">a link resting on the paper</a>
+        </div>
+      </div>
+
+      <h3>button - the poster plate</h3>
+      <div class="row row--tight">
+        <div class="cell"><span class="lbl">live</span><button class="k-btn" type="button">continue</button></div>
+        <div class="cell"><span class="lbl">live primary</span><button class="k-btn k-btn--primary" type="button">confirm</button></div>
+        <div class="cell"><span class="lbl">disabled</span><button class="k-btn" type="button" disabled>unavailable</button></div>
+      </div>
+      <div class="row row--tight" style="margin-top:1.5rem">
+        <div class="cell"><span class="lbl">pinned hover</span><button class="k-btn is-hover" type="button" tabindex="-1">continue</button></div>
+        <div class="cell"><span class="lbl">pinned active</span><button class="k-btn is-active" type="button" tabindex="-1">continue</button></div>
+        <div class="cell"><span class="lbl">pinned primary hover</span><button class="k-btn k-btn--primary is-hover" type="button" tabindex="-1">confirm</button></div>
+        <div class="cell"><span class="lbl">pinned primary active</span><button class="k-btn k-btn--primary is-active" type="button" tabindex="-1">confirm</button></div>
+      </div>
+      <p style="margin-top:1rem">Plate, 2px ink-strong pixel-step edge, 4px recede shadow. Primary is an ink plate with plate-coloured text. Disabled drops the shadow and goes to recede.</p>
+
+      <h3>chip - a tiny sign stripe</h3>
+      <div class="row row--tight" data-chips>
+        <button class="k-chip" type="button" aria-pressed="true">option one</button>
+        <button class="k-chip" type="button" aria-pressed="false">option two</button>
+        <button class="k-chip" type="button" aria-pressed="false">option three</button>
+        <button class="k-chip" type="button" aria-pressed="false" disabled>disabled</button>
+      </div>
+      <p style="margin-top:1rem">Click to toggle. Selected is an inversion: ink plate, plate-coloured text. The accent stripes stay - they are the chip's shape, not its state.</p>
+
+      <h3>pagination - folios</h3>
+      <nav class="k-pagination" aria-label="Example pagination" data-pages="7">
+        <button type="button" data-step="-1">&lt;- prev</button>
+        <span><span class="current">1</span> / 7</span>
+        <button type="button" data-step="1">next -&gt;</button>
+      </nav>
+      <p style="margin-top:1rem">Live: page through it. At either end the arrow is truly disabled and goes to recede.</p>
+
+      <h3>entry - plate fields</h3>
+      <div class="row">
+        <div class="cell k-entry">
+          <label for="in-empty">empty</label>
+          <input class="k-input" id="in-empty" type="text" placeholder="placeholder text" />
+        </div>
+        <div class="cell k-entry">
+          <label for="in-filled">filled</label>
+          <input class="k-input" id="in-filled" type="text" value="entered value" />
+        </div>
+        <div class="cell k-entry">
+          <label for="in-off">disabled</label>
+          <input class="k-input" id="in-off" type="text" value="not editable" disabled />
+        </div>
+      </div>
+      <p style="margin-top:1rem">Plate field, 2px ink-strong bottom rule, ink caret and placeholder. Focus turns the rule to ink.</p>
+
+      <div class="callout">
+        <b>Every state is a change of plate, never a change of shape.</b> A
+        button does not grow, round off or glow when hovered; it moves one step
+        and its shadow follows. A chip does not gain a border when selected; it
+        inverts. Because nothing is added, nothing has to be animated in -
+        which is what lets the whole set snap and still feel deliberate.
+      </div>
+      <div class="spread-folio"><span class="k-pageno">07</span></div>
+    </section>
+
+    <div class="k-band" role="presentation"></div>
+
+    <!-- ============ 08 MOTIFS ============ -->
+    <section class="spread" id="motifs" aria-labelledby="motifs-h">
+      <div class="spread-head">
+        <h2 id="motifs-h">motifs</h2>
+        <span class="n">7</span>
+      </div>
+      <p class="lede">
+        What makes a page read as this system at a glance. Not the palette - a
+        blue sky is common - but the pixel scene under it, the sign band, and
+        the quiet type on the paper.
+      </p>
+
+      <h3>the pixel scene</h3>
+      <p>
+        The poster at the top of this page: one quiet everyday place, drawn
+        rect by rect on a 176 x 104 grid, standing on the ground line where the
+        field meets the paper. One per page, always the centrepiece. Flip the
+        theme to see it at night - the glass lights up because
+        <code>--art-glass</code> switches alias.
+      </p>
 
       <h3>pixel icons - 16 grid</h3>
       <div class="icon-grid">
-        <div class="cell">
-          <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-pole" /></svg>
-          <span class="lbl">power pole</span>
-        </div>
-        <div class="cell">
-          <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-vending" /></svg>
-          <span class="lbl">vending machine</span>
-        </div>
-        <div class="cell">
-          <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-cone" /></svg>
-          <span class="lbl">traffic cone</span>
-        </div>
-        <div class="cell">
-          <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-ac" /></svg>
-          <span class="lbl">ac unit</span>
-        </div>
-        <div class="cell">
-          <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-truck" /></svg>
-          <span class="lbl">kei truck</span>
-        </div>
-        <div class="cell">
-          <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-snowflake" /></svg>
-          <span class="lbl">snowflake</span>
-        </div>
-        <div class="cell">
-          <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-onigiri" /></svg>
-          <span class="lbl">onigiri</span>
-        </div>
-        <div class="cell">
-          <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-hotcan" /></svg>
-          <span class="lbl">hot drink can</span>
-        </div>
+        <div class="cell"><svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-pole" /></svg><span class="lbl">power pole</span></div>
+        <div class="cell"><svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-vending" /></svg><span class="lbl">vending machine</span></div>
+        <div class="cell"><svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-cone" /></svg><span class="lbl">traffic cone</span></div>
+        <div class="cell"><svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-ac" /></svg><span class="lbl">air conditioner</span></div>
+        <div class="cell"><svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-truck" /></svg><span class="lbl">small truck</span></div>
+        <div class="cell"><svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-snowflake" /></svg><span class="lbl">snowflake</span></div>
+        <div class="cell"><svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-riceball" /></svg><span class="lbl">rice ball</span></div>
+        <div class="cell"><svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-can" /></svg><span class="lbl">drink can</span></div>
       </div>
 
       <h3>caption row</h3>
       <p>Three short lowercase phrases spread across the full width.</p>
       <p class="k-captions" style="max-width:640px">
-        <span class="k-caption">open all night</span>
+        <span class="k-caption">a quiet street</span>
+        <span class="k-caption">cold clear air</span>
         <span class="k-caption">lights on the snow</span>
-        <span class="k-caption">warm hands</span>
       </p>
 
       <h3>katakana block</h3>
-      <p>
-        A kana column or row in cobalt, used as graphic texture beside a
-        scene or a paragraph.
-      </p>
+      <p>A kana column or row in ink, used as graphic texture beside a scene or a paragraph. It is scenery, never navigation.</p>
       <div class="row" style="align-items:center">
-        <span class="kana-column" lang="ja" aria-label="fuyu no machi, winter town, in kana">フユノマチ</span>
+        <span class="kana-column" lang="ja" aria-label="fuyu no machi, winter town, in katakana">フユノマチ</span>
         <span class="k-kana" lang="ja" style="font-size:clamp(2.5rem,8vw,5rem)" aria-label="yoru, night, in katakana">ヨル</span>
       </div>
 
       <h3>sign band</h3>
-      <p>
-        The konbini fascia: white, orange, white, held by navy hairlines.
-        It divides sections the way the sign divides roof from storefront.
-        Orange never carries text.
-      </p>
+      <p>The fascia stripe: lit, accent, lit, held by art-line hairlines. It divides sections the way a sign divides roof from storefront.</p>
       <div class="k-band" role="presentation" style="max-width:520px"></div>
 
-      <h3>sky field</h3>
-      <p>The gradient block that display type floats in.</p>
-      <div class="specimen-sky k-sky" style="max-width:520px">
-        <span class="k-display" style="font-size:2.5rem">FUYU</span>
-        <span class="k-caption" style="color:var(--navy)">the long season</span>
+      <h3>field</h3>
+      <p>The one gradient, as a block display type floats in. Small type on it is ink-strong, never lit.</p>
+      <div class="specimen-field k-field">
+        <span class="k-display">FIELD</span>
+        <span class="k-caption">the long season</span>
       </div>
 
-      <div class="spread-folio"><span class="k-pageno" aria-label="page 31">31</span></div>
+      <h3>footnote and folio</h3>
+      <div class="poster-foot" style="max-width:520px">
+        <p class="k-footnote" style="margin:0">a small paragraph in the corner, ragged right, with a page number beside it.</p>
+        <p class="k-pageno" style="margin:0">12</p>
+      </div>
+
+      <div class="callout">
+        <b>Every motif is a quiet thing at rest.</b> A scene with nobody in it,
+        a stripe, a page number. The system has no badges, no counters, no
+        alerts in its vocabulary, and adding one would change what it is: a
+        poster that shouts is an advertisement. Before adding an eighth motif,
+        ask whether it would still belong on a poster nobody is being sold
+        anything from.
+      </div>
+      <div class="spread-folio"><span class="k-pageno">08</span></div>
     </section>
 
     <div class="k-band" role="presentation"></div>
 
-    <!-- ============ components ============ -->
-    <section class="spread" id="components">
+    <!-- ============ 09 COMPOSITION ============ -->
+    <section class="spread" id="composition" aria-labelledby="composition-h">
       <div class="spread-head">
-        <h2>components</h2>
-        <span class="kana" lang="ja" aria-hidden="true">パーツ</span>
+        <h2 id="composition-h">composition</h2>
+        <span class="n">one plate</span>
       </div>
-
-      <h3>text links</h3>
-      <div class="row">
-        <div class="cell">
-          <span class="lbl">default</span>
-          <a class="k-link" href="#components">the shop at the end of the street</a>
-        </div>
-        <div class="cell">
-          <span class="lbl">hover - navy, 2px underline</span>
-          <a class="k-link is-hover" href="#components">the shop at the end of the street</a>
-        </div>
-        <div class="cell">
-          <span class="lbl">focus - tab to see the 2px cobalt ring</span>
-          <a class="k-link" href="#components">the shop at the end of the street</a>
-        </div>
-      </div>
-
-      <h3>buttons - poster plates</h3>
-      <p>
-        A snow plate with a 2px navy pixel-step border and a flat ice pixel
-        shadow. Hover lifts the plate one step; active sits it flat on the
-        snow. States snap: posters do not ease.
-      </p>
-      <div class="row row--tight">
-        <div class="cell"><span class="lbl">default</span><button class="k-btn" type="button">stock up</button></div>
-        <div class="cell"><span class="lbl">hover</span><button class="k-btn is-hover" type="button">stock up</button></div>
-        <div class="cell"><span class="lbl">active</span><button class="k-btn is-active" type="button">stock up</button></div>
-        <div class="cell"><span class="lbl">disabled</span><button class="k-btn" type="button" disabled>sold out</button></div>
-      </div>
-      <div class="row row--tight" style="margin-top:1.5rem">
-        <div class="cell"><span class="lbl">primary</span><button class="k-btn k-btn--primary" type="button">pay here</button></div>
-        <div class="cell"><span class="lbl">primary hover</span><button class="k-btn k-btn--primary is-hover" type="button">pay here</button></div>
-        <div class="cell"><span class="lbl">primary active</span><button class="k-btn k-btn--primary is-active" type="button">pay here</button></div>
-      </div>
-
-      <h3>chips - tiny sign stripes</h3>
-      <div class="row row--tight">
-        <span class="k-chip is-selected">onigiri</span>
-        <span class="k-chip">hot drinks</span>
-        <span class="k-chip">seasonal</span>
-        <span class="k-chip is-disabled">sold out</span>
-      </div>
-
-      <h3>pagination - folios</h3>
-      <nav class="k-pagination" aria-label="example pagination">
-        <span class="is-disabled" aria-disabled="true">&lt;- prev</span>
-        <span><span class="current">28</span> / 32</span>
-        <a href="#components">next -&gt;</a>
-      </nav>
-
-      <h3>input - snow fields</h3>
-      <div class="row">
-        <div class="cell k-field">
-          <label for="in-name">traveler name</label>
-          <input class="k-input" id="in-name" type="text" placeholder="who is out tonight" />
-        </div>
-        <div class="cell k-field">
-          <label for="in-town">town</label>
-          <input class="k-input" id="in-town" type="text" value="Teine, Sapporo" />
-        </div>
-        <div class="cell k-field">
-          <label for="in-closed">disabled</label>
-          <input class="k-input" id="in-closed" type="text" value="closed for winter" disabled />
-        </div>
-      </div>
-    </section>
-
-    <div class="k-band" role="presentation"></div>
-
-    <!-- in application shares page 32 with components: the kit, then the kit at work -->
-    <section class="spread" id="application">
-      <div class="spread-head">
-        <h2>in application</h2>
-        <span class="kana" lang="ja" aria-hidden="true">おみせ</span>
-      </div>
-      <p>
-        A page from a traveler's log, built entirely from the kit: sky field,
-        sign band, pixel icons, price chips, plates, and folios.
+      <p class="lede">
+        The parts assembled into one poster plate: a field that sets the key, a
+        thin band, then a short run of paper with a list and an action. The
+        placeholder copy is about the system itself, so what a reader takes
+        away is the skeleton.
       </p>
 
-      <article class="app-poster" style="margin-top:2rem" aria-label="example page: Seimart travel log">
-        <div class="app-sky k-sky">
-          <span class="k-display">SEIMART</span>
-          <span class="kana" lang="ja" aria-label="seimart, in katakana">セイマート</span>
+      <article class="spec-poster" aria-label="Specimen poster plate">
+        <div class="spec-field k-field">
+          <span class="k-display">SPECIMEN</span>
+          <span class="k-caption">plate 03</span>
         </div>
         <div class="k-band k-band--thin" role="presentation"></div>
-        <div class="app-body">
-          <p class="k-caption">travel log - day 3</p>
+        <div class="spec-body">
+          <p class="k-caption">sheet heading</p>
           <p class="k-body">
-            Snow since morning. The town went quiet by four and dark by five,
-            and the only light left on the street was the Seimart at the end
-            of it, humming to itself. Bought too much again.
+            Specimen body copy. A plate holds one field, one band, and a short
+            run of text on the paper beneath them; the list is the only place
+            the plate is allowed to get busy.
           </p>
-          <ul class="stock-list">
-            <li>
-              <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-onigiri" /></svg>
-              <span class="item">onigiri, tuna mayo<br /><span class="note">two, because it is cold</span></span>
-              <span class="price">&yen;120</span>
-            </li>
-            <li>
-              <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-hotcan" /></svg>
-              <span class="item">hot can coffee<br /><span class="note">from the warm shelf</span></span>
-              <span class="price">&yen;130</span>
-            </li>
+          <ul class="item-list">
             <li>
               <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-snowflake" /></svg>
-              <span class="item">bag of ice<br /><span class="note">in january, somehow</span></span>
-              <span class="price">&yen;200</span>
+              <span class="item">grid unit<br /><span class="note">sixteen by sixteen cells</span></span>
+              <span class="tally">16 px</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-cone" /></svg>
+              <span class="item">accent mark<br /><span class="note">a stripe, never a word</span></span>
+              <span class="tally">1 per plate</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><use href="#px-pole" /></svg>
+              <span class="item">outline<br /><span class="note">two pixels, notched at the corner</span></span>
+              <span class="tally">2 px</span>
             </li>
           </ul>
-          <div class="app-actions">
-            <button class="k-btn k-btn--primary" type="button">stock up</button>
-            <nav class="k-pagination" aria-label="travel log pages">
-              <a href="#application">&lt;- day 2</a>
+          <div class="spec-actions">
+            <button class="k-btn k-btn--primary" type="button">continue</button>
+            <nav class="k-pagination" aria-label="Specimen pages" data-pages="7">
+              <button type="button" data-step="-1">&lt;- prev</button>
               <span><span class="current">3</span> / 7</span>
+              <button type="button" data-step="1">next -&gt;</button>
             </nav>
           </div>
         </div>
       </article>
 
-      <div class="spread-folio"><span class="k-pageno" aria-label="page 32">32</span></div>
+      <h3>anatomy</h3>
+      <div class="table-wrap">
+        <table class="spec">
+          <thead><tr><th>part</th><th>as built</th><th>why it is that</th></tr></thead>
+          <tbody>
+            <tr><td>frame</td><td class="v">plate + 8px frame shadow</td><td class="d">The heaviest shadow in the system, spent once, on the object that holds everything else.</td></tr>
+            <tr><td>field</td><td class="v">.k-field + .k-display</td><td class="d">The one gradient, used once. It sets the key before anything is read.</td></tr>
+            <tr><td>field caption</td><td class="v">.k-caption, ink-strong, 0.28em</td><td class="d">Small type on the field is never lit - lit is only legible at poster size.</td></tr>
+            <tr><td>band</td><td class="v">.k-band--thin</td><td class="d">The seam between sky and paper. Without it the field just stops; with it, the plate reads as a sign over a storefront.</td></tr>
+            <tr><td>list row</td><td class="v">icon at 2x, 32px</td><td class="d">A whole-step icon, 2px paper rules between rows. The rule is the paper colour, so it separates without adding a line.</td></tr>
+            <tr><td>tally</td><td class="v">paper plate, 3px accent top rule</td><td class="d">The accent marks the value; it never is the value. The number stays in ink.</td></tr>
+            <tr><td>actions</td><td class="v">primary plate + folio</td><td class="d">One primary per plate. The folio on the right is the poster's page number, doing the job of pagination.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <b>This is not a page from a product with the copy swapped out.</b> The
+        list rows describe the system's own rules - a grid unit, an accent mark,
+        an outline - chosen precisely because they imply nothing about what the
+        system is for. The same plate could hold a timetable, a recipe or a
+        changelog.
+      </div>
+      <div class="spread-folio"><span class="k-pageno">09</span></div>
+    </section>
+
+    <div class="k-band" role="presentation"></div>
+
+    <!-- ============ 10 RULES ============ -->
+    <section class="spread" id="rules" aria-labelledby="rules-h">
+      <div class="spread-head">
+        <h2 id="rules-h">rules</h2>
+        <span class="n">the refusals matter more</span>
+      </div>
+      <div class="dodont">
+        <section class="do">
+          <p class="hd">do</p>
+          <ul>
+            <li>Keep margins <b>enormous</b> and elements few: one centrepiece per poster.</li>
+            <li>Snap everything to the grid: <b>2px steps</b> in CSS, whole-number scale for pixel art.</li>
+            <li>Fill illustration with the <b>art inks</b>, so a scene follows the page to night.</li>
+            <li>Set small type on the field in <b>ink-strong</b>; keep lit for poster-size display.</li>
+            <li><b>Author both posters</b> and look at each with the masthead toggle.</li>
+            <li>Let states <b>snap</b>. A plate moves one step or it does not move.</li>
+          </ul>
+        </section>
+        <section class="dont">
+          <p class="hd">do not</p>
+          <ul>
+            <li>Draw <b>curves, circles or strokes</b> in illustration. Rects only, integer coordinates.</li>
+            <li>Add a <b>second gradient</b>. No gradient text, no gradient buttons, no radial anything.</li>
+            <li>Use a <b>blurred shadow</b>, ever. Shadows are flat offset plates.</li>
+            <li>Put <b>text on the accent</b>. It is stripes, cones and marks.</li>
+            <li>Set body text in <b>recede</b>. Recede is for distance and for disabled.</li>
+            <li>Scale pixel art by a <b>fraction</b>: 1.5x is not a size.</li>
+            <li>Animate anything but the <b>hero birds and cloud</b> - and the optional pixel sky, once, never behind text.</li>
+          </ul>
+        </section>
+      </div>
+      <div class="spread-folio"><span class="k-pageno">10</span></div>
     </section>
 
   </main>
@@ -1149,13 +1530,57 @@ paginated poster spreads; no seed roll.
 
   <footer class="k-footer">
     <p class="note">
-      All places, products, and prices on this page are synthetic: poster
-      fiction for a design exploration. Seimart is not a real store, but one
-      like it is never too far away.
+      KONBINI - pixel travel-poster system. Type is platform fonts only; all
+      pixel art is drawn in this file. Every place and object on this page is
+      poster fiction. This catalog follows STANDARD.md at the repository root.
     </p>
-    <p class="k-pageno" aria-label="page 32 of 32">32 / 32</p>
-    <a class="k-link" href="../../index.html">&lt;- all systems</a>
+    <a class="k-link" href="../../index.html">&lt;- all design systems</a>
   </footer>
 
+<script src="js/pixel-sky.js"></script>
+<script>
+  (function () {
+    var root = document.documentElement;
+    if (location.hash === "#light" || location.hash === "#dark") {
+      root.setAttribute("data-theme", location.hash.slice(1));
+    }
+    document.querySelectorAll("[data-toggle-theme]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var cur = root.getAttribute("data-theme");
+        if (!cur) cur = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        root.setAttribute("data-theme", cur === "dark" ? "light" : "dark");
+      });
+    });
+    // Chips toggle themselves, so the selected state is live rather than pictured.
+    document.querySelectorAll("[data-chips]").forEach(function (group) {
+      group.addEventListener("click", function (e) {
+        var c = e.target.closest(".k-chip");
+        if (!c || c.disabled) return;
+        c.setAttribute("aria-pressed", c.getAttribute("aria-pressed") === "true" ? "false" : "true");
+      });
+    });
+    // Folios page for real, and the arrows are truly disabled at either end.
+    document.querySelectorAll(".k-pagination[data-pages]").forEach(function (nav) {
+      var total = parseInt(nav.getAttribute("data-pages"), 10);
+      var cur = nav.querySelector(".current");
+      var btns = nav.querySelectorAll("button[data-step]");
+      function sync() {
+        var n = parseInt(cur.textContent, 10);
+        btns.forEach(function (b) {
+          var s = parseInt(b.getAttribute("data-step"), 10);
+          b.disabled = (s < 0 && n <= 1) || (s > 0 && n >= total);
+        });
+      }
+      btns.forEach(function (b) {
+        b.addEventListener("click", function () {
+          var n = parseInt(cur.textContent, 10) + parseInt(b.getAttribute("data-step"), 10);
+          cur.textContent = String(Math.max(1, Math.min(total, n)));
+          sync();
+        });
+      });
+      sync();
+    });
+  })();
+</script>
 </body>
 </html>

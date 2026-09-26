@@ -1,131 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <!--
-THESIS: A mission console projecting instrument overlays onto black glass; every
-element is a self-contained readout fit for compositing over footage.
-OWN-WORLD: STRATOS (DESIGN.md): flat marks only - one ink (#f4f2ee) plus one hot
-orange (#ff6a00) carrying ~30% of the surface; heavy grotesque lockups (SAT.3,
-DB.40), underscore mono labels, hazard stripes, segmented bars, corner brackets.
-STORY: A teammate scrolls foundations, marks, components, then a full telemetry
-console, and copies readout blocks straight into an overlay comp.
-FIRST VIEWPORT: A dense corner-bracketed cluster: STRATOS lockup with orange
-square, tag chips, a big orange 89, segmented bars, hazard stripe, live feed
-rows, blinking ACTIVE chip, one slow scan sweep.
-FORM: Catalog (mode: Read). Direction client-pinned from a reference sheet; all
-demo data synthetic.
+THESIS: a signal-overlay kit - every element is a self-contained instrument
+readout composited over glass. Flat marks in one ink and one signal hue: no
+glow, no blur, no radius, no gradient fades.
+FORM: catalog page, set in the system itself, following STANDARD.md.
+CONTENT: every specimen is neutral by rule (STANDARD.md R1). Labels are
+generic channel, unit and level names, and the thesis cluster reads out the
+system's own values rather than anyone's data.
 -->
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>STRATOS - Signal Overlay Kit</title>
   <link rel="stylesheet" href="css/stratos-core.css" />
-  <style>
-    /* catalog page scaffolding; the kit itself lives in stratos-core.css */
-    .page { max-width: 1240px; margin: 0 auto; padding: 28px 24px 64px; }
-
-    /* ---- hero cluster ---- */
-    .hero { padding: 24px; margin-bottom: 64px; }
-    .hero-top {
-      display: flex; justify-content: space-between; align-items: center;
-      gap: 14px 24px; flex-wrap: wrap; margin-bottom: 16px;
-    }
-    .hero-id { display: flex; align-items: center; gap: 14px; }
-    .hero-sys { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-    .hero-main {
-      display: grid; grid-template-columns: 4fr 5fr 4fr;
-      gap: 24px 28px; padding: 24px 0;
-    }
-    .hero-col { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
-    .num-hero { font-size: clamp(64px, 9vw, 116px); }
-    .num-wide { font-size: clamp(40px, 8vw, 68px); }
-    .chip-row { display: flex; gap: 8px; flex-wrap: wrap; }
-    .schem-hero { flex: 1; min-height: 150px; }
-    .hero-bottom {
-      display: flex; align-items: flex-end; gap: 14px 22px; flex-wrap: wrap;
-      border-top: 1px solid var(--hairline); padding-top: 16px;
-    }
-    .markers { display: flex; align-items: center; gap: 10px; }
-    .grow { flex: 1; }
-
-    /* ---- sections ---- */
-    .sec { margin-bottom: 64px; }
-    .sechead { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
-    .sechead h2 {
-      font-family: var(--font-mono); font-size: 12px; font-weight: 400;
-      letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap;
-    }
-    .sechead .s-rule { flex: 1; }
-
-    .spec-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 18px;
-    }
-    .cell {
-      border: 1px solid var(--hairline); padding: 16px;
-      display: flex; flex-direction: column; gap: 14px; min-width: 0;
-    }
-    .cell .cap {
-      margin-top: auto; padding-top: 10px; color: var(--dim);
-      border-top: 1px dotted var(--hairline);
-    }
-    .cell .demo { display: flex; flex-direction: column; gap: 10px; }
-    .cell .demo-row { display: flex; flex-direction: row; align-items: center; gap: 10px; flex-wrap: wrap; }
-
-    /* palette */
-    .swatches {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 14px; margin-bottom: 26px;
-    }
-    .sw .block { height: 64px; border: 1px solid var(--hairline); margin-bottom: 7px; }
-    .sw p { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
-
-    /* type specimens */
-    .type-rows { display: flex; flex-direction: column; gap: 22px; margin-bottom: 26px; }
-    .type-row { display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap; }
-    .type-row .who { width: 170px; flex: none; color: var(--dim); }
-    .type-row .what { min-width: 0; overflow-wrap: anywhere; }
-
-    .gram { list-style: none; max-width: 640px; }
-    .gram li { display: flex; align-items: baseline; gap: 8px; padding: 5px 0; }
-    .gram .pat { color: var(--dim); white-space: nowrap; }
-    .gram .lead { flex: 1; min-width: 12px; border-bottom: 1px dotted var(--hairline); transform: translateY(-3px); }
-    .gram .ex { text-align: right; }
-
-    /* console composition */
-    .console { background: var(--panel); padding: 22px; }
-    .console .s-feed li:hover, .console .s-feed li.is-hot { background: rgba(244, 242, 238, 0.07); }
-    .console-head { display: flex; align-items: center; gap: 12px 18px; flex-wrap: wrap; margin-bottom: 14px; }
-    .console-head .lockup { display: flex; align-items: baseline; gap: 12px; }
-    .console-body { display: grid; grid-template-columns: 1fr 1.15fr 1fr; gap: 26px; padding: 20px 0 16px; }
-    .console-col { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
-    .console-col .blk { display: flex; flex-direction: column; gap: 8px; }
-    .schem-console { height: 130px; }
-    .console-foot { border-top: 1px solid var(--hairline); padding-top: 12px; display: flex; flex-direction: column; gap: 10px; }
-    .ctrl-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-
-    /* footer */
-    .endcap { margin-top: 80px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 18px; }
-    .endcap .s-hazard, .endcap .s-rule { align-self: stretch; }
-
-    /* ---- responsive ---- */
-    @media (max-width: 720px) {
-      .hero-main { grid-template-columns: 1fr 1fr; }
-      .hero-col--schem { grid-column: 1 / -1; order: 3; }
-      .console-body { grid-template-columns: 1fr; }
-      .type-row .who { width: 100%; }
-    }
-    @media (max-width: 480px) {
-      .page { padding: 18px 14px 48px; }
-      .hero { padding: 16px; }
-      .hero-main { grid-template-columns: 1fr; }
-      .console { padding: 16px; }
-    }
-  </style>
+  <link rel="stylesheet" href="css/catalog.css" />
 </head>
 <body>
+
+  <!-- ============ MASTHEAD ============ -->
+  <div class="mast">
+    <div class="mast-in">
+      <span class="mast-id"><span class="s-square" aria-hidden="true"></span>STRATOS</span>
+      <nav class="idx" aria-label="Sections">
+        <a href="#colour">01_COLOUR</a>
+        <a href="#type">02_TYPE</a>
+        <a href="#space">03_SPACE</a>
+        <a href="#form">04_FORM</a>
+        <a href="#motion">05_MOTION</a>
+        <a href="#screen">06_SCREEN</a>
+        <a href="#components">07_COMPONENTS</a>
+        <a href="#motifs">08_MOTIFS</a>
+        <a href="#composition">09_COMPOSITION</a>
+        <a href="#rules">10_RULES</a>
+      </nav>
+      <a class="s-btn s-btn--bracket hide-sm" href="../../index.html">ALL_SYSTEMS</a>
+      <button class="s-btn s-btn--bracket" data-toggle-theme type="button">FLIP_THEME</button>
+    </div>
+  </div>
+
   <div class="page">
 
-    <!-- ============ HERO: first-viewport thesis cluster ============ -->
+    <!-- ============ THESIS ============ -->
     <header class="hero s-frame s-scan-host">
       <i class="s-frame-x" aria-hidden="true"></i>
       <span class="s-scan" aria-hidden="true"></span>
@@ -133,12 +49,12 @@ demo data synthetic.
       <div class="hero-top">
         <div class="hero-id">
           <span class="s-square s-square--lg" aria-hidden="true"></span>
-          <h1 class="v-display v-display-lg">STRATOS</h1>
+          <h1 class="v-display v-display-xl">STRATOS</h1>
           <span class="s-chip s-chip--ghost">SIGNAL_OVERLAY_KIT</span>
         </div>
-        <div class="hero-sys v-data">
-          <span class="ink-dim">SYS.CHK // ORB.PASS 2049</span>
-          <span class="s-chip s-chip--alert s-status is-active"><span class="dot" aria-hidden="true"></span>ACTIVE</span>
+        <div class="demo-row v-data">
+          <span class="ink-dim">KIT.V0.1 // TWO GROUNDS</span>
+          <span class="s-chip s-chip--signal s-status is-active"><span class="dot" aria-hidden="true"></span>ACTIVE</span>
         </div>
       </div>
 
@@ -146,45 +62,40 @@ demo data synthetic.
 
       <div class="hero-main">
         <div class="hero-col">
-          <span class="v-label ink-dim">SIGNAL_STRENGTH</span>
-          <p class="s-num s-num--alert num-hero">89</p>
-          <p class="v-data">DB.40 / GAIN_04</p>
-          <div class="s-seg" role="img" aria-label="Signal level 8 of 12">
-            <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i>
-          </div>
-          <p class="v-micro">CARRIER LOCKED / DRIFT +0.003HZ / FRAME_SYNC 8N1 / BUFFER 62PCT / NEXT_PASS 00:41:22 / AUTH RB - 10040</p>
-        </div>
-
-        <div class="hero-col hero-col--schem">
-          <div class="s-schem schem-hero">
-            <svg aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 100 100">
-              <line x1="0" y1="0" x2="100" y2="100" />
-              <line x1="100" y1="0" x2="0" y2="100" />
-            </svg>
-            <span class="pip" aria-hidden="true"></span>
-          </div>
-          <p class="v-label ink-dim">SUB_SCHEMATIC / SEC 1..4</p>
-          <div class="chip-row">
-            <span class="s-chip s-chip--white">&gt; SOURCE_TRACKING</span>
-            <span class="s-chip s-chip--outline">+ VXZ_SCANNING</span>
-            <span class="s-chip s-chip--alert">MOUNT_PROCESS</span>
+          <p class="thesis">
+            A signal-overlay kit: every element is a self-contained instrument
+            readout that could be composited over footage and still hold. Dense
+            mono labels, heavy grotesque numerals, segmented bars, corner
+            brackets and hazard stripes - drawn in one ink and one signal hue.
+          </p>
+          <p class="thesis">
+            Two things to hold on to. <b>There is exactly one hue, and it means
+            live</b> - the signal colour marks what is active, selected, focused
+            or alarming, never what is merely decorative. And <b>every mark is
+            flat</b>: no glow, no blur, no radius, no gradient fade. A readout
+            either holds or flips.
+          </p>
+          <div class="demo-row">
+            <span class="s-chip s-chip--ink">&gt; ONE_INK</span>
+            <span class="s-chip s-chip--outline">+ ONE_SIGNAL</span>
+            <span class="s-chip s-chip--ghost">ZERO_RADIUS</span>
           </div>
         </div>
 
         <div class="hero-col">
-          <span class="v-label ink-dim">LIVE_FEED</span>
+          <span class="v-label ink-dim">ROLE_TOKENS / COLOUR</span>
+          <p class="s-num s-num--signal s-num--xl">08</p>
+          <div class="s-seg" role="img" aria-label="8 of 12">
+            <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i>
+          </div>
           <div class="s-rule" aria-hidden="true"></div>
           <ul class="s-feed">
-            <li><span class="mk s-tri s-tri--right s-tri--alert" aria-hidden="true"></span><span class="lbl">UPLINK</span><span class="lead" aria-hidden="true"></span><span class="val ink-alert">137.62MHZ</span></li>
-            <li><span class="mk s-square s-square--signal" aria-hidden="true"></span><span class="lbl">AZIMUTH</span><span class="lead" aria-hidden="true"></span><span class="val">214.7</span></li>
-            <li><span class="mk s-cross" aria-hidden="true"></span><span class="lbl">ELEVATION</span><span class="lead" aria-hidden="true"></span><span class="val">43.9</span></li>
-            <li><span class="mk s-square" aria-hidden="true"></span><span class="lbl">DOWNLINK</span><span class="lead" aria-hidden="true"></span><span class="val">8.4MB/S</span></li>
-            <li><span class="mk s-cross" aria-hidden="true"></span><span class="lbl">LATENCY</span><span class="lead" aria-hidden="true"></span><span class="val">122MS</span></li>
+            <li><span class="mk s-tri s-tri--right s-tri--signal" aria-hidden="true"></span><span class="lbl">HUES</span><span class="lead" aria-hidden="true"></span><span class="val ink-signal">1</span></li>
+            <li><span class="mk s-square s-square--ink" aria-hidden="true"></span><span class="lbl">RADIUS</span><span class="lead" aria-hidden="true"></span><span class="val">0PX</span></li>
+            <li><span class="mk s-cross" aria-hidden="true"></span><span class="lbl">GLOW</span><span class="lead" aria-hidden="true"></span><span class="val">NONE</span></li>
+            <li><span class="mk s-cross" aria-hidden="true"></span><span class="lbl">BLINK</span><span class="lead" aria-hidden="true"></span><span class="val">1.4S</span></li>
+            <li><span class="mk s-square s-square--outline" aria-hidden="true"></span><span class="lbl">SCAN</span><span class="lead" aria-hidden="true"></span><span class="val">8S</span></li>
           </ul>
-          <div class="s-seg s-seg--alert" role="img" aria-label="Alert buffer 5 of 12">
-            <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-          </div>
-          <p class="v-data"><span class="ink-dim">SAT.3</span> &nbsp;UI-12&nbsp; <span class="ink-dim">RB - 10040</span></p>
         </div>
       </div>
 
@@ -196,110 +107,481 @@ demo data synthetic.
           <span class="s-square s-square--outline"></span>
           <span class="s-cross"></span>
         </div>
-        <span class="s-chip s-chip--ghost">PROTOCOL_DIAGNOSIS</span>
+        <span class="s-chip s-chip--ghost">FLAT_MARKS_ONLY</span>
         <span class="grow"></span>
-        <p class="v-micro">PACKET_ID SEQUENCE / VERIFIED 2049.203</p>
-        <p class="s-num num-wide">77449</p>
+        <p class="v-micro">NO GLOW / NO BLUR / NO RADIUS / NO FADE / STATES FLIP, THEY DO NOT EASE</p>
       </div>
     </header>
 
+    <!-- ============ BRIEF ============ -->
+    <section class="brief" aria-labelledby="brief-h">
+      <div class="s-hazard s-hazard--thin" aria-hidden="true"></div>
+      <p class="hd"><span class="s-chip s-chip--signal">READ_THIS_FIRST</span><span id="brief-h" class="v-label ink-dim">CONTRACT FOR WHOEVER IMPLEMENTS</span></p>
+      <ol>
+        <li><span><b>These values are the system.</b> Every token below exists in <code>css/stratos-core.css</code>. Use them; do not invent parallel ones.</span></li>
+        <li><span><b>Search the marks before drawing a new one.</b> Chip, stripe, segmented bar, readout, bracket, cross, schematic, feed row - a new element is almost always one of these eight.</span></li>
+        <li><span><b>No ad-hoc values.</b> No raw hex, no one-off sizes, no easing curve. Motion is <code>steps()</code> or <code>linear</code>, nothing else.</span></li>
+        <li><span><b>Token names are roles.</b> <code>--ink</code> is the foreground, near-white on black glass and near-black in daylight. <code>--signal</code> is the live hue, not "the orange".</span></li>
+        <li><span><b>The signal hue is spent on live things only.</b> Active, selected, focused, alarming. Put it on an idle element and every live element on the screen loses its meaning. The hazard stripe and the wordmark square are the only standing exceptions, which is why both are rationed.</span></li>
+        <li><span><b>Nothing is soft.</b> No glow, no blur, no radius, no shadow, no gradient fade. The hazard stripe's gradient is hard-stop strips, and it is the only one.</span></li>
+      </ol>
+    </section>
+
     <main>
 
-      <!-- ============ SEC.1 FOUNDATIONS ============ -->
-      <section class="sec" aria-labelledby="h-foundations">
+      <!-- ============ 01 COLOUR ============ -->
+      <section class="sec" id="colour" aria-labelledby="colour-h">
         <div class="sechead">
-          <span class="s-chip s-chip--alert">SEC.1</span>
-          <h2 id="h-foundations">FOUNDATIONS</h2>
+          <span class="s-chip s-chip--ink">SEC.01</span>
+          <h2 id="colour-h">Colour</h2>
           <div class="s-rule" aria-hidden="true"></div>
+          <span class="v-label ink-dim">8 ROLE TOKENS</span>
+        </div>
+        <p class="lede">
+          Eight role tokens: two grounds, two inks, one signal, one hairline, and
+          the two inks that sit on a filled block. Every swatch shows <b>black
+          glass on the left and daylight glass on the right</b>, so both themes
+          are visible at once - and the FLIP_THEME button in the masthead flips
+          every other specimen on the page.
+        </p>
+
+        <div class="duo">
+          <div class="cell"><div class="halves"><i style="background:#0b0b0b"></i><i style="background:#f4f2ee"></i></div><div class="cap"><span class="nm">--ground</span><span class="role">The glass itself. Every mark is drawn on it.</span><span class="hex"><span>#0B0B0B</span><span>#F4F2EE</span></span></div></div>
+          <div class="cell"><div class="halves"><i style="background:#151515"></i><i style="background:#e8e5de"></i></div><div class="cap"><span class="nm">--panel</span><span class="role">Raised block and the hover fill. The only lift there is.</span><span class="hex"><span>#151515</span><span>#E8E5DE</span></span></div></div>
+          <div class="cell"><div class="halves"><i style="background:#f4f2ee"></i><i style="background:#0b0b0b"></i></div><div class="cap"><span class="nm">--ink</span><span class="role">Primary ink: text, filled cells, solid chips, brackets.</span><span class="hex"><span>#F4F2EE</span><span>#0B0B0B</span></span></div></div>
+          <div class="cell"><div class="halves"><i style="background:#9b9b9b"></i><i style="background:#595959"></i></div><div class="cap"><span class="nm">--ink-dim</span><span class="role">Secondary ink. The dimmest text allowed.</span><span class="hex"><span>#9B9B9B</span><span>#595959</span></span></div></div>
+          <div class="cell"><div class="halves"><i style="background:#ff6a00"></i><i style="background:#b84300"></i></div><div class="cap"><span class="nm">--signal</span><span class="role">The one hue. Live, selected, focused, alarming - nothing else.</span><span class="hex"><span>#FF6A00</span><span>#B84300</span></span></div></div>
+          <div class="cell"><div class="halves"><i style="background-color:#0b0b0b;background-image:linear-gradient(rgba(244,242,238,.22),rgba(244,242,238,.22))"></i><i style="background-color:#f4f2ee;background-image:linear-gradient(rgba(11,11,11,.22),rgba(11,11,11,.22))"></i></div><div class="cap"><span class="nm">--hairline</span><span class="role">Ink at 22%: rules, cell outlines, leaders, schematic strokes.</span><span class="hex"><span>INK 22PCT</span><span>INK 22PCT</span></span></div></div>
+          <div class="cell"><div class="halves"><i style="background:#0b0b0b"></i><i style="background:#f4f2ee"></i></div><div class="cap"><span class="nm">--on-ink</span><span class="role">Text on a solid ink block: chips and the solid button.</span><span class="hex"><span>#0B0B0B</span><span>#F4F2EE</span></span></div></div>
+          <div class="cell"><div class="halves"><i style="background:#0b0b0b"></i><i style="background:#f4f2ee"></i></div><div class="cap"><span class="nm">--on-signal</span><span class="role">Text on a signal block. Flips polarity between grounds.</span><span class="hex"><span>#0B0B0B</span><span>#F4F2EE</span></span></div></div>
         </div>
 
-        <h3 class="v-label ink-dim" style="margin-bottom: 12px;">PALETTE</h3>
-        <div class="swatches">
-          <div class="sw">
-            <div class="block" style="background: #0b0b0b;"></div>
-            <p class="v-data"><span>--void</span><span class="ink-dim">#0B0B0B</span></p>
-          </div>
-          <div class="sw">
-            <div class="block" style="background: #151515;"></div>
-            <p class="v-data"><span>--panel</span><span class="ink-dim">#151515</span></p>
-          </div>
-          <div class="sw">
-            <div class="block" style="background: #f4f2ee;"></div>
-            <p class="v-data"><span>--signal</span><span class="ink-dim">#F4F2EE</span></p>
-          </div>
-          <div class="sw">
-            <div class="block" style="background: #9b9b9b;"></div>
-            <p class="v-data"><span>--dim</span><span class="ink-dim">#9B9B9B</span></p>
-          </div>
-          <div class="sw">
-            <div class="block" style="background: #ff6a00;"></div>
-            <p class="v-data"><span>--alert</span><span class="ink-dim">#FF6A00</span></p>
-          </div>
-          <div class="sw">
-            <div class="block" style="background: rgba(244,242,238,0.22);"></div>
-            <p class="v-data"><span>--hairline</span><span class="ink-dim">22PCT</span></p>
-          </div>
+        <span class="sub-hd v-label">CONTRAST_FLOOR / BLACK GLASS - DAYLIGHT</span>
+        <div class="table-scroll">
+          <table class="spec">
+            <thead><tr><th>Pair</th><th>Black glass</th><th>Daylight</th><th>Use it for</th></tr></thead>
+            <tbody>
+              <tr><td>--ink on --ground</td><td class="v">17.6:1</td><td class="v">17.6:1</td><td class="d">Everything that must be read.</td></tr>
+              <tr><td>--ink on --panel</td><td class="v">16.3:1</td><td class="v">15.7:1</td><td class="d">Text inside a raised block or a hovered row.</td></tr>
+              <tr><td>--ink-dim on --ground</td><td class="v">7.1:1</td><td class="v">6.3:1</td><td class="d">Labels, captions, micro text. <b>Nothing is dimmer than this.</b></td></tr>
+              <tr><td>--ink-dim on --panel</td><td class="v">6.6:1</td><td class="v">5.6:1</td><td class="d">Labels inside a raised block.</td></tr>
+              <tr><td>--signal on --ground</td><td class="v">6.9:1</td><td class="v">4.9:1</td><td class="d">Signal text, held to 14px bold or larger in both themes.</td></tr>
+              <tr><td>--signal on --panel</td><td class="v">6.4:1</td><td class="v">4.4:1</td><td class="d">Signal marks in a raised block. Prefer the ground for signal text.</td></tr>
+              <tr><td>--on-signal on --signal</td><td class="v">6.9:1</td><td class="v">4.9:1</td><td class="d">Labels on a signal chip or a hovered solid button.</td></tr>
+              <tr><td>--on-ink on --ink</td><td class="v">17.6:1</td><td class="v">17.6:1</td><td class="d">Labels on an ink chip or the solid button at rest.</td></tr>
+            </tbody>
+          </table>
         </div>
 
-        <h3 class="v-label ink-dim" style="margin-bottom: 14px;">TYPE_VOICES</h3>
-        <div class="type-rows">
-          <div class="type-row">
-            <span class="who v-label">DISPLAY / 800</span>
-            <span class="what v-display v-display-xl">SAT.3</span>
-          </div>
-          <div class="type-row">
-            <span class="who v-label">DISPLAY / 800</span>
-            <span class="what v-display v-display-lg">DB.40 <span class="ink-alert">UI-12</span></span>
-          </div>
-          <div class="type-row">
-            <span class="who v-label">DISPLAY / 700</span>
-            <span class="what v-display v-display-md">RB - 10040</span>
-          </div>
-          <div class="type-row">
-            <span class="who v-label">LABEL / MONO 10</span>
-            <span class="what v-label">SOURCE_TRACKING / MOUNT_PROCESS / LIVE_FEED</span>
-          </div>
-          <div class="type-row">
-            <span class="who v-label">DATA / MONO 11</span>
-            <span class="what v-data">137.62MHZ&nbsp; 409KM&nbsp; 51.6DEG&nbsp; 7.66KM/S</span>
-          </div>
-          <div class="type-row">
-            <span class="who v-label">MICRO / MONO 9</span>
-            <span class="what v-micro" style="max-width: 420px;">TELEMETRY BLOCK RELAYED VIA GROUND STATION KIR.4 / CHECKSUM VALID / PACKETS 4402 OF 4402 / RETRY 0 / SIGNAL PATH COLD START COMPLETE</span>
-          </div>
+        <div class="callout">
+          <b>Black glass is the default, and it sits on bare <code>:root</code>.</b>
+          This is an overlay language - it is designed to be composited over
+          footage, and its natural ground is the dark glass in front of it.
+          Daylight glass is a hand-authored second ground for pages that live on
+          a light screen: an OS light preference reaches it, and an explicit
+          <code>data-theme</code> wins in either direction. It is not a derived
+          inversion. The two neutrals swap, but the signal hue is <b>re-cut from
+          #FF6A00 to #B84300</b>, because the bright cut falls to 2.6:1 on a
+          light ground and the deeper one keeps signal text above 4.5:1. The
+          same move flips <code>--on-signal</code> from near-black to near-white.
         </div>
-
-        <h3 class="v-label ink-dim" style="margin-bottom: 8px;">NAMING_GRAMMAR</h3>
-        <ul class="gram v-data">
-          <li><span class="pat">UPPERCASE_UNDERSCORE</span><span class="lead" aria-hidden="true"></span><span class="ex">SOURCE_TRACKING, END_OF_TRANSMISSION</span></li>
-          <li><span class="pat">WORD.DIGIT</span><span class="lead" aria-hidden="true"></span><span class="ex">SAT.3, DB.40, ACTIVE.B</span></li>
-          <li><span class="pat">ABBREV-NUMBER</span><span class="lead" aria-hidden="true"></span><span class="ex">UI-12, RB - 10040</span></li>
-          <li><span class="pat">PREFIX &gt;</span><span class="lead" aria-hidden="true"></span><span class="ex">&gt; SOURCE_TRACKING (live pointer)</span></li>
-          <li><span class="pat">PREFIX +</span><span class="lead" aria-hidden="true"></span><span class="ex">+ VXZ_SCANNING (aux item)</span></li>
-        </ul>
       </section>
 
-      <!-- ============ SEC.2 MARKS ============ -->
-      <section class="sec" aria-labelledby="h-marks">
+      <!-- ============ 02 TYPE ============ -->
+      <section class="sec" id="type" aria-labelledby="type-h">
         <div class="sechead">
-          <span class="s-chip s-chip--alert">SEC.2</span>
-          <h2 id="h-marks">MARKS</h2>
+          <span class="s-chip s-chip--ink">SEC.02</span>
+          <h2 id="type-h">Typography</h2>
           <div class="s-rule" aria-hidden="true"></div>
+          <span class="v-label ink-dim">2 STACKS / 8 VOICES</span>
         </div>
+        <p class="lede">
+          Two stacks, both system fonts, nothing to download. <b>A heavy
+          grotesque for lockups and numerals</b>, tracked in to -0.02em; <b>the
+          platform mono for everything that is read</b>, small, uppercase and
+          tracked out to +0.08em. Each voice below is set at its real size.
+        </p>
+
+        <div class="type-rows">
+          <div class="type-row"><span class="who v-label">DISPLAY_XL / 800</span><span class="what v-display v-display-xl">UNIT.3</span></div>
+          <div class="type-row"><span class="who v-label">NUM_XL / 800</span><span class="what s-num s-num--xl s-num--signal">89</span></div>
+          <div class="type-row"><span class="who v-label">DISPLAY_LG / 800</span><span class="what v-display v-display-lg">CH.40 UI-12</span></div>
+          <div class="type-row"><span class="who v-label">DISPLAY_MD / 700</span><span class="what v-display v-display-md">REF - 10040</span></div>
+          <div class="type-row"><span class="who v-label">INPUT / MONO 12</span><span class="what s-input" style="width:auto;border:0">ENTRY_0042</span></div>
+          <div class="type-row"><span class="who v-label">DATA / MONO 11</span><span class="what v-data">42.08HZ&nbsp; 409PX&nbsp; 64PCT&nbsp; 118MS</span></div>
+          <div class="type-row"><span class="who v-label">LABEL / MONO 10</span><span class="what v-label">SOURCE_TRACKING / BLOCK_PROCESS / LIVE_FEED</span></div>
+          <div class="type-row"><span class="who v-label">MICRO / MONO 9</span><span class="what v-micro" style="max-width:420px">BLOCK RELAYED VIA NODE.4 / CHECKSUM VALID / PACKETS 4402 OF 4402 / RETRY 0 / COLD START COMPLETE</span></div>
+        </div>
+
+        <div class="table-scroll">
+          <table class="spec">
+            <thead><tr><th>Voice</th><th>Stack</th><th>Size / weight</th><th>Tracking</th><th>Where</th></tr></thead>
+            <tbody>
+              <tr><td>.v-display-xl</td><td class="v">--font-display</td><td class="v">clamp(56px, 9vw, 96px) / 800</td><td class="v">-0.02em</td><td class="d">The page lockup. One per screen.</td></tr>
+              <tr><td>.s-num--xl</td><td class="v">--font-display</td><td class="v">--num-xl clamp(64px, 9vw, 116px) / 800</td><td class="v">-0.02em</td><td class="d">The hero readout. Tabular figures, line-height 0.9.</td></tr>
+              <tr><td>.s-num--lg / --md</td><td class="v">--font-display</td><td class="v">--num-lg 56px / --num-md 44px</td><td class="v">-0.02em</td><td class="d">Secondary readouts inside a block.</td></tr>
+              <tr><td>.v-display-lg</td><td class="v">--font-display</td><td class="v">clamp(30px, 5vw, 44px) / 800</td><td class="v">-0.02em</td><td class="d">Block lockups: <code>WORD.DIGIT</code>, <code>ABBREV-NUMBER</code>.</td></tr>
+              <tr><td>.v-display-md</td><td class="v">--font-display</td><td class="v">24px / 700</td><td class="v">-0.02em</td><td class="d">Lockup inside a console head.</td></tr>
+              <tr><td>.s-input</td><td class="v">--font-mono</td><td class="v">12px / 400</td><td class="v">+0.04em</td><td class="d">The field value. The only mono above 11px.</td></tr>
+              <tr><td>.v-data</td><td class="v">--font-mono</td><td class="v">11px / 400</td><td class="v">0</td><td class="d">Values, feed rows, body size of the page.</td></tr>
+              <tr><td>.v-label</td><td class="v">--font-mono</td><td class="v">10px / 400</td><td class="v">+0.08em</td><td class="d">Labels, chips, buttons. Uppercase with underscores.</td></tr>
+              <tr><td>.v-micro</td><td class="v">--font-mono</td><td class="v">9px / 400</td><td class="v">+0.02em</td><td class="d">Log and annotation paragraphs in <code>--ink-dim</code>. The floor.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <span class="sub-hd v-label">NAMING_GRAMMAR</span>
+        <ul class="gram v-data">
+          <li><span class="pat">UPPERCASE_UNDERSCORE</span><span class="lead" aria-hidden="true"></span><span class="ex">SOURCE_TRACKING, END_OF_TRANSMISSION</span></li>
+          <li><span class="pat">WORD.DIGIT</span><span class="lead" aria-hidden="true"></span><span class="ex">UNIT.3, CH.40, ACTIVE.B</span></li>
+          <li><span class="pat">ABBREV-NUMBER</span><span class="lead" aria-hidden="true"></span><span class="ex">UI-12, REF - 10040</span></li>
+          <li><span class="pat">VALUE+UNIT</span><span class="lead" aria-hidden="true"></span><span class="ex">42.08HZ, 64PCT, 118MS</span></li>
+          <li><span class="pat">PREFIX &gt;</span><span class="lead" aria-hidden="true"></span><span class="ex">&gt; LIVE_FEED (live pointer)</span></li>
+          <li><span class="pat">PREFIX +</span><span class="lead" aria-hidden="true"></span><span class="ex">+ AUX_CHANNEL (addable item)</span></li>
+        </ul>
+
+        <div class="callout">
+          <b>The display closes in and the mono opens up, and that is the whole
+          hierarchy.</b> Tight heavy numerals read as instruments; small tracked
+          mono reads as annotation. Running both directions at once separates
+          the readout layer from the label layer without a third size, a second
+          weight in the mono, or a colour. The underscore grammar does the rest:
+          a label with no spaces reads as an identifier, never as a sentence.
+        </div>
+      </section>
+
+      <!-- ============ 03 SPACE ============ -->
+      <section class="sec" id="space" aria-labelledby="space-h">
+        <div class="sechead">
+          <span class="s-chip s-chip--ink">SEC.03</span>
+          <h2 id="space-h">Space and layout</h2>
+          <div class="s-rule" aria-hidden="true"></div>
+          <span class="v-label ink-dim">DENSE</span>
+        </div>
+        <p class="lede">
+          Instruments are dense. Inside a mark the steps are 3 to 18 pixels;
+          between blocks the page jumps straight to 64. There is no middle
+          register - a readout is either packed or it is a separate readout.
+        </p>
+
+        <div class="table-scroll">
+          <table class="spec">
+            <thead><tr><th>Token</th><th>Value</th><th>Note</th></tr></thead>
+            <tbody>
+              <tr><td>--measure</td><td class="v">1240px</td><td class="d">Content ceiling, centred.</td></tr>
+              <tr><td>--gutter</td><td class="v">24px</td><td class="d">Side margin and frame padding. 16px below the 480 breakpoint.</td></tr>
+              <tr><td>--section-gap</td><td class="v">64px</td><td class="d">Between sections. The only large step in the system.</td></tr>
+              <tr><td>breakpoints</td><td class="v">720px / 480px</td><td class="d">720 stacks multi-column clusters; 480 tightens the frame padding.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <span class="sub-hd v-label">STEPS_IN_USE / INSIDE A MARK</span>
+        <div class="table-scroll">
+          <table class="spec">
+            <tbody>
+              <tr><td>3</td><td class="v">3px</td><td style="width:120px"><div class="scale" style="width:3px"></div></td><td class="d">Segmented-bar gap.</td></tr>
+              <tr><td>4</td><td class="v">4px</td><td><div class="scale" style="width:4px"></div></td><td class="d">Chip and feed-row vertical padding.</td></tr>
+              <tr><td>6</td><td class="v">6px</td><td><div class="scale" style="width:6px"></div></td><td class="d">Status-dot gap, feed-row side padding.</td></tr>
+              <tr><td>7</td><td class="v">7px</td><td><div class="scale" style="width:7px"></div></td><td class="d">Chip side padding, marker-to-label gap.</td></tr>
+              <tr><td>8</td><td class="v">8px</td><td><div class="scale" style="width:8px"></div></td><td class="d">Hazard strip width, bracket-button padding.</td></tr>
+              <tr><td>12</td><td class="v">12px</td><td><div class="scale" style="width:12px"></div></td><td class="d">Corner-bracket arm.</td></tr>
+              <tr><td>14</td><td class="v">14px</td><td><div class="scale" style="width:14px"></div></td><td class="d">Solid-button side padding.</td></tr>
+              <tr><td>18</td><td class="v">18px</td><td><div class="scale" style="width:18px"></div></td><td class="d">Between the ticks of a toggle pair.</td></tr>
+              <tr><td>24</td><td class="v">--gutter</td><td><div class="scale" style="width:24px"></div></td><td class="d">Frame padding and page margin.</td></tr>
+              <tr><td>64</td><td class="v">--section-gap</td><td><div class="scale" style="width:64px"></div></td><td class="d">Between sections.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout">
+          <b>The odd numbers are not a mistake.</b> 3, 7 and 9 exist because the
+          marks are built on a pixel grid, not a spacing scale: a 9px cell with a
+          3px gap is a 12px pitch, and a 9px cross needs its 1px stroke on pixel
+          4 to sit dead centre. Round these to a 4px scale and every segmented
+          bar and cross goes soft by half a pixel.
+        </div>
+      </section>
+
+      <!-- ============ 04 FORM ============ -->
+      <section class="sec" id="form" aria-labelledby="form-h">
+        <div class="sechead">
+          <span class="s-chip s-chip--ink">SEC.04</span>
+          <h2 id="form-h">Form</h2>
+          <div class="s-rule" aria-hidden="true"></div>
+          <span class="v-label ink-dim">0PX RADIUS</span>
+        </div>
+        <p class="lede">
+          The silhouette is a 1px line and a square corner. There is no radius
+          anywhere, no shadow, and no elevation beyond one flat fill - a raised
+          block is <code>--panel</code>, and that is the whole depth model.
+        </p>
+
+        <div class="spec-grid">
+          <div class="cell"><div class="form-tile form-tile--hair"></div><p class="cap v-label">HAIRLINE / 1PX --HAIRLINE</p></div>
+          <div class="cell"><div class="form-tile s-frame"><i class="s-frame-x" aria-hidden="true"></i></div><p class="cap v-label">CORNER_BRACKETS / 12PX ARMS, 1PX --INK</p></div>
+          <div class="cell"><div class="form-tile form-tile--ink"></div><p class="cap v-label">HOVER EDGE / 1PX --INK</p></div>
+          <div class="cell"><div class="form-tile form-tile--dashed"></div><p class="cap v-label">DISABLED / 1PX DASHED --HAIRLINE</p></div>
+          <div class="cell"><div class="form-tile form-tile--panel"></div><p class="cap v-label">RAISED / --PANEL FILL, NO EDGE</p></div>
+          <div class="cell"><div class="demo"><div class="leader"></div><div class="s-rule" aria-hidden="true"></div></div><p class="cap v-label">LEADER / 1PX DOTTED - RULE / END TICKS</p></div>
+        </div>
+
+        <div class="table-scroll" style="margin-top:24px">
+          <table class="spec">
+            <thead><tr><th>Property</th><th>Value</th><th>Why</th></tr></thead>
+            <tbody>
+              <tr><td>border-radius</td><td class="v">0</td><td class="d">Everywhere, including focus rings and the status dot. A rounded corner reads as a consumer control, not an instrument.</td></tr>
+              <tr><td>border</td><td class="v">1px</td><td class="d">The only weight. Emphasis comes from swapping <code>--hairline</code> for <code>--ink</code>, never from going thicker.</td></tr>
+              <tr><td>focus</td><td class="v">2px --signal, offset 2px</td><td class="d">The one 2px line - focus is live, so it takes the live hue.</td></tr>
+              <tr><td>elevation</td><td class="v">--panel</td><td class="d">A flat fill one step off the ground. No shadow exists to reach for.</td></tr>
+              <tr><td>gradient</td><td class="v">hazard only</td><td class="d">Hard-stop 8px strips at -45deg. Two stops at the same position, so it is a pattern, not a fade.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout">
+          <b>Flat is what makes it composite.</b> A glow or a soft shadow is
+          drawn assuming a known background; laid over footage it turns into a
+          grey smear. A 1px line and a solid block survive any backdrop, which
+          is the only thing an overlay has to do.
+        </div>
+      </section>
+
+      <!-- ============ 05 MOTION ============ -->
+      <section class="sec" id="motion" aria-labelledby="motion-h">
+        <div class="sechead">
+          <span class="s-chip s-chip--ink">SEC.05</span>
+          <h2 id="motion-h">Motion</h2>
+          <div class="s-rule" aria-hidden="true"></div>
+          <span class="v-label ink-dim">2 AUTHORED MOMENTS</span>
+        </div>
+        <p class="lede">
+          Instruments, not decoration. Two authored moments - a stepped blink on
+          live things, and one flat scan column - and every other state change
+          is an instant flip with no transition at all.
+        </p>
+
+        <div class="spec-grid">
+          <div class="cell">
+            <div class="demo-row">
+              <span class="s-chip s-chip--signal s-status is-active"><span class="dot" aria-hidden="true"></span>LIVE</span>
+              <p class="v-data" aria-hidden="true">INPUT&gt;&nbsp;<span class="s-caret"></span></p>
+            </div>
+            <p class="cap v-label">--T-BLINK 1.4S STEPS(1, END)</p>
+          </div>
+          <div class="cell">
+            <div class="scan-demo s-scan-host"><span class="s-scan" aria-hidden="true"></span></div>
+            <p class="cap v-label">--T-SCAN 8S LINEAR / SWEEP 32PCT, DWELL 68PCT</p>
+          </div>
+          <div class="cell">
+            <div class="demo-row">
+              <button type="button" class="s-btn s-btn--bracket">PRESS</button>
+              <button type="button" class="s-btn s-btn--solid">HOVER</button>
+            </div>
+            <p class="cap v-label">FLIP / NO TRANSITION, :ACTIVE 1PX DOWN</p>
+          </div>
+        </div>
+
+        <div class="table-scroll" style="margin-top:24px">
+          <table class="spec">
+            <thead><tr><th>Token</th><th>Value</th><th>Where</th></tr></thead>
+            <tbody>
+              <tr><td>--t-blink</td><td class="v">1.4s steps(1, end)</td><td class="d">Live status dots and the block caret. On or off, never a fade.</td></tr>
+              <tr><td>--t-scan</td><td class="v">8s linear</td><td class="d">One flat column crosses a hero frame in the first 32% of the cycle, then dwells off-frame.</td></tr>
+              <tr><td>press</td><td class="v">translateY(1px)</td><td class="d">Buttons on <code>:active</code>. The largest displacement in the system.</td></tr>
+              <tr><td>hover</td><td class="v">instant</td><td class="d">Fill and edge flip in the same frame. <b>There is no easing curve to reuse.</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout">
+          <b>A readout either holds or flips.</b> An eased transition implies the
+          value passed through the states in between, which an instrument never
+          claims. Stepped timing keeps motion honest, and the scan spends most
+          of its cycle off-frame so it reads as a periodic check rather than a
+          loop to watch. Under <code>prefers-reduced-motion</code> the blink
+          stops, the scan is removed, and nothing is lost.
+        </div>
+      </section>
+
+      <!-- ============ 06 SCREEN ============ -->
+      <section class="sec" id="screen" aria-labelledby="screen-h">
+        <div class="sechead">
+          <span class="s-chip s-chip--ink">SEC.06</span>
+          <h2 id="screen-h">Screen</h2>
+          <div class="s-rule" aria-hidden="true"></div>
+          <span class="v-label ink-dim">ENHANCEMENT ONLY</span>
+        </div>
+        <p class="lede">
+          One optional surface treatment: <b>interference contours</b>. Two slow
+          emitters ring outward across the glass and their interference is drawn
+          as hairline contours. <b>The pointer is a third emitter</b> - move it
+          across the right-hand panel and, inside a bracketed reach, the field is
+          read out as segmented-bar cells: signal where it peaks, outline where
+          it does not.
+        </p>
+
+        <div class="shaderRow">
+          <div class="shaderCell">
+            <div class="shaderStage" id="fieldFallback"></div>
+            <span class="shaderCap v-label">STATIC_FALLBACK / HAIRLINE RINGS</span>
+          </div>
+          <div class="shaderCell">
+            <div class="shaderStage"><canvas id="fieldCanvas"></canvas></div>
+            <span class="shaderCap v-label">LIVE / MOVE THE POINTER ACROSS IT</span>
+          </div>
+        </div>
+
+        <div class="table-scroll" style="margin-top:24px">
+          <table class="spec">
+            <thead><tr><th>Uniform</th><th>Value</th><th>What it does</th></tr></thead>
+            <tbody>
+              <tr><td>uLevels</td><td class="v">6.0</td><td class="d">Contour steps across the field's range. More reads as a fingerprint; fewer loses the interference.</td></tr>
+              <tr><td>uWave</td><td class="v">34.0 rad / height</td><td class="d">Emitter spatial frequency. About five rings per canvas height.</td></tr>
+              <tr><td>uDrift</td><td class="v">0.9 rad/s</td><td class="d">Phase speed. The rings travel outward slowly enough to read as a field, not an animation.</td></tr>
+              <tr><td>uCell / uGap</td><td class="v">12px / 3px</td><td class="d">Readout pitch and gap - a 9px cell with a 3px gap, exactly the segmented bar.</td></tr>
+              <tr><td>uReach</td><td class="v">0.14 heights</td><td class="d">Radius of the readout around the pointer. It grows in with the pointer's spring.</td></tr>
+              <tr><td>uThresh</td><td class="v">0.6</td><td class="d">Field level above which a readout cell lights. Each cell samples the field once, so it is either lit or not.</td></tr>
+              <tr><td>uGround / uInk / uSignal</td><td class="v">tokens</td><td class="d">Read from the live values, and re-read on every theme flip.</td></tr>
+              <tr><td>uHair</td><td class="v">--hairline alpha</td><td class="d">Contour and outline strength, taken from the token so the lines match every other hairline.</td></tr>
+              <tr><td>spring</td><td class="v">k 60 / d 10</td><td class="d">The pointer is followed on a spring, so the reach has mass and settles instead of snapping.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout">
+          <b>The flat-marks rule is structural here, not a matter of care.</b>
+          The shader composites exactly four things - <code>--ground</code>, the
+          hairline mix of <code>--ink</code>, <code>--ink</code>, and
+          <code>--signal</code> - and every readout cell samples the field once,
+          so it can only be fully lit or dark. There is no path for a glow or a
+          fade to reach the screen. The signal hue appears only while the pointer
+          is present, so at rest the panel obeys the same live-only rule as
+          everything else. The canvas is transparent until its first frame,
+          stops rendering when scrolled off screen, and under
+          <code>prefers-reduced-motion</code> draws one settled frame and never
+          starts a loop.
+        </div>
+        <p class="note">
+          <b>Where it belongs:</b> an empty hero frame, or a schematic slot that
+          has nothing to show yet. Not behind readouts or body text - contours
+          under a feed row compete with the dotted leaders and cost the dim ink
+          its contrast.
+        </p>
+      </section>
+
+      <!-- ============ 07 COMPONENTS ============ -->
+      <section class="sec" id="components" aria-labelledby="components-h">
+        <div class="sechead">
+          <span class="s-chip s-chip--ink">SEC.07</span>
+          <h2 id="components-h">Components</h2>
+          <div class="s-rule" aria-hidden="true"></div>
+          <span class="v-label ink-dim">6 / ALL STATES LIVE</span>
+        </div>
+        <p class="lede">
+          Every state here is live: hover the buttons and rows, press and hold,
+          tab to focus, tick the toggles, type in the field. The disabled
+          specimens are actually disabled.
+        </p>
+
+        <div class="spec-grid">
+          <div class="cell">
+            <div class="demo-row">
+              <span class="s-chip s-chip--signal s-status is-active"><span class="dot" aria-hidden="true"></span>ACTIVE</span>
+              <span class="s-chip s-chip--ink s-status"><span class="dot" aria-hidden="true"></span>READY</span>
+              <span class="s-chip s-chip--ghost s-status"><span class="dot" aria-hidden="true"></span>INACTIVE</span>
+            </div>
+            <p class="cap v-label">STATUS_CHIP / SIGNAL = LIVE, INK = READY, GHOST = INACTIVE</p>
+          </div>
+
+          <div class="cell">
+            <div class="demo-row">
+              <button type="button" class="s-btn s-btn--bracket">EXECUTE</button>
+              <button type="button" class="s-btn s-btn--bracket" disabled>OFFLINE</button>
+            </div>
+            <div class="demo-row">
+              <button type="button" class="s-btn s-btn--solid">COMMIT</button>
+              <button type="button" class="s-btn s-btn--solid" disabled>LOCKED</button>
+            </div>
+            <p class="cap v-label">BUTTON / HOVER FLIPS, :ACTIVE 1PX, DISABLED DASHED</p>
+          </div>
+
+          <div class="cell">
+            <fieldset class="s-toggle">
+              <legend class="v-label legend">CHANNEL_MODE</legend>
+              <label><input type="checkbox" checked /><span class="tick" aria-hidden="true"></span><span class="txt">MODE_A</span></label>
+              <label><input type="checkbox" /><span class="tick" aria-hidden="true"></span><span class="txt">MODE_B</span></label>
+            </fieldset>
+            <p class="cap v-label">TOGGLE / CHECKED = SIGNAL TICK + INK TEXT</p>
+          </div>
+
+          <div class="cell">
+            <ul class="s-feed">
+              <li><span class="mk s-square s-square--ink" aria-hidden="true"></span><span class="lbl">NODE_ALPHA</span><span class="lead" aria-hidden="true"></span><span class="val">SYNCED</span></li>
+              <li class="is-hot"><span class="mk s-tri s-tri--right s-tri--signal" aria-hidden="true"></span><span class="lbl">NODE_BRAVO</span><span class="lead" aria-hidden="true"></span><span class="val">HOLD</span></li>
+              <li><span class="mk s-cross" aria-hidden="true"></span><span class="lbl">NODE_CHARLIE</span><span class="lead" aria-hidden="true"></span><span class="val">QUEUED</span></li>
+            </ul>
+            <p class="cap v-label">LIST_ROW / HOVER = PANEL FILL, .IS-HOT PINS IT</p>
+          </div>
+
+          <div class="cell">
+            <label class="s-field">
+              <span class="flabel v-label">FIELD_ID</span>
+              <input class="s-input" type="text" value="ENTRY_0042" spellcheck="false" />
+            </label>
+            <label class="s-field">
+              <span class="flabel v-label">EMPTY_FIELD</span>
+              <input class="s-input" type="text" placeholder="ENTER_SEQUENCE" spellcheck="false" />
+            </label>
+            <p class="cap v-label">INPUT / UNDERLINE, FOCUS = INK LINE, SIGNAL CARET</p>
+          </div>
+
+          <div class="cell">
+            <label class="s-field">
+              <span class="flabel v-label">REF_KEY</span>
+              <input class="s-input" type="text" value="REF - 10040" disabled />
+            </label>
+            <p class="v-data" aria-hidden="true">INPUT&gt;&nbsp;UNIT.3<span class="s-caret"></span></p>
+            <p class="cap v-label">DISABLED = DIM INK, DASHED / BLOCK CARET SPECIMEN</p>
+          </div>
+        </div>
+
+        <div class="callout">
+          <b>Every state is carried by a flip, and the flips are ordered.</b> Rest
+          to hover swaps a fill (<code>--panel</code>) or the block colour
+          (ink to signal); press moves 1px; disabled trades the solid for a
+          dashed hairline. Because each state changes exactly one property, the
+          states stay readable over any footage - and the signal hue only ever
+          appears on the state that means "this is happening now".
+        </div>
+      </section>
+
+      <!-- ============ 08 MOTIFS ============ -->
+      <section class="sec" id="motifs" aria-labelledby="motifs-h">
+        <div class="sechead">
+          <span class="s-chip s-chip--ink">SEC.08</span>
+          <h2 id="motifs-h">Motifs</h2>
+          <div class="s-rule" aria-hidden="true"></div>
+          <span class="v-label ink-dim">8 MARKS</span>
+        </div>
+        <p class="lede">
+          The eight marks everything else is built from. These - not the palette
+          - are what make a screen read as STRATOS at a glance.
+        </p>
 
         <div class="spec-grid">
           <div class="cell">
             <div class="demo">
               <div class="demo-row">
-                <span class="s-chip s-chip--white">&gt; SOURCE_TRACKING</span>
-                <span class="s-chip s-chip--alert">MOUNT_PROCESS</span>
+                <span class="s-chip s-chip--ink">&gt; LIVE_FEED</span>
+                <span class="s-chip s-chip--signal">BLOCK_PROCESS</span>
               </div>
               <div class="demo-row">
-                <span class="s-chip s-chip--outline">+ VXZ_SCANNING</span>
+                <span class="s-chip s-chip--outline">+ AUX_CHANNEL</span>
                 <span class="s-chip s-chip--ghost">STANDBY_LINK</span>
               </div>
             </div>
-            <p class="cap v-label">TAG_CHIP / WHITE, ALERT, OUTLINE, GHOST</p>
+            <p class="cap v-label">TAG_CHIP / INK, SIGNAL, OUTLINE, GHOST</p>
           </div>
 
           <div class="cell">
@@ -312,58 +594,47 @@ demo data synthetic.
 
           <div class="cell">
             <div class="demo">
-              <div class="s-seg" role="img" aria-label="Level 7 of 10">
-                <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i>
-              </div>
-              <div class="s-seg s-seg--alert" role="img" aria-label="Alert level 4 of 10">
-                <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i>
-              </div>
-              <div class="s-seg s-seg--tall" role="img" aria-label="Level 3 of 6">
-                <i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i>
-              </div>
+              <div class="s-seg" role="img" aria-label="Level 7 of 10"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+              <div class="s-seg s-seg--signal" role="img" aria-label="Signal level 4 of 10"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="s-seg s-seg--tall" role="img" aria-label="Level 3 of 6"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
             </div>
-            <p class="cap v-label">SEGMENTED_BAR / SIGNAL, ALERT, TALL</p>
+            <p class="cap v-label">SEGMENTED_BAR / INK, SIGNAL, TALL</p>
           </div>
 
           <div class="cell">
-            <div class="demo demo-row" style="align-items: baseline;">
-              <span class="s-num s-num--alert" style="font-size: 64px;">89</span>
-              <span class="s-num" style="font-size: 44px;">402</span>
+            <div class="demo-row demo-row--base">
+              <span class="s-num s-num--signal s-num--lg">89</span>
+              <span class="s-num s-num--md">402</span>
             </div>
-            <p class="cap v-label">BIG_READOUT / ALERT, SIGNAL</p>
+            <p class="cap v-label">BIG_READOUT / SIGNAL, INK</p>
           </div>
 
           <div class="cell">
             <div class="demo">
-              <div class="s-frame" style="height: 74px;">
-                <i class="s-frame-x" aria-hidden="true"></i>
-              </div>
+              <div class="form-tile s-frame"><i class="s-frame-x" aria-hidden="true"></i></div>
               <div class="s-rule" aria-hidden="true"></div>
             </div>
             <p class="cap v-label">CORNER_BRACKETS / RULE_END_TICKS</p>
           </div>
 
           <div class="cell">
-            <div class="demo demo-row" aria-hidden="true">
+            <div class="demo-row" aria-hidden="true">
               <span class="s-cross"></span>
               <span class="s-square"></span>
-              <span class="s-square s-square--signal"></span>
+              <span class="s-square s-square--ink"></span>
               <span class="s-square s-square--outline"></span>
               <span class="s-tri"></span>
-              <span class="s-tri s-tri--alert"></span>
+              <span class="s-tri s-tri--signal"></span>
               <span class="s-tri s-tri--right"></span>
-              <span class="s-tri s-tri--right s-tri--alert"></span>
+              <span class="s-tri s-tri--right s-tri--signal"></span>
             </div>
             <p class="cap v-label">MARKERS / CROSS, SQUARE, TRIANGLE</p>
           </div>
 
           <div class="cell">
             <div class="demo">
-              <div class="s-schem" style="height: 110px;">
-                <svg aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 100 100">
-                  <line x1="0" y1="0" x2="100" y2="100" />
-                  <line x1="100" y1="0" x2="0" y2="100" />
-                </svg>
+              <div class="s-schem schem-sm">
+                <svg aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 100 100"><line x1="0" y1="0" x2="100" y2="100" /><line x1="100" y1="0" x2="0" y2="100" /></svg>
                 <span class="pip" aria-hidden="true"></span>
               </div>
               <p class="v-label ink-dim">SUB_SCHEMATIC / SEC 1..4</p>
@@ -373,181 +644,167 @@ demo data synthetic.
 
           <div class="cell">
             <ul class="s-feed">
-              <li><span class="mk s-tri s-tri--right s-tri--alert" aria-hidden="true"></span><span class="lbl">FREQ</span><span class="lead" aria-hidden="true"></span><span class="val">137.62MHZ</span></li>
-              <li><span class="mk s-square s-square--signal" aria-hidden="true"></span><span class="lbl">RANGE</span><span class="lead" aria-hidden="true"></span><span class="val">409KM</span></li>
-              <li><span class="mk s-cross" aria-hidden="true"></span><span class="lbl">DOPPLER</span><span class="lead" aria-hidden="true"></span><span class="val">-2.1KHZ</span></li>
+              <li><span class="mk s-tri s-tri--right s-tri--signal" aria-hidden="true"></span><span class="lbl">FREQ</span><span class="lead" aria-hidden="true"></span><span class="val">42.08HZ</span></li>
+              <li><span class="mk s-square s-square--ink" aria-hidden="true"></span><span class="lbl">RANGE</span><span class="lead" aria-hidden="true"></span><span class="val">409PX</span></li>
+              <li><span class="mk s-cross" aria-hidden="true"></span><span class="lbl">OFFSET</span><span class="lead" aria-hidden="true"></span><span class="val">-2.1PCT</span></li>
             </ul>
             <p class="cap v-label">FEED_ROW / MARKER, LABEL, LEADER, VALUE</p>
           </div>
         </div>
-      </section>
 
-      <!-- ============ SEC.3 COMPONENTS ============ -->
-      <section class="sec" aria-labelledby="h-components">
-        <div class="sechead">
-          <span class="s-chip s-chip--alert">SEC.3</span>
-          <h2 id="h-components">COMPONENTS</h2>
-          <div class="s-rule" aria-hidden="true"></div>
-        </div>
-
-        <div class="spec-grid">
-          <div class="cell">
-            <div class="demo demo-row">
-              <span class="s-chip s-chip--alert s-status is-active"><span class="dot" aria-hidden="true"></span>ACTIVE</span>
-              <span class="s-chip s-chip--white s-status"><span class="dot" aria-hidden="true"></span>READY</span>
-              <span class="s-chip s-chip--ghost s-status"><span class="dot" aria-hidden="true"></span>INACTIVE</span>
-            </div>
-            <p class="cap v-label">STATUS_CHIP / ACTIVE BLINKS 1.4S STEPS</p>
-          </div>
-
-          <div class="cell">
-            <div class="demo demo-row">
-              <button type="button" class="s-btn s-btn--bracket">ENGAGE</button>
-              <button type="button" class="s-btn s-btn--bracket" disabled>OFFLINE</button>
-            </div>
-            <div class="demo demo-row">
-              <button type="button" class="s-btn s-btn--solid">TRANSMIT</button>
-              <button type="button" class="s-btn s-btn--solid" disabled>LOCKED</button>
-            </div>
-            <p class="cap v-label">BUTTON / HOVER FLIPS, ACTIVE SHIFTS 1PX</p>
-          </div>
-
-          <div class="cell">
-            <fieldset class="s-toggle">
-              <legend class="v-label ink-dim" style="margin-bottom: 8px;">CHANNEL_MODE</legend>
-              <label>
-                <input type="checkbox" checked />
-                <span class="tick" aria-hidden="true"></span>
-                <span class="txt">UPLOAD</span>
-              </label>
-              <label>
-                <input type="checkbox" />
-                <span class="tick" aria-hidden="true"></span>
-                <span class="txt">DOWNLOAD</span>
-              </label>
-            </fieldset>
-            <p class="cap v-label">TOGGLE / PAIRED TICKS, CHECKED = ALERT</p>
-          </div>
-
-          <div class="cell">
-            <ul class="s-feed">
-              <li><span class="mk s-square s-square--signal" aria-hidden="true"></span><span class="lbl">NODE_ALPHA</span><span class="lead" aria-hidden="true"></span><span class="val">SYNCED</span></li>
-              <li class="is-hot"><span class="mk s-tri s-tri--right s-tri--alert" aria-hidden="true"></span><span class="lbl">NODE_BRAVO</span><span class="lead" aria-hidden="true"></span><span class="val">HOLD</span></li>
-              <li><span class="mk s-cross" aria-hidden="true"></span><span class="lbl">NODE_CHARLIE</span><span class="lead" aria-hidden="true"></span><span class="val">QUEUED</span></li>
-            </ul>
-            <p class="cap v-label">LIST_ROW / HOVER = PANEL FILL</p>
-          </div>
-
-          <div class="cell">
-            <label class="s-field">
-              <span class="flabel v-label">CHANNEL_ID</span>
-              <input class="s-input" type="text" value="FREQ_137.62" spellcheck="false" />
-            </label>
-            <p class="v-data" aria-hidden="true">TARGET_LOCK&gt;&nbsp;SAT.3<span class="s-caret"></span></p>
-            <p class="cap v-label">INPUT / UNDERLINE, BLOCK CARET IN ALERT</p>
-          </div>
-
-          <div class="cell">
-            <label class="s-field">
-              <span class="flabel v-label">RELAY_KEY</span>
-              <input class="s-input" type="text" value="RB - 10040" disabled />
-            </label>
-            <p class="cap v-label">DISABLED / DIM INK, DASHED UNDERLINE</p>
-          </div>
+        <div class="callout">
+          <b>Every mark is a rectangle, a 1px line, or a triangle - and nothing
+          else.</b> That is what lets them be combined without a style guide for
+          each pairing: a chip next to a segmented bar next to a readout always
+          agrees, because they are all drawn from the same three primitives in
+          the same two colours. Before adding a ninth mark, ask whether it can be
+          built from those three.
         </div>
       </section>
 
-      <!-- ============ SEC.4 CONSOLE ============ -->
-      <section class="sec" aria-labelledby="h-console">
+      <!-- ============ 09 COMPOSITION ============ -->
+      <section class="sec" id="composition" aria-labelledby="composition-h">
         <div class="sechead">
-          <span class="s-chip s-chip--alert">SEC.4</span>
-          <h2 id="h-console">CONSOLE</h2>
+          <span class="s-chip s-chip--ink">SEC.09</span>
+          <h2 id="composition-h">Composition</h2>
           <div class="s-rule" aria-hidden="true"></div>
+          <span class="v-label ink-dim">SPECIMEN</span>
         </div>
+        <p class="lede">
+          The parts assembled into one console: a bracketed frame, a lockup head,
+          three columns of readouts and controls, a log foot. The labels are
+          generic channel, level and mode names, so what a reader takes away is
+          the arrangement, not a guess at what it monitors.
+        </p>
 
         <div class="console s-frame">
           <i class="s-frame-x" aria-hidden="true"></i>
 
           <div class="console-head">
             <div class="lockup">
-              <span class="v-display v-display-md">SAT.3</span>
-              <span class="v-label ink-dim">ORBITAL_TELEMETRY</span>
+              <span class="v-display v-display-md">UNIT.3</span>
+              <span class="v-label ink-dim">CHANNEL_OVERVIEW</span>
             </div>
             <span class="grow"></span>
-            <span class="s-chip s-chip--alert s-status is-active"><span class="dot" aria-hidden="true"></span>ACTIVE.B</span>
-            <span class="s-chip s-chip--white">&gt; LIVE_FEED</span>
+            <span class="s-chip s-chip--signal s-status is-active"><span class="dot" aria-hidden="true"></span>ACTIVE.B</span>
+            <span class="s-chip s-chip--ink">&gt; LIVE_FEED</span>
           </div>
 
           <div class="s-hazard s-hazard--thin" aria-hidden="true"></div>
 
           <div class="console-body">
             <div class="console-col">
-              <span class="v-label ink-dim">ORBIT_TRACE</span>
+              <span class="v-label ink-dim">CHANNEL_SET</span>
               <ul class="s-feed">
-                <li><span class="mk s-square s-square--signal" aria-hidden="true"></span><span class="lbl">PERIGEE</span><span class="lead" aria-hidden="true"></span><span class="val">409KM</span></li>
-                <li><span class="mk s-square s-square--signal" aria-hidden="true"></span><span class="lbl">APOGEE</span><span class="lead" aria-hidden="true"></span><span class="val">421KM</span></li>
-                <li><span class="mk s-cross" aria-hidden="true"></span><span class="lbl">INCLINATION</span><span class="lead" aria-hidden="true"></span><span class="val">51.6DEG</span></li>
-                <li><span class="mk s-cross" aria-hidden="true"></span><span class="lbl">VELOCITY</span><span class="lead" aria-hidden="true"></span><span class="val">7.66KM/S</span></li>
-                <li><span class="mk s-tri s-tri--right s-tri--alert" aria-hidden="true"></span><span class="lbl">PERIOD</span><span class="lead" aria-hidden="true"></span><span class="val">92.9MIN</span></li>
+                <li><span class="mk s-square s-square--ink" aria-hidden="true"></span><span class="lbl">CHANNEL_A</span><span class="lead" aria-hidden="true"></span><span class="val">409</span></li>
+                <li><span class="mk s-square s-square--ink" aria-hidden="true"></span><span class="lbl">CHANNEL_B</span><span class="lead" aria-hidden="true"></span><span class="val">421</span></li>
+                <li><span class="mk s-cross" aria-hidden="true"></span><span class="lbl">CHANNEL_C</span><span class="lead" aria-hidden="true"></span><span class="val">51.6PCT</span></li>
+                <li><span class="mk s-cross" aria-hidden="true"></span><span class="lbl">CHANNEL_D</span><span class="lead" aria-hidden="true"></span><span class="val">7.66</span></li>
+                <li><span class="mk s-tri s-tri--right s-tri--signal" aria-hidden="true"></span><span class="lbl">CHANNEL_E</span><span class="lead" aria-hidden="true"></span><span class="val ink-signal">92.9</span></li>
               </ul>
-              <p class="v-micro">TLE EPOCH 2049.203.7741 / SOURCE GROUND KIR.4 / PROPAGATOR SGP.4 / RESIDUAL 0.002</p>
+              <p class="v-micro">SAMPLE 0042.7741 / SOURCE NODE.4 / RESIDUAL 0.002</p>
             </div>
 
             <div class="console-col">
               <div class="s-schem schem-console">
-                <svg aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 100 100">
-                  <line x1="0" y1="0" x2="100" y2="100" />
-                  <line x1="100" y1="0" x2="0" y2="100" />
-                </svg>
+                <svg aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 100 100"><line x1="0" y1="0" x2="100" y2="100" /><line x1="100" y1="0" x2="0" y2="100" /></svg>
                 <span class="pip" aria-hidden="true"></span>
               </div>
-              <p class="v-label ink-dim">ARRAY_SCHEMATIC / SEC 1..4</p>
+              <p class="v-label ink-dim">BLOCK_SCHEMATIC / SEC 1..4</p>
               <div class="blk">
-                <span class="v-label ink-dim">POWER_BUS</span>
-                <div class="s-seg" role="img" aria-label="Power 9 of 12">
-                  <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i>
-                </div>
+                <span class="v-label ink-dim">LEVEL_A</span>
+                <div class="s-seg" role="img" aria-label="Level A 9 of 12"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
               </div>
               <div class="blk">
-                <span class="v-label ink-dim">THERMAL_MARGIN</span>
-                <div class="s-seg s-seg--alert" role="img" aria-label="Thermal margin 4 of 12">
-                  <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-                </div>
+                <span class="v-label ink-dim">LEVEL_B / ALERT</span>
+                <div class="s-seg s-seg--signal" role="img" aria-label="Level B 4 of 12"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
               </div>
             </div>
 
             <div class="console-col">
               <div class="blk">
-                <span class="v-label ink-dim">PASS_WINDOW / MIN</span>
-                <p class="s-num s-num--alert" style="font-size: 56px;">12</p>
+                <span class="v-label ink-dim">WINDOW / MIN</span>
+                <p class="s-num s-num--signal s-num--lg">12</p>
               </div>
               <fieldset class="s-toggle">
-                <legend class="v-label ink-dim" style="margin-bottom: 8px;">CHANNEL_MODE</legend>
-                <label>
-                  <input type="checkbox" checked />
-                  <span class="tick" aria-hidden="true"></span>
-                  <span class="txt">UPLOAD</span>
-                </label>
-                <label>
-                  <input type="checkbox" />
-                  <span class="tick" aria-hidden="true"></span>
-                  <span class="txt">DOWNLOAD</span>
-                </label>
+                <legend class="v-label legend">CHANNEL_MODE</legend>
+                <label><input type="checkbox" checked /><span class="tick" aria-hidden="true"></span><span class="txt">MODE_A</span></label>
+                <label><input type="checkbox" /><span class="tick" aria-hidden="true"></span><span class="txt">MODE_B</span></label>
               </fieldset>
               <label class="s-field">
                 <span class="flabel v-label">COMMAND_LINE</span>
                 <input class="s-input" type="text" placeholder="ENTER_SEQUENCE" spellcheck="false" />
               </label>
               <div class="ctrl-row">
-                <button type="button" class="s-btn s-btn--bracket">ENGAGE</button>
-                <button type="button" class="s-btn s-btn--solid">TRANSMIT</button>
+                <button type="button" class="s-btn s-btn--bracket">EXECUTE</button>
+                <button type="button" class="s-btn s-btn--solid">COMMIT</button>
               </div>
             </div>
           </div>
 
           <div class="console-foot">
-            <p class="v-micro">LOG 22:14:07 UPLINK ACK / 22:14:09 MODE SHIFT B / 22:14:12 ARRAY SEC.2 NOMINAL / 22:14:15 QUEUE 3 CMD</p>
+            <p class="v-micro">LOG 22:14:07 ACK / 22:14:09 MODE SHIFT B / 22:14:12 BLOCK SEC.2 NOMINAL / 22:14:15 QUEUE 3 CMD</p>
             <div class="s-hazard s-hazard--thin" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <span class="sub-hd v-label">ANATOMY</span>
+        <div class="table-scroll">
+          <table class="spec">
+            <thead><tr><th>Part</th><th>As built</th><th>Why it is that</th></tr></thead>
+            <tbody>
+              <tr><td>Frame</td><td class="v">.s-frame on --panel</td><td class="d">Four 12px corner brackets instead of a box. The block reads as one instrument without an edge that would cut into the footage behind it.</td></tr>
+              <tr><td>Head</td><td class="v">.v-display-md + .v-label</td><td class="d">Lockup left, status chips right. The lockup names the unit; the chips say what it is doing.</td></tr>
+              <tr><td>Hazard</td><td class="v">.s-hazard--thin</td><td class="d">Top and foot of the console. It marks the extent of the readout, not a warning - which is why it is the thin cut.</td></tr>
+              <tr><td>Feed column</td><td class="v">.s-feed</td><td class="d">Marker, label, dotted leader, value. The leader carries the eye across, so labels and values can sit at opposite edges.</td></tr>
+              <tr><td>Centre column</td><td class="v">.s-schem + .s-seg</td><td class="d">A slot for an image and the levels that describe it. The schematic placeholder is what the slot looks like empty.</td></tr>
+              <tr><td>Signal spend</td><td class="v">live states + hazards</td><td class="d">The live chip, one feed row, one level bar, one readout, the checked tick and the schematic pip - each a live state - plus the two hazard strips that bound the block. Everything else is ink. <b>Count the signal before shipping a screen.</b></td></tr>
+              <tr><td>Controls</td><td class="v">toggle, input, buttons</td><td class="d">Bottom-right, after the readouts. You read an instrument before you operate it.</td></tr>
+              <tr><td>Log foot</td><td class="v">.v-micro</td><td class="d">The dimmest, smallest voice closes the block, so the eye lands on the readouts first and the log last.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout">
+          <b>This is a specimen, not a screen from a product.</b> The channels,
+          levels and modes are deliberately nameless, so the section still makes
+          sense to someone building a dashboard, a game HUD or a title sequence.
+          What it teaches is the order - frame, head, readouts, controls, log -
+          and how little of the signal hue a full console actually needs.
+        </div>
+      </section>
+
+      <!-- ============ 10 RULES ============ -->
+      <section class="sec" id="rules" aria-labelledby="rules-h">
+        <div class="sechead">
+          <span class="s-chip s-chip--ink">SEC.10</span>
+          <h2 id="rules-h">Rules</h2>
+          <div class="s-rule" aria-hidden="true"></div>
+          <span class="v-label ink-dim">THE REFUSALS MATTER MORE</span>
+        </div>
+
+        <div class="dodont">
+          <div class="do">
+            <p class="hd"><span class="s-chip s-chip--ink">DO</span></p>
+            <ul>
+              <li><span>Spend the <b>signal hue on live things only</b>: active, selected, focused, alarming.</span></li>
+              <li><span>Keep every mark <b>flat</b>: 1px lines, solid blocks, square corners.</span></li>
+              <li><span>Keep text at <b><code>--ink-dim</code> or brighter</b>. There is no darker grey.</span></li>
+              <li><span>Use the <b>naming grammar everywhere</b>, specimen data included: underscores, <code>WORD.DIGIT</code>, values with a unit suffix.</span></li>
+              <li><span>Change <b>one property per state</b>, and flip it instantly.</span></li>
+              <li><span>Check <b>both grounds</b> with the toggle. Daylight is hand-authored, not derived.</span></li>
+            </ul>
+          </div>
+          <div class="dont">
+            <p class="hd"><span class="s-chip s-chip--signal">DO_NOT</span></p>
+            <ul>
+              <li><span>Add a <b>second hue</b>. The moment there are two, neither means live.</span></li>
+              <li><span>Add <b>glow, blur, shadow, radius or a gradient fade</b>. The hazard stripe is hard-stop strips and the only gradient.</span></li>
+              <li><span>Set <b>signal text below 14px bold</b>, on either ground.</span></li>
+              <li><span><b>Ease</b> a state change, or animate anything for flavour.</span></li>
+              <li><span>Name a token after its <b>hue</b>. On daylight glass the signal is a different cut and the ink is black.</span></li>
+              <li><span>Run the <b>interference contours behind readouts</b>. It is an empty-frame treatment, nothing more.</span></li>
+            </ul>
           </div>
         </div>
       </section>
@@ -558,11 +815,28 @@ demo data synthetic.
     <footer class="endcap">
       <div class="s-hazard" aria-hidden="true"></div>
       <p class="v-display v-display-lg">END_OF_TRANSMISSION</p>
-      <a class="s-btn s-btn--bracket" href="../../index.html">RETURN_TO_PORTAL</a>
-      <p class="v-micro">ALL_TELEMETRY_SYNTHETIC / NO_LIVE_DOWNLINK / STRATOS KIT V0.1 / 2049.203</p>
+      <a class="s-btn s-btn--bracket" href="../../index.html">RETURN_TO_INDEX</a>
+      <p class="v-micro">STRATOS KIT V0.1 / SYSTEM FONT STACKS, NOTHING DOWNLOADED / THIS CATALOG FOLLOWS STANDARD.MD</p>
       <div class="s-rule" aria-hidden="true"></div>
     </footer>
 
   </div>
+
+<script src="js/interference.js"></script>
+<script>
+  (function () {
+    var root = document.documentElement;
+    if (location.hash === "#light" || location.hash === "#dark") {
+      root.setAttribute("data-theme", location.hash.slice(1));
+    }
+    document.querySelectorAll("[data-toggle-theme]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var cur = root.getAttribute("data-theme");
+        if (!cur) cur = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        root.setAttribute("data-theme", cur === "dark" ? "light" : "dark");
+      });
+    });
+  })();
+</script>
 </body>
 </html>

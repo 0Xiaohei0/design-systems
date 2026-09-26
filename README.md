@@ -17,35 +17,40 @@ no build step to understand: these are plain HTML and CSS files.
 
 ## Systems
 
-- **[SDPG-HUD](systems/sdpg-hud/)** - monochrome arcade/targeting HUD. Two
+Every system ships a catalog page on the same spine (see [`STANDARD.md`](STANDARD.md)),
+both a light and a dark theme with a toggle, and one interactive WebGL2 surface
+treatment built for its own material.
+
+- **[SDPG-HUD](systems/sdpg-hud/)** - monochrome arcade targeting-HUD. Two
   grounds (blueprint and CRT), no chroma anywhere: emphasis is a filled block,
-  and status is encoded in form rather than color.
-- **[Objekt](systems/objekt/)** - brutalist industrial sticker/label system:
-  four paper stocks, condensed display type set vertically, barcodes, stamps,
-  spec sheets.
-- **[Stratos](systems/stratos/)** - sci-fi FUI signal-overlay kit: white and one
-  hot orange on black glass, `underscore_labels`, hazard stripes, segmented bars.
+  and status is encoded in form rather than color. Shader: phosphor sweep.
+- **[Objekt](systems/objekt/)** - brutalist industrial label system: four paper
+  stocks, condensed display type set vertically, barcodes, stamps, spec sheets.
+  Shader: thermal print head.
+- **[Stratos](systems/stratos/)** - sci-fi FUI signal-overlay kit: one ink and
+  one signal hue on black glass, `underscore_labels`, hazard stripes, segmented
+  bars. Shader: interference contours.
 - **[Enjoy](systems/enjoy/)** - cozy retro-desktop system: chunky outlined
-  windows over a cream desk with pastel waves, mono type, pill meters, one
-  saturated blue player pane.
-- **[Mochi](systems/mochi/)** - soft neumorphic kawaii widget system: one warm
-  greige material shaped by light (raised/pressed), pastel plates, flip clocks,
-  bilingual labels.
-- **[Konbini](systems/konbini/)** - pixel-art travel-poster system: rect-only
-  pixel scenes on an integer grid, giant white poster type in a sky gradient,
-  cobalt captions on snow.
-- **[Benran](systems/benran/)** - zen tea-ceremony identity: ink silhouettes on
-  hairline horizons, vertical CJK type, one vermilion seal, emptiness as the
-  primary material.
-- **[Sprout](systems/sprout/)** - cozy farm-game pixel UI kit: biscuit buttons
-  with pixel-step corners and one-pixel bevels, wooden signs, matcha boards,
-  `steps()` motion only.
-- **[Chaguan](systems/chaguan/)** - neo-Chinese teahouse mini-app system:
-  brush-ink illustrations over gold sun discs, cream hero posters, service
-  tiles, coffee-brown chrome.
+  windows over a desk with pastel waves, mono type, pill meters, one saturated
+  feature field. Shader: wallpaper tide.
+- **[Mochi](systems/mochi/)** - soft neumorphic widget system: one warm material
+  shaped by light (raised or pressed), pastel plates, flip clocks, no borders.
+  Shader: dough press.
+- **[Konbini](systems/konbini/)** - pixel-art poster system: rect-only pixel
+  scenes on an integer grid, giant white poster type in a sky field, quiet
+  captions on snow-white paper. Shader: pixel sky.
+- **[Benran](systems/benran/)** - stationery of emptiness: ink silhouettes on
+  hairline horizons, upright vertical type, one seal, emptiness as the primary
+  material. Shader: still water.
+- **[Sprout](systems/sprout/)** - pixel-prop UI kit: biscuit buttons with
+  pixel-step corners and one-pixel bevels, wooden signs, a flat board,
+  `steps()` motion only. Shader: furrow field.
+- **[Chaguan](systems/chaguan/)** - literati ink-painting clothes on plain
+  task-first UI: brush display type, solid-ink still lifes over a flat disc, a
+  seal as punctuation. Shader: ink wash.
 - **[Shimbun](systems/shimbun/)** - warm-paper editorial print system: one
   vermilion spot color, oversized tight headlines, hairline rules, mono
-  annotations, light + dark paper themes.
+  annotations. Shader: halftone press.
 
 ## Layout
 

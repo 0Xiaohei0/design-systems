@@ -1,20 +1,29 @@
-# BENRAN (本然)
+# BENRAN 本然
 
-Zen tea-ceremony identity system: vast paper-white emptiness, tiny ink tea-object
-silhouettes resting on a hairline horizon, vertical CJK type, and color spent one
-seal stamp at a time. An homage to a Sun Zhang tea-brand sheet
-("本然 x 東方禪意").
+A stationery language built from emptiness: vast paper, small ink objects
+resting on one hairline horizon, upright vertical type, and colour spent one
+seal at a time. Day and night themes, both hand-authored.
 
-Status: **Exploration**.
+Status: **Exploration**. Extracted from a one-page stationery study; this
+folder is the whole system.
 
 ## Contents
 
-- `DESIGN.md` - the durable spec: tokens, the emptiness rule, type voices,
-  motif vocabulary, component states, do/don't.
-- `css/benran-core.css` - tokens, primitives, and components (plain CSS).
-- `css/portal-card.css` - the system's card on the root portal (owned by the
-  portal task).
-- `index.html` - the catalog page: hero shelf, foundations, motifs, components,
-  and the poster/bookmark application gallery.
+- `DESIGN.md` - the spec: tokens, the emptiness rule, type voices, motif
+  vocabulary, component states, refusals. Read this first.
+- `index.html` - the catalog, following [`STANDARD.md`](../../STANDARD.md):
+  colour, type, space, form, motion, screen, components, motifs, one composed
+  specimen, and the rules. Theme toggle in the masthead.
+- `css/benran-core.css` - tokens (day + night), type voices, motifs,
+  components and sheets.
+- `css/catalog.css` - the catalog page and its spec furniture, set in the
+  system itself.
+- `css/portal-card.css` - the system's card on the root portal.
+- `js/stillwater.js` - the optional still-water shader. Enhancement only,
+  token-coloured, visibility-gated, and silent under reduced motion.
 
-All names, dates, and programs in the demo content are synthetic.
+## Fonts
+
+System stacks only (Songti SC / Palatino / Noto Serif CJK SC for the serif
+voice; Avenir Next / Futura / Century Gothic for captions). Nothing is
+vendored into this repo.

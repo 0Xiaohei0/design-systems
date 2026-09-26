@@ -1,36 +1,65 @@
-/* SPROUT - cozy farm-game pixel UI kit. Tokens, primitives, components.
+/* SPROUT - pixel-prop UI kit. Tokens, primitives, components.
    Construction law: no border-radius anywhere. Corners are clip-path step
    polygons at --px increments; outlines are 1-unit layers; depth is a 1-unit
-   bevel; motion is steps() only. See DESIGN.md. */
+   bevel; motion is steps() only. See DESIGN.md.
+
+   Themes: day (light) is the default. Night (dark) is hand-authored below and
+   reachable by OS preference or by an explicit data-theme on <html>. At night
+   the field goes dark and the pieces stay the colour of baked things, dimmed
+   as if lamplit - a piece is an object, and objects do not invert. */
 
 :root {
   --px: 3px;
 
-  --matcha: #b8cf70;
-  --matcha-deep: #a3bd5c;
-  --biscuit: #ecd7ab;
-  --cream: #f6ead0;
-  --biscuit-shade: #d9b98a;
-  --crust: #b08d62;
-  --cocoa: #6b5346;
-  --leaf: #9ac059;
-  --leaf-deep: #7da644;
-  --snow: #fdfdf5;
+  /* ---- ground: the board everything sits on ---- */
+  --ground: #b8cf70;
+  --ground-inset: #a3bd5c;
+  --ground-ink: #4f3b31;       /* text and glyphs set directly on the ground */
 
-  /* derived shades - contrast + cocoa bevels only (DESIGN.md) */
-  --cocoa-deep: #4f3b31;
-  --cocoa-soft: #7c6455;
-  --cocoa-light: #7d6252;
-  --cocoa-dark: #554136;
+  /* ---- piece: the raised, baked face of every control ---- */
+  --piece: #ecd7ab;
+  --piece-hi: #f6ead0;         /* top bevel, hover face, sheet face */
+  --piece-lo: #d9b98a;         /* bottom bevel, pressed face */
+  --piece-edge: #b08d62;       /* the 1-unit outline. Never small text. */
+  --glint: #fdfdf5;            /* brightest pixel: hover bevel, sprite highlight, text on alt and accent */
 
-  /* disabled ramp: desaturated biscuit */
-  --dough: #e7decb;
-  --dough-hi: #f1ebdd;
-  --dough-lo: #d2c7ae;
-  --dough-edge: #c4b499;
+  /* ---- alt: the dark counter-piece - secondary buttons, tracks, dashes ---- */
+  --alt: #6b5346;
+  --alt-hi: #7d6252;
+  --alt-lo: #554136;
+  --alt-glint: #8f7361;
 
+  /* ---- ink: text and glyphs on pieces and sheets ---- */
+  --ink: #6b5346;
+  --ink-soft: #7c6455;         /* placeholder and secondary text, sheet face only */
+
+  /* ---- accent: the living signal - on state, heading plates ---- */
+  --accent: #9ac059;
+  --accent-lo: #7da644;
+
+  /* ---- disabled: an unbaked piece ---- */
+  --disabled: #e7decb;
+  --disabled-hi: #f1ebdd;
+  --disabled-lo: #d2c7ae;
+  --disabled-edge: #c4b499;
+  --disabled-ink: #b08d62;
+
+  --focus: #6b5346;
+
+  /* ---- type ---- */
   --font-pixel: "Silkscreen", monospace;
   --font-body: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-code: ui-monospace, "Cascadia Mono", Menlo, Consolas, monospace;
+  --fs-hero: 40px;
+  --fs-title: 30px;
+  --fs-heading: 20px;
+  --fs-label: 15px;
+  --fs-caption: 10px;
+  --fs-body: 14px;
+
+  /* ---- motion: steps() only ---- */
+  --t-hop: 0.2s;               /* toggle knob, 2 steps */
+  --t-sway: 2.6s;              /* one hold of the tendril sway */
 
   /* the signature corner: a 2-unit staircase, 1 unit per step */
   --c1: var(--px);
@@ -59,25 +88,79 @@
   );
 }
 
+/* ---- night: the field goes dark, the pieces are lamplit ---- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #141d16;
+    --ground-inset: #0d140f;
+    --ground-ink: #eadfc4;
+    --piece: #d2b98b;
+    --piece-hi: #e2cfa6;
+    --piece-lo: #b89c6c;
+    --piece-edge: #94754f;
+    --glint: #fbf3df;
+    --alt: #80654f;
+    --alt-hi: #927561;
+    --alt-lo: #654f3f;
+    --alt-glint: #a58772;
+    --ink: #4a372c;
+    --ink-soft: #65503f;
+    --accent: #5f8a34;
+    --accent-lo: #4d7629;
+    --disabled: #4a4840;
+    --disabled-hi: #57554c;
+    --disabled-lo: #3d3b35;
+    --disabled-edge: #33312c;
+    --disabled-ink: #928c7b;
+    --focus: #80654f;
+  }
+}
+
+/* explicit choice wins in both directions */
+:root[data-theme="dark"] {
+  --ground: #141d16;
+  --ground-inset: #0d140f;
+  --ground-ink: #eadfc4;
+  --piece: #d2b98b;
+  --piece-hi: #e2cfa6;
+  --piece-lo: #b89c6c;
+  --piece-edge: #94754f;
+  --glint: #fbf3df;
+  --alt: #80654f;
+  --alt-hi: #927561;
+  --alt-lo: #654f3f;
+  --alt-glint: #a58772;
+  --ink: #4a372c;
+  --ink-soft: #65503f;
+  --accent: #5f8a34;
+  --accent-lo: #4d7629;
+  --disabled: #4a4840;
+  --disabled-hi: #57554c;
+  --disabled-lo: #3d3b35;
+  --disabled-edge: #33312c;
+  --disabled-ink: #928c7b;
+  --focus: #80654f;
+}
+
 /* ---------- base ---------- */
 
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
-  background: var(--matcha);
-  color: var(--cocoa-deep);
+  background: var(--ground);
+  color: var(--ground-ink);
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: var(--fs-body);
   line-height: 1.6;
 }
 
 p { margin: 0; }
 
-::selection { background: var(--cocoa); color: var(--cream); }
+::selection { background: var(--alt); color: var(--glint); }
 
 :where(a, button, input, select, textarea, [tabindex]):focus-visible {
-  outline: 2px solid var(--cocoa);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
 }
 
@@ -105,7 +188,7 @@ p { margin: 0; }
 .spr-plate {
   --c1: calc(var(--px) * 2);
   --c2: calc(var(--px) * 4);
-  background: var(--matcha-deep);
+  background: var(--ground-inset);
   clip-path: var(--clip-px);
   padding: calc(6 * var(--px));
 }
@@ -126,7 +209,7 @@ p { margin: 0; }
 
 .spr-btn-body {
   display: block;
-  background: var(--crust);
+  background: var(--piece-edge);
   clip-path: var(--clip-px);
   padding: var(--px);
 }
@@ -136,30 +219,30 @@ p { margin: 0; }
   align-items: center;
   justify-content: center;
   gap: calc(2 * var(--px));
-  background: var(--biscuit);
+  background: var(--piece);
   clip-path: var(--clip-px);
   box-shadow:
-    inset 0 var(--px) 0 0 var(--cream),
-    inset 0 calc(-1 * var(--px)) 0 0 var(--biscuit-shade);
+    inset 0 var(--px) 0 0 var(--piece-hi),
+    inset 0 calc(-1 * var(--px)) 0 0 var(--piece-lo);
   padding: calc(3 * var(--px)) calc(5 * var(--px));
   font-family: var(--font-pixel);
-  font-size: 15px;
+  font-size: var(--fs-label);
   line-height: 1.2;
   text-transform: uppercase;
-  color: var(--cocoa);
+  color: var(--ink);
 }
 
 .spr-btn:hover:not(:disabled):not(.is-pressed) .spr-btn-face,
 .spr-btn.is-hover .spr-btn-face {
-  background: var(--cream);
+  background: var(--piece-hi);
   box-shadow:
-    inset 0 var(--px) 0 0 var(--snow),
-    inset 0 calc(-1 * var(--px)) 0 0 var(--biscuit-shade);
+    inset 0 var(--px) 0 0 var(--glint),
+    inset 0 calc(-1 * var(--px)) 0 0 var(--piece-lo);
 }
 
 .spr-btn:active:not(:disabled) .spr-btn-face,
 .spr-btn.is-pressed .spr-btn-face {
-  background: var(--biscuit-shade);
+  background: var(--piece-lo);
   box-shadow: none;
 }
 
@@ -174,42 +257,42 @@ p { margin: 0; }
 }
 
 .spr-btn:disabled .spr-btn-body,
-.spr-btn.is-disabled .spr-btn-body { background: var(--dough-edge); }
+.spr-btn.is-disabled .spr-btn-body { background: var(--disabled-edge); }
 
 .spr-btn:disabled .spr-btn-face,
 .spr-btn.is-disabled .spr-btn-face {
-  background: var(--dough);
-  color: var(--crust);
+  background: var(--disabled);
+  color: var(--disabled-ink);
   box-shadow:
-    inset 0 var(--px) 0 0 var(--dough-hi),
-    inset 0 calc(-1 * var(--px)) 0 0 var(--dough-lo);
+    inset 0 var(--px) 0 0 var(--disabled-hi),
+    inset 0 calc(-1 * var(--px)) 0 0 var(--disabled-lo);
 }
 
 /* sizes */
-.spr-btn--sm .spr-btn-face { padding: calc(2 * var(--px)) calc(3 * var(--px)); font-size: 10px; }
-.spr-btn--lg .spr-btn-face { padding: calc(4 * var(--px)) calc(7 * var(--px)); font-size: 20px; }
+.spr-btn--sm .spr-btn-face { padding: calc(2 * var(--px)) calc(3 * var(--px)); font-size: var(--fs-caption); }
+.spr-btn--lg .spr-btn-face { padding: calc(4 * var(--px)) calc(7 * var(--px)); font-size: var(--fs-heading); }
 .spr-btn--icon .spr-btn-face { padding: calc(2 * var(--px)); }
 .spr-btn--wide { display: block; width: 100%; }
 
-/* cocoa (dark) variant */
-.spr-btn--cocoa .spr-btn-body { background: var(--cocoa-dark); }
-.spr-btn--cocoa .spr-btn-face {
-  background: var(--cocoa);
-  color: var(--snow);
+/* alt variant: the dark counter-piece */
+.spr-btn--alt .spr-btn-body { background: var(--alt-lo); }
+.spr-btn--alt .spr-btn-face {
+  background: var(--alt);
+  color: var(--glint);
   box-shadow:
-    inset 0 var(--px) 0 0 var(--cocoa-light),
-    inset 0 calc(-1 * var(--px)) 0 0 var(--cocoa-dark);
+    inset 0 var(--px) 0 0 var(--alt-hi),
+    inset 0 calc(-1 * var(--px)) 0 0 var(--alt-lo);
 }
-.spr-btn--cocoa:hover:not(:disabled):not(.is-pressed) .spr-btn-face,
-.spr-btn--cocoa.is-hover .spr-btn-face {
-  background: var(--cocoa-light);
+.spr-btn--alt:hover:not(:disabled):not(.is-pressed) .spr-btn-face,
+.spr-btn--alt.is-hover .spr-btn-face {
+  background: var(--alt-hi);
   box-shadow:
-    inset 0 var(--px) 0 0 #8f7361,
-    inset 0 calc(-1 * var(--px)) 0 0 var(--cocoa-dark);
+    inset 0 var(--px) 0 0 var(--alt-glint),
+    inset 0 calc(-1 * var(--px)) 0 0 var(--alt-lo);
 }
-.spr-btn--cocoa:active:not(:disabled) .spr-btn-face,
-.spr-btn--cocoa.is-pressed .spr-btn-face {
-  background: var(--cocoa-dark);
+.spr-btn--alt:active:not(:disabled) .spr-btn-face,
+.spr-btn--alt.is-pressed .spr-btn-face {
+  background: var(--alt-lo);
   box-shadow: none;
 }
 
@@ -225,6 +308,9 @@ p { margin: 0; }
 .spr-i--2 { width: 32px; height: 32px; }   /* fixed 2px cell for compact spots */
 .spr-i--8 { width: calc(8 * var(--px)); height: calc(8 * var(--px)); }
 
+/* the highlight pixels inside a two-tone sprite */
+.spr-glint { fill: var(--glint); }
+
 .spr-rot90  { transform: rotate(90deg); }
 .spr-rot180 { transform: rotate(180deg); }
 .spr-rot270 { transform: rotate(270deg); }
@@ -238,15 +324,15 @@ p { margin: 0; }
 
 .spr-sign-shell {
   display: block;
-  background: var(--leaf-deep);
+  background: var(--accent-lo);
   clip-path: var(--clip-px);
   padding: var(--px);
   padding-bottom: calc(2 * var(--px)); /* bottom shade */
 }
 
-.spr-sign-snow {
+.spr-sign-rim {
   display: block;
-  background: var(--snow);
+  background: var(--glint);
   clip-path: var(--clip-px);
   padding: var(--px);
 }
@@ -254,28 +340,28 @@ p { margin: 0; }
 .spr-sign-face {
   display: block;
   margin: 0; /* signs carry headings */
-  background: var(--leaf);
+  background: var(--accent);
   clip-path: var(--clip-px);
   padding: calc(2 * var(--px)) calc(5 * var(--px));
   font-family: var(--font-pixel);
   font-weight: 700;
-  font-size: 20px;
+  font-size: var(--fs-heading);
   line-height: 1.2;
   text-transform: uppercase;
   text-align: center;
-  color: var(--snow);
+  color: var(--glint);
 }
 
 .spr-sign--big .spr-sign-shell { --c1: calc(var(--px) * 2); --c2: calc(var(--px) * 4); }
 .spr-sign--big .spr-sign-face {
   --c1: calc(var(--px) * 2);
   --c2: calc(var(--px) * 4);
-  font-size: 40px;
+  font-size: var(--fs-hero);
   padding: calc(4 * var(--px)) calc(8 * var(--px));
 }
 .spr-sign--big .spr-sign-face small {
   display: block;
-  font-size: 20px;
+  font-size: var(--fs-heading);
   font-weight: 700;
 }
 
@@ -286,20 +372,27 @@ p { margin: 0; }
   width: calc(12 * var(--px));
   height: calc(12 * var(--px));
   top: calc(-10 * var(--px));
-  color: var(--leaf-deep);
-  animation: spr-sway 2.6s steps(1) infinite alternate;
+  color: var(--accent-lo);
+  /* one full cycle is two holds: left for --t-sway, right for --t-sway */
+  animation: spr-sway calc(var(--t-sway) * 2) steps(1) infinite;
 }
 .spr-tendril--l { left: calc(-3 * var(--px)); }
-.spr-tendril--r { right: calc(-3 * var(--px)); transform: scaleX(-1); }
-.spr-tendril--r svg { animation-delay: 1.3s; }
-
-/* sway rides the translate property so scaleX(-1) mirroring stays intact */
-@keyframes spr-sway {
-  from { translate: calc(-1 * var(--px)) 0; }
-  to   { translate: var(--px) 0; }
+.spr-tendril--r {
+  right: calc(-3 * var(--px));
+  transform: scaleX(-1);
+  animation-delay: calc(var(--t-sway) * -1); /* out of phase with the left one */
 }
 
-/* ---------- settings panel ---------- */
+/* Sway rides the translate property so the scaleX(-1) mirror stays intact.
+   Explicit holds, not `alternate`: steps(1) played in reverse never leaves its
+   first keyframe, so an alternating sway silently stands still. */
+@keyframes spr-sway {
+  0%   { translate: calc(-1 * var(--px)) 0; }
+  50%  { translate: var(--px) 0; }
+  100% { translate: var(--px) 0; }
+}
+
+/* ---------- panel ---------- */
 
 .spr-panel {
   position: relative;
@@ -310,7 +403,7 @@ p { margin: 0; }
   display: block;
   --c1: calc(var(--px) * 2);
   --c2: calc(var(--px) * 4);
-  background: var(--crust);
+  background: var(--piece-edge);
   clip-path: var(--clip-px);
   padding: var(--px);
   padding-bottom: calc(2 * var(--px));
@@ -320,19 +413,19 @@ p { margin: 0; }
   display: block;
   --c1: calc(var(--px) * 2);
   --c2: calc(var(--px) * 4);
-  background: var(--cream);
+  background: var(--piece-hi);
   clip-path: var(--clip-px);
   padding: calc(6 * var(--px));
-  color: var(--cocoa);
+  color: var(--ink);
 }
 
 .spr-panel-title {
   font-family: var(--font-pixel);
   font-weight: 700;
-  font-size: 15px;
+  font-size: var(--fs-label);
   line-height: 1.2;
   text-transform: uppercase;
-  color: var(--cocoa);
+  color: var(--ink);
   margin: 0 0 calc(4 * var(--px));
 }
 
@@ -349,18 +442,18 @@ p { margin: 0; }
   padding: calc(2 * var(--px)) 0;
 }
 
-.spr-row .spr-i { color: var(--cocoa); flex: none; }
+.spr-row .spr-i { color: var(--ink); flex: none; }
 
 /* rows swap their sprite when the toggle flips */
-.spr-row:has(input:checked) .i-when-off { display: none; }
-.spr-row:not(:has(input:checked)) .i-when-on { display: none; }
+.spr-row:has(input:checked) .spr-when-off { display: none; }
+.spr-row:not(:has(input:checked)) .spr-when-on { display: none; }
 
 .spr-row-label {
   font-family: var(--font-pixel);
-  font-size: 10px;
+  font-size: var(--fs-caption);
   line-height: 1.2;
   text-transform: uppercase;
-  color: var(--cocoa);
+  color: var(--ink);
 }
 
 /* ---------- toggle ---------- */
@@ -372,7 +465,7 @@ p { margin: 0; }
 
 .spr-toggle-outline {
   display: block;
-  background: var(--cocoa-dark);
+  background: var(--alt-lo);
   clip-path: var(--clip-px);
   padding: var(--px);
 }
@@ -382,7 +475,7 @@ p { margin: 0; }
   display: block;
   width: calc(18 * var(--px));
   height: calc(8 * var(--px));
-  background: var(--cocoa);
+  background: var(--alt);
   clip-path: var(--clip-px);
 }
 
@@ -392,33 +485,34 @@ p { margin: 0; }
   left: var(--px);
   width: calc(6 * var(--px));
   height: calc(6 * var(--px));
-  background: var(--crust);
+  background: var(--piece-edge);
   clip-path: var(--clip-px);
-  transition: transform 0.2s steps(2); /* the knob hops across in 2 steps */
+  transition: transform var(--t-hop) steps(2); /* the knob hops across in 2 steps */
 }
 
 .spr-toggle-knob::after {
   content: "";
   position: absolute;
   inset: var(--px);
-  background: var(--biscuit);
+  background: var(--piece);
   clip-path: var(--clip-px);
 }
 
-.spr-toggle input:checked + .spr-toggle-outline .spr-toggle-track { background: var(--leaf); }
+.spr-toggle input:checked + .spr-toggle-outline .spr-toggle-track { background: var(--accent); }
 .spr-toggle input:checked + .spr-toggle-outline .spr-toggle-knob {
   transform: translateX(calc(10 * var(--px)));
 }
 
 .spr-toggle input:focus-visible + .spr-toggle-outline {
-  outline: 2px solid var(--cocoa);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
 }
 
-.spr-toggle input:disabled + .spr-toggle-outline { cursor: not-allowed; }
-.spr-toggle input:disabled + .spr-toggle-outline .spr-toggle-track { background: var(--dough-lo); }
-.spr-toggle input:disabled + .spr-toggle-outline .spr-toggle-knob { background: var(--dough-edge); }
-.spr-toggle input:disabled + .spr-toggle-outline .spr-toggle-knob::after { background: var(--dough); }
+.spr-toggle:has(input:disabled) { cursor: not-allowed; }
+.spr-toggle input:disabled + .spr-toggle-outline { background: var(--disabled-edge); }
+.spr-toggle input:disabled + .spr-toggle-outline .spr-toggle-track { background: var(--disabled-lo); }
+.spr-toggle input:disabled + .spr-toggle-outline .spr-toggle-knob { background: var(--disabled-edge); }
+.spr-toggle input:disabled + .spr-toggle-outline .spr-toggle-knob::after { background: var(--disabled); }
 
 /* ---------- checkbox ---------- */
 
@@ -427,12 +521,12 @@ p { margin: 0; }
   align-items: center;
   gap: calc(3 * var(--px));
   cursor: pointer;
-  color: var(--cocoa);
+  color: inherit; /* the label takes the ink of the surface it sits on */
 }
 
 .spr-check-box {
   display: block;
-  background: var(--crust);
+  background: var(--piece-edge);
   clip-path: var(--clip-px);
   padding: var(--px);
 }
@@ -443,33 +537,33 @@ p { margin: 0; }
   justify-content: center;
   width: calc(10 * var(--px));
   height: calc(10 * var(--px));
-  background: var(--biscuit);
+  background: var(--piece);
   clip-path: var(--clip-px);
   box-shadow:
-    inset 0 var(--px) 0 0 var(--cream),
-    inset 0 calc(-1 * var(--px)) 0 0 var(--biscuit-shade);
-  color: var(--cocoa);
+    inset 0 var(--px) 0 0 var(--piece-hi),
+    inset 0 calc(-1 * var(--px)) 0 0 var(--piece-lo);
+  color: var(--ink);
 }
 
 .spr-check-face .spr-i--8 { display: none; }
 .spr-check input:checked + .spr-check-box .spr-i--8 { display: block; }
 .spr-check input:focus-visible + .spr-check-box {
-  outline: 2px solid var(--cocoa);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
 }
-.spr-check input:disabled ~ * { cursor: not-allowed; }
-.spr-check input:disabled + .spr-check-box { background: var(--dough-edge); }
+.spr-check:has(input:disabled) { cursor: not-allowed; }
+.spr-check input:disabled + .spr-check-box { background: var(--disabled-edge); }
 .spr-check input:disabled + .spr-check-box .spr-check-face {
-  background: var(--dough);
+  background: var(--disabled);
   box-shadow:
-    inset 0 var(--px) 0 0 var(--dough-hi),
-    inset 0 calc(-1 * var(--px)) 0 0 var(--dough-lo);
-  color: var(--crust);
+    inset 0 var(--px) 0 0 var(--disabled-hi),
+    inset 0 calc(-1 * var(--px)) 0 0 var(--disabled-lo);
+  color: var(--disabled-ink);
 }
 
 .spr-check-text {
   font-family: var(--font-pixel);
-  font-size: 10px;
+  font-size: var(--fs-caption);
   line-height: 1.2;
   text-transform: uppercase;
 }
@@ -477,18 +571,18 @@ p { margin: 0; }
 /* ---------- radio / pagination as seed dots ---------- */
 
 /* two-tone seed: --seed-meat inherits across the <use> shadow boundary */
-.spr-seed-dot { color: var(--crust); --seed-meat: var(--biscuit); }
-.spr-radio input:checked + .spr-seed-dot { color: var(--cocoa-dark); --seed-meat: var(--cocoa); }
+.spr-seed-dot { color: var(--piece-edge); --seed-meat: var(--piece); }
+.spr-radio input:checked + .spr-seed-dot { color: var(--alt-lo); --seed-meat: var(--alt); }
 
 .spr-radio {
   display: inline-flex;
   align-items: center;
   gap: calc(2 * var(--px));
   cursor: pointer;
-  color: var(--cocoa);
+  color: inherit; /* the label takes the ink of the surface it sits on */
 }
 .spr-radio input:focus-visible + .spr-seed-dot {
-  outline: 2px solid var(--cocoa);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
 }
 
@@ -505,8 +599,8 @@ p { margin: 0; }
   display: block;
 }
 .spr-pager button[aria-current="page"] .spr-seed-dot {
-  color: var(--cocoa-dark);
-  --seed-meat: var(--cocoa);
+  color: var(--alt-lo);
+  --seed-meat: var(--alt);
 }
 
 /* ---------- segment bar ---------- */
@@ -522,8 +616,8 @@ p { margin: 0; }
   width: calc(3 * var(--px));
   height: calc(8 * var(--px));
 }
-.spr-seg i.on  { background: var(--cocoa); }
-.spr-seg i.off { box-shadow: inset 0 0 0 var(--px) var(--cocoa); }
+.spr-seg i.on  { background: var(--alt); }
+.spr-seg i.off { box-shadow: inset 0 0 0 var(--px) var(--alt); }
 
 /* ---------- sliders ---------- */
 
@@ -549,9 +643,9 @@ p { margin: 0; }
   width: calc(6 * var(--px));
   height: calc(10 * var(--px));
   margin-top: calc(-3 * var(--px));
-  background: var(--biscuit);
+  background: var(--piece);
   clip-path: var(--clip-px);
-  box-shadow: inset 0 0 0 var(--px) var(--crust);
+  box-shadow: inset 0 0 0 var(--px) var(--piece-edge);
 }
 
 .spr-range::-moz-range-track {
@@ -562,9 +656,9 @@ p { margin: 0; }
   border: 0;
   width: calc(6 * var(--px));
   height: calc(10 * var(--px));
-  background: var(--biscuit);
+  background: var(--piece);
   clip-path: var(--clip-px);
-  box-shadow: inset 0 0 0 var(--px) var(--crust);
+  box-shadow: inset 0 0 0 var(--px) var(--piece-edge);
 }
 
 .spr-range--v {
@@ -586,7 +680,7 @@ p { margin: 0; }
 .spr-range--v::-moz-range-track { width: calc(4 * var(--px)); height: 100%; }
 .spr-range--v::-moz-range-thumb { width: calc(10 * var(--px)); height: calc(6 * var(--px)); }
 
-/* rail: draws the cocoa plank under a transparent-tracked input */
+/* rail: draws the alt plank under a transparent-tracked input */
 .spr-rail { position: relative; display: inline-block; }
 .spr-rail::before {
   content: "";
@@ -598,7 +692,7 @@ p { margin: 0; }
   top: 50%;
   margin-top: calc(-2 * var(--px));
   height: calc(4 * var(--px));
-  background: var(--cocoa);
+  background: var(--alt);
   clip-path: var(--clip-px);
 }
 .spr-rail--v::before {
@@ -640,24 +734,25 @@ p { margin: 0; }
 
 .spr-tip-shell {
   display: block;
-  background: var(--crust);
+  background: var(--piece-edge);
   clip-path: var(--clip-px);
   padding: var(--px);
 }
 
 .spr-tip-face {
   display: block;
-  background: var(--biscuit);
+  background: var(--piece);
   clip-path: var(--clip-px);
   padding: calc(2 * var(--px)) calc(3 * var(--px));
   font-family: var(--font-pixel);
-  font-size: 10px;
+  font-size: var(--fs-caption);
   line-height: 1.2;
   text-transform: uppercase;
-  color: var(--cocoa);
+  color: var(--ink);
 }
 
-/* pixel-step tail: one 1-unit cell plus stacked box-shadow pixels */
+/* pixel-step tail: one 1-unit cell plus stacked box-shadow pixels. It is a
+   sibling of the shell, not a child - the shell's clip-path would cut it off. */
 .spr-tip-tail {
   position: absolute;
   left: 50%;
@@ -665,16 +760,16 @@ p { margin: 0; }
   margin-left: calc(-0.5 * var(--px));
   width: var(--px);
   height: var(--px);
-  background: var(--biscuit);
+  background: var(--piece);
   box-shadow:
-    calc(-2 * var(--px)) calc(-1 * var(--px)) 0 0 var(--crust),
-    calc(-1 * var(--px)) calc(-1 * var(--px)) 0 0 var(--biscuit),
-    0 calc(-1 * var(--px)) 0 0 var(--biscuit),
-    var(--px) calc(-1 * var(--px)) 0 0 var(--biscuit),
-    calc(2 * var(--px)) calc(-1 * var(--px)) 0 0 var(--crust),
-    calc(-1 * var(--px)) 0 0 0 var(--crust),
-    var(--px) 0 0 0 var(--crust),
-    0 var(--px) 0 0 var(--crust);
+    calc(-2 * var(--px)) calc(-1 * var(--px)) 0 0 var(--piece-edge),
+    calc(-1 * var(--px)) calc(-1 * var(--px)) 0 0 var(--piece),
+    0 calc(-1 * var(--px)) 0 0 var(--piece),
+    var(--px) calc(-1 * var(--px)) 0 0 var(--piece),
+    calc(2 * var(--px)) calc(-1 * var(--px)) 0 0 var(--piece-edge),
+    calc(-1 * var(--px)) 0 0 0 var(--piece-edge),
+    var(--px) 0 0 0 var(--piece-edge),
+    0 var(--px) 0 0 var(--piece-edge);
 }
 
 /* hover/focus tooltip on demand */
@@ -686,14 +781,14 @@ p { margin: 0; }
 
 .spr-field {
   display: inline-block;
-  background: var(--crust);
+  background: var(--piece-edge);
   clip-path: var(--clip-px);
   padding: var(--px);
 }
 
 .spr-field-wrap { display: inline-block; }
 .spr-field-wrap:focus-within {
-  outline: 2px solid var(--cocoa);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
 }
 
@@ -701,18 +796,18 @@ p { margin: 0; }
   display: block;
   border: 0;
   outline: none;
-  background: var(--cream);
+  background: var(--piece-hi);
   clip-path: var(--clip-px);
-  box-shadow: inset 0 var(--px) 0 0 var(--biscuit-shade); /* inset lip: dug into the biscuit */
+  box-shadow: inset 0 var(--px) 0 0 var(--piece-lo); /* inset lip: dug into the piece */
   padding: calc(2 * var(--px)) calc(3 * var(--px));
   font-family: var(--font-body);
-  font-size: 14px;
-  color: var(--cocoa);
-  caret-color: var(--cocoa);
+  font-size: var(--fs-body);
+  color: var(--ink);
+  caret-color: var(--ink);
   width: calc(60 * var(--px));
   max-width: 100%;
 }
-.spr-input::placeholder { color: var(--cocoa-soft); opacity: 1; }
+.spr-input::placeholder { color: var(--ink-soft); opacity: 1; }
 
 /* ---------- D-pad cluster ---------- */
 
@@ -723,9 +818,10 @@ p { margin: 0; }
   width: -moz-fit-content;
   width: fit-content;
 }
-.spr-dpad .pad-c { /* empty grid filler: the cluster reads as a plus shape */ }
+/* empty grid filler: the four corners stay open so the cluster reads as a plus */
+.spr-dpad .spr-pad-gap { display: block; }
 
-/* ---------- seed packet (palette chip) ---------- */
+/* ---------- swatch packet (palette chip) ---------- */
 
 .spr-packet {
   border: 0;
@@ -738,39 +834,42 @@ p { margin: 0; }
 }
 .spr-packet-shell {
   display: block;
-  background: var(--crust);
+  background: var(--piece-edge);
   clip-path: var(--clip-px);
   padding: var(--px);
 }
 .spr-packet-face {
   display: block;
-  background: var(--cream);
+  background: var(--piece-hi);
   clip-path: var(--clip-px);
   padding: calc(2 * var(--px));
   width: calc(36 * var(--px));
 }
+/* the swatch is framed by a 1-unit piece-lo edge; one <i> per colour inside */
 .spr-packet-swatch {
-  display: block;
+  display: flex;
   height: calc(14 * var(--px));
+  background: var(--piece-lo);
   clip-path: var(--clip-px);
-  box-shadow: inset 0 0 0 var(--px) var(--biscuit-shade);
+  padding: var(--px);
 }
+.spr-packet-swatch i { flex: 1; display: block; }
 .spr-packet-name {
   display: block;
   font-family: var(--font-pixel);
-  font-size: 10px;
+  font-size: var(--fs-caption);
   line-height: 1.2;
   text-transform: uppercase;
-  color: var(--cocoa);
+  color: var(--ink);
   margin-top: calc(2 * var(--px));
 }
 .spr-packet-hex {
   display: block;
   font-family: var(--font-pixel);
-  font-size: 10px;
+  font-size: var(--fs-caption);
   line-height: 1.2;
   text-transform: uppercase;
-  color: var(--cocoa-soft);
+  color: var(--ink-soft);
 }
 
 /* ---------- shared motion switch ---------- */

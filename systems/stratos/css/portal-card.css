@@ -1,7 +1,8 @@
 /*
 Stratos's entrance card on the root portal. Scoped to .sys-str; loaded by the
-portal only. Mirrors the Stratos tokens by value: black glass, white signal,
-one hot orange; underscore labels, hazard stripe, feed row, blinking live dot.
+portal only. Mirrors the black-glass tokens by value (--ground, --ink,
+--ink-dim, --signal, --hairline); underscore labels, hazard stripe, feed row,
+blinking live dot.
 Flat marks only - no glow, no radius, no gradient fills beyond the stripe.
 */
 

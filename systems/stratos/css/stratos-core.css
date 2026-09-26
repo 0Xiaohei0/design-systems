@@ -1,16 +1,78 @@
 /* STRATOS core - tokens, primitives, marks, components. Flat FUI: no glow,
-   no blur, no radius, no gradient fades (hazard stripes are hard-stop strips). */
+   no blur, no radius, no gradient fades (hazard stripes are hard-stop strips).
+
+   Two grounds. Black glass is the authored default and lives on bare :root;
+   daylight glass is the same two neutrals swapped with the signal hue re-cut
+   for a light ground. An OS light preference reaches daylight, and an explicit
+   data-theme wins in both directions. */
 
 :root {
-  --void: #0b0b0b;
+  /* ---- black glass (default) ---- */
+  --ground: #0b0b0b;
   --panel: #151515;
-  --signal: #f4f2ee;
-  --dim: #9b9b9b;
-  --alert: #ff6a00;
+  --ink: #f4f2ee;
+  --ink-dim: #9b9b9b;
+  --signal: #ff6a00;
   --hairline: rgba(244, 242, 238, 0.22);
+  --on-ink: #0b0b0b;
+  --on-signal: #0b0b0b;
+  color-scheme: dark;
 
+  /* ---- type ---- */
   --font-display: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --num-xl: clamp(64px, 9vw, 116px);
+  --num-lg: 56px;
+  --num-md: 44px;
+
+  /* ---- layout ---- */
+  --measure: 1240px;
+  --gutter: 24px;
+  --section-gap: 64px;
+
+  /* ---- motion: two authored moments, everything else flips ---- */
+  --t-blink: 1.4s;
+  --t-scan: 8s;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    /* daylight glass */
+    --ground: #f4f2ee;
+    --panel: #e8e5de;
+    --ink: #0b0b0b;
+    --ink-dim: #595959;
+    --signal: #b84300;
+    --hairline: rgba(11, 11, 11, 0.22);
+    --on-ink: #f4f2ee;
+    --on-signal: #f4f2ee;
+    color-scheme: light;
+  }
+}
+
+/* explicit choice wins in both directions - the catalog has a toggle */
+:root[data-theme="light"] {
+  --ground: #f4f2ee;
+  --panel: #e8e5de;
+  --ink: #0b0b0b;
+  --ink-dim: #595959;
+  --signal: #b84300;
+  --hairline: rgba(11, 11, 11, 0.22);
+  --on-ink: #f4f2ee;
+  --on-signal: #f4f2ee;
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --ground: #0b0b0b;
+  --panel: #151515;
+  --ink: #f4f2ee;
+  --ink-dim: #9b9b9b;
+  --signal: #ff6a00;
+  --hairline: rgba(244, 242, 238, 0.22);
+  --on-ink: #0b0b0b;
+  --on-signal: #0b0b0b;
+  color-scheme: dark;
 }
 
 * {
@@ -20,12 +82,12 @@
 }
 
 html {
-  background: var(--void);
+  background: var(--ground);
 }
 
 body {
-  background: var(--void);
-  color: var(--signal);
+  background: var(--ground);
+  color: var(--ink);
   font-family: var(--font-mono);
   font-size: 11px;
   line-height: 1.5;
@@ -33,12 +95,12 @@ body {
 }
 
 ::selection {
-  background: var(--alert);
-  color: #0b0b0b;
+  background: var(--signal);
+  color: var(--on-signal);
 }
 
 :focus-visible {
-  outline: 2px solid var(--alert);
+  outline: 2px solid var(--signal);
   outline-offset: 2px;
 }
 
@@ -49,7 +111,7 @@ svg {
 }
 
 a {
-  color: var(--signal);
+  color: var(--ink);
 }
 
 /* ---------- type voices ---------- */
@@ -85,12 +147,12 @@ a {
   font-size: 9px;
   line-height: 1.6;
   letter-spacing: 0.02em;
-  color: var(--dim);
+  color: var(--ink-dim);
   text-transform: uppercase;
 }
 
-.ink-dim { color: var(--dim); }
-.ink-alert { color: var(--alert); } /* 14px+ bold only on dark grounds */
+.ink-dim { color: var(--ink-dim); }
+.ink-signal { color: var(--signal); } /* 14px+ bold only */
 
 /* ---------- marks: chips ---------- */
 
@@ -106,32 +168,32 @@ a {
   border: 1px solid transparent;
 }
 
-.s-chip--white {
-  background: var(--signal);
-  border-color: var(--signal);
-  color: #0b0b0b;
+.s-chip--ink {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--on-ink);
 }
 
-.s-chip--alert {
-  background: var(--alert);
-  border-color: var(--alert);
-  color: #0b0b0b;
+.s-chip--signal {
+  background: var(--signal);
+  border-color: var(--signal);
+  color: var(--on-signal);
 }
 
 .s-chip--outline {
-  border-color: var(--signal);
-  color: var(--signal);
+  border-color: var(--ink);
+  color: var(--ink);
 }
 
 .s-chip--ghost {
   border-color: var(--hairline);
-  color: var(--dim);
+  color: var(--ink-dim);
 }
 
-/* status chips: orange = live, white = ready, outline+dim = inactive */
+/* status chips: signal = live, ink = ready, ghost = inactive */
 .s-status { display: inline-flex; align-items: center; gap: 6px; }
 .s-status .dot { width: 6px; height: 6px; background: currentColor; }
-.s-status.is-active .dot { animation: s-blink 1.4s steps(1, end) infinite; }
+.s-status.is-active .dot { animation: s-blink var(--t-blink) steps(1, end) infinite; }
 
 /* ---------- marks: hazard stripe ---------- */
 
@@ -139,10 +201,10 @@ a {
   height: 10px;
   background: repeating-linear-gradient(
     -45deg,
-    var(--alert) 0,
-    var(--alert) 8px,
-    var(--void) 8px,
-    var(--void) 16px
+    var(--signal) 0,
+    var(--signal) 8px,
+    var(--ground) 8px,
+    var(--ground) 16px
   );
 }
 
@@ -163,7 +225,7 @@ a {
   top: -3px;
   width: 1px;
   height: 7px;
-  background: var(--signal);
+  background: var(--ink);
 }
 
 .s-rule::before { left: 0; }
@@ -184,7 +246,7 @@ a {
   position: absolute;
   width: 12px;
   height: 12px;
-  border: 0 solid var(--signal);
+  border: 0 solid var(--ink);
   pointer-events: none;
 }
 
@@ -199,11 +261,11 @@ a {
   display: inline-block;
   width: 8px;
   height: 8px;
-  background: var(--alert);
+  background: var(--signal);
   flex: none;
 }
 
-.s-square--signal { background: var(--signal); }
+.s-square--ink { background: var(--ink); }
 .s-square--outline { background: none; border: 1px solid var(--hairline); }
 .s-square--lg { width: 14px; height: 14px; }
 
@@ -213,7 +275,7 @@ a {
   width: 9px;
   height: 9px;
   flex: none;
-  color: var(--dim);
+  color: var(--ink-dim);
 }
 
 .s-cross::before,
@@ -233,17 +295,17 @@ a {
   flex: none;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  border-top: 7px solid var(--signal);
+  border-top: 7px solid var(--ink);
 }
 
-.s-tri--alert { border-top-color: var(--alert); }
+.s-tri--signal { border-top-color: var(--signal); }
 .s-tri--right {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
-  border-left: 7px solid var(--signal);
+  border-left: 7px solid var(--ink);
   border-right: 0;
 }
-.s-tri--right.s-tri--alert { border-left-color: var(--alert); border-top-color: transparent; }
+.s-tri--right.s-tri--signal { border-left-color: var(--signal); border-top-color: transparent; }
 
 /* ---------- marks: segmented bar ---------- */
 
@@ -260,13 +322,13 @@ a {
 }
 
 .s-seg i.on {
-  background: var(--signal);
-  border-color: var(--signal);
+  background: var(--ink);
+  border-color: var(--ink);
 }
 
-.s-seg--alert i.on {
-  background: var(--alert);
-  border-color: var(--alert);
+.s-seg--signal i.on {
+  background: var(--signal);
+  border-color: var(--signal);
 }
 
 .s-seg--tall i { height: 22px; }
@@ -281,7 +343,10 @@ a {
   font-variant-numeric: tabular-nums;
 }
 
-.s-num--alert { color: var(--alert); }
+.s-num--xl { font-size: var(--num-xl); }
+.s-num--lg { font-size: var(--num-lg); }
+.s-num--md { font-size: var(--num-md); }
+.s-num--signal { color: var(--signal); }
 
 /* ---------- marks: schematic placeholder ---------- */
 
@@ -309,7 +374,7 @@ a {
   right: 4px;
   width: 8px;
   height: 8px;
-  background: var(--alert);
+  background: var(--signal);
 }
 
 /* ---------- marks: feed rows ---------- */
@@ -355,9 +420,9 @@ a {
   font-variant-numeric: tabular-nums;
 }
 
-.s-feed .val.ink-alert {
+.s-feed .val.ink-signal {
   font-weight: 700;
-  font-size: 14px; /* orange on black floor: 14px bold */
+  font-size: 14px; /* signal text floor: 14px bold */
   line-height: 1;
   align-self: center;
 }
@@ -372,7 +437,7 @@ a {
   line-height: 1;
   background: none;
   border: none;
-  color: var(--signal);
+  color: var(--ink);
   padding: 6px 4px;
   cursor: pointer;
   display: inline-flex;
@@ -391,17 +456,18 @@ a {
 
 .s-btn--bracket:hover:not(:disabled) {
   background: var(--panel);
-  border-color: var(--signal);
+  border-color: var(--ink);
 }
 
 .s-btn--solid {
-  background: var(--signal);
-  color: #0b0b0b;
+  background: var(--ink);
+  color: var(--on-ink);
   padding: 8px 14px;
 }
 
 .s-btn--solid:hover:not(:disabled) {
-  background: var(--alert);
+  background: var(--signal);
+  color: var(--on-signal);
 }
 
 .s-btn:active:not(:disabled) {
@@ -409,7 +475,7 @@ a {
 }
 
 .s-btn:disabled {
-  color: var(--dim);
+  color: var(--ink-dim);
   background: none;
   border: 1px dashed var(--hairline);
   cursor: not-allowed;
@@ -420,7 +486,7 @@ a {
   padding: 6px 8px;
 }
 
-/* ---------- components: toggle pair (UPLOAD / DOWNLOAD ticks) ---------- */
+/* ---------- components: toggle pair (paired ticks) ---------- */
 
 .s-toggle {
   display: inline-flex;
@@ -436,7 +502,7 @@ a {
   font-size: 10px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--dim);
+  color: var(--ink-dim);
   cursor: pointer;
   position: relative;
 }
@@ -457,16 +523,16 @@ a {
 }
 
 .s-toggle input:checked ~ .tick {
-  background: var(--alert);
-  border-color: var(--alert);
+  background: var(--signal);
+  border-color: var(--signal);
 }
 
 .s-toggle input:checked ~ .txt {
-  color: var(--signal);
+  color: var(--ink);
 }
 
 .s-toggle input:focus-visible ~ .tick {
-  outline: 2px solid var(--alert);
+  outline: 2px solid var(--signal);
   outline-offset: 2px;
 }
 
@@ -479,7 +545,7 @@ a {
 .s-field .flabel {
   display: block;
   margin-bottom: 5px;
-  color: var(--dim);
+  color: var(--ink-dim);
 }
 
 .s-input {
@@ -489,30 +555,30 @@ a {
   background: none;
   border: none;
   border-bottom: 1px solid var(--hairline);
-  color: var(--signal);
+  color: var(--ink);
   padding: 5px 2px;
   width: 100%;
-  caret-color: var(--alert);
+  caret-color: var(--signal);
   text-transform: uppercase;
 }
 
 .s-input::placeholder {
-  color: var(--dim);
+  color: var(--ink-dim);
   opacity: 1;
 }
 
 .s-input:focus {
-  border-bottom-color: var(--signal);
+  border-bottom-color: var(--ink);
   outline: none;
 }
 
 .s-input:focus-visible {
-  outline: 2px solid var(--alert);
+  outline: 2px solid var(--signal);
   outline-offset: 2px;
 }
 
 .s-input:disabled {
-  color: var(--dim);
+  color: var(--ink-dim);
   border-bottom-style: dashed;
   cursor: not-allowed;
 }
@@ -522,9 +588,9 @@ a {
   display: inline-block;
   width: 7px;
   height: 12px;
-  background: var(--alert);
+  background: var(--signal);
   vertical-align: -2px;
-  animation: s-blink 1.4s steps(1, end) infinite;
+  animation: s-blink var(--t-blink) steps(1, end) infinite;
 }
 
 /* ---------- motion ---------- */
@@ -535,7 +601,7 @@ a {
   100% { opacity: 1; }
 }
 
-/* flat scan column sweeping a .s-scan-host once per ~8s */
+/* flat scan column sweeping a .s-scan-host once per --t-scan */
 .s-scan-host {
   position: relative;
   overflow: hidden;
@@ -547,10 +613,10 @@ a {
   bottom: 0;
   left: -18%;
   width: 90px;
-  background: rgba(244, 242, 238, 0.05);
-  border-right: 1px solid rgba(255, 106, 0, 0.35);
+  background: color-mix(in srgb, var(--ink) 5%, transparent);
+  border-right: 1px solid color-mix(in srgb, var(--signal) 35%, transparent);
   pointer-events: none;
-  animation: s-scan 8s linear infinite;
+  animation: s-scan var(--t-scan) linear infinite;
 }
 
 @keyframes s-scan {

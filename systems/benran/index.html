@@ -1,30 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <!--
-THESIS: A design catalog that behaves like tea-ceremony stationery: nine tenths
-paper, tiny ink objects resting on one hairline horizon. It refuses the dense
-token-grid spec page.
-OWN-WORLD: BENRAN (DESIGN.md): paper #fcfcfa, solid ink silhouettes, hairline
-rules with shelf ticks, vertical Songti CJK plus 10px tracked Latin, one
-vermilion seal, celadon ripples, tan roundel.
-STORY: A teammate scrolls a quiet shelf: foundations, motifs, components, then
-three posters and four bookmarks; they leave knowing restraint IS the system.
-FIRST VIEWPORT: thumbnail strip top-left, tiny vertical masthead top-right, five
-silhouettes on one long horizon with a slow celadon ripple and drifting steam,
-then vast emptiness holding only the tan roundel.
-FORM: Brief-pinned homage to a Sun Zhang tea-brand sheet; no seed roll; mode Read.
+THESIS: A stationery language built from emptiness - nine tenths paper, small
+ink objects resting on one hairline horizon, upright vertical type, colour
+spent one seal at a time.
+FORM: catalog page, set in the system itself, following STANDARD.md.
+CONTENT: documentation is English (STANDARD.md R7). CJK appears only where it
+is demonstrated - the wordmark and the vertical type specimen. All specimen
+copy is neutral placeholder text (R1).
 -->
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BENRAN 本然 - Design Language Catalog</title>
+  <title>BENRAN - Stationery of Emptiness</title>
   <link rel="stylesheet" href="css/benran-core.css" />
+  <link rel="stylesheet" href="css/catalog.css" />
 </head>
 <body>
 
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
-      <!-- object silhouettes: solid ink, evenodd paper cutouts as highlights -->
+      <!-- object silhouettes: solid ink, evenodd cutouts as highlights -->
       <symbol id="o-bowl" viewBox="0 0 96 54">
         <path fill="currentColor" fill-rule="evenodd" d="M48 6 C68 6 88 7.5 88 11 C88 26 74 40 59 43.5 C59.8 46.5 61.2 48.5 63 50 L33 50 C34.8 48.5 36.2 46.5 37 43.5 C22 40 8 26 8 11 C8 7.5 28 6 48 6 Z M20 13 C19 20 22 27 27 32 C23.5 26.5 21.5 20 22.5 13.5 Z" />
       </symbol>
@@ -38,7 +34,7 @@ FORM: Brief-pinned homage to a Sun Zhang tea-brand sheet; no seed roll; mode Rea
         <path fill="currentColor" fill-rule="evenodd" d="M25 43 C25 41.6 32 40.8 42 40.8 C52 40.8 59 41.6 59 43 C59 51.5 51.5 58 42 58 C32.5 58 25 51.5 25 43 Z M29 44 C33 45.4 51 45.4 55 44 C51 46.6 33 46.6 29 44 Z" />
         <path fill="currentColor" d="M10 62 C10 60.6 24 59.6 42 59.6 C60 59.6 74 60.6 74 62 C74 66.4 60 70 42 70 C24 70 10 66.4 10 62 Z" />
       </symbol>
-      <symbol id="o-teapot" viewBox="0 0 100 72">
+      <symbol id="o-pot" viewBox="0 0 100 72">
         <path fill="currentColor" d="M32 26 C32 9 68 9 68 26 L63.5 26 C63.5 14 36.5 14 36.5 26 Z" />
         <circle fill="currentColor" cx="50" cy="26.5" r="3" />
         <path fill="currentColor" d="M37 34 C37 30 63 30 63 34 L37 34 Z" />
@@ -53,8 +49,8 @@ FORM: Brief-pinned homage to a Sun Zhang tea-brand sheet; no seed roll; mode Rea
         <path fill="currentColor" fill-rule="evenodd" d="M6 50 C6 26 24 8 50 6 C48 32 30 50 6 50 Z M10 46 C22 38 36 24 45 11 C38 26 25 40 11 47 Z" />
       </symbol>
 
-      <!-- roundel: thin circle holding a three-stroke 本 mark -->
-      <symbol id="b-roundel" viewBox="0 0 44 44">
+      <!-- roundel: a thin circle holding the three-stroke mark -->
+      <symbol id="m-roundel" viewBox="0 0 44 44">
         <g fill="none" stroke="currentColor" stroke-linecap="round">
           <circle cx="22" cy="22" r="20.5" stroke-width="1" />
           <path stroke-width="1.2" d="M22 11.5 V32.5" />
@@ -64,19 +60,19 @@ FORM: Brief-pinned homage to a Sun Zhang tea-brand sheet; no seed roll; mode Rea
         </g>
       </symbol>
 
-      <!-- seal stamp: vermilion ground, white negative 本 -->
-      <symbol id="b-seal-sq" viewBox="0 0 22 22">
+      <!-- seal stamp: accent ground, reversed mark -->
+      <symbol id="m-seal-sq" viewBox="0 0 22 22">
         <rect fill="currentColor" x="1" y="1" width="20" height="20" rx="4" />
-        <g fill="none" stroke="#fcfcfa" stroke-width="1.3" stroke-linecap="round">
+        <g class="b-seal-glyph">
           <path d="M11 5 V17" />
           <path d="M6.5 8.5 H15.5" />
           <path d="M11 10 L7.5 14 M11 10 L14.5 14" />
           <path d="M8.5 15.5 H13.5" />
         </g>
       </symbol>
-      <symbol id="b-seal-rd" viewBox="0 0 22 22">
+      <symbol id="m-seal-rd" viewBox="0 0 22 22">
         <circle fill="currentColor" cx="11" cy="11" r="10" />
-        <g fill="none" stroke="#fcfcfa" stroke-width="1.3" stroke-linecap="round">
+        <g class="b-seal-glyph">
           <path d="M11 5 V17" />
           <path d="M6.5 8.5 H15.5" />
           <path d="M11 10 L7.5 14 M11 10 L14.5 14" />
@@ -85,7 +81,7 @@ FORM: Brief-pinned homage to a Sun Zhang tea-brand sheet; no seed roll; mode Rea
       </symbol>
 
       <!-- static ripple: three flat concentric ellipses -->
-      <symbol id="b-ripple3" viewBox="0 0 220 44">
+      <symbol id="m-ripple" viewBox="0 0 220 44">
         <g fill="none" stroke="currentColor" stroke-width="1">
           <ellipse cx="110" cy="22" rx="34" ry="4" opacity="0.8" />
           <ellipse cx="110" cy="22" rx="66" ry="8" opacity="0.5" />
@@ -95,38 +91,63 @@ FORM: Brief-pinned homage to a Sun Zhang tea-brand sheet; no seed roll; mode Rea
     </defs>
   </svg>
 
+  <!-- ================= MASTHEAD ================= -->
+  <header class="b-topbar">
+    <span class="tb-mark"><span class="tb-glyph" lang="zh">本然</span><span class="v-caption">Benran</span></span>
+    <nav aria-label="Sections">
+      <a class="b-link" href="#colour">Colour</a>
+      <a class="b-link" href="#type">Type</a>
+      <a class="b-link" href="#space">Space</a>
+      <a class="b-link" href="#form">Form</a>
+      <a class="b-link" href="#motion">Motion</a>
+      <a class="b-link" href="#screen">Screen</a>
+      <a class="b-link" href="#components">Components</a>
+      <a class="b-link" href="#motifs">Motifs</a>
+      <a class="b-link" href="#composition">Composition</a>
+      <a class="b-link" href="#rules">Rules</a>
+    </nav>
+    <button class="b-theme-btn" data-toggle-theme type="button">Day / Night</button>
+  </header>
+
   <div class="b-page">
 
-    <!-- ================= HERO ================= -->
-    <header class="b-hero">
+    <!-- ================= THESIS ================= -->
+    <section class="b-hero" aria-labelledby="h-thesis">
       <div class="b-hero-top">
-        <div class="b-thumbstrip" aria-hidden="true">
-          <span><svg class="b-obj" width="40" height="22.5" viewBox="0 0 96 54"><use href="#o-bowl" /></svg></span>
-          <span><svg class="b-obj" width="26" height="25.3" viewBox="0 0 72 70"><use href="#o-stone" /></svg></span>
-          <span><svg class="b-obj" width="38" height="27.4" viewBox="0 0 100 72"><use href="#o-teapot" /></svg></span>
-          <span><svg class="b-obj" width="21" height="27.6" viewBox="0 0 64 84"><use href="#o-gourd" /></svg></span>
+        <div class="b-thesis">
+          <span class="v-caption">Design system - stationery of emptiness</span>
+          <p class="v-body">
+            Benran - "as it is, of itself" - is a stationery language built from
+            emptiness. Every surface begins as bare paper, and the work is deciding
+            how little may enter: small ink objects resting on one hairline horizon,
+            words standing upright as on a scroll, colour spent one seal at a time.
+          </p>
+          <p class="v-body">
+            Two things to hold on to. Content occupies about a tenth of any surface -
+            when a composition feels thin, remove something rather than enlarge what
+            is left. And nothing floats: every object sits on a horizon, a trail or a
+            ripple.
+          </p>
         </div>
-        <div class="b-masthead">
-          <div class="m-latin">
-            <span class="v-latin">Benran</span>
-            <span class="v-latin is-echo">Oriental zen</span>
-            <span class="v-num">2026 / 8.3</span>
-          </div>
-          <h1 class="v-cjk m-cjk" lang="zh">本然</h1>
-        </div>
+        <h1 class="b-titleblock" id="h-thesis">
+          <span class="tb-captions">
+            <span class="v-caption">Benran</span>
+            <span class="v-caption is-echo">Stationery system</span>
+            <span class="v-num">No. 01</span>
+          </span>
+          <span class="v-vertical tb-display" lang="zh">本然</span>
+        </h1>
       </div>
 
       <!-- five objects resting on one long horizon -->
-      <div class="b-shelf" role="img" aria-label="Five ink tea-object silhouettes resting on a hairline shelf: tea bowl, donut stone, sprouting cup, iron teapot, gourd">
+      <div class="b-shelf" role="img" aria-label="Five ink silhouettes resting on a hairline shelf: bowl, stone, sprout, pot, gourd">
         <div class="b-shelf-row">
           <span class="shelf-slot">
             <svg class="b-obj" width="78" height="43.9" viewBox="0 0 96 54" aria-hidden="true"><use href="#o-bowl" /></svg>
-            <svg class="b-ripple b-shelf-ripple" width="190" height="38" viewBox="0 0 220 44" style="margin-top:-13px" aria-hidden="true">
-              <g fill="none" stroke="var(--celadon)" stroke-width="1">
-                <ellipse cx="110" cy="22" rx="30" ry="3.5" opacity="0.75" />
-                <ellipse cx="110" cy="22" rx="62" ry="7.5" opacity="0.4" />
-                <ellipse class="r-live" cx="110" cy="22" rx="102" ry="12" stroke="var(--celadon)" />
-              </g>
+            <svg class="b-ripple is-trace b-shelf-ripple" width="190" height="38" viewBox="0 0 220 44" aria-hidden="true">
+              <ellipse cx="110" cy="22" rx="30" ry="3.5" opacity="0.75" />
+              <ellipse cx="110" cy="22" rx="62" ry="7.5" opacity="0.4" />
+              <ellipse class="r-live" cx="110" cy="22" rx="102" ry="12" />
             </svg>
           </span>
           <span class="shelf-slot">
@@ -137,7 +158,7 @@ FORM: Brief-pinned homage to a Sun Zhang tea-brand sheet; no seed roll; mode Rea
           </span>
           <span class="shelf-slot">
             <span class="b-trail is-live shelf-steam" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
-            <svg class="b-obj" width="82" height="59" viewBox="0 0 100 72" aria-hidden="true"><use href="#o-teapot" /></svg>
+            <svg class="b-obj" width="82" height="59" viewBox="0 0 100 72" aria-hidden="true"><use href="#o-pot" /></svg>
           </span>
           <span class="shelf-slot">
             <svg class="b-obj" width="46" height="60.4" viewBox="0 0 64 84" aria-hidden="true"><use href="#o-gourd" /></svg>
@@ -146,388 +167,745 @@ FORM: Brief-pinned homage to a Sun Zhang tea-brand sheet; no seed roll; mode Rea
         <div class="b-horizon"></div>
       </div>
 
-      <!-- vast space; the roundel alone -->
       <div class="b-hero-void">
-        <svg class="b-roundel" width="40" height="40" viewBox="0 0 44 44" role="img" aria-label="Benran roundel mark"><use href="#b-roundel" /></svg>
+        <svg class="b-roundel" width="40" height="40" viewBox="0 0 44 44" role="img" aria-label="Benran roundel"><use href="#m-roundel" /></svg>
       </div>
-    </header>
+    </section>
 
     <main>
 
-      <!-- ================= FOUNDATIONS ================= -->
-      <section class="b-section" aria-labelledby="h-foundations">
-        <h2 class="b-sect-head" id="h-foundations">
-          <span class="v-cjk sh-cjk" lang="zh">素材</span>
-          <span class="v-latin sh-latin">Foundations</span>
-        </h2>
+      <!-- ================= READ THIS FIRST ================= -->
+      <section class="b-section" aria-labelledby="h-brief">
+        <h2 class="b-sect-head" id="h-brief"><span class="v-num">00</span><span class="sh-title">Read this first</span></h2>
         <div class="b-horizon b-sect-rule"></div>
+        <ol class="b-brief v-body">
+          <li>These values are the system. Every token on this page exists in <span class="b-code">css/benran-core.css</span>; do not invent parallel ones.</li>
+          <li>Search the components before building one. There are six, plus two sheet formats; most needs are a link, a stamp, or a trail.</li>
+          <li>No ad-hoc values: no raw hex, no one-off sizes, no new easing curve. The motion budget is two durations and one curve.</li>
+          <li>Token names are roles. <span class="b-code">--trace</span> is linework, <span class="b-code">--accent</span> is the seal. Read what a token is for, not what colour it happens to be.</li>
+          <li>One tenth, one accent. Content stays near a tenth of the surface. Seal, trace ripple or roundel - only one may lead, and there is never more than one seal.</li>
+          <li>No weight, no fill, no depth. No bold, no panels or washes, no shadows, gradients or glass, and no radius except circles and the seal.</li>
+        </ol>
+      </section>
 
-        <div class="b-sect-body">
+      <!-- ================= 01 COLOUR ================= -->
+      <section class="b-section" id="colour" aria-labelledby="h-colour">
+        <h2 class="b-sect-head" id="h-colour"><span class="v-num">01</span><span class="sh-title">Colour</span></h2>
+        <div class="b-horizon b-sect-rule"></div>
+        <p class="v-body b-lede">
+          Nine role tokens. Each dot is split: paper by day on the left, the same
+          sheet at night on the right, so both themes are on the page at once. At
+          night the ground goes to inkstone and the silhouettes become paper
+          cutouts - the names stay true because none of them names a hue.
+        </p>
+
+        <div class="b-sect-body b-duo">
+          <div class="b-duo-cell"><span class="b-duo-dot"><i style="background:#fcfcfa"></i><i style="background:#161614"></i></span><span class="b-duo-cap"><span class="b-code">--paper</span><span class="role">The ground. Nine tenths of every surface.</span><span class="v-num">#FCFCFA / #161614</span></span></div>
+          <div class="b-duo-cell"><span class="b-duo-dot"><i style="background:#ffffff"></i><i style="background:#1c1c1a"></i></span><span class="b-duo-cap"><span class="b-code">--surface</span><span class="role">Sheet ground: poster, bookmark, composed sheet.</span><span class="v-num">#FFFFFF / #1C1C1A</span></span></div>
+          <div class="b-duo-cell"><span class="b-duo-dot"><i style="background:#2a2a28"></i><i style="background:#e6e3da"></i></span><span class="b-duo-cap"><span class="b-code">--ink</span><span class="role">Silhouettes and every essential word.</span><span class="v-num">#2A2A28 / #E6E3DA</span></span></div>
+          <div class="b-duo-cell"><span class="b-duo-dot"><i style="background:#8a8880"></i><i style="background:#6f6d67"></i></span><span class="b-duo-cap"><span class="b-code">--faint</span><span class="role">Dotted trails; text only when large or duplicated.</span><span class="v-num">#8A8880 / #6F6D67</span></span></div>
+          <div class="b-duo-cell"><span class="b-duo-dot"><i style="background:#d5d3cd"></i><i style="background:#393834"></i></span><span class="b-duo-cap"><span class="b-code">--hairline</span><span class="role">Rules, sheet edges, the disabled state.</span><span class="v-num">#D5D3CD / #393834</span></span></div>
+          <div class="b-duo-cell"><span class="b-duo-dot"><i style="background:#9fc4bd"></i><i style="background:#3e5a55"></i></span><span class="b-duo-cap"><span class="b-code">--trace</span><span class="role">Primary linework: ripples, selection. Never text.</span><span class="v-num">#9FC4BD / #3E5A55</span></span></div>
+          <div class="b-duo-cell"><span class="b-duo-dot"><i style="background:#c9a87c"></i><i style="background:#5f4f37"></i></span><span class="b-duo-cap"><span class="b-code">--trace-alt</span><span class="role">Secondary linework: the roundel, a second ripple.</span><span class="v-num">#C9A87C / #5F4F37</span></span></div>
+          <div class="b-duo-cell"><span class="b-duo-dot"><i style="background:#c25e4a"></i><i style="background:#c9654f"></i></span><span class="b-duo-cap"><span class="b-code">--accent</span><span class="role">The seal, and the dot a link summons. One per surface.</span><span class="v-num">#C25E4A / #C9654F</span></span></div>
+          <div class="b-duo-cell"><span class="b-duo-dot"><i style="background:#fcfcfa"></i><i style="background:#fcfcfa"></i></span><span class="b-duo-cap"><span class="b-code">--on-accent</span><span class="role">The reversed mark inside a seal.</span><span class="v-num">#FCFCFA / #FCFCFA</span></span></div>
+        </div>
+
+        <span class="v-caption b-sub">Contrast floor - day / night</span>
+        <div class="b-spec-wrap">
+          <table class="b-spec">
+            <thead><tr><th>Pair</th><th>Day</th><th>Night</th><th>What it may carry</th></tr></thead>
+            <tbody>
+              <tr><td>--ink on --paper</td><td class="v">14.0 : 1</td><td class="v">14.1 : 1</td><td>Everything essential, at any size.</td></tr>
+              <tr><td>--faint on --paper</td><td class="v">3.5 : 1</td><td class="v">3.5 : 1</td><td>Text 18px and up, or a caption that repeats an adjacent label. Nothing smaller and essential.</td></tr>
+              <tr><td>--faint on --surface</td><td class="v">3.6 : 1</td><td class="v">3.3 : 1</td><td>The same rule on a sheet; the night value is lower, so treat it as the floor.</td></tr>
+              <tr><td>--accent on --paper</td><td class="v">4.1 : 1</td><td class="v">4.7 : 1</td><td>The seal and the link dot. Never words.</td></tr>
+              <tr><td>--on-accent on --accent</td><td class="v">4.1 : 1</td><td class="v">3.8 : 1</td><td>The seal's reversed mark. Decorative.</td></tr>
+              <tr><td>--trace, --trace-alt, --hairline</td><td class="v">1.8 / 2.2 / 1.5</td><td class="v">2.4 / 2.3 / 1.5</td><td>Lines only. None of them ever carries text.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="b-callout">
+          <span class="v-caption">Why</span>
           <p class="v-body">
-            <span lang="zh">本然</span> - benran, "what is so of itself" - is the stationery
-            identity of a small tea atelier. Every surface begins as empty paper; the work
-            is deciding what little may enter. Objects are solid ink and rest on a hairline
-            shelf, words stand upright as they do on a scroll, and color is spent the way
-            seal paste is: one stamp at a time.
+            The night theme is authored, not inverted. The trace colours are pulled
+            down to roughly the same quietness against inkstone that they have
+            against paper, and faint is set to the same 3.5 : 1 in both - so a
+            ripple is exactly as loud at night as by day, and the contrast rule for
+            faint text does not quietly change meaning when the theme flips.
           </p>
         </div>
+      </section>
 
-        <div class="b-sect-body">
-          <div class="b-palette">
-            <div class="b-swatch">
-              <span class="sw-dot is-outlined" style="background:var(--paper)"></span>
-              <span class="sw-name">Paper</span><span class="sw-hex">#FCFCFA</span>
-            </div>
-            <div class="b-swatch">
-              <span class="sw-dot" style="background:var(--ink)"></span>
-              <span class="sw-name">Ink</span><span class="sw-hex">#2A2A28</span>
-            </div>
-            <div class="b-swatch">
-              <span class="sw-dot" style="background:var(--faint)"></span>
-              <span class="sw-name">Faint</span><span class="sw-hex">#8A8880</span>
-            </div>
-            <div class="b-swatch">
-              <span class="sw-dot" style="background:var(--hairline)"></span>
-              <span class="sw-name">Hairline</span><span class="sw-hex">#D5D3CD</span>
-            </div>
-            <div class="b-swatch">
-              <span class="sw-dot" style="background:var(--celadon)"></span>
-              <span class="sw-name">Celadon</span><span class="sw-hex">#9FC4BD</span>
-            </div>
-            <div class="b-swatch">
-              <span class="sw-dot" style="background:var(--seal)"></span>
-              <span class="sw-name">Seal</span><span class="sw-hex">#C25E4A</span>
-            </div>
-            <div class="b-swatch">
-              <span class="sw-dot" style="background:var(--tan)"></span>
-              <span class="sw-name">Tan</span><span class="sw-hex">#C9A87C</span>
-            </div>
+      <!-- ================= 02 TYPE ================= -->
+      <section class="b-section" id="type" aria-labelledby="h-type">
+        <h2 class="b-sect-head" id="h-type"><span class="v-num">02</span><span class="sh-title">Typography</span></h2>
+        <div class="b-horizon b-sect-rule"></div>
+        <p class="v-body b-lede">
+          Four voices, all quiet. Words of weight stand upright in a vertical column;
+          the small voice that names things is a tracked Latin caption; body text is
+          a serif at a double line height. There is no bold anywhere - emphasis comes
+          from placement and isolation.
+        </p>
+
+        <div class="b-sect-body b-voices">
+          <div class="b-voice">
+            <span class="v-caption">Vertical display - CJK</span>
+            <span class="v-vertical vo-display" lang="zh">本然</span>
           </div>
-          <p class="v-body" style="margin-top:44px">
-            Ink carries everything essential. Faint is reserved for large or duplicated
-            captions; celadon, tan, and the hairline never carry text.
+          <div class="b-voice">
+            <span class="v-caption">Vertical display - Latin, upright</span>
+            <span class="v-vertical vo-display">Still</span>
+          </div>
+          <div class="b-voice">
+            <span class="v-caption">Heading - 18px - 0.5em</span>
+            <span style="font:400 var(--fs-heading)/1.4 var(--font-serif);letter-spacing:var(--track-wide);text-transform:uppercase">Heading</span>
+            <span class="v-caption">Caption - 10px - 0.35em</span>
+            <span class="v-caption">Placeholder caption</span>
+            <span class="v-caption">Numbers - 10px - 0.25em</span>
+            <span class="v-num">No. 04 - 2026 / 8.3</span>
+          </div>
+          <div class="b-voice">
+            <span class="v-caption">Body - 13px / 2</span>
+            <p class="v-body" style="max-width:22em">
+              A short paragraph of placeholder text. It runs narrow, sits low on the
+              sheet, and leaves the air around it alone.
+            </p>
+          </div>
+        </div>
+
+        <div class="b-sect-body b-spec-wrap">
+          <table class="b-spec">
+            <thead><tr><th>Token</th><th>Size</th><th>Tracking</th><th>Where</th></tr></thead>
+            <tbody>
+              <tr><td>--fs-display-lg</td><td class="v">34px</td><td class="v">0.4em</td><td>The largest vertical word. One per sheet.</td></tr>
+              <tr><td>--fs-display</td><td class="v">26px</td><td class="v">0.4em</td><td>The wordmark in a title block; a sheet's vertical title.</td></tr>
+              <tr><td>--fs-heading</td><td class="v">18px</td><td class="v">0.5em</td><td>Section headings, bookmark titles. Uppercase, weight 400.</td></tr>
+              <tr><td>--fs-label</td><td class="v">15px</td><td class="v">0.45em</td><td>The stamp button's upright label.</td></tr>
+              <tr><td>--fs-body</td><td class="v">13px / 2</td><td class="v">0</td><td>Running text in the serif stack, capped at 36em.</td></tr>
+              <tr><td>--fs-small</td><td class="v">11px</td><td class="v">0.3em</td><td>Chips, list numbers, the x mark.</td></tr>
+              <tr><td>--fs-caption</td><td class="v">10px / 300</td><td class="v">0.35em</td><td>Captions, links, field labels, placeholders. Uppercase.</td></tr>
+              <tr><td>--track-num</td><td class="v">10px / 300</td><td class="v">0.25em</td><td>Numbers and dates: tiny, tracked, never tabular columns.</td></tr>
+              <tr><td>--font-serif</td><td class="v" colspan="2">Songti SC, Palatino Linotype, Book Antiqua, Palatino, Noto Serif CJK SC, SimSun, serif</td><td>Vertical display, headings, body. Songti first carries both scripts where it exists; elsewhere a Latin serif sets the Latin and the CJK serif catches the rest. System fonts only; nothing is vendored.</td></tr>
+              <tr><td>--font-sans</td><td class="v" colspan="2">Avenir Next, Futura, Century Gothic, Helvetica Neue, Arial</td><td>Captions and numbers. A geometric sans, light weight.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="b-callout">
+          <span class="v-caption">Why</span>
+          <p class="v-body">
+            Vertical text is set with <span class="b-code">text-orientation: upright</span>, so a Latin
+            word stands letter over letter instead of lying on its side. It keeps the
+            column reading as an object on the sheet - a signboard, a spine - rather
+            than as a rotated line of text, and it lets the same voice carry any
+            script without a second rule.
           </p>
         </div>
+      </section>
 
-        <div class="b-sect-body">
-          <div class="b-voices">
-            <div class="b-voice">
-              <span class="vo-caption">CJK display - vertical-rl - Songti</span>
-              <span class="v-cjk vo-cjk-lg" lang="zh">東方禪意</span>
-            </div>
-            <div class="b-voice">
-              <span class="vo-caption">Latin - 10px - 0.35em track</span>
-              <span class="v-latin">Benran</span>
-              <span class="v-latin">Oriental zen</span>
-              <span class="v-latin">Sun Zhang</span>
-            </div>
-            <div class="b-voice">
-              <span class="vo-caption">Body - 13px / 2</span>
-              <p class="v-body" style="max-width:22em">
-                The kettle is heard before it is seen. Guests are seated when the
-                water first speaks.
-              </p>
-            </div>
-            <div class="b-voice">
-              <span class="vo-caption">Numbers and dates</span>
-              <span class="v-num">2026 / 8.3</span>
-              <span class="v-num">NO. 04 - 19:00</span>
-            </div>
-          </div>
+      <!-- ================= 03 SPACE ================= -->
+      <section class="b-section" id="space" aria-labelledby="h-space">
+        <h2 class="b-sect-head" id="h-space"><span class="v-num">03</span><span class="sh-title">Space and layout</span></h2>
+        <div class="b-horizon b-sect-rule"></div>
+        <p class="v-body b-lede">
+          Space is the material. The gaps are large and few: a section sits 170px
+          from the last one, a block 56px from its heading, and inside a component
+          the rhythm stays small and tight so the objects read as objects.
+        </p>
+
+        <div class="b-sect-body b-spec-wrap">
+          <table class="b-spec">
+            <thead><tr><th>Token</th><th>Value</th><th>Note</th></tr></thead>
+            <tbody>
+              <tr><td>--page-max</td><td class="v">1060px</td><td>Measure ceiling, centred.</td></tr>
+              <tr><td>--page-pad</td><td class="v">40px / 22px</td><td>Side margin; the smaller value below 760px.</td></tr>
+              <tr><td>--space-section</td><td class="v">170px / 120px</td><td>Between sections. The paper between chapters.</td></tr>
+              <tr><td>--space-block</td><td class="v">56px</td><td>Between a section's heading and its content.</td></tr>
+              <tr><td>measure</td><td class="v">36em</td><td>Body text never runs wider.</td></tr>
+              <tr><td>breakpoints</td><td class="v">900px / 760px</td><td>At 900 the composed sheet drops a column; at 760 everything goes to one column and the margins and section gap shrink.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <span class="v-caption b-sub">Rhythm - as used</span>
+        <div class="b-spec-wrap">
+          <table class="b-spec">
+            <tbody>
+              <tr><td>8</td><td class="v">8px</td><td class="sc"><div class="b-scale" style="width:8px"></div></td><td>Between the dots of a trail.</td></tr>
+              <tr><td>14</td><td class="v">14px</td><td class="sc"><div class="b-scale" style="width:14px"></div></td><td>Pagination circles; the x mark's columns.</td></tr>
+              <tr><td>22</td><td class="v">22px</td><td class="sc"><div class="b-scale" style="width:22px"></div></td><td>A component's caption to its specimen.</td></tr>
+              <tr><td>26</td><td class="v">26px</td><td class="sc"><div class="b-scale" style="width:26px"></div></td><td>Between items in a component row.</td></tr>
+              <tr><td>56</td><td class="v">56px</td><td class="sc"><div class="b-scale" style="width:56px"></div></td><td><span class="b-code">--space-block</span>.</td></tr>
+              <tr><td>70</td><td class="v">70px</td><td class="sc"><div class="b-scale" style="width:70px"></div></td><td>Between components and motifs.</td></tr>
+              <tr><td>170</td><td class="v">170px</td><td class="sc"><div class="b-scale" style="width:170px"></div></td><td><span class="b-code">--space-section</span>.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="b-callout">
+          <span class="v-caption">Why</span>
+          <p class="v-body">
+            The scale jumps from 70 straight to 170 on purpose. Between those two
+            numbers is the distance at which a reader stops seeing one arrangement
+            and starts seeing two - and this system only ever wants one or the
+            other, never the uneasy middle.
+          </p>
         </div>
       </section>
 
-      <!-- ================= MOTIFS ================= -->
-      <section class="b-section" aria-labelledby="h-motifs">
-        <h2 class="b-sect-head" id="h-motifs">
-          <span class="v-cjk sh-cjk" lang="zh">紋樣</span>
-          <span class="v-latin sh-latin">Motifs</span>
-        </h2>
+      <!-- ================= 04 FORM ================= -->
+      <section class="b-section" id="form" aria-labelledby="h-form">
+        <h2 class="b-sect-head" id="h-form"><span class="v-num">04</span><span class="sh-title">Form</span></h2>
         <div class="b-horizon b-sect-rule"></div>
+        <p class="v-body b-lede">
+          The silhouette is a line, not a box. One-pixel hairlines, a shelf edge with
+          angled ticks, and circles. Nothing has depth: no shadow, no gradient, no
+          glass, and the only rounded shapes are true circles and the seal.
+        </p>
 
-        <div class="b-sect-body">
-          <div class="b-motifs">
-            <div class="b-motif b-motif-wide">
-              <div class="mo-stage" style="width:100%"><div class="b-horizon" style="width:100%"></div></div>
-              <span class="mo-caption">Horizon rule - objects sit on it</span>
-            </div>
-
-            <div class="b-motif">
-              <div class="mo-stage"><svg class="b-obj" width="72" height="40.5" viewBox="0 0 96 54" role="img" aria-label="Tea bowl silhouette"><use href="#o-bowl" /></svg></div>
-              <span class="mo-caption">Tea bowl</span>
-            </div>
-            <div class="b-motif">
-              <div class="mo-stage"><svg class="b-obj" width="50" height="48.6" viewBox="0 0 72 70" role="img" aria-label="Donut stone silhouette"><use href="#o-stone" /></svg></div>
-              <span class="mo-caption">Donut stone</span>
-            </div>
-            <div class="b-motif">
-              <div class="mo-stage"><svg class="b-obj" width="56" height="50.7" viewBox="0 0 84 76" role="img" aria-label="Sprouting cup on a saucer"><use href="#o-sprout" /></svg></div>
-              <span class="mo-caption">Sprout cup</span>
-            </div>
-            <div class="b-motif">
-              <div class="mo-stage"><svg class="b-obj" width="76" height="54.7" viewBox="0 0 100 72" role="img" aria-label="Iron teapot silhouette"><use href="#o-teapot" /></svg></div>
-              <span class="mo-caption">Iron pot</span>
-            </div>
-            <div class="b-motif">
-              <div class="mo-stage"><svg class="b-obj" width="42" height="55.1" viewBox="0 0 64 84" role="img" aria-label="Gourd silhouette"><use href="#o-gourd" /></svg></div>
-              <span class="mo-caption">Gourd</span>
-            </div>
-            <div class="b-motif">
-              <div class="mo-stage"><svg class="b-obj" width="40" height="40" viewBox="0 0 56 56" role="img" aria-label="Tea leaf silhouette"><use href="#o-leaf" /></svg></div>
-              <span class="mo-caption">Leaf</span>
-            </div>
-
-            <div class="b-motif">
-              <div class="mo-stage" style="gap:22px;align-items:center">
-                <svg class="b-roundel" width="40" height="40" viewBox="0 0 44 44" role="img" aria-label="Roundel, tan"><use href="#b-roundel" /></svg>
-                <svg class="b-roundel is-ink" width="30" height="30" viewBox="0 0 44 44" role="img" aria-label="Roundel, ink"><use href="#b-roundel" /></svg>
-              </div>
-              <span class="mo-caption">Roundel - tan / ink</span>
-            </div>
-            <div class="b-motif">
-              <div class="mo-stage" style="gap:18px;align-items:center;color:var(--seal)">
-                <svg width="20" height="20" viewBox="0 0 22 22" role="img" aria-label="Seal stamp, square"><use href="#b-seal-sq" /></svg>
-                <svg width="18" height="18" viewBox="0 0 22 22" role="img" aria-label="Seal stamp, round"><use href="#b-seal-rd" /></svg>
-              </div>
-              <span class="mo-caption">Seal - one per surface</span>
-            </div>
-            <div class="b-motif">
-              <div class="mo-stage" style="align-items:center">
-                <span class="b-trail" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
-              </div>
-              <span class="mo-caption">Dotted trail - steam</span>
-            </div>
-            <div class="b-motif">
-              <div class="mo-stage" style="flex-direction:column;gap:14px;align-items:center;justify-content:center">
-                <svg width="170" height="34" viewBox="0 0 220 44" style="color:var(--celadon)" aria-hidden="true"><use href="#b-ripple3" /></svg>
-                <svg width="170" height="34" viewBox="0 0 220 44" style="color:var(--tan)" aria-hidden="true"><use href="#b-ripple3" /></svg>
-              </div>
-              <span class="mo-caption">Ripple - celadon / tan</span>
-            </div>
-            <div class="b-motif">
-              <div class="mo-stage" style="align-items:center">
-                <span class="b-lockup">
-                  <span class="v-cjk" style="font-size:15px" lang="zh">本然</span>
-                  <span class="b-x" aria-hidden="true">x</span>
-                  <span class="v-cjk" style="font-size:15px" lang="zh">東方禪意</span>
-                </span>
-              </div>
-              <span class="mo-caption">The x mark - collaboration</span>
-            </div>
+        <div class="b-sect-body b-forms">
+          <div class="b-form">
+            <div class="fo-stage" style="width:220px"><div class="b-horizon" style="width:100%"></div></div>
+            <span class="v-caption">Horizon - 1px, 9px ticks at 35deg</span>
           </div>
+          <div class="b-form">
+            <div class="fo-stage"><span class="b-form-edge"></span></div>
+            <span class="v-caption">Edge - 1px hairline, radius 0</span>
+          </div>
+          <div class="b-form">
+            <div class="fo-stage"><svg class="b-roundel is-ink" width="40" height="40" viewBox="0 0 44 44" aria-hidden="true"><use href="#m-roundel" /></svg></div>
+            <span class="v-caption">Circle - the only curve</span>
+          </div>
+          <div class="b-form">
+            <div class="fo-stage"><svg class="b-seal" width="22" height="22" viewBox="0 0 22 22" role="img" aria-label="Square seal"><use href="#m-seal-sq" /></svg></div>
+            <span class="v-caption">Seal - the one rounded square</span>
+          </div>
+          <div class="b-form">
+            <div class="fo-stage"><button class="b-stamp-btn" type="button">Tab</button></div>
+            <span class="v-caption">Focus - tab to it</span>
+          </div>
+        </div>
+
+        <div class="b-sect-body b-spec-wrap">
+          <table class="b-spec">
+            <thead><tr><th>Token</th><th>Value</th><th>Where</th></tr></thead>
+            <tbody>
+              <tr><td>--rule</td><td class="v">1px</td><td>Every line: horizon, edges, underline, focus outline. There is no second weight.</td></tr>
+              <tr><td>--tick</td><td class="v">9px</td><td>The shelf's end ticks.</td></tr>
+              <tr><td>--tick-angle</td><td class="v">35deg</td><td>Their lean - a shelf edge seen in slight perspective.</td></tr>
+              <tr><td>--focus-offset</td><td class="v">3px</td><td>Focus is a 1px ink outline standing 3px off the element, everywhere.</td></tr>
+              <tr><td>radius</td><td class="v">0 / 50% / rx 4</td><td>Square by default; circles for roundel, dots and pagination; the square seal alone gets rx 4 on a 22 box.</td></tr>
+              <tr><td>elevation</td><td class="v">none</td><td>No shadows. Sheets are separated from paper by a hairline and one step of ground.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="b-callout">
+          <span class="v-caption">Why</span>
+          <p class="v-body">
+            A single line weight is what keeps a sparse page from looking unfinished.
+            When every rule, edge and outline is the same 1px, the eye reads them as
+            one drawing - add a 2px rule anywhere and it becomes the loudest thing on
+            a page that has almost nothing else on it.
+          </p>
         </div>
       </section>
 
-      <!-- ================= COMPONENTS ================= -->
-      <section class="b-section" aria-labelledby="h-components">
-        <h2 class="b-sect-head" id="h-components">
-          <span class="v-cjk sh-cjk" lang="zh">器件</span>
-          <span class="v-latin sh-latin">Components</span>
-        </h2>
+      <!-- ================= 05 MOTION ================= -->
+      <section class="b-section" id="motion" aria-labelledby="h-motion">
+        <h2 class="b-sect-head" id="h-motion"><span class="v-num">05</span><span class="sh-title">Motion</span></h2>
         <div class="b-horizon b-sect-rule"></div>
+        <p class="v-body b-lede">
+          Stillness. Two ambient moments - a ripple that slowly widens and fades under
+          an object, and steam dots that drift up three pixels - and two short fades
+          for interaction. Nothing slides, bounces, or scales on hover.
+        </p>
 
-        <div class="b-sect-body">
-          <div class="b-comp-grid">
+        <div class="b-sect-body b-motion-stage" aria-hidden="true">
+          <span class="ms-obj">
+            <span class="b-trail is-live ms-steam"><i></i><i></i><i></i><i></i><i></i></span>
+            <svg class="b-obj" width="78" height="43.9" viewBox="0 0 96 54"><use href="#o-bowl" /></svg>
+          </span>
+          <span class="b-horizon"></span>
+          <svg class="b-ripple is-trace" width="220" height="44" viewBox="0 0 220 44">
+            <ellipse cx="110" cy="22" rx="30" ry="3.5" opacity="0.75" />
+            <ellipse class="r-live" cx="110" cy="22" rx="102" ry="12" />
+          </svg>
+        </div>
 
-            <div class="b-comp">
-              <span class="co-caption">Text link - hover summons the seal dot</span>
-              <div class="co-row" style="flex-direction:column;gap:14px">
-                <a class="b-link" href="#h-application">Season program</a>
-                <a class="b-link" href="#h-foundations">Reserve a seat</a>
-                <span class="b-link is-disabled" aria-disabled="true">Winter - closed</span>
-              </div>
-            </div>
+        <div class="b-sect-body b-spec-wrap">
+          <table class="b-spec">
+            <thead><tr><th>Token</th><th>Value</th><th>Where</th></tr></thead>
+            <tbody>
+              <tr><td>--t-fade</td><td class="v">0.3s</td><td>The link's seal dot, chip border, input underline, pagination fill.</td></tr>
+              <tr><td>--t-ink</td><td class="v">0.35s</td><td>The stamp button inking. A touch slower, like ink taking.</td></tr>
+              <tr><td>--ease</td><td class="v">ease-out</td><td>The only interaction curve.</td></tr>
+              <tr><td>--d-ripple</td><td class="v">7s</td><td>One ripple, scale 0.2 to 1, fading out - on <span class="b-code">--ease-ripple</span>.</td></tr>
+              <tr><td>--ease-ripple</td><td class="v">cubic-bezier(0.16, 0.84, 0.44, 1)</td><td>Fast release, long settle - how a ring on still water behaves.</td></tr>
+              <tr><td>--d-steam</td><td class="v">6s</td><td>Steam dots drift 3px, ease-in-out, staggered 0.7s apart.</td></tr>
+            </tbody>
+          </table>
+        </div>
 
-            <div class="b-comp">
-              <span class="co-caption">Stamp button - hover inks it</span>
-              <div class="co-row">
-                <button class="b-stamp-btn" type="button" lang="zh">預約</button>
-                <button class="b-stamp-btn" type="button" lang="zh">入席</button>
-                <button class="b-stamp-btn" type="button" lang="zh" disabled>已滿</button>
-              </div>
-              <span class="co-note">Reserve - be seated - full (disabled). Focus is a 1px ink outline, 3px offset.</span>
-            </div>
-
-            <div class="b-comp">
-              <span class="co-caption">Chip - two glyphs, upright</span>
-              <div class="co-row">
-                <button class="b-chip" type="button" lang="zh">濃茶</button>
-                <button class="b-chip is-selected" type="button" aria-pressed="true" lang="zh">薄茶</button>
-                <button class="b-chip" type="button" lang="zh">焙茶</button>
-                <button class="b-chip" type="button" lang="zh" disabled>售罄</button>
-              </div>
-              <span class="co-note">Thick tea - thin tea (selected) - roasted tea - sold out.</span>
-            </div>
-
-            <div class="b-comp">
-              <span class="co-caption">List - dotted-trail entries</span>
-              <ol class="b-list">
-                <li><span lang="zh">迎客</span><span class="li-latin">Greeting</span><span class="li-num">19:00</span></li>
-                <li><span lang="zh">點炭</span><span class="li-latin">Charcoal</span><span class="li-num">19:15</span></li>
-                <li><span lang="zh">濃茶</span><span class="li-latin">Thick tea</span><span class="li-num">19:40</span></li>
-                <li><span lang="zh">薄茶</span><span class="li-latin">Thin tea</span><span class="li-num">20:10</span></li>
-                <li class="is-disabled"><span lang="zh">夜話</span><span class="li-latin">Night talk</span><span class="li-num">Full</span></li>
-              </ol>
-            </div>
-
-            <div class="b-comp">
-              <span class="co-caption">Input - bare underline</span>
-              <div class="co-row" style="flex-direction:column;gap:26px">
-                <label class="b-field">
-                  <span class="f-label"><span lang="zh">姓名</span> Name</span>
-                  <input class="b-input" type="text" placeholder="Your name" />
-                </label>
-                <label class="b-field">
-                  <span class="f-label"><span lang="zh">同行</span> Guests</span>
-                  <input class="b-input" type="text" value="沈青竹 +1" />
-                </label>
-                <label class="b-field">
-                  <span class="f-label"><span lang="zh">席位</span> Seat</span>
-                  <input class="b-input" type="text" value="窗邊 - window" disabled />
-                </label>
-              </div>
-            </div>
-
-            <div class="b-comp">
-              <span class="co-caption">Pagination - tiny circles</span>
-              <nav class="co-row" style="align-items:center" aria-label="Program pages">
-                <span class="b-pgn">
-                  <button type="button" aria-label="Page 1"></button>
-                  <button type="button" aria-label="Page 2" aria-current="page"></button>
-                  <button type="button" aria-label="Page 3"></button>
-                  <button type="button" aria-label="Page 4"></button>
-                  <button type="button" aria-label="Page 5" disabled></button>
-                </span>
-                <span class="v-num"><span lang="zh">頁</span> 2 / 5</span>
-              </nav>
-            </div>
-
-          </div>
+        <div class="b-callout">
+          <span class="v-caption">Why</span>
+          <p class="v-body">
+            Only opacity, colour and the two ambient drifts are allowed to move. A
+            page this empty amplifies every motion on it, so anything faster or
+            larger than a fade reads as an event. Under
+            <span class="b-code">prefers-reduced-motion</span> the ripple freezes at
+            three-quarter size, the steam stops, and nothing is lost.
+          </p>
         </div>
       </section>
 
-      <!-- ================= IN APPLICATION ================= -->
-      <section class="b-section" aria-labelledby="h-application">
-        <h2 class="b-sect-head" id="h-application">
-          <span class="v-cjk sh-cjk" lang="zh">應用</span>
-          <span class="v-latin sh-latin">In application</span>
-        </h2>
+      <!-- ================= 06 SCREEN ================= -->
+      <section class="b-section" id="screen" aria-labelledby="h-screen">
+        <h2 class="b-sect-head" id="h-screen"><span class="v-num">06</span><span class="sh-title">Screen - still water</span></h2>
         <div class="b-horizon b-sect-rule"></div>
+        <p class="v-body b-lede">
+          One optional surface treatment. Below the horizon the paper becomes still
+          water seen at a low angle: hairline rings travel out from under the resting
+          object. Move across the right-hand panel and the source follows you,
+          slowly; press and a single ink ring drops into the surface.
+        </p>
 
-        <div class="b-sect-body">
-          <div class="b-posters">
+        <div class="b-sect-body b-screen-row">
+          <div class="b-screen-cell">
+            <div class="b-screen-stage">
+              <svg class="b-ripple is-trace b-screen-still" viewBox="0 0 220 44" aria-hidden="true"><use href="#m-ripple" /></svg>
+              <div class="b-screen-over" aria-hidden="true">
+                <svg class="b-obj" width="64" height="36" viewBox="0 0 96 54"><use href="#o-bowl" /></svg>
+                <span class="b-horizon"></span>
+              </div>
+            </div>
+            <span class="v-caption">Static fallback - the ripple motif</span>
+          </div>
+          <div class="b-screen-cell">
+            <div class="b-screen-stage">
+              <svg class="b-ripple is-trace b-screen-still" viewBox="0 0 220 44" aria-hidden="true"><use href="#m-ripple" /></svg>
+              <canvas id="waterCanvas" aria-label="Interactive still-water surface"></canvas>
+              <div class="b-screen-over" aria-hidden="true">
+                <svg class="b-obj" width="64" height="36" viewBox="0 0 96 54"><use href="#o-bowl" /></svg>
+                <span class="b-horizon"></span>
+              </div>
+            </div>
+            <span class="v-caption b-screen-cap">Live - move across it, press to drop</span>
+          </div>
+        </div>
 
-            <!-- poster 1: ripple-bowl diagram -->
-            <article class="b-poster" aria-label="Poster: Benran, tea bowl over ripples">
-              <svg class="b-roundel b-pin" style="top:18px;left:18px" width="30" height="30" viewBox="0 0 44 44" aria-hidden="true"><use href="#b-roundel" /></svg>
-              <span class="v-cjk b-pin" style="top:20px;right:22px;font-size:22px" lang="zh">本然</span>
-              <span class="b-trail b-pin" style="bottom:calc(44% + 52px);left:50%;transform:translateX(-50%)" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-              <svg class="b-obj b-pin" style="bottom:44%;left:50%;transform:translateX(-50%)" width="62" height="34.9" viewBox="0 0 96 54" aria-hidden="true"><use href="#o-bowl" /></svg>
-              <span class="b-horizon b-pin" style="top:56%;left:19%;width:62%"></span>
-              <svg class="b-pin" style="top:calc(56% - 15px);left:50%;transform:translateX(-50%);color:var(--celadon)" width="160" height="32" viewBox="0 0 220 44" aria-hidden="true"><use href="#b-ripple3" /></svg>
-              <span class="b-pin" style="bottom:18px;left:0;right:0;text-align:center">
-                <span class="v-latin" style="font-size:9.5px">Benran tea atelier</span><br />
-                <span class="v-num">2026 / 8.3</span>
+        <div class="b-sect-body b-spec-wrap">
+          <table class="b-spec">
+            <thead><tr><th>Uniform</th><th>Value</th><th>What it does</th></tr></thead>
+            <tbody>
+              <tr><td>uHorizon</td><td class="v">0.62</td><td>Waterline height from the bottom. Matches the overlay horizon at 38% from the top; nothing is drawn above it.</td></tr>
+              <tr><td>uPitch</td><td class="v">26px</td><td>Ring spacing across the water, in CSS pixels scaled by device pixel ratio. Divided by uFlat it is still 5px front to back, so rings never merge into a band.</td></tr>
+              <tr><td>uFlat</td><td class="v">5.0</td><td>Vertical squash. Circles on the water, flat ellipses to the eye - a low viewing angle, like the ripple motif.</td></tr>
+              <tr><td>uReach</td><td class="v">0.26</td><td>How far the rings carry before fading, in canvas widths.</td></tr>
+              <tr><td>uSpeed</td><td class="v">0.22</td><td>Rings emitted per second. Slow enough that no single ring draws the eye.</td></tr>
+              <tr><td>uLine</td><td class="v">1 CSS px</td><td>Every ring is one hairline. Width is held constant with <span class="b-code">fwidth</span>, so rings stay 1px at their flanks.</td></tr>
+              <tr><td>uDropSpeed / uDropFade</td><td class="v">0.22 / 0.9</td><td>The pressed ink ring: growth in canvas widths per second, and decay per second.</td></tr>
+              <tr><td>uPaper / uTrace / uInk</td><td class="v">tokens</td><td>Read from <span class="b-code">--paper</span>, <span class="b-code">--trace</span> and <span class="b-code">--ink</span> at runtime and re-read on every theme change. The shader has no path to <span class="b-code">--accent</span>: the seal is never water.</td></tr>
+              <tr><td>spring</td><td class="v">k 34 / d 8</td><td>The source follows the pointer on a spring, and returns to rest under the object when the pointer leaves.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="b-callout">
+          <span class="v-caption">Why</span>
+          <p class="v-body">
+            Enhancement only. Underneath the canvas is the complete static design -
+            the ripple motif at the waterline - and the canvas stays transparent until
+            its first frame, so a machine without WebGL2 loses nothing. It stops when
+            scrolled off screen, and under <span class="b-code">prefers-reduced-motion</span>
+            it draws one settled frame and never starts a loop. It draws lines and
+            nothing else, so the emptiness rule holds inside the canvas too.
+          </p>
+        </div>
+        <p class="v-body" style="margin-top:22px">
+          Where it belongs: the empty lower half of a sheet, under an object resting
+          on a horizon. Not behind text, and never across a whole page - water with
+          nothing resting on it is only noise.
+        </p>
+      </section>
+
+      <!-- ================= 07 COMPONENTS ================= -->
+      <section class="b-section" id="components" aria-labelledby="h-components">
+        <h2 class="b-sect-head" id="h-components"><span class="v-num">07</span><span class="sh-title">Components</span></h2>
+        <div class="b-horizon b-sect-rule"></div>
+        <p class="v-body b-lede">
+          Six components and two sheet formats. Every state is live: hover, focus
+          with the keyboard, press the chips and the pagination. Disabled items are
+          actually disabled.
+        </p>
+
+        <div class="b-sect-body b-comp-grid">
+
+          <div class="b-comp">
+            <span class="v-caption">Text link</span>
+            <div class="co-row" style="flex-direction:column;gap:14px">
+              <a class="b-link" href="#components">Placeholder link</a>
+              <a class="b-link" href="#rules">Second link</a>
+              <span class="b-link is-disabled" aria-disabled="true">Unavailable</span>
+            </div>
+            <span class="co-note">Hover or focus summons a 5px seal dot in <span class="b-code">--accent</span>. Disabled is hairline.</span>
+          </div>
+
+          <div class="b-comp">
+            <span class="v-caption">Stamp button</span>
+            <div class="co-row">
+              <button class="b-stamp-btn" type="button">Open</button>
+              <button class="b-stamp-btn" type="button">Keep</button>
+              <button class="b-stamp-btn" type="button" disabled>Shut</button>
+            </div>
+            <span class="co-note">Upright label in a hairline frame. Hover inks the whole stamp; disabled is hairline text and edge.</span>
+          </div>
+
+          <div class="b-comp">
+            <span class="v-caption">Chip</span>
+            <div class="co-row" data-chips>
+              <button class="b-chip" type="button" aria-pressed="false">Ash</button>
+              <button class="b-chip is-selected" type="button" aria-pressed="true">Dew</button>
+              <button class="b-chip" type="button" aria-pressed="false">Fog</button>
+              <button class="b-chip" type="button" disabled>Salt</button>
+            </div>
+            <span class="co-note">Press to select. Hover darkens the edge to faint; selected is an ink edge.</span>
+          </div>
+
+          <div class="b-comp">
+            <span class="v-caption">List</span>
+            <ol class="b-list">
+              <li>First entry<span class="li-caption">Caption</span><span class="li-num">06:00</span></li>
+              <li>Second entry<span class="li-caption">Caption</span><span class="li-num">09:30</span></li>
+              <li>Third entry<span class="li-caption">Caption</span><span class="li-num">12:00</span></li>
+              <li class="is-disabled">Unavailable entry<span class="li-caption">Caption</span><span class="li-num">--:--</span></li>
+            </ol>
+          </div>
+
+          <div class="b-comp">
+            <span class="v-caption">Input</span>
+            <div class="co-row" style="flex-direction:column;gap:26px">
+              <label class="b-field">
+                <span class="f-label">Name</span>
+                <input class="b-input" type="text" placeholder="Placeholder" />
+              </label>
+              <label class="b-field">
+                <span class="f-label">Note</span>
+                <input class="b-input" type="text" value="A filled value" />
+              </label>
+              <label class="b-field">
+                <span class="f-label">Locked</span>
+                <input class="b-input" type="text" value="Unavailable" disabled />
+              </label>
+            </div>
+            <span class="co-note">A bare underline. Focus turns it ink; disabled is hairline.</span>
+          </div>
+
+          <div class="b-comp">
+            <span class="v-caption">Pagination</span>
+            <nav class="co-row" style="align-items:center" aria-label="Specimen pages">
+              <span class="b-pgn" data-pgn>
+                <button type="button" aria-label="Page 1"></button>
+                <button type="button" aria-label="Page 2" aria-current="page"></button>
+                <button type="button" aria-label="Page 3"></button>
+                <button type="button" aria-label="Page 4"></button>
+                <button type="button" aria-label="Page 5" disabled></button>
               </span>
-            </article>
+              <span class="v-num" data-pgn-count>2 / 5</span>
+            </nav>
+            <span class="co-note">Press a circle. Current is filled ink; hover fills hairline; disabled is a hairline ring.</span>
+          </div>
 
-            <!-- poster 2: the collaboration -->
-            <article class="b-poster" aria-label="Poster: Benran x Oriental Zen, leaf and stone">
-              <span class="b-lockup b-pin" style="top:13%;left:0;right:0" lang="zh">
-                <span class="v-cjk" style="font-size:20px">本然</span>
+          <div class="b-comp">
+            <span class="v-caption">Sheets - poster 3:4, bookmark 1:2.6</span>
+            <div class="b-sheets">
+              <article class="b-poster" aria-label="Poster specimen">
+                <svg class="b-roundel b-pin" style="top:14px;left:14px" width="24" height="24" viewBox="0 0 44 44" aria-hidden="true"><use href="#m-roundel" /></svg>
+                <span class="v-vertical b-pin" style="top:16px;right:16px;font-size:var(--fs-heading)">Still</span>
+                <svg class="b-obj b-pin" style="bottom:36%;left:50%;transform:translateX(-50%)" width="46" height="25.9" viewBox="0 0 96 54" aria-hidden="true"><use href="#o-bowl" /></svg>
+                <span class="b-horizon b-pin" style="top:64%;left:20%;width:60%"></span>
+                <span class="b-pin" style="bottom:12px;left:0;right:0;text-align:center"><span class="v-num">No. 01</span></span>
+              </article>
+              <article class="b-bookmark" aria-label="Bookmark specimen">
+                <div class="b-bm-flow">
+                  <span class="v-vertical bm-title">Dew</span>
+                  <span class="b-trail" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+                  <span class="bm-shelf">
+                    <svg class="b-obj" width="28" height="27.2" viewBox="0 0 72 70" aria-hidden="true"><use href="#o-stone" /></svg>
+                    <span class="b-horizon"></span>
+                  </span>
+                  <span class="bm-caption">No. 02</span>
+                </div>
+              </article>
+            </div>
+            <span class="co-note">Surface ground, hairline edge. Printed formats: no hover, no state.</span>
+          </div>
+
+        </div>
+
+        <div class="b-callout">
+          <span class="v-caption">Why</span>
+          <p class="v-body">
+            Every hover is a colour change and nothing else, and every disabled state
+            is the hairline colour. With no weight or fill to lean on, the system has
+            exactly one way to say "not available": let the thing fade to the colour
+            of the rules around it.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================= 08 MOTIFS ================= -->
+      <section class="b-section" id="motifs" aria-labelledby="h-motifs">
+        <h2 class="b-sect-head" id="h-motifs"><span class="v-num">08</span><span class="sh-title">Motifs</span></h2>
+        <div class="b-horizon b-sect-rule"></div>
+        <p class="v-body b-lede">
+          The signature shapes. A reader recognises Benran from these long before the
+          palette: a shelf edge, small solid objects, a roundel, one seal, a trail of
+          dots, flat rings on water.
+        </p>
+
+        <div class="b-sect-body b-motifs">
+          <div class="b-motif b-motif-wide">
+            <div class="mo-stage"><div class="b-horizon"></div></div>
+            <span class="v-caption">Horizon - objects sit on it</span>
+          </div>
+
+          <div class="b-motif">
+            <div class="mo-stage"><svg class="b-obj" width="72" height="40.5" viewBox="0 0 96 54" role="img" aria-label="Bowl silhouette"><use href="#o-bowl" /></svg></div>
+            <span class="v-caption">Bowl</span>
+          </div>
+          <div class="b-motif">
+            <div class="mo-stage"><svg class="b-obj" width="50" height="48.6" viewBox="0 0 72 70" role="img" aria-label="Stone silhouette"><use href="#o-stone" /></svg></div>
+            <span class="v-caption">Stone</span>
+          </div>
+          <div class="b-motif">
+            <div class="mo-stage"><svg class="b-obj" width="56" height="50.7" viewBox="0 0 84 76" role="img" aria-label="Sprout in a cup on a saucer"><use href="#o-sprout" /></svg></div>
+            <span class="v-caption">Sprout</span>
+          </div>
+          <div class="b-motif">
+            <div class="mo-stage"><svg class="b-obj" width="76" height="54.7" viewBox="0 0 100 72" role="img" aria-label="Pot silhouette"><use href="#o-pot" /></svg></div>
+            <span class="v-caption">Pot</span>
+          </div>
+          <div class="b-motif">
+            <div class="mo-stage"><svg class="b-obj" width="42" height="55.1" viewBox="0 0 64 84" role="img" aria-label="Gourd silhouette"><use href="#o-gourd" /></svg></div>
+            <span class="v-caption">Gourd</span>
+          </div>
+          <div class="b-motif">
+            <div class="mo-stage"><svg class="b-obj" width="40" height="40" viewBox="0 0 56 56" role="img" aria-label="Leaf silhouette"><use href="#o-leaf" /></svg></div>
+            <span class="v-caption">Leaf</span>
+          </div>
+
+          <div class="b-motif">
+            <div class="mo-stage is-center">
+              <svg class="b-roundel" width="40" height="40" viewBox="0 0 44 44" role="img" aria-label="Roundel in trace-alt"><use href="#m-roundel" /></svg>
+              <svg class="b-roundel is-ink" width="30" height="30" viewBox="0 0 44 44" role="img" aria-label="Roundel in ink"><use href="#m-roundel" /></svg>
+            </div>
+            <span class="v-caption">Roundel - trace-alt / ink</span>
+          </div>
+          <div class="b-motif">
+            <div class="mo-stage is-center">
+              <svg class="b-seal" width="20" height="20" viewBox="0 0 22 22" role="img" aria-label="Square seal"><use href="#m-seal-sq" /></svg>
+              <svg class="b-seal" width="18" height="18" viewBox="0 0 22 22" role="img" aria-label="Round seal"><use href="#m-seal-rd" /></svg>
+            </div>
+            <span class="v-caption">Seal - one per surface</span>
+          </div>
+          <div class="b-motif">
+            <div class="mo-stage is-center">
+              <span class="b-trail" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+            </div>
+            <span class="v-caption">Trail - steam, or a path</span>
+          </div>
+          <div class="b-motif">
+            <div class="mo-stage is-stack">
+              <svg class="b-ripple is-trace" width="170" height="34" viewBox="0 0 220 44" aria-hidden="true"><use href="#m-ripple" /></svg>
+              <svg class="b-ripple is-trace-alt" width="170" height="34" viewBox="0 0 220 44" aria-hidden="true"><use href="#m-ripple" /></svg>
+            </div>
+            <span class="v-caption">Ripple - trace / trace-alt</span>
+          </div>
+          <div class="b-motif">
+            <div class="mo-stage is-center">
+              <span class="b-lockup">
+                <span class="v-vertical" style="font-size:var(--fs-label)">One</span>
                 <span class="b-x" aria-hidden="true">x</span>
-                <span class="v-cjk" style="font-size:20px">東方禪意</span>
+                <span class="v-vertical" style="font-size:var(--fs-label)">Two</span>
               </span>
-              <svg class="b-obj b-pin" style="top:50%;left:26%;transform:rotate(-24deg)" width="24" height="24" viewBox="0 0 56 56" aria-hidden="true"><use href="#o-leaf" /></svg>
-              <svg class="b-obj b-pin" style="bottom:24%;left:56%;transform:translateX(-50%)" width="38" height="36.9" viewBox="0 0 72 70" aria-hidden="true"><use href="#o-stone" /></svg>
-              <span class="b-horizon b-pin" style="top:76%;left:22%;width:56%"></span>
-              <svg class="b-pin" style="top:calc(76% - 13px);left:56%;transform:translateX(-50%);color:var(--tan)" width="140" height="28" viewBox="0 0 220 44" aria-hidden="true"><use href="#b-ripple3" /></svg>
-              <span class="b-pin" style="bottom:18px;left:0;right:0;text-align:center">
-                <span class="v-latin" style="font-size:9.5px">Oriental zen - autumn program</span>
-              </span>
-            </article>
-
-            <!-- poster 3: the seal -->
-            <article class="b-poster" aria-label="Poster: vertical Benran wordmark with seal stamp and gourd">
-              <span class="v-cjk b-pin" style="top:14%;right:22%;font-size:34px" lang="zh">本然</span>
-              <svg class="b-pin" style="top:calc(14% + 128px);right:calc(22% + 7px);color:var(--seal)" width="20" height="20" viewBox="0 0 22 22" role="img" aria-label="Vermilion seal stamp"><use href="#b-seal-sq" /></svg>
-              <svg class="b-obj b-pin" style="bottom:18%;left:30%;transform:translateX(-50%)" width="34" height="44.6" viewBox="0 0 64 84" aria-hidden="true"><use href="#o-gourd" /></svg>
-              <span class="b-horizon b-pin" style="top:82%;left:12%;width:44%"></span>
-              <span class="b-pin" style="bottom:18px;left:0;right:0;text-align:center">
-                <span class="v-latin" style="font-size:9.5px">Benran - est. 2026</span>
-              </span>
-            </article>
-
+            </div>
+            <span class="v-caption">The x mark - co-sign</span>
           </div>
+        </div>
 
-          <div class="b-bookmarks">
+        <div class="b-callout">
+          <span class="v-caption">Why</span>
+          <p class="v-body">
+            The objects are solid because everything else is a line. A 1px page
+            needs a few points of real mass to rest the eye on, and a small filled
+            silhouette carries that mass without a panel or a wash. The cutouts in
+            each one are paper showing through - which is why, at night, they read
+            as the ground rather than as highlights.
+          </p>
+        </div>
+      </section>
 
-            <article class="b-bookmark" aria-label="Bookmark: Kodo, the way of incense">
-              <div class="b-bm-flow">
-                <span class="v-cjk bm-title" lang="zh">香道</span>
-                <span class="b-trail" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
-                <span class="bm-shelf">
-                  <svg class="b-obj" width="44" height="24.8" viewBox="0 0 96 54" aria-hidden="true"><use href="#o-bowl" /></svg>
-                  <span class="b-horizon"></span>
-                </span>
-                <span class="bm-latin">Kodo<br />incense</span>
+      <!-- ================= 09 COMPOSITION ================= -->
+      <section class="b-section" id="composition" aria-labelledby="h-composition">
+        <h2 class="b-sect-head" id="h-composition"><span class="v-num">09</span><span class="sh-title">Composition</span></h2>
+        <div class="b-horizon b-sect-rule"></div>
+        <p class="v-body b-lede">
+          The parts on one sheet: a head, a vertical title with the sheet's single
+          seal, a narrow column of text and a trail list, and one object resting on
+          the horizon. The copy is placeholder, so what a reader takes away is the
+          arrangement - and how much of the sheet is left empty.
+        </p>
+
+        <div class="b-sect-body">
+          <article class="b-sheet" aria-label="Composition specimen">
+            <div class="sh-head">
+              <svg class="b-roundel is-ink" width="30" height="30" viewBox="0 0 44 44" aria-hidden="true"><use href="#m-roundel" /></svg>
+              <span class="v-caption">Specimen sheet</span>
+              <span class="v-num">No. 01</span>
+            </div>
+            <div class="sh-title">
+              <span class="v-vertical">Still</span>
+              <svg class="b-seal" width="18" height="18" viewBox="0 0 22 22" role="img" aria-label="Seal"><use href="#m-seal-sq" /></svg>
+            </div>
+            <div class="sh-text">
+              <p class="v-body">
+                A short paragraph of placeholder text. It sits in a narrow column,
+                keeps to the upper left, and leaves the rest of the sheet to the air.
+              </p>
+              <ol class="b-list">
+                <li>First entry<span class="li-num">01</span></li>
+                <li>Second entry<span class="li-num">02</span></li>
+                <li>Third entry<span class="li-num">03</span></li>
+              </ol>
+              <a class="b-link" href="#composition">Placeholder link</a>
+            </div>
+            <div class="sh-shelf">
+              <div class="sh-stand">
+                <span class="b-trail sh-steam" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+                <svg class="b-obj" width="60" height="43.2" viewBox="0 0 100 72" aria-hidden="true"><use href="#o-pot" /></svg>
+                <span class="b-horizon"></span>
+                <svg class="b-ripple is-trace" width="200" height="40" viewBox="0 0 220 44" aria-hidden="true"><use href="#m-ripple" /></svg>
               </div>
-            </article>
+              <span class="v-num">Placeholder caption - 2026 / 8.3</span>
+            </div>
+          </article>
+        </div>
 
-            <article class="b-bookmark" aria-label="Bookmark: Shodo, the way of writing">
-              <div class="b-bm-flow">
-                <span class="v-cjk bm-title" lang="zh">書道</span>
-                <span class="b-trail" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
-                <span class="bm-shelf">
-                  <svg class="b-obj" width="30" height="29.2" viewBox="0 0 72 70" aria-hidden="true"><use href="#o-stone" /></svg>
-                  <span class="b-horizon"></span>
-                </span>
-                <span class="bm-latin">Shodo<br />writing</span>
-              </div>
-            </article>
+        <span class="v-caption b-sub">Anatomy</span>
+        <div class="b-spec-wrap">
+          <table class="b-spec">
+            <thead><tr><th>Part</th><th>As built</th><th>Why it is that way</th></tr></thead>
+            <tbody>
+              <tr><td>Sheet</td><td class="v">--surface, 1px --hairline</td><td>One step off the paper and a hairline edge - separated without a shadow.</td></tr>
+              <tr><td>Head</td><td class="v">roundel + caption + number</td><td>The roundel is in ink here, because the ripple is this sheet's accent. Only one may lead.</td></tr>
+              <tr><td>Vertical title</td><td class="v">--fs-display, upright</td><td>The sheet's one word of weight, in the corner, not the centre - it is an object placed on the page, not a headline over it.</td></tr>
+              <tr><td>Seal</td><td class="v">--accent, 18px</td><td>Under the title, where a signature goes. The only seal on the sheet, and small enough to sign it rather than lead it.</td></tr>
+              <tr><td>Text column</td><td class="v">22em max</td><td>Narrow and high. Together with the title and head it keeps content near a tenth of the sheet.</td></tr>
+              <tr><td>List</td><td class="v">b-list</td><td>The trail between entries is the same dotted path as the steam - one motif doing two jobs.</td></tr>
+              <tr><td>Shelf</td><td class="v">60% horizon + object + ripple</td><td>The object sits on the line and the ripple spreads under it. Nothing floats.</td></tr>
+              <tr><td>Caption</td><td class="v">v-num</td><td>At the foot, centred on the object it belongs to.</td></tr>
+            </tbody>
+          </table>
+        </div>
 
-            <article class="b-bookmark" aria-label="Bookmark: Chado, the way of tea, with seal stamp">
-              <div class="b-bm-flow">
-                <span class="v-cjk bm-title" lang="zh">茶道</span>
-                <svg style="color:var(--seal)" width="14" height="14" viewBox="0 0 22 22" aria-hidden="true"><use href="#b-seal-rd" /></svg>
-                <span class="b-trail" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
-                <span class="bm-shelf">
-                  <svg class="b-obj" width="46" height="33.1" viewBox="0 0 100 72" aria-hidden="true"><use href="#o-teapot" /></svg>
-                  <span class="b-horizon"></span>
-                </span>
-                <span class="bm-latin">Chado<br />tea</span>
-              </div>
-            </article>
+        <div class="b-callout">
+          <span class="v-caption">Why</span>
+          <p class="v-body">
+            It is tempting to fill a sheet like this - a second object, a longer
+            paragraph, a second seal. Each addition would be fine alone, and together
+            they would turn the sheet into a layout. The test before adding anything:
+            what would have to leave to make room for it?
+          </p>
+        </div>
+      </section>
 
-            <article class="b-bookmark" aria-label="Bookmark: Kado, the way of flowers">
-              <div class="b-bm-flow">
-                <span class="v-cjk bm-title" lang="zh">花道</span>
-                <span class="b-trail" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
-                <span class="bm-shelf">
-                  <svg class="b-obj" width="36" height="32.6" viewBox="0 0 84 76" aria-hidden="true"><use href="#o-sprout" /></svg>
-                  <span class="b-horizon"></span>
-                </span>
-                <span class="bm-latin">Kado<br />flowers</span>
-              </div>
-            </article>
+      <!-- ================= 10 RULES ================= -->
+      <section class="b-section" id="rules" aria-labelledby="h-rules">
+        <h2 class="b-sect-head" id="h-rules"><span class="v-num">10</span><span class="sh-title">Rules</span></h2>
+        <div class="b-horizon b-sect-rule"></div>
+        <p class="v-body b-lede">The refusals matter more than the permissions.</p>
 
-          </div>
+        <div class="b-sect-body b-dodont">
+          <section aria-labelledby="h-do">
+            <div class="dd-head"><span class="dd-mark"></span><span class="v-caption" id="h-do">Do</span></div>
+            <ul class="v-body">
+              <li>Keep every element small and let the paper carry the composition.</li>
+              <li>Anchor every object on a horizon, a trail or a ripple.</li>
+              <li>Let one accent lead each surface: a seal, a trace ripple, or a roundel.</li>
+              <li>Carry every essential word in <span class="b-code">--ink</span>.</li>
+              <li>Check both themes with the masthead toggle - they are authored separately.</li>
+              <li>Set vertical words upright, whatever the script.</li>
+            </ul>
+          </section>
+          <section aria-labelledby="h-dont">
+            <div class="dd-head"><span class="dd-mark is-hollow"></span><span class="v-caption" id="h-dont">Do not</span></div>
+            <ul class="v-body">
+              <li>Fill any area larger than a silhouette. No panels, no washes.</li>
+              <li>Use a bold weight. Emphasis comes from placement and isolation.</li>
+              <li>Add shadows, gradients or glass.</li>
+              <li>Round a corner, except true circles and the seal.</li>
+              <li>Place more than one seal on a surface.</li>
+              <li>Let <span class="b-code">--trace</span>, <span class="b-code">--trace-alt</span> or <span class="b-code">--hairline</span> carry text.</li>
+              <li>Run the still-water screen behind text or across a whole page.</li>
+            </ul>
+          </section>
         </div>
       </section>
 
     </main>
 
-    <!-- ================= FOOTER ================= -->
     <footer class="b-footer">
-      <svg class="b-roundel" width="34" height="34" viewBox="0 0 44 44" aria-hidden="true"><use href="#b-roundel" /></svg>
-      <p class="ft-note">
-        Benran - oriental zen - an homage to a Sun Zhang tea-brand sheet<br />
-        all names, dates and programs on this page are synthetic
-      </p>
-      <a class="b-stamp-btn" href="../../index.html" lang="zh" aria-label="All systems - back to the portal">所有系統</a>
+      <svg class="b-roundel" width="34" height="34" viewBox="0 0 44 44" aria-hidden="true"><use href="#m-roundel" /></svg>
+      <span class="v-caption">Benran - stationery of emptiness</span>
+      <p class="v-body ft-note">System fonts only; nothing is vendored. This catalog follows STANDARD.md at the repository root.</p>
+      <a class="b-link" href="../../index.html">All design systems</a>
     </footer>
 
   </div>
 
+<script src="js/stillwater.js"></script>
+<script>
+  (function () {
+    var root = document.documentElement;
+    if (location.hash === "#light" || location.hash === "#dark") {
+      root.setAttribute("data-theme", location.hash.slice(1));
+    }
+    document.querySelectorAll("[data-toggle-theme]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var cur = root.getAttribute("data-theme");
+        if (!cur) cur = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        root.setAttribute("data-theme", cur === "dark" ? "light" : "dark");
+      });
+    });
+    // Chips select themselves so the selected state is live rather than pictured.
+    document.querySelectorAll("[data-chips]").forEach(function (group) {
+      group.addEventListener("click", function (e) {
+        var c = e.target.closest(".b-chip");
+        if (!c || c.disabled) return;
+        group.querySelectorAll(".b-chip").forEach(function (o) {
+          o.classList.remove("is-selected");
+          if (!o.disabled) o.setAttribute("aria-pressed", "false");
+        });
+        c.classList.add("is-selected");
+        c.setAttribute("aria-pressed", "true");
+      });
+    });
+    // Pagination moves the current page for real.
+    document.querySelectorAll("[data-pgn]").forEach(function (pgn) {
+      var btns = pgn.querySelectorAll("button");
+      var count = pgn.parentNode.querySelector("[data-pgn-count]");
+      btns.forEach(function (b, i) {
+        b.addEventListener("click", function () {
+          btns.forEach(function (o) { o.removeAttribute("aria-current"); });
+          b.setAttribute("aria-current", "page");
+          if (count) count.textContent = (i + 1) + " / " + btns.length;
+        });
+      });
+    });
+  })();
+</script>
 </body>
 </html>

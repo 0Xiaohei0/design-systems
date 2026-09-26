@@ -1,20 +1,31 @@
 /* OBJEKT core - tokens, primitives, components. Print, not screen:
-   no gradients, no radius, no blur, no transparency effects. */
+   no gradients, no radius, no blur, no transparency effects.
+
+   Token names are roles. The four paper stocks are named for the job each
+   label does, not for the paper it happens to be in daylight - in the night
+   theme the lead stock is the palest label on the sheet, and the name stays
+   true. */
 
 :root {
-  --stock-black: #161616;
-  --stock-kraft: #c7ac83;
-  --stock-steel: #a4a8ab;
-  --stock-bone: #edeae2;
-  --ground: #d7d5d0;
-  --frame: #0e0e0e;
+  /* ---- day sheet (default) ---- */
+  --ground: #d7d5d0;          /* the sheet everything is stuck to */
+  --frame: #0e0e0e;           /* press frame; also every hard lift shadow */
+  --shade: #bcbab4;           /* resting shadow a label casts on the sheet */
+  --frame-ink: #b9b5aa;       /* registration marks and edge captions on the frame */
 
-  --ink: #1a1a1a;
-  --ink-2: #34312b;
-  --ink-40: #989791;          /* solid 40% ink mixed on bone, disabled only */
-  --ink-on-dark: #eae7df;
-  --ink-on-dark-2: #b9b5aa;
-  --ink-on-dark-40: #6b6a66;  /* solid 40% ink mixed on black, disabled only */
+  --stock-lead: #161616;      /* the loudest label: section strips, primary stamps */
+  --stock-mark: #c7ac83;      /* marking stock: tags, secondary stamps, notes */
+  --stock-plate: #a4a8ab;     /* plate stock: technical and serial labels */
+  --stock-base: #edeae2;      /* base stock: forms, tables, reading surfaces */
+
+  --ink: #1a1a1a;             /* ink on mark, plate, base and ground */
+  --ink-2: #34312b;           /* secondary step of the same ink */
+  --ink-dis: #989791;         /* disabled ink on base stock (solid mix, no opacity) */
+  --ink-dis-mark: #7e7059;    /* disabled ink on mark stock */
+  --ink-dis-plate: #6d7072;   /* disabled ink on plate stock */
+  --ink-on-lead: #eae7df;     /* ink on lead stock */
+  --ink-on-lead-2: #b9b5aa;   /* secondary ink on lead stock */
+  --ink-on-lead-dis: #6b6a66; /* disabled ink on lead stock */
 
   --font-display: "Anton", "Arial Narrow", Impact, sans-serif;
   --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
@@ -24,9 +35,58 @@
   --lift: 4px 4px 0 var(--frame);
   --frame-w: 28px;
 
-  /* per-stock secondary ink, overridden by stock classes */
-  --ink-sec: var(--ink-2);
-  --ink-dis: var(--ink-40);
+  --t-lift: 120ms;
+  --ease-lift: cubic-bezier(0.2, 0.9, 0.2, 1);
+
+  /* contextual inks: the stock a thing sits on decides these */
+  --c-ink-2: var(--ink-2);
+  --c-ink-dis: var(--ink-dis);
+}
+
+/* ---- night sheet: hand-authored, not inverted by formula ---- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #1f1e1b;
+    --frame: #080808;
+    --shade: #0a0a09;
+    --frame-ink: #8f8b81;
+
+    --stock-lead: #e6e2d8;
+    --stock-mark: #4f412e;
+    --stock-plate: #3c4044;
+    --stock-base: #35342f;
+
+    --ink: #ece8de;
+    --ink-2: #bdb8ac;
+    --ink-dis: #7a776e;
+    --ink-dis-mark: #837154;
+    --ink-dis-plate: #71757a;
+    --ink-on-lead: #161616;
+    --ink-on-lead-2: #3e3a33;
+    --ink-on-lead-dis: #8a877f;
+  }
+}
+
+/* an explicit choice wins in both directions - the catalog has a toggle */
+:root[data-theme="dark"] {
+  --ground: #1f1e1b;
+  --frame: #080808;
+  --shade: #0a0a09;
+  --frame-ink: #8f8b81;
+
+  --stock-lead: #e6e2d8;
+  --stock-mark: #4f412e;
+  --stock-plate: #3c4044;
+  --stock-base: #35342f;
+
+  --ink: #ece8de;
+  --ink-2: #bdb8ac;
+  --ink-dis: #7a776e;
+  --ink-dis-mark: #837154;
+  --ink-dis-plate: #71757a;
+  --ink-on-lead: #161616;
+  --ink-on-lead-2: #3e3a33;
+  --ink-on-lead-dis: #8a877f;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -42,27 +102,22 @@ body {
   line-height: 1.45;
 }
 
-::selection { background: var(--stock-black); color: var(--ink-on-dark); }
+::selection { background: var(--stock-lead); color: var(--ink-on-lead); }
 
 :focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
 
 img, svg { display: block; max-width: 100%; }
 
-.visually-hidden {
-  position: absolute; width: 1px; height: 1px;
-  overflow: hidden; clip-path: inset(50%); white-space: nowrap;
-}
-
 /* ---------- stocks: color is material ---------- */
 
-.stock-black { background: var(--stock-black); color: var(--ink-on-dark); --ink-sec: var(--ink-on-dark-2); --ink-dis: var(--ink-on-dark-40); }
-.stock-kraft { background: var(--stock-kraft); color: var(--ink); --ink-sec: var(--ink-2); --ink-dis: #7e7059; }
-.stock-steel { background: var(--stock-steel); color: var(--ink); --ink-sec: var(--ink-2); --ink-dis: #6d7072; }
-.stock-bone  { background: var(--stock-bone);  color: var(--ink); --ink-sec: var(--ink-2); --ink-dis: var(--ink-40); }
+.stock-lead  { background: var(--stock-lead);  color: var(--ink-on-lead); --c-ink-2: var(--ink-on-lead-2); --c-ink-dis: var(--ink-on-lead-dis); }
+.stock-mark  { background: var(--stock-mark);  color: var(--ink); --c-ink-2: var(--ink-2); --c-ink-dis: var(--ink-dis-mark); }
+.stock-plate { background: var(--stock-plate); color: var(--ink); --c-ink-2: var(--ink-2); --c-ink-dis: var(--ink-dis-plate); }
+.stock-base  { background: var(--stock-base);  color: var(--ink); --c-ink-2: var(--ink-2); --c-ink-dis: var(--ink-dis); }
 
 /* ---------- frame chrome: registration marks + edge captions ---------- */
 
-.frame-cross { position: fixed; z-index: 40; color: var(--ink-on-dark-2); width: 12px; height: 12px; }
+.frame-cross { position: fixed; z-index: 40; color: var(--frame-ink); width: 12px; height: 12px; }
 .frame-cross.tl { top: 8px; left: 8px; }
 .frame-cross.tr { top: 8px; right: 8px; }
 .frame-cross.bl { bottom: 8px; left: 8px; }
@@ -71,7 +126,7 @@ img, svg { display: block; max-width: 100%; }
 .frame-cap {
   position: fixed; z-index: 40;
   font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em;
-  text-transform: uppercase; color: var(--ink-on-dark-2); white-space: nowrap;
+  text-transform: uppercase; color: var(--frame-ink); white-space: nowrap;
 }
 .frame-cap.top { top: 0; left: 48px; height: var(--frame-w); line-height: var(--frame-w); }
 .frame-cap.bottom { bottom: 0; right: 48px; height: var(--frame-w); line-height: var(--frame-w); }
@@ -107,7 +162,7 @@ img, svg { display: block; max-width: 100%; }
   text-transform: uppercase;
   line-height: 1.7;
 }
-.t-data-sec { color: var(--ink-sec); }
+.t-data-sec { color: var(--c-ink-2); }
 .t-fine {
   font-family: var(--font-fine);
   font-size: 10.5px;
@@ -171,7 +226,7 @@ img, svg { display: block; max-width: 100%; }
   display: flex; flex-direction: column;
   width: 100%; max-width: 220px;
   padding: 14px 14px 16px;
-  box-shadow: 6px 6px 0 #bcbab4; /* resting sticker lift off the sheet */
+  box-shadow: 6px 6px 0 var(--shade); /* resting sticker lift off the sheet */
 }
 .strip-word-area { flex: 1; display: flex; justify-content: center; min-height: 300px; padding: 6px 0 14px; }
 .strip-word {
@@ -190,22 +245,22 @@ img, svg { display: block; max-width: 100%; }
 .strip-data {
   writing-mode: vertical-rl; transform: rotate(180deg);
   font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em;
-  text-transform: uppercase; line-height: 1.8; color: var(--ink-sec);
+  text-transform: uppercase; line-height: 1.8; color: var(--c-ink-2);
 }
 .strip-draw { flex: 1; display: flex; align-items: center; }
 .strip .barcode { margin-bottom: 12px; }
 .strip-foot { display: flex; justify-content: space-between; align-items: center; }
 .strip-foot .made {
   font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.12em;
-  text-transform: uppercase; color: var(--ink-sec);
+  text-transform: uppercase; color: var(--c-ink-2);
 }
 
-/* ---------- section header: a black label strip, not a heading ---------- */
+/* ---------- section header: a lead label strip, not a heading ---------- */
 
-.sec { margin-top: clamp(40px, 6vw, 72px); }
+.sec { margin-top: clamp(40px, 6vw, 72px); scroll-margin-top: 84px; }
 .sec-head {
-  background: var(--stock-black); color: var(--ink-on-dark);
-  --ink-sec: var(--ink-on-dark-2);
+  background: var(--stock-lead); color: var(--ink-on-lead);
+  --c-ink-2: var(--ink-on-lead-2);
   display: flex; align-items: baseline; justify-content: space-between;
   gap: 16px; padding: 10px 16px 8px; margin-bottom: 24px;
 }
@@ -215,14 +270,14 @@ img, svg { display: block; max-width: 100%; }
 }
 .sec-head .idx {
   font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em;
-  text-transform: uppercase; color: var(--ink-on-dark-2); white-space: nowrap;
+  text-transform: uppercase; color: var(--ink-on-lead-2); white-space: nowrap;
 }
 
 /* plates: rectangular specimen surfaces inside sections */
-.plate { padding: 16px; box-shadow: 4px 4px 0 #bcbab4; }
+.plate { padding: 16px; box-shadow: 4px 4px 0 var(--shade); }
 .plate-cap {
   font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em;
-  text-transform: uppercase; color: var(--ink-sec); margin-bottom: 10px;
+  text-transform: uppercase; color: var(--c-ink-2); margin-bottom: 10px;
 }
 
 /* ---------- components ---------- */
@@ -230,38 +285,39 @@ img, svg { display: block; max-width: 100%; }
 /* stamp button: the one authored motion is the sticker lift */
 .btn {
   display: inline-block; border: 0; cursor: pointer;
-  background: var(--stock-black); color: var(--ink-on-dark);
+  background: var(--stock-lead); color: var(--ink-on-lead);
   font-family: var(--font-display); font-weight: 400;
   font-size: 14px; letter-spacing: 0.01em; text-transform: uppercase;
   padding: 10px 18px 9px; text-decoration: none; text-align: center;
-  transition: transform 120ms cubic-bezier(0.2, 0.9, 0.2, 1),
-              box-shadow 120ms cubic-bezier(0.2, 0.9, 0.2, 1);
+  transition: transform var(--t-lift) var(--ease-lift),
+              box-shadow var(--t-lift) var(--ease-lift);
 }
 .btn:hover, .btn.is-lifted { transform: translate(-2px, -2px); box-shadow: var(--lift); }
 .btn:active, .btn.is-pressed { transform: translate(0, 0); box-shadow: none; }
 .btn:disabled, .btn.is-disabled {
-  cursor: not-allowed; color: var(--ink-on-dark-40);
-  outline: 1.5px dashed var(--ink-on-dark-40); outline-offset: -4px;
+  cursor: not-allowed; color: var(--ink-on-lead-dis);
+  outline: 1.5px dashed var(--ink-on-lead-dis); outline-offset: -4px;
   transform: none; box-shadow: none;
 }
-/* the black stamp sits on light surfaces, so focus draws in frame black */
-.btn:focus-visible { outline: 2px solid var(--frame); outline-offset: 2px; }
-.btn-bone { background: var(--stock-bone); color: var(--ink); border: 2px solid var(--ink); padding: 8px 16px 7px; }
-.btn-bone:disabled, .btn-bone.is-disabled { color: var(--ink-40); border-color: var(--ink-40); border-style: dashed; outline: 0; }
-.btn-kraft { background: var(--stock-kraft); color: var(--ink); border: 2px solid var(--ink); padding: 8px 16px 7px; }
-.btn-kraft:disabled, .btn-kraft.is-disabled { color: #7e7059; border-color: #7e7059; border-style: dashed; outline: 0; }
+/* focus draws in the sheet's own ink, never in the stamp's ink - the ring sits
+   on the surface around the stamp, so it must contrast with that surface */
+.btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.btn-base { background: var(--stock-base); color: var(--ink); border: 2px solid var(--ink); padding: 8px 16px 7px; }
+.btn-base:disabled, .btn-base.is-disabled { color: var(--ink-dis); border-color: var(--ink-dis); border-style: dashed; outline: 0; }
+.btn-mark { background: var(--stock-mark); color: var(--ink); border: 2px solid var(--ink); padding: 8px 16px 7px; }
+.btn-mark:disabled, .btn-mark.is-disabled { color: var(--ink-dis-mark); border-color: var(--ink-dis-mark); border-style: dashed; outline: 0; }
 /* frozen focus specimen for the catalog only */
 .btn.is-focused { outline: 2px solid var(--ink); outline-offset: 2px; }
 
-/* text field: ruled underline on bone stock */
+/* text field: ruled underline on base stock */
 .field { display: block; }
 .field .field-label {
   display: block; font-family: var(--font-mono); font-size: 9.5px;
   letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px;
 }
 .field input, .field select {
-  width: 100%; border: 0; border-bottom: 2px solid var(--ink);
-  background: var(--stock-bone); color: var(--ink);
+  width: 100%; border: 0; border-radius: 0; border-bottom: 2px solid var(--ink);
+  background: var(--stock-base); color: var(--ink);
   font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em;
   text-transform: uppercase; padding: 4px 2px 5px;
 }
@@ -270,29 +326,30 @@ img, svg { display: block; max-width: 100%; }
 .field.is-error input { border-bottom-width: 3px; }
 .field .field-error {
   display: inline-block; margin-top: 8px;
-  background: var(--stock-black); color: var(--ink-on-dark);
+  background: var(--stock-lead); color: var(--ink-on-lead);
   font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em;
   text-transform: uppercase; padding: 4px 8px 3px;
 }
+.field:not(.is-error) .field-error { display: none; }
 .field input:disabled {
-  color: var(--ink-40); border-bottom-style: dashed; border-bottom-color: var(--ink-40);
+  color: var(--ink-dis); border-bottom-style: dashed; border-bottom-color: var(--ink-dis);
 }
-.field.is-disabled .field-label { color: var(--ink-40); }
+.field.is-disabled .field-label { color: var(--ink-dis); }
 
 /* badges: small stock chips */
 .badge {
   display: inline-block; font-family: var(--font-mono); font-size: 9px;
   letter-spacing: 0.14em; text-transform: uppercase; padding: 4px 8px 3px;
 }
-.badge.stock-kraft, .badge.stock-steel, .badge.stock-bone { border: 1px solid var(--ink); }
-.badge.is-disabled { color: var(--ink-dis); border-style: dashed; }
-.badge.stock-black.is-disabled { color: var(--ink-on-dark-40); border: 1px dashed var(--ink-on-dark-40); }
+.badge.stock-mark, .badge.stock-plate, .badge.stock-base { border: 1px solid var(--ink); }
+.badge.is-disabled { color: var(--c-ink-dis); border-style: dashed; }
+.badge.stock-lead.is-disabled { color: var(--ink-on-lead-dis); border: 1px dashed var(--ink-on-lead-dis); }
 
 /* spec table: thick top rule, thin row rules, mono values */
 .spec-table { width: 100%; border-collapse: collapse; border-top: var(--rule-w) solid var(--ink); }
 .spec-table caption {
   text-align: left; font-family: var(--font-mono); font-size: 9px;
-  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-sec);
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-ink-2);
   padding: 0 0 8px;
 }
 .spec-table th, .spec-table td { border-bottom: 1px solid var(--ink); padding: 7px 4px 6px; vertical-align: top; }
@@ -324,9 +381,9 @@ img, svg { display: block; max-width: 100%; }
 }
 .check.is-disabled { cursor: not-allowed; }
 /* 1.5px keeps the dash fine enough to read as an edge, not corner marks */
-.check.is-disabled .box { border: 1.5px dashed var(--ink-dis); }
-.check.is-disabled .box::before, .check.is-disabled .box::after { background: var(--ink-dis); }
-.check.is-disabled .check-label { color: var(--ink-dis); }
+.check.is-disabled .box { border: 1.5px dashed var(--c-ink-dis); }
+.check.is-disabled .box::before, .check.is-disabled .box::after { background: var(--c-ink-dis); }
+.check.is-disabled .check-label { color: var(--c-ink-dis); }
 .check.is-disabled input { cursor: not-allowed; }
 
 /* ---------- motion restraint ---------- */

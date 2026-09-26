@@ -1,8 +1,8 @@
 /*
 Chaguan's entrance card on the root portal. Scoped to .sys-cha; loaded by the
-portal only. Mirrors the Chaguan tokens by value: caramel mount, cream hero
-poster with a sun disc and ink teapot, brush CJK display, service tiles, one
-vermilion seal, coffee-brown door button.
+portal only. Mirrors the Chaguan light tokens by value: the mount ground, a
+paper poster with a disc and an ink still life, brush display type, tiles,
+one seal, and a primary-fill door button.
 */
 
 .sys-cha {
@@ -14,7 +14,7 @@ vermilion seal, coffee-brown door button.
   padding: 16px;
 }
 
-/* the cream hero poster */
+/* the paper poster */
 .sys-cha .poster {
   position: relative;
   background: #f0e8d3;
@@ -81,7 +81,7 @@ vermilion seal, coffee-brown door button.
   border: 1px solid rgba(251, 248, 240, 0.9);
 }
 
-/* service tiles */
+/* tiles */
 .sys-cha .tiles {
   display: flex;
   gap: 8px;
