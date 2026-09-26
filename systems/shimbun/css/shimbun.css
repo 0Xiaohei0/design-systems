@@ -777,3 +777,34 @@ table.spec td.d b { color: var(--ink); }
 .dodont b { color: var(--ink); font-weight: 700; }
 
 /* ---- composition specimen ---- */
+
+/* ---- live ink: the shader panels and their CSS fallback ---- */
+.shaderRow { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.shaderCell { display: flex; flex-direction: column; gap: 10px; }
+.shaderStage {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  overflow: hidden;
+  background: var(--bg);
+}
+.shaderStage canvas {
+  display: block; width: 100%; height: 100%;
+  opacity: 0;                      /* transparent until the first frame lands */
+  transition: opacity var(--t-zoom) var(--ease);
+}
+/* The fallback IS the design: a flat halftone screen built from the same two
+   tokens the shader reads, so it themes for free and needs no image. */
+#inkFallback, .shaderStage.is-fallback {
+  background-color: var(--bg);
+  background-image: radial-gradient(var(--ink) 26%, transparent 27%);
+  background-size: 7px 7px;
+  background-position: 0 0;
+}
+.shaderCap {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}

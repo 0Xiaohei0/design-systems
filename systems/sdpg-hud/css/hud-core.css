@@ -153,6 +153,10 @@ code { font-family:var(--font-mono); font-size:.86em; background:var(--field);
 }
 /* direct child of .hero so bottom:0 anchors past the band - the character
    sinks into the inverted band and bleeds off the poster edge */
+.hero .mascot {
+  position:absolute; left:50%; bottom:0; transform:translateX(-50%);
+  height:min(90%, 780px); z-index:2; filter:grayscale(1); pointer-events:none;
+}
 .stage .sub {
   position:absolute; top:63%; z-index:3;
   font-size:clamp(.78rem, 1.5vw, 1.1rem); font-weight:700; letter-spacing:.24em;
@@ -171,6 +175,7 @@ code { font-family:var(--font-mono); font-size:.86em; background:var(--field);
 @media (max-width:520px){ .hide-sm { display:none !important; } }
 @media (max-width:640px){
   .stage { height:clamp(340px, 105vw, 470px); }
+  .hero .mascot { height:86%; }
   .stage .sub { top:72%; }
   .sec-head { flex-wrap:wrap; row-gap:10px; }
   .sec-head h2 { white-space:normal; letter-spacing:.14em; }
@@ -420,6 +425,16 @@ table.spec td.d { font-family:var(--font-body); font-size:.86rem; line-height:1.
 .duo .hex { display:flex; gap:8px; margin-top:7px; font-size:.62rem; letter-spacing:.06em; color:var(--gray-500); }
 .duo .hex span { flex:1; }
 
+/* ---- character plate: the mascot shown as the component it is ---- */
+.charRow { display:grid; grid-template-columns:minmax(0,220px) 1fr; gap:26px; align-items:center; }
+.charPlate {
+  display:flex; align-items:flex-end; justify-content:center;
+  background:var(--field); border:1px solid var(--line-strong);
+  min-height:250px; padding:14px 14px 0; overflow:hidden;
+}
+.charPlate img { max-width:100%; max-height:238px; display:block; filter:grayscale(1); }
+@media (max-width:640px){ .charRow { grid-template-columns:1fr; } }
+
 /* ---- scale bars ---- */
 .scale { height:12px; background:var(--ink); }
 .radius-demo { width:66px; height:40px; background:var(--gray-300); }
@@ -452,3 +467,27 @@ table.spec td.d { font-family:var(--font-body); font-size:.86rem; line-height:1.
 @media (max-width:640px){
   .mod .unit { grid-template-columns:1fr; gap:9px; }
 }
+
+/* ---- phosphor sweep: the shader panels and their CSS fallback ---- */
+.shaderRow { display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); }
+.shaderCell { display:flex; flex-direction:column; gap:10px; }
+.shaderStage {
+  position:relative; aspect-ratio:16/10; overflow:hidden;
+  border:1.5px solid var(--line-strong); background:var(--ground);
+}
+.shaderStage canvas {
+  display:block; width:100%; height:100%;
+  opacity:0;                      /* transparent until the first frame lands */
+  transition:opacity .3s linear;
+}
+/* The fallback IS the design: the graph-paper ground and a scanline wash,
+   both built from the same tokens the shader reads. */
+#crtFallback, .shaderStage.is-fallback {
+  background-color:var(--ground);
+  background-image:
+    repeating-linear-gradient(0deg, color-mix(in srgb, var(--ink) 9%, transparent) 0 1px, transparent 1px 3px),
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size:auto, 22px 22px, 22px 22px;
+}
+.shaderCap { font-size:.66rem; letter-spacing:.16em; text-transform:uppercase; color:var(--gray-500); }

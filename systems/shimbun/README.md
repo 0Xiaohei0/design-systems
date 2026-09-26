@@ -2,7 +2,7 @@
 
 Warm-paper editorial print system. A newspaper desk as an interface: warm
 paper ground, one vermilion spot color, oversized tight headlines, hairline
-rules, and mono annotations. Chinese-first labels, three type stacks
+rules, and mono annotations. Documentation in English, three type stacks
 (Noto Sans SC / Archivo / IBM Plex Mono), light + dark paper themes.
 
 Status: **Documented** 2026-09-26, extracted from a shipped page's live CSS.
@@ -19,6 +19,8 @@ This folder is the whole system - there is no upstream file to keep in sync.
   stacks, radii, the kicker voice, focus and reduced-motion rules.
 - `css/shimbun.css` - the catalog page, set in the system itself.
 - `css/portal-card.css` - the system's card on the root portal.
+- `js/halftone.js` - the optional halftone-press shader. Enhancement only,
+  token-coloured, visibility-gated, and silent under reduced motion.
 
 ## Fonts
 

@@ -43,10 +43,11 @@ app copy, no screenshots - see STANDARD.md R1.
       <a href="#space">03 Space</a>
       <a href="#form">04 Form</a>
       <a href="#motion">05 Motion</a>
-      <a href="#components">06 Components</a>
-      <a href="#motifs">07 Motifs</a>
-      <a href="#composition">08 Composition</a>
-      <a href="#rules">09 Rules</a>
+      <a href="#screen">06 Screen</a>
+      <a href="#components">07 Components</a>
+      <a href="#motifs">08 Motifs</a>
+      <a href="#composition">09 Composition</a>
+      <a href="#rules">10 Rules</a>
     </nav>
     <span class="spacer"></span>
     <a class="tbtn" href="../../index.html">All Systems</a>
@@ -61,6 +62,7 @@ app copy, no screenshots - see STANDARD.md R1.
   <div class="poster-meta tc"><svg width="20" height="20"><use href="#i-target"/></svg></div>
   <div class="poster-meta tr"><b>GROUND 02</b><br>CRT</div>
 
+  <img class="mascot" src="mascot.png" alt="The system's character, standing in the poster stage">
   <div class="stage">
     <h1 class="bigword solid">Design</h1>
     <div class="bigword outline" aria-hidden="true">Design</div>
@@ -332,10 +334,59 @@ app copy, no screenshots - see STANDARD.md R1.
     <p class="prose" style="margin-top:18px"><code>prefers-reduced-motion</code> kills the blink and every transition outright - there is nothing in the system whose meaning depends on movement.</p>
   </div></section>
 
-  <!-- ===== 06 COMPONENTS ===== -->
-  <section class="block" id="components"><div class="wrap">
+  <!-- ===== 06 SCREEN ===== -->
+  <section class="block" id="screen"><div class="wrap">
     <div class="sec-head">
       <span class="id">&#167;06</span>
+      <h2>Screen</h2>
+      <span class="rule"></span>
+      <span class="status"><span class="dot blink"></span> Enhancement only</span>
+    </div>
+
+    <p class="prose">One optional surface treatment: a <b>phosphor sweep</b>. A beam rotates and decays across the screen, scanlines cut it, grain sits on top, and range rings lock to the pointer. <b>The pointer is the target</b> - move it across the right-hand panel and the reticle follows on a spring.</p>
+
+    <div style="height:24px"></div>
+
+    <div class="shaderRow">
+      <div class="shaderCell">
+        <div class="shaderStage" id="crtFallback"></div>
+        <span class="shaderCap">Static fallback &middot; grid and scanline</span>
+      </div>
+      <div class="shaderCell">
+        <div class="shaderStage"><canvas id="crtCanvas"></canvas></div>
+        <span class="shaderCap">Live &middot; move the pointer across it</span>
+      </div>
+    </div>
+
+    <table class="spec" style="margin-top:26px">
+      <thead><tr><th>Uniform</th><th>Value</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td>uSweep</td><td class="v">0.55 rad/s</td><td class="d">Beam rate. One revolution takes about eleven seconds, slow enough to read as instrumentation rather than as a spinner.</td></tr>
+        <tr><td>uPersist</td><td class="v">2.3</td><td class="d">Trail decay. Higher is a shorter tail - this is the phosphor, and it is the only thing that makes the sweep read as a sweep.</td></tr>
+        <tr><td>uScan</td><td class="v">0.14</td><td class="d">Scanline depth, at one cycle every two device pixels.</td></tr>
+        <tr><td>uGrain</td><td class="v">0.05</td><td class="d">Phosphor grain. Enough to kill banding, not enough to read as noise.</td></tr>
+        <tr><td>uRings / uRingGap</td><td class="v">3 / 0.075</td><td class="d">Range rings around the target, breathing on a 1.6s pulse.</td></tr>
+        <tr><td>uGround / uInk</td><td class="v">tokens</td><td class="d">Read from the live values, so the treatment inverts with the ground like everything else.</td></tr>
+        <tr><td>spring</td><td class="v">k 52 / d 9</td><td class="d">The reticle is followed on a spring, so it has mass and settles instead of snapping.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <b>The no-chroma rule is structural here, not a matter of care.</b> The
+      shader accumulates a single intensity and its last line is
+      <code>mix(uGround, uInk, ink)</code> - so the only colours it is capable of
+      emitting are the two ground tokens and the greys between them. There is no
+      way to leak a hue into this panel without rewriting that line, which is a
+      far better guarantee than remembering not to.
+    </div>
+
+    <p class="prose" style="margin-top:18px"><b>Where it belongs:</b> behind a hero, or filling an empty state or a panel that has nothing in it yet. Not behind a working surface - it is the decorative register, and it lives under the same quarantine as the gauges and the D-pad. Under <code>prefers-reduced-motion</code> it renders one settled frame and never starts the loop; with no WebGL2 the static panel on the left is the whole design.</p>
+  </div></section>
+
+  <!-- ===== 07 COMPONENTS ===== -->
+  <section class="block" id="components"><div class="wrap">
+    <div class="sec-head">
+      <span class="id">&#167;07</span>
       <h2>Components</h2>
       <span class="rule"></span>
       <span class="status"><span class="dot"></span> Live - hover them</span>
@@ -425,7 +476,7 @@ app copy, no screenshots - see STANDARD.md R1.
   <!-- ===== 07 MOTIFS ===== -->
   <section class="block" id="motifs"><div class="wrap">
     <div class="sec-head">
-      <span class="id">&#167;07</span>
+      <span class="id">&#167;08</span>
       <h2>Motifs</h2>
       <span class="rule"></span>
       <span class="status">Recognisable at a glance</span>
@@ -453,7 +504,32 @@ app copy, no screenshots - see STANDARD.md R1.
       </div>
     </div>
 
-    <p class="prose">Beyond the icons, four pieces of furniture carry the register: the <b>corner bracket</b> on panels, the <b>registration cross</b>, the <b>scanline wash</b>, and the <b>viewport frame</b> pinned to the four corners of the window. Below, the decorative register at full strength - reserved for heroes, empty states and section furniture, never for working surfaces.</p>
+    <h3 class="eyebrow" style="margin:34px 0 14px">The character</h3>
+    <div class="charRow">
+      <div class="charPlate"><img src="mascot.png" alt="The system's character, full figure"></div>
+      <div>
+        <p class="prose" style="margin-top:0">The one figurative mark in an otherwise geometric system, and the only place a drawn image is allowed. It is <b>desaturated to the ramp</b> like everything else - the system has no chroma, and the character does not get an exemption.</p>
+        <table class="spec" style="margin-top:18px">
+          <tbody>
+            <tr><td>placement</td><td class="v">poster stage only</td><td class="d">Bottom-anchored, centred, standing in the stage. It belongs to the hero.</td></tr>
+            <tr><td>height</td><td class="v">min(90%, 780px)</td><td class="d">86% below 640px, so it keeps its feet on the band.</td></tr>
+            <tr><td>depth</td><td class="v">z-index 2</td><td class="d">Above the poster ground and below the wordmark - the type crosses in front of it.</td></tr>
+            <tr><td>filter</td><td class="v">grayscale(1)</td><td class="d">Forced, not assumed. A colour source file must still land on the ramp.</td></tr>
+            <tr><td>pointer</td><td class="v">none</td><td class="d">It never intercepts a click; the stage behind it stays reachable.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="callout">
+      <b>One per page, and only on a poster.</b> The character is what keeps the
+      system from reading as pure instrumentation - but it earns that by being
+      rare. Put it on a working surface and it stops being a mascot and starts
+      being clutter, which is the same rule the gauges and the D-pad live under.
+    </div>
+
+    <h3 class="eyebrow" style="margin:34px 0 14px">Furniture</h3>
+    <p class="prose">Beyond the icons and the character, four pieces of furniture carry the register: the <b>corner bracket</b> on panels, the <b>registration cross</b>, the <b>scanline wash</b>, and the <b>viewport frame</b> pinned to the four corners of the window. Below, the decorative register at full strength - reserved for heroes, empty states and section furniture, never for working surfaces.</p>
 
     <div style="height:22px"></div>
 
@@ -502,7 +578,7 @@ app copy, no screenshots - see STANDARD.md R1.
   <!-- ===== 08 COMPOSITION ===== -->
   <section class="block" id="composition"><div class="wrap">
     <div class="sec-head">
-      <span class="id">&#167;08</span>
+      <span class="id">&#167;09</span>
       <h2>Composition</h2>
       <span class="rule"></span>
       <span class="status"><span class="dot"></span> Specimen</span>
@@ -610,7 +686,7 @@ kilo, lima, mike</pre>
   <!-- ===== 09 RULES ===== -->
   <section class="block" id="rules"><div class="wrap">
     <div class="sec-head">
-      <span class="id">&#167;09</span>
+      <span class="id">&#167;10</span>
       <h2>Rules</h2>
       <span class="rule"></span>
       <span class="status"><span class="dot"></span> The refusals matter most</span>
@@ -638,6 +714,7 @@ kilo, lima, mike</pre>
           <li><b>Nest panels.</b> Two hairlines a few pixels apart read as a rendering fault.</li>
           <li>Give anything a radius <b>above 4px</b>, pills excepted. Round corners drain the instrument out of it.</li>
           <li><b>Interpolate.</b> The live dot steps; it never fades.</li>
+          <li>Run the <b>phosphor sweep behind a working surface</b>. It is decorative register, under the same quarantine as the gauges.</li>
         </ul>
       </div>
     </div>
@@ -652,6 +729,7 @@ kilo, lima, mike</pre>
   </div>
 </div></footer>
 
+<script src="js/phosphor.js"></script>
 <script>
   (function () {
     var root = document.documentElement;

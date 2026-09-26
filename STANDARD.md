@@ -20,16 +20,17 @@ honest omission, not a gap to pad.
 | # | Section | What goes in it |
 |---|---------|-----------------|
 | 0 | **Masthead** | Sticky. Section index, and a theme toggle. Nothing else. |
-| 1 | **Read this first** | The short list of rules an implementer must obey. See §3. |
+| 1 | **Read this first** | The short list of rules an implementer must obey. See §4. |
 | 2 | **Thesis** | `h1` plus two or three sentences: what this system is, and the one or two things a reader must hold on to before reading further. |
 | 3 | **Colour** | Every role token, **both themes visible at once**, plus the contrast floor. |
 | 4 | **Typography** | Every type token, rendered at its real size. Not a list of numbers. |
 | 5 | **Space and layout** | The spacing scale, the content measure, the breakpoints. |
 | 6 | **Form** | Radii, borders, elevation - whatever gives the system its silhouette. |
 | 7 | **Motion** | Durations, easing, what is allowed to move and what is not. |
+| 7.5 | **Screen** *(optional)* | An interactive surface treatment, if the system has one. Held to the contract in §3. |
 | 8 | **Components** | Every component, every state, **live**. |
 | 9 | **Motifs** | The signature shapes. What makes this system recognisable at a glance. |
-| 10 | **Composition** | The parts assembled into one neutral specimen. See §4 - this is the section people get wrong. |
+| 10 | **Composition** | The parts assembled into one neutral specimen. See §5 - this is the section people get wrong. |
 | 11 | **Rules** | Do / Do not. The refusals matter more than the permissions. |
 
 Each section opens with a heading and one lede paragraph, then shows the thing
@@ -54,9 +55,9 @@ labels, or a walkthrough of a flow. If a reader can tell what the app *did* from
 reading the design system, the system has leaked.
 
 > **Why it matters beyond tidiness.** Product content makes the system look
-> narrower than it is. A reader who sees a card full of anime titles concludes
-> "this is for anime catalogues" and closes the tab, when what they were looking
-> at was a perfectly general editorial card.
+> narrower than it is. A reader who sees a card filled with one industry's
+> catalogue entries concludes the system is *for* that industry and closes the
+> tab - when what they were actually looking at was a perfectly general card.
 
 ### R2 - No project details
 
@@ -105,7 +106,27 @@ Hover states hover. Disabled states are actually disabled. Toggles flip. A
 reader must be able to point at any state on the page and see it happen. A
 screenshot of a hover state is not documentation of a hover state.
 
-### R7 - Self-contained
+### R7 - Documentation is in English
+
+**Every word written to be read is English**: headings, ledes, table
+descriptions, callouts, rules, component notes, code comments, `DESIGN.md`,
+`README.md`.
+
+The exception is *shown* text rather than *written* text. A system whose
+identity includes a non-Latin script keeps that script exactly where it is being
+demonstrated - the wordmark, and the type specimen that exists to show the
+stack. SHIMBUN is the worked example: it is a CJK-first editorial system, and
+CJK survives in precisely two places on its page.
+
+Specimen copy elsewhere - card titles, field labels, placeholder values - is
+English too, and neutral per R1.
+
+> **Why.** These systems are published for strangers. A reader who cannot read
+> the documentation cannot evaluate the system, and will not fork it. Keeping
+> the script where it is being *documented* loses nothing: the specimen still
+> proves the stack renders.
+
+### R8 - Self-contained
 
 The page must work from a `file://` open with no build step: relative links,
 webfonts by URL or a system stack, no imports from outside the system's folder.
@@ -114,7 +135,37 @@ gets its own.
 
 ---
 
-## 3. The "read this first" block
+## 3. Shaders and live surfaces
+
+A system may ship an interactive surface treatment - a shader behind a hero, a
+generative field in an empty frame. Both SDPG-HUD and SHIMBUN have one, and they
+are held to the same contract. If you add one, it must:
+
+1. **Be enhancement only.** What sits underneath is the complete static design.
+   The canvas is transparent until its first frame, so a machine without WebGL2
+   loses nothing. Say so on the page, and show the fallback next to the live one.
+2. **Read its colours from tokens at runtime**, never from hardcoded hex. This
+   is what lets the treatment survive a theme flip, and it is also how a system
+   with a colour rule can make that rule structural - SDPG-HUD's shader ends on
+   `mix(uGround, uInk, ink)`, so it is incapable of emitting a hue.
+3. **Stop when off screen.** Gate it on an `IntersectionObserver`. A decorative
+   surface has no claim on a frame budget nobody is watching.
+4. **Collapse under `prefers-reduced-motion`.** Render one settled frame and
+   never start a loop.
+5. **Be documented like anything else.** A uniform table with real values and a
+   sentence on what each one does, plus an explicit statement of *where it
+   belongs* - which, for every shader so far, has meant "not behind body text".
+6. **Stay inside the system's folder.** `systems/<name>/js/`. No shared shader
+   library: two systems wanting a similar effect each get their own, because the
+   moment they share one, neither can change it.
+
+Interaction should have weight. Follow the pointer on a spring rather than
+binding to it directly - it costs four lines and is the difference between a
+treatment that feels like a material and one that feels like a mouse trail.
+
+---
+
+## 4. The "read this first" block
 
 Near the top, before the specimens, a short numbered list addressed to whoever
 implements against the system - increasingly an agent rather than a person.
@@ -131,7 +182,7 @@ Keep it to five or six items. It is a contract, not a manual.
 
 ---
 
-## 4. The Composition section
+## 5. The Composition section
 
 This is the section that breaks the standard most often, because the natural
 thing to do is paste in a real screen - and a real screen is precisely what R1
@@ -153,7 +204,7 @@ product, rebuild it.
 
 ---
 
-## 5. Checklist
+## 6. Checklist
 
 Before adding or updating a system:
 
@@ -162,7 +213,10 @@ Before adding or updating a system:
 - [ ] No internal paths, repo names, or URLs a reader cannot open
 - [ ] No third-party brands, titles, logos, or licensed font binaries
 - [ ] Every token name survives being used for a different product
+- [ ] All documentation in English; non-Latin script only where it is demonstrated
 - [ ] Both themes authored, and a toggle on the page
+- [ ] Any shader is enhancement-only, token-coloured, visibility-gated, and
+      collapses under reduced motion
 - [ ] Every state is live and reachable
 - [ ] Opens from `file://` with no build step
 - [ ] `DESIGN.md` states the thesis and, explicitly, the refusals

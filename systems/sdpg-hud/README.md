@@ -22,6 +22,11 @@ the whole of it, with no upstream file to keep in sync.
 - `css/hud-core.css` - all tokens and component styles, plus the page's own spec
   furniture at the bottom.
 - `css/portal-card.css` - the system's card on the root portal.
+- `js/phosphor.js` - the optional phosphor-sweep shader. Enhancement only,
+  token-coloured, visibility-gated, and silent under reduced motion.
+- `mascot.png` - the system's character. A component, not decoration: it is
+  poster-only, forced to grayscale, and documented under Motifs with its
+  placement rules.
 
 ## Fonts
 
